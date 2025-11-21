@@ -1,11 +1,15 @@
 import { useState, useEffect, useRef } from "react"; 
 import "./app.css"; // ← твой CSS
 import { Sun, Moon } from 'lucide-react';
+<<<<<<< HEAD
 import { 
   List, Triangle, ArrowDown, Envelope, Play, 
   Question, Star, Image, Diamond, CurrencyDollar, 
   Users, // ← добавь FileText или другую иконку
 } from "phosphor-react";
+=======
+import { List, Triangle, ArrowDown, Envelope, Play, Question, Star, Image, Diamond, CurrencyDollar, Users } from "phosphor-react";
+>>>>>>> 121b1eb1167b4606a15eb4e119afd1b402241066
 
 type ComponentItem = {
   key: string;
@@ -39,6 +43,10 @@ const getIconForSection = (section: string) => {
     case "logo": return <Diamond weight="bold" />;
     case "pricing": return <CurrencyDollar weight="bold" />;
     case "testimonial": return <Users weight="bold" />;
+<<<<<<< HEAD
+=======
+    default: return <Document weight="bold" />;
+>>>>>>> 121b1eb1167b4606a15eb4e119afd1b402241066
   }
 };
 
