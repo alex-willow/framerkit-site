@@ -151,6 +151,12 @@ export default function FramerKitGallery() {
     >
       Get Full Access
     </button>
+    <button
+  className="theme-toggle-btn"
+  onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+>
+  {theme === "light" ? "🌙 Темная" : "☀️ Светлая"}
+</button>
   </div>
 </header>
 
