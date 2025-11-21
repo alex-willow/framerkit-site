@@ -217,7 +217,7 @@ useEffect(() => {
 
       {/* FOOTER */}
       <footer className="footer">
-        © {new Date().getFullYear()} FramerKit · Собрано с ❤️ для дизайнеров
+        © {new Date().getFullYear()} FramerKit · Crafted with ❤️ for Designers
       </footer>
     </div>
   );
