@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react"; 
-import "./app.css"; // ← твой CSS
+import "./App.css"; 
 import { Sun, Moon } from 'lucide-react';
 import { List, Triangle, ArrowDown, Envelope, Play, Question, Star, Image, Diamond, CurrencyDollar, Users } from "phosphor-react";
 
@@ -19,7 +19,6 @@ const STATIC_SECTIONS = [
 ];
 
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
-
 
 
 const getIconForSection = (section: string) => {
