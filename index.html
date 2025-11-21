@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/Logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FramerKit</title>
+
+    <!-- Inter font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- 🔥 Anti-jump (без скачка мобильной версии) -->
+    <style>
+      /* Фиксация базового desktop layout до загрузки App.module.css */
+
+      .main {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+      }
+
+      .sidebar {
+        width: 200px;
+      }
+
+      /* Поведение для мобильных — как в App.module.css */
+      @media (max-width: 767px) {
+        .sidebar {
+          display: none;
+        }
+      }
+    </style>
+    <!-- 🔥 END FIX -->
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
