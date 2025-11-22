@@ -67,25 +67,25 @@ function ComponentDropdown({ options, value, onChange }: ComponentDropdownProps)
   return (
     <div className="component-dropdown-container" ref={ref}>
       <button
-          className={`component-dropdown-toggle ${open ? "active" : ""}`}
-          onClick={() => setOpen(!open)}
-        >
-          <span>{value}</span>
-          <svg
-            className={`component-dropdown-arrow ${open ? "rotated" : ""}`}
-            width="12"
-            height="6"
-            viewBox="0 0 12 6"
-            fill="none"
-          >
-            <path
-              d="M1 1L6 5L11 1"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-            />
-          </svg>
-        </button>
+      className={`component-dropdown-toggle ${open ? "active" : ""}`}
+      onClick={() => setOpen(!open)}
+    >
+      <span>{value}</span>
+      <svg
+        className={`component-dropdown-arrow ${open ? "rotated" : ""}`}
+        width="12"
+        height="6"
+        viewBox="0 0 12 6"
+        fill="none"
+      >
+        <path
+          d="M1 1L6 5L11 1"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+        />
+      </svg>
+    </button>
 
       {open && (
         <div className="component-dropdown-list">
@@ -251,7 +251,7 @@ export default function FramerKitGallery() {
           ):(
             <>
               <button className="loginButton" onClick={()=>setIsSignInOpen(true)}>Log in</button>
-              <button className="authButton" onClick={()=>window.open("https://framer.com/marketplace","_blank")}>Get Full Access</button>
+              <button className="authButton" onClick={()=>window.open("https://gum.co/framerkit","_blank")}>Get Full Access</button>
             </>
           )}
         </div>
@@ -273,29 +273,49 @@ export default function FramerKitGallery() {
           </nav>
         )}
 
-        <section className="content" ref={contentRef} aria-labelledby="gallery-title">
-        {isMobile && (
-              <ComponentDropdown
-                options={displaySections}
-                value={activeSection}
-                onChange={setActiveSection}
-              />
-            )}
+<section className="content">
+  {isMobile && (
+    <ComponentDropdown
+      options={displaySections}
+      value={activeSection}
+      onChange={setActiveSection}
+    />
+  )}
 
-          <h2 id="gallery-title" className="title">{activeSection.charAt(0).toUpperCase()+activeSection.slice(1)} Section</h2>
+  {/* Заголовок и переключатель — фиксированные, не скроллятся */}
+  <div className="section-header-sticky">
+    <h2 id="gallery-title" className="title">
+      {activeSection.charAt(0).toUpperCase() + activeSection.slice(1)} Section
+    </h2>
 
-          <div className="subtitleRow">
-            <p className="subtitle">{loading?"Loading...":`${filtered.length} layouts`} in the "{theme==="light"?"Light":"Dark"}" theme</p>
-            <div className="themeSwitcher">
-              <span className="modeLabel">Mode:</span>
-              <button className="themeToggle" onClick={()=>setTheme(theme==="light"?"dark":"light")} aria-label={theme==="light"?"Switch to dark theme":"Switch to light theme"}>
-                {theme==="light"?<Moon size={18}/>:<Sun size={18}/>}
-              </button>
-            </div>
-          </div>
+    <div className="subtitleRow">
+      <p className="subtitle">
+        {loading ? "Loading..." : `${filtered.length} layouts`} in the "{theme === "light" ? "Light" : "Dark"}" theme
+      </p>
+      <div className="themeSwitcher">
+        <span className="modeLabel">Mode:</span>
+        <button
+          className="themeToggle"
+          onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+          aria-label={theme === "light" ? "Switch to dark theme" : "Switch to light theme"}
+        >
+          {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
+        </button>
+      </div>
+    </div>
+  </div>
 
-          {error?<p style={{color:"red"}}>{error}</p>:<div className="gallery" role="list">{galleryContent}</div>}
-        </section>
+  {/* Только галерея скроллится */}
+  <div className="gallery-scroll-area" ref={contentRef}>
+    {error ? (
+      <p style={{ color: "red" }}>{error}</p>
+    ) : (
+      <div className="gallery" role="list">
+        {galleryContent}
+      </div>
+    )}
+  </div>
+</section>
       </div>
 
       <footer className="footer">© {new Date().getFullYear()} FramerKit · Crafted with ❤️ for Designers</footer>
