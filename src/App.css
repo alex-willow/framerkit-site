@@ -26,7 +26,6 @@
 body {
   margin: 0;
   padding: 0;
-  overflow: hidden;
   font-family: var(--font-family);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -59,15 +58,14 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 0 24px;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid #e6e6e6;
+  /* Добавь эти строки: */
+  background: rgba(255, 255, 255, 0.23);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(230, 230, 230, 0.5);
 }
 
-[data-framer-theme="dark"] .header {
-  background: var(--framer-color-bg-dark);
-  border-color: var(--framer-color-border-dark);
-}
+
 
 .headerLeft {
   display: flex;
@@ -78,7 +76,7 @@ body {
 .header h1 {
   margin: 0;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 800;
   letter-spacing: -0.2px;
   color: var(--framer-color-text);
 }
@@ -98,6 +96,66 @@ body {
   align-items: center;
   gap: 12px;
 }
+
+.logoutButton {
+  height: 36px;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid #ddd; /* светлая граница */
+  color: #333;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px; /* отступ между иконкой и текстом */
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.1s ease;
+  white-space: nowrap;
+}
+
+.logoutButton:hover {
+  background: rgba(110, 63, 243, 0.06);
+  border-color: rgba(110, 63, 243, 0.06);
+}
+
+.logoutButton:active {
+  transform: translateY(1px);
+}
+
+.logoutButton:focus {
+  outline: none;
+}
+
+
+.loginButton {
+  height: 36px;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #6E3FF3;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  white-space: nowrap;
+  outline: none;
+  box-shadow: none;
+}
+
+.loginButton:hover {
+  background: rgba(110, 63, 243, 0.06);
+}
+
+.loginButton:active {
+  transform: translateY(1px); 
+}
+
+.loginButton:focus {
+  outline: none; /* убираем синюю обводку */
+}
+
 
 /* === ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ (чистая иконка) === */
 .themeToggle {
@@ -132,7 +190,6 @@ body {
   color: var(--framer-color-text-dark);
 }
 
-/* === КНОПКА ДОСТУПА === */
 .authButton {
   height: 36px;
   padding: 6px 12px;
@@ -143,7 +200,7 @@ body {
   background: #6E3FF3;
   color: #ffffff;
   cursor: pointer;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.1s ease;
   box-shadow: 
       0 1px 1px 0 rgba(90, 54, 191, 1),
       0 0 0 1px rgba(110, 63, 243, 1),
@@ -153,6 +210,7 @@ body {
   align-items: center;
   gap: 4px;
   white-space: nowrap;
+  outline: none;
 }
 
 .authButton:hover {
@@ -160,8 +218,14 @@ body {
 }
 
 .authButton:active {
-  transform: translateY(0.5px);
+  transform: translateY(1px); /* слегка приподнимается при клике */
+  /* тени и границы оставляем */
 }
+
+.authButton:focus {
+  outline: none; /* убираем синюю обводку */
+}
+
 
 /* === ОСНОВНАЯ ОБЁРТКА === */
 .app-layout {
@@ -174,7 +238,7 @@ body {
 /* === ФИКСИРОВАННЫЙ САЙДБАР === */
 .sidebar {
   position: fixed;
-  top: 50px;
+  top: 60px;
   left: 0;
   width: 220px;
   height: calc(100vh - 50px - 60px); /* -50px header, -60px footer */
@@ -184,9 +248,6 @@ body {
   box-sizing: border-box;
 }
 
-[data-framer-theme="dark"] .sidebar {
-  background: var(--framer-color-bg-dark);
-}
 
 .sidebar-header {
   font-size: 16px;
@@ -220,7 +281,7 @@ body {
 }
 
 .sidebar-item:hover {
-  background: #f3f3f3;
+  background: rgba(110, 63, 243, 0.06);
   color: var(--framer-color-text);
 }
 
@@ -304,6 +365,32 @@ body {
   color: var(--framer-color-text-secondary-dark);
 }
 
+/* выравнивание subtitle и переключателя */
+.subtitleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* чтобы p не имел лишних отступов внутри row */
+.subtitleRow .subtitle {
+  margin: 0;
+}
+
+
+
+.themeSwitcher {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.modeLabel {
+  font-size: 14px;
+  color: var(--framer-color-text-secondary);
+}
+
+
 /* === СЕТКА === */
 .gallery {
   display: grid;
@@ -370,21 +457,45 @@ body {
 }
 
 .cardInfo {
-  padding: 8px 8px;
-  flex: 1;
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
+  align-items: center;
+  padding: 0 6px 4px 6px;
+  margin-top: 8px;
 }
 
 .cardInfo h3 {
+  font-size: 15px;
+  font-weight: 500;
   margin: 0;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--framer-color-text);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+}
+
+/* кнопка-иконка */
+.iconButton {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.iconButton:hover {
+  background: rgba(110, 63, 243, 0.06);
+}
+
+.lock {
+  background: none;
+}
+
+.lock:hover {
+  background: rgba(110, 63, 243, 0.06);
 }
 
 [data-framer-theme="dark"] .cardInfo h3 {

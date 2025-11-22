@@ -1,0 +1,231 @@
+/* === Модальный фон === */
+.modalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding: 16px;
+  }
+  
+  /* === Контейнер модалки === */
+  .auth-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 300px;
+    max-width: 100%;
+    padding: 24px;
+    border-radius: 12px;
+    text-align: center;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  }
+  
+  /* === Light / Dark темы для карточки === */
+  [data-framer-theme="light"] .auth-card {
+    background: #ffffff;
+  }
+  
+  [data-framer-theme="dark"] .auth-card {
+    background: #111111;
+    color: #fff;
+  }
+  
+  /* === Закрывающая кнопка === */
+  .modalClose {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    border: none;
+    background: transparent;
+    font-size: 24px;
+    cursor: pointer;
+    color: inherit;
+  }
+  
+  /* === Логотип === */
+  .auth-logo {
+    width: 40px; /* размер логотипа, можно увеличить или уменьшить */
+    height: auto; /* сохраняет пропорции */
+    display: block; /* чтобы margin auto сработал */
+    margin: 0 auto 10px; /* центрирование + отступ снизу */
+  }
+  
+  /* === Заголовок === */
+  .auth-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    transition: color 0.3s ease;
+  }
+  
+  [data-framer-theme="light"] .auth-title {
+    color: #000000;
+  }
+  
+  [data-framer-theme="dark"] .auth-title {
+    color: #ffffff;
+  }
+  
+  /* === Описание под заголовком === */
+  .auth-description {
+    font-size: 14px;
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+  }
+  
+  [data-framer-theme="light"] .auth-description {
+    color: #666666;
+  }
+  
+  [data-framer-theme="dark"] .auth-description {
+    color: #cccccc;
+  }
+  
+  /* === Форма === */
+  .auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  /* === Подписи для полей === */
+  .auth-label {
+    display: block;
+    text-align: left;
+    font-size: 13px;
+    font-weight: normal;
+    margin-bottom: 4px;
+    transition: color 0.3s ease;
+  }
+  
+  [data-framer-theme="light"] .auth-label {
+    color: #000000;
+  }
+  
+  [data-framer-theme="dark"] .auth-label {
+    color: #ffffff;
+  }
+  
+  /* === Поля ввода === */
+  .auth-input {
+    width: 100%;
+    height: 40px;
+    padding: 8px 12px;
+    font-size: 13px;
+    border: none;
+    border-radius: 6px;
+    box-sizing: border-box;
+    outline: none;
+    transition: box-shadow 0.25s ease-in-out;
+  }
+  
+  [data-framer-theme="light"] .auth-input {
+    background: #ffffff;
+    color: #0A0D14;
+    box-shadow: inset 0 0 0 1.5px #E3E3E3;
+  }
+  
+  [data-framer-theme="dark"] .auth-input {
+    background: #151723;
+    color: #ffffff;
+    box-shadow: inset 0 0 0 1.5px #4A505A;
+  }
+  
+  .auth-input:focus {
+    box-shadow: inset 0 0 0 2px #6E3FF3;
+  }
+  
+  .auth-input::placeholder {
+    color: #9aa0a6;
+  }
+  
+  [data-framer-theme="dark"] .auth-input::placeholder {
+    color: #6e7480;
+  }
+  
+  /* === Ошибки формы === */
+  .auth-error {
+    color: red;
+    font-size: 12px;
+    text-align: center;
+    margin-top: -4px;
+  }
+  
+  /* === Кнопка входа === */
+  .auth-button {
+    width: 100%;
+    height: 40px;
+    font-size: 13px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    background: #6E3FF3;
+    color: #ffffff;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 
+        0 1px 1px 0 rgba(90, 54, 191, 1),
+        0 0 0 1px rgba(110, 63, 243, 1),
+        inset 0 4px 12px 0 rgba(202, 194, 255, 0.3),
+        inset 0 1px 0 0 rgba(202, 194, 255, 0.6);
+  }
+  
+  .auth-button:hover {
+    background: #5A32D3;
+  }
+  
+  .auth-button:active {
+    transform: translateY(0.5px);
+  }
+  
+  .auth-button.loading {
+    cursor: not-allowed;
+    opacity: 0.7;
+    pointer-events: none;
+  }
+  
+  /* === Снизу текст с ссылкой === */
+  .auth-footer {
+    margin-top: 16px;
+    font-size: 13px;
+    text-align: center;
+    transition: color 0.3s ease;
+  }
+  
+  [data-framer-theme="light"] .auth-footer {
+    color: #151723;
+  }
+  
+  [data-framer-theme="dark"] .auth-footer {
+    color: #cccccc;
+  }
+  
+  .auth-link {
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+  }
+  
+  [data-framer-theme="light"] .auth-link {
+    color: #000000;
+  }
+  
+  [data-framer-theme="dark"] .auth-link {
+    color: #ffffff;
+  }
+  
+  .auth-link:hover {
+    color: #6E3FF3;
+    text-decoration: underline;
+  }
+  
