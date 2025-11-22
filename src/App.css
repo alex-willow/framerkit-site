@@ -563,3 +563,101 @@ body {
     display: block;
   }
 }
+
+/* === Component Dropdown (Mobile) === */
+.component-dropdown-container {
+  position: relative;
+  width: 100%;
+  margin: 10px 0; /* верхний и нижний отступ */
+  z-index: 10; /* чтобы не перекрывался другими элементами */
+}
+
+.component-dropdown-toggle {
+  width: 100%;
+  height: 38px;
+  padding: 0 12px;
+  font-size: 14px;
+  border: 1px solid #d1d5db; /* всегда серый бордер */
+  border-radius: 6px;
+  background: #ffffff;
+  color: #111827;
+  font-family: Inter, sans-serif;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.component-dropdown-toggle:hover {
+  border-color: #9ca3af; /* серый при ховере */
+}
+
+.component-dropdown-toggle.active {
+  border-color: #d1d5db; /* всегда серый, когда открыто */
+  box-shadow: none;       /* убираем синий shadow */
+}
+
+/* Стрелка */
+.component-dropdown-arrow {
+  display: inline-block;
+  width: 12px;
+  height: 6px;
+  margin-left: 8px; /* отступ от текста */
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.component-dropdown-arrow.rotated {
+  transform: rotate(180deg);
+}
+
+.component-dropdown-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+
+  margin-top: 4px;
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 2000;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.component-dropdown-option {
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #111827;
+  transition: background 0.15s, color 0.15s;
+}
+
+.component-dropdown-option:hover {
+  background: #f9fafb;
+}
+
+.component-dropdown-option.active {
+  background: rgba(110, 63, 243, 0.08);
+  color: #6E3FF3;
+  font-weight: 600;
+}
+
+/* Убираем outline для всех элементов дропдауна */
+.component-dropdown-container * {
+  outline: none !important;
+}
+
+/* Или, если хочешь быть более точным — убери outline только у контейнера и списка */
+.component-dropdown-toggle,
+.component-dropdown-list {
+  outline: none !important;
+}
+

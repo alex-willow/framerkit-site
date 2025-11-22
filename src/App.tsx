@@ -42,6 +42,72 @@ const getIconForSection = (section: string) => {
   }
 };
 
+
+type ComponentDropdownProps = {
+  options: string[];
+  value: string;
+  onChange: (val: string) => void;
+};
+
+function ComponentDropdown({ options, value, onChange }: ComponentDropdownProps) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  // Закрытие по клику вне
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  return (
+    <div className="component-dropdown-container" ref={ref}>
+      <button
+          className={`component-dropdown-toggle ${open ? "active" : ""}`}
+          onClick={() => setOpen(!open)}
+        >
+          <span>{value}</span>
+          <svg
+            className={`component-dropdown-arrow ${open ? "rotated" : ""}`}
+            width="12"
+            height="6"
+            viewBox="0 0 12 6"
+            fill="none"
+          >
+            <path
+              d="M1 1L6 5L11 1"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+            />
+          </svg>
+        </button>
+
+      {open && (
+        <div className="component-dropdown-list">
+          {options.map((option) => (
+            <div
+              key={option}
+              className={`component-dropdown-option ${value === option ? "active" : ""}`}
+              onClick={() => {
+                onChange(option);
+                setOpen(false);
+              }}
+            >
+              {option}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+
 export default function FramerKitGallery() {
   const [isSignInOpen, setIsSignInOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -208,11 +274,13 @@ export default function FramerKitGallery() {
         )}
 
         <section className="content" ref={contentRef} aria-labelledby="gallery-title">
-          {isMobile && (
-            <select className="mobileSelect" value={activeSection} onChange={e=>setActiveSection(e.target.value)} aria-label="Section selection">
-              {displaySections.map(s=><option key={s} value={s}>{s.charAt(0).toUpperCase()+s.slice(1)} ({sectionCounts[s]??0})</option>)}
-            </select>
-          )}
+        {isMobile && (
+              <ComponentDropdown
+                options={displaySections}
+                value={activeSection}
+                onChange={setActiveSection}
+              />
+            )}
 
           <h2 id="gallery-title" className="title">{activeSection.charAt(0).toUpperCase()+activeSection.slice(1)} Section</h2>
 
