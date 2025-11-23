@@ -171,6 +171,7 @@ export default function FramerKitGallery() {
   const [activeSection, setActiveSection] = useState("navbar");
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [loading, setLoading] = useState(true);
+  const [setError] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const galleryScrollRef = useRef<HTMLDivElement>(null);
 
