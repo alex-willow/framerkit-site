@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import "./App.css";
 import { createClient } from "@supabase/supabase-js";
-import { Sun, Moon, Copy, Lock, LogOut, Twitter, Instagram, Youtube } from "lucide-react";
+import { Sun, Moon, Copy, Lock, LogOut } from "lucide-react";
 import SignInModal from "./SignInModal";
 import {
   List,
@@ -171,7 +171,6 @@ export default function FramerKitGallery() {
   const [activeSection, setActiveSection] = useState("navbar");
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const galleryScrollRef = useRef<HTMLDivElement>(null);
 
