@@ -1,9 +1,28 @@
 import { useState, useEffect, useRef } from "react";
 import "./App.css";
 import { createClient } from "@supabase/supabase-js";
-import { Sun, Moon, Copy, Lock, LogOut } from "lucide-react";
+import { Sun, Moon, Copy, Lock, LogOut, Twitter, Instagram, Youtube } from "lucide-react";
 import SignInModal from "./SignInModal";
-import { List, Triangle, ArrowDown, Envelope, Play, Question, Star, Image, Diamond, CurrencyDollar, Users } from "phosphor-react";
+import {
+  List,
+  Triangle,
+  ArrowDown,
+  Envelope,
+  Play,
+  Question,
+  Star,
+  Image,
+  Diamond,
+  CurrencyDollar,
+  Users,
+  InstagramLogo,
+  YoutubeLogo,
+  TiktokLogo,
+} from "phosphor-react";
+
+/* --------------------------------------------- */
+/* =============== TYPES ======================= */
+/* --------------------------------------------- */
 
 type ComponentItem = {
   key: string;
@@ -14,34 +33,65 @@ type ComponentItem = {
   section: string;
 };
 
+/* --------------------------------------------- */
+/* =============== SUPABASE ==================== */
+/* --------------------------------------------- */
+
 const supabase = createClient(
   "https://ibxakfxqoqiypfhgkpds.supabase.co",
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlieGFrZnhxb3FpeXBmaGdrcGRzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA4MTQxMDcsImV4cCI6MjA1NjM5MDEwN30.tWculxF6xgGw4NQEWPBp7uH_gsl5HobP9wQn3Tf9yyw"
 );
 
 const STATIC_SECTIONS = [
-  "navbar","hero","logo","feature","gallery",
-  "testimonial","contact","pricing","faq","cta","footer"
+  "navbar",
+  "hero",
+  "logo",
+  "feature",
+  "gallery",
+  "testimonial",
+  "contact",
+  "pricing",
+  "faq",
+  "cta",
+  "footer"
 ];
 
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
 
+/* --------------------------------------------- */
+/* =============== ICONS ======================= */
+/* --------------------------------------------- */
+
 const getIconForSection = (section: string) => {
-  switch(section){
-    case "navbar": return <List weight="bold" />;
-    case "hero": return <Triangle weight="bold" />;
-    case "footer": return <ArrowDown weight="bold" />;
-    case "contact": return <Envelope weight="bold" />;
-    case "cta": return <Play weight="bold" />;
-    case "faq": return <Question weight="bold" />;
-    case "feature": return <Star weight="bold" />;
-    case "gallery": return <Image weight="bold" />;
-    case "logo": return <Diamond weight="bold" />;
-    case "pricing": return <CurrencyDollar weight="bold" />;
-    case "testimonial": return <Users weight="bold" />;
+  switch (section) {
+    case "navbar":
+      return <List weight="bold" />;
+    case "hero":
+      return <Triangle weight="bold" />;
+    case "footer":
+      return <ArrowDown weight="bold" />;
+    case "contact":
+      return <Envelope weight="bold" />;
+    case "cta":
+      return <Play weight="bold" />;
+    case "faq":
+      return <Question weight="bold" />;
+    case "feature":
+      return <Star weight="bold" />;
+    case "gallery":
+      return <Image weight="bold" />;
+    case "logo":
+      return <Diamond weight="bold" />;
+    case "pricing":
+      return <CurrencyDollar weight="bold" />;
+    case "testimonial":
+      return <Users weight="bold" />;
   }
 };
 
+/* ------------------------------------------------ */
+/* =============== DROPDOWN ======================= */
+/* ------------------------------------------------ */
 
 type ComponentDropdownProps = {
   options: string[];
@@ -53,7 +103,7 @@ function ComponentDropdown({ options, value, onChange }: ComponentDropdownProps)
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
-  // Закрытие по клику вне
+  // Click outside closes dropdown
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (ref.current && !ref.current.contains(e.target as Node)) {
@@ -67,32 +117,35 @@ function ComponentDropdown({ options, value, onChange }: ComponentDropdownProps)
   return (
     <div className="component-dropdown-container" ref={ref}>
       <button
-      className={`component-dropdown-toggle ${open ? "active" : ""}`}
-      onClick={() => setOpen(!open)}
-    >
-      <span>{value}</span>
-      <svg
-        className={`component-dropdown-arrow ${open ? "rotated" : ""}`}
-        width="12"
-        height="6"
-        viewBox="0 0 12 6"
-        fill="none"
+        className={`component-dropdown-toggle ${open ? "active" : ""}`}
+        onClick={() => setOpen(!open)}
       >
-        <path
-          d="M1 1L6 5L11 1"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
-      </svg>
-    </button>
+        <span>{value}</span>
+
+        <svg
+          className={`component-dropdown-arrow ${open ? "rotated" : ""}`}
+          width="12"
+          height="6"
+          viewBox="0 0 12 6"
+          fill="none"
+        >
+          <path
+            d="M1 1L6 5L11 1"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
+        </svg>
+      </button>
 
       {open && (
         <div className="component-dropdown-list">
           {options.map((option) => (
             <div
               key={option}
-              className={`component-dropdown-option ${value === option ? "active" : ""}`}
+              className={`component-dropdown-option ${
+                value === option ? "active" : ""
+              }`}
               onClick={() => {
                 onChange(option);
                 setOpen(false);
@@ -107,36 +160,42 @@ function ComponentDropdown({ options, value, onChange }: ComponentDropdownProps)
   );
 }
 
+/* ------------------------------------------------ */
+/* =============== MAIN APP ====================== */
+/* ------------------------------------------------ */
 
 export default function FramerKitGallery() {
   const [isSignInOpen, setIsSignInOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [components, setComponents] = useState<ComponentItem[]>([]);
   const [activeSection, setActiveSection] = useState("navbar");
-  const [theme, setTheme] = useState<"light"|"dark">("light");
+  const [theme, setTheme] = useState<"light" | "dark">("light");
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string|null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
-  const contentRef = useRef<HTMLDivElement>(null);
+  const galleryScrollRef = useRef<HTMLDivElement>(null);
 
-  // Авто-вход из localStorage
+
+  /* Auto login */
   useEffect(() => {
     const savedEmail = localStorage.getItem("rememberedEmail");
     const savedKey = localStorage.getItem("rememberedKey");
-    if(savedEmail && savedKey){
-      const checkLogin = async () => {
+
+    if (savedEmail && savedKey) {
+      const check = async () => {
         const { data: users } = await supabase
           .from("framer_kit")
           .select("*")
           .eq("email", savedEmail)
           .eq("key", savedKey);
-        if(users && users.length > 0) setIsAuthenticated(true);
+
+        if (users && users.length > 0) setIsAuthenticated(true);
       };
-      checkLogin();
+      check();
     }
   }, []);
 
-  // Проверка ширины
+  /* Mobile detection */
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth <= 767);
     check();
@@ -144,186 +203,262 @@ export default function FramerKitGallery() {
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  // Загрузка компонентов
+  /* Load components */
   useEffect(() => {
     let cancelled = false;
+
     const load = async () => {
-      try{
+      try {
         const all: ComponentItem[] = [];
-        for(const sec of STATIC_SECTIONS){
-          const res = await fetch(`https://raw.githubusercontent.com/alex-willow/framerkit-data/main/${sec}.json`);
-          if(!res.ok) continue;
+
+        for (const sec of STATIC_SECTIONS) {
+          const res = await fetch(
+            `https://raw.githubusercontent.com/alex-willow/framerkit-data/main/${sec}.json`
+          );
+          if (!res.ok) continue;
+
           const json = await res.json();
           const items = json[sec] || [];
-          items.forEach((item:any)=> all.push({...item, section: sec}));
+          items.forEach((item: any) =>
+            all.push({ ...item, section: sec })
+          );
         }
-        if(!cancelled) setComponents(all);
-      }catch{
-        if(!cancelled) setError("Не удалось загрузить компоненты");
-      }finally{
-        if(!cancelled) setLoading(false);
+
+        if (!cancelled) setComponents(all);
+      } catch {
+        if (!cancelled) setError("Не удалось загрузить компоненты");
+      } finally {
+        if (!cancelled) setLoading(false);
       }
     };
+
     load();
-    return () => { cancelled=true; };
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
+  /* Scroll reset when section changes */
   useEffect(() => {
-    if(contentRef.current) contentRef.current.scrollTo({top:0});
+    if (galleryScrollRef.current) {
+      galleryScrollRef.current.scrollTo({ top: 0 });
+    }
   }, [activeSection]);
 
-  const displaySections = components.length>0 ? Array.from(new Set(components.map(c=>c.section))) : STATIC_SECTIONS;
-  const sectionCounts:Record<string,number> = {};
-  displaySections.forEach(s=> sectionCounts[s] = components.filter(c=>c.section===s).length);
-
-  const filtered = components.filter(item=> item.section===activeSection && (theme==="dark"?item.key.includes("dark"):!item.key.includes("dark")));
-
-  const handleCopy = (url:string) => {
-    navigator.clipboard.writeText(url);
-    alert("Component URL copied!");
-  };
-
-  // ✅ Новый handleLogout
+  /* Logout */
   const handleLogout = async () => {
     const email = localStorage.getItem("rememberedEmail");
-  
+
     if (email) {
-      const { error } = await supabase
+      await supabase
         .from("framer_kit")
         .update({ site_status: "inactive" })
         .eq("email", email);
-  
-      if (error) {
-        console.error("Supabase error:", error.message);
-      } else {
-        console.log("Site status set to inactive for:", email);
-      }
     }
-  
+
     localStorage.removeItem("rememberedEmail");
     localStorage.removeItem("rememberedKey");
+
     setIsAuthenticated(false);
   };
-  
 
-  let galleryContent;
-  if(loading){
-    galleryContent = Array.from({length:6}).map((_,i)=><div key={i} className="skeleton" aria-hidden />);
-  }else if(filtered.length===0){
-    galleryContent=<div style={{gridColumn:"1 / -1", color:"var(--framer-color-text-secondary)"}}>Пусто — в этой секции нет компонентов для выбранной темы.</div>;
-  }else{
-    galleryContent = filtered.map(item=>(
-      <article key={item.key} className="card" role="listitem" aria-labelledby={`title-${item.key}`}>
+  /* Filter logic */
+  const filtered = components.filter(
+    (item) =>
+      item.section === activeSection &&
+      (theme === "dark"
+        ? item.key.includes("dark")
+        : !item.key.includes("dark"))
+  );
+
+  /* Gallery elements */
+  const galleryContent =
+    loading
+      ? Array.from({ length: 6 }).map((_, i) => (
+          <div key={i} className="skeleton" />
+        ))
+      : filtered.length === 0
+      ? (
+        <div className="empty-message">Нет компонентов для выбранной темы.</div>
+      )
+      : filtered.map((item) => (
+          <article key={item.key} className="card">
             <div className="cardImage">
-              <img src={item.image || PLACEHOLDER} alt={item.title} loading="lazy" />
+              <img
+                src={item.image || PLACEHOLDER}
+                alt={item.title}
+                loading="lazy"
+              />
             </div>
 
             <div className="cardInfo">
-              <h3 id={`title-${item.key}`}>{item.title}</h3>
+              <h3>{item.title}</h3>
 
               {isAuthenticated || item.type === "free" ? (
-                <div className="iconButton" onClick={() => handleCopy(item.url)}>
+                <div
+                  className="iconButton"
+                  onClick={() => navigator.clipboard.writeText(item.url)}
+                >
                   <Copy size={16} />
                 </div>
               ) : (
-                <div className="iconButton lock" onClick={() => setIsSignInOpen(true)}>
+                <div
+                  className="iconButton lock"
+                  onClick={() => setIsSignInOpen(true)}
+                >
                   <Lock size={16} />
                 </div>
               )}
             </div>
-      </article>
-    ));
-  }
+          </article>
+        ));
+
+  /* ------------------------------------------------ */
+  /* ==================== JSX ======================= */
+  /* ------------------------------------------------ */
 
   return (
     <div className="container" data-theme={theme}>
+      {/* HEADER */}
       <header className="header">
         <div className="headerLeft">
-          <img src="/Logo.png" alt="FramerKit" className="logo"/>
+          <img src="/Logo.png" alt="FramerKit" className="logo" />
           <h1>FramerKit</h1>
         </div>
+
         <div className="headerActions">
           {isAuthenticated ? (
             <button className="logoutButton" onClick={handleLogout}>
-            <LogOut size={16} />
-            Log out
-          </button>
-          ):(
+              <LogOut size={16} />
+              Log out
+            </button>
+          ) : (
             <>
-              <button className="loginButton" onClick={()=>setIsSignInOpen(true)}>Log in</button>
-              <button className="authButton" onClick={()=>window.open("https://gum.co/framerkit","_blank")}>Get Full Access</button>
+              <button
+                className="loginButton"
+                onClick={() => setIsSignInOpen(true)}
+              >
+                Log in
+              </button>
+              <button
+                className="authButton"
+                onClick={() =>
+                  window.open("https://gum.co/framerkit", "_blank")
+                }
+              >
+                Get Full Access
+              </button>
             </>
           )}
         </div>
       </header>
 
+      {/* MAIN LAYOUT */}
       <div className="app-layout">
+        {/* SIDEBAR (Fixed) */}
         {!isMobile && (
-          <nav className="sidebar" aria-label="Секции">
+          <nav className="sidebar">
             <div className="sidebar-header">Layout Section</div>
-            {displaySections.map(sec=>{
-              const icon = getIconForSection(sec);
-              return (
-                <button key={sec} onClick={()=>setActiveSection(sec)} className={`sidebar-item ${activeSection===sec?"active":""}`} aria-current={activeSection===sec?"true":undefined}>
-                  <span className="sidebar-icon">{icon}</span>
-                  <span className="sidebar-text">{sec.charAt(0).toUpperCase()+sec.slice(1)}</span>
-                </button>
-              );
-            })}
+
+            {STATIC_SECTIONS.map((sec) => (
+              <button
+                key={sec}
+                onClick={() => setActiveSection(sec)}
+                className={`sidebar-item ${
+                  activeSection === sec ? "active" : ""
+                }`}
+              >
+                <span className="sidebar-icon">{getIconForSection(sec)}</span>
+                <span className="sidebar-text">
+                  {sec.charAt(0).toUpperCase() + sec.slice(1)}
+                </span>
+              </button>
+            ))}
           </nav>
         )}
 
-<section className="content">
-  {isMobile && (
-    <ComponentDropdown
-      options={displaySections}
-      value={activeSection}
-      onChange={setActiveSection}
-    />
-  )}
+        {/* CONTENT = fixed header + scrollable gallery */}
+        <section className="content">
+       
 
-  {/* Заголовок и переключатель — фиксированные, не скроллятся */}
-  <div className="section-header-sticky">
-    <h2 id="gallery-title" className="title">
-      {activeSection.charAt(0).toUpperCase() + activeSection.slice(1)} Section
-    </h2>
+          {/* Sticky section header */}
+          <div className="section-header-sticky">
+          {isMobile && (
+              <div className="dropdown-wrapper">
+                <ComponentDropdown
+                  options={STATIC_SECTIONS}
+                  value={activeSection}
+                  onChange={setActiveSection}
+                />
+              </div>
+            )}
+            <h2 className="title">
+              {activeSection.charAt(0).toUpperCase() + activeSection.slice(1)}
+            </h2>
 
-    <div className="subtitleRow">
-      <p className="subtitle">
-        {loading ? "Loading..." : `${filtered.length} layouts`} in the "{theme === "light" ? "Light" : "Dark"}" theme
-      </p>
-      <div className="themeSwitcher">
-        <span className="modeLabel">Mode:</span>
-        <button
-          className="themeToggle"
-          onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-          aria-label={theme === "light" ? "Switch to dark theme" : "Switch to light theme"}
-        >
-          {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
-        </button>
+            <div className="subtitleRow">
+              <p className="subtitle">
+                {loading
+                  ? "Loading..."
+                  : `${filtered.length} layouts in ${
+                      theme === "light" ? "Light" : "Dark"
+                    } theme`}
+              </p>
+
+              <div className="themeSwitcher">
+                <span className="modeLabel">Mode:</span>
+                <button
+                  className="themeToggle"
+                  onClick={() =>
+                    setTheme(theme === "light" ? "dark" : "light")
+                  }
+                >
+                  {theme === "light" ? (
+                    <Moon size={18} />
+                  ) : (
+                    <Sun size={18} />
+                  )}
+                </button>
+              </div>
+            </div>
+            <div className="title-divider"></div>
+          </div>
+
+          {/* SCROLLABLE GALLERY */}
+          <div className="gallery-scroll-area" ref={galleryScrollRef}>
+            <div className="gallery">{galleryContent}</div>
+
+            {/* FOOTER (показывается только внизу) */}
+            <footer className="footer">
+            <div className="footer-content">
+              <span className="footer-text">
+                © {new Date().getFullYear()} FramerKit. All rights reserved
+              </span>
+
+              <div className="footer-socials">
+                <a href="https://x.com/framer_kit" target="_blank" rel="noopener noreferrer">
+                  <img src="/x-logo.svg" alt="X Logo" width={18} height={18} />
+                </a>
+                <a href="https://www.instagram.com/framer.kit/" target="_blank" rel="noopener noreferrer">
+                  <InstagramLogo size={18} />
+                </a>
+                <a href="https://www.youtube.com/@framerkit_plugin" target="_blank" rel="noopener noreferrer">
+                  <YoutubeLogo size={18} />
+                </a>
+                <a href="https://www.tiktok.com/@framer_plugin" target="_blank" rel="noopener noreferrer">
+                  <TiktokLogo size={18} />
+                </a>
+              </div>
+            </div>
+          </footer>
+          </div>
+        </section>
       </div>
-    </div>
-  </div>
-
-  {/* Только галерея скроллится */}
-  <div className="gallery-scroll-area" ref={contentRef}>
-    {error ? (
-      <p style={{ color: "red" }}>{error}</p>
-    ) : (
-      <div className="gallery" role="list">
-        {galleryContent}
-      </div>
-    )}
-  </div>
-</section>
-      </div>
-
-      <footer className="footer">© {new Date().getFullYear()} FramerKit · Crafted with ❤️ for Designers</footer>
 
       <SignInModal
         isOpen={isSignInOpen}
-        onClose={()=>setIsSignInOpen(false)}
-        onLogin={()=>setIsAuthenticated(true)}
+        onClose={() => setIsSignInOpen(false)}
+        onLogin={() => setIsAuthenticated(true)}
       />
     </div>
   );
