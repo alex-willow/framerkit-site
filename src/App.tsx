@@ -171,7 +171,6 @@ export default function FramerKitGallery() {
   const [activeSection, setActiveSection] = useState("navbar");
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [loading, setLoading] = useState(true);
-  const [setError] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const galleryScrollRef = useRef<HTMLDivElement>(null);
 
@@ -224,9 +223,10 @@ export default function FramerKitGallery() {
           );
         }
 
+     
         if (!cancelled) setComponents(all);
-      } catch {
-        if (!cancelled) setError("Не удалось загрузить компоненты");
+      } catch (err) {
+        if (!cancelled) console.error("Не удалось загрузить компоненты", err);
       } finally {
         if (!cancelled) setLoading(false);
       }
