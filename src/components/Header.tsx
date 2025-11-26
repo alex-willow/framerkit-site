@@ -1,0 +1,42 @@
+import { LogOut } from "lucide-react";
+
+type HeaderProps = {
+  isAuthenticated: boolean;
+  onLogout: () => void;
+  onSignInOpen: () => void;
+  isMobile: boolean;
+  onMenuToggle: () => void;
+};
+
+export default function Header({ isAuthenticated, onLogout, onSignInOpen, isMobile, onMenuToggle }: HeaderProps) {
+  return (
+    <header className="header">
+      <div className="headerLeft">
+        <img src="/Logo.png" alt="FramerKit" className="logo" />
+        <h1>FramerKit</h1>
+      </div>
+      <div className="headerActions">
+        {isMobile && (
+          <button className="hamburgerButton" onClick={onMenuToggle}>
+            ☰
+          </button>
+        )}
+        {isAuthenticated ? (
+          <button className="logoutButton" onClick={onLogout}>
+            <LogOut size={16} />
+            Log out
+          </button>
+        ) : (
+          <>
+            <button className="loginButton" onClick={onSignInOpen}>
+              Log in
+            </button>
+            <button className="authButton" onClick={() => window.open("https://gum.co/framerkit", "_blank")}>
+              Get Full Access
+            </button>
+          </>
+        )}
+      </div>
+    </header>
+  );
+}

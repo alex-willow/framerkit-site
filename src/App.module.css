@@ -244,7 +244,6 @@ body {
   padding-top: 60px; /* отступ под header, чтобы текст не перекрывался */
   padding-left: 6px;
   padding-right: 6px;
-  padding-bottom: 60px; /* отступ снизу */
   background: var(--framer-color-bg);
   box-sizing: border-box;
   border-right: 1px solid rgba(0,0,0,0.08); /* сплошная линия */
@@ -338,14 +337,14 @@ body {
 .content {
   flex: 1;
   display: flex;
-  flex-direction: column;
+  flex-direction: column;          
   color: var(--framer-color-text);
-  padding: 0 20px 40px 20px;
+  padding: 0 20px 60px 20px;
   margin-left: 220px;
   box-sizing: border-box;
   min-width: 0;
-  overflow-y: auto; /* ← ДОБАВЬ ЭТО */
-  overflow-x: hidden;
+  overflow: hidden;       
+  overflow-x: hidden; /* ← добавь это на всякий случай */
 }
 
 
@@ -717,7 +716,7 @@ body {
 
   /* Добавим небольшой отступ чтобы заголовок не прилипал */
   .section-header-sticky {
-    padding-top: 10px; /* Dropdown + spacing */
+    padding-top: 0px; /* Dropdown + spacing */
   }
 }
 
@@ -728,7 +727,7 @@ body {
 /* === Scroll Area (галерея) === */
 .gallery-scroll-area {
   flex: 1;
-  overflow-y: hidden; /* ← УБРАТЬ скролл изнутри */
+  overflow-y: auto;
   padding-bottom: 20px;
   padding-top: 20px;
 }
@@ -772,52 +771,4 @@ body {
 
 [data-framer-theme="dark"] .dropdown-wrapper {
   background: var(--framer-color-bg-dark);
-}
-
-
-/* === Мобильный сайдбар === */
-.sidebar-mobile {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 280px;
-  height: 100%;
-  background: var(--framer-color-bg);
-  z-index: 1000;
-  padding: 20px;
-  box-sizing: border-box;
-  transform: translateX(100%);
-  transition: transform 0.3s ease;
-  overflow-y: auto; /* ← добавь это */
-}
-
-.sidebar-mobile.open {
-  transform: translateX(0);
-}
-
-/* === Оверлей === */
-.sidebar-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 999;
-  display: block;
-}
-
-/* === Кнопка гамбургер === */
-.hamburgerButton {
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  padding: 0;
-  margin-right: 12px;
-}
-
-/* === Скролл-блокировка при открытом меню === */
-body.menu-open {
-  overflow: hidden;
 }
