@@ -1,5 +1,6 @@
 // src/pages/LayoutSectionPage.tsx
 import { useState, useEffect } from "react";
+import { Copy } from "lucide-react";
 
 const STATIC_SECTIONS = [
   "navbar", "hero", "logo", "feature", "gallery",
