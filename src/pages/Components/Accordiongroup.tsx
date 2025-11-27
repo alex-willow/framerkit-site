@@ -8,61 +8,52 @@ type ComponentItem = {
   image: string;
   url: string;
   type: "free" | "paid";
-  section: string;
 };
 
 type AccordionGroupPageProps = {
-  theme: "light" | "dark";
-  setTheme: (theme: "light" | "dark") => void;
   isAuthenticated: boolean;
   setIsSignInOpen: (open: boolean) => void;
-  galleryRef: React.RefObject<HTMLDivElement>;
 };
 
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
 
-export default function AccordionGroupPage({ 
-  theme, 
-  setTheme, 
-  isAuthenticated, 
-  setIsSignInOpen, 
-  galleryRef 
-}: AccordionGroupPageProps) {
-  const [filtered, setFiltered] = useState<ComponentItem[]>([]);
+export default function AccordionGroupPage({ isAuthenticated, setIsSignInOpen }: AccordionGroupPageProps) {
+  const [items, setItems] = useState<ComponentItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const galleryRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const load = async () => {
       try {
-        // ✅ Загружаем напрямую
         const res = await fetch(
-          "https://raw.githubusercontent.com/alex-willow/framerkit-data/refs/heads/components/accordiongroup.json"
+          "https://raw.githubusercontent.com/alex-willow/framerkit-data/components/accordiongroup.json"
         );
         if (!res.ok) throw new Error("Failed to load accordiongroup");
-
         const json = await res.json();
-        const items = json.accordiongroup || []; // ✅ ключ в JSON — с маленькой буквы
-
-        // ✅ Фильтруем по теме
-        const filteredItems = items.filter(item =>
-          theme === "dark" ? item.key.includes("dark") : !item.key.includes("dark")
-        );
-
-        setFiltered(filteredItems);
+        setItems(json.accordiongroup || []);
         setLoading(false);
       } catch (err) {
         setError("Не удалось загрузить компоненты Accordion Group");
         setLoading(false);
       }
     };
-
     load();
+  }, []);
+
+  useEffect(() => {
+    if (galleryRef.current) {
+      galleryRef.current.scrollTo({ top: 0 });
+    }
   }, [theme]);
+
+  const filtered = items.filter(item =>
+    theme === "dark" ? item.key.includes("dark") : !item.key.includes("dark")
+  );
 
   return (
     <div style={{ padding: 0 }}>
-      {/* Sticky header — как у Layout/Components */}
       <div className="section-header-sticky">
         <h2 className="title">Accordion Group</h2>
         <div className="subtitleRow">
@@ -82,7 +73,6 @@ export default function AccordionGroupPage({
         <div className="title-divider" />
       </div>
 
-      {/* Gallery scroll area */}
       <div className="gallery-scroll-area" ref={galleryRef}>
         {loading ? (
           <div>Loading...</div>

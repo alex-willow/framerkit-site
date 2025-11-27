@@ -8,23 +8,23 @@ type ComponentItem = {
   image: string;
   url: string;
   type: "free" | "paid";
-  section: string;
+  // section не используется — можно убрать
 };
 
 type HeroPageProps = {
-  theme: "light" | "dark";
-  setTheme: (theme: "light" | "dark") => void;
   isAuthenticated: boolean;
   setIsSignInOpen: (open: boolean) => void;
-  galleryRef: React.RefObject<HTMLDivElement>;
+  // theme, setTheme, galleryRef — УДАЛЕНЫ
 };
 
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
 
-export default function HeroPage({ theme, setTheme, isAuthenticated, setIsSignInOpen, galleryRef }: HeroPageProps) {
+export default function HeroPage({ isAuthenticated, setIsSignInOpen }: HeroPageProps) {
   const [items, setItems] = useState<ComponentItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [theme, setTheme] = useState<"light" | "dark">("light"); // ← локальное состояние
+  const galleryRef = useRef<HTMLDivElement>(null); // ← локальный ref
 
   useEffect(() => {
     const load = async () => {
@@ -44,13 +44,19 @@ export default function HeroPage({ theme, setTheme, isAuthenticated, setIsSignIn
     load();
   }, []);
 
+  // Прокрутка наверх при смене темы или загрузке
+  useEffect(() => {
+    if (galleryRef.current) {
+      galleryRef.current.scrollTo({ top: 0 });
+    }
+  }, [theme, loading]);
+
   const filtered = items.filter(item =>
     theme === "dark" ? item.key.includes("dark") : !item.key.includes("dark")
   );
 
   return (
     <div style={{ padding: 0 }}>
-      {/* Sticky header — как у Layout/Components */}
       <div className="section-header-sticky">
         <h2 className="title">Hero</h2>
         <div className="subtitleRow">
@@ -70,7 +76,6 @@ export default function HeroPage({ theme, setTheme, isAuthenticated, setIsSignIn
         <div className="title-divider" />
       </div>
 
-      {/* Gallery scroll area */}
       <div className="gallery-scroll-area" ref={galleryRef}>
         {loading ? (
           <div>Loading...</div>

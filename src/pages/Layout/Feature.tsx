@@ -8,37 +8,55 @@ type ComponentItem = {
   image: string;
   url: string;
   type: "free" | "paid";
-  section: string;
+  // section не нужен — все данные из feature.json
 };
 
 type FeaturePageProps = {
-  components: ComponentItem[];
-  theme: "light" | "dark";
-  setTheme: (theme: "light" | "dark") => void;
   isAuthenticated: boolean;
   setIsSignInOpen: (open: boolean) => void;
-  galleryRef: React.RefObject<HTMLDivElement>;
+  // остальное — локальное
 };
 
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
 
-export default function FeaturePage({ components, theme, setTheme, isAuthenticated, setIsSignInOpen, galleryRef }: FeaturePageProps) {
-  const [filtered, setFiltered] = useState<ComponentItem[]>([]);
+export default function FeaturePage({ isAuthenticated, setIsSignInOpen }: FeaturePageProps) {
+  const [items, setItems] = useState<ComponentItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const galleryRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Фильтруем только компоненты из секции "feature"
-    const featureItems = components.filter(item => item.section === "feature");
-    const filteredItems = featureItems.filter(item =>
-      theme === "dark" ? item.key.includes("dark") : !item.key.includes("dark")
-    );
-    setFiltered(filteredItems);
-    setLoading(false);
-  }, [components, theme]);
+    const load = async () => {
+      try {
+        const res = await fetch(
+          "https://raw.githubusercontent.com/alex-willow/framerkit-data/main/feature.json"
+        );
+        if (!res.ok) throw new Error("Failed to load feature");
+        const json = await res.json();
+        setItems(json.feature || []);
+        setLoading(false);
+      } catch (err) {
+        setError("Не удалось загрузить компоненты Feature");
+        setLoading(false);
+      }
+    };
+    load();
+  }, []);
+
+  // Прокрутка наверх при смене темы
+  useEffect(() => {
+    if (galleryRef.current) {
+      galleryRef.current.scrollTo({ top: 0 });
+    }
+  }, [theme]);
+
+  const filtered = items.filter(item =>
+    theme === "dark" ? item.key.includes("dark") : !item.key.includes("dark")
+  );
 
   return (
     <div style={{ padding: 0 }}>
-      {/* Sticky header — как у Layout/Components */}
       <div className="section-header-sticky">
         <h2 className="title">Feature</h2>
         <div className="subtitleRow">
@@ -58,10 +76,11 @@ export default function FeaturePage({ components, theme, setTheme, isAuthenticat
         <div className="title-divider" />
       </div>
 
-      {/* Gallery scroll area */}
       <div className="gallery-scroll-area" ref={galleryRef}>
         {loading ? (
           <div>Loading...</div>
+        ) : error ? (
+          <p style={{ color: "red" }}>{error}</p>
         ) : filtered.length === 0 ? (
           <div className="empty-message">Пусто — в этой секции нет компонентов для выбранной темы.</div>
         ) : (

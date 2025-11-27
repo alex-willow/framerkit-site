@@ -8,27 +8,26 @@ type ComponentItem = {
   image: string;
   url: string;
   type: "free" | "paid";
-  section: string;
+  // section не используется — можно убрать
 };
 
 type LogoPageProps = {
-  theme: "light" | "dark";
-  setTheme: (theme: "light" | "dark") => void;
   isAuthenticated: boolean;
   setIsSignInOpen: (open: boolean) => void;
+  // theme и setTheme — убраны из пропсов
 };
 
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
 
-export default function LogoPage({ theme, setTheme, isAuthenticated, setIsSignInOpen }: LogoPageProps) {
+export default function LogoPage({ isAuthenticated, setIsSignInOpen }: LogoPageProps) {
   const [items, setItems] = useState<ComponentItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [theme, setTheme] = useState<"light" | "dark">("light"); // ← локальное состояние
 
   useEffect(() => {
     const load = async () => {
       try {
-        // Updated URL for raw logo.json file
         const res = await fetch(
           "https://raw.githubusercontent.com/alex-willow/framerkit-data/main/logo.json"
         );
@@ -50,7 +49,6 @@ export default function LogoPage({ theme, setTheme, isAuthenticated, setIsSignIn
 
   return (
     <div style={{ padding: 0 }}>
-      {/* Sticky header */}
       <div className="section-header-sticky">
         <h2 className="title">Logo</h2>
         <div className="subtitleRow">
@@ -70,7 +68,6 @@ export default function LogoPage({ theme, setTheme, isAuthenticated, setIsSignIn
         <div className="title-divider" />
       </div>
 
-      {/* Gallery scroll area */}
       <div className="gallery-scroll-area">
         {loading ? (
           <div>Loading...</div>

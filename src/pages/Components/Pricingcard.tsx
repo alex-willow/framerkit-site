@@ -8,61 +8,52 @@ type ComponentItem = {
   image: string;
   url: string;
   type: "free" | "paid";
-  section: string;
 };
 
 type PricingCardPageProps = {
-  theme: "light" | "dark";
-  setTheme: (theme: "light" | "dark") => void;
   isAuthenticated: boolean;
   setIsSignInOpen: (open: boolean) => void;
-  galleryRef: React.RefObject<HTMLDivElement>;
 };
 
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
 
-export default function PricingCardPage({ 
-  theme, 
-  setTheme, 
-  isAuthenticated, 
-  setIsSignInOpen, 
-  galleryRef 
-}: PricingCardPageProps) {
-  const [filtered, setFiltered] = useState<ComponentItem[]>([]);
+export default function PricingCardPage({ isAuthenticated, setIsSignInOpen }: PricingCardPageProps) {
+  const [items, setItems] = useState<ComponentItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const galleryRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const load = async () => {
       try {
-        // ✅ Загружаем напрямую
         const res = await fetch(
-          "https://raw.githubusercontent.com/alex-willow/framerkit-data/refs/heads/components/pricingcard.json"
+          "https://raw.githubusercontent.com/alex-willow/framerkit-data/components/pricingcard.json"
         );
         if (!res.ok) throw new Error("Failed to load pricingcard");
-
         const json = await res.json();
-        const items = json.Pricingcard || []; // ✅ ключ в JSON
-
-        // ✅ Фильтруем по теме
-        const filteredItems = items.filter(item =>
-          theme === "dark" ? item.key.includes("Dark") : !item.key.includes("Dark")
-        );
-
-        setFiltered(filteredItems);
+        setItems(json.Pricingcard || []);
         setLoading(false);
       } catch (err) {
         setError("Не удалось загрузить компоненты Pricing Card");
         setLoading(false);
       }
     };
-
     load();
+  }, []);
+
+  useEffect(() => {
+    if (galleryRef.current) {
+      galleryRef.current.scrollTo({ top: 0 });
+    }
   }, [theme]);
+
+  const filtered = items.filter(item =>
+    theme === "dark" ? item.key.includes("Dark") : !item.key.includes("Dark")
+  );
 
   return (
     <div style={{ padding: 0 }}>
-      {/* Sticky header */}
       <div className="section-header-sticky">
         <h2 className="title">Pricing Card</h2>
         <div className="subtitleRow">
@@ -82,7 +73,6 @@ export default function PricingCardPage({
         <div className="title-divider" />
       </div>
 
-      {/* Gallery scroll area */}
       <div className="gallery-scroll-area" ref={galleryRef}>
         {loading ? (
           <div>Loading...</div>

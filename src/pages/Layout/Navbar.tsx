@@ -8,19 +8,19 @@ type ComponentItem = {
   image: string;
   url: string;
   type: "free" | "paid";
-  section: string;
+  // section не используется — можно убрать
 };
 
 type NavbarPageProps = {
-  theme: "light" | "dark";
-  setTheme: (theme: "light" | "dark") => void;
   isAuthenticated: boolean;
   setIsSignInOpen: (open: boolean) => void;
+  // theme и setTheme — убраны из пропсов
 };
 
-export default function NavbarPage({ theme, setTheme, isAuthenticated, setIsSignInOpen }: NavbarPageProps) {
+export default function NavbarPage({ isAuthenticated, setIsSignInOpen }: NavbarPageProps) {
   const [items, setItems] = useState<ComponentItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [theme, setTheme] = useState<"light" | "dark">("light"); // ← локальное состояние
 
   useEffect(() => {
     const load = async () => {
@@ -44,13 +44,8 @@ export default function NavbarPage({ theme, setTheme, isAuthenticated, setIsSign
     theme === "dark" ? item.key.includes("dark") : !item.key.includes("dark")
   );
 
-  useEffect(() => {
-    console.log("isAuthenticated changed:", isAuthenticated); // Для отладки
-  }, [isAuthenticated]); // Это сработает при изменении isAuthenticated
-
   return (
     <div style={{ padding: 0 }}>
-      {/* Sticky header */}
       <div className="section-header-sticky">
         <h2 className="title">Navbar</h2>
         <div className="subtitleRow">
@@ -70,7 +65,6 @@ export default function NavbarPage({ theme, setTheme, isAuthenticated, setIsSign
         <div className="title-divider" />
       </div>
 
-      {/* Gallery scroll area */}
       <div className="gallery-scroll-area">
         {loading ? (
           <div>Loading...</div>
@@ -79,7 +73,11 @@ export default function NavbarPage({ theme, setTheme, isAuthenticated, setIsSign
             {filtered.map(item => (
               <div key={item.key} className="card">
                 <div className="cardImage">
-                  <img src={item.image || "https://via.placeholder.com/280x160?text=No+Image"} alt={item.title} loading="lazy" />
+                  <img
+                    src={item.image || "https://via.placeholder.com/280x160?text=No+Image"}
+                    alt={item.title}
+                    loading="lazy"
+                  />
                 </div>
                 <div className="cardInfo">
                   <h3>{item.title}</h3>

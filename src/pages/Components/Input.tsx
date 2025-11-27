@@ -1,3 +1,4 @@
+// src/pages/Components/Input.tsx
 import { useState, useEffect, useRef } from "react";
 import { Copy, Lock } from "lucide-react";
 
@@ -7,46 +8,52 @@ type ComponentItem = {
   image: string;
   url: string;
   type: "free" | "paid";
-  section: string;
 };
 
 type InputPageProps = {
-  components: ComponentItem[];
-  theme: "light" | "dark";
-  setTheme: (theme: "light" | "dark") => void;
   isAuthenticated: boolean;
   setIsSignInOpen: (open: boolean) => void;
-  galleryRef: React.RefObject<HTMLDivElement>;
 };
 
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
 
-export default function InputPage({ 
-  components, 
-  theme, 
-  setTheme, 
-  isAuthenticated, 
-  setIsSignInOpen, 
-  galleryRef 
-}: InputPageProps) {
-  const [filtered, setFiltered] = useState<ComponentItem[]>([]);
+export default function InputPage({ isAuthenticated, setIsSignInOpen }: InputPageProps) {
+  const [items, setItems] = useState<ComponentItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const galleryRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const load = async () => {
-      const inputItems = components.filter(item => item.section === "components/input");
-      const filteredItems = inputItems.filter(item =>
-        theme === "dark" ? item.key.includes("dark") : !item.key.includes("dark")
-      );
-      setFiltered(filteredItems);
-      setLoading(false);
+      try {
+        const res = await fetch(
+          "https://raw.githubusercontent.com/alex-willow/framerkit-data/components/input.json"
+        );
+        if (!res.ok) throw new Error("Failed to load input");
+        const json = await res.json();
+        setItems(json.input || []);
+        setLoading(false);
+      } catch (err) {
+        setError("Не удалось загрузить компоненты Input");
+        setLoading(false);
+      }
     };
     load();
-  }, [components, theme]);
+  }, []);
+
+  useEffect(() => {
+    if (galleryRef.current) {
+      galleryRef.current.scrollTo({ top: 0 });
+    }
+  }, [theme]);
+
+  const filtered = items.filter(item =>
+    theme === "dark" ? item.key.includes("dark") : !item.key.includes("dark")
+  );
 
   return (
     <div style={{ padding: 0 }}>
-      {/* Sticky header — как у Layout/Components */}
       <div className="section-header-sticky">
         <h2 className="title">Input</h2>
         <div className="subtitleRow">
@@ -66,10 +73,11 @@ export default function InputPage({
         <div className="title-divider" />
       </div>
 
-      {/* Gallery scroll area */}
       <div className="gallery-scroll-area" ref={galleryRef}>
         {loading ? (
           <div>Loading...</div>
+        ) : error ? (
+          <p style={{ color: "red" }}>{error}</p>
         ) : filtered.length === 0 ? (
           <div className="empty-message">Пусто — в этой секции нет компонентов для выбранной темы.</div>
         ) : (

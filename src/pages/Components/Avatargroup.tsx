@@ -1,4 +1,4 @@
-// src/pages/Components/Avatar-Group.tsx
+// src/pages/Components/AvatarGroup.tsx
 import { useState, useEffect, useRef } from "react";
 import { Copy, Lock } from "lucide-react";
 
@@ -8,61 +8,52 @@ type ComponentItem = {
   image: string;
   url: string;
   type: "free" | "paid";
-  section: string;
 };
 
 type AvatarGroupPageProps = {
-  theme: "light" | "dark";
-  setTheme: (theme: "light" | "dark") => void;
   isAuthenticated: boolean;
   setIsSignInOpen: (open: boolean) => void;
-  galleryRef: React.RefObject<HTMLDivElement>;
 };
 
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
 
-export default function AvatarGroupPage({ 
-  theme, 
-  setTheme, 
-  isAuthenticated, 
-  setIsSignInOpen, 
-  galleryRef 
-}: AvatarGroupPageProps) {
-  const [filtered, setFiltered] = useState<ComponentItem[]>([]);
+export default function AvatarGroupPage({ isAuthenticated, setIsSignInOpen }: AvatarGroupPageProps) {
+  const [items, setItems] = useState<ComponentItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const galleryRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const load = async () => {
       try {
-        // ✅ Загружаем напрямую
         const res = await fetch(
-          "https://raw.githubusercontent.com/alex-willow/framerkit-data/refs/heads/components/avatargroup.json"
+          "https://raw.githubusercontent.com/alex-willow/framerkit-data/components/avatargroup.json"
         );
         if (!res.ok) throw new Error("Failed to load avatargroup");
-
         const json = await res.json();
-        const items = json.avatargroup || []; // ✅ ключ в JSON — с заглавной
-
-        // ✅ Фильтруем по теме
-        const filteredItems = items.filter(item =>
-          theme === "dark" ? item.key.includes("dark") : !item.key.includes("dark")
-        );
-
-        setFiltered(filteredItems);
+        setItems(json.avatargroup || []);
         setLoading(false);
       } catch (err) {
         setError("Не удалось загрузить компоненты Avatar Group");
         setLoading(false);
       }
     };
-
     load();
+  }, []);
+
+  useEffect(() => {
+    if (galleryRef.current) {
+      galleryRef.current.scrollTo({ top: 0 });
+    }
   }, [theme]);
+
+  const filtered = items.filter(item =>
+    theme === "dark" ? item.key.includes("dark") : !item.key.includes("dark")
+  );
 
   return (
     <div style={{ padding: 0 }}>
-      {/* Sticky header */}
       <div className="section-header-sticky">
         <h2 className="title">Avatar Group</h2>
         <div className="subtitleRow">
@@ -82,7 +73,6 @@ export default function AvatarGroupPage({
         <div className="title-divider" />
       </div>
 
-      {/* Gallery scroll area */}
       <div className="gallery-scroll-area" ref={galleryRef}>
         {loading ? (
           <div>Loading...</div>

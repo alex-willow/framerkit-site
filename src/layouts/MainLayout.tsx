@@ -7,8 +7,8 @@ type MainLayoutProps = {
   children: React.ReactNode;
   activeSection: string;
   onSectionChange: (section: string) => void;
-  theme: "light" | "dark";
-  onThemeToggle: () => void;
+  theme?: "light" | "dark";      // ← сделали необязательным
+  onThemeToggle?: () => void; 
   isAuthenticated: boolean;
   onLogout: () => void;
   onSignInOpen: () => void;
@@ -16,6 +16,7 @@ type MainLayoutProps = {
   isMenuOpen: boolean;
   onMenuToggle: () => void;
   galleryScrollRef?: React.RefObject<HTMLDivElement>;
+  
 };
 
 export default function MainLayout({
@@ -23,7 +24,6 @@ export default function MainLayout({
   activeSection,
   onSectionChange,
   theme,
-  onThemeToggle,
   isAuthenticated,
   onLogout,
   onSignInOpen,

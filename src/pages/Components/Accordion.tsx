@@ -1,3 +1,4 @@
+// src/pages/Components/Accordion.tsx
 import { useState, useEffect, useRef } from "react";
 import { Copy, Lock } from "lucide-react";
 
@@ -7,42 +8,49 @@ type ComponentItem = {
   image: string;
   url: string;
   type: "free" | "paid";
-  section: string;
 };
 
 type AccordionPageProps = {
-  components: ComponentItem[];
-  theme: "light" | "dark";
-  setTheme: (theme: "light" | "dark") => void;
   isAuthenticated: boolean;
   setIsSignInOpen: (open: boolean) => void;
-  galleryRef: React.RefObject<HTMLDivElement>;
 };
 
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
 
-export default function AccordionPage({ 
-  components, 
-  theme, 
-  setTheme, 
-  isAuthenticated, 
-  setIsSignInOpen, 
-  galleryRef 
-}: AccordionPageProps) {
-  const [filtered, setFiltered] = useState<ComponentItem[]>([]);
+export default function AccordionPage({ isAuthenticated, setIsSignInOpen }: AccordionPageProps) {
+  const [items, setItems] = useState<ComponentItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const galleryRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const load = async () => {
-      const accordionItems = components.filter(item => item.section === "components/accordion");
-      const filteredItems = accordionItems.filter(item =>
-        theme === "dark" ? item.key.includes("dark") : !item.key.includes("dark")
-      );
-      setFiltered(filteredItems);
-      setLoading(false);
+      try {
+        const res = await fetch(
+          "https://raw.githubusercontent.com/alex-willow/framerkit-data/components/accordion.json"
+        );
+        if (!res.ok) throw new Error("Failed to load accordion");
+        const json = await res.json();
+        setItems(json.accordion || []);
+        setLoading(false);
+      } catch (err) {
+        setError("Не удалось загрузить компоненты Accordion");
+        setLoading(false);
+      }
     };
     load();
-  }, [components, theme]);
+  }, []);
+
+  useEffect(() => {
+    if (galleryRef.current) {
+      galleryRef.current.scrollTo({ top: 0 });
+    }
+  }, [theme]);
+
+  const filtered = items.filter(item =>
+    theme === "dark" ? item.key.includes("dark") : !item.key.includes("dark")
+  );
 
   return (
     <div style={{ padding: 0 }}>
@@ -68,6 +76,8 @@ export default function AccordionPage({
       <div className="gallery-scroll-area" ref={galleryRef}>
         {loading ? (
           <div>Loading...</div>
+        ) : error ? (
+          <p style={{ color: "red" }}>{error}</p>
         ) : filtered.length === 0 ? (
           <div className="empty-message">Пусто — в этой секции нет компонентов для выбранной темы.</div>
         ) : (

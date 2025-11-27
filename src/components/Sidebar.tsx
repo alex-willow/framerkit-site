@@ -2,7 +2,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 type SidebarProps = {
   activeSection: string;
-  onSectionChange: (section: string) => void;
+  onSectionChange: (sectionId: string) => void;
   isMobile: boolean;
   isMenuOpen: boolean;
   onMenuClose: () => void;
@@ -16,177 +16,126 @@ export default function Sidebar({
   onMenuClose,
 }: SidebarProps) {
   const navigate = useNavigate();
-  const location = useLocation(); // Получаем текущий путь из location
+  const location = useLocation();
 
-  // Список секций с путями и отображаемыми текстами
-  const sectionsList = [
-    { path: "overview", label: "Overview" },
-    { path: "installation", label: "Installation" },
-    { path: "how-it-works", label: "How It Works" },
-    { path: "faq", label: "FAQ" },
+  const homeSections = [
+    { id: "overview", label: "Overview" },
+    { id: "getting-started", label: "Getting Started" },
+    { id: "installation", label: "Installation" },
+    { id: "how-it-works", label: "How It Works" },
+    { id: "get-framerkit", label: "Get FramerKit" },
   ];
 
-  const layoutSectionsList = [
-    { path: "navbar", label: "Navbar" },
-    { path: "hero", label: "Hero" },
-    { path: "logo", label: "Logo" },
-    { path: "feature", label: "Feature" },
-    { path: "gallery", label: "Gallery" },
-    { path: "testimonial", label: "Testimonial" },
-    { path: "contact", label: "Contact" },
-    { path: "pricing", label: "Pricing" },
-    { path: "cta", label: "CTA" },
-    { path: "footer", label: "Footer" },
+  const layoutSections = [
+    "navbar", "hero", "logo", "feature", "gallery",
+    "testimonial", "contact", "pricing", "faq", "cta", "footer"
   ];
 
-  const componentsList = [
-    { path: "accordion", label: "Accordion" },
-    { path: "accordiongroup", label: "Accordion Group" },
-    { path: "avatar", label: "Avatar" },
-    { path: "avatargroup", label: "Avatar Group" },
-    { path: "badge", label: "Badge" },
-    { path: "button", label: "Button" },
-    { path: "card", label: "Card" },
-    { path: "icon", label: "Icon" },
-    { path: "input", label: "Input" },
-    { path: "form", label: "Form" },
-    { path: "pricingcard", label: "Pricing Card" },
-    { path: "rating", label: "Rating" },
-    { path: "testimonialcard", label: "Testimonial Card" },
+  const componentSections = [
+    "accordion", "accordiongroup", "avatar", "avatargroup", "badge", "button",
+    "card", "icon", "input", "form", "pricingcard", "rating", "testimonialcard"
   ];
 
-  const templatesList = [
-    { path: "templates/framerkitdaily", label: "Framer Kit Daily" },
-  ];
-
-  // Функция для обработки кликов по кнопкам
-  const handleNavigation = (section: string) => {
-    onSectionChange(section); // Обновляем активную секцию
-    navigate(`/${section.toLowerCase().replace(/\s+/g, "-")}`); // Переход по маршруту
+  const handleHomeSectionClick = (id: string) => {
+    // Обновляем активную секцию
+    onSectionChange(id);
     onMenuClose();
+
+    if (location.pathname !== "/") {
+      // Переход на главную и скролл
+      navigate("/");
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 150);
+    } else {
+      // Просто скроллим
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    }
   };
 
-  // Функция для форматирования текста
-  const formatText = (text: string) => {
-    return text
-      .replace(/\b\w/g, (char) => char.toUpperCase()) // Преобразуем первую букву каждого слова в заглавную
-      .replace(/-/g, " "); // Заменяем дефисы на пробелы
+  const handleOtherSectionClick = (section: string, basePath: string) => {
+    onSectionChange(section);
+    onMenuClose();
+    navigate(`/${basePath}/${section}`);
   };
 
-  // Проверка активной секции
-  const isActive = (section: string) => {
-    const path = `/${section.toLowerCase().replace(/\s+/g, "-")}`;
-    return location.pathname === path ? "active" : ""; // Проверяем активность по пути
+  const isActive = (id: string, basePath?: string): boolean => {
+    if (location.pathname === "/") {
+      // На главной — активна секция по id
+      return activeSection === id;
+    }
+    // На других — активна по совпадению URL
+    if (basePath) {
+      return location.pathname === `/${basePath}/${id}`;
+    }
+    return location.pathname === `/${id}`;
   };
+
+  const renderHomeItems = () =>
+    homeSections.map(({ id, label }) => (
+      <button
+        key={id}
+        className={`sidebar-item ${isActive(id) ? "active" : ""}`}
+        onClick={() => handleHomeSectionClick(id)}
+      >
+        {label}
+      </button>
+    ));
+
+  const renderSectionItems = (list: string[], basePath: string) =>
+    list.map(id => (
+      <button
+        key={id}
+        className={`sidebar-item ${isActive(id, basePath) ? "active" : ""}`}
+        onClick={() => handleOtherSectionClick(id, basePath)}
+      >
+        {id
+          .split("-")
+          .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+          .join(" ")}
+      </button>
+    ));
+
+  const sidebarContent = (
+    <>
+      <div className="sidebar-header">Getting Started</div>
+      {renderHomeItems()}
+
+      <div className="sidebar-header" style={{ marginTop: 20 }}>Layout Section</div>
+      {renderSectionItems(layoutSections, "layout")}
+
+      <div className="sidebar-header" style={{ marginTop: 20 }}>Components</div>
+      {renderSectionItems(componentSections, "components")}
+
+      <div className="sidebar-header" style={{ marginTop: 20 }}>Templates</div>
+      <button
+        className="sidebar-item"
+        onClick={() => {
+          navigate("/templates/framerkitdaily");
+          onMenuClose();
+        }}
+      >
+        Framer Kit Daily
+      </button>
+    </>
+  );
 
   if (isMobile) {
     return (
       <>
-        {isMenuOpen && (
-          <div className="sidebar-overlay" onClick={onMenuClose}></div>
-        )}
-        <nav className={`sidebar-mobile ${isMenuOpen ? "open" : ""}`} aria-label="Main navigation">
-          {/* Getting Started */}
-          <div className="sidebar-header">Getting Started</div>
-          {sectionsList.map((page) => (
-            <button
-              key={page.path}
-              onClick={() => handleNavigation(page.path)}
-              className={`sidebar-item ${isActive(page.path)}`}
-            >
-              {page.label}
-            </button>
-          ))}
-
-          {/* Layout Section */}
-          <div className="sidebar-header" style={{ marginTop: 20 }}>Layout Section</div>
-          {layoutSectionsList.map((sec) => (
-            <button
-              key={sec.path}
-              onClick={() => handleNavigation(`layout/${sec.path}`)}
-              className={`sidebar-item ${isActive(`layout/${sec.path}`)}`}
-            >
-              {sec.label}
-            </button>
-          ))}
-
-          {/* Components */}
-          <div className="sidebar-header" style={{ marginTop: 20 }}>Components</div>
-          {componentsList.map((comp) => (
-            <button
-              key={comp.path}
-              onClick={() => handleNavigation(`components/${comp.path}`)}
-              className={`sidebar-item ${isActive(`components/${comp.path}`)}`}
-            >
-              {comp.label}
-            </button>
-          ))}
-
-          {/* Templates */}
-          <div className="sidebar-header" style={{ marginTop: 20 }}>Templates</div>
-          {templatesList.map((tpl) => (
-            <button
-              key={tpl.path}
-              onClick={() => handleNavigation(tpl.path)}
-              className={`sidebar-item ${isActive(tpl.path)}`}
-            >
-              {tpl.label}
-            </button>
-          ))}
+        {isMenuOpen && <div className="sidebar-overlay" onClick={onMenuClose} />}
+        <nav className={`sidebar-mobile ${isMenuOpen ? "open" : ""}`}>
+          {sidebarContent}
         </nav>
       </>
     );
   }
 
-  return (
-    <nav className="sidebar" aria-label="Main navigation">
-      {/* Getting Started */}
-      <div className="sidebar-header">Getting Started</div>
-      {sectionsList.map((page) => (
-        <button
-          key={page.path}
-          onClick={() => handleNavigation(page.path)}
-          className={`sidebar-item ${isActive(page.path)}`}
-        >
-          {page.label}
-        </button>
-      ))}
-
-      {/* Layout Section */}
-      <div className="sidebar-header" style={{ marginTop: 20 }}>Layout Section</div>
-      {layoutSectionsList.map((sec) => (
-        <button
-          key={sec.path}
-          onClick={() => handleNavigation(`layout/${sec.path}`)}
-          className={`sidebar-item ${isActive(`layout/${sec.path}`)}`}
-        >
-          {sec.label}
-        </button>
-      ))}
-
-      {/* Components */}
-      <div className="sidebar-header" style={{ marginTop: 20 }}>Components</div>
-      {componentsList.map((comp) => (
-        <button
-          key={comp.path}
-          onClick={() => handleNavigation(`components/${comp.path}`)}
-          className={`sidebar-item ${isActive(`components/${comp.path}`)}`}
-        >
-          {comp.label}
-        </button>
-      ))}
-
-      {/* Templates */}
-      <div className="sidebar-header" style={{ marginTop: 20 }}>Templates</div>
-      {templatesList.map((tpl) => (
-        <button
-          key={tpl.path}
-          onClick={() => handleNavigation(tpl.path)}
-          className={`sidebar-item ${isActive(tpl.path)}`}
-        >
-          {tpl.label}
-        </button>
-      ))}
-    </nav>
-  );
+  return <nav className="sidebar">{sidebarContent}</nav>;
 }
