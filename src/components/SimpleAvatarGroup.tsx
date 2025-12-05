@@ -13,12 +13,13 @@ export default function SimpleAvatarGroup({
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   const avatars = [
-    { src: "https://storage.googleapis.com/framerkit/Avatar1.png", alt: "User 1" },
-    { src: "https://storage.googleapis.com/framerkit/Avatar2.png", alt: "User 2" },
-    { src: "https://storage.googleapis.com/framerkit/Avatar3.png", alt: "User 3" },
-    { src: "https://storage.googleapis.com/framerkit/Avatar4.png", alt: "User 4" },
-    { src: "https://storage.googleapis.com/framerkit/Avatar5.png", alt: "User 5" },
+    { src: "https://storage.googleapis.com/framerkit/heroavatar1.jpg", alt: "User 1" },
+    { src: "https://storage.googleapis.com/framerkit/heroavatar2.jpg", alt: "User 2" },
+    { src: "https://storage.googleapis.com/framerkit/heroavatar3.jpg", alt: "User 3" },
+    { src: "https://storage.googleapis.com/framerkit/heroavatar4.jpg", alt: "User 4" },
+    { src: "https://storage.googleapis.com/framerkit/heroavatar5.jpg", alt: "User 5" },
   ];
+  
 
   return (
     <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
