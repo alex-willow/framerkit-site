@@ -1,0 +1,204 @@
+/* === Explore Sections Section === */
+.explore-sections-section {
+    padding: 200px 20px; /* общий верхний и нижний отступ секции */
+    background-color: var(--framer-color-bg);
+    color: var(--framer-color-text);
+  }
+  
+  [data-framer-theme="dark"] .explore-sections-section {
+    background-color: var(--framer-color-bg-dark);
+    color: var(--framer-color-text-dark);
+  }
+  
+  .explore-sections-section .fk-container {
+    padding: 200px 20px; 
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  /* === Заголовок и подзаголовок === */
+  
+  .explore-sections-title {
+    padding: 200px 20px; /* общий верхний и нижний отступ секции */
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 800;
+    margin: 0 0 20px; /* отступ снизу до подзаголовка */
+    text-align: center;
+  }
+  
+  .explore-sections-subtitle {
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--framer-color-text-secondary);
+    margin: 0 0 40px; /* отступ до галереи */
+    text-align: center;
+    max-width: 800px;
+    line-height: 1.5;
+  }
+  
+  [data-framer-theme="dark"] .explore-sections-subtitle {
+    color: var(--framer-color-text-secondary-dark);
+  }
+  
+  /* === Галерея / Сетка карточек === */
+  .explore-gallery-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    padding: 40px 10px; /* добавляем внутренние отступы сверху/снизу */
+    box-sizing: border-box;
+    margin: 0 auto;
+  }
+  
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    width: 100%;
+    justify-items: center;
+  }
+  
+  /* Адаптив */
+  @media (max-width: 1024px) {
+    .gallery {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .explore-sections-section {
+      padding: 60px 16px;
+    }
+  
+    .explore-sections-title {
+      font-size: clamp(22px, 5vw, 32px);
+    }
+  
+    .explore-sections-subtitle {
+      font-size: clamp(14px, 3vw, 18px);
+    }
+  
+    .gallery {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  
+
+  /* === Карточки === */
+  .card {
+    background: var(--framer-color-bg);
+    border: 1px solid var(--framer-color-border);
+    border-radius: calc(var(--border-radius) - 2px);
+    overflow: hidden;
+    box-shadow: var(--box-shadow-small);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-width: 250px;
+    max-width: 360px; /* ограничение ширины карточки */
+  }
+  
+  [data-framer-theme="dark"] .card {
+    background: var(--framer-color-bg-tertiary-dark);
+    border-color: var(--framer-color-border-dark);
+  }
+  
+  .cardImage {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+  
+  .cardImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+    pointer-events: none;
+  }
+  
+  .cardInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px; /* внутренние отступы */
+    margin-top: 8px;
+  }
+  
+  .cardInfo h3 {
+    font-size: 15px;
+    font-weight: 500;
+    margin: 0;
+    color: var(--framer-color-text);
+  }
+  
+  [data-framer-theme="dark"] .cardInfo h3 {
+    color: var(--framer-color-text-dark);
+  }
+  
+  .iconButton {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  .iconButton:hover {
+    background: rgba(110, 63, 243, 0.06);
+  }
+  
+  /* === Плавная смена карточки === */
+  .fadeIn {
+    animation: fadeInCard 0.5s forwards;
+  }
+  
+  .fadeOut {
+    animation: fadeOutCard 0.5s forwards;
+  }
+  
+  @keyframes fadeInCard {
+    0% {
+      opacity: 0;
+      transform: scale(0.97);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes fadeOutCard {
+    0% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0.97);
+    }
+  }
+  
+  /* === Hover Overlay === */
+  .hoverOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  
+  

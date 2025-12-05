@@ -1,4 +1,4 @@
-import { LogOut } from "lucide-react";
+import { LogOut, Menu } from "lucide-react";
 
 type HeaderProps = {
   isAuthenticated: boolean;
@@ -16,11 +16,6 @@ export default function Header({ isAuthenticated, onLogout, onSignInOpen, isMobi
         <h1>FramerKit</h1>
       </div>
       <div className="headerActions">
-        {isMobile && (
-          <button className="hamburgerButton" onClick={onMenuToggle}>
-            ☰
-          </button>
-        )}
         {isAuthenticated ? (
           <button className="logoutButton" onClick={onLogout}>
             <LogOut size={16} />
@@ -35,6 +30,12 @@ export default function Header({ isAuthenticated, onLogout, onSignInOpen, isMobi
               Get Full Access
             </button>
           </>
+        )}
+
+        {isMobile && (
+          <button className="hamburgerButton" onClick={onMenuToggle}>
+            <Menu size={24} />
+          </button>
         )}
       </div>
     </header>

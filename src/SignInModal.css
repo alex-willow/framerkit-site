@@ -1,27 +1,37 @@
 /* === Модальный фон === */
 .modalOverlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    padding: 16px;
-  }
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 16px;
+  /* Убираем анимацию для фона */
+  /* Прозрачность фона сразу полупрозрачная */
+}
   
   /* === Контейнер модалки === */
   .auth-card {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 300px;
-    max-width: 100%;
+    width: 100%;
+    max-width: 300px;
     padding: 24px;
     border-radius: 12px;
     text-align: center;
     transition: background 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    opacity: 0; /* Начальная непрозрачность */
+    transform: translateY(-20px); /* Начальное смещение */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Плавное изменение */
+  }
+
+  .auth-card.show {
+    opacity: 1; /* Модалка становится видимой */
+    transform: translateY(0); /* Модалка плавно опускается */
   }
   
   /* === Light / Dark темы для карточки === */
@@ -73,7 +83,7 @@
   /* === Описание под заголовком === */
   .auth-description {
     font-size: 14px;
-    margin-bottom: 10px;
+    margin-bottom: 16px;
     transition: color 0.3s ease;
   }
   
@@ -89,7 +99,7 @@
   .auth-form {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 0px;
   }
   
   /* === Подписи для полей === */
@@ -116,6 +126,7 @@
     height: 40px;
     padding: 8px 12px;
     font-size: 13px;
+    margin-bottom: 12px;
     border: none;
     border-radius: 6px;
     box-sizing: border-box;

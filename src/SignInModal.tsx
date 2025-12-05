@@ -25,7 +25,16 @@ export default function SignInModal({
   const [key, setKey] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [showModal, setShowModal] = useState(false); // Логика для анимации
   const modalRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      setShowModal(true); // Когда модалка открывается, добавляем анимацию
+    } else {
+      setShowModal(false); // Когда модалка закрывается, убираем анимацию
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     document.body.setAttribute("data-framer-theme", theme);
@@ -34,12 +43,13 @@ export default function SignInModal({
 
   // Закрытие по клику вне модалки
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    // Игнорируем long press и любые тач-события
+    if (e.nativeEvent instanceof MouseEvent === false) return;
+  
     if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
       onClose();
     }
   };
-
-  if (!isOpen) return null;
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -82,9 +92,11 @@ export default function SignInModal({
     }
   };
 
+  if (!isOpen) return null;
+
   return createPortal(
     <div className="modalOverlay" onClick={handleOverlayClick}>
-      <div className="auth-card" ref={modalRef}>
+      <div className={`auth-card ${showModal ? "show" : ""}`} ref={modalRef}>
         <img className="auth-logo" src="/Logo.png" alt="Logo" />
         <h2 className="auth-title">Sign in to FramerKit</h2>
         <p className="auth-description">

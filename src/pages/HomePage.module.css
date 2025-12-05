@@ -1,0 +1,200 @@
+/* HomePage.module.css */
+
+.heroSection {
+    position: relative;
+    min-height: calc(100vh - 50px); /* занимает почти весь экран */
+    width: calc(100% + 40px);       /* компенсируем padding родителя слева/справа */
+    margin-left: -20px;             /* компенсируем padding слева */
+    margin-right: -20px;            /* компенсируем padding справа */
+    
+    display: flex;
+    justify-content: center; /* центр по горизонтали */
+    align-items: center;     /* центр по вертикали */
+    
+    padding: 0 20px;         /* убираем верхний отступ, оставляем внутренние боковые padding */
+    box-sizing: border-box;
+    text-align: center;
+    overflow: hidden;
+  }
+  
+  /* Свет в левом верхнем углу */
+.lightTop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 100%;
+    filter: blur(60px);
+    opacity: 0.2;
+    z-index: 0;
+    pointer-events: none;
+    width: clamp(200px, 25vw, 400px);  /* масштабируется по ширине экрана */
+    height: clamp(200px, 25vw, 400px);
+    background: linear-gradient(135deg, #6E3FF3 0%, #FF6BDD 100%);
+  }
+  
+  /* Свет в правом верхнем углу */
+  .lightMid {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 100%;
+    filter: blur(60px);
+    opacity: 0.15;
+    z-index: 0;
+    pointer-events: none;
+    width: clamp(200px, 25vw, 400px);  /* масштабируется по ширине экрана */
+    height: clamp(200px, 25vw, 400px);
+    background: linear-gradient(135deg, #6E3FF3 0%, #FF6BDD 100%);
+  }
+  
+  
+  .container {
+    max-width: 800px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    /* теперь контент по центру секции */
+  }
+  
+  
+/* Логотипы */
+/* Логотипы */
+.logos {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 0;
+  }
+  
+  .logos .logo-item {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: #fff; /* ← белый фон, как на скриншоте */
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  
+  .logos .logo-item img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    
+  }
+  
+
+  .title {
+    font-weight: 800;
+    color: #2B0691;
+    margin: 0;
+    text-align: center;
+    line-height: 1.1;
+    /* Убираем font-size — он будет на .titleLine */
+  }
+  
+  /* Каждая строка масштабируется независимо */
+  .titleLine {
+    white-space: nowrap;          /* ← запрещает перенос */
+    overflow: hidden;             /* ← на всякий случай */
+    text-overflow: ellipsis;      /* ← если вдруг не поместится */
+    font-size: clamp(52px, 4.2vw, 64px); /* ← адаптивный размер */
+    letter-spacing: -0.5px;
+  }
+  
+  /* Подзаголовок */
+  .subtitle {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #666;
+    margin: 0;
+    max-width: 600px;
+  }
+  
+  .buttons {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    max-width: 400px;
+    justify-content: center;
+  }
+
+  
+  
+  /* Аватарки */
+  .testimonials {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .avatarRow {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+  
+  .avatarRow img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 2px #e0d6ff;
+  }
+  
+  .statsText {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+  }
+  
+  .statsNote {
+    font-size: 12px;
+    color: #999;
+    font-style: italic;
+    margin: 0;
+  }
+  
+  /* ===== МОБИЛЬНАЯ ВЕРСИЯ ===== */
+  @media (max-width: 768px) {
+    .title {
+      font-size: 2.2rem;
+    }
+  
+    .subtitle {
+      font-size: 1.1rem;
+    }
+  
+    .logos img {
+      width: 52px;
+      height: 52px;
+    }
+  
+    .buttons {
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      max-width: none;
+    }
+  
+    .btnPrimary,
+    .btnSecondary {
+      width: 100%;
+      flex: none;
+    }
+  
+    .avatarRow img {
+      width: 32px;
+      height: 32px;
+    }
+  
+    /* На мобильных хедер выше — увеличиваем отступ сверху */
+    .heroSection {
+      padding: 80px 20px 40px;
+    }
+  }

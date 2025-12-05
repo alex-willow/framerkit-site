@@ -80,9 +80,9 @@ function AppContent() {
     setIsMenuOpen(false);
 
     // Определяем, является ли секция частью главной страницы
-    const homeSections = ["overview", "getting-started", "installation", "how-it-works", "get-framerkit"];
+    const homeSections = ["overview", "getting-started", "layout-sections", "ui-components", "get-framerkit", "faq-contact" ];
     if (homeSections.includes(section)) {
-      // Остаёмся на главной странице — не навигируем
+      // Остаёмся на главной странице — не навигируем   
       return;
     }
 

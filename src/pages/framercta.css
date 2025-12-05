@@ -1,0 +1,134 @@
+/* ===== INSTALLATION SECTION ===== */
+.installation-section {
+    width: 100%;
+    padding: 100px 0;
+  }
+  
+  .installation-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 80px; /* Отступ между двумя блоками */
+    position: relative;
+  }
+  
+  /* ЛЕВЫЙ БЛОК */
+  .installation-left {
+    flex: 1;
+    max-width: 650px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .installation-left h2 {
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 800;
+    color: #2B0691;
+    margin: 0;
+  }
+  
+  .installation-text {
+    font-size: 18px;
+    color: #555;
+    line-height: 1.6;
+  }
+  
+  .installation-code {
+    background: #F4F1FF;
+    border: 1px dashed #C9C2FF;
+    padding: 20px;
+    border-radius: 16px;
+    font-family: monospace;
+    white-space: pre-line;
+    color: #4328B7;
+  }
+  
+  .installation-buttons {
+    display: flex;
+    gap: 14px;
+    margin-top: 10px;
+  }
+  
+  .inst-btn {
+    padding: 12px 28px;
+    border-radius: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.25s;
+    font-size: 15px;
+  }
+  
+  .inst-btn.primary {
+    background: #6E3FF3;
+    color: #fff;
+  }
+  
+  .inst-btn.primary:hover {
+    background: #5328c7;
+  }
+  
+  .inst-btn.secondary {
+    background: #EEE8FF;
+    color: #4a31c9;
+  }
+  
+  .inst-btn.secondary:hover {
+    background: #d6cdff;
+  }
+  
+  /* ПРАВЫЙ БЛОК (ПУСТОЙ) */
+  .installation-right {
+    flex: 1;
+    min-height: 600px;
+    position: relative; /* родитель для absolute картинки */
+    overflow: visible; /* картинка может выходить */
+  }
+  
+  .installation-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+  
+    /* масштабируем по высоте всей правой колонки */
+    height: 100%;
+    width: auto; /* сохраняем пропорции */
+  
+    /* сдвигаем вверх и влево */
+    transform: translate(-10%, -15%);
+  
+    object-fit: contain; /* сохраняет пропорции */
+    z-index: 10;
+    pointer-events: none;
+  }
+  
+  
+  /* АДАПТИВ */
+  @media (max-width: 980px) {
+    .installation-wrapper {
+      flex-direction: column;
+      gap: 40px;
+    }
+  
+    .installation-right {
+      min-height: 260px;
+    }
+  
+    .installation-image {
+      position: relative;
+      width: 100%;
+      transform: none;
+      left: 0;
+      top: 0;
+    }
+  }
+
+
+  .fk-explore-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
