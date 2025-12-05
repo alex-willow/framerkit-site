@@ -24,7 +24,7 @@ export default function RandomComponentCards() {
   const hoveredIndexesRef = useRef<boolean[]>(Array(6).fill(false));
   const lastChangeTimeRef = useRef<number[]>(Array(6).fill(0));
   const allItemsRef = useRef<ComponentItem[]>([]);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isRotatingRef = useRef(false);
 
   useEffect(() => {
