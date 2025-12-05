@@ -90,12 +90,12 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, ease: "easeOut", delay: logoAndFirstLineDelay }}
           >
-            <div className={styles["logo-item"]} style={{ transform: "rotate(-10deg)" }}>
-              <img src="/icons/Framer.png" alt="Framer" />
-            </div>
-            <div className={styles["logo-item"]} style={{ transform: "rotate(10deg)" }}>
-              <img src="/icons/framerkit.png" alt="FramerKit" />
-            </div>
+          <div className={styles["logo-item"]} style={{ transform: "rotate(-10deg)" }}>
+            <img src="/Framer.png" alt="Framer" />
+          </div>
+          <div className={styles["logo-item"]} style={{ transform: "rotate(10deg)" }}>
+            <img src="/framerkit.png" alt="FramerKit" />
+          </div>
           </motion.div>
 
           {/* 2-3. Заголовок по строкам и символам */}
