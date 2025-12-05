@@ -139,19 +139,33 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
           </motion.p>
 
           {/* 5. Кнопки */}
-          <motion.div
-            className={styles.buttons}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{
-              duration: 0.6,
-              ease: "easeOut",
-              delay: buttonsDelay,
-            }}
-          >
-            <button className="authButton">Get Full Version</button>
-            <button className="logoutButton">Try Free on Framer</button>
-          </motion.div>
+            <motion.div
+              className={styles.buttons}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{
+                duration: 0.6,
+                ease: "easeOut",
+                delay: buttonsDelay,
+              }}
+            >
+              <a
+                href="https://gum.co/framerkit"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <button className="authButton">Get Full Version</button>
+              </a>
+
+              <a
+                href="https://www.framer.com/marketplace/plugins/framerkit"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <button className="logoutButton">Try Free on Framer</button>
+              </a>
+            </motion.div>
+
 
           {/* 6. Аватарки и статистика */}
           <motion.div
