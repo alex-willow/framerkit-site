@@ -61,7 +61,11 @@ export default function RandomSectionCards() {
     };
 
     load();
-    return () => timeoutRef.current && clearTimeout(timeoutRef.current);
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
   }, []);
 
   const rotateOne = () => {
