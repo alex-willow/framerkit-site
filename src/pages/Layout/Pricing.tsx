@@ -1,6 +1,6 @@
-// src/pages/Layout/Pricing.tsx
 import { useState, useEffect, useRef } from "react";
 import { Copy, CircleCheck, Lock } from "lucide-react";
+import { motion } from "framer-motion";
 import SectionHeader from "../../components/SectionHeader";
 
 type ComponentItem = {
@@ -28,29 +28,53 @@ export default function PricingPage({ isAuthenticated, setIsSignInOpen }: Pricin
 
   const galleryRef = useRef<HTMLDivElement>(null);
 
+  // Загрузка данных
   useEffect(() => {
     const load = async () => {
       try {
         const res = await fetch(
           "https://raw.githubusercontent.com/alex-willow/framerkit-data/main/pricing.json"
         );
-        if (!res.ok) throw new Error("Failed to load pricing data");
+        if (!res.ok) throw new Error("Failed to load pricing components");
         const json = await res.json();
-        setItems(json.pricing || []);
-      } catch {
+        const loadedItems = json.pricing || [];
+        setItems(loadedItems);
+
+        const imagePromises = loadedItems.map(
+          (item: ComponentItem) =>
+            new Promise<void>(resolve => {
+              const img = new Image();
+              img.onload = img.onerror = () => resolve();
+              img.src = item.image || PLACEHOLDER;
+            })
+        );
+
+        await Promise.all(imagePromises);
+        setLoading(false);
+      } catch (err) {
+        console.error(err);
         setError("Failed to load pricing components");
-      } finally {
         setLoading(false);
       }
     };
+
     load();
   }, []);
 
+  // Сброс прокрутки галереи при смене фильтра
   useEffect(() => {
     if (galleryRef.current) {
       galleryRef.current.scrollTo({ top: 0 });
     }
-  }, [filter, loading]);
+  }, [filter]);
+
+  // Прокрутка страницы под header при входе
+  useEffect(() => {
+    const section = document.getElementById("pricing-page");
+    if (section) {
+      section.scrollIntoView({ behavior: "auto", block: "start" });
+    }
+  }, []);
 
   const filtered = items.filter(item =>
     filter === "dark" ? item.key.includes("dark") : !item.key.includes("dark")
@@ -67,8 +91,10 @@ export default function PricingPage({ isAuthenticated, setIsSignInOpen }: Pricin
     setTimeout(() => setCopiedKey(null), 4000);
   };
 
+  const skeletonCards = Array.from({ length: 6 });
+
   return (
-    <div style={{ padding: 0 }}>
+    <div id="pricing-page" style={{ padding: 0, scrollMarginTop: "64px" }}>
       <SectionHeader
         title="Pricing"
         count={filtered.length}
@@ -79,50 +105,70 @@ export default function PricingPage({ isAuthenticated, setIsSignInOpen }: Pricin
 
       <div className="gallery-scroll-area" ref={galleryRef}>
         {loading ? (
-          <div>Loading...</div>
+          <div className="skeleton-gallery">
+            {skeletonCards.map((_, i) => (
+              <div key={i} className="skeleton-card">
+                <div className="skeleton-card-image" />
+                <div className="skeleton-card-info" />
+              </div>
+            ))}
+          </div>
         ) : error ? (
-          <p style={{ color: "red" }}>{error}</p>
+          <p style={{ color: "red", padding: "20px" }}>{error}</p>
         ) : filtered.length === 0 ? (
-          <div className="empty-message">No pricing components available for the selected theme.</div>
+          <div className="empty-message">
+            No pricing components available for the selected theme.
+          </div>
         ) : (
-          <div className="gallery">
-            {filtered.map(item => {
-              const canCopy = isAuthenticated || item.type === "free";
-              const isCopied = copiedKey === item.key;
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+          >
+            <div className="gallery">
+              {filtered.map(item => {
+                const canCopy = isAuthenticated || item.type === "free";
+                const isCopied = copiedKey === item.key;
 
-              return (
-                <div key={item.key} className="card">
-                  <div className="cardImage">
-                    <img src={item.image || PLACEHOLDER} alt={item.title} loading="lazy" />
-                  </div>
-                  <div className="cardInfo">
-                    <h3>{item.title}</h3>
+                return (
+                  <div key={item.key} className="card">
+                    <div className="cardImage">
+                      <img src={item.image || PLACEHOLDER} alt={item.title} />
+                    </div>
+                    <div className="cardInfo">
+                      <h3>{item.title}</h3>
+                      <div
+                        className={`iconButton ${isCopied ? "copied" : ""} ${
+                          !canCopy ? "locked" : ""
+                        }`}
+                        onClick={() => handleCopy(item)}
+                        onMouseEnter={() => !isCopied && setHoveredKey(item.key)}
+                        onMouseLeave={() => setHoveredKey(null)}
+                      >
+                        {isCopied ? (
+                          <CircleCheck size={20} color="#22c55e" strokeWidth={2.5} />
+                        ) : canCopy ? (
+                          <Copy size={16} />
+                        ) : (
+                          <Lock size={16} />
+                        )}
 
-                    <div
-                      className={`iconButton ${isCopied ? "copied" : ""} ${!canCopy ? "locked" : ""}`}
-                      onClick={() => handleCopy(item)}
-                      onMouseEnter={() => !isCopied && setHoveredKey(item.key)}
-                      onMouseLeave={() => setHoveredKey(null)}
-                    >
-                      {isCopied ? (
-                        <CircleCheck size={20} color="#22c55e" strokeWidth={2.5} />
-                      ) : canCopy ? (
-                        <Copy size={16} />
-                      ) : (
-                        <Lock size={16} />
-                      )}
-
-                      {(isCopied || hoveredKey === item.key) && (
-                        <div className="tooltip">
-                          {isCopied ? "Copied" : canCopy ? "Copy" : "Sign in to copy"}
-                        </div>
-                      )}
+                        {(isCopied || hoveredKey === item.key) && (
+                          <div className="tooltip">
+                            {isCopied
+                              ? "Copied"
+                              : canCopy
+                              ? "Copy"
+                              : "Sign in to copy"}
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          </motion.div>
         )}
       </div>
     </div>

@@ -141,17 +141,18 @@ export default function Sidebar({
     </>
   );
 
-  // === Мобильная версия ===
-  if (isMobile) {
-    return (
-      <>
-        {isMenuOpen && <div className="sidebar-overlay" onClick={onMenuClose} />}
-        <nav className={`sidebar-mobile ${isMenuOpen ? "open" : ""}`}>
-          {sidebarContent}
-        </nav>
-      </>
-    );
-  }
+
+// === Мобильная версия ===
+if (isMobile) {
+  return (
+    <>
+      {isMenuOpen && <div className="sidebar-overlay" onClick={onMenuClose} />}
+      <nav className={`sidebar-mobile ${isMenuOpen ? "open" : ""}`}>
+        {sidebarContent}
+      </nav>
+    </>
+  );
+}
 
   // === Десктопная версия ===
   return <nav className="sidebar">{sidebarContent}</nav>;

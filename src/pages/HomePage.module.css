@@ -99,10 +99,12 @@
   
   /* Каждая строка масштабируется независимо */
   .titleLine {
-    white-space: nowrap;          /* ← запрещает перенос */
-    overflow: hidden;             /* ← на всякий случай */
-    text-overflow: ellipsis;      /* ← если вдруг не поместится */
-    font-size: clamp(52px, 4.2vw, 64px); /* ← адаптивный размер */
+    display: block;               /* или inline-block, если нужно */
+    width: 100%;                  /* или конкретное значение, например max-width: 500px */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: clamp(42px, 3.2vw, 64px);
     letter-spacing: -0.5px;
   }
   

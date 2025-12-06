@@ -11,9 +11,9 @@ type ComponentItem = {
   type: "free" | "paid";
 };
 
-// Компоненты из FramerKit: Accordion, Avatar, Badge, Button, Card, Icon, Input, Form, Pricing Card, Rating, Testimonial Card
 const COMPONENT_SECTIONS = [
-  "accordion", "avatar", "badge", "button", "card", "icon", "input", "form", "pricingcard", "rating", "testimonialcard"
+  "accordion", "avatar", "badge", "button", "card",
+  "icon", "input", "form", "pricingcard", "rating", "testimonialcard"
 ];
 
 export default function RandomComponentCards() {
@@ -30,18 +30,17 @@ export default function RandomComponentCards() {
   useEffect(() => {
     const loadComponents = async () => {
       const all: ComponentItem[] = [];
+
       for (const sec of COMPONENT_SECTIONS) {
         try {
           const res = await fetch(
-              `https://raw.githubusercontent.com/alex-willow/framerkit-data/components/${sec}.json` 
+            `https://raw.githubusercontent.com/alex-willow/framerkit-data/components/${sec}.json`
           );
           if (res.ok) {
             const json = await res.json();
             all.push(...(json[sec] || []));
           }
-        } catch (e) {
-          console.warn(`Failed to load ${sec}`, e);
-        }
+        } catch (_) {}
       }
 
       allItemsRef.current = all;
@@ -54,15 +53,12 @@ export default function RandomComponentCards() {
         setCards(initial);
         cardsRef.current = initial;
         lastChangeTimeRef.current = initial.map(() => now);
-        startGlobalRotation();
+        startRotation();
       }
     };
 
     loadComponents();
-
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
+    return () => timeoutRef.current && clearTimeout(timeoutRef.current);
   }, []);
 
   const rotateOneCard = () => {
@@ -70,20 +66,21 @@ export default function RandomComponentCards() {
 
     const now = Date.now();
     const minInterval = 5000;
-    const eligibleIndexes = [];
+
+    const eligible = [];
 
     for (let i = 0; i < 6; i++) {
-      if (!hoveredIndexesRef.current[i] && (now - lastChangeTimeRef.current[i] >= minInterval)) {
-        eligibleIndexes.push(i);
+      if (!hoveredIndexesRef.current[i] && now - lastChangeTimeRef.current[i] >= minInterval) {
+        eligible.push(i);
       }
     }
 
-    if (eligibleIndexes.length === 0) {
+    if (!eligible.length) {
       timeoutRef.current = setTimeout(rotateOneCard, 1000);
       return;
     }
 
-    const index = eligibleIndexes[Math.floor(Math.random() * eligibleIndexes.length)];
+    const index = eligible[Math.floor(Math.random() * eligible.length)];
     const newCard = allItemsRef.current[Math.floor(Math.random() * allItemsRef.current.length)];
 
     isRotatingRef.current = true;
@@ -94,10 +91,10 @@ export default function RandomComponentCards() {
       return arr;
     });
 
-    const img = new Image();
-    img.src = newCard.image;
+    const preload = new Image();
+    preload.src = newCard.image;
 
-    const onImageReady = () => {
+    const swap = () => {
       setTimeout(() => {
         setCards(prev => {
           const arr = [...prev];
@@ -106,46 +103,36 @@ export default function RandomComponentCards() {
           lastChangeTimeRef.current[index] = Date.now();
           return arr;
         });
+
         setFading(prev => {
           const arr = [...prev];
           arr[index] = false;
           return arr;
         });
+
         isRotatingRef.current = false;
         timeoutRef.current = setTimeout(rotateOneCard, 1500);
       }, 500);
     };
 
-    if (img.complete && img.naturalHeight !== 0) {
-      onImageReady();
-    } else {
-      img.onload = onImageReady;
-      img.onerror = onImageReady;
-    }
+    preload.onload = swap;
+    preload.onerror = swap;
   };
 
-  const startGlobalRotation = () => {
+  const startRotation = () => {
     timeoutRef.current = setTimeout(rotateOneCard, 6000);
-  };
-
-  const handleMouseEnter = (index: number) => {
-    hoveredIndexesRef.current[index] = true;
-  };
-
-  const handleMouseLeave = (index: number) => {
-    hoveredIndexesRef.current[index] = false;
   };
 
   return (
     <>
       {cards.map((item, index) => (
         <Link
-          key={`comp-card-${index}`}
-          to={item ? `/components/${item.key.split('-')[0]}` : "#"}
-          className={`card ${fading[index] ? 'fadeOut' : 'fadeIn'}`}
-          onMouseEnter={() => handleMouseEnter(index)}
-          onMouseLeave={() => handleMouseLeave(index)}
-          style={{ textDecoration: 'none', color: 'inherit' }}
+          key={`random-card-${index}`}
+          to={item ? `/components/${item.key.split("-")[0]}` : "#"}
+          className={`card ${fading[index] ? "fadeOut" : "fadeIn"}`}
+          onMouseEnter={() => (hoveredIndexesRef.current[index] = true)}
+          onMouseLeave={() => (hoveredIndexesRef.current[index] = false)}
+          style={{ textDecoration: "none", color: "inherit" }}
         >
           {item ? (
             <>
@@ -153,17 +140,26 @@ export default function RandomComponentCards() {
                 <img
                   src={item.image}
                   alt={item.title}
-                  onError={(e) => (e.currentTarget.src = "https://via.placeholder.com/280x160?text=Component")}
+                  onError={(e) =>
+                    (e.currentTarget.src =
+                      "https://via.placeholder.com/280x160?text=Component")
+                  }
                 />
               </div>
+
               <div className="cardInfo">
                 <h3>{item.title}</h3>
-                <ArrowUpRight className="explore-icon" size={16} />
+                <div className="iconButton2">
+                  <ArrowUpRight size={16} className="explore-icon" />
+                </div>
               </div>
+
               <div className="hoverOverlay" />
             </>
           ) : (
-            <div className="skeleton" style={{ aspectRatio: "16/9" }} />
+            <div className="skeleton-card">
+              <div className="skeleton-img" />
+            </div>
           )}
         </Link>
       ))}

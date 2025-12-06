@@ -12,7 +12,8 @@ type ComponentItem = {
 };
 
 const STATIC_SECTIONS = [
-  "navbar", "hero", "logo", "feature", "testimonial", "faq", "contact", "pricing", "cta", "footer"
+  "navbar", "hero", "logo", "feature", "testimonial",
+  "faq", "contact", "pricing", "cta", "footer"
 ];
 
 export default function RandomSectionCards() {
@@ -20,16 +21,17 @@ export default function RandomSectionCards() {
   const [fading, setFading] = useState<boolean[]>(Array(6).fill(false));
 
   const cardsRef = useRef<(ComponentItem | null)[]>(Array(6).fill(null));
-  const hoveredIndexesRef = useRef<boolean[]>(Array(6).fill(false));
-  const lastChangeTimeRef = useRef<number[]>(Array(6).fill(0));
+  const hoveredRef = useRef<boolean[]>(Array(6).fill(false));
+  const lastChangeRef = useRef<number[]>(Array(6).fill(0));
   const allItemsRef = useRef<ComponentItem[]>([]);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const isRotatingRef = useRef(false); // ← критическая защита от двойной смены
+  const rotatingRef = useRef(false);
 
-  // === Загрузка данных ===
+  // === Load data ===
   useEffect(() => {
-    const loadSections = async () => {
+    const load = async () => {
       const all: ComponentItem[] = [];
+
       for (const sec of STATIC_SECTIONS) {
         try {
           const res = await fetch(
@@ -39,9 +41,7 @@ export default function RandomSectionCards() {
             const json = await res.json();
             all.push(...(json[sec] || []));
           }
-        } catch (e) {
-          console.warn(`Failed to load ${sec}`, e);
-        }
+        } catch (_) {}
       }
 
       allItemsRef.current = all;
@@ -51,113 +51,91 @@ export default function RandomSectionCards() {
         const initial = Array.from({ length: 6 }, () =>
           all[Math.floor(Math.random() * all.length)]
         );
+
         setCards(initial);
         cardsRef.current = initial;
-        lastChangeTimeRef.current = initial.map(() => now);
-        startGlobalRotation();
+        lastChangeRef.current = initial.map(() => now);
+
+        startRotation();
       }
     };
 
-    loadSections();
-
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
+    load();
+    return () => timeoutRef.current && clearTimeout(timeoutRef.current);
   }, []);
 
-  // === Безопасная смена одной карточки ===
-  const rotateOneCard = () => {
-    if (isRotatingRef.current) return; // ← защита от двойного запуска
+  const rotateOne = () => {
+    if (rotatingRef.current) return;
 
     const now = Date.now();
     const minInterval = 5000;
 
-    const eligibleIndexes = [];
+    const eligible: number[] = [];
+
     for (let i = 0; i < 6; i++) {
-      if (!hoveredIndexesRef.current[i] && (now - lastChangeTimeRef.current[i] >= minInterval)) {
-        eligibleIndexes.push(i);
+      if (!hoveredRef.current[i] && now - lastChangeRef.current[i] >= minInterval) {
+        eligible.push(i);
       }
     }
 
-    if (eligibleIndexes.length === 0) {
-      timeoutRef.current = setTimeout(rotateOneCard, 1000);
+    if (!eligible.length) {
+      timeoutRef.current = setTimeout(rotateOne, 1000);
       return;
     }
 
-    const index = eligibleIndexes[Math.floor(Math.random() * eligibleIndexes.length)];
+    const index = eligible[Math.floor(Math.random() * eligible.length)];
     const newCard = allItemsRef.current[Math.floor(Math.random() * allItemsRef.current.length)];
 
-    // 🔴 НАЧАЛО ВРАЩЕНИЯ — блокируем повтор
-    isRotatingRef.current = true;
+    rotatingRef.current = true;
 
-    // Плавно скрываем старую
     setFading(prev => {
-      const arr = [...prev];
-      arr[index] = true;
-      return arr;
+      const copy = [...prev];
+      copy[index] = true;
+      return copy;
     });
 
-    // Загружаем новое изображение ДО показа
-    const img = new Image();
-    img.src = newCard.image;
+    const preload = new Image();
+    preload.src = newCard.image;
 
-    const onImageReady = () => {
+    const swap = () => {
       setTimeout(() => {
-        // Показываем ТОЛЬКО после загрузки
         setCards(prev => {
-          const arr = [...prev];
-          arr[index] = newCard;
+          const copy = [...prev];
+          copy[index] = newCard;
           cardsRef.current[index] = newCard;
-          lastChangeTimeRef.current[index] = Date.now();
-          return arr;
+          lastChangeRef.current[index] = Date.now();
+          return copy;
         });
+
         setFading(prev => {
-          const arr = [...prev];
-          arr[index] = false;
-          return arr;
+          const copy = [...prev];
+          copy[index] = false;
+          return copy;
         });
 
-        // 🔴 КОНЕЦ ВРАЩЕНИЯ — разблокируем
-        isRotatingRef.current = false;
-
-        // Следующая попытка
-        timeoutRef.current = setTimeout(rotateOneCard, 1500);
+        rotatingRef.current = false;
+        timeoutRef.current = setTimeout(rotateOne, 1500);
       }, 500);
     };
 
-    if (img.complete && img.naturalHeight !== 0) {
-      onImageReady();
-    } else {
-      img.onload = onImageReady;
-      img.onerror = onImageReady; // даже при ошибке — показываем (с placeholder'ом)
-    }
+    preload.onload = swap;
+    preload.onerror = swap;
   };
 
-  const startGlobalRotation = () => {
-    const step = () => {
-      rotateOneCard();
-    };
-    timeoutRef.current = setTimeout(step, 6000);
-  };
-
-  const handleMouseEnter = (index: number) => {
-    hoveredIndexesRef.current[index] = true;
-  };
-
-  const handleMouseLeave = (index: number) => {
-    hoveredIndexesRef.current[index] = false;
+  const startRotation = () => {
+    timeoutRef.current = setTimeout(rotateOne, 6000);
   };
 
   return (
     <>
       {cards.map((item, index) => (
         <Link
-          key={`card-${index}`}
-          to={item ? `/layout/${item.key.split('-')[0]}` : "#"}
-          className={`card ${fading[index] ? 'fadeOut' : 'fadeIn'}`}
-          onMouseEnter={() => handleMouseEnter(index)}
-          onMouseLeave={() => handleMouseLeave(index)}
-          style={{ textDecoration: 'none', color: 'inherit' }}
+          key={`section-card-${index}`}
+          to={item ? `/layout/${item.key.split("-")[0]}` : "#"}
+          className={`card ${fading[index] ? "fadeOut" : "fadeIn"}`}
+          onMouseEnter={() => (hoveredRef.current[index] = true)}
+          onMouseLeave={() => (hoveredRef.current[index] = false)}
+          style={{ textDecoration: "none", color: "inherit" }}
         >
           {item ? (
             <>
@@ -165,17 +143,26 @@ export default function RandomSectionCards() {
                 <img
                   src={item.image}
                   alt={item.title}
-                  onError={(e) => (e.currentTarget.src = "https://via.placeholder.com/280x160?text=Preview")}
+                  onError={(e) =>
+                    (e.currentTarget.src =
+                      "https://via.placeholder.com/280x160?text=Preview")
+                  }
                 />
               </div>
+
               <div className="cardInfo">
                 <h3>{item.title}</h3>
-                <ArrowUpRight className="explore-icon" size={16} />
+                <div className="iconButton2">
+                  <ArrowUpRight size={16} className="explore-icon" />
+                </div>
               </div>
+
               <div className="hoverOverlay" />
             </>
           ) : (
-            <div className="skeleton" style={{ aspectRatio: "16/9" }} />
+            <div className="skeleton-card">
+              <div className="skeleton-img" />
+            </div>
           )}
         </Link>
       ))}
