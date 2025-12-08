@@ -13,15 +13,6 @@ export default function Footer({
   const navigate = useNavigate();
   const location = useLocation();
 
-  const homeSections = [
-    { id: "overview", label: "Overview" },
-    { id: "getting-started", label: "Getting Started" },
-    { id: "layout-sections", label: "Layout Sections" },
-    { id: "ui-components", label: "UI Components" },
-    { id: "get-framerkit", label: "Get FramerKit" },
-    { id: "faq-contact", label: "FAQ" },
-  ];
-
   const layoutSections = [
     { id: "navbar", label: "Navbar" },
     { id: "hero", label: "Hero" },

@@ -57,7 +57,10 @@ export default function MainLayout({
           {children}
 
           {/* Футер в конце контента */}
-          <Footer />
+          <Footer 
+            activeSection={activeSection} 
+            onSectionChange={onSectionChange} 
+          />
         </main>
       </div>
     </div>
