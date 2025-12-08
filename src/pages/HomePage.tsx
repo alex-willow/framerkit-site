@@ -1,23 +1,29 @@
 // src/pages/HomePage.tsx
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useLayoutEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+
 import RandomSectionCards from "../components/RandomSectionCards";
 import RandomComponentCards from "../components/RandomComponentCards";
 import "./framerkit.css";
 import "./gettingstarted.css";
-import styles from "./HomePage.module.css"; // ← подключаем
+import styles from "./HomePage.module.css";
 import SimpleAvatarGroup from "../components/SimpleAvatarGroup";
-import { motion } from "framer-motion"; // ← добавьте эту строку
+import { motion } from "framer-motion";
 import {
   RocketLaunch,
   ClipboardText,
   Sliders,
   CloudArrowUp
 } from "phosphor-react";
+
 type HomePageProps = {
   onSectionChange: (sectionId: string) => void;
 };
 
 export default function HomePage({ onSectionChange }: HomePageProps) {
+  const location = useLocation();
+  const [ready, setReady] = useState(false);
+
   const sections = [
     "overview",
     "getting-started",
@@ -27,34 +33,83 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
     "faq-contact",
   ];
 
-  
-
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
-  
 
-  useEffect(() => {
+  // === собираем рефы секций после рендера ===
+  useLayoutEffect(() => {
     sections.forEach((id) => {
       sectionRefs.current[id] = document.getElementById(id);
     });
+  }, []);
 
+  // === ждём, пока обе галереи реально появятся в DOM ===
+  useEffect(() => {
+    const checkLoaded = () => {
+      const layoutGallery = document.querySelector("#layout-sections .gallery2");
+      const uiGallery = document.querySelector("#ui-components .gallery2");
+      return layoutGallery?.children.length && uiGallery?.children.length;
+    };
+
+    if (checkLoaded()) {
+      setReady(true);
+      return;
+    }
+
+    const observer = new MutationObserver(() => {
+      if (checkLoaded()) {
+        setReady(true);
+        observer.disconnect();
+      }
+    });
+
+    const layoutGallery = document.querySelector("#layout-sections .gallery2");
+    const uiGallery = document.querySelector("#ui-components .gallery2");
+
+    if (layoutGallery) observer.observe(layoutGallery, { childList: true });
+    if (uiGallery) observer.observe(uiGallery, { childList: true });
+
+    return () => observer.disconnect();
+  }, []);
+
+  // === Скролл к целевой секции после полной отрисовки ===
+  useEffect(() => {
+    if (!ready) return;
+    const target = location.state?.scrollTo;
+    if (!target) return;
+
+    let attempts = 0;
+    const tryScroll = () => {
+      attempts++;
+      const el = document.getElementById(target);
+      if (el) {
+        el.scrollIntoView({ behavior: "auto", block: "start" });
+        const top = el.getBoundingClientRect().top;
+        if (top > -2 && top < 2) return; // успешно прокрутили
+      }
+      if (attempts < 10) setTimeout(tryScroll, 35);
+    };
+
+    setTimeout(tryScroll, 0);
+  }, [ready, location.key]);
+
+  // === Отслеживание активной секции ===
+  useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const id = entry.target.id;
-            onSectionChange(id);
-          }
-        });
+        const visibleEntry = entries.find((e) => e.isIntersecting);
+        if (visibleEntry) {
+          onSectionChange(visibleEntry.target.id);
+        }
       },
       {
         root: null,
-        rootMargin: "-10% 0px -10% 0px",
-        threshold: 0.1,
+        threshold: 0.2,
+        rootMargin: "-20% 0px -20% 0px",
       }
     );
 
     sections.forEach((id) => {
-      const el = sectionRefs.current[id];
+      const el = document.getElementById(id);
       if (el) observer.observe(el);
     });
 
@@ -62,7 +117,7 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
   }, []);
 
   return (
-    <>
+    <div style={{ opacity: ready ? 1 : 0, transition: "opacity 0.3s ease" }}>
   {/* OVERVIEW — с полосами света */}
 <section id="overview" className={styles.heroSection}>
   <div className={styles.lightTop}></div>
@@ -259,11 +314,11 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
   </div>
 </section>
 
-{/* EXPLORE SECTIONS */}
-<section id="layout-sections">
-  <div className="explore-sections-wrapper"> {/* ← новый обёрточный класс */}
-    <div className="fk-container">
-      <div className="explore-block">
+{/* LAYOUT SECTIONS */}
+<section id="layout-sections" className="ls-section">
+  <div className="ls-wrapper">
+    <div className="ls-container">
+      <div className="ls-block">
         <h2 className="fk-gs-title">Layout Sections</h2>
         <p className="fk-gs-text">
           Pre-built page sections like Navigation Bars, Hero Sections, Testimonials, FAQs, and more — fully responsive and ready to drop into your Framer project
@@ -276,15 +331,14 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
   </div>
 </section>
 
-
-
-<section id="ui-components">
-  <div className="explore-sections-wrapper"> {/* ← новый обёрточный класс */}
-    <div className="fk-container">
-      <div className="explore-block">
+{/* UI COMPONENTS */}
+<section id="ui-components" className="ui-section">
+  <div className="ui-wrapper">
+    <div className="ui-container">
+      <div className="ui-block">
         <h2 className="fk-gs-title">UI Components</h2>
         <p className="fk-gs-text">
-        Reusable interface elements like Buttons, Cards, Avatars, Forms, and Pricing Blocks — designed to be mixed, matched, and fully customized to your brand.
+          Reusable interface elements like Buttons, Cards, Avatars, Forms, and Pricing Blocks — designed to be mixed, matched, and fully customized to your brand.
         </p>
         <div className="gallery2">
           <RandomComponentCards />
@@ -294,12 +348,14 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
   </div>
 </section>
 
+
+
 {/* GET FRAMERKIT – PRICING SECTION */}
 <section id="get-framerkit" className="pricing-section">
   <div className="pricing-container">
 
     <h2 className="fk-gs-title">Get FramerKit</h2>
-    <p className="pricing-subtitle">
+    <p className="fk-gs-text">
       One-time purchase. Lifetime access. Free updates forever.
     </p>
 
@@ -378,7 +434,7 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
 
     {/* TITLE */}
     <h2 className="fk-gs-title">Frequently Asked Questions</h2>
-    <p className="faq-subtitle">Answers to common questions about FramerKit</p>
+    <p className="fk-gs-text">Answers to common questions about FramerKit</p>
 
     {/* FAQ GRID */}
     <div className="faq-grid">
@@ -424,13 +480,25 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
           FramerKit components adapt to any style — just change fonts, colors, spacing.
         </p>
       </div>
+
+      <div className="faq-item">
+        <h3 className="faq-question">Does it work with any project?</h3>
+        <p className="faq-answer">
+          FramerKit components adapt to any style — just change fonts, colors, spacing.
+        </p>
+      </div>
+
+      <div className="faq-item">
+        <h3 className="faq-question">Does it work with any project?</h3>
+        <p className="faq-answer">
+          FramerKit components adapt to any style — just change fonts, colors, spacing.
+        </p>
+      </div>
     </div>
   </div>
 
 </section>
 
-
-
-    </>
+</div>
   );
 }

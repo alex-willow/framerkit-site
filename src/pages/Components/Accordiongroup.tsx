@@ -32,16 +32,17 @@ export default function AccordionGroupPage({
   const galleryRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const loadData = async () => {
+    const load = async () => {
       try {
         const res = await fetch(
           "https://raw.githubusercontent.com/alex-willow/framerkit-data/components/accordiongroup.json"
         );
-        if (!res.ok) throw new Error("Failed");
+        if (!res.ok) throw new Error("Failed to load accordion group data");
         const json = await res.json();
         const loadedItems = json.accordiongroup || [];
         setItems(loadedItems);
 
+        // preload images
         const imagePromises = loadedItems.map(
           (item: ComponentItem) =>
             new Promise<void>((resolve) => {
@@ -59,17 +60,18 @@ export default function AccordionGroupPage({
         setLoading(false);
       }
     };
-    loadData();
+
+    load();
   }, []);
 
-  // Сброс прокрутки галереи при смене фильтра
+  // reset scroll on filter change
   useEffect(() => {
     if (galleryRef.current) {
       galleryRef.current.scrollTo({ top: 0 });
     }
   }, [filter]);
 
-  // Прокрутка страницы под header при входе
+  // scroll section under header
   useEffect(() => {
     const section = document.getElementById("accordion-group-page");
     if (section) {
@@ -156,11 +158,7 @@ export default function AccordionGroupPage({
 
                         {(isCopied || hoveredKey === item.key) && (
                           <div className="tooltip">
-                            {isCopied
-                              ? "Copied"
-                              : canCopy
-                              ? "Copy"
-                              : "Sign in to copy"}
+                            {isCopied ? "Copied" : canCopy ? "Copy" : "Sign in to copy"}
                           </div>
                         )}
                       </div>

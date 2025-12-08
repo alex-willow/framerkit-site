@@ -1,10 +1,8 @@
 /* ===== GETTING STARTED SECTION ===== */
 #getting-started {
-    padding: 100px 0;
+    padding: 80px 0;
     background: #ffffff;
-    width: calc(100% + 40px);   /* компенсируем padding родителя слева/справа */
-    margin-left: -20px;          /* компенсируем padding слева */
-    margin-right: -20px;         /* компенсируем padding справа */
+    width: 100%;
     position: relative;
     overflow: visible;
   }
@@ -12,9 +10,7 @@
   
   /* Контейнер — боковые отступы */
   .fk-gs-container {
-    
     margin: 0 auto;
-    padding: 0 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -37,7 +33,7 @@
   }
   
   .fk-gs-text {
-    font-size: 18px;
+    font-size: 16px;
     color: var(--framer-color-text-secondary);
     line-height: 1.6;
     text-align: center;
@@ -51,7 +47,7 @@
     display: grid;
 
     grid-template-columns: repeat(4, 1fr);
-    gap: 28px;
+    gap: 20px;
     margin-top: 40px;
   }
   
@@ -126,7 +122,7 @@
     width: 100%;
  
     margin: 20px auto 0;
-    padding: 0 20px;       /* стандартный внутренний отступ */
+
     text-align: center;
   }
   
@@ -173,9 +169,15 @@
 
   .fk-gs-wrapper {
     display: flex;
-    padding: 0 20px; /* отступы по бокам на мобильных */
     flex-direction: column;
+    padding: 0px 20px;
     width: 100%;
+  }
+
+  @media (max-width: 767px) {
+    .fk-gs-wrapper {
+      padding: 0;
+    }
   }
 
 
@@ -206,6 +208,36 @@
     padding: 0px 20px 20px; /* верхний отступ = высота твоего sticky */
   }
   .gallery2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* === Сетка / галерея === */
+.gallery3 {
+  width: 100%;
+  display: grid;
+  padding: 40px 0px 0px 0px;
+  flex: 1;        
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 0;
+}
+
+@media (max-width: 1024px) {
+  .gallery3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .sidebar {
+    display: none;
+  }
+  .content {
+    margin-left: 0;
+    padding: 0px 20px 20px; /* верхний отступ = высота твоего sticky */
+  }
+  .gallery3 {
     grid-template-columns: 1fr;
   }
 }

@@ -86,14 +86,47 @@ function AppContent() {
       return;
     }
 
-    // Layout секции
-    if (["navbar","hero","logo","feature","gallery","testimonial","contact","pricing","faq","cta","footer"].includes(section)) {
-      navigate(`/layout/${section}`);
-    }
-    // Components
-    else {
-      navigate(`/components/${section.toLowerCase()}`);
-    }
+// Layout секции
+if (
+  [
+    "navbar",
+    "hero",
+    "logo",
+    "feature",
+    "gallery",
+    "testimonial",
+    "contact",
+    "pricing",
+    "faq",
+    "cta",
+    "footer"
+  ].includes(section)
+) {
+  navigate(`/layout/${section}`);
+}
+// Components
+else if (
+  [
+    "Accordion",
+    "AccordionGroup",
+    "Avatar",
+    "AvatarGroup",
+    "Badge",
+    "Button",
+    "Card",
+    "Icon",
+    "Input",
+    "Form",
+    "PricingCard",
+    "Rating",
+    "TestimonialCard"
+  ].includes(section)
+) {
+  // Преобразуем имя компонента в путь без пробелов и с маленькой буквы в начале
+  const path = section.charAt(0).toLowerCase() + section.slice(1);
+  navigate(`/components/${path}`);
+}
+
   };
 
   return (

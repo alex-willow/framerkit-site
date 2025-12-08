@@ -29,14 +29,16 @@ export default function PricingCardPage({ isAuthenticated, setIsSignInOpen }: Pr
   const galleryRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const loadData = async () => {
+    const load = async () => {
       try {
         const res = await fetch(
           "https://raw.githubusercontent.com/alex-willow/framerkit-data/components/pricingcard.json"
         );
-        if (!res.ok) throw new Error("Failed to load pricing card data");
+        if (!res.ok) throw new Error("Failed to load Pricing Card data");
         const json = await res.json();
-        const loadedItems = json.Pricingcard || [];
+
+        // ⚠️ Используем ключ точно как в JSON
+        const loadedItems = json.PricingCard || json.Pricingcard || [];
         setItems(loadedItems);
 
         const imagePromises = loadedItems.map(
@@ -57,28 +59,20 @@ export default function PricingCardPage({ isAuthenticated, setIsSignInOpen }: Pr
       }
     };
 
-    loadData();
+    load();
   }, []);
 
-  // Сброс прокрутки галереи при смене фильтра
   useEffect(() => {
-    if (galleryRef.current) {
-      galleryRef.current.scrollTo({ top: 0 });
-    }
+    if (galleryRef.current) galleryRef.current.scrollTo({ top: 0 });
   }, [filter]);
 
-  // Прокрутка страницы под header при входе
   useEffect(() => {
     const section = document.getElementById("pricing-card-page");
-    if (section) {
-      section.scrollIntoView({ behavior: "auto", block: "start" });
-    }
+    if (section) section.scrollIntoView({ behavior: "auto", block: "start" });
   }, []);
 
   const filtered = items.filter(item =>
-    filter === "dark"
-      ? item.key.toLowerCase().includes("dark")
-      : !item.key.toLowerCase().includes("dark")
+    filter === "dark" ? item.key.toLowerCase().includes("dark") : !item.key.toLowerCase().includes("dark")
   );
 
   const handleCopy = async (item: ComponentItem) => {
@@ -86,7 +80,6 @@ export default function PricingCardPage({ isAuthenticated, setIsSignInOpen }: Pr
       setIsSignInOpen(true);
       return;
     }
-
     await navigator.clipboard.writeText(item.url);
     setCopiedKey(item.key);
     setTimeout(() => setCopiedKey(null), 4000);

@@ -27,24 +27,28 @@ export default function Header({
       </div>
 
       <div className="headerActions">
-        {isAuthenticated ? (
-          <button className="logoutButton" onClick={onLogout}>
-            <LogOut size={16} />
-            Log out
-          </button>
-        ) : (
+        {!isMobile && (
           <>
-            <button className="loginButton" onClick={onSignInOpen}>
-              Log in
-            </button>
-            <button
-              className="authButton"
-              onClick={() =>
-                window.open("https://gum.co/framerkit", "_blank")
-              }
-            >
-              Get Full Access
-            </button>
+            {isAuthenticated ? (
+              <button className="logoutButton" onClick={onLogout}>
+                <LogOut size={16} />
+                Log out
+              </button>
+            ) : (
+              <>
+                <button className="loginButton" onClick={onSignInOpen}>
+                  Log in
+                </button>
+                <button
+                  className="authButton"
+                  onClick={() =>
+                    window.open("https://gum.co/framerkit", "_blank")
+                  }
+                >
+                  Get Full Access
+                </button>
+              </>
+            )}
           </>
         )}
 

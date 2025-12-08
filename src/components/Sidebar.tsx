@@ -1,4 +1,6 @@
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 type SidebarProps = {
   activeSection: string;
@@ -6,6 +8,9 @@ type SidebarProps = {
   isMobile: boolean;
   isMenuOpen: boolean;
   onMenuClose: () => void;
+  isAuthenticated?: boolean;
+  onLogout?: () => void;
+  onSignInOpen?: () => void;
 };
 
 export default function Sidebar({
@@ -14,17 +19,25 @@ export default function Sidebar({
   isMobile,
   isMenuOpen,
   onMenuClose,
+  isAuthenticated = false,
+  onLogout,
+  onSignInOpen,
 }: SidebarProps) {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // === Секции ===
+  // === Состояние раскрытия секций
+  const [layoutOpen, setLayoutOpen] = useState(false);
+  const [componentsOpen, setComponentsOpen] = useState(false);
+  const [templatesOpen, setTemplatesOpen] = useState(false);
+
+  // === Определяем секции
   const homeSections = [
     { id: "overview", label: "Overview" },
     { id: "getting-started", label: "Getting Started" },
     { id: "layout-sections", label: "Layout Sections" },
-    { id: "ui-components", label: "UI Cmponents" },
-    { id: "get-framerkit", label: "Get Framerkit" },
+    { id: "ui-components", label: "UI Components" },
+    { id: "get-framerkit", label: "Get FramerKit" },
     { id: "faq-contact", label: "FAQ" },
   ];
 
@@ -58,19 +71,35 @@ export default function Sidebar({
     { id: "testimonialcard", label: "Testimonial Card" },
   ];
 
-  // === Обработчики ===
+  // === При открытии меню определяем, какие секции открыть
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    const path = location.pathname;
+    if (path.startsWith("/components")) {
+      setComponentsOpen(true);
+      setLayoutOpen(false);
+      setTemplatesOpen(false);
+    } else if (path.startsWith("/layout")) {
+      setLayoutOpen(true);
+      setComponentsOpen(false);
+      setTemplatesOpen(false);
+    } else {
+      setLayoutOpen(false);
+      setComponentsOpen(false);
+      setTemplatesOpen(false);
+    }
+  }, [isMenuOpen, location.pathname]);
+
+  // === Обработчики клика
   const handleHomeSectionClick = (id: string) => {
     onSectionChange(id);
     onMenuClose();
-
     if (location.pathname !== "/") {
-      navigate("/");
-      setTimeout(() => {
-        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-      }, 150);
-    } else {
-      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+      navigate("/", { state: { scrollTo: id } });
+      return;
     }
+    document.getElementById(id)?.scrollIntoView({ behavior: "auto" });
   };
 
   const handleOtherSectionClick = (id: string, basePath: string) => {
@@ -79,19 +108,16 @@ export default function Sidebar({
     navigate(`/${basePath}/${id}`);
   };
 
-  // === Проверка активности ===
-  const isActive = (id: string, basePath?: string): boolean => {
-    if (location.pathname === "/") {
-      return activeSection === id;
-    }
-    if (basePath) {
-      return location.pathname === `/${basePath}/${id}`;
-    }
+  const isActive = (id: string, basePath?: string) => {
+    if (location.pathname === "/") return activeSection === id;
+    if (basePath) return location.pathname === `/${basePath}/${id}`;
     return location.pathname === `/${id}`;
   };
 
-  // === Рендер пунктов секции ===
-  const renderSectionItems = (list: { id: string; label: string }[], basePath: string) =>
+  const renderSectionItems = (
+    list: { id: string; label: string }[],
+    basePath: string
+  ) =>
     list.map(({ id, label }) => (
       <button
         key={id}
@@ -102,9 +128,38 @@ export default function Sidebar({
       </button>
     ));
 
-  // === Содержимое сайдбара ===
-  const sidebarContent = (
-    <>
+  // === Collapsible секция с Lucide иконкой
+  const CollapsibleSection = ({
+    title,
+    open,
+    setOpen,
+    children,
+  }: {
+    title: string;
+    open: boolean;
+    setOpen: (v: boolean) => void;
+    children: React.ReactNode;
+  }) => (
+    <div className="collapsible-section">
+      <div
+        className="sidebar-header collapsible"
+        onClick={() => setOpen(!open)}
+        style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
+      >
+        <span>{title}</span>
+        {open ? <ChevronDown size={16} /> : <ChevronUp size={16} />}
+      </div>
+      <div className={`collapsible-content ${open ? "open" : ""}`}>
+        {children}
+      </div>
+    </div>
+  );
+
+  // === Контент сайдбара
+const sidebarContent = (
+  <div className="sidebar-inner" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+    
+    <div>
       <div className="sidebar-header">Getting Started</div>
       {homeSections.map(({ id, label }) => (
         <button
@@ -116,44 +171,78 @@ export default function Sidebar({
         </button>
       ))}
 
-      <div className="sidebar-header" style={{ marginTop: 20 }}>
-        Layout Section
-      </div>
-      {renderSectionItems(layoutSections, "layout")}
-
-      <div className="sidebar-header" style={{ marginTop: 20 }}>
-        Components
-      </div>
-      {renderSectionItems(componentSections, "components")}
-
-      <div className="sidebar-header" style={{ marginTop: 20 }}>
-        Templates
-      </div>
-      <button
-        className="sidebar-item"
-        onClick={() => {
-          navigate("/templates/framerkitdaily");
-          onMenuClose();
-        }}
+      <CollapsibleSection
+        title="Layout Sections"
+        open={layoutOpen}
+        setOpen={setLayoutOpen}
       >
-        Framer Kit Daily
-      </button>
-    </>
-  );
+        {renderSectionItems(layoutSections, "layout")}
+      </CollapsibleSection>
+
+      <CollapsibleSection
+        title="Components"
+        open={componentsOpen}
+        setOpen={setComponentsOpen}
+      >
+        {renderSectionItems(componentSections, "components")}
+      </CollapsibleSection>
+
+      <CollapsibleSection
+        title="Templates"
+        open={templatesOpen}
+        setOpen={setTemplatesOpen}
+      >
+        <button
+          className="sidebar-item"
+          onClick={() => {
+            navigate("/templates/framerkitdaily");
+            onMenuClose();
+          }}
+        >
+          Framer Kit Daily
+        </button>
+      </CollapsibleSection>
+    </div>
+
+    {/* Блок кнопок прижат к низу */}
+    {isMobile && (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', padding: '0.5rem', marginTop: 'auto' }}>
+        {isAuthenticated ? (
+          <button className="logoutButton" onClick={onLogout}>
+            Log out
+          </button>
+        ) : (
+          <>
+            <button className="loginButton" onClick={onSignInOpen}>
+              Log in
+            </button>
+            <button
+              className="authButton"
+              onClick={() =>
+                window.open("https://gum.co/framerkit", "_blank")
+              }
+            >
+              Get Full Access
+            </button>
+          </>
+        )}
+      </div>
+    )}
+  </div>
+);
 
 
-// === Мобильная версия ===
-if (isMobile) {
-  return (
-    <>
-      {isMenuOpen && <div className="sidebar-overlay" onClick={onMenuClose} />}
-      <nav className={`sidebar-mobile ${isMenuOpen ? "open" : ""}`}>
-        {sidebarContent}
-      </nav>
-    </>
-  );
-}
+  // === Мобильная версия
+  if (isMobile) {
+    return (
+      <>
+        {isMenuOpen && <div className="sidebar-overlay" onClick={onMenuClose} />}
+        <nav className={`sidebar-mobile ${isMenuOpen ? "open" : ""}`}>
+          {sidebarContent}
+        </nav>
+      </>
+    );
+  }
 
-  // === Десктопная версия ===
   return <nav className="sidebar">{sidebarContent}</nav>;
 }

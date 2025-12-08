@@ -42,6 +42,7 @@ export default function AvatarGroupPage({
         const loadedItems = json.avatargroup || [];
         setItems(loadedItems);
 
+        // подгружаем картинки
         const imagePromises = loadedItems.map(
           (item: ComponentItem) =>
             new Promise<void>((resolve) => {
@@ -63,14 +64,14 @@ export default function AvatarGroupPage({
     load();
   }, []);
 
-  // Сброс прокрутки галереи при смене фильтра
+  // сброс скролла при смене фильтра
   useEffect(() => {
     if (galleryRef.current) {
       galleryRef.current.scrollTo({ top: 0 });
     }
   }, [filter]);
 
-  // Прокрутка страницы под header при входе
+  // прокрутка страницы под header при входе
   useEffect(() => {
     const section = document.getElementById("avatar-group-page");
     if (section) {
@@ -78,6 +79,7 @@ export default function AvatarGroupPage({
     }
   }, []);
 
+  // фильтр светлое / тёмное
   const filtered = items.filter(item =>
     filter === "dark" ? item.key.includes("dark") : !item.key.includes("dark")
   );
@@ -118,9 +120,7 @@ export default function AvatarGroupPage({
         ) : error ? (
           <p style={{ color: "red", padding: "20px" }}>{error}</p>
         ) : filtered.length === 0 ? (
-          <div className="empty-message">
-            No components available for the selected theme.
-          </div>
+          <div className="empty-message">No components available for the selected theme.</div>
         ) : (
           <motion.div
             initial={{ opacity: 0 }}

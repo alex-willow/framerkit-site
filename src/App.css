@@ -47,26 +47,23 @@ body {
   color: var(--framer-color-text);
 }
 
-[data-framer-theme="dark"] .container {
-  background-color: var(--framer-color-bg-dark);
-  color: var(--framer-color-text-dark);
-}
+
 
 /* === Фиксированный хедер / навбар === */
 .header {
+  display: flex;
+  justify-content: space-between; /* логотип слева, все действия справа */
+  align-items: center;
+  padding: 20px; /* отступы по бокам всей шапки */
+  height: 50px;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: 50px;
   z-index: 100;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
   background: rgb(255, 255, 255);
-  backdrop-filter: blur(12px);
   border-bottom: 1px solid #eee;
+  backdrop-filter: blur(12px);
 }
 
 .headerLeft {
@@ -74,6 +71,13 @@ body {
   align-items: center;
   gap: 0.5rem;
 }
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* расстояние между кнопками */
+}
+
 
 .header h1 {
   margin: 0;
@@ -93,11 +97,6 @@ body {
   display: block;
 }
 
-.headerActions {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
 
 /* === Кнопки авторизации === */
 .logoutButton {
@@ -244,28 +243,33 @@ body {
 .app-layout {
   display: flex;
   flex: 1;
-  overflow: hidden;
   padding-top: 40px;
 }
 
 /* === Сайдбар === */
 .sidebar {
   position: fixed;
-  top: 0; /* линия начинается сверху окна */
+  top: 0;
   left: 0;
   width: 220px;
-  height: 100vh; /* линия до низа окна */
+  height: 100vh;
   overflow-y: auto;
-  padding-top: 60px; /* отступ под header, чтобы текст не перекрывался */
-  padding-left: 6px;
-  padding-right: 6px;
-  padding-bottom: 60px; /* отступ снизу */
+  padding: 60px 6px 60px 6px; /* top, sides, bottom */
   background: var(--framer-color-bg);
   box-sizing: border-box;
-  border-right: 1px solid #eee; /* сплошная линия */
-  z-index: 1; /* ← КЛЮЧЕВОЕ ИЗМЕНЕНИЕ */
+  border-right: 1px solid #eee;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
 }
 
+.sidebar-inner {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* === Заголовки секций === */
 .sidebar-header {
   font-size: 16px;
   font-weight: 800;
@@ -274,10 +278,13 @@ body {
   margin-bottom: 4px;
 }
 
-[data-framer-theme="dark"] .sidebar-header {
-  color: var(--framer-color-text-dark);
+.sidebar-header.collapsible {
+  cursor: pointer;
+  margin-top: 16px;
+  user-select: none;
 }
 
+/* === Пункты меню === */
 .sidebar-item {
   display: flex;
   align-items: center;
@@ -308,20 +315,17 @@ body {
   font-weight: 600;
 }
 
-[data-framer-theme="dark"] .sidebar-item {
-  color: var(--framer-color-text-secondary-dark);
+/* === Фокус === */
+.sidebar-item:focus { 
+  outline: none; 
+  border: none; 
+}
+.sidebar-item.active:focus { 
+  outline: none; 
+  border: none; 
 }
 
-[data-framer-theme="dark"] .sidebar-item:hover {
-  background: #2a2a4e;
-  color: var(--framer-color-text-dark);
-}
-
-[data-framer-theme="dark"] .sidebar-item.active {
-  background: #3a3a6a;
-  color: #9E7FF1;
-}
-
+/* === Иконки и текст === */
 .sidebar-icon {
   width: 20px;
   height: 20px;
@@ -340,15 +344,38 @@ body {
   white-space: nowrap;
 }
 
-.sidebar-item:focus { 
-  outline: none; 
-  border: none; 
+/* === Стили для темной темы === */
+[data-framer-theme="dark"] .sidebar-header {
+  color: var(--framer-color-text-dark);
 }
 
-.sidebar-item.active:focus { 
-  outline: none; 
-  border: none; 
+[data-framer-theme="dark"] .sidebar-item {
+  color: var(--framer-color-text-secondary-dark);
 }
+
+[data-framer-theme="dark"] .sidebar-item:hover {
+  background: #2a2a4e;
+  color: var(--framer-color-text-dark);
+}
+
+[data-framer-theme="dark"] .sidebar-item.active {
+  background: #3a3a6a;
+  color: #9E7FF1;
+}
+
+/* === Collapsible Content === */
+.collapsible-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.collapsible-content.open {
+  max-height: 1000px; /* достаточно большое значение для всех пунктов */
+}
+
+
+
 
 /* === Контент === */
 .content {
@@ -359,7 +386,6 @@ body {
   margin-left: 220px;
   box-sizing: border-box;
   min-width: 0;
-  overflow-y: auto; /* ← ДОБАВЬ ЭТО */
   overflow-x: hidden;
 }
 
@@ -503,7 +529,6 @@ body {
   }
   .content {
     margin-left: 0;
-    padding: 0px 20px 20px; /* верхний отступ = высота твоего sticky */
   }
   .gallery {
     grid-template-columns: 1fr;
@@ -658,35 +683,69 @@ body {
 
 
 
+/* контейнер всей страницы */
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* чтобы футер был внизу, если контента мало */
+}
+
+
 /* === Футер === */
 .footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 12px 20px;
-  text-align: left;
-  font-size: 12px;
-  border-top: 1px solid #eee;
-  background: var(--framer-color-bg);
-  z-index: 90;
-  display: flex;
-  justify-content: center;
-}
-
-.footer-content {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.footer-text {
+  padding: 40px 20px 20px;
+  background: #ffffff;
   color: var(--framer-color-text-secondary);
+  border-top: 1px solid #eee;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* === Сетка футера === */
+.footer-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+/* === Колонки футера === */
+.footer-col {
+  flex: 1 1 150px; /* минимальная ширина 150px, растет при необходимости */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* === Заголовки колонок === */
+.footer-title {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--framer-color-text);
+  margin-bottom: 8px;
+}
+
+/* === Ссылки в футере === */
+.footer-col a {
+  font-size: 14px;
+  color: var(--framer-color-text-secondary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-col a:hover {
+  color: var(--framer-color-text);
+}
+
+/* === Социальные ссылки === */
+.footer-socials {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
 }
 
 .footer-socials a {
-  margin-left: 12px;
   color: var(--framer-color-text-secondary);
   transition: color 0.2s;
 }
@@ -695,36 +754,22 @@ body {
   color: var(--framer-color-text);
 }
 
-[data-framer-theme="dark"] .footer {
-  background: var(--framer-color-bg-dark);
-  border-color: var(--framer-color-border-dark);
-}
-
-[data-framer-theme="dark"] .footer-text,
-[data-framer-theme="dark"] .footer-socials a {
-  color: var(--framer-color-text-secondary-dark);
-}
 
 
-/* === Mobile Select === */
-.mobileSelect {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px solid var(--framer-color-border);
-  border-radius: var(--border-radius);
-  font-size: 15px;
-  margin-bottom: 18px;
-  background: var(--framer-color-bg);
-  color: var(--framer-color-text);
-  display: none;
-  font-weight: 600;
-}
+/* === Адаптивность === */
+@media (max-width: 900px) {
+  .footer-grid {
+    flex-direction: column;
+    gap: 20px;
+  }
 
-@media (max-width: 767px) {
-  .mobileSelect {
-    display: block;
+  .footer-col {
+    flex: 1 1 100%;
   }
 }
+
+
+
 
 /* === Component Dropdown (Mobile) === */
 .component-dropdown-container {
@@ -819,7 +864,7 @@ body {
 
 /* === Sticky Section Header === */
 .section-header-sticky {
-  padding: 20px 20px 0px 20px;
+  padding: 18px 20px 0px 20px;
   background: #ffffff;
   z-index: 10;
   position: sticky;
@@ -830,7 +875,8 @@ body {
 @media (max-width: 767px) {
   .section-header-sticky {
     background: #ffffff;
-    top: 10px;          /* высота мобильного header */
+    padding: 18px 0px 0px 0px;
+    top: 0px;          /* высота мобильного header */
   }
 }
 
@@ -859,6 +905,7 @@ body {
   overflow-y: hidden; /* ← УБРАТЬ скролл изнутри */
   padding-bottom: 20px;
   padding-top: 20px;
+  
 }
 
 /* Разделитель под заголовком и подзаголовком */
@@ -942,7 +989,14 @@ body {
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center; /* выравнивание содержимого */
+  padding: 0; /* убираем все внутренние отступы */
+  margin: 0;  /* убираем внешние */
+  line-height: 0; /* убирает лишнее пространство вокруг SVG */
+  width: 36px; /* при желании фиксируем размер кнопки */
+  height: 36px;
 }
+
 
 .hamburgerButton:focus {
   outline: none;
@@ -1150,6 +1204,16 @@ body.menu-open {
 
 
 /* Секция без padding */
+
+#explore-sections,
+#explore-sections * {
+  animation: none !important;
+  transition: none !important;
+  transform: none !important;
+  opacity: 1 !important;
+}
+
+
 #explore-sections {
   background: var(--framer-color-bg);
   color: var(--framer-color-text);
@@ -1161,6 +1225,7 @@ body.menu-open {
   
   padding: 100px 20px;
 }
+
 
 
 .fk-explore-wrapper {
@@ -1282,18 +1347,28 @@ body.menu-open {
   color: var(--framer-color-text-secondary-dark);
 }
 
-/* PRICING SECTION */
-
+/* Фон на всю ширину */
 .pricing-section {
-  padding: 120px 0;
-  background: #fafafa;
+  padding: 80px 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
+/* Контент внутри с отступами на десктопе */
 .pricing-container {
   max-width: 1180px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 20px; /* отступы по бокам на десктопе */
   text-align: center;
+}
+
+/* Убираем боковые отступы на мобильных */
+@media (max-width: 767px) {
+  .pricing-container {
+    padding: 0px 0;
+  }
+}
+
 }
 
 .pricing-title {
@@ -1311,7 +1386,8 @@ body.menu-open {
 .pricing-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-  gap: 32px;
+  gap: 20px;
+  margin-top: 40px;
 }
 
 /* CARD */
@@ -1319,22 +1395,18 @@ body.menu-open {
   background: white;
   padding: 32px;
   border-radius: 20px;
-  border: 1px solid #e7e7e7;
+  border: 1px solid #eee;
   transition: 0.25s ease;
   position: relative;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.04);
 
   /* >>> added to align buttons <<< */
   display: flex;
   flex-direction: column;
 }
 
-.pricing-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.06);
-}
-
 .featured {
-  border: 2px solid black;
+  border: 2px solid #6E3FF3;
   background: #ffffff;
 }
 
@@ -1343,7 +1415,7 @@ body.menu-open {
   top: -12px;
   left: 50%;
   transform: translateX(-50%);
-  background: black;
+  background: #6E3FF3;
   color: white;
   padding: 6px 14px;
   border-radius: 50px;
@@ -1460,9 +1532,8 @@ body.menu-open {
 /* ========================= */
 
 .faq-section {
-  padding: 120px 0;
+  padding: 80px 0;
   background: #ffffff;
-  border-top: 1px solid #eee;
 }
 
 .faq-container {
@@ -1488,22 +1559,23 @@ body.menu-open {
 .faq-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 32px;
+  gap: 20px;
   margin-bottom: 80px;
+  margin-top: 40px;
 }
 
 .faq-item {
   padding: 28px;
   background: #fafafa;
   border-radius: 16px;
-  border: 1px solid #e5e5e5;
+  border: 1px solid #eee;
   text-align: left;
   transition: 0.25s ease;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.04);
 }
 
 .faq-item:hover {
   background: rgba(110, 63, 243, 0.06);
-  transform: translateY(-3px);
 }
 
 .faq-question {
@@ -1516,4 +1588,112 @@ body.menu-open {
   color: #555;
   line-height: 1.6;
 }
+
+/* === LAYOUT SECTIONS — НОВАЯ ЧИСТАЯ ВЕРСИЯ === */
+
+.ls-section {
+  background: var(--framer-color-bg);
+  color: var(--framer-color-text);
+  width: 100%;
+}
+
+.ls-wrapper {
+  padding: 80px 20px;
+}
+@media (max-width: 767px) {
+  .ls-wrapper {
+    padding: 0px 0;
+  }
+}
+
+.ls-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.ls-block {
+  width: 100%;
+  text-align: center;
+}
+
+/* Заголовок */
+.ls-title {
+  font-size: 40px;
+  font-weight: 800;
+  margin: 0 0 20px;
+  color: var(--framer-color-text);
+}
+
+[data-framer-theme="dark"] .ls-title {
+  color: var(--framer-color-text-dark);
+}
+
+/* Подзаголовок */
+.ls-subtitle {
+  max-width: 800px;
+  margin: 0 auto 40px;
+  font-size: 20px;
+  line-height: 1.6;
+  color: var(--framer-color-text-secondary);
+}
+
+[data-framer-theme="dark"] .ls-subtitle {
+  color: var(--framer-color-text-secondary-dark);
+}
+
+/* === UI COMPONENTS — НОВАЯ ЧИСТАЯ ВЕРСИЯ === */
+
+.ui-section {
+  background: var(--framer-color-bg);
+  color: var(--framer-color-text);
+  width: 100%;
+}
+
+.ui-wrapper {
+  padding: 80px 20px;
+}
+
+@media (max-width: 767px) {
+  .ui-wrapper {
+    padding: 80px 0;
+  }
+}
+
+.ui-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.ui-block {
+  width: 100%;
+  text-align: center;
+}
+
+/* Заголовок */
+.ui-title {
+  font-size: 40px;
+  font-weight: 800;
+  margin: 0 0 20px;
+  color: var(--framer-color-text);
+}
+
+[data-framer-theme="dark"] .ui-title {
+  color: var(--framer-color-text-dark);
+}
+
+/* Подзаголовок */
+.ui-subtitle {
+  max-width: 800px;
+  margin: 0 auto 40px;
+  font-size: 20px;
+  line-height: 1.6;
+  color: var(--framer-color-text-secondary);
+}
+
+[data-framer-theme="dark"] .ui-subtitle {
+  color: var(--framer-color-text-secondary-dark);
+}
+
 

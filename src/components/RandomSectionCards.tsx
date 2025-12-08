@@ -12,59 +12,80 @@ type ComponentItem = {
 };
 
 const STATIC_SECTIONS = [
-  "navbar", "hero", "logo", "feature", "testimonial",
-  "faq", "contact", "pricing", "cta", "footer"
+  "navbar",
+  "hero",
+  "logo",
+  "feature",
+  "gallery",
+  "testimonial",
+  "contact",
+  "pricing",
+  "faq",
+  "cta",
+  "footer"
 ];
 
 export default function RandomSectionCards() {
-  const [cards, setCards] = useState<(ComponentItem | null)[]>(Array(6).fill(null));
-  const [fading, setFading] = useState<boolean[]>(Array(6).fill(false));
+  const [cards, setCards] = useState<(ComponentItem | null)[]>(Array(STATIC_SECTIONS.length).fill(null));
+  const [fading, setFading] = useState<boolean[]>(Array(STATIC_SECTIONS.length).fill(false));
 
-  const cardsRef = useRef<(ComponentItem | null)[]>(Array(6).fill(null));
-  const hoveredRef = useRef<boolean[]>(Array(6).fill(false));
-  const lastChangeRef = useRef<number[]>(Array(6).fill(0));
-  const allItemsRef = useRef<ComponentItem[]>([]);
+  const hoveredRef = useRef<boolean[]>(Array(STATIC_SECTIONS.length).fill(false));
+  const lastChangeRef = useRef<number[]>(Array(STATIC_SECTIONS.length).fill(0));
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // LIGHT-компоненты по секциям
+  const itemsBySection = useRef<Record<string, ComponentItem[]>>({});
+
   const rotatingRef = useRef(false);
 
-  // === Load data ===
   useEffect(() => {
     const load = async () => {
-      const all: ComponentItem[] = [];
+      const data: Record<string, ComponentItem[]> = {};
 
       for (const sec of STATIC_SECTIONS) {
         try {
           const res = await fetch(
             `https://raw.githubusercontent.com/alex-willow/framerkit-data/main/${sec}.json`
           );
+
           if (res.ok) {
             const json = await res.json();
-            all.push(...(json[sec] || []));
+            const allItems = json[sec] || [];
+
+            // ⭐ фильтр: только светлые (без dark)
+            data[sec] = allItems.filter(
+              (item: ComponentItem) =>
+                !item.key.toLowerCase().includes("dark")
+            );
+          } else {
+            data[sec] = [];
           }
-        } catch (_) {}
+        } catch {
+          data[sec] = [];
+        }
       }
 
-      allItemsRef.current = all;
+      itemsBySection.current = data;
 
-      if (all.length > 0) {
-        const now = Date.now();
-        const initial = Array.from({ length: 6 }, () =>
-          all[Math.floor(Math.random() * all.length)]
-        );
+      const now = Date.now();
 
-        setCards(initial);
-        cardsRef.current = initial;
-        lastChangeRef.current = initial.map(() => now);
+      // начальные карточки
+      const initial = STATIC_SECTIONS.map(sec => {
+        const items = data[sec];
+        if (!items.length) return null;
+        return items[Math.floor(Math.random() * items.length)];
+      });
 
-        startRotation();
-      }
+      setCards(initial);
+      lastChangeRef.current = initial.map(() => now);
+
+      startRotation();
     };
 
     load();
+
     return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
   }, []);
 
@@ -73,29 +94,37 @@ export default function RandomSectionCards() {
 
     const now = Date.now();
     const minInterval = 5000;
-
     const eligible: number[] = [];
 
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < STATIC_SECTIONS.length; i++) {
       if (!hoveredRef.current[i] && now - lastChangeRef.current[i] >= minInterval) {
         eligible.push(i);
       }
     }
 
     if (!eligible.length) {
-      timeoutRef.current = setTimeout(rotateOne, 1000);
+      timeoutRef.current = setTimeout(rotateOne, 1200);
       return;
     }
 
     const index = eligible[Math.floor(Math.random() * eligible.length)];
-    const newCard = allItemsRef.current[Math.floor(Math.random() * allItemsRef.current.length)];
+    const sec = STATIC_SECTIONS[index];
+
+    const items = itemsBySection.current[sec];
+
+    if (!items || items.length === 0) {
+      timeoutRef.current = setTimeout(rotateOne, 1200);
+      return;
+    }
+
+    const newCard = items[Math.floor(Math.random() * items.length)];
 
     rotatingRef.current = true;
 
     setFading(prev => {
-      const copy = [...prev];
-      copy[index] = true;
-      return copy;
+      const c = [...prev];
+      c[index] = true;
+      return c;
     });
 
     const preload = new Image();
@@ -104,22 +133,21 @@ export default function RandomSectionCards() {
     const swap = () => {
       setTimeout(() => {
         setCards(prev => {
-          const copy = [...prev];
-          copy[index] = newCard;
-          cardsRef.current[index] = newCard;
+          const c = [...prev];
+          c[index] = newCard;
           lastChangeRef.current[index] = Date.now();
-          return copy;
+          return c;
         });
 
         setFading(prev => {
-          const copy = [...prev];
-          copy[index] = false;
-          return copy;
+          const c = [...prev];
+          c[index] = false;
+          return c;
         });
 
         rotatingRef.current = false;
         timeoutRef.current = setTimeout(rotateOne, 1500);
-      }, 500);
+      }, 400);
     };
 
     preload.onload = swap;
@@ -134,8 +162,8 @@ export default function RandomSectionCards() {
     <>
       {cards.map((item, index) => (
         <Link
-          key={`section-card-${index}`}
-          to={item ? `/layout/${item.key.split("-")[0]}` : "#"}
+          key={STATIC_SECTIONS[index]}
+          to={item ? `/layout/${STATIC_SECTIONS[index]}` : "#"}
           className={`card ${fading[index] ? "fadeOut" : "fadeIn"}`}
           onMouseEnter={() => (hoveredRef.current[index] = true)}
           onMouseLeave={() => (hoveredRef.current[index] = false)}

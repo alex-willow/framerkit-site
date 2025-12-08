@@ -1,4 +1,3 @@
-// src/layouts/MainLayout.tsx
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
@@ -7,7 +6,7 @@ type MainLayoutProps = {
   children: React.ReactNode;
   activeSection: string;
   onSectionChange: (section: string) => void;
-  theme?: "light" | "dark";      // ← сделали необязательным
+  theme?: "light" | "dark";
   onThemeToggle?: () => void; 
   isAuthenticated: boolean;
   onLogout: () => void;
@@ -16,7 +15,6 @@ type MainLayoutProps = {
   isMenuOpen: boolean;
   onMenuToggle: () => void;
   galleryScrollRef?: React.RefObject<HTMLDivElement>;
-  
 };
 
 export default function MainLayout({
@@ -30,10 +28,11 @@ export default function MainLayout({
   isMobile,
   isMenuOpen,
   onMenuToggle,
-  galleryScrollRef, // ← добавь деструктуризацию
+  galleryScrollRef,
 }: MainLayoutProps) {
   return (
     <div className="container" data-theme={theme}>
+      {/* Header фиксирован */}
       <Header
         isAuthenticated={isAuthenticated}
         onLogout={onLogout}
@@ -42,35 +41,25 @@ export default function MainLayout({
         onMenuToggle={onMenuToggle}
       />
 
+      {/* Основная часть страницы: Sidebar + Контент */}
       <div className="app-layout">
-        {!isMobile && (
-          <Sidebar
-            activeSection={activeSection}
-            onSectionChange={onSectionChange}
-            isMobile={false}
-            isMenuOpen={false}
-            onMenuClose={() => {}}
-          />
-        )}
+        {/* Sidebar */}
+        <Sidebar
+          activeSection={activeSection}
+          onSectionChange={onSectionChange}
+          isMobile={isMobile}
+          isMenuOpen={isMenuOpen}
+          onMenuClose={onMenuToggle}
+        />
 
-        {isMobile && (
-          <Sidebar
-            activeSection={activeSection}
-            onSectionChange={onSectionChange}
-            isMobile={true}
-            isMenuOpen={isMenuOpen}
-            onMenuClose={onMenuToggle}
-          />
-        )}
-
-        {/* === Контент === */}
-        {/* Вот сюда передаём galleryScrollRef */}
+        {/* Контент */}
         <main className="content" ref={galleryScrollRef}>
           {children}
+
+          {/* Футер в конце контента */}
+          <Footer />
         </main>
       </div>
-
-      <Footer />
     </div>
   );
 }
