@@ -38,13 +38,12 @@ import AvatarGroupPage from "./pages/Components/Avatargroup";
 // Templates Pages
 import FramerKitDaily from "./pages/Templates/FramerKitDaily";
 
-
 import SignInModal from "./SignInModal";
 
-// Supabase client — исправлены пробелы
+// Supabase client
 const supabase = createClient(
   "https://ibxakfxqoqiypfhgkpds.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlieGFrZnhxb3FpeXBmaGdrcGRzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA4MTQxMDcsImV4cCI6MjA1NjM5MDEwN30.tWculxF6xgGw4NQEWPBp7uH_gsl5HobP9wQn3Tf9yyw"
+  "SERVICE_ROLE_KEY_HERE"
 );
 
 function AppContent() {
@@ -56,9 +55,8 @@ function AppContent() {
   });
   const [isMobile, setIsMobile] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("overview"); // ← изменил на первую секцию
+  const [activeSection, setActiveSection] = useState("overview");
   const navigate = useNavigate();
-  
 
   // Mobile detection
   useEffect(() => {
@@ -79,58 +77,58 @@ function AppContent() {
   };
 
   const handleSetActiveSection = (section: string) => {
-    // Обновляем активную секцию
     setActiveSection(section);
     setIsMenuOpen(false);
 
-    // Определяем, является ли секция частью главной страницы
-    const homeSections = ["overview", "getting-started", "layout-sections", "ui-components", "get-framerkit", "faq-contact" ];
-    if (homeSections.includes(section)) {
-      // Остаёмся на главной странице — не навигируем   
-      return;
+    const homeSections = [
+      "overview",
+      "getting-started",
+      "layout-sections",
+      "ui-components",
+      "get-framerkit",
+      "faq-contact"
+    ];
+    if (homeSections.includes(section)) return;
+
+    // Layout sections
+    if (
+      [
+        "navbar",
+        "hero",
+        "logo",
+        "feature",
+        "gallery",
+        "testimonial",
+        "contact",
+        "pricing",
+        "faq",
+        "cta",
+        "footer"
+      ].includes(section)
+    ) {
+      navigate(`/layout/${section}`);
     }
-
-// Layout секции
-if (
-  [
-    "navbar",
-    "hero",
-    "logo",
-    "feature",
-    "gallery",
-    "testimonial",
-    "contact",
-    "pricing",
-    "faq",
-    "cta",
-    "footer"
-  ].includes(section)
-) {
-  navigate(`/layout/${section}`);
-}
-// Components
-else if (
-  [
-    "Accordion",
-    "AccordionGroup",
-    "Avatar",
-    "AvatarGroup",
-    "Badge",
-    "Button",
-    "Card",
-    "Icon",
-    "Input",
-    "Form",
-    "PricingCard",
-    "Rating",
-    "TestimonialCard"
-  ].includes(section)
-) {
-  // Преобразуем имя компонента в путь без пробелов и с маленькой буквы в начале
-  const path = section.charAt(0).toLowerCase() + section.slice(1);
-  navigate(`/components/${path}`);
-}
-
+    // Components
+    else if (
+      [
+        "Accordion",
+        "AccordionGroup",
+        "Avatar",
+        "AvatarGroup",
+        "Badge",
+        "Button",
+        "Card",
+        "Icon",
+        "Input",
+        "Form",
+        "PricingCard",
+        "Rating",
+        "TestimonialCard"
+      ].includes(section)
+    ) {
+      const path = section.charAt(0).toLowerCase() + section.slice(1);
+      navigate(`/components/${path}`);
+    }
   };
 
   return (
@@ -177,15 +175,7 @@ else if (
           <Route path="/components/avatargroup" element={<AvatarGroupPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
 
           {/* Templates */}
-              <Route 
-                path="/templates/framerkitdaily" 
-                element={
-                  <FramerKitDaily 
-                    isAuthenticated={isAuthenticated} 
-                    setIsSignInOpen={setIsSignInOpen} 
-                  />
-                } 
-              />
+          <Route path="/templates/framerkitdaily" element={<FramerKitDaily />} />
 
           {/* fallback */}
           <Route path="*" element={<HomePage onSectionChange={handleSetActiveSection} />} />
