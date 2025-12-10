@@ -42,7 +42,7 @@ export default function Header({
                 <button
                   className="authButton"
                   onClick={() =>
-                    window.open("https://gum.co/framerkit", "_blank")
+                    window.open("https://buy.polar.sh/polar_cl_jUF1ses8UossGQ9kTHh9Fb6PRHJA4uwchcdHJ38a4tp", "_blank")
                   }
                 >
                   Get Full Access

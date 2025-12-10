@@ -205,7 +205,7 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
               }}
             >
               <a
-                href="https://gum.co/framerkit"
+                href="https://buy.polar.sh/polar_cl_jUF1ses8UossGQ9kTHh9Fb6PRHJA4uwchcdHJ38a4tp"
                 target="_blank"
                 rel="noopener noreferrer"
               >

@@ -35,6 +35,10 @@ import TestimonialCardPage from "./pages/Components/Testimonialcard";
 import AccordionGroupPage from "./pages/Components/Accordiongroup";
 import AvatarGroupPage from "./pages/Components/Avatargroup";
 
+// Templates Pages
+import FramerKitDaily from "./pages/Templates/FramerKitDaily";
+
+
 import SignInModal from "./SignInModal";
 
 // Supabase client — исправлены пробелы
@@ -171,6 +175,17 @@ else if (
           <Route path="/components/testimonialcard" element={<TestimonialCardPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
           <Route path="/components/accordiongroup" element={<AccordionGroupPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
           <Route path="/components/avatargroup" element={<AvatarGroupPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
+
+          {/* Templates */}
+              <Route 
+                path="/templates/framerkitdaily" 
+                element={
+                  <FramerKitDaily 
+                    isAuthenticated={isAuthenticated} 
+                    setIsSignInOpen={setIsSignInOpen} 
+                  />
+                } 
+              />
 
           {/* fallback */}
           <Route path="*" element={<HomePage onSectionChange={handleSetActiveSection} />} />

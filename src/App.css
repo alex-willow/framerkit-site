@@ -392,10 +392,10 @@ body {
 
 /* === Заголовки === */
 .title {
-  font-size: 24px;
-  font-weight: 700;
-  margin: 10px 0 4px;
+  font-size: 18px;
+  font-weight: 800;
   color: var(--framer-color-text);
+  margin-bottom: 8px;
 }
 
 [data-framer-theme="dark"] .title {
@@ -535,7 +535,7 @@ body {
     padding: 0px 0px 30px 0px;
   }
   .title {
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 700;
     margin: 0px 0 4px;
     color: var(--framer-color-text);
@@ -720,8 +720,8 @@ body {
 
 /* === Заголовки колонок === */
 .footer-title {
-  font-weight: 700;
-  font-size: 16px;
+  font-weight: 800;
+  font-size: 18px;
   color: var(--framer-color-text);
   margin-bottom: 8px;
 }
@@ -864,40 +864,15 @@ body {
 
 /* === Sticky Section Header === */
 .section-header-sticky {
-  padding: 18px 20px 0px 20px;
+  padding: 20px 20px 0px 20px;
   background: #ffffff;
   z-index: 10;
   position: sticky;
   top: 0;
 }
 
-/* 📱 Мобильная версия: фиксируем реальную позицию */
-@media (max-width: 767px) {
-  .section-header-sticky {
-    background: #ffffff;
-    padding: 18px 0px 0px 0px;
-    top: 0px;          /* высота мобильного header */
-  }
-}
 
-/* ===== MOBILE DROPDOWN FIXED INSIDE HEADER ===== */
-@media (max-width: 767px) {
-  .component-dropdown-container {
-    position: sticky;
-    z-index: 50;
-    background: #ffffff;
-    padding-bottom: 10px;
-  }
 
-  /* Добавим небольшой отступ чтобы заголовок не прилипал */
-  .section-header-sticky {
-    padding-top: 20px; /* Dropdown + spacing */
-  }
-}
-
-[data-framer-theme="dark"] .section-header-sticky {
-  background: var(--framer-color-bg-dark);
-}
 
 /* === Scroll Area (галерея) === */
 .gallery-scroll-area {
@@ -918,35 +893,6 @@ body {
   left: 50%;
   right: 50%;
   transform: translateX(-50%);
-}
-[data-framer-theme="dark"] .title-divider {
-  background: rgba(255,255,255,0.1); /* линия для тёмной темы */
-}
-
-.header-wrapper {
-  position: sticky;
-  top: 0;
-  z-index: 10; /* выше галереи */
-  background: var(--framer-color-bg);
-  padding-bottom: 0; /* убираем лишний отступ */
-}
-
-/* Обёртка, которая даёт фон под dropdown */
-.dropdown-wrapper {
-  position: sticky;
-  z-index: 50;
-  background: var(--framer-color-bg);
-  padding: 1px 0;
-}
-
-/* Сами элементы внутри получают фон */
-.dropdown-wrapper .component-dropdown-container {
-  background: var(--framer-color-bg);
-  z-index: 55;
-}
-
-[data-framer-theme="dark"] .dropdown-wrapper {
-  background: var(--framer-color-bg-dark);
 }
 
 
@@ -1094,6 +1040,11 @@ body.menu-open {
 
 /* Адаптивность */
 @media (max-width: 768px) {
+
+  .section-header-sticky {
+    padding: 20px 0px 0px 0px;
+  }
+
   .hero-section {
     padding: 60px 16px;
   }
@@ -1695,4 +1646,146 @@ body.menu-open {
   color: var(--framer-color-text-secondary-dark);
 }
 
+
+
+/* === СЕТКА === */
+
+/* === СЕТКА === */
+.daily-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* === КАРТОЧКА === */
+.daily-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 100%;
+  cursor: pointer;
+}
+
+.daily-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+}
+
+/* === ОВЕРЛЕЙ НА НАВЕДЕНИИ === */
+.daily-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0);
+  transition: background 0.25s ease;
+  pointer-events: none;
+}
+
+.daily-card:hover::after {
+  background: rgba(0,0,0,0.07);
+}
+
+/* === КАРТИНКА === */
+.daily-card-image {
+  width: 100%;
+  aspect-ratio: 16 / 20;
+  overflow: hidden;
+  background: #f4f4f4;
+}
+
+.daily-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+
+/* === ФУТЕР КАРТОЧКИ === */
+.daily-card-footer {
+  display: flex;
+  justify-content: space-between; /* ← теперь слева и справа */
+  align-items: center;
+  padding: 12px 14px;
+  border-top: 1px solid #eee;
+  background: #fff;
+}
+
+/* НАЗВАНИЕ */
+.daily-card-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* === КНОПКИ === */
+.copy-button,
+.view-button {
+  background: #6e3ff3;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 13px;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.copy-button:hover,
+.view-button:hover {
+  background: #5b2fe0;
+}
+
+.copy-button.copied {
+  background: #22c55e !important;
+}
+
+/* ==== АДАПТИВ ==== */
+
+/* планшеты */
+@media (max-width: 1200px) {
+  .daily-grid {
+    gap: 16px;
+  }
+}
+
+/* маленькие планшеты */
+@media (max-width: 900px) {
+  .daily-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+}
+
+/* мобильные */
+@media (max-width: 600px) {
+  .daily-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 14px;
+  }
+
+  .daily-card-footer {
+    padding: 10px 12px;
+  }
+
+  .daily-card-title {
+    font-size: 14px;
+  }
+
+  .copy-button, .view-button {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+}
 
