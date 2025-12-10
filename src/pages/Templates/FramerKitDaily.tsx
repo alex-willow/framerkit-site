@@ -9,17 +9,9 @@ type TemplateItem = {
   url: string;
 };
 
-type FramerKitDailyPageProps = {
-  isAuthenticated: boolean;
-  setIsSignInOpen: (open: boolean) => void;
-};
-
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
 
-export default function FramerKitDailyPage({
-  isAuthenticated,
-  setIsSignInOpen,
-}: FramerKitDailyPageProps) {
+export default function FramerKitDailyPage() {
   const [items, setItems] = useState<TemplateItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -89,7 +81,6 @@ export default function FramerKitDailyPage({
 
                 return (
                   <div key={item.key} className="daily-card">
-                    
                     {/* IMAGE + OVERLAY */}
                     <div className="daily-card-image-wrapper">
                       <div className="daily-card-image">
