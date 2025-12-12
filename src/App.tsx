@@ -1,6 +1,6 @@
 // src/App.tsx
 import { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import { HashRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import { createClient } from "@supabase/supabase-js";
 import MainLayout from "./layouts/MainLayout";
 
@@ -43,7 +43,7 @@ import SignInModal from "./SignInModal";
 // Supabase client
 const supabase = createClient(
   "https://ibxakfxqoqiypfhgkpds.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlieGFrZnhxb3FpeXBmaGdrcGRzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA4MTQxMDcsImV4cCI6MjA1NjM5MDEwN30.tWculxF6xgGw4NQEWPBp7uH_gsl5HobP9wQn3Tf9yyw"
+  "YOUR_SUPABASE_KEY"
 );
 
 function AppContent() {
@@ -58,7 +58,6 @@ function AppContent() {
   const [activeSection, setActiveSection] = useState("overview");
   const navigate = useNavigate();
 
-  // Mobile detection
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth <= 767);
     check();
@@ -90,7 +89,6 @@ function AppContent() {
     ];
     if (homeSections.includes(section)) return;
 
-    // Layout sections
     if (
       [
         "navbar",
@@ -107,25 +105,7 @@ function AppContent() {
       ].includes(section)
     ) {
       navigate(`/layout/${section}`);
-    }
-    // Components
-    else if (
-      [
-        "Accordion",
-        "AccordionGroup",
-        "Avatar",
-        "AvatarGroup",
-        "Badge",
-        "Button",
-        "Card",
-        "Icon",
-        "Input",
-        "Form",
-        "PricingCard",
-        "Rating",
-        "TestimonialCard"
-      ].includes(section)
-    ) {
+    } else {
       const path = section.charAt(0).toLowerCase() + section.slice(1);
       navigate(`/components/${path}`);
     }
@@ -177,12 +157,7 @@ function AppContent() {
           {/* Templates */}
           <Route
             path="/templates/framerkitdaily"
-            element={
-              <FramerKitDaily
-                isAuthenticated={isAuthenticated}
-                setIsSignInOpen={setIsSignInOpen}
-              />
-            }
+            element={<FramerKitDaily isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />}
           />
 
           {/* fallback */}
