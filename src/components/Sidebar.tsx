@@ -205,7 +205,7 @@ export default function Sidebar({
 
       {/* Баннер только для ПК, прижат к низу */}
       {!isMobile && (
-        <div className="sidebar-banner" onClick={() => window.open("https://gum.co/framerkit", "_blank")}>
+        <div className="sidebar-banner" onClick={() => window.open("https://buy.polar.sh/polar_cl_jUF1ses8UossGQ9kTHh9Fb6PRHJA4uwchcdHJ38a4tp", "_blank")}>
           <span>Get Full Access</span>
           <small>Premium templates & features</small>
         </div>
