@@ -18,10 +18,7 @@ export default function Sidebar({
   onSectionChange,
   isMobile,
   isMenuOpen,
-  onMenuClose,
-  isAuthenticated = false,
-  onLogout,
-  onSignInOpen,
+  onMenuClose
 }: SidebarProps) {
   const navigate = useNavigate();
   const location = useLocation();
