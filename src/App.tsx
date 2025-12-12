@@ -43,7 +43,7 @@ import SignInModal from "./SignInModal";
 // Supabase client
 const supabase = createClient(
   "https://ibxakfxqoqiypfhgkpds.supabase.co",
-  "SERVICE_ROLE_KEY_HERE"
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlieGFrZnhxb3FpeXBmaGdrcGRzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA4MTQxMDcsImV4cCI6MjA1NjM5MDEwN30.tWculxF6xgGw4NQEWPBp7uH_gsl5HobP9wQn3Tf9yyw"
 );
 
 function AppContent() {
@@ -175,7 +175,15 @@ function AppContent() {
           <Route path="/components/avatargroup" element={<AvatarGroupPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
 
           {/* Templates */}
-          <Route path="/templates/framerkitdaily" element={<FramerKitDaily />} />
+          <Route
+            path="/templates/framerkitdaily"
+            element={
+              <FramerKitDaily
+                isAuthenticated={isAuthenticated}
+                setIsSignInOpen={setIsSignInOpen}
+              />
+            }
+          />
 
           {/* fallback */}
           <Route path="*" element={<HomePage onSectionChange={handleSetActiveSection} />} />

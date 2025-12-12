@@ -1,125 +1,177 @@
-import { useState, useEffect, useRef } from "react";
-import { Copy, CircleCheck } from "lucide-react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { Eye, Paperclip, Lock } from "lucide-react";
 import SectionHeader from "../../components/SectionHeader";
 
-type TemplateItem = {
+interface TemplateItem {
   key: string;
   image: string;
   url: string;
-};
+  preview: string;
+  type?: "free" | "paid"; // добавляем тип
+}
+
+interface FramerKitDailyPageProps {
+  galleryScrollRef?: React.RefObject<HTMLDivElement>;
+  isAuthenticated?: boolean;
+  setIsSignInOpen?: (open: boolean) => void;
+}
 
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
 
-export default function FramerKitDailyPage() {
+export default function FramerKitDailyPage({
+  galleryScrollRef,
+  isAuthenticated = false,
+  setIsSignInOpen,
+}: FramerKitDailyPageProps) {
   const [items, setItems] = useState<TemplateItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [copiedKey, setCopiedKey] = useState<string | null>(null);
+  const location = useLocation();
 
-  const galleryRef = useRef<HTMLDivElement>(null);
+  // Скролл наверх при смене страницы
+  useEffect(() => {
+    if (galleryScrollRef?.current) {
+      galleryScrollRef.current.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    } else {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    }
+  }, [location.pathname, galleryScrollRef]);
 
-  // === Load JSON
+  // Загрузка JSON и добавление типов
   useEffect(() => {
     const load = async () => {
       try {
         const res = await fetch(
           "https://raw.githubusercontent.com/alex-willow/framerkit-data/refs/heads/main/framerkitdaily"
         );
-        if (!res.ok) throw new Error("Failed to load FramerKitDaily templates");
+        if (!res.ok) throw new Error("Failed to load");
         const json = await res.json();
-        setItems(json.framerkitdaily || []);
-      } catch (err) {
-        console.error(err);
-        setError("Failed to load FramerKitDaily templates");
+        const framerkitdaily: TemplateItem[] = json.framerkitdaily.map(
+          (item: TemplateItem, index: number) => ({
+            ...item,
+            type: index === 0 ? "free" : "paid", // первый бесплатный, остальные платные
+          })
+        );
+        setItems(framerkitdaily);
+      } catch (e) {
+        setError("Failed to load templates");
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
     load();
   }, []);
 
-  const handleCopy = async (item: TemplateItem) => {
-    await navigator.clipboard.writeText(item.url);
-    setCopiedKey(item.key);
-    setTimeout(() => setCopiedKey(null), 2500);
-  };
-
-  const skeletonCards = Array.from({ length: 10 });
-
   return (
-    <div id="framerkitdaily-page" style={{ padding: 0, scrollMarginTop: "64px" }}>
+    <div id="framerkitdaily-page" style={{ padding: 0 }}>
       <SectionHeader
         title="FramerKit Daily Templates"
         count={items.length}
-        filter="light"
-        onFilterChange={() => {}}
         loading={loading}
+        hideThemeSwitcher={true}
+        templateLabel="templates"
       />
 
-      <div className="gallery-scroll-area" ref={galleryRef}>
-        {loading ? (
-          <div className="skeleton-gallery">
-            {skeletonCards.map((_, i) => (
-              <div key={i} className="skeleton-card">
-                <div className="skeleton-card-image" />
-              </div>
-            ))}
-          </div>
-        ) : error ? (
-          <p style={{ color: "red", padding: "20px" }}>{error}</p>
-        ) : items.length === 0 ? (
-          <div className="empty-message">No templates available.</div>
-        ) : (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-          >
-            <div className="daily-grid">
-              {items.map((item) => {
-                const isCopied = copiedKey === item.key;
-
-                return (
-                  <div key={item.key} className="daily-card">
-                    {/* IMAGE + OVERLAY */}
-                    <div className="daily-card-image-wrapper">
-                      <div className="daily-card-image">
-                        <img src={item.image || PLACEHOLDER} alt={item.key} />
-                      </div>
-
-                      <div className="daily-card-overlay">
-                        <a
-                          href={item.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="overlay-view-button"
-                        >
-                          Preview
-                        </a>
-                      </div>
-                    </div>
-
-                    {/* DAY + COPY */}
-                    <div className="daily-card-title-row">
-                      <span className="daily-day">{item.key.replace("Day", "Day ")}</span>
-
-                      <button
-                        className={`copy-icon-btn ${isCopied ? "copied" : ""}`}
-                        onClick={() => handleCopy(item)}
-                      >
-                        {isCopied ? (
-                          <CircleCheck size={20} color="#22c55e" />
-                        ) : (
-                          <Copy size={18} />
-                        )}
-                      </button>
-                    </div>
-                  </div>
-                );
-              })}
+      {loading ? (
+        <div className="template-skeleton-grid">
+          {Array.from({ length: 12 }).map((_, i) => (
+            <div className="template-skeleton-card" key={i}>
+              <div className="template-skeleton-card-image" />
+              <div className="template-skeleton-card-info" />
             </div>
-          </motion.div>
-        )}
+          ))}
+        </div>
+      ) : error ? (
+        <p style={{ color: "red", padding: 20 }}>{error}</p>
+      ) : (
+        <div className="daily-grid">
+          {items.map((item, index) => (
+            <DailyCard
+              key={item.key}
+              item={item}
+              dayNumber={index + 1}
+              isAuthenticated={isAuthenticated}
+              setIsSignInOpen={setIsSignInOpen}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+interface DailyCardProps {
+  item: TemplateItem;
+  dayNumber: number;
+  isAuthenticated?: boolean;
+  setIsSignInOpen?: (open: boolean) => void;
+}
+
+function DailyCard({
+  item,
+  dayNumber,
+  isAuthenticated = false,
+  setIsSignInOpen,
+}: DailyCardProps) {
+  const [visible, setVisible] = useState(false);
+  const hasPreview = Boolean(item.preview);
+
+  // показываем карточку после монтирования
+  useEffect(() => {
+    setVisible(true);
+  }, []);
+
+  const canAccess = isAuthenticated || item.type === "free";
+
+  const handleClick = () => {
+    if (!canAccess && setIsSignInOpen) {
+      setIsSignInOpen(true);
+    }
+    if (canAccess) {
+      window.open(`https://${item.url}`, "_blank");
+    }
+  };
+
+  return (
+    <div className={`daily-card ${visible ? "visible" : ""}`}>
+      <div className="daily-img-wrapper">
+        <img
+          src={item.image || PLACEHOLDER}
+          alt=""
+          draggable={false}
+          className="daily-img"
+        />
+      </div>
+
+      <div className="daily-title-row">
+        <span className="daily-day">{`Day ${dayNumber}`}</span>
+
+        <div className="daily-actions">
+          {/* Preview */}
+          <div className={`iconButton ${!hasPreview ? "disabled" : ""}`}>
+            <a
+              href={item.preview}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ pointerEvents: hasPreview ? "auto" : "none" }}
+            >
+              <Eye size={18} />
+            </a>
+            <div className="tooltip">
+              {hasPreview ? "View Template" : "Preview not available"}
+            </div>
+          </div>
+
+          {/* Remix / Lock */}
+          <div
+            className={`iconButton ${!canAccess ? "locked" : ""}`}
+            onClick={handleClick}
+          >
+            {canAccess ? <Paperclip size={18} /> : <Lock size={18} />}
+            <div className="tooltip">{canAccess ? "Remix Link" : "Sign in to view"}</div>
+          </div>
+        </div>
       </div>
     </div>
   );

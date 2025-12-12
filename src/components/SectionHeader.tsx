@@ -3,35 +3,44 @@ import { Sun, Moon } from "lucide-react";
 type SectionHeaderProps = {
   title: string;
   count: number;
-  filter: "light" | "dark";
-  onFilterChange: (filter: "light" | "dark") => void;
+  filter?: "light" | "dark";  // опционально
+  onFilterChange?: (filter: "light" | "dark") => void;
   loading: boolean;
+  hideThemeSwitcher?: boolean; // новый пропс для скрытия темы
+  templateLabel?: string;      // можно писать "templates" вместо "layouts"
 };
 
 export default function SectionHeader({
   title,
   count,
-  filter,
+  filter = "light",
   onFilterChange,
-  loading
+  loading,
+  hideThemeSwitcher = false,
+  templateLabel = "layouts"
 }: SectionHeaderProps) {
   return (
     <div className="section-header-sticky">
       <h2 className="title">{title}</h2>
       <div className="subtitleRow">
         <p className="subtitle">
-          {loading ? "Loading..." : `${count} layouts`} in the "{filter === "light" ? "Light" : "Dark"}" theme
+          {loading
+            ? "Loading..."
+            : `${count} ${templateLabel}`}{!hideThemeSwitcher && onFilterChange ? ` in the "${filter === "light" ? "Light" : "Dark"}" theme` : ""}
         </p>
-        <div className="themeSwitcher">
-          <span className="modeLabel">Mode:</span>
-          <button
-            className="themeToggle"
-            onClick={() => onFilterChange(filter === "light" ? "dark" : "light")}
-            style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
-          >
-            {filter === "light" ? <Moon size={18} /> : <Sun size={18} />}
-          </button>
-        </div>
+
+        {!hideThemeSwitcher && onFilterChange && (
+          <div className="themeSwitcher">
+            <span className="modeLabel">Mode:</span>
+            <button
+              className="themeToggle"
+              onClick={() => onFilterChange(filter === "light" ? "dark" : "light")}
+              style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+            >
+              {filter === "light" ? <Moon size={18} /> : <Sun size={18} />}
+            </button>
+          </div>
+        )}
       </div>
       <div className="title-divider" />
     </div>

@@ -1,7 +1,7 @@
 // src/pages/HomePage.tsx
 import { useEffect, useRef, useLayoutEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-
+import ComponentRunner from "../components/ComponentRunner";
 import RandomSectionCards from "../components/RandomSectionCards";
 import RandomComponentCards from "../components/RandomComponentCards";
 import "./framerkit.css";
@@ -9,6 +9,7 @@ import "./gettingstarted.css";
 import styles from "./HomePage.module.css";
 import SimpleAvatarGroup from "../components/SimpleAvatarGroup";
 import { motion } from "framer-motion";
+import { CircleCheck } from "lucide-react";
 import {
   RocketLaunch,
   ClipboardText,
@@ -242,6 +243,7 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
     })()}
   </div>
 </section>
+<ComponentRunner />
 
 
 
@@ -263,7 +265,7 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
           <div className="custom-section-icon"><RocketLaunch weight="duotone" size={28} /></div>
           <div className="fk-gs-card-content">
             <h3>Choose a Section</h3>
-            <p>Browse sections, components, or templates on the FramerKit website. Each block is fully responsive and ready to use.</p>
+            <p>Browse sections, components, or templates on the FramerKit website. Each block is fully responsive and ready to use</p>
           </div>
         </div>
 
@@ -271,7 +273,7 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
           <div className="custom-section-icon"><ClipboardText weight="duotone"/></div>
           <div className="fk-gs-card-content">
             <h3>Copy or Use Plugin</h3>
-            <p>Click “Copy to Framer” on the site — or open the FramerKit plugin and drop blocks directly onto your canvas.</p>
+            <p>Click “Copy” on the site — or open the FramerKit plugin and drop blocks directly onto your canvas</p>
           </div>
         </div>
 
@@ -279,7 +281,7 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
           <div className="custom-section-icon"><Sliders weight="duotone" /></div>
           <div className="fk-gs-card-content">
             <h3>Customize Everything</h3>
-            <p>Change colors, fonts, spacing, animations, layout options — every block adapts instantly to your design system.</p>
+            <p>Change colors, fonts, spacing, animations, layout options — every block adapts instantly to your design system</p>
           </div>
         </div>
 
@@ -287,7 +289,7 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
           <div className="custom-section-icon"><CloudArrowUp weight="duotone" /></div>
           <div className="fk-gs-card-content">
             <h3>Publish Your Page</h3>
-            <p>Combine as many blocks as you need to build full pages, then publish. All components are optimized for speed and mobile devices.</p>
+            <p>Combine as many blocks as you need to build full pages, then publish. All components are optimized for speed and mobile devices</p>
           </div>
         </div>
       </div>
@@ -353,74 +355,65 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
 {/* GET FRAMERKIT – PRICING SECTION */}
 <section id="get-framerkit" className="pricing-section">
   <div className="pricing-container">
-
     <h2 className="fk-gs-title">Get FramerKit</h2>
     <p className="fk-gs-text">
-      One-time purchase. Lifetime access. Free updates forever.
+      Choose your plan and unlock the power of FramerKit
     </p>
 
     <div className="pricing-grid">
-
-      {/* --- PLAN FREE --- */}
+      {/* --- PLAN STARTER --- */}
       <div className="pricing-card">
         <h3 className="plan-title">Starter</h3>
-        <p className="plan-desc">Perfect to explore components</p>
-
+        <p className="plan-desc">Access library for 12 months</p>
         <div className="price">
-          <span className="price-amount">$0</span>
+          <span className="price-amount">$29</span>
+          <span className="price-note">year</span>
         </div>
-
-        <ul className="features">
-          <li>Basic UI Components</li>
-          <li>Limited Layout Sections</li>
-          <li>Email Support</li>
-        </ul>
-
-        <button className="pricing-btn secondary">Get Started</button>
+        <div className="features">
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Full Access</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Framer Plugin</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Updates for 12 Months</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Commercial Use</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Email Support</div>
+        </div>
+        <button className="pricing-btn secondary">Subscribe</button>
       </div>
 
       {/* --- PLAN PRO --- */}
       <div className="pricing-card featured">
         <div className="badge">Most Popular</div>
-
         <h3 className="plan-title">Pro</h3>
-        <p className="plan-desc">Full access to everything</p>
-
+        <p className="plan-desc">Lifetime access to library</p>
         <div className="price">
-          <span className="price-amount">$49</span>
+          <span className="price-amount">$79</span>
           <span className="price-note">one-time</span>
         </div>
-
-        <ul className="features">
-          <li>All Layout Sections</li>
-          <li>All UI Components</li>
-          <li>Commercial License</li>
-          <li>Lifetime Updates</li>
-          <li>Priority Support</li>
-        </ul>
-
+        <div className="features">
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Full Access</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Framer Plugin</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Lifetime Updates</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Commercial Use</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Priority Support</div>
+        </div>
         <button className="pricing-btn">Get Pro</button>
       </div>
 
-      {/* --- PLAN TEAM --- */}
+      {/* --- PLAN ULTIMATE --- */}
       <div className="pricing-card">
-        <h3 className="plan-title">Team</h3>
-        <p className="plan-desc">For agencies & companies</p>
-
+        <h3 className="plan-title">Ultimate</h3>
+        <p className="plan-desc">Lifetime access + all future products</p>
         <div className="price">
-          <span className="price-amount">$129</span>
+          <span className="price-amount">$199</span>
           <span className="price-note">one-time</span>
         </div>
-
-        <ul className="features">
-          <li>Unlimited Team Seats</li>
-          <li>Full Component Library</li>
-          <li>Commercial License</li>
-          <li>Priority Support</li>
-          <li>Custom Requests</li>
-        </ul>
-
-        <button className="pricing-btn secondary">Contact Us</button>
+        <div className="features">
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Full Access</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Framer Plugin</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Lifetime Updates</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Commercial Use</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Access to Future Products</div>
+        </div>
+        <button className="pricing-btn secondary">Get Ultimate</button>
       </div>
     </div>
   </div>

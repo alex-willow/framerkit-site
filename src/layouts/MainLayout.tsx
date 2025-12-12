@@ -1,3 +1,5 @@
+import { useRef, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
@@ -7,7 +9,7 @@ type MainLayoutProps = {
   activeSection: string;
   onSectionChange: (section: string) => void;
   theme?: "light" | "dark";
-  onThemeToggle?: () => void; 
+  onThemeToggle?: () => void;
   isAuthenticated: boolean;
   onLogout: () => void;
   onSignInOpen: () => void;
@@ -30,9 +32,21 @@ export default function MainLayout({
   onMenuToggle,
   galleryScrollRef,
 }: MainLayoutProps) {
+  const location = useLocation();
+  const internalRef = useRef<HTMLDivElement>(null);
+  const contentRef = galleryScrollRef || internalRef;
+
+  // Скролл наверх при смене маршрута
+  useEffect(() => {
+    if (contentRef.current) {
+      contentRef.current.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    } else {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    }
+  }, [location.pathname, contentRef]);
+
   return (
     <div className="container" data-theme={theme}>
-      {/* Header фиксирован */}
       <Header
         isAuthenticated={isAuthenticated}
         onLogout={onLogout}
@@ -41,26 +55,21 @@ export default function MainLayout({
         onMenuToggle={onMenuToggle}
       />
 
-      {/* Основная часть страницы: Sidebar + Контент */}
       <div className="app-layout">
-        {/* Sidebar */}
         <Sidebar
           activeSection={activeSection}
           onSectionChange={onSectionChange}
           isMobile={isMobile}
           isMenuOpen={isMenuOpen}
           onMenuClose={onMenuToggle}
+          isAuthenticated={isAuthenticated} 
+          onLogout={onLogout}              
+          onSignInOpen={onSignInOpen}       
         />
 
-        {/* Контент */}
-        <main className="content" ref={galleryScrollRef}>
+        <main className="content" ref={contentRef}>
           {children}
-
-          {/* Футер в конце контента */}
-          <Footer 
-            activeSection={activeSection} 
-            onSectionChange={onSectionChange} 
-          />
+          <Footer activeSection={activeSection} onSectionChange={onSectionChange} />
         </main>
       </div>
     </div>

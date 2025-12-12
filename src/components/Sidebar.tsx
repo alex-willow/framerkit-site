@@ -71,7 +71,7 @@ export default function Sidebar({
     { id: "testimonialcard", label: "Testimonial Card" },
   ];
 
-  // === При открытии меню определяем, какие секции открыть
+  // === При открытии меню определяем, какие секции раскрыты
   useEffect(() => {
     if (!isMenuOpen) return;
 
@@ -84,6 +84,10 @@ export default function Sidebar({
       setLayoutOpen(true);
       setComponentsOpen(false);
       setTemplatesOpen(false);
+    } else if (path.startsWith("/templates")) {
+      setTemplatesOpen(true);
+      setLayoutOpen(false);
+      setComponentsOpen(false);
     } else {
       setLayoutOpen(false);
       setComponentsOpen(false);
@@ -94,7 +98,7 @@ export default function Sidebar({
   // === Обработчики клика
   const handleHomeSectionClick = (id: string) => {
     onSectionChange(id);
-    onMenuClose();
+    if (isMobile) onMenuClose();
     if (location.pathname !== "/") {
       navigate("/", { state: { scrollTo: id } });
       return;
@@ -104,7 +108,7 @@ export default function Sidebar({
 
   const handleOtherSectionClick = (id: string, basePath: string) => {
     onSectionChange(id);
-    onMenuClose();
+    if (isMobile) onMenuClose();
     navigate(`/${basePath}/${id}`);
   };
 
@@ -128,7 +132,7 @@ export default function Sidebar({
       </button>
     ));
 
-  // === Collapsible секция с Lucide иконкой
+  // === Collapsible секция
   const CollapsibleSection = ({
     title,
     open,
@@ -155,82 +159,62 @@ export default function Sidebar({
     </div>
   );
 
+  // === Контент Templates
+  const renderTemplatesSection = () => (
+    <CollapsibleSection
+      title="Templates"
+      open={templatesOpen}
+      setOpen={setTemplatesOpen}
+    >
+      <button
+        className={`sidebar-item ${location.pathname === "/templates/framerkitdaily" ? "active" : ""}`}
+        onClick={() => {
+          onSectionChange("framerkitdaily");
+          if (isMobile) onMenuClose();
+          navigate("/templates/framerkitdaily");
+        }}
+      >
+        Framer Kit Daily
+      </button>
+    </CollapsibleSection>
+  );
+
   // === Контент сайдбара
-const sidebarContent = (
-  <div className="sidebar-inner" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-    
-    <div>
-      <div className="sidebar-header">Getting Started</div>
-      {homeSections.map(({ id, label }) => (
-        <button
-          key={id}
-          className={`sidebar-item ${isActive(id) ? "active" : ""}`}
-          onClick={() => handleHomeSectionClick(id)}
-        >
-          {label}
-        </button>
-      ))}
-
-      <CollapsibleSection
-        title="Layout Sections"
-        open={layoutOpen}
-        setOpen={setLayoutOpen}
-      >
-        {renderSectionItems(layoutSections, "layout")}
-      </CollapsibleSection>
-
-      <CollapsibleSection
-        title="Components"
-        open={componentsOpen}
-        setOpen={setComponentsOpen}
-      >
-        {renderSectionItems(componentSections, "components")}
-      </CollapsibleSection>
-
-      <CollapsibleSection
-        title="Templates"
-        open={templatesOpen}
-        setOpen={setTemplatesOpen}
-      >
-        <button
-          className="sidebar-item"
-          onClick={() => {
-            navigate("/templates/framerkitdaily");
-            onMenuClose();
-          }}
-        >
-          Framer Kit Daily
-        </button>
-      </CollapsibleSection>
-    </div>
-
-    {/* Блок кнопок прижат к низу */}
-    {isMobile && (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', padding: '0.5rem', marginTop: 'auto' }}>
-        {isAuthenticated ? (
-          <button className="logoutButton" onClick={onLogout}>
-            Log out
+  const sidebarContent = (
+    <div className="sidebar-inner">
+      {/* Скролл-контент */}
+      <div className="sidebar-scroll">
+        <div className="sidebar-header">Getting Started</div>
+        {homeSections.map(({ id, label }) => (
+          <button
+            key={id}
+            className={`sidebar-item ${isActive(id) ? "active" : ""}`}
+            onClick={() => handleHomeSectionClick(id)}
+          >
+            {label}
           </button>
-        ) : (
-          <>
-            <button className="loginButton" onClick={onSignInOpen}>
-              Log in
-            </button>
-            <button
-              className="authButton"
-              onClick={() =>
-                window.open("https://gum.co/framerkit", "_blank")
-              }
-            >
-              Get Full Access
-            </button>
-          </>
-        )}
-      </div>
-    )}
-  </div>
-);
+        ))}
 
+        <CollapsibleSection title="Layout Sections" open={layoutOpen} setOpen={setLayoutOpen}>
+          {renderSectionItems(layoutSections, "layout")}
+        </CollapsibleSection>
+
+        <CollapsibleSection title="Components" open={componentsOpen} setOpen={setComponentsOpen}>
+          {renderSectionItems(componentSections, "components")}
+        </CollapsibleSection>
+
+        {renderTemplatesSection()}
+      </div>
+
+      {/* Баннер только для ПК, прижат к низу */}
+      {!isMobile && (
+        <div className="sidebar-banner" onClick={() => window.open("https://gum.co/framerkit", "_blank")}>
+          <span>Get Full Access</span>
+          <small>Premium templates & features</small>
+        </div>
+      )}
+    </div>
+  );
 
   // === Мобильная версия
   if (isMobile) {
