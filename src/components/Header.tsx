@@ -3,6 +3,9 @@ import { Menu } from "lucide-react";
 type HeaderProps = {
   isMobile: boolean;
   onMenuToggle: () => void;
+  isAuthenticated: boolean;
+  onLogout: () => void;
+  onSignInOpen: () => void;
 };
 
 export default function Header({ isMobile, onMenuToggle }: HeaderProps) {
