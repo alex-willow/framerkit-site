@@ -475,7 +475,6 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
 
 {/* FAQ + CONTACT */}
 <section id="faq-contact" className="faq-section">
-
   <div className="faq-container">
 
     {/* TITLE */}
@@ -488,62 +487,49 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
       <div className="faq-item">
         <h3 className="faq-question">Can I use components commercially?</h3>
         <p className="faq-answer">
-          Yes — all paid plans include full commercial licensing with no limitations.
+          Yes — all paid plans include full commercial licensing with no limitations
         </p>
       </div>
 
       <div className="faq-item">
         <h3 className="faq-question">Do I get lifetime updates?</h3>
         <p className="faq-answer">
-          Pro & Team plans include free lifetime updates as the library grows.
+        Yes — all plans include lifetime updates as the library grows
         </p>
       </div>
 
       <div className="faq-item">
-        <h3 className="faq-question">Do you add new components?</h3>
+        <h3 className="faq-question">Do you add new components regularly?</h3>
         <p className="faq-answer">
-          Yes! New layout blocks, UI components and animations are added monthly.
-        </p>
-      </div>
-
-      <div className="faq-item">
-        <h3 className="faq-question">Does it work with any project?</h3>
-        <p className="faq-answer">
-          FramerKit components adapt to any style — just change fonts, colors, spacing.
+        Yes! New layouts, UI components, and animations are announced weekly on X
         </p>
       </div>
 
       <div className="faq-item">
         <h3 className="faq-question">Does it work with any project?</h3>
         <p className="faq-answer">
-          FramerKit components adapt to any style — just change fonts, colors, spacing.
+          FramerKit components adapt to any style — just change fonts, colors, and spacing
         </p>
       </div>
 
       <div className="faq-item">
-        <h3 className="faq-question">Does it work with any project?</h3>
+        <h3 className="faq-question">Can I try before buying?</h3>
         <p className="faq-answer">
-          FramerKit components adapt to any style — just change fonts, colors, spacing.
+        Yes — in the demo version, 1 section from each category is free to explore
         </p>
       </div>
 
       <div className="faq-item">
-        <h3 className="faq-question">Does it work with any project?</h3>
+        <h3 className="faq-question">Do you support team collaboration?</h3>
         <p className="faq-answer">
-          FramerKit components adapt to any style — just change fonts, colors, spacing.
+          Yes — Team plans allow multiple users with shared libraries and permissions
         </p>
       </div>
 
-      <div className="faq-item">
-        <h3 className="faq-question">Does it work with any project?</h3>
-        <p className="faq-answer">
-          FramerKit components adapt to any style — just change fonts, colors, spacing.
-        </p>
-      </div>
     </div>
   </div>
-
 </section>
+
 
 </div>
   );
