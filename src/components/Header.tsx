@@ -1,63 +1,31 @@
-import { LogOut, Menu } from "lucide-react";
+import { Menu } from "lucide-react";
 
 type HeaderProps = {
-  isAuthenticated: boolean;
-  onLogout: () => void;
-  onSignInOpen: () => void;
   isMobile: boolean;
   onMenuToggle: () => void;
 };
 
-export default function Header({
-  isAuthenticated,
-  onLogout,
-  onSignInOpen,
-  isMobile,
-  onMenuToggle
-}: HeaderProps) {
+export default function Header({ isMobile, onMenuToggle }: HeaderProps) {
+  if (!isMobile) return null; // Отображаем только на мобильных
+
   return (
     <header className="header">
       <div
         className="headerLeft"
         onClick={() => (window.location.href = "/")}
-        style={{ cursor: "pointer" }}
+        style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: "8px" }}
       >
-        <img src="/Logo.png" alt="FramerKit" className="logo" />
-        <h1>FramerKit</h1>
+        <img src="/Logo.png" alt="FramerKit" className="logo" style={{ height: "32px" }} />
+        <h1 style={{ fontSize: "20px", margin: 0 }}>FramerKit</h1>
       </div>
 
-      <div className="headerActions">
-        {!isMobile && (
-          <>
-            {isAuthenticated ? (
-              <button className="logoutButton" onClick={onLogout}>
-                <LogOut size={16} />
-                Log out
-              </button>
-            ) : (
-              <>
-                <button className="loginButton" onClick={onSignInOpen}>
-                  Log in
-                </button>
-                <button
-                  className="authButton"
-                  onClick={() =>
-                    window.open("https://buy.polar.sh/polar_cl_jUF1ses8UossGQ9kTHh9Fb6PRHJA4uwchcdHJ38a4tp", "_blank")
-                  }
-                >
-                  Get Full Access
-                </button>
-              </>
-            )}
-          </>
-        )}
-
-        {isMobile && (
-          <button className="hamburgerButton" onClick={onMenuToggle}>
-            <Menu size={24} />
-          </button>
-        )}
-      </div>
+      <button
+        className="hamburgerButton"
+        onClick={onMenuToggle}
+        style={{ background: "none", border: "none", cursor: "pointer" }}
+      >
+        <Menu size={24} />
+      </button>
     </header>
   );
 }

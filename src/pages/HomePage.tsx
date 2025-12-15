@@ -10,6 +10,7 @@ import styles from "./HomePage.module.css";
 import SimpleAvatarGroup from "../components/SimpleAvatarGroup";
 import { motion } from "framer-motion";
 import { CircleCheck } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import {
   RocketLaunch,
   ClipboardText,
@@ -34,8 +35,36 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
     "faq-contact",
   ];
 
+  
+
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
 
+  useEffect(() => {
+    if (!ready) return;
+  
+    // Если pathname === "/" и нет явно scrollTo из меню — всегда overview
+    const target =
+      location.pathname === "/" && !location.state?.scrollTo
+        ? "overview"
+        : location.state?.scrollTo;
+  
+    if (!target) return;
+  
+    let attempts = 0;
+    const tryScroll = () => {
+      attempts++;
+      const el = document.getElementById(target);
+      if (el) {
+        el.scrollIntoView({ behavior: "auto", block: "start" });
+        const top = el.getBoundingClientRect().top;
+        if (top > -2 && top < 2) return; // успешно прокрутили
+      }
+      if (attempts < 10) setTimeout(tryScroll, 35);
+    };
+  
+    setTimeout(tryScroll, 0);
+  }, [ready, location.key]);
+  
   // === собираем рефы секций после рендера ===
   useLayoutEffect(() => {
     sections.forEach((id) => {
@@ -72,26 +101,16 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
     return () => observer.disconnect();
   }, []);
 
-  // === Скролл к целевой секции после полной отрисовки ===
+  const navigate = useNavigate();
+
   useEffect(() => {
-    if (!ready) return;
-    const target = location.state?.scrollTo;
-    if (!target) return;
+    if (location.pathname === "/" && location.state?.scrollTo) {
+      // очищаем scrollTo, чтобы при обновлении оставалось начало
+      navigate("/", { replace: true, state: {} });
+    }
+  }, [location.pathname]);
 
-    let attempts = 0;
-    const tryScroll = () => {
-      attempts++;
-      const el = document.getElementById(target);
-      if (el) {
-        el.scrollIntoView({ behavior: "auto", block: "start" });
-        const top = el.getBoundingClientRect().top;
-        if (top > -2 && top < 2) return; // успешно прокрутили
-      }
-      if (attempts < 10) setTimeout(tryScroll, 35);
-    };
-
-    setTimeout(tryScroll, 0);
-  }, [ready, location.key]);
+  
 
   // === Отслеживание активной секции ===
   useEffect(() => {
@@ -119,7 +138,9 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
 
   return (
     <div style={{ opacity: ready ? 1 : 0, transition: "opacity 0.3s ease" }}>
-  {/* OVERVIEW — с полосами света */}
+
+
+ {/* OVERVIEW — с полосами света */}
 <section id="overview" className={styles.heroSection}>
   <div className={styles.lightTop}></div>
   <div className={styles.lightMid}></div>
@@ -194,33 +215,41 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
             A complete library of ready-to-use sections, components, styles, and templates — fully optimized for Framer
           </motion.p>
 
-          {/* 5. Кнопки */}
-            <motion.div
-              className={styles.buttons}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{
-                duration: 0.6,
-                ease: "easeOut",
-                delay: buttonsDelay,
-              }}
-            >
-              <a
-                href="https://buy.polar.sh/polar_cl_jUF1ses8UossGQ9kTHh9Fb6PRHJA4uwchcdHJ38a4tp"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <button className="authButton">Get Full Version</button>
-              </a>
 
-              <a
-                href="https://www.framer.com/marketplace/plugins/framerkit"
-                target="_blank"
-                rel="noopener noreferrer"
+            {/* 5. Кнопки */}
+              <motion.div
+                className={styles.buttons}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{
+                  duration: 0.6,
+                  ease: "easeOut",
+                  delay: buttonsDelay,
+                }}
               >
-                <button className="logoutButton">Try Free on Framer</button>
-              </a>
-            </motion.div>
+                {/* Скролл к секции прайса */}
+                <button
+                  className="authButton"
+                  onClick={() => {
+                    const el = document.getElementById("get-framerkit");
+                    if (el) {
+                      el.scrollIntoView({ behavior: "smooth" });
+                    }
+                  }}
+                >
+                  Get Full Version
+                </button>
+
+                {/* Внешняя ссылка остаётся */}
+                <a
+                  href="https://www.framer.com/marketplace/plugins/framerkit"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <button className="logoutButton">Try Free on Framer</button>
+                </a>
+              </motion.div>
+
 
 
           {/* 6. Аватарки и статистика */}
@@ -246,11 +275,9 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
 <ComponentRunner />
 
 
+<section id="getting-started">
+  <div className="fk-gs-wrapper"> {/* ← новый контейнер */}
 
-     {/* GETTING STARTED */}
-     <section id="getting-started">
-     <div className="fk-gs-wrapper"> {/* ← новый контейнер */}
-    
     {/* Контейнер карточек */}
     <div className="fk-gs-container">
       <h2 className="fk-gs-title">Getting Started</h2>
@@ -261,6 +288,7 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
       </p>
 
       <div className="fk-gs-grid">
+        {/* карточки */}
         <div className="fk-gs-card">
           <div className="custom-section-icon"><RocketLaunch weight="duotone" size={28} /></div>
           <div className="fk-gs-card-content">
@@ -268,7 +296,6 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
             <p>Browse sections, components, or templates on the FramerKit website. Each block is fully responsive and ready to use</p>
           </div>
         </div>
-
         <div className="fk-gs-card">
           <div className="custom-section-icon"><ClipboardText weight="duotone"/></div>
           <div className="fk-gs-card-content">
@@ -276,7 +303,6 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
             <p>Click “Copy” on the site — or open the FramerKit plugin and drop blocks directly onto your canvas</p>
           </div>
         </div>
-
         <div className="fk-gs-card">
           <div className="custom-section-icon"><Sliders weight="duotone" /></div>
           <div className="fk-gs-card-content">
@@ -284,7 +310,6 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
             <p>Change colors, fonts, spacing, animations, layout options — every block adapts instantly to your design system</p>
           </div>
         </div>
-
         <div className="fk-gs-card">
           <div className="custom-section-icon"><CloudArrowUp weight="duotone" /></div>
           <div className="fk-gs-card-content">
@@ -295,14 +320,21 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
       </div>
     </div>
 
-    {/* Видео блок */}
+    {/* Видео блок с YouTube плейлистом */}
     <div className="fk-gs-video-block">
       <div className="fk-gs-video-wrapper">
-        <div className="fk-gs-video-placeholder"><span>Video Coming Soon</span></div>
+      <iframe 
+        className="fk-gs-video-iframe"
+        src="https://www.youtube.com/embed/videoseries?list=PLMWSF_elzJIMIJsZaIK6Y_NztCiYd-Sx4&index=1&autoplay=1&mute=1&rel=0&modestbranding=1"
+        title="YouTube playlist"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      ></iframe>
+
       </div>
     </div>
 
-  </div>
+  </div> {/* закрыли fk-gs-wrapper */}
 </section>
 
 
@@ -361,60 +393,81 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
     </p>
 
     <div className="pricing-grid">
-      {/* --- PLAN STARTER --- */}
-      <div className="pricing-card">
-        <h3 className="plan-title">Starter</h3>
-        <p className="plan-desc">Access library for 12 months</p>
-        <div className="price">
-          <span className="price-amount">$29</span>
-          <span className="price-note">year</span>
-        </div>
-        <div className="features">
-          <div className="feature-item"><CircleCheck className="feature-icon" /> Full Access</div>
-          <div className="feature-item"><CircleCheck className="feature-icon" /> Framer Plugin</div>
-          <div className="feature-item"><CircleCheck className="feature-icon" /> Updates for 12 Months</div>
-          <div className="feature-item"><CircleCheck className="feature-icon" /> Commercial Use</div>
-          <div className="feature-item"><CircleCheck className="feature-icon" /> Email Support</div>
-        </div>
-        <button className="pricing-btn secondary">Subscribe</button>
-      </div>
+   {/* --- PLAN STARTER --- */}
+<div className="pricing-card">
+  <h3 className="plan-title">Starter</h3>
+  <p className="plan-desc">Lifetime access</p>
+  <div className="price">
+    <span className="price-amount">$59</span>
+    <span className="price-note">one-time</span>
+  </div>
+  <div className="features">
+    <div className="feature-item"><CircleCheck className="feature-icon" /> Single user license</div>
+    <div className="feature-item"><CircleCheck className="feature-icon" /> Full Components Library</div>
+    <div className="feature-item"><CircleCheck className="feature-icon" /> Lifetime Updates</div>
+    <div className="feature-item"><CircleCheck className="feature-icon" /> Commercial Use</div>
+  </div>
+  <a
+    href="https://buy.polar.sh/polar_cl_LJnSRqf2juaDuIvTQwDGGrBDgWkm6mG4ka8t60bnY5K"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="pricing-btn secondary"
+  >
+    Get Starter
+  </a>
+</div>
 
-      {/* --- PLAN PRO --- */}
-      <div className="pricing-card featured">
-        <div className="badge">Most Popular</div>
-        <h3 className="plan-title">Pro</h3>
-        <p className="plan-desc">Lifetime access to library</p>
-        <div className="price">
-          <span className="price-amount">$79</span>
-          <span className="price-note">one-time</span>
-        </div>
-        <div className="features">
-          <div className="feature-item"><CircleCheck className="feature-icon" /> Full Access</div>
-          <div className="feature-item"><CircleCheck className="feature-icon" /> Framer Plugin</div>
-          <div className="feature-item"><CircleCheck className="feature-icon" /> Lifetime Updates</div>
-          <div className="feature-item"><CircleCheck className="feature-icon" /> Commercial Use</div>
-          <div className="feature-item"><CircleCheck className="feature-icon" /> Priority Support</div>
-        </div>
-        <button className="pricing-btn">Get Pro</button>
-      </div>
+{/* --- PLAN PRO --- */}
+<div className="pricing-card featured">
+  <div className="badge">Most Popular</div>
+  <h3 className="plan-title">Pro</h3>
+  <p className="plan-desc">Lifetime access</p>
+  <div className="price">
+    <span className="price-amount">$79</span>
+    <span className="price-note">one-time</span>
+  </div>
+  <div className="features">
+    <div className="feature-item"><CircleCheck className="feature-icon" /> Single user license</div>
+    <div className="feature-item"><CircleCheck className="feature-icon" /> Full Components Library</div>
+    <div className="feature-item"><CircleCheck className="feature-icon" /> Lifetime Updates</div>
+    <div className="feature-item"><CircleCheck className="feature-icon" /> Commercial Use</div>
+    <div className="feature-item"><CircleCheck className="feature-icon" /> Plugin for Framer</div>
+  </div>
+  <a
+    href="https://buy.polar.sh/polar_cl_lbbqLYLaayU8OwD7xLYNCiFvxQcw0LpKSm6kl4MLuVh"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="pricing-btn"
+  >
+    Get Pro
+  </a>
+</div>
 
-      {/* --- PLAN ULTIMATE --- */}
-      <div className="pricing-card">
-        <h3 className="plan-title">Ultimate</h3>
-        <p className="plan-desc">Lifetime access + all future products</p>
-        <div className="price">
-          <span className="price-amount">$199</span>
-          <span className="price-note">one-time</span>
-        </div>
-        <div className="features">
-          <div className="feature-item"><CircleCheck className="feature-icon" /> Full Access</div>
-          <div className="feature-item"><CircleCheck className="feature-icon" /> Framer Plugin</div>
-          <div className="feature-item"><CircleCheck className="feature-icon" /> Lifetime Updates</div>
-          <div className="feature-item"><CircleCheck className="feature-icon" /> Commercial Use</div>
-          <div className="feature-item"><CircleCheck className="feature-icon" /> Access to Future Products</div>
-        </div>
-        <button className="pricing-btn secondary">Get Ultimate</button>
-      </div>
+{/* --- PLAN ULTIMATE --- */}
+<div className="pricing-card">
+  <h3 className="plan-title">Ultimate</h3>
+  <p className="plan-desc">Lifetime access</p>
+  <div className="price">
+    <span className="price-amount">$199</span>
+    <span className="price-note">one-time</span>
+  </div>
+  <div className="features">
+    <div className="feature-item"><CircleCheck className="feature-icon" /> 5 user license</div>
+    <div className="feature-item"><CircleCheck className="feature-icon" /> Full Components Library</div>
+    <div className="feature-item"><CircleCheck className="feature-icon" /> Lifetime Updates</div>
+    <div className="feature-item"><CircleCheck className="feature-icon" /> Commercial Use</div>
+    <div className="feature-item"><CircleCheck className="feature-icon" /> Plugin for Framer</div>
+  </div>
+  <a
+    href="https://buy.polar.sh/polar_cl_UDp7hLEWPWpbHEEKOFxqME3ytaysBd6cXUONc3fQ8NM"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="pricing-btn secondary"
+  >
+    Get Ultimate
+  </a>
+</div>
+
     </div>
   </div>
 </section>

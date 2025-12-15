@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, LogOut } from "lucide-react";
 
 type SidebarProps = {
   activeSection: string;
@@ -18,17 +18,18 @@ export default function Sidebar({
   onSectionChange,
   isMobile,
   isMenuOpen,
-  onMenuClose
+  onMenuClose,
+  isAuthenticated,
+  onLogout,
+  onSignInOpen
 }: SidebarProps) {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // === Состояние раскрытия секций
   const [layoutOpen, setLayoutOpen] = useState(false);
   const [componentsOpen, setComponentsOpen] = useState(false);
   const [templatesOpen, setTemplatesOpen] = useState(false);
 
-  // === Определяем секции
   const homeSections = [
     { id: "overview", label: "Overview" },
     { id: "getting-started", label: "Getting Started" },
@@ -68,10 +69,9 @@ export default function Sidebar({
     { id: "testimonialcard", label: "Testimonial Card" },
   ];
 
-  // === При открытии меню определяем, какие секции раскрыты
+  // === Определяем какие collapsible открыты
   useEffect(() => {
     if (!isMenuOpen) return;
-
     const path = location.pathname;
     if (path.startsWith("/components")) {
       setComponentsOpen(true);
@@ -92,7 +92,6 @@ export default function Sidebar({
     }
   }, [isMenuOpen, location.pathname]);
 
-  // === Обработчики клика
   const handleHomeSectionClick = (id: string) => {
     onSectionChange(id);
     if (isMobile) onMenuClose();
@@ -100,7 +99,7 @@ export default function Sidebar({
       navigate("/", { state: { scrollTo: id } });
       return;
     }
-    document.getElementById(id)?.scrollIntoView({ behavior: "auto" });
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
   const handleOtherSectionClick = (id: string, basePath: string) => {
@@ -115,10 +114,7 @@ export default function Sidebar({
     return location.pathname === `/${id}`;
   };
 
-  const renderSectionItems = (
-    list: { id: string; label: string }[],
-    basePath: string
-  ) =>
+  const renderSectionItems = (list: { id: string; label: string }[], basePath: string) =>
     list.map(({ id, label }) => (
       <button
         key={id}
@@ -129,7 +125,6 @@ export default function Sidebar({
       </button>
     ));
 
-  // === Collapsible секция
   const CollapsibleSection = ({
     title,
     open,
@@ -150,19 +145,12 @@ export default function Sidebar({
         <span>{title}</span>
         {open ? <ChevronDown size={16} /> : <ChevronUp size={16} />}
       </div>
-      <div className={`collapsible-content ${open ? "open" : ""}`}>
-        {children}
-      </div>
+      <div className={`collapsible-content ${open ? "open" : ""}`}>{children}</div>
     </div>
   );
 
-  // === Контент Templates
   const renderTemplatesSection = () => (
-    <CollapsibleSection
-      title="Templates"
-      open={templatesOpen}
-      setOpen={setTemplatesOpen}
-    >
+    <CollapsibleSection title="Templates" open={templatesOpen} setOpen={setTemplatesOpen}>
       <button
         className={`sidebar-item ${location.pathname === "/templates/framerkitdaily" ? "active" : ""}`}
         onClick={() => {
@@ -176,11 +164,27 @@ export default function Sidebar({
     </CollapsibleSection>
   );
 
-  // === Контент сайдбара
+  const scrollToPricing = () => {
+    if (location.pathname === "/") {
+      const el = document.getElementById("get-framerkit");
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    } else {
+      navigate("/", { state: { scrollTo: "get-framerkit" } });
+    }
+  };
+
   const sidebarContent = (
-    <div className="sidebar-inner">
-      {/* Скролл-контент */}
-      <div className="sidebar-scroll">
+    <div className="sidebar-inner" style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+      {/* Logo on desktop only */}
+      {!isMobile && (
+        <div className="sidebar-logo-container" onClick={() => (window.location.href = "/")}>
+          <img src="/Logo.png" alt="FramerKit" className="sidebar-logo-icon" />
+          <h1 className="sidebar-logo-text">FramerKit</h1>
+        </div>
+      )}
+
+      {/* Scrollable section content */}
+      <div className="sidebar-scroll" style={{ flexGrow: 1, overflowY: "auto" }}>
         <div className="sidebar-header">Getting Started</div>
         {homeSections.map(({ id, label }) => (
           <button
@@ -203,24 +207,31 @@ export default function Sidebar({
         {renderTemplatesSection()}
       </div>
 
-      {/* Баннер только для ПК, прижат к низу */}
-      {!isMobile && (
-        <div className="sidebar-banner" onClick={() => window.open("https://buy.polar.sh/polar_cl_jUF1ses8UossGQ9kTHh9Fb6PRHJA4uwchcdHJ38a4tp", "_blank")}>
-          <span>Get Full Access</span>
-          <small>Premium templates & features</small>
-        </div>
-      )}
+      {/* Buttons at bottom */}
+      <div className="sidebar-bottom">
+        {isAuthenticated ? (
+          <button className="logoutButton" onClick={onLogout}>
+            <LogOut size={16} /> Log out
+          </button>
+        ) : (
+          <>
+            <button className="authButton" onClick={scrollToPricing}>
+              Get Full Access
+            </button>
+            <button className="loginButton" onClick={onSignInOpen}>
+              Log in
+            </button>
+          </>
+        )}
+      </div>
     </div>
   );
 
-  // === Мобильная версия
   if (isMobile) {
     return (
       <>
         {isMenuOpen && <div className="sidebar-overlay" onClick={onMenuClose} />}
-        <nav className={`sidebar-mobile ${isMenuOpen ? "open" : ""}`}>
-          {sidebarContent}
-        </nav>
+        <nav className={`sidebar-mobile ${isMenuOpen ? "open" : ""}`}>{sidebarContent}</nav>
       </>
     );
   }

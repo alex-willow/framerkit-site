@@ -159,7 +159,7 @@ function DailyCard({
               <Eye size={18} />
             </a>
             <div className="tooltip">
-              {hasPreview ? "View Template" : "Preview not available"}
+              {hasPreview ? "Preview" : "Preview not available"}
             </div>
           </div>
 
@@ -169,7 +169,7 @@ function DailyCard({
             onClick={handleClick}
           >
             {canAccess ? <Paperclip size={18} /> : <Lock size={18} />}
-            <div className="tooltip">{canAccess ? "Remix Link" : "Sign in to view"}</div>
+            <div className="tooltip">{canAccess ? "Remix" : "Sign in to view"}</div>
           </div>
         </div>
       </div>
