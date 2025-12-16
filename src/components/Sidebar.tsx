@@ -98,7 +98,7 @@ export default function Sidebar({
       // Уже на главной — скроллим
       const el = document.getElementById(id);
       if (el) {
-        el.scrollIntoView({ behavior: "auto", block: "start" });
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     } else {
       // Переходим на главную + хэш
