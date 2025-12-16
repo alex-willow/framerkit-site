@@ -35,18 +35,53 @@ export default function MainLayout({
   const location = useLocation();
   const internalRef = useRef<HTMLDivElement>(null);
   const contentRef = galleryScrollRef || internalRef;
-  
+
+  // ===============================
+  // GA: Инициализация
+  // ===============================
   useEffect(() => {
-    // ❗ если есть hash — НЕ ТРОГАЕМ СКРОЛЛ
+    // добавляем скрипт GA один раз
+    const scriptExists = document.querySelector(`script[src*="googletagmanager"]`);
+    if (!scriptExists) {
+      const script1 = document.createElement("script");
+      script1.async = true;
+      script1.src = "https://www.googletagmanager.com/gtag/js?id=G-GNZGR575KN";
+      document.head.appendChild(script1);
+
+      const script2 = document.createElement("script");
+      script2.innerHTML = `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-GNZGR575KN', { page_path: window.location.pathname });
+      `;
+      document.head.appendChild(script2);
+    }
+  }, []);
+
+  // ===============================
+  // GA: Отслеживание страниц
+  // ===============================
+  useEffect(() => {
+    if ((window as any).gtag) {
+      (window as any).gtag("config", "G-GNZGR575KN", {
+        page_path: location.pathname + location.hash,
+      });
+    }
+  }, [location.pathname, location.hash]);
+
+  // ===============================
+  // Скролл в начало при смене страницы
+  // ===============================
+  useEffect(() => {
     if (location.hash) return;
-  
+
     if (contentRef.current) {
       contentRef.current.scrollTo({ top: 0, left: 0, behavior: "auto" });
     } else {
       window.scrollTo({ top: 0, left: 0, behavior: "auto" });
     }
   }, [location.pathname, location.hash, contentRef]);
-  
 
   return (
     <div className="container" data-theme={theme}>
@@ -65,9 +100,9 @@ export default function MainLayout({
           isMobile={isMobile}
           isMenuOpen={isMenuOpen}
           onMenuClose={onMenuToggle}
-          isAuthenticated={isAuthenticated} // добавляем
-          onLogout={onLogout}               // добавляем
-          onSignInOpen={onSignInOpen}       // добавляем
+          isAuthenticated={isAuthenticated}
+          onLogout={onLogout}
+          onSignInOpen={onSignInOpen}
         />
 
         <main className="content" ref={contentRef}>

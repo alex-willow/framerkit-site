@@ -7,6 +7,9 @@ import {
   useLocation,
 } from "react-router-dom";
 import { createClient } from "@supabase/supabase-js";
+import ReactGA from "react-ga4";
+import { Analytics } from "@vercel/analytics/react";
+
 import MainLayout from "./layouts/MainLayout";
 
 // Pages
@@ -44,6 +47,11 @@ import AvatarGroupPage from "./pages/Components/Avatargroup";
 import FramerKitDaily from "./pages/Templates/FramerKitDaily";
 import SignInModal from "./SignInModal";
 
+// ================================
+// 🔑 GA4 ID
+// ================================
+const GA_ID = "G-GNZGR575KN";
+
 // Supabase client
 const supabase = createClient(
   "https://ibxakfxqoqiypfhgkpds.supabase.co",
@@ -67,6 +75,23 @@ function AppContent() {
   const location = useLocation();
 
   // ================================
+  // 🔥 GA4 INIT (ONCE)
+  // ================================
+  useEffect(() => {
+    ReactGA.initialize(GA_ID);
+  }, []);
+
+  // ================================
+  // 📄 GA4 PAGEVIEWS (SPA + HASH)
+  // ================================
+  useEffect(() => {
+    ReactGA.send({
+      hitType: "pageview",
+      page: location.pathname + location.search + location.hash,
+    });
+  }, [location.pathname, location.search, location.hash]);
+
+  // ================================
   // MOBILE CHECK
   // ================================
   useEffect(() => {
@@ -77,12 +102,11 @@ function AppContent() {
   }, []);
 
   // ================================
-  // 🔥 SYNC ACTIVE SECTION WITH URL HASH
+  // SYNC ACTIVE SECTION WITH HASH
   // ================================
   useEffect(() => {
     if (location.pathname === "/" && location.hash) {
-      const sectionFromHash = location.hash.replace("#", "");
-      setActiveSection(sectionFromHash);
+      setActiveSection(location.hash.replace("#", ""));
     }
   }, [location.pathname, location.hash]);
 
@@ -100,12 +124,23 @@ function AppContent() {
     localStorage.removeItem("rememberedEmail");
     localStorage.removeItem("rememberedKey");
     setIsAuthenticated(false);
+
+    ReactGA.event({
+      category: "Auth",
+      action: "logout",
+    });
   };
 
   // ================================
   // SECTION CHANGE HANDLER
   // ================================
   const handleSetActiveSection = (section: string) => {
+    ReactGA.event({
+      category: "Navigation",
+      action: "section_click",
+      label: section,
+    });
+
     setActiveSection(section);
     setIsMenuOpen(false);
 
@@ -172,7 +207,13 @@ function AppContent() {
         onSectionChange={handleSetActiveSection}
         isAuthenticated={isAuthenticated}
         onLogout={handleLogout}
-        onSignInOpen={() => setIsSignInOpen(true)}
+        onSignInOpen={() => {
+          ReactGA.event({
+            category: "Auth",
+            action: "open_sign_in",
+          });
+          setIsSignInOpen(true);
+        }}
         isMobile={isMobile}
         isMenuOpen={isMenuOpen}
         onMenuToggle={() => setIsMenuOpen(!isMenuOpen)}
@@ -225,7 +266,13 @@ function AppContent() {
       <SignInModal
         isOpen={isSignInOpen}
         onClose={() => setIsSignInOpen(false)}
-        onLogin={() => setIsAuthenticated(true)}
+        onLogin={() => {
+          ReactGA.event({
+            category: "Auth",
+            action: "login_success",
+          });
+          setIsAuthenticated(true);
+        }}
       />
     </>
   );
@@ -235,6 +282,7 @@ export default function App() {
   return (
     <Router>
       <AppContent />
+      <Analytics />
     </Router>
   );
 }
