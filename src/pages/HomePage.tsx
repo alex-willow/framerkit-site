@@ -1,5 +1,5 @@
 // src/pages/HomePage.tsx
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import ComponentRunner from "../components/ComponentRunner";
 import RandomSectionCards from "../components/RandomSectionCards";
 import RandomComponentCards from "../components/RandomComponentCards";
@@ -33,23 +33,36 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
   const onSectionChangeRef = useRef(onSectionChange);
   onSectionChangeRef.current = onSectionChange;
 
-  // === Прокрутка к хэшу с ожиданием появления секции ===
+  const [isReady, setIsReady] = useState(false);
+
+  // === Прокрутка к хэшу + мгновенное появление ===
   useEffect(() => {
     const hash = window.location.hash.replace('#', '');
-    if (!hash) return;
-  
-    // Даем достаточно времени на рендер всей страницы (включая анимации)
-    const scrollTimeout = setTimeout(() => {
+    if (!hash) {
+      setIsReady(true);
+      return;
+    }
+
+    let hasScrolled = false;
+
+    const tryScroll = (attempts = 0) => {
       const el = document.getElementById(hash);
-      if (el) {
+      if (el && !hasScrolled) {
+        hasScrolled = true;
         if ("scrollRestoration" in window.history) {
           window.history.scrollRestoration = "manual";
         }
         el.scrollIntoView({ behavior: "auto", block: "start" });
+        setIsReady(true);
+      } else if (attempts < 20) {
+        requestAnimationFrame(() => tryScroll(attempts + 1));
+      } else {
+        // Если не нашли — всё равно показываем
+        setIsReady(true);
       }
-    }, 1200); // ← 1.2 секунды — достаточно для всех анимаций
-  
-    return () => clearTimeout(scrollTimeout);
+    };
+
+    tryScroll();
   }, []);
 
   // === Отслеживание активной секции ===
@@ -77,7 +90,8 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
   }, []);
 
   return (
-    <div>
+    <div style={{ opacity: isReady ? 1 : 0, transition: 'opacity 0ms' }}>
+      
       {/* OVERVIEW — с полосами света */}
       <section id="overview" className={styles.heroSection}>
         <div className={styles.lightTop}></div>
