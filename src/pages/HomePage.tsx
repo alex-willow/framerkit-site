@@ -24,7 +24,6 @@ type HomePageProps = {
 export default function HomePage({ onSectionChange }: HomePageProps) {
   const location = useLocation();
 
-
   const sections = [
     "overview",
     "getting-started",
@@ -34,54 +33,68 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
     "faq-contact",
   ];
 
-  // === Стабильная ссылка для onSectionChange ===
   const onSectionChangeRef = useRef(onSectionChange);
   onSectionChangeRef.current = onSectionChange;
 
+  // === Надёжный скролл с MutationObserver ===
   useEffect(() => {
-    const { pathname, state, key } = location;
+    const { pathname, state } = location;
     const explicitScrollTo = state?.scrollTo;
     const fromLogo = state?.fromLogo === true;
-    const isRefreshOrFirstEntry = key === "default";
-  
+
     let target: string | null = null;
-  
-    // При обновлении — ВСЕГДА к overview
-    if (pathname === "/" && isRefreshOrFirstEntry) {
+
+    // При обновлении страницы (state отсутствует) → overview
+    if (pathname === "/" && !state) {
       target = "overview";
     }
-    // При явном запросе (логотип, ссылка)
+    // При явном запросе (scrollTo)
     else if (explicitScrollTo) {
       target = explicitScrollTo;
     }
-    // При клике по логотипу (без scrollTo, но с fromLogo)
+    // При клике по логотипу
     else if (pathname === "/" && fromLogo) {
       target = "overview";
     }
-  
+
     if (!target) return;
-  
-    // Функция прокрутки с повторами
-    const tryScroll = (attempts = 0) => {
+
+    // Уже есть элемент? → скроллим сразу
+    const el = document.getElementById(target);
+    if (el) {
+      if ("scrollRestoration" in window.history) {
+        window.history.scrollRestoration = "manual";
+      }
+      el.scrollIntoView({ behavior: "auto", block: "start" });
+      return;
+    }
+
+    // Иначе — ждём появления через MutationObserver
+    const observer = new MutationObserver(() => {
       const el = document.getElementById(target!);
       if (el) {
-        // Прокручиваем и отключаем восстановление скролла браузером
-        el.scrollIntoView({ behavior: "auto", block: "start" });
-        // Фикс: сбрасываем scrollRestoration
+        observer.disconnect();
         if ("scrollRestoration" in window.history) {
           window.history.scrollRestoration = "manual";
         }
-      } else if (attempts < 15) {
-        // Ждём до 15 кадров (~240ms)
-        requestAnimationFrame(() => tryScroll(attempts + 1));
+        el.scrollIntoView({ behavior: "auto", block: "start" });
       }
-    };
-  
-    // Запускаем немедленно
-    tryScroll();
-  }, [location.pathname, location.state]);
+    });
 
-  // === Отслеживание активной секции (запускается ОДИН РАЗ) ===
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    // Защита от утечки
+    const timeout = setTimeout(() => {
+      observer.disconnect();
+    }, 3000);
+
+    return () => {
+      observer.disconnect();
+      clearTimeout(timeout);
+    };
+  }, [location.pathname, location.state?.scrollTo]);
+
+  // === Отслеживание активной секции ===
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -103,7 +116,7 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
     });
 
     return () => observer.disconnect();
-  }, []); // ⚠️ ПУСТОЙ массив — критически важно!
+  }, []);
 
   return (
     <div>
