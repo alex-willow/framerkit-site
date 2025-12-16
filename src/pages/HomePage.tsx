@@ -37,22 +37,19 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
   useEffect(() => {
     const hash = window.location.hash.replace('#', '');
     if (!hash) return;
-
-    let attempts = 0;
-    const tryScroll = () => {
+  
+    // Даем достаточно времени на рендер всей страницы (включая анимации)
+    const scrollTimeout = setTimeout(() => {
       const el = document.getElementById(hash);
       if (el) {
         if ("scrollRestoration" in window.history) {
           window.history.scrollRestoration = "manual";
         }
         el.scrollIntoView({ behavior: "auto", block: "start" });
-      } else if (attempts < 30) {
-        attempts++;
-        setTimeout(tryScroll, 50); // используем setTimeout вместо RAF для надёжности
       }
-    };
-
-    tryScroll();
+    }, 1200); // ← 1.2 секунды — достаточно для всех анимаций
+  
+    return () => clearTimeout(scrollTimeout);
   }, []);
 
   // === Отслеживание активной секции ===
