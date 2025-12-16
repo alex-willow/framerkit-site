@@ -36,7 +36,7 @@ import FramerKitDaily from "./pages/Templates/FramerKitDaily";
 import SignInModal from "./SignInModal";
 
 // Supabase client
-const supabase = createClient("https://ibxakfxqoqiypfhgkpds.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlieGFrZnhxb3FpeXBmaGdrcGRzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0MDgxNDEwNywiZXhwIjoyMDU2MzkwMTA3fQ.LY2R7PvUzpcZlYjByO2F_PS5EU7SGtyZMT4IGcFotO4");
+const supabase = createClient("https://ibxakfxqoqiypfhgkpds.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlieGFrZnhxb3FpeXBmaGdrcGRzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA4MTQxMDcsImV4cCI6MjA1NjM5MDEwN30.tWculxF6xgGw4NQEWPBp7uH_gsl5HobP9wQn3Tf9yyw");
 
 function AppContent() {
   const [isSignInOpen, setIsSignInOpen] = useState(false);
