@@ -61,9 +61,33 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
     return () => clearTimeout(timer);
   }, []);
 
+  // === Отслеживание активной секции ===
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntry = entries.find((e) => e.isIntersecting);
+        if (visibleEntry) {
+          onSectionChangeRef.current(visibleEntry.target.id);
+        }
+      },
+      {
+        root: null,
+        threshold: 0.2,
+        rootMargin: "-20% 0px -20% 0px",
+      }
+    );
+
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div>
-
+      
       {/* OVERVIEW — с полосами света */}
       <section id="overview" className={styles.heroSection}>
         <div className={styles.lightTop}></div>
