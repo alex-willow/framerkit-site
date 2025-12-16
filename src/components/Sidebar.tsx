@@ -2,6 +2,13 @@ import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ChevronDown, ChevronUp, LogOut } from "lucide-react";
 
+const trackEvent = (event: string, params?: Record<string, any>) => {
+  if (typeof window !== "undefined" && (window as any).gtag) {
+    (window as any).gtag("event", event, params);
+  }
+};
+
+
 type SidebarProps = {
   activeSection: string;
   onSectionChange: (sectionId: string) => void;
@@ -209,23 +216,38 @@ export default function Sidebar({
         ) : (
           <>
             <button
-              className="authButton"
-              onClick={() => {
-                if (location.pathname === "/") {
-                  const el = document.getElementById("get-framerkit");
-                  if (el) {
-                    el.scrollIntoView({ behavior: "smooth", block: "start" });
-                  }
-                } else {
-                  navigate("/#get-framerkit"); // ← ключевое изменение
-                }
-              }}
-            >
-              Get Full Access
-            </button>
-            <button className="loginButton" onClick={onSignInOpen}>
-              Log in
-            </button>
+                  className="authButton"
+                  onClick={() => {
+                    trackEvent("cta_click", {
+                      location: "sidebar",
+                      action: "get_full_access",
+                    });
+
+                    if (location.pathname === "/") {
+                      const el = document.getElementById("get-framerkit");
+                      if (el) {
+                        el.scrollIntoView({ behavior: "smooth", block: "start" });
+                      }
+                    } else {
+                      navigate("/#get-framerkit");
+                    }
+                  }}
+                >
+                  Get Full Access
+                </button>
+
+                <button
+                  className="loginButton"
+                  onClick={() => {
+                    trackEvent("login_click", {
+                      location: "sidebar",
+                    });
+                    onSignInOpen?.();
+                  }}
+                >
+                  Log in
+                </button>
+
           </>
         )}
       </div>

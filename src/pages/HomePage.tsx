@@ -29,6 +29,13 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
     "faq-contact",
   ];
 
+  const trackEvent = (event: string, params?: Record<string, any>) => {
+    if (typeof window !== "undefined" && (window as any).gtag) {
+      (window as any).gtag("event", event, params);
+    }
+  };
+
+
   const onSectionChangeRef = useRef(onSectionChange);
   onSectionChangeRef.current = onSectionChange;
 
@@ -72,9 +79,36 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const el = document.getElementById("get-framerkit");
+    if (!el) return;
+  
+    let fired = false;
+  
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !fired) {
+          fired = true;
+  
+          trackEvent("view_pricing", {
+            section: "get-framerkit",
+          });
+  
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.4 }
+    );
+  
+    observer.observe(el);
+  
+    return () => observer.disconnect();
+  }, []);
+  
+
   return (
     <div>
-      
+
       {/* OVERVIEW — с полосами света */}
       <section id="overview" className={styles.heroSection}>
         <div className={styles.lightTop}></div>
@@ -151,38 +185,49 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
                 </motion.p>
 
                 {/* 5. Кнопки */}
-                <motion.div
-                  className={styles.buttons}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{
-                    duration: 0.6,
-                    ease: "easeOut",
-                    delay: buttonsDelay,
-                  }}
-                >
-                  {/* Скролл к секции прайса */}
-                  <button
-                    className="authButton"
-                    onClick={() => {
-                      const el = document.getElementById("get-framerkit");
-                      if (el) {
-                        el.scrollIntoView({ behavior: "smooth" });
-                      }
-                    }}
-                  >
-                    Get Full Version
-                  </button>
+                    <motion.div
+                      className={styles.buttons}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{
+                        duration: 0.6,
+                        ease: "easeOut",
+                        delay: buttonsDelay,
+                      }}
+                    >
+                      {/* Get Full Version */}
+                      <button
+                        className="authButton"
+                        onClick={() => {
+                          trackEvent("click_get_full_version", {
+                            location: "hero",
+                          });
 
-                  {/* Внешняя ссылка */}
-                  <a
-                    href="https://www.framer.com/marketplace/plugins/framerkit"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <button className="logoutButton">Try Free on Framer</button>
-                  </a>
-                </motion.div>
+                          const el = document.getElementById("get-framerkit");
+                          if (el) {
+                            el.scrollIntoView({ behavior: "smooth", block: "start" });
+                          }
+                        }}
+                      >
+                        Get Full Version
+                      </button>
+
+                      {/* Try Free on Framer */}
+                      <a
+                        href="https://www.framer.com/marketplace/plugins/framerkit"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() =>
+                          trackEvent("click_try_free_on_framer", {
+                            location: "hero",
+                            outbound: true,
+                          })
+                        }
+                      >
+                        <button className="logoutButton">Try Free on Framer</button>
+                      </a>
+                    </motion.div>
+
 
                 {/* 6. Аватарки и статистика */}
                 <motion.div
@@ -309,80 +354,114 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
           <p className="fk-gs-text">Choose your plan and unlock the power of FramerKit</p>
 
           <div className="pricing-grid">
-            {/* --- PLAN STARTER --- */}
-            <div className="pricing-card">
-              <h3 className="plan-title">Starter</h3>
-              <p className="plan-desc">Lifetime access</p>
-              <div className="price">
-                <span className="price-amount">$59</span>
-                <span className="price-note">one-time</span>
-              </div>
-              <div className="features">
-                <div className="feature-item"><CircleCheck className="feature-icon" /> Single user license</div>
-                <div className="feature-item"><CircleCheck className="feature-icon" /> Full Components Library</div>
-                <div className="feature-item"><CircleCheck className="feature-icon" /> Lifetime Updates</div>
-                <div className="feature-item"><CircleCheck className="feature-icon" /> Commercial Use</div>
-              </div>
-              <a
-                href="https://buy.polar.sh/polar_cl_LJnSRqf2juaDuIvTQwDGGrBDgWkm6mG4ka8t60bnY5K"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="pricing-btn secondary"
-              >
-                Get Starter
-              </a>
-            </div>
+           {/* --- PLAN STARTER --- */}
+                <div className="pricing-card">
+                  <h3 className="plan-title">Starter</h3>
+                  <p className="plan-desc">Lifetime access</p>
 
-            {/* --- PLAN PRO --- */}
-            <div className="pricing-card featured">
-              <div className="badge">Most Popular</div>
-              <h3 className="plan-title">Pro</h3>
-              <p className="plan-desc">Lifetime access</p>
-              <div className="price">
-                <span className="price-amount">$79</span>
-                <span className="price-note">one-time</span>
+                  <div className="price">
+                    <span className="price-amount">$59</span>
+                    <span className="price-note">one-time</span>
+                  </div>
+
+                  <div className="features">
+                    <div className="feature-item"><CircleCheck className="feature-icon" /> Single user license</div>
+                    <div className="feature-item"><CircleCheck className="feature-icon" /> Full Components Library</div>
+                    <div className="feature-item"><CircleCheck className="feature-icon" /> Lifetime Updates</div>
+                    <div className="feature-item"><CircleCheck className="feature-icon" /> Commercial Use</div>
+                  </div>
+
+                  <a
+                    href="https://buy.polar.sh/polar_cl_LJnSRqf2juaDuIvTQwDGGrBDgWkm6mG4ka8t60bnY5K"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="pricing-btn secondary"
+                    onClick={() =>
+                      trackEvent("select_plan", {
+                        plan: "starter",
+                        price: 59,
+                        currency: "USD",
+                      })
+                    }
+                  >
+                    Get Starter
+                  </a>
+                </div>
+
+
+           {/* --- PLAN PRO --- */}
+              <div className="pricing-card featured">
+                <div className="badge">Most Popular</div>
+                <h3 className="plan-title">Pro</h3>
+                <p className="plan-desc">Lifetime access</p>
+
+                <div className="price">
+                  <span className="price-amount">$79</span>
+                  <span className="price-note">one-time</span>
+                </div>
+
+                <div className="features">
+                  <div className="feature-item"><CircleCheck className="feature-icon" /> Single user license</div>
+                  <div className="feature-item"><CircleCheck className="feature-icon" /> Full Components Library</div>
+                  <div className="feature-item"><CircleCheck className="feature-icon" /> Lifetime Updates</div>
+                  <div className="feature-item"><CircleCheck className="feature-icon" /> Commercial Use</div>
+                  <div className="feature-item"><CircleCheck className="feature-icon" /> Plugin for Framer</div>
+                </div>
+
+                <a
+                  href="https://buy.polar.sh/polar_cl_lbbqLYLaayU8OwD7xLYNCiFvxQcw0LpKSm6kl4MLuVh"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="pricing-btn"
+                  onClick={() =>
+                    trackEvent("select_plan", {
+                      plan: "pro",
+                      price: 79,
+                      currency: "USD",
+                      featured: true,
+                    })
+                  }
+                >
+                  Get Pro
+                </a>
               </div>
-              <div className="features">
-                <div className="feature-item"><CircleCheck className="feature-icon" /> Single user license</div>
-                <div className="feature-item"><CircleCheck className="feature-icon" /> Full Components Library</div>
-                <div className="feature-item"><CircleCheck className="feature-icon" /> Lifetime Updates</div>
-                <div className="feature-item"><CircleCheck className="feature-icon" /> Commercial Use</div>
-                <div className="feature-item"><CircleCheck className="feature-icon" /> Plugin for Framer</div>
-              </div>
-              <a
-                href="https://buy.polar.sh/polar_cl_lbbqLYLaayU8OwD7xLYNCiFvxQcw0LpKSm6kl4MLuVh"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="pricing-btn"
-              >
-                Get Pro
-              </a>
-            </div>
+
 
             {/* --- PLAN ULTIMATE --- */}
-            <div className="pricing-card">
-              <h3 className="plan-title">Ultimate</h3>
-              <p className="plan-desc">Lifetime access</p>
-              <div className="price">
-                <span className="price-amount">$199</span>
-                <span className="price-note">one-time</span>
-              </div>
-              <div className="features">
-                <div className="feature-item"><CircleCheck className="feature-icon" /> 5 user license</div>
-                <div className="feature-item"><CircleCheck className="feature-icon" /> Full Components Library</div>
-                <div className="feature-item"><CircleCheck className="feature-icon" /> Lifetime Updates</div>
-                <div className="feature-item"><CircleCheck className="feature-icon" /> Commercial Use</div>
-                <div className="feature-item"><CircleCheck className="feature-icon" /> Plugin for Framer</div>
-              </div>
-              <a
-                href="https://buy.polar.sh/polar_cl_UDp7hLEWPWpbHEEKOFxqME3ytaysBd6cXUONc3fQ8NM"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="pricing-btn secondary"
-              >
-                Get Ultimate
-              </a>
-            </div>
+                <div className="pricing-card">
+                  <h3 className="plan-title">Ultimate</h3>
+                  <p className="plan-desc">Lifetime access</p>
+
+                  <div className="price">
+                    <span className="price-amount">$199</span>
+                    <span className="price-note">one-time</span>
+                  </div>
+
+                  <div className="features">
+                    <div className="feature-item"><CircleCheck className="feature-icon" /> 5 user license</div>
+                    <div className="feature-item"><CircleCheck className="feature-icon" /> Full Components Library</div>
+                    <div className="feature-item"><CircleCheck className="feature-icon" /> Lifetime Updates</div>
+                    <div className="feature-item"><CircleCheck className="feature-icon" /> Commercial Use</div>
+                    <div className="feature-item"><CircleCheck className="feature-icon" /> Plugin for Framer</div>
+                  </div>
+
+                  <a
+                    href="https://buy.polar.sh/polar_cl_UDp7hLEWPWpbHEEKOFxqME3ytaysBd6cXUONc3fQ8NM"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="pricing-btn secondary"
+                    onClick={() =>
+                      trackEvent("select_plan", {
+                        plan: "ultimate",
+                        price: 199,
+                        currency: "USD",
+                      })
+                    }
+                  >
+                    Get Ultimate
+                  </a>
+                </div>
+
           </div>
         </div>
       </section>
