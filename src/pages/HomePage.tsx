@@ -37,47 +37,26 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
   onSectionChangeRef.current = onSectionChange;
 
   useEffect(() => {
-    const { pathname, state } = location;
-    const targetId = state?.scrollTo;
-  
-    // Только если цель указана и мы на главной
-    if (!targetId || pathname !== "/") return;
-  
-    // Пытаемся найти сразу
-    let el = document.getElementById(targetId);
-    if (el) {
-      if ("scrollRestoration" in window.history) {
-        window.history.scrollRestoration = "manual";
-      }
-      el.scrollIntoView({ behavior: "auto", block: "start" });
-      return;
-    }
-  
-    // Если не нашли — наблюдаем за изменениями DOM
-    const observer = new MutationObserver(() => {
-      el = document.getElementById(targetId);
-      if (el) {
-        observer.disconnect();
-        if ("scrollRestoration" in window.history) {
-          window.history.scrollRestoration = "manual";
+    const scrollToSection = () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash) {
+        const el = document.getElementById(hash);
+        if (el) {
+          if ("scrollRestoration" in window.history) {
+            window.history.scrollRestoration = "manual";
+          }
+          el.scrollIntoView({ behavior: "auto", block: "start" });
         }
-        el.scrollIntoView({ behavior: "auto", block: "start" });
       }
-    });
-  
-    // Наблюдаем за всем body
-    observer.observe(document.body, { childList: true, subtree: true });
-  
-    // Защита от утечки: отключаем через 3 сек
-    const timeout = setTimeout(() => {
-      observer.disconnect();
-    }, 3000);
-  
-    return () => {
-      observer.disconnect();
-      clearTimeout(timeout);
     };
-  }, [location.pathname, location.state?.scrollTo]);
+  
+    // Сразу после монтирования
+    scrollToSection();
+  
+    // Обновлять при изменении хэша (если нужно)
+    window.addEventListener('hashchange', scrollToSection);
+    return () => window.removeEventListener('hashchange', scrollToSection);
+  }, []);
 
   // === Отслеживание активной секции ===
   useEffect(() => {

@@ -94,11 +94,16 @@ export default function Sidebar({
   const handleHomeSectionClick = (id: string) => {
     onSectionChange(id);
     if (isMobile) onMenuClose();
-    if (location.pathname !== "/") {
-      navigate("/", { state: { scrollTo: id } });
-      return;
+    if (location.pathname === "/") {
+      // Уже на главной — скроллим
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    } else {
+      // Переходим на главную + хэш
+      navigate(`/#${id}`);
     }
-    document.getElementById(id)?.scrollIntoView({ behavior: "auto" });
   };
 
   const handleOtherSectionClick = (id: string, basePath: string) => {
@@ -165,15 +170,14 @@ export default function Sidebar({
 
   const sidebarContent = (
     <div className="sidebar-inner" style={{ display: "flex", flexDirection: "column", height: "100%" }}>
-      {/* Logo on top — показываем только на десктопе */}
+      {/* Logo */}
       {!isMobile && (
-        <div className="sidebar-logo-container" onClick={() => (window.location.href = "/")}>
+        <div className="sidebar-logo-container" onClick={() => navigate("/")}>
           <img src="/Logo.png" alt="FramerKit" className="sidebar-logo-icon" />
           <h1 className="sidebar-logo-text">FramerKit</h1>
         </div>
       )}
 
-      {/* Scrollable section content */}
       <div className="sidebar-scroll" style={{ flexGrow: 1, overflowY: "auto" }}>
         <div className="sidebar-header">Getting Started</div>
         {homeSections.map(({ id, label }) => (
@@ -197,7 +201,6 @@ export default function Sidebar({
         {renderTemplatesSection()}
       </div>
 
-      {/* Buttons at bottom */}
       <div className="sidebar-bottom">
         {isAuthenticated ? (
           <button className="logoutButton" onClick={onLogout}>
@@ -205,25 +208,21 @@ export default function Sidebar({
           </button>
         ) : (
           <>
-           <button
-                  className="authButton"
-                  onClick={() => {
-                    if (location.pathname === "/") {
-                      // Уже на главной — просто скроллим
-                      const el = document.getElementById("get-framerkit");
-                      if (el) {
-                        el.scrollIntoView({ behavior: "smooth" });
-                      }
-                    } else {
-                      // На другой странице — переходим на главную с флагом
-                      navigate("/", {
-                        state: { scrollTo: "get-framerkit", fromSidebar: true },
-                      });
-                    }
-                  }}
-                >
-                  Get Full Access
-                </button>
+            <button
+              className="authButton"
+              onClick={() => {
+                if (location.pathname === "/") {
+                  const el = document.getElementById("get-framerkit");
+                  if (el) {
+                    el.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }
+                } else {
+                  navigate("/#get-framerkit"); // ← ключевое изменение
+                }
+              }}
+            >
+              Get Full Access
+            </button>
             <button className="loginButton" onClick={onSignInOpen}>
               Log in
             </button>
@@ -233,7 +232,6 @@ export default function Sidebar({
     </div>
   );
 
-  // Mobile sidebar
   if (isMobile) {
     return (
       <>
