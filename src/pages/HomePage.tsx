@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import ComponentRunner from "../components/ComponentRunner";
 import RandomSectionCards from "../components/RandomSectionCards";
 import RandomComponentCards from "../components/RandomComponentCards";
@@ -32,64 +32,29 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
   const onSectionChangeRef = useRef(onSectionChange);
   onSectionChangeRef.current = onSectionChange;
 
-  const [isReady, setIsReady] = useState(false);
-
   // ================================
-  // ХЭШ-СКРОЛЛ БЕЗ МИГАНИЯ
+  // ХЭШ-СКРОЛЛ
   // ================================
   useEffect(() => {
-    const hash = window.location.hash.slice(1);
+    const hash = window.location.hash.replace("#", "");
+    if (!hash) return;
 
-    // если хэша нет — просто показываем страницу
-    if (!hash) {
-      setIsReady(true);
-      return;
+    const el = document.getElementById(hash);
+    if (el) {
+      el.scrollIntoView({ behavior: "auto", block: "start" });
+      onSectionChangeRef.current(hash);
     }
-
-    let attempts = 0;
-    let scrolled = false;
-
-    const scrollToHash = () => {
-      const el = document.getElementById(hash);
-
-      if (el && !scrolled) {
-        scrolled = true;
-        el.scrollIntoView({
-          behavior: "auto",
-          block: "start",
-        });
-
-        // показываем страницу ТОЛЬКО после скролла
-        setIsReady(true);
-      } else if (attempts < 40) {
-        attempts++;
-        setTimeout(scrollToHash, 50);
-      } else {
-        // fallback — если секция так и не появилась
-        setIsReady(true);
-      }
-    };
-
-    // ждём layout
-    requestAnimationFrame(() => {
-      setTimeout(scrollToHash, 0);
-    });
   }, []);
 
   // ================================
   // INTERSECTION OBSERVER
-  // (включается ПОСЛЕ hash-скролла)
   // ================================
   useEffect(() => {
-    let enabled = false;
-
     const observer = new IntersectionObserver(
       (entries) => {
-        if (!enabled) return;
-
-        const visibleEntry = entries.find((e) => e.isIntersecting);
-        if (visibleEntry) {
-          onSectionChangeRef.current(visibleEntry.target.id);
+        const visible = entries.find((e) => e.isIntersecting);
+        if (visible) {
+          onSectionChangeRef.current(visible.target.id);
         }
       },
       {
@@ -104,27 +69,12 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
       if (el) observer.observe(el);
     });
 
-    // включаем observer ПОСЛЕ скролла
-    const timer = setTimeout(() => {
-      enabled = true;
-    }, 500);
-
-    return () => {
-      clearTimeout(timer);
-      observer.disconnect();
-    };
+    return () => observer.disconnect();
   }, []);
 
-  // ================================
-  // RENDER
-  // ================================
   return (
-    <div
-      style={{
-        opacity: isReady ? 1 : 0,
-        transition: "opacity 0ms",
-      }}
-    >
+    <div>
+      
       {/* OVERVIEW — с полосами света */}
       <section id="overview" className={styles.heroSection}>
         <div className={styles.lightTop}></div>
