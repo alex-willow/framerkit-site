@@ -216,9 +216,6 @@
     color: #151723;
   }
   
-  [data-framer-theme="dark"] .auth-footer {
-    color: #cccccc;
-  }
   
   .auth-link {
     cursor: pointer;
@@ -226,17 +223,23 @@
     font-weight: 600;
     transition: color 0.3s ease, text-decoration 0.3s ease;
   }
-  
-  [data-framer-theme="light"] .auth-link {
-    color: #000000;
-  }
-  
-  [data-framer-theme="dark"] .auth-link {
-    color: #ffffff;
-  }
-  
+
   .auth-link:hover {
     color: #6E3FF3;
     text-decoration: underline;
   }
+
+  /* Убираем стандартное выделение при клике */
+.auth-footer .auth-link:focus,
+.auth-footer .auth-link:active {
+  outline: none;       /* убирает рамку вокруг кнопки */
+  color: inherit;      /* оставляет прежний цвет текста */
+  text-decoration: underline; /* сохраняем подчеркивание */
+}
+
+/* Можно дополнительно убрать transition, если нужно */
+.auth-footer .auth-link {
+  transition: none;
+}
+
   
