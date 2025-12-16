@@ -104,23 +104,24 @@ export default function SignInModal({
     }
   };
 
-  // 🔑 НОВАЯ ФУНКЦИЯ: переход к ценам
-  const goToPricing = () => {
-    if (location.pathname === "/") {
-      // Уже на главной → просто скроллим
-      const el = document.getElementById("get-framerkit");
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth" });
-      }
-      onClose();
-    } else {
-      // На другой странице → идём на главную + передаём флаг
-      navigate("/", {
-        state: { scrollTo: "get-framerkit", fromPricingLink: true },
-      });
-      onClose();
+// 🔑 НОВАЯ ФУНКЦИЯ: переход к секции "get-framerkit"
+const goToPricing = () => {
+  if (location.pathname === "/") {
+    // Уже на главной → скроллим к секции
+    const el = document.getElementById("get-framerkit");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
-  };
+    // Закрываем модалку
+    onClose();
+  } else {
+    // На другой странице → переходим на главную с хэшем
+    navigate("/#get-framerkit");
+    // Закрываем модалку
+    onClose();
+  }
+};
+
 
   if (!isOpen) return null;
 
