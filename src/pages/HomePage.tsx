@@ -79,7 +79,7 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
   
     // Запускаем немедленно
     tryScroll();
-  }, [location.key, location.pathname, location.state]);
+  }, [location.pathname, location.state]);
 
   // === Отслеживание активной секции (запускается ОДИН РАЗ) ===
   useEffect(() => {
