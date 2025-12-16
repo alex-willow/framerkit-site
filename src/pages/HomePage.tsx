@@ -1,5 +1,5 @@
 // src/pages/HomePage.tsx
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import ComponentRunner from "../components/ComponentRunner";
 import RandomSectionCards from "../components/RandomSectionCards";
 import RandomComponentCards from "../components/RandomComponentCards";
@@ -33,32 +33,42 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
   const onSectionChangeRef = useRef(onSectionChange);
   onSectionChangeRef.current = onSectionChange;
 
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  // === Скролл к хэшу + инициализация ===
   useEffect(() => {
-    const scrollToHash = () => {
-      const hash = window.location.hash.replace('#', '');
-      if (!hash) return;
-  
-      // Функция попытки найти и проскроллить
-      const tryScroll = (attempts = 0) => {
+    const hash = window.location.hash.replace('#', '');
+    let hasScrolled = false;
+
+    const tryScroll = (attempts = 0) => {
+      if (hasScrolled) return;
+
+      if (hash) {
         const el = document.getElementById(hash);
         if (el) {
-          // Отключаем стандартное восстановление скролла
+          hasScrolled = true;
           if ("scrollRestoration" in window.history) {
             window.history.scrollRestoration = "manual";
           }
           el.scrollIntoView({ behavior: "auto", block: "start" });
-        } else if (attempts < 30) {
-          // Ждём до 30 кадров (~500ms)
-          requestAnimationFrame(() => tryScroll(attempts + 1));
+          setIsInitialized(true);
+          return;
         }
-      };
-  
-      tryScroll();
+      } else {
+        // Нет хэша — просто показываем страницу
+        setIsInitialized(true);
+        return;
+      }
+
+      if (attempts < 30) {
+        requestAnimationFrame(() => tryScroll(attempts + 1));
+      } else {
+        // Защита: показываем даже если не нашли
+        setIsInitialized(true);
+      }
     };
-  
-    // Запускаем с небольшой задержкой, чтобы дать React отрисоваться
-    const timer = setTimeout(scrollToHash, 50);
-    return () => clearTimeout(timer);
+
+    tryScroll();
   }, []);
 
   // === Отслеживание активной секции ===
@@ -86,8 +96,11 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
   }, []);
 
   return (
-    <div>
-      
+    <div style={{
+      opacity: isInitialized ? 1 : 0,
+      transition: 'opacity 0.3s ease'  // ← плавное появление, как у карточек
+    }}>
+
       {/* OVERVIEW — с полосами света */}
       <section id="overview" className={styles.heroSection}>
         <div className={styles.lightTop}></div>
