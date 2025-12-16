@@ -35,15 +35,16 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
 
   const [isInitialized, setIsInitialized] = useState(false);
 
-  // === Скролл к хэшу + инициализация ===
   useEffect(() => {
-    const hash = window.location.hash.replace('#', '');
     let hasScrolled = false;
-
-    const tryScroll = (attempts = 0) => {
+  
+    const scrollToHash = () => {
       if (hasScrolled) return;
-
-      if (hash) {
+  
+      const hash = window.location.hash.replace('#', '');
+      if (!hash) return;
+  
+      const tryScroll = (attempts = 0) => {
         const el = document.getElementById(hash);
         if (el) {
           hasScrolled = true;
@@ -52,23 +53,27 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
           }
           el.scrollIntoView({ behavior: "auto", block: "start" });
           setIsInitialized(true);
-          return;
+        } else if (attempts < 30) {
+          requestAnimationFrame(() => tryScroll(attempts + 1));
+        } else {
+          setIsInitialized(true); // защита
         }
-      } else {
-        // Нет хэша — просто показываем страницу
-        setIsInitialized(true);
-        return;
-      }
-
-      if (attempts < 30) {
-        requestAnimationFrame(() => tryScroll(attempts + 1));
-      } else {
-        // Защита: показываем даже если не нашли
-        setIsInitialized(true);
-      }
+      };
+  
+      tryScroll();
     };
-
-    tryScroll();
+  
+    // Сразу при монтировании
+    scrollToHash();
+  
+    // Слушаем изменения хэша (в т.ч. при SPA-переходах)
+    const handleHashChange = () => {
+      hasScrolled = false;
+      scrollToHash();
+    };
+  
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
   // === Отслеживание активной секции ===
