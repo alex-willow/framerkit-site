@@ -1,6 +1,5 @@
 // src/pages/HomePage.tsx
 import { useEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
 import ComponentRunner from "../components/ComponentRunner";
 import RandomSectionCards from "../components/RandomSectionCards";
 import RandomComponentCards from "../components/RandomComponentCards";
@@ -22,7 +21,7 @@ type HomePageProps = {
 };
 
 export default function HomePage({ onSectionChange }: HomePageProps) {
-  const location = useLocation();
+
 
   const sections = [
     "overview",
