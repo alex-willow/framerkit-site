@@ -1,5 +1,5 @@
 // src/pages/HomePage.tsx
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import ComponentRunner from "../components/ComponentRunner";
 import RandomSectionCards from "../components/RandomSectionCards";
 import RandomComponentCards from "../components/RandomComponentCards";
@@ -33,39 +33,22 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
   const onSectionChangeRef = useRef(onSectionChange);
   onSectionChangeRef.current = onSectionChange;
 
-  const [isInitialized, setIsInitialized] = useState(false);
-
-  // === Скролл к хэшу + плавное появление ===
+  // === Прокрутка к хэшу с ожиданием появления секции ===
   useEffect(() => {
     const hash = window.location.hash.replace('#', '');
-    let hasScrolled = false;
+    if (!hash) return;
 
-    const tryScroll = (attempts = 0) => {
-      if (hasScrolled) return;
-
-      if (hash) {
-        const el = document.getElementById(hash);
-        if (el) {
-          hasScrolled = true;
-          if ("scrollRestoration" in window.history) {
-            window.history.scrollRestoration = "manual";
-          }
-          el.scrollIntoView({ behavior: "auto", block: "start" });
-          // Плавно показываем контент через 50ms после скролла
-          setTimeout(() => setIsInitialized(true), 50);
-          return;
+    let attempts = 0;
+    const tryScroll = () => {
+      const el = document.getElementById(hash);
+      if (el) {
+        if ("scrollRestoration" in window.history) {
+          window.history.scrollRestoration = "manual";
         }
-      } else {
-        // Нет хэша — сразу показываем
-        setIsInitialized(true);
-        return;
-      }
-
-      if (attempts < 30) {
-        requestAnimationFrame(() => tryScroll(attempts + 1));
-      } else {
-        // Защита: показываем даже если не нашли
-        setIsInitialized(true);
+        el.scrollIntoView({ behavior: "auto", block: "start" });
+      } else if (attempts < 30) {
+        attempts++;
+        setTimeout(tryScroll, 50); // используем setTimeout вместо RAF для надёжности
       }
     };
 
@@ -97,11 +80,7 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
   }, []);
 
   return (
-    <div style={{
-      opacity: isInitialized ? 1 : 0,
-      transition: 'opacity 0.3s ease'
-    }}>
-      
+    <div>
       {/* OVERVIEW — с полосами света */}
       <section id="overview" className={styles.heroSection}>
         <div className={styles.lightTop}></div>
