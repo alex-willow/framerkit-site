@@ -21,8 +21,6 @@ type HomePageProps = {
 };
 
 export default function HomePage({ onSectionChange }: HomePageProps) {
-
-
   const sections = [
     "overview",
     "getting-started",
@@ -36,49 +34,31 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
   onSectionChangeRef.current = onSectionChange;
 
   useEffect(() => {
-    const scrollToSection = () => {
+    const scrollToHash = () => {
       const hash = window.location.hash.replace('#', '');
-      if (hash) {
+      if (!hash) return;
+  
+      // Функция попытки найти и проскроллить
+      const tryScroll = (attempts = 0) => {
         const el = document.getElementById(hash);
         if (el) {
+          // Отключаем стандартное восстановление скролла
           if ("scrollRestoration" in window.history) {
             window.history.scrollRestoration = "manual";
           }
           el.scrollIntoView({ behavior: "auto", block: "start" });
+        } else if (attempts < 30) {
+          // Ждём до 30 кадров (~500ms)
+          requestAnimationFrame(() => tryScroll(attempts + 1));
         }
-      }
+      };
+  
+      tryScroll();
     };
   
-    // Сразу после монтирования
-    scrollToSection();
-  
-    // Обновлять при изменении хэша (если нужно)
-    window.addEventListener('hashchange', scrollToSection);
-    return () => window.removeEventListener('hashchange', scrollToSection);
-  }, []);
-
-  // === Отслеживание активной секции ===
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntry = entries.find((e) => e.isIntersecting);
-        if (visibleEntry) {
-          onSectionChangeRef.current(visibleEntry.target.id);
-        }
-      },
-      {
-        root: null,
-        threshold: 0.2,
-        rootMargin: "-20% 0px -20% 0px",
-      }
-    );
-
-    sections.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
+    // Запускаем с небольшой задержкой, чтобы дать React отрисоваться
+    const timer = setTimeout(scrollToHash, 50);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
