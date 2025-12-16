@@ -1,5 +1,5 @@
 // src/pages/HomePage.tsx
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import ComponentRunner from "../components/ComponentRunner";
 import RandomSectionCards from "../components/RandomSectionCards";
 import RandomComponentCards from "../components/RandomComponentCards";
@@ -33,33 +33,44 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
   const onSectionChangeRef = useRef(onSectionChange);
   onSectionChangeRef.current = onSectionChange;
 
-  useEffect(() => {
-  const scrollToHash = () => {
-    const hash = window.location.hash.replace('#', '');
-    if (!hash) return;
+  const [isInitialized, setIsInitialized] = useState(false);
 
-    // Функция попытки найти и проскроллить
+  // === Скролл к хэшу + плавное появление ===
+  useEffect(() => {
+    const hash = window.location.hash.replace('#', '');
+    let hasScrolled = false;
+
     const tryScroll = (attempts = 0) => {
-      const el = document.getElementById(hash);
-      if (el) {
-        // Отключаем стандартное восстановление скролла
-        if ("scrollRestoration" in window.history) {
-          window.history.scrollRestoration = "manual";
+      if (hasScrolled) return;
+
+      if (hash) {
+        const el = document.getElementById(hash);
+        if (el) {
+          hasScrolled = true;
+          if ("scrollRestoration" in window.history) {
+            window.history.scrollRestoration = "manual";
+          }
+          el.scrollIntoView({ behavior: "auto", block: "start" });
+          // Плавно показываем контент через 50ms после скролла
+          setTimeout(() => setIsInitialized(true), 50);
+          return;
         }
-        el.scrollIntoView({ behavior: "auto", block: "start" });
-      } else if (attempts < 30) {
-        // Ждём до 30 кадров (~500ms)
+      } else {
+        // Нет хэша — сразу показываем
+        setIsInitialized(true);
+        return;
+      }
+
+      if (attempts < 30) {
         requestAnimationFrame(() => tryScroll(attempts + 1));
+      } else {
+        // Защита: показываем даже если не нашли
+        setIsInitialized(true);
       }
     };
 
     tryScroll();
-  };
-
-  // Запускаем с небольшой задержкой, чтобы дать React отрисоваться
-  const timer = setTimeout(scrollToHash, 50);
-  return () => clearTimeout(timer);
-}, []);
+  }, []);
 
   // === Отслеживание активной секции ===
   useEffect(() => {
@@ -86,7 +97,10 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
   }, []);
 
   return (
-    <div>
+    <div style={{
+      opacity: isInitialized ? 1 : 0,
+      transition: 'opacity 0.3s ease'
+    }}>
       
       {/* OVERVIEW — с полосами света */}
       <section id="overview" className={styles.heroSection}>
