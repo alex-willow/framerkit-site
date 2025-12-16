@@ -36,7 +36,6 @@ export default function RandomComponentCards() {
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const rotatingRef = useRef(false);
 
-  // Храним данные по категориям
   const itemsBySection = useRef<Record<string, ComponentItem[]>>({});
 
   useEffect(() => {
@@ -54,12 +53,8 @@ export default function RandomComponentCards() {
           }
 
           const json = await res.json();
-
-          // Находим ключ в объекте JSON независимо от регистра
           const jsonKey = Object.keys(json).find(k => k.toLowerCase() === sec.toLowerCase());
           const allItems: ComponentItem[] = jsonKey ? json[jsonKey] : [];
-
-          // ⭐ фильтр: только светлые (без dark)
           data[sec] = allItems.filter(item => !item.key.toLowerCase().includes("dark"));
         } catch {
           data[sec] = [];
@@ -77,7 +72,6 @@ export default function RandomComponentCards() {
 
       setCards(initial);
       lastChangeRef.current = initial.map(() => now);
-
       startRotation();
     };
 
@@ -93,7 +87,6 @@ export default function RandomComponentCards() {
 
     const now = Date.now();
     const minInterval = 5000;
-
     const eligible: number[] = [];
 
     for (let i = 0; i < COMPONENT_SECTIONS.length; i++) {
@@ -117,7 +110,6 @@ export default function RandomComponentCards() {
     }
 
     const newCard = list[Math.floor(Math.random() * list.length)];
-
     rotatingRef.current = true;
 
     setFading(prev => {
@@ -137,13 +129,11 @@ export default function RandomComponentCards() {
           lastChangeRef.current[index] = Date.now();
           return arr;
         });
-
         setFading(prev => {
           const arr = [...prev];
           arr[index] = false;
           return arr;
         });
-
         rotatingRef.current = false;
         timeoutRef.current = setTimeout(rotateOne, 1500);
       }, 500);
@@ -163,7 +153,7 @@ export default function RandomComponentCards() {
         <Link
           key={COMPONENT_SECTIONS[index]}
           to={item ? `/components/${COMPONENT_SECTIONS[index]}` : "#"}
-          className={`card ${fading[index] ? "fadeOut" : "fadeIn"}`}
+          className={item ? `card ${fading[index] ? "fadeOut" : "fadeIn"}` : "skeleton-card"}
           onMouseEnter={() => (hoveredRef.current[index] = true)}
           onMouseLeave={() => (hoveredRef.current[index] = false)}
           style={{ textDecoration: "none", color: "inherit" }}
@@ -180,20 +170,16 @@ export default function RandomComponentCards() {
                   }
                 />
               </div>
-
               <div className="cardInfo">
                 <h3>{item.title}</h3>
                 <div className="iconButton2">
                   <ArrowUpRight size={16} className="explore-icon" />
                 </div>
               </div>
-
               <div className="hoverOverlay" />
             </>
           ) : (
-            <div className="skeleton-card">
-              <div className="skeleton-img" />
-            </div>
+            <div className="skeleton-card-info"></div>
           )}
         </Link>
       ))}

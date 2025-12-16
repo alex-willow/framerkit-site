@@ -62,9 +62,9 @@ export default function MainLayout({
           isMobile={isMobile}
           isMenuOpen={isMenuOpen}
           onMenuClose={onMenuToggle}
-          isAuthenticated={isAuthenticated} 
-          onLogout={onLogout}              
-          onSignInOpen={onSignInOpen}       
+          isAuthenticated={isAuthenticated} // добавляем
+          onLogout={onLogout}               // добавляем
+          onSignInOpen={onSignInOpen}       // добавляем
         />
 
         <main className="content" ref={contentRef}>

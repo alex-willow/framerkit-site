@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { createPortal } from "react-dom";
+import { useNavigate, useLocation } from "react-router-dom"; // 👈 добавили
 import "./SignInModal.css";
 
 const supabase = createClient(
@@ -27,6 +28,9 @@ export default function SignInModal({
   const [errorMessage, setErrorMessage] = useState("");
   const [showModal, setShowModal] = useState(false);
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const modalRef = useRef<HTMLDivElement>(null);
   const mouseDownInside = useRef(false);
 
@@ -39,24 +43,20 @@ export default function SignInModal({
     document.body.setAttribute("data-framer-theme", theme);
     return () => document.body.removeAttribute("data-framer-theme");
   }, [theme]);
-
-  // фикс для drag-out
+  
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     if (modalRef.current?.contains(e.target as Node)) {
-      mouseDownInside.current = true;
+      mouseDownInside.current = true; // ✅ правильно
     } else {
       mouseDownInside.current = false;
     }
   };
 
   const handleMouseUp = (e: React.MouseEvent<HTMLDivElement>) => {
-    // если зажатие было внутри → НИКОГДА не закрываем
     if (mouseDownInside.current) {
       mouseDownInside.current = false;
       return;
     }
-
-    // обычный клик вне карточки → закрываем
     if (!modalRef.current?.contains(e.target as Node)) {
       onClose();
     }
@@ -101,6 +101,24 @@ export default function SignInModal({
       setErrorMessage("An unexpected error occurred.");
     } finally {
       setLoading(false);
+    }
+  };
+
+  // 🔑 НОВАЯ ФУНКЦИЯ: переход к ценам
+  const goToPricing = () => {
+    if (location.pathname === "/") {
+      // Уже на главной → просто скроллим
+      const el = document.getElementById("get-framerkit");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+      onClose();
+    } else {
+      // На другой странице → идём на главную + передаём флаг
+      navigate("/", {
+        state: { scrollTo: "get-framerkit", fromPricingLink: true },
+      });
+      onClose();
     }
   };
 
@@ -153,14 +171,22 @@ export default function SignInModal({
 
         <div className="auth-footer">
           No license key?{" "}
-          <a
+          <button
+            type="button"
             className="auth-link"
-            href="https://buy.polar.sh/polar_cl_jUF1ses8UossGQ9kTHh9Fb6PRHJA4uwchcdHJ38a4tp"
-            target="_blank"
-            rel="noopener noreferrer"
+            onClick={goToPricing}
+            style={{
+              background: "none",
+              border: "none",
+              color: "inherit",
+              cursor: "pointer",
+              textDecoration: "underline",
+              padding: 0,
+              font: "inherit",
+            }}
           >
             Get one here
-          </a>
+          </button>
         </div>
       </div>
     </div>,

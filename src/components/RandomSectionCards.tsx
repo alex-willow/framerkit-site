@@ -32,11 +32,9 @@ export default function RandomSectionCards() {
   const hoveredRef = useRef<boolean[]>(Array(STATIC_SECTIONS.length).fill(false));
   const lastChangeRef = useRef<number[]>(Array(STATIC_SECTIONS.length).fill(0));
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  // LIGHT-компоненты по секциям
-  const itemsBySection = useRef<Record<string, ComponentItem[]>>({});
-
   const rotatingRef = useRef(false);
+
+  const itemsBySection = useRef<Record<string, ComponentItem[]>>({});
 
   useEffect(() => {
     const load = async () => {
@@ -44,6 +42,7 @@ export default function RandomSectionCards() {
 
       for (const sec of STATIC_SECTIONS) {
         try {
+          // Исправлен URL: убраны лишние пробелы
           const res = await fetch(
             `https://raw.githubusercontent.com/alex-willow/framerkit-data/main/${sec}.json`
           );
@@ -51,8 +50,6 @@ export default function RandomSectionCards() {
           if (res.ok) {
             const json = await res.json();
             const allItems = json[sec] || [];
-
-            // ⭐ фильтр: только светлые (без dark)
             data[sec] = allItems.filter(
               (item: ComponentItem) =>
                 !item.key.toLowerCase().includes("dark")
@@ -68,8 +65,6 @@ export default function RandomSectionCards() {
       itemsBySection.current = data;
 
       const now = Date.now();
-
-      // начальные карточки
       const initial = STATIC_SECTIONS.map(sec => {
         const items = data[sec];
         if (!items.length) return null;
@@ -78,7 +73,6 @@ export default function RandomSectionCards() {
 
       setCards(initial);
       lastChangeRef.current = initial.map(() => now);
-
       startRotation();
     };
 
@@ -109,7 +103,6 @@ export default function RandomSectionCards() {
 
     const index = eligible[Math.floor(Math.random() * eligible.length)];
     const sec = STATIC_SECTIONS[index];
-
     const items = itemsBySection.current[sec];
 
     if (!items || items.length === 0) {
@@ -118,7 +111,6 @@ export default function RandomSectionCards() {
     }
 
     const newCard = items[Math.floor(Math.random() * items.length)];
-
     rotatingRef.current = true;
 
     setFading(prev => {
@@ -138,13 +130,11 @@ export default function RandomSectionCards() {
           lastChangeRef.current[index] = Date.now();
           return c;
         });
-
         setFading(prev => {
           const c = [...prev];
           c[index] = false;
           return c;
         });
-
         rotatingRef.current = false;
         timeoutRef.current = setTimeout(rotateOne, 1500);
       }, 400);
@@ -164,7 +154,7 @@ export default function RandomSectionCards() {
         <Link
           key={STATIC_SECTIONS[index]}
           to={item ? `/layout/${STATIC_SECTIONS[index]}` : "#"}
-          className={`card ${fading[index] ? "fadeOut" : "fadeIn"}`}
+          className={item ? `card ${fading[index] ? "fadeOut" : "fadeIn"}` : "skeleton-card"}
           onMouseEnter={() => (hoveredRef.current[index] = true)}
           onMouseLeave={() => (hoveredRef.current[index] = false)}
           style={{ textDecoration: "none", color: "inherit" }}
@@ -181,20 +171,16 @@ export default function RandomSectionCards() {
                   }
                 />
               </div>
-
               <div className="cardInfo">
                 <h3>{item.title}</h3>
                 <div className="iconButton2">
                   <ArrowUpRight size={16} className="explore-icon" />
                 </div>
               </div>
-
               <div className="hoverOverlay" />
             </>
           ) : (
-            <div className="skeleton-card">
-              <div className="skeleton-img" />
-            </div>
+            <div className="skeleton-card-info"></div>
           )}
         </Link>
       ))}

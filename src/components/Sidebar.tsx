@@ -69,7 +69,6 @@ export default function Sidebar({
     { id: "testimonialcard", label: "Testimonial Card" },
   ];
 
-  // === Определяем какие collapsible открыты
   useEffect(() => {
     if (!isMenuOpen) return;
     const path = location.pathname;
@@ -99,7 +98,7 @@ export default function Sidebar({
       navigate("/", { state: { scrollTo: id } });
       return;
     }
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    document.getElementById(id)?.scrollIntoView({ behavior: "auto" });
   };
 
   const handleOtherSectionClick = (id: string, basePath: string) => {
@@ -164,18 +163,9 @@ export default function Sidebar({
     </CollapsibleSection>
   );
 
-  const scrollToPricing = () => {
-    if (location.pathname === "/") {
-      const el = document.getElementById("get-framerkit");
-      if (el) el.scrollIntoView({ behavior: "smooth" });
-    } else {
-      navigate("/", { state: { scrollTo: "get-framerkit" } });
-    }
-  };
-
   const sidebarContent = (
     <div className="sidebar-inner" style={{ display: "flex", flexDirection: "column", height: "100%" }}>
-      {/* Logo on desktop only */}
+      {/* Logo on top — показываем только на десктопе */}
       {!isMobile && (
         <div className="sidebar-logo-container" onClick={() => (window.location.href = "/")}>
           <img src="/Logo.png" alt="FramerKit" className="sidebar-logo-icon" />
@@ -215,9 +205,25 @@ export default function Sidebar({
           </button>
         ) : (
           <>
-            <button className="authButton" onClick={scrollToPricing}>
-              Get Full Access
-            </button>
+           <button
+                  className="authButton"
+                  onClick={() => {
+                    if (location.pathname === "/") {
+                      // Уже на главной — просто скроллим
+                      const el = document.getElementById("get-framerkit");
+                      if (el) {
+                        el.scrollIntoView({ behavior: "smooth" });
+                      }
+                    } else {
+                      // На другой странице — переходим на главную с флагом
+                      navigate("/", {
+                        state: { scrollTo: "get-framerkit", fromSidebar: true },
+                      });
+                    }
+                  }}
+                >
+                  Get Full Access
+                </button>
             <button className="loginButton" onClick={onSignInOpen}>
               Log in
             </button>
@@ -227,6 +233,7 @@ export default function Sidebar({
     </div>
   );
 
+  // Mobile sidebar
   if (isMobile) {
     return (
       <>

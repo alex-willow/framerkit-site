@@ -502,12 +502,16 @@ body {
 }
 
 .skeleton-card {
+  background: var(--framer-color-bg);
+  border: 1px solid var(--framer-color-border);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.04);
   display: flex;
   flex-direction: column;
-  border-radius: calc(var(--border-radius) - 2px);
+  height: 100%; /* ← как у .card */
+  min-width: 250px;
+  position: relative;
   overflow: hidden;
-  box-shadow: var(--box-shadow-small);
-  background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
 }
 
 /* Имитация картинки с aspect-ratio 16/9 */
@@ -1434,9 +1438,11 @@ body.menu-open {
 .pricing-card {
   background: white;
   padding: 32px;
+  display: flex;
   border-radius: 20px;
   border: 1px solid #eee;
   transition: 0.25s ease;
+  min-height: 360px; /* ← ключевое: подбери точное значение */
   position: relative;
   box-shadow: 0 8px 24px rgba(0,0,0,0.04);
 

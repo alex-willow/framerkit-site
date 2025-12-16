@@ -190,6 +190,7 @@
   flex: 1;        
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+  min-height: 180px; /* ← ключевая строка */
   margin-top: 0;
 }
 
