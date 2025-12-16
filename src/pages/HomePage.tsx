@@ -36,31 +36,15 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
   const onSectionChangeRef = useRef(onSectionChange);
   onSectionChangeRef.current = onSectionChange;
 
-  // === Надёжный скролл с MutationObserver ===
   useEffect(() => {
     const { pathname, state } = location;
-    const explicitScrollTo = state?.scrollTo;
-    const fromLogo = state?.fromLogo === true;
-
-    let target: string | null = null;
-
-    // При обновлении страницы (state отсутствует) → overview
-    if (pathname === "/" && !state) {
-      target = "overview";
-    }
-    // При явном запросе (scrollTo)
-    else if (explicitScrollTo) {
-      target = explicitScrollTo;
-    }
-    // При клике по логотипу
-    else if (pathname === "/" && fromLogo) {
-      target = "overview";
-    }
-
-    if (!target) return;
-
-    // Уже есть элемент? → скроллим сразу
-    const el = document.getElementById(target);
+    const targetId = state?.scrollTo;
+  
+    // Только если цель указана и мы на главной
+    if (!targetId || pathname !== "/") return;
+  
+    // Пытаемся найти сразу
+    let el = document.getElementById(targetId);
     if (el) {
       if ("scrollRestoration" in window.history) {
         window.history.scrollRestoration = "manual";
@@ -68,10 +52,10 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
       el.scrollIntoView({ behavior: "auto", block: "start" });
       return;
     }
-
-    // Иначе — ждём появления через MutationObserver
+  
+    // Если не нашли — наблюдаем за изменениями DOM
     const observer = new MutationObserver(() => {
-      const el = document.getElementById(target!);
+      el = document.getElementById(targetId);
       if (el) {
         observer.disconnect();
         if ("scrollRestoration" in window.history) {
@@ -80,14 +64,15 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
         el.scrollIntoView({ behavior: "auto", block: "start" });
       }
     });
-
+  
+    // Наблюдаем за всем body
     observer.observe(document.body, { childList: true, subtree: true });
-
-    // Защита от утечки
+  
+    // Защита от утечки: отключаем через 3 сек
     const timeout = setTimeout(() => {
       observer.disconnect();
     }, 3000);
-
+  
     return () => {
       observer.disconnect();
       clearTimeout(timeout);
