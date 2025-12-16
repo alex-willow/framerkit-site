@@ -44,17 +44,23 @@ export default function RandomComponentCards() {
 
       for (const sec of COMPONENT_SECTIONS) {
         try {
+          // 🔥 УБРАНЫ ЛИШНИЕ ПРОБЕЛЫ
           const res = await fetch(
             `https://raw.githubusercontent.com/alex-willow/framerkit-data/components/${sec}.json`
           );
+
           if (!res.ok) {
             data[sec] = [];
             continue;
           }
 
           const json = await res.json();
+
+          // Ищем ключ, совпадающий с секцией (регистронезависимо)
           const jsonKey = Object.keys(json).find(k => k.toLowerCase() === sec.toLowerCase());
           const allItems: ComponentItem[] = jsonKey ? json[jsonKey] : [];
+
+          // Фильтр: только light-варианты
           data[sec] = allItems.filter(item => !item.key.toLowerCase().includes("dark"));
         } catch {
           data[sec] = [];
@@ -110,6 +116,7 @@ export default function RandomComponentCards() {
     }
 
     const newCard = list[Math.floor(Math.random() * list.length)];
+
     rotatingRef.current = true;
 
     setFading(prev => {
@@ -129,11 +136,13 @@ export default function RandomComponentCards() {
           lastChangeRef.current[index] = Date.now();
           return arr;
         });
+
         setFading(prev => {
           const arr = [...prev];
           arr[index] = false;
           return arr;
         });
+
         rotatingRef.current = false;
         timeoutRef.current = setTimeout(rotateOne, 1500);
       }, 500);
@@ -153,7 +162,11 @@ export default function RandomComponentCards() {
         <Link
           key={COMPONENT_SECTIONS[index]}
           to={item ? `/components/${COMPONENT_SECTIONS[index]}` : "#"}
-          className={item ? `card ${fading[index] ? "fadeOut" : "fadeIn"}` : "skeleton-card"}
+          className={
+            item
+              ? `card ${fading[index] ? "fadeOut" : "fadeIn"}`
+              : "skeleton-card"
+          }
           onMouseEnter={() => (hoveredRef.current[index] = true)}
           onMouseLeave={() => (hoveredRef.current[index] = false)}
           style={{ textDecoration: "none", color: "inherit" }}
@@ -165,8 +178,7 @@ export default function RandomComponentCards() {
                   src={item.image}
                   alt={item.title}
                   onError={(e) =>
-                    (e.currentTarget.src =
-                      "https://via.placeholder.com/280x160?text=Component")
+                    (e.currentTarget.src = "https://via.placeholder.com/280x160?text=Component")
                   }
                 />
               </div>
@@ -179,7 +191,11 @@ export default function RandomComponentCards() {
               <div className="hoverOverlay" />
             </>
           ) : (
-            <div className="skeleton-card-info"></div>
+            // ✅ Скелетон как в CtaPage
+            <>
+              <div className="skeleton-card-image" />
+              <div className="skeleton-card-info" />
+            </>
           )}
         </Link>
       ))}

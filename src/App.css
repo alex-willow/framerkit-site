@@ -551,10 +551,11 @@ body {
 /* Имитация cardInfo снизу */
 .skeleton-card-info {
   height: 40px; /* повторяет высоту блока с текстом и кнопками */
-  margin-top: 8px;
   background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
   border-radius: 2px;
 }
+
+
 
 
 
@@ -2235,3 +2236,5 @@ body.menu-open {
   height: 100%;
   border: 0;
 }
+
+

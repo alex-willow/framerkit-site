@@ -42,17 +42,18 @@ export default function RandomSectionCards() {
 
       for (const sec of STATIC_SECTIONS) {
         try {
-          // Исправлен URL: убраны лишние пробелы
+          // 🔥 УБРАНЫ ЛИШНИЕ ПРОБЕЛЫ В URL
           const res = await fetch(
             `https://raw.githubusercontent.com/alex-willow/framerkit-data/main/${sec}.json`
           );
 
           if (res.ok) {
             const json = await res.json();
+            // Структура: { "navbar": [...] }
             const allItems = json[sec] || [];
+            // Фильтр light-only
             data[sec] = allItems.filter(
-              (item: ComponentItem) =>
-                !item.key.toLowerCase().includes("dark")
+              (item: ComponentItem) => !item.key.toLowerCase().includes("dark")
             );
           } else {
             data[sec] = [];
@@ -111,6 +112,7 @@ export default function RandomSectionCards() {
     }
 
     const newCard = items[Math.floor(Math.random() * items.length)];
+
     rotatingRef.current = true;
 
     setFading(prev => {
@@ -130,11 +132,13 @@ export default function RandomSectionCards() {
           lastChangeRef.current[index] = Date.now();
           return c;
         });
+
         setFading(prev => {
           const c = [...prev];
           c[index] = false;
           return c;
         });
+
         rotatingRef.current = false;
         timeoutRef.current = setTimeout(rotateOne, 1500);
       }, 400);
@@ -154,7 +158,11 @@ export default function RandomSectionCards() {
         <Link
           key={STATIC_SECTIONS[index]}
           to={item ? `/layout/${STATIC_SECTIONS[index]}` : "#"}
-          className={item ? `card ${fading[index] ? "fadeOut" : "fadeIn"}` : "skeleton-card"}
+          className={
+            item
+              ? `card ${fading[index] ? "fadeOut" : "fadeIn"}`
+              : "skeleton-card"
+          }
           onMouseEnter={() => (hoveredRef.current[index] = true)}
           onMouseLeave={() => (hoveredRef.current[index] = false)}
           style={{ textDecoration: "none", color: "inherit" }}
@@ -166,8 +174,7 @@ export default function RandomSectionCards() {
                   src={item.image}
                   alt={item.title}
                   onError={(e) =>
-                    (e.currentTarget.src =
-                      "https://via.placeholder.com/280x160?text=Preview")
+                    (e.currentTarget.src = "https://via.placeholder.com/280x160?text=Preview")
                   }
                 />
               </div>
@@ -180,7 +187,11 @@ export default function RandomSectionCards() {
               <div className="hoverOverlay" />
             </>
           ) : (
-            <div className="skeleton-card-info"></div>
+            // ✅ Используем структуру как в CtaPage
+            <>
+              <div className="skeleton-card-image" />
+              <div className="skeleton-card-info" />
+            </>
           )}
         </Link>
       ))}

@@ -1,5 +1,5 @@
 // src/pages/HomePage.tsx
-import { useEffect, useRef, useLayoutEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import ComponentRunner from "../components/ComponentRunner";
 import RandomSectionCards from "../components/RandomSectionCards";
@@ -10,7 +10,6 @@ import styles from "./HomePage.module.css";
 import SimpleAvatarGroup from "../components/SimpleAvatarGroup";
 import { motion } from "framer-motion";
 import { CircleCheck } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 import {
   RocketLaunch,
   ClipboardText,
@@ -24,8 +23,7 @@ type HomePageProps = {
 
 export default function HomePage({ onSectionChange }: HomePageProps) {
   const location = useLocation();
-  const [ready, setReady] = useState(false);
-  const navigate = useNavigate();
+
 
   const sections = [
     "overview",
@@ -36,106 +34,60 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
     "faq-contact",
   ];
 
-  const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
+  // === Стабильная ссылка для onSectionChange ===
+  const onSectionChangeRef = useRef(onSectionChange);
+  onSectionChangeRef.current = onSectionChange;
 
-  // === Прокрутка к секции (только при refresh или клике по логотипу) ===
   useEffect(() => {
-    if (!ready) return;
-
     const { pathname, state, key } = location;
     const explicitScrollTo = state?.scrollTo;
     const fromLogo = state?.fromLogo === true;
-    const isRefreshOrFirstEntry = key === "default"; // true при refresh или первом заходе
-
+    const isRefreshOrFirstEntry = key === "default";
+  
     let target: string | null = null;
-
-    if (explicitScrollTo) {
-      target = explicitScrollTo;
-    } else if (pathname === "/" && (isRefreshOrFirstEntry || fromLogo)) {
+  
+    // При обновлении — ВСЕГДА к overview
+    if (pathname === "/" && isRefreshOrFirstEntry) {
       target = "overview";
     }
-
+    // При явном запросе (логотип, ссылка)
+    else if (explicitScrollTo) {
+      target = explicitScrollTo;
+    }
+    // При клике по логотипу (без scrollTo, но с fromLogo)
+    else if (pathname === "/" && fromLogo) {
+      target = "overview";
+    }
+  
     if (!target) return;
-
-    let attempts = 0;
-    const tryScroll = () => {
-      attempts++;
+  
+    // Функция прокрутки с повторами
+    const tryScroll = (attempts = 0) => {
       const el = document.getElementById(target!);
       if (el) {
+        // Прокручиваем и отключаем восстановление скролла браузером
         el.scrollIntoView({ behavior: "auto", block: "start" });
-        const top = el.getBoundingClientRect().top;
-        if (top > -2 && top < 2) return; // успешно прокрутили
-      }
-      if (attempts < 10) setTimeout(tryScroll, 35);
-    };
-
-    setTimeout(tryScroll, 0);
-  }, [ready, location.key, location.pathname, location.state]);
-
-  // === собираем рефы секций после рендера ===
-  useLayoutEffect(() => {
-    sections.forEach((id) => {
-      sectionRefs.current[id] = document.getElementById(id);
-    });
-  }, []);
-
-    // === Флаг: был ли HomePage уже полностью загружен хотя бы раз ===
-    const hasEverBeenReady = useRef(false);
-
-    // === Ждём галереи только при первом заходе. При повторных — сразу ready ===
-    useEffect(() => {
-      if (hasEverBeenReady.current) {
-        // Уже загружали — пропускаем ожидание
-        setReady(true);
-        return;
-      }
-  
-      const checkLoaded = () => {
-        const layoutGallery = document.querySelector("#layout-sections .gallery2");
-        const uiGallery = document.querySelector("#ui-components .gallery2");
-        return layoutGallery?.children.length && uiGallery?.children.length;
-      };
-  
-      if (checkLoaded()) {
-        setReady(true);
-        hasEverBeenReady.current = true;
-        return;
-      }
-  
-      const observer = new MutationObserver(() => {
-        if (checkLoaded()) {
-          setReady(true);
-          hasEverBeenReady.current = true;
-          observer.disconnect();
+        // Фикс: сбрасываем scrollRestoration
+        if ("scrollRestoration" in window.history) {
+          window.history.scrollRestoration = "manual";
         }
-      });
+      } else if (attempts < 15) {
+        // Ждём до 15 кадров (~240ms)
+        requestAnimationFrame(() => tryScroll(attempts + 1));
+      }
+    };
   
-      const layoutGallery = document.querySelector("#layout-sections .gallery2");
-      const uiGallery = document.querySelector("#ui-components .gallery2");
-  
-      if (layoutGallery) observer.observe(layoutGallery, { childList: true });
-      if (uiGallery) observer.observe(uiGallery, { childList: true });
-  
-      return () => observer.disconnect();
-    }, []);
+    // Запускаем немедленно
+    tryScroll();
+  }, [location.key, location.pathname, location.state]);
 
-  // === Очистка state после использования (чтобы не мешал при refresh) ===
-  useEffect(() => {
-    if (
-      location.pathname === "/" &&
-      (location.state?.scrollTo || location.state?.fromLogo)
-    ) {
-      navigate("/", { replace: true, state: {} });
-    }
-  }, [location.pathname, navigate]);
-
-  // === Отслеживание активной секции ===
+  // === Отслеживание активной секции (запускается ОДИН РАЗ) ===
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         const visibleEntry = entries.find((e) => e.isIntersecting);
         if (visibleEntry) {
-          onSectionChange(visibleEntry.target.id);
+          onSectionChangeRef.current(visibleEntry.target.id);
         }
       },
       {
@@ -151,10 +103,10 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
     });
 
     return () => observer.disconnect();
-  }, [onSectionChange]);
+  }, []); // ⚠️ ПУСТОЙ массив — критически важно!
 
   return (
-    <div style={{ opacity: ready ? 1 : 0, transition: "opacity 0.3s ease" }}>
+    <div>
 
       {/* OVERVIEW — с полосами света */}
       <section id="overview" className={styles.heroSection}>
@@ -384,8 +336,8 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
       </section>
 
       {/* GET FRAMERKIT – PRICING SECTION */}
-      <section id="get-framerkit" className="faq-section">
-        <div className="faq-container">
+      <section id="get-framerkit" className="pricing-section">
+        <div className="pricing-container">
           <h2 className="fk-gs-title">Get FramerKit</h2>
           <p className="fk-gs-text">Choose your plan and unlock the power of FramerKit</p>
 
