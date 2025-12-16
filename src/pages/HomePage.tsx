@@ -1,4 +1,3 @@
-// src/pages/HomePage.tsx
 import { useEffect, useRef, useState } from "react";
 import ComponentRunner from "../components/ComponentRunner";
 import RandomSectionCards from "../components/RandomSectionCards";
@@ -13,7 +12,7 @@ import {
   RocketLaunch,
   ClipboardText,
   Sliders,
-  CloudArrowUp
+  CloudArrowUp,
 } from "phosphor-react";
 
 type HomePageProps = {
@@ -35,40 +34,59 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
 
   const [isReady, setIsReady] = useState(false);
 
-  // === Прокрутка к хэшу + мгновенное появление ===
+  // ================================
+  // ХЭШ-СКРОЛЛ БЕЗ МИГАНИЯ
+  // ================================
   useEffect(() => {
-    const hash = window.location.hash.replace('#', '');
+    const hash = window.location.hash.slice(1);
+
+    // если хэша нет — просто показываем страницу
     if (!hash) {
       setIsReady(true);
       return;
     }
 
-    let hasScrolled = false;
+    let attempts = 0;
+    let scrolled = false;
 
-    const tryScroll = (attempts = 0) => {
+    const scrollToHash = () => {
       const el = document.getElementById(hash);
-      if (el && !hasScrolled) {
-        hasScrolled = true;
-        if ("scrollRestoration" in window.history) {
-          window.history.scrollRestoration = "manual";
-        }
-        el.scrollIntoView({ behavior: "auto", block: "start" });
+
+      if (el && !scrolled) {
+        scrolled = true;
+        el.scrollIntoView({
+          behavior: "auto",
+          block: "start",
+        });
+
+        // показываем страницу ТОЛЬКО после скролла
         setIsReady(true);
-      } else if (attempts < 20) {
-        requestAnimationFrame(() => tryScroll(attempts + 1));
+      } else if (attempts < 40) {
+        attempts++;
+        setTimeout(scrollToHash, 50);
       } else {
-        // Если не нашли — всё равно показываем
+        // fallback — если секция так и не появилась
         setIsReady(true);
       }
     };
 
-    tryScroll();
+    // ждём layout
+    requestAnimationFrame(() => {
+      setTimeout(scrollToHash, 0);
+    });
   }, []);
 
-  // === Отслеживание активной секции ===
+  // ================================
+  // INTERSECTION OBSERVER
+  // (включается ПОСЛЕ hash-скролла)
+  // ================================
   useEffect(() => {
+    let enabled = false;
+
     const observer = new IntersectionObserver(
       (entries) => {
+        if (!enabled) return;
+
         const visibleEntry = entries.find((e) => e.isIntersecting);
         if (visibleEntry) {
           onSectionChangeRef.current(visibleEntry.target.id);
@@ -86,12 +104,27 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
       if (el) observer.observe(el);
     });
 
-    return () => observer.disconnect();
+    // включаем observer ПОСЛЕ скролла
+    const timer = setTimeout(() => {
+      enabled = true;
+    }, 500);
+
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+    };
   }, []);
 
+  // ================================
+  // RENDER
+  // ================================
   return (
-    <div style={{ opacity: isReady ? 1 : 0, transition: 'opacity 0ms' }}>
-      
+    <div
+      style={{
+        opacity: isReady ? 1 : 0,
+        transition: "opacity 0ms",
+      }}
+    >
       {/* OVERVIEW — с полосами света */}
       <section id="overview" className={styles.heroSection}>
         <div className={styles.lightTop}></div>

@@ -35,15 +35,18 @@ export default function MainLayout({
   const location = useLocation();
   const internalRef = useRef<HTMLDivElement>(null);
   const contentRef = galleryScrollRef || internalRef;
-
-  // Скролл наверх при смене маршрута
+  
   useEffect(() => {
+    // ❗ если есть hash — НЕ ТРОГАЕМ СКРОЛЛ
+    if (location.hash) return;
+  
     if (contentRef.current) {
       contentRef.current.scrollTo({ top: 0, left: 0, behavior: "auto" });
     } else {
       window.scrollTo({ top: 0, left: 0, behavior: "auto" });
     }
-  }, [location.pathname, contentRef]);
+  }, [location.pathname, location.hash, contentRef]);
+  
 
   return (
     <div className="container" data-theme={theme}>
