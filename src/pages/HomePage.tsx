@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import ComponentRunner from "../components/ComponentRunner";
 import RandomSectionCards from "../components/RandomSectionCards";
 import RandomComponentCards from "../components/RandomComponentCards";
@@ -35,9 +35,21 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
     }
   };
 
-
   const onSectionChangeRef = useRef(onSectionChange);
   onSectionChangeRef.current = onSectionChange;
+
+  // Для гибридной анимации
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" ? window.innerWidth < 768 : false
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // ================================
   // ХЭШ-СКРОЛЛ
@@ -82,47 +94,47 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
   useEffect(() => {
     const el = document.getElementById("get-framerkit");
     if (!el) return;
-  
+
     let fired = false;
-  
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !fired) {
           fired = true;
-  
+
           trackEvent("view_pricing", {
             section: "get-framerkit",
           });
-  
+
           observer.disconnect();
         }
       },
       { threshold: 0.4 }
     );
-  
+
     observer.observe(el);
-  
+
     return () => observer.disconnect();
   }, []);
-  
+
+  const splitWords = (text: string) => text.split(" ");
 
   return (
     <div>
-
       {/* OVERVIEW — с полосами света */}
       <section id="overview" className={styles.heroSection}>
         <div className={styles.lightTop}></div>
         <div className={styles.lightMid}></div>
 
         <div className={styles.container}>
-          {/* Строки заголовка */}
           {(() => {
             const firstLine = "Build Websites Faster";
             const secondLine = "with FramerKit";
 
             // Задержки
             const logoAndFirstLineDelay = 0;
-            const secondLineDelay = logoAndFirstLineDelay + firstLine.length * 0.03 + 0.2;
+            const secondLineDelay =
+              logoAndFirstLineDelay + firstLine.length * 0.03 + 0.2;
             const subtitleDelay = secondLineDelay + secondLine.length * 0.03 + 0.2;
             const buttonsDelay = subtitleDelay + 0.6;
             const testimonialsDelay = buttonsDelay + 0.2;
@@ -134,37 +146,74 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
                   className={styles.logos}
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, ease: "easeOut", delay: logoAndFirstLineDelay }}
+                  transition={{
+                    duration: 0.6,
+                    ease: "easeOut",
+                    delay: logoAndFirstLineDelay,
+                  }}
                 >
-                  <div className={styles["logo-item"]} style={{ transform: "rotate(-10deg)" }}>
+                  <div
+                    className={styles["logo-item"]}
+                    style={{ transform: "rotate(-10deg)" }}
+                  >
                     <img src="/Framer.png" alt="Framer" />
                   </div>
-                  <div className={styles["logo-item"]} style={{ transform: "rotate(10deg)" }}>
+                  <div
+                    className={styles["logo-item"]}
+                    style={{ transform: "rotate(10deg)" }}
+                  >
                     <img src="/framerkit.png" alt="FramerKit" />
                   </div>
                 </motion.div>
 
-                {/* 2-3. Заголовок по строкам и символам */}
+                {/* 2-3. Заголовок — гибридная анимация */}
                 <motion.h1 className={styles.title}>
                   {[firstLine, secondLine].map((line, lineIndex) => {
-                    const baseDelay = lineIndex === 0 ? logoAndFirstLineDelay : secondLineDelay;
+                    const baseDelay =
+                      lineIndex === 0
+                        ? logoAndFirstLineDelay
+                        : secondLineDelay;
+
                     return (
-                      <motion.div className={styles.titleLine} key={`line-${lineIndex}`}>
-                        {Array.from(line).map((char, i) => (
-                          <motion.span
-                            key={`line${lineIndex}-${i}`}
-                            className={styles.animatedChar}
-                            initial={{ opacity: 0, x: -20, filter: "blur(6px)" }}
-                            animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-                            transition={{
-                              duration: 0.6,
-                              ease: "easeOut",
-                              delay: baseDelay + i * 0.03,
-                            }}
-                          >
-                            {char === " " ? "\u00A0" : char}
-                          </motion.span>
-                        ))}
+                      <motion.div
+                        className={styles.titleLine}
+                        key={`line-${lineIndex}`}
+                      >
+                        {isMobile
+                          ? splitWords(line).map((word, i) => (
+                              <motion.span
+                                key={`word-${lineIndex}-${i}`}
+                                className={styles.animatedWord}
+                                initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
+                                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                                transition={{
+                                  duration: 0.6,
+                                  ease: "easeOut",
+                                  delay: baseDelay + i * 0.08,
+                                }}
+                              >
+                                {word}&nbsp;
+                              </motion.span>
+                            ))
+                          : Array.from(line).map((char, i) => (
+                              <motion.span
+                                key={`line${lineIndex}-${i}`}
+                                className={styles.animatedChar}
+                                initial={{
+                                  opacity: 0,
+                                  x: -20,
+                                  filter: "blur(6px)",
+                                }}
+                                animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+                                transition={{
+                                  duration: 0.6,
+                                  ease: "easeOut",
+                                  delay: baseDelay + i * 0.03,
+                                }}
+                              >
+                                {char === " " ? "\u00A0" : char}
+                              </motion.span>
+                            ))}
                       </motion.div>
                     );
                   })}
@@ -181,53 +230,54 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
                     delay: subtitleDelay,
                   }}
                 >
-                  A complete library of ready-to-use sections, components, styles, and templates — fully optimized for Framer
+                  A complete library of ready-to-use sections, components, styles,
+                  and templates — fully optimized for Framer
                 </motion.p>
 
                 {/* 5. Кнопки */}
-                    <motion.div
-                      className={styles.buttons}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{
-                        duration: 0.6,
-                        ease: "easeOut",
-                        delay: buttonsDelay,
-                      }}
-                    >
-                      {/* Get Full Version */}
-                      <button
-                        className="authButton"
-                        onClick={() => {
-                          trackEvent("click_get_full_version", {
-                            location: "hero",
-                          });
+                <motion.div
+                  className={styles.buttons}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{
+                    duration: 0.6,
+                    ease: "easeOut",
+                    delay: buttonsDelay,
+                  }}
+                >
+                  <button
+                    className="authButton"
+                    onClick={() => {
+                      trackEvent("click_get_full_version", {
+                        location: "hero",
+                      });
 
-                          const el = document.getElementById("get-framerkit");
-                          if (el) {
-                            el.scrollIntoView({ behavior: "smooth", block: "start" });
-                          }
-                        }}
-                      >
-                        Get Full Version
-                      </button>
+                      const el = document.getElementById("get-framerkit");
+                      if (el) {
+                        el.scrollIntoView({
+                          behavior: "smooth",
+                          block: "start",
+                        });
+                      }
+                    }}
+                  >
+                    Get Full Version
+                  </button>
 
-                      {/* Try Free on Framer */}
-                      <a
-                        href="https://www.framer.com/marketplace/plugins/framerkit"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={() =>
-                          trackEvent("click_try_free_on_framer", {
-                            location: "hero",
-                            outbound: true,
-                          })
-                        }
-                      >
-                        <button className="logoutButton">Try Free on Framer</button>
-                      </a>
-                    </motion.div>
-
+                  <a
+                    href="https://www.framer.com/marketplace/plugins/framerkit"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() =>
+                      trackEvent("click_try_free_on_framer", {
+                        location: "hero",
+                        outbound: true,
+                      })
+                    }
+                  >
+                    <button className="logoutButton">Try Free on Framer</button>
+                  </a>
+                </motion.div>
 
                 {/* 6. Аватарки и статистика */}
                 <motion.div
@@ -241,8 +291,12 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
                   }}
                 >
                   <SimpleAvatarGroup size={40} overlap={6} />
-                  <p className={styles.statsText}>1,200+ designers already use FramerKit</p>
-                  <p className={styles.statsNote}>(and the number grows every day)</p>
+                  <p className={styles.statsText}>
+                    1,200+ designers already use FramerKit
+                  </p>
+                  <p className={styles.statsNote}>
+                    (and the number grows every day)
+                  </p>
                 </motion.div>
               </>
             );

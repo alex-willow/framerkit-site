@@ -1076,6 +1076,23 @@ body.menu-open {
   margin-bottom: 40px;
 }
 
+.animatedChar {
+  display: inline-block; /* обязательно для анимации каждой буквы */
+  white-space: pre; /* сохраняем пробелы */
+}
+.animatedWord {
+  display: inline-block; /* чтобы слова анимировались отдельно */
+  margin-right: 0.25em; /* небольшой отступ между словами */
+  white-space: pre; /* сохраняем пробелы */
+}
+
+.titleLine {
+  display: flex;
+  flex-wrap: wrap; /* важно для мобильного переноса слов */
+  justify-content: center; /* по желанию, чтобы центрировать текст */
+}
+
+
 .hero-logos img {
   width: 72px;
   height: 72px;
@@ -2138,10 +2155,10 @@ body.menu-open {
 /* Контейнер кнопок */
 .sidebar-bottom {
   border-top: 1px solid #e5e5e5;
-  padding: 12px 6px 6px 6px;
+  padding: 6px 6px 6px 6px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   background-color: #fff;
 }
 
