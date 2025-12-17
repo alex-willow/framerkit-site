@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ChevronDown, ChevronUp, LogOut } from "lucide-react";
+
 
 const trackEvent = (event: string, params?: Record<string, any>) => {
   if (typeof window !== "undefined" && (window as any).gtag) {
@@ -32,10 +33,12 @@ export default function Sidebar({
 }: SidebarProps) {
   const navigate = useNavigate();
   const location = useLocation();
-
+  const scrollRef = useRef<HTMLDivElement>(null);
   const [layoutOpen, setLayoutOpen] = useState(false);
   const [componentsOpen, setComponentsOpen] = useState(false);
   const [templatesOpen, setTemplatesOpen] = useState(false);
+
+
 
   const homeSections = [
     { id: "overview", label: "Overview" },
@@ -76,27 +79,58 @@ export default function Sidebar({
     { id: "testimonialcard", label: "Testimonial Card" },
   ];
 
+  const layoutIds = layoutSections.map(s => s.id);
+  const componentIds = componentSections.map(s => s.id);
+
   useEffect(() => {
-    if (!isMenuOpen) return;
-    const path = location.pathname;
-    if (path.startsWith("/components")) {
-      setComponentsOpen(true);
-      setLayoutOpen(false);
-      setTemplatesOpen(false);
-    } else if (path.startsWith("/layout")) {
+    // layout
+    if (
+      location.pathname.startsWith("/layout") ||
+      layoutIds.includes(activeSection)
+    ) {
       setLayoutOpen(true);
       setComponentsOpen(false);
       setTemplatesOpen(false);
-    } else if (path.startsWith("/templates")) {
+      return;
+    }
+  
+    // components
+    if (
+      location.pathname.startsWith("/components") ||
+      componentIds.includes(activeSection)
+    ) {
+      setComponentsOpen(true);
+      setLayoutOpen(false);
+      setTemplatesOpen(false);
+      return;
+    }
+  
+    // templates
+    if (location.pathname.startsWith("/templates")) {
       setTemplatesOpen(true);
       setLayoutOpen(false);
       setComponentsOpen(false);
-    } else {
-      setLayoutOpen(false);
-      setComponentsOpen(false);
-      setTemplatesOpen(false);
+      return;
     }
-  }, [isMenuOpen, location.pathname]);
+  }, [location.pathname, activeSection]);
+  
+  useEffect(() => {
+    if (!scrollRef.current) return;
+  
+    const activeItem = scrollRef.current.querySelector(
+      ".sidebar-item.active"
+    ) as HTMLElement | null;
+  
+    if (activeItem) {
+      activeItem.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+      });
+    }
+  }, [activeSection, location.pathname]);
+  
+
+
 
   const handleHomeSectionClick = (id: string) => {
     onSectionChange(id);
@@ -185,7 +219,11 @@ export default function Sidebar({
         </div>
       )}
 
-      <div className="sidebar-scroll" style={{ flexGrow: 1, overflowY: "auto" }}>
+          <div
+            ref={scrollRef}
+            className="sidebar-scroll"
+            style={{ flexGrow: 1, overflowY: "auto" }}
+          >
         <div className="sidebar-header">Getting Started</div>
         {homeSections.map(({ id, label }) => (
           <button
