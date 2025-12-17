@@ -230,8 +230,8 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
                     delay: subtitleDelay,
                   }}
                 >
-                  A complete library of ready-to-use sections, components, styles,
-                  and templates — fully optimized for Framer
+                 Everything you need to design, build, and launch beautiful websites faster and smarter
+
                 </motion.p>
 
                 {/* 5. Кнопки */}
@@ -426,7 +426,7 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
                   </div>
 
                   <a
-                    href="https://buy.polar.sh/polar_cl_LJnSRqf2juaDuIvTQwDGGrBDgWkm6mG4ka8t60bnY5K"
+                    href="https://buy.polar.sh/polar_cl_XHxCo4fFM0lO2Oyv9HFja89aD2W5dEZ4gw3fz3rlDKY"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="pricing-btn secondary"
