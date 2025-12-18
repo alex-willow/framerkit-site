@@ -26,7 +26,6 @@ export default function FramerKitDailyPage({
 }: FramerKitDailyPageProps) {
   const [items, setItems] = useState<TemplateItem[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const location = useLocation();
 
   // Скролл наверх при смене страницы
@@ -55,7 +54,7 @@ export default function FramerKitDailyPage({
         );
         setItems(framerkitdaily);
       } catch (e) {
-        setError("Failed to load templates");
+ 
       } finally {
         setLoading(false);
       }
