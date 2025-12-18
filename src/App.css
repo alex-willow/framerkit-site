@@ -969,25 +969,7 @@ body {
   display: block;
 }
 
-/* === Кнопка гамбургер === */
-.hamburgerButton {
-  background: none;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center; /* выравнивание содержимого */
-  padding: 0; /* убираем все внутренние отступы */
-  margin: 0;  /* убираем внешние */
-  line-height: 0; /* убирает лишнее пространство вокруг SVG */
-  width: 36px; /* при желании фиксируем размер кнопки */
-  height: 36px;
-}
 
-
-.hamburgerButton:focus {
-  outline: none;
-}
 
 /* === Скролл-блокировка при открытом меню === */
 body.menu-open {
@@ -1025,6 +1007,40 @@ body.menu-open {
   margin-right: 0.25em; /* небольшой отступ между словами */
   white-space: pre; /* сохраняем пробелы */
 }
+
+/* src/styles/Header.css */
+.hamburgerButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Убираем outline при фокусе */
+  outline: none;
+}
+
+/* Убираем эффекты при клике и фокусе */
+.hamburgerButton:focus,
+.hamburgerButton:active {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Иконка Lucide */
+.hamburgerButton svg {
+  color: #000000; /* основной цвет иконки */
+  display: block;  /* устраняет возможные проблемы с inline */
+  transition: color 0.2s ease;
+}
+
+/* Hover эффект */
+.hamburgerButton:hover svg {
+  color: #000000;
+}
+
 
 
 .hero-logos img {

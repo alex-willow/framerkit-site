@@ -1,15 +1,13 @@
 import { Menu } from "lucide-react";
+import "./Header.css";
 
 type HeaderProps = {
   isMobile: boolean;
   onMenuToggle: () => void;
-  isAuthenticated: boolean;
-  onLogout: () => void;
-  onSignInOpen: () => void;
 };
 
 export default function Header({ isMobile, onMenuToggle }: HeaderProps) {
-  if (!isMobile) return null; // Отображаем только на мобильных
+  if (!isMobile) return null;
 
   return (
     <header className="header">
@@ -22,11 +20,7 @@ export default function Header({ isMobile, onMenuToggle }: HeaderProps) {
         <h1 style={{ fontSize: "20px", margin: 0 }}>FramerKit</h1>
       </div>
 
-      <button
-        className="hamburgerButton"
-        onClick={onMenuToggle}
-        style={{ background: "none", border: "none", cursor: "pointer" }}
-      >
+      <button className="hamburgerButton" onClick={onMenuToggle}>
         <Menu size={24} />
       </button>
     </header>

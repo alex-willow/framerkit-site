@@ -168,56 +168,37 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
 
                 {/* 2-3. Заголовок — гибридная анимация */}
                 <motion.h1 className={styles.title}>
-                  {[firstLine, secondLine].map((line, lineIndex) => {
-                    const baseDelay =
-                      lineIndex === 0
-                        ? logoAndFirstLineDelay
-                        : secondLineDelay;
+  {[firstLine, secondLine].map((line, lineIndex) => {
+    const baseDelay =
+      lineIndex === 0 ? logoAndFirstLineDelay : secondLineDelay;
 
-                    return (
-                      <motion.div
-                        className={styles.titleLine}
-                        key={`line-${lineIndex}`}
+    return (
+                  <motion.div className={styles.titleLine} key={`line-${lineIndex}`}>
+                    {Array.from(line).map((char, i) => (
+                      <motion.span
+                        key={`char-${lineIndex}-${i}`}
+                        className={styles.animatedChar}
+                        initial={{
+                          opacity: 0,
+                          x: -20,
+                          filter: "blur(6px)",
+                        }}
+                        animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+                        transition={{
+                          duration: 0.6,
+                          ease: "easeOut",
+                          delay: baseDelay + i * 0.03,
+                        }}
+                        style={{ whiteSpace: char === " " ? "pre" : "normal" }}
                       >
-                        {isMobile
-                          ? splitWords(line).map((word, i) => (
-                              <motion.span
-                                key={`word-${lineIndex}-${i}`}
-                                className={styles.animatedWord}
-                                initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
-                                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                                transition={{
-                                  duration: 0.6,
-                                  ease: "easeOut",
-                                  delay: baseDelay + i * 0.08,
-                                }}
-                              >
-                                {word}&nbsp;
-                              </motion.span>
-                            ))
-                          : Array.from(line).map((char, i) => (
-                              <motion.span
-                                key={`line${lineIndex}-${i}`}
-                                className={styles.animatedChar}
-                                initial={{
-                                  opacity: 0,
-                                  x: -20,
-                                  filter: "blur(6px)",
-                                }}
-                                animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-                                transition={{
-                                  duration: 0.6,
-                                  ease: "easeOut",
-                                  delay: baseDelay + i * 0.03,
-                                }}
-                              >
-                                {char === " " ? "\u00A0" : char}
-                              </motion.span>
-                            ))}
-                      </motion.div>
-                    );
-                  })}
-                </motion.h1>
+                        {char}
+                      </motion.span>
+                    ))}
+                  </motion.div>
+                );
+              })}
+            </motion.h1>
+
 
                 {/* 4. Подзаголовок */}
                 <motion.p
