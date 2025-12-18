@@ -116,6 +116,18 @@
     margin: 0;
     max-width: 600px;
   }
+
+  @media (max-width: 767px) {
+    .titleLine {
+      white-space: normal;        /* разрешаем перенос */
+      overflow: visible;          /* не обрезаем текст */
+      text-overflow: clip;        /* убираем многоточие */
+    }
+  
+    .titleLine span {
+      display: inline;            /* слова и символы могут переноситься */
+    }
+  }
   
   .buttons {
     display: flex;

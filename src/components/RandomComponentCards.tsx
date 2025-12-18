@@ -28,8 +28,15 @@ const COMPONENT_SECTIONS = [
 ];
 
 export default function RandomComponentCards() {
-  const [cards, setCards] = useState<(ComponentItem | null)[]>(Array(COMPONENT_SECTIONS.length).fill(null));
-  const [fading, setFading] = useState<boolean[]>(Array(COMPONENT_SECTIONS.length).fill(false));
+  const [cards, setCards] = useState<(ComponentItem | null)[]>(
+    Array(COMPONENT_SECTIONS.length).fill(null)
+  );
+  const [loaded, setLoaded] = useState<boolean[]>(
+    Array(COMPONENT_SECTIONS.length).fill(false)
+  );
+  const [fading, setFading] = useState<boolean[]>(
+    Array(COMPONENT_SECTIONS.length).fill(false)
+  );
 
   const hoveredRef = useRef<boolean[]>(Array(COMPONENT_SECTIONS.length).fill(false));
   const lastChangeRef = useRef<number[]>(Array(COMPONENT_SECTIONS.length).fill(0));
@@ -44,23 +51,17 @@ export default function RandomComponentCards() {
 
       for (const sec of COMPONENT_SECTIONS) {
         try {
-          // 🔥 УБРАНЫ ЛИШНИЕ ПРОБЕЛЫ
           const res = await fetch(
             `https://raw.githubusercontent.com/alex-willow/framerkit-data/components/${sec}.json`
           );
-
           if (!res.ok) {
             data[sec] = [];
             continue;
           }
 
           const json = await res.json();
-
-          // Ищем ключ, совпадающий с секцией (регистронезависимо)
           const jsonKey = Object.keys(json).find(k => k.toLowerCase() === sec.toLowerCase());
           const allItems: ComponentItem[] = jsonKey ? json[jsonKey] : [];
-
-          // Фильтр: только light-варианты
           data[sec] = allItems.filter(item => !item.key.toLowerCase().includes("dark"));
         } catch {
           data[sec] = [];
@@ -76,9 +77,17 @@ export default function RandomComponentCards() {
         return arr[Math.floor(Math.random() * arr.length)];
       });
 
-      setCards(initial);
-      lastChangeRef.current = initial.map(() => now);
-      startRotation();
+      // Показываем скелетоны сначала
+      setCards(Array(COMPONENT_SECTIONS.length).fill(null));
+      setLoaded(Array(COMPONENT_SECTIONS.length).fill(false));
+
+      // Через таймаут показываем реальные карточки
+      setTimeout(() => {
+        setCards(initial);
+        setLoaded(initial.map(i => i !== null));
+        lastChangeRef.current = initial.map(() => now);
+        startRotation();
+      }, 800);
     };
 
     load();
@@ -110,13 +119,12 @@ export default function RandomComponentCards() {
     const sec = COMPONENT_SECTIONS[index];
     const list = itemsBySection.current[sec] || [];
 
-    if (list.length === 0) {
+    if (!list.length) {
       timeoutRef.current = setTimeout(rotateOne, 1000);
       return;
     }
 
     const newCard = list[Math.floor(Math.random() * list.length)];
-
     rotatingRef.current = true;
 
     setFading(prev => {
@@ -158,47 +166,77 @@ export default function RandomComponentCards() {
 
   return (
     <>
-      {cards.map((item, index) => (
-        <Link
-          key={COMPONENT_SECTIONS[index]}
-          to={item ? `/components/${COMPONENT_SECTIONS[index]}` : "#"}
-          className={
-            item
-              ? `card ${fading[index] ? "fadeOut" : "fadeIn"}`
-              : "skeleton-card"
-          }
-          onMouseEnter={() => (hoveredRef.current[index] = true)}
-          onMouseLeave={() => (hoveredRef.current[index] = false)}
-          style={{ textDecoration: "none", color: "inherit" }}
-        >
-          {item ? (
-            <>
-              <div className="cardImage">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  onError={(e) =>
-                    (e.currentTarget.src = "https://via.placeholder.com/280x160?text=Component")
-                  }
-                />
+      {COMPONENT_SECTIONS.map((section, index) => {
+        const item = cards[index];
+        const count = itemsBySection.current[section]?.length || 0;
+
+        return (
+          <Link
+            key={section}
+            to={item ? `/components/${section}` : "#"}
+            className="card"
+            onMouseEnter={() => (hoveredRef.current[index] = true)}
+            onMouseLeave={() => (hoveredRef.current[index] = false)}
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            {/* Скелетон */}
+            {!loaded[index] && (
+              <div className="skeleton-card">
+                <div className="skeleton-card-image" />
+                <div className="skeleton-card-info" />
               </div>
-              <div className="cardInfo">
-                <h3>{item.title}</h3>
-                <div className="iconButton2">
-                  <ArrowUpRight size={16} className="explore-icon" />
+            )}
+
+            {/* Карточка с названием и фоном, без изображения */}
+            {loaded[index] && !item && (
+              <div
+                className="card-name-only"
+                style={{
+                  height: "100%",
+                  borderRadius: "8px",
+                  display: "flex",
+                  alignItems: "flex-end",
+                  padding: "12px"
+                }}
+              >
+                <div className="cardInfo">
+                  <h3>
+                    {section.charAt(0).toUpperCase() + section.slice(1)} · 0
+                  </h3>
+                  <div className="iconButton2">
+                    <ArrowUpRight size={16} className="explore-icon" />
+                  </div>
                 </div>
               </div>
-              <div className="hoverOverlay" />
-            </>
-          ) : (
-            // ✅ Скелетон как в CtaPage
-            <>
-              <div className="skeleton-card-image" />
-              <div className="skeleton-card-info" />
-            </>
-          )}
-        </Link>
-      ))}
+            )}
+
+            {/* Карточка с изображением */}
+            {loaded[index] && item && (
+              <>
+                <div className={`cardImage ${fading[index] ? "fadeOut" : "fadeIn"}`}>
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    onError={e =>
+                      (e.currentTarget.src =
+                        "https://via.placeholder.com/280x160?text=Component")
+                    }
+                  />
+                </div>
+
+                <div className="cardInfo">
+                  <h3>
+                    {section.charAt(0).toUpperCase() + section.slice(1)} · {count}
+                  </h3>
+                  <div className="iconButton2">
+                    <ArrowUpRight size={16} className="explore-icon" />
+                  </div>
+                </div>
+              </>
+            )}
+          </Link>
+        );
+      })}
     </>
   );
 }

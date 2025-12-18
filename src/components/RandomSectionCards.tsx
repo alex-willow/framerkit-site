@@ -26,8 +26,15 @@ const STATIC_SECTIONS = [
 ];
 
 export default function RandomSectionCards() {
-  const [cards, setCards] = useState<(ComponentItem | null)[]>(Array(STATIC_SECTIONS.length).fill(null));
-  const [fading, setFading] = useState<boolean[]>(Array(STATIC_SECTIONS.length).fill(false));
+  const [cards, setCards] = useState<(ComponentItem | null)[]>(
+    Array(STATIC_SECTIONS.length).fill(null)
+  );
+  const [loaded, setLoaded] = useState<boolean[]>(
+    Array(STATIC_SECTIONS.length).fill(false)
+  );
+  const [fading, setFading] = useState<boolean[]>(
+    Array(STATIC_SECTIONS.length).fill(false)
+  );
 
   const hoveredRef = useRef<boolean[]>(Array(STATIC_SECTIONS.length).fill(false));
   const lastChangeRef = useRef<number[]>(Array(STATIC_SECTIONS.length).fill(0));
@@ -42,18 +49,15 @@ export default function RandomSectionCards() {
 
       for (const sec of STATIC_SECTIONS) {
         try {
-          // 🔥 УБРАНЫ ЛИШНИЕ ПРОБЕЛЫ В URL
           const res = await fetch(
             `https://raw.githubusercontent.com/alex-willow/framerkit-data/main/${sec}.json`
           );
 
           if (res.ok) {
             const json = await res.json();
-            // Структура: { "navbar": [...] }
-            const allItems = json[sec] || [];
-            // Фильтр light-only
+            const allItems: ComponentItem[] = json[sec] || [];
             data[sec] = allItems.filter(
-              (item: ComponentItem) => !item.key.toLowerCase().includes("dark")
+              (item) => !item.key.toLowerCase().includes("dark")
             );
           } else {
             data[sec] = [];
@@ -72,9 +76,17 @@ export default function RandomSectionCards() {
         return items[Math.floor(Math.random() * items.length)];
       });
 
-      setCards(initial);
-      lastChangeRef.current = initial.map(() => now);
-      startRotation();
+      // Показываем скелетоны сначала
+      setCards(Array(STATIC_SECTIONS.length).fill(null));
+      setLoaded(Array(STATIC_SECTIONS.length).fill(false));
+
+      // Через короткий таймаут показываем реальные карточки
+      setTimeout(() => {
+        setCards(initial);
+        setLoaded(initial.map(i => i !== null));
+        lastChangeRef.current = initial.map(() => now);
+        startRotation();
+      }, 800);
     };
 
     load();
@@ -98,27 +110,26 @@ export default function RandomSectionCards() {
     }
 
     if (!eligible.length) {
-      timeoutRef.current = setTimeout(rotateOne, 1200);
+      timeoutRef.current = setTimeout(rotateOne, 1000);
       return;
     }
 
     const index = eligible[Math.floor(Math.random() * eligible.length)];
     const sec = STATIC_SECTIONS[index];
-    const items = itemsBySection.current[sec];
+    const list = itemsBySection.current[sec] || [];
 
-    if (!items || items.length === 0) {
-      timeoutRef.current = setTimeout(rotateOne, 1200);
+    if (!list.length) {
+      timeoutRef.current = setTimeout(rotateOne, 1000);
       return;
     }
 
-    const newCard = items[Math.floor(Math.random() * items.length)];
-
+    const newCard = list[Math.floor(Math.random() * list.length)];
     rotatingRef.current = true;
 
     setFading(prev => {
-      const c = [...prev];
-      c[index] = true;
-      return c;
+      const arr = [...prev];
+      arr[index] = true;
+      return arr;
     });
 
     const preload = new Image();
@@ -127,16 +138,16 @@ export default function RandomSectionCards() {
     const swap = () => {
       setTimeout(() => {
         setCards(prev => {
-          const c = [...prev];
-          c[index] = newCard;
+          const arr = [...prev];
+          arr[index] = newCard;
           lastChangeRef.current[index] = Date.now();
-          return c;
+          return arr;
         });
 
         setFading(prev => {
-          const c = [...prev];
-          c[index] = false;
-          return c;
+          const arr = [...prev];
+          arr[index] = false;
+          return arr;
         });
 
         rotatingRef.current = false;
@@ -154,47 +165,77 @@ export default function RandomSectionCards() {
 
   return (
     <>
-      {cards.map((item, index) => (
-        <Link
-          key={STATIC_SECTIONS[index]}
-          to={item ? `/layout/${STATIC_SECTIONS[index]}` : "#"}
-          className={
-            item
-              ? `card ${fading[index] ? "fadeOut" : "fadeIn"}`
-              : "skeleton-card"
-          }
-          onMouseEnter={() => (hoveredRef.current[index] = true)}
-          onMouseLeave={() => (hoveredRef.current[index] = false)}
-          style={{ textDecoration: "none", color: "inherit" }}
-        >
-          {item ? (
-            <>
-              <div className="cardImage">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  onError={(e) =>
-                    (e.currentTarget.src = "https://via.placeholder.com/280x160?text=Preview")
-                  }
-                />
+      {STATIC_SECTIONS.map((section, index) => {
+        const item = cards[index];
+        const count = itemsBySection.current[section]?.length || 0;
+
+        return (
+          <Link
+            key={section}
+            to={item ? `/layout/${section}` : "#"}
+            className="card"
+            onMouseEnter={() => (hoveredRef.current[index] = true)}
+            onMouseLeave={() => (hoveredRef.current[index] = false)}
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            {/* Скелетон */}
+            {!loaded[index] && (
+              <div className="skeleton-card">
+                <div className="skeleton-card-image" />
+                <div className="skeleton-card-info" />
               </div>
-              <div className="cardInfo">
-                <h3>{item.title}</h3>
-                <div className="iconButton2">
-                  <ArrowUpRight size={16} className="explore-icon" />
+            )}
+
+            {/* Карточка с названием и фоном, если изображение нет */}
+            {loaded[index] && !item && (
+              <div
+                className="card-name-only"
+                style={{
+                  background: "var(--framer-color-bg)",
+                  height: "100%",
+                  borderRadius: "8px",
+                  display: "flex",
+                  alignItems: "flex-end",
+                  padding: "12px"
+                }}
+              >
+                <div className="cardInfo">
+                  <h3>
+                    {section.charAt(0).toUpperCase() + section.slice(1)} · 0
+                  </h3>
+                  <div className="iconButton2">
+                    <ArrowUpRight size={16} className="explore-icon" />
+                  </div>
                 </div>
               </div>
-              <div className="hoverOverlay" />
-            </>
-          ) : (
-            // ✅ Используем структуру как в CtaPage
-            <>
-              <div className="skeleton-card-image" />
-              <div className="skeleton-card-info" />
-            </>
-          )}
-        </Link>
-      ))}
+            )}
+
+            {/* Карточка с изображением */}
+            {loaded[index] && item && (
+              <>
+                <div className={`cardImage ${fading[index] ? "fadeOut" : "fadeIn"}`}>
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    onError={e =>
+                      (e.currentTarget.src =
+                        "https://via.placeholder.com/280x160?text=Preview")
+                    }
+                  />
+                </div>
+                <div className="cardInfo">
+                  <h3>
+                    {section.charAt(0).toUpperCase() + section.slice(1)} · {count}
+                  </h3>
+                  <div className="iconButton2">
+                    <ArrowUpRight size={16} className="explore-icon" />
+                  </div>
+                </div>
+              </>
+            )}
+          </Link>
+        );
+      })}
     </>
   );
 }

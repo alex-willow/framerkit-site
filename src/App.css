@@ -265,9 +265,6 @@ body {
   color: var(--framer-color-text);
 }
 
-[data-framer-theme="dark"] .themeToggle {
-  color: var(--framer-color-text-dark);
-}
 
 /* === Основная обертка === */
 .app-layout {
@@ -424,35 +421,7 @@ body {
 }
 
 
-/* === Заголовки === */
-.title {
-  font-size: 18px;
-  font-weight: 800;
-  color: var(--framer-color-text);
-  margin-bottom: 8px;
-}
 
-[data-framer-theme="dark"] .title {
-  color: var(--framer-color-text-dark);
-}
-
-.subtitle {
-  color: var(--framer-color-text-secondary);
-  margin-bottom: 18px;
-  font-size: 14px;
-}
-
-
-.subtitleRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 10px;
-}
-
-.subtitleRow .subtitle {
-  margin: 0;
-}
 
 .themeSwitcher {
   display: flex;
@@ -503,9 +472,9 @@ body {
 
 .skeleton-card {
   background: var(--framer-color-bg);
-  border: 1px solid var(--framer-color-border);
+ 
   border-radius: 8px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+
   display: flex;
   flex-direction: column;
   height: 100%; /* ← как у .card */
@@ -558,26 +527,6 @@ body {
 
 
 
-
-@media (max-width: 767px) {
-  .sidebar {
-    display: none;
-  }
-  .content {
-    margin-left: 0;
-  }
-  .gallery {
-    grid-template-columns: 1fr;
-    padding: 0px 0px 30px 0px;
-  }
-  .title {
-    font-size: 18px;
-    font-weight: 700;
-    margin: 0px 0 4px;
-    color: var(--framer-color-text);
-  }
-}
-
 /* === Карточки === */
 .card {
   background: var(--framer-color-bg);
@@ -613,6 +562,7 @@ body {
   object-position: top;
   display: block;
   pointer-events: none;
+  
 }
 
 .cardInfo {
@@ -940,17 +890,7 @@ body {
   flex-wrap: wrap;
 }
 
-.section-title {
-  font-size: 24px;
-  font-weight: 700;
-  margin: 0;
-}
 
-.section-subtitle {
-  font-size: 14px;
-  color: #666;
-  white-space: nowrap;
-}
 
 /* RIGHT */
 .section-header-right {
@@ -1084,12 +1024,6 @@ body.menu-open {
   display: inline-block; /* чтобы слова анимировались отдельно */
   margin-right: 0.25em; /* небольшой отступ между словами */
   white-space: pre; /* сохраняем пробелы */
-}
-
-.titleLine {
-  display: flex;
-  flex-wrap: wrap; /* важно для мобильного переноса слов */
-  justify-content: center; /* по желанию, чтобы центрировать текст */
 }
 
 
