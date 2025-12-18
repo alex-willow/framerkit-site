@@ -117,21 +117,20 @@
   max-width: 600px;
 }
 
-/* === Мобильная версия === */
 @media (max-width: 767px) {
   .titleLine {
-    font-size: clamp(28px, 6vw, 36px); /* меньше, чтобы влезло */
-    white-space: normal;               /* перенос строк */
+    font-size: clamp(28px, 8vw, 48px); /* Минимум 28px, максимум 48px, 8% ширины экрана */
+    white-space: normal;               /* разрешаем перенос */
     overflow: visible;
     text-overflow: clip;
   }
 
-  /* Для span внутри анимации */
   .titleLine span {
-    display: inline;                   /* разрешаем перенос */
+    display: inline;
     white-space: normal;
   }
 }
+
 
   
   
