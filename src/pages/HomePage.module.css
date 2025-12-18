@@ -88,47 +88,51 @@
   }
   
 
-  .title {
-    font-weight: 800;
-    color: #2B0691;
-    margin: 0;
-    text-align: center;
-    line-height: 1.1;
-    /* Убираем font-size — он будет на .titleLine */
-  }
-  
-  /* Каждая строка масштабируется независимо */
+  /* === Заголовок === */
+.title {
+  font-weight: 800;
+  color: #2B0691;
+  margin: 0;
+  text-align: center;
+  line-height: 1.1;
+}
+
+/* Каждая строка заголовка */
+.titleLine {
+  display: block;
+  width: 100%;
+  white-space: normal;       /* разрешаем перенос */
+  overflow: visible;         /* не обрезаем текст */
+  text-overflow: clip;       /* убираем многоточие */
+  font-size: clamp(42px, 3.2vw, 64px); /* масштабируемый размер */
+  letter-spacing: -0.5px;
+}
+
+/* Подзаголовок */
+.subtitle {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #666;
+  margin: 0;
+  max-width: 600px;
+}
+
+/* === Мобильная версия === */
+@media (max-width: 767px) {
   .titleLine {
-    display: block;               /* или inline-block, если нужно */
-    width: 100%;                  /* или конкретное значение, например max-width: 500px */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: clamp(42px, 3.2vw, 64px);
-    letter-spacing: -0.5px;
+    font-size: clamp(28px, 6vw, 36px); /* меньше, чтобы влезло */
+    white-space: normal;               /* перенос строк */
+    overflow: visible;
+    text-overflow: clip;
   }
-  
-  /* Подзаголовок */
-  .subtitle {
-    font-size: 16px;
-    line-height: 1.6;
-    color: #666;
-    margin: 0;
-    max-width: 600px;
+
+  /* Для span внутри анимации */
+  .titleLine span {
+    display: inline;                   /* разрешаем перенос */
+    white-space: normal;
   }
-  
-  @media (max-width: 767px) {
-    .titleLine {
-      white-space: normal !important;
-      overflow: visible !important;
-      text-overflow: clip !important;
-    }
-  
-    .titleLine span {
-      display: inline !important;
-      transform: none !important; /* убираем анимацию сдвига */
-    }
-  }
+}
+
   
   
   .buttons {
