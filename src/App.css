@@ -1008,38 +1008,30 @@ body.menu-open {
   white-space: pre; /* сохраняем пробелы */
 }
 
-/* src/styles/Header.css */
-.hamburgerButton {
+.hamburgerBtn {
   background: none;
   border: none;
-  cursor: pointer;
   padding: 8px;
+  cursor: pointer;
   display: flex;
+  color: #2B0691; 
   align-items: center;
   justify-content: center;
 
-  /* Убираем outline при фокусе */
+  /* Убираем голубую подсветку на iOS */
+  -webkit-tap-highlight-color: transparent;
   outline: none;
 }
 
-/* Убираем эффекты при клике и фокусе */
-.hamburgerButton:focus,
-.hamburgerButton:active {
-  outline: none;
-  box-shadow: none;
+.hamburgerBtn svg {
+  color: #2B0691; /* фиолетовый цвет иконки */
+  display: block;
 }
 
-/* Иконка Lucide */
-.hamburgerButton svg {
-  color: #000000; /* основной цвет иконки */
-  display: block;  /* устраняет возможные проблемы с inline */
-  transition: color 0.2s ease;
+.hamburgerBtn:focus {
+  outline: none; /* убираем обводку при фокусе */
 }
 
-/* Hover эффект */
-.hamburgerButton:hover svg {
-  color: #000000;
-}
 
 
 
@@ -2205,3 +2197,31 @@ body.menu-open {
 }
 
 
+
+/* КНОПКА */
+.hamburgerButton {
+  all: unset; /* 💥 убивает ВСЕ системные стили iOS */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+
+  /* важно */
+  color: #111 !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* SVG ИКОНКА */
+.hamburgerButton {
+  width: 24px;
+  height: 24px;
+  stroke: #111 !important; /* 💥 override currentColor */
+}
+
+/* iOS active / focus */
+.hamburgerButton:focus,
+.hamburgerButton:active {
+  outline: none;
+}

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import ComponentRunner from "../components/ComponentRunner";
 import RandomSectionCards from "../components/RandomSectionCards";
 import RandomComponentCards from "../components/RandomComponentCards";
@@ -38,18 +38,7 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
   const onSectionChangeRef = useRef(onSectionChange);
   onSectionChangeRef.current = onSectionChange;
 
-  // Для гибридной анимации
-  const [isMobile, setIsMobile] = useState(
-    typeof window !== "undefined" ? window.innerWidth < 768 : false
-  );
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   // ================================
   // ХЭШ-СКРОЛЛ
@@ -116,8 +105,6 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
 
     return () => observer.disconnect();
   }, []);
-
-  const splitWords = (text: string) => text.split(" ");
 
   return (
     <div>

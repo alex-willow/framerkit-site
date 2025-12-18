@@ -20,9 +20,13 @@ export default function Header({ isMobile, onMenuToggle }: HeaderProps) {
         <h1 style={{ fontSize: "20px", margin: 0 }}>FramerKit</h1>
       </div>
 
-      <button className="hamburgerButton" onClick={onMenuToggle}>
-        <Menu size={24} />
-      </button>
+      <button
+          className="mobile-hamburger"
+          onClick={onMenuToggle}
+          aria-label="Open menu"
+        >
+          <Menu size={24} />
+        </button>
     </header>
   );
 }

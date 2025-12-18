@@ -86,9 +86,6 @@ export default function MainLayout({
   return (
     <div className="container" data-theme={theme}>
       <Header
-        isAuthenticated={isAuthenticated}
-        onLogout={onLogout}
-        onSignInOpen={onSignInOpen}
         isMobile={isMobile}
         onMenuToggle={onMenuToggle}
       />

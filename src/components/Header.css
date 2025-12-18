@@ -1,0 +1,31 @@
+.mobile-hamburger {
+    appearance: none;
+    -webkit-appearance: none;
+  
+    background: transparent;
+    border: none;
+    padding: 8px;
+  
+    color: #000000; /* ← ВАЖНО: задаём цвет SVG */
+  
+    cursor: pointer;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* убираем iOS / Android подсветку */
+  .mobile-hamburger:focus,
+  .mobile-hamburger:active {
+    outline: none;
+    background: transparent;
+  }
+  
+  /* страховка */
+  .mobile-hamburger svg {
+    stroke: currentColor;
+  }
+  
