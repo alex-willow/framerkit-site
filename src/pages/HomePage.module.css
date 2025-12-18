@@ -104,7 +104,7 @@
   white-space: normal;       /* разрешаем перенос */
   overflow: visible;         /* не обрезаем текст */
   text-overflow: clip;       /* убираем многоточие */
-  font-size: clamp(42px, 3.2vw, 64px); /* масштабируемый размер */
+  font-size: clamp(32px, 6vw, 64px);
   letter-spacing: -0.5px;
 }
 

@@ -450,6 +450,13 @@ body {
   }
 }
 
+@media (max-width: 640px) {
+  .gallery {
+    grid-template-columns: repeat(1, 1fr);
+    padding: 0px 0px 50px 0px;
+  }
+}
+
 .skeleton-gallery {
   display: grid;
   padding: 0px 20px 50px 20px;
@@ -467,6 +474,7 @@ body {
 @media (max-width: 640px) {
   .skeleton-gallery {
     grid-template-columns: repeat(1, 1fr);
+    padding: 0px 0px 50px 0px;
   }
 }
 
@@ -706,7 +714,7 @@ body {
 
 /* === Колонки футера === */
 .footer-col {
-  flex: 1 1 150px; /* минимальная ширина 150px, растет при необходимости */
+  flex: 1 1 250px; /* минимальная ширина 150px, растет при необходимости */
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -942,11 +950,11 @@ body {
   position: fixed;
   top: 0;
   right: 0;
-  width: 280px;
+  width: 240px;
   height: 100%;
   background: var(--framer-color-bg);
   z-index: 1000;
-  padding: 20px;
+  padding: 10px;
   box-sizing: border-box;
   transform: translateX(100%);
   transition: transform 0.3s ease;
@@ -1006,30 +1014,6 @@ body.menu-open {
   display: inline-block; /* чтобы слова анимировались отдельно */
   margin-right: 0.25em; /* небольшой отступ между словами */
   white-space: pre; /* сохраняем пробелы */
-}
-
-.hamburgerBtn {
-  background: none;
-  border: none;
-  padding: 8px;
-  cursor: pointer;
-  display: flex;
-  color: #2B0691; 
-  align-items: center;
-  justify-content: center;
-
-  /* Убираем голубую подсветку на iOS */
-  -webkit-tap-highlight-color: transparent;
-  outline: none;
-}
-
-.hamburgerBtn svg {
-  color: #2B0691; /* фиолетовый цвет иконки */
-  display: block;
-}
-
-.hamburgerBtn:focus {
-  outline: none; /* убираем обводку при фокусе */
 }
 
 
@@ -1359,6 +1343,12 @@ body.menu-open {
   box-sizing: border-box;
 }
 
+@media (max-width: 640px) {
+  .pricing-section {
+    padding: 40px 0;
+  }
+}
+
 /* Контент внутри с отступами на десктопе */
 .pricing-container {
   max-width: 1180px;
@@ -1367,12 +1357,6 @@ body.menu-open {
   text-align: center;
 }
 
-/* Убираем боковые отступы на мобильных */
-@media (max-width: 767px) {
-  .pricing-container {
-    padding: 0px 0;
-  }
-}
 
 
 .pricing-title {
@@ -1555,10 +1539,17 @@ body.menu-open {
   background: #ffffff;
 }
 
+
+@media (max-width: 640px) {
+  .faq-section {
+    padding: 40px 0;
+  }
+}
+
 .faq-container {
   width: 100%;
   margin: 0 auto;
-  padding: 0 24px;
+
   text-align: center;
 }
 
@@ -1621,7 +1612,7 @@ body.menu-open {
 }
 @media (max-width: 767px) {
   .ls-wrapper {
-    padding: 80px 0;
+    padding: 40px 0;
   }
 }
 
@@ -1675,7 +1666,7 @@ body.menu-open {
 
 @media (max-width: 767px) {
   .ui-wrapper {
-    padding: 80px 0;
+    padding: 40px 0;
   }
 }
 
@@ -1795,7 +1786,7 @@ body.menu-open {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 20px;
-  padding: 20px;
+  padding: 20px 0px 50px 0px;
 }
 
 
@@ -1893,7 +1884,6 @@ body.menu-open {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 20px;
-  padding: 20px;
 }
 
 /* ===== CARD ===== */
@@ -1990,7 +1980,7 @@ body.menu-open {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 20px;
-  padding: 20px;
+  
 }
 
 /* ===== SKELETON CARD ===== */
@@ -2196,32 +2186,3 @@ body.menu-open {
   border: 0;
 }
 
-
-
-/* КНОПКА */
-.hamburgerButton {
-  all: unset; /* 💥 убивает ВСЕ системные стили iOS */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  cursor: pointer;
-
-  /* важно */
-  color: #111 !important;
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* SVG ИКОНКА */
-.hamburgerButton {
-  width: 24px;
-  height: 24px;
-  stroke: #111 !important; /* 💥 override currentColor */
-}
-
-/* iOS active / focus */
-.hamburgerButton:focus,
-.hamburgerButton:active {
-  outline: none;
-}

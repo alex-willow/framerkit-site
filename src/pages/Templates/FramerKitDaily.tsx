@@ -64,7 +64,7 @@ export default function FramerKitDailyPage({
   }, []);
 
   return (
-    <div id="framerkitdaily-page" style={{ padding: 0 }}>
+    <div id="framerkitdaily-page" >
       <SectionHeader
         title="FramerKit Daily Templates"
         count={items.length}
@@ -82,8 +82,8 @@ export default function FramerKitDailyPage({
             </div>
           ))}
         </div>
-      ) : error ? (
-        <p style={{ color: "red", padding: 20 }}>{error}</p>
+    
+       
       ) : (
         <div className="daily-grid">
           {items.map((item, index) => (
