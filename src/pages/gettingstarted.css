@@ -1,6 +1,6 @@
 /* ===== GETTING STARTED SECTION ===== */
 #getting-started {
-    
+    padding: 80px 0;
     background: #ffffff;
     width: 100%;
     position: relative;
@@ -170,12 +170,12 @@
   .fk-gs-wrapper {
     display: flex;
     flex-direction: column;
-    padding: 0px 20px;
+    padding: 40px 20px;
     width: 100%;
   }
 
   @media (max-width: 640px) {
-    .fk-gs-wrapper {
+   .fk-gs-wrapper {
       padding: 40px 0;
     }
   }
