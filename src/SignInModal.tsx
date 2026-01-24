@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { createPortal } from "react-dom";
-import { useNavigate, useLocation } from "react-router-dom"; // 👈 добавили
+import { useNavigate, useLocation } from "react-router-dom";
 import "./SignInModal.css";
 
 const supabase = createClient(
@@ -43,10 +43,10 @@ export default function SignInModal({
     document.body.setAttribute("data-framer-theme", theme);
     return () => document.body.removeAttribute("data-framer-theme");
   }, [theme]);
-  
+
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     if (modalRef.current?.contains(e.target as Node)) {
-      mouseDownInside.current = true; // ✅ правильно
+      mouseDownInside.current = true;
     } else {
       mouseDownInside.current = false;
     }
@@ -67,35 +67,37 @@ export default function SignInModal({
     setLoading(true);
     setErrorMessage("");
 
+    const cleanEmail = email.trim();
+    const cleanKey = key.trim();
+
     try {
       const { data: users, error } = await supabase
         .from("framer_kit")
         .select("*")
-        .eq("email", email.trim())
-        .eq("key", key.trim());
+        .eq("email", cleanEmail)
+        .eq("key", cleanKey);
 
       if (error) {
         setErrorMessage("Database error. Please try again.");
       } else if (!users || users.length === 0) {
         setErrorMessage("Invalid Email or License Key");
       } else {
-        const user = users[0];
-        if (user.site_status === "active") {
-          setErrorMessage("This account is already active on another device.");
-          setLoading(false);
-          return;
-        }
-
-        await supabase
+        // ✅ Автоматически активируем текущее устройство (перехват лицензии)
+        const { error: updateError } = await supabase
           .from("framer_kit")
           .update({ site_status: "active" })
-          .eq("email", email.trim());
+          .eq("email", cleanEmail)
+          .eq("key", cleanKey);
 
-        localStorage.setItem("rememberedEmail", email.trim());
-        localStorage.setItem("rememberedKey", key.trim());
+        if (updateError) {
+          setErrorMessage("Failed to activate license. Please try again.");
+        } else {
+          localStorage.setItem("rememberedEmail", cleanEmail);
+          localStorage.setItem("rememberedKey", cleanKey);
 
-        onLogin();
-        onClose();
+          onLogin();
+          onClose();
+        }
       }
     } catch {
       setErrorMessage("An unexpected error occurred.");
@@ -104,24 +106,19 @@ export default function SignInModal({
     }
   };
 
-// 🔑 НОВАЯ ФУНКЦИЯ: переход к секции "get-framerkit"
-const goToPricing = () => {
-  if (location.pathname === "/") {
-    // Уже на главной → скроллим к секции
-    const el = document.getElementById("get-framerkit");
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
+  // 🔑 Переход к секции покупки
+  const goToPricing = () => {
+    if (location.pathname === "/") {
+      const el = document.getElementById("get-framerkit");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+      onClose();
+    } else {
+      navigate("/#get-framerkit");
+      onClose();
     }
-    // Закрываем модалку
-    onClose();
-  } else {
-    // На другой странице → переходим на главную с хэшем
-    navigate("/#get-framerkit");
-    // Закрываем модалку
-    onClose();
-  }
-};
-
+  };
 
   if (!isOpen) return null;
 
