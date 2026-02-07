@@ -369,17 +369,53 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
         </div>
       </section>
 
-     {/* GET FRAMERKIT – PRICING SECTION */}
+    {/* GET FRAMERKIT – PRICING SECTION */}
 <section id="get-framerkit" className="pricing-section">
   <div className="pricing-container">
     <h2 className="fk-gs-title">Get FramerKit</h2>
     <p className="fk-gs-text">
-      Choose your plan and get access to sections, components, and templates for Framer
+      Choose your plan: subscribe monthly or get lifetime access with all future updates
     </p>
 
     <div className="pricing-grid">
+      {/* --- MONTHLY SUBSCRIPTION --- */}
+      <div className="pricing-card">
+        <div className="badge">Flexible</div>
+        <h3 className="plan-title">Monthly</h3>
+        <p className="plan-desc">Full access, billed monthly</p>
 
-      {/* --- PLAN LIBRARY --- */}
+        <div className="price">
+          <span className="price-amount">$12</span>
+          <span className="price-note">per month</span>
+        </div>
+
+        <div className="features">
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Full FramerKit library</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Framer plugin access</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Single-user license</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Cancel anytime</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> <span className="feature-unavailable">Lifetime updates</span></div>
+        </div>
+
+        <a
+          href="https://buy.polar.sh/polar_cl_ksuL1cw1GuaLpoC3Dg5vsv4qSlLRSaX45c3JQ1HIx65"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="pricing-btn secondary"
+          onClick={() =>
+            trackEvent("select_plan", {
+              plan: "monthly",
+              price: 12,
+              currency: "USD",
+              interval: "month",
+            })
+          }
+        >
+          Subscribe Monthly
+        </a>
+      </div>
+
+      {/* --- PLAN LIBRARY (Lifetime) --- */}
       <div className="pricing-card">
         <h3 className="plan-title">Library</h3>
         <p className="plan-desc">Sections, components & templates</p>
@@ -414,7 +450,7 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
         </a>
       </div>
 
-      {/* --- PLAN PLUGIN --- */}
+      {/* --- PLAN PLUGIN (Lifetime) - MOST POPULAR --- */}
       <div className="pricing-card featured">
         <div className="badge">Most Popular</div>
         <h3 className="plan-title">Plugin</h3>
@@ -450,42 +486,6 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
           Get Plugin
         </a>
       </div>
-
-      {/* --- PLAN TEAM --- */}
-      <div className="pricing-card">
-        <h3 className="plan-title">Team</h3>
-        <p className="plan-desc">Library + Plugin (5 seats)</p>
-
-        <div className="price">
-          <span className="price-amount">$199</span>
-          <span className="price-note">one-time payment</span>
-        </div>
-
-        <div className="features">
-          <div className="feature-item"><CircleCheck className="feature-icon" /> Full FramerKit library</div>
-          <div className="feature-item"><CircleCheck className="feature-icon" /> Framer plugin access</div>
-          <div className="feature-item"><CircleCheck className="feature-icon" /> 5-user license</div>
-          <div className="feature-item"><CircleCheck className="feature-icon" /> Lifetime updates</div>
-          <div className="feature-item"><CircleCheck className="feature-icon" /> Commercial use</div>
-        </div>
-
-        <a
-          href="https://buy.polar.sh/polar_cl_UDp7hLEWPWpbHEEKOFxqME3ytaysBd6cXUONc3fQ8NM"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="pricing-btn secondary"
-          onClick={() =>
-            trackEvent("select_plan", {
-              plan: "team",
-              price: 199,
-              currency: "USD",
-            })
-          }
-        >
-          Get Team
-        </a>
-      </div>
-
     </div>
   </div>
 </section>
