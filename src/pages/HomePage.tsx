@@ -380,7 +380,7 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
     <div className="pricing-grid">
       {/* --- MONTHLY SUBSCRIPTION --- */}
       <div className="pricing-card">
-        <div className="badge">Flexible</div>
+      <div className="badge-light">Flexible</div>
         <h3 className="plan-title">Monthly</h3>
         <p className="plan-desc">Full access, billed monthly</p>
 
@@ -415,40 +415,6 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
         </a>
       </div>
 
-      {/* --- PLAN LIBRARY (Lifetime) --- */}
-      <div className="pricing-card">
-        <h3 className="plan-title">Library</h3>
-        <p className="plan-desc">Sections, components & templates</p>
-
-        <div className="price">
-          <span className="price-amount">$59</span>
-          <span className="price-note">one-time payment</span>
-        </div>
-
-        <div className="features">
-          <div className="feature-item"><CircleCheck className="feature-icon" /> Full FramerKit library</div>
-          <div className="feature-item"><CircleCheck className="feature-icon" /> Website access</div>
-          <div className="feature-item"><CircleCheck className="feature-icon" /> Single-user license</div>
-          <div className="feature-item"><CircleCheck className="feature-icon" /> Lifetime updates</div>
-          <div className="feature-item"><CircleCheck className="feature-icon" /> Commercial use</div>
-        </div>
-
-        <a
-          href="https://buy.polar.sh/polar_cl_XHxCo4fFM0lO2Oyv9HFja89aD2W5dEZ4gw3fz3rlDKY"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="pricing-btn secondary"
-          onClick={() =>
-            trackEvent("select_plan", {
-              plan: "library",
-              price: 59,
-              currency: "USD",
-            })
-          }
-        >
-          Get Library
-        </a>
-      </div>
 
       {/* --- PLAN PLUGIN (Lifetime) - MOST POPULAR --- */}
       <div className="pricing-card featured">
