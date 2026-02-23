@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import ComponentRunner from "../components/ComponentRunner";
 import RandomSectionCards from "../components/RandomSectionCards";
 import RandomComponentCards from "../components/RandomComponentCards";
@@ -7,7 +7,7 @@ import "./gettingstarted.css";
 import styles from "./HomePage.module.css";
 import SimpleAvatarGroup from "../components/SimpleAvatarGroup";
 import { motion } from "framer-motion";
-import { CircleCheck } from "lucide-react";
+import { Copy, CircleCheck } from "lucide-react";
 import {
   RocketLaunch,
   ClipboardText,
@@ -38,6 +38,9 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
   const onSectionChangeRef = useRef(onSectionChange);
   onSectionChangeRef.current = onSectionChange;
 
+
+  const [copiedEmail, setCopiedEmail] = useState(false); // для FAQ email
+  const [hoveredEmail, setHoveredEmail] = useState(false); // для FAQ email
 
 
   // ================================
@@ -381,9 +384,7 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
       {/* --- MONTHLY SUBSCRIPTION --- */}
       <div className="pricing-card">
       <div className="badge-light">Flexible</div>
-        <h3 className="plan-title">Monthly</h3>
-        <p className="plan-desc">Full access, billed monthly</p>
-
+  
         <div className="price">
           <span className="price-amount">$15</span>
           <span className="price-note">per month</span>
@@ -392,9 +393,11 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
         <div className="features">
           <div className="feature-item"><CircleCheck className="feature-icon" /> Full FramerKit library</div>
           <div className="feature-item"><CircleCheck className="feature-icon" /> Framer plugin access</div>
-          <div className="feature-item"><CircleCheck className="feature-icon" /> Single-user license</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> 1000+ Premium sections</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Wireframe & Design modes</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Fully Responsive blocks</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> All updates while subscribed</div>
           <div className="feature-item"><CircleCheck className="feature-icon" /> Cancel anytime</div>
-          <div className="feature-item"><CircleCheck className="feature-icon" /> <span className="feature-unavailable">Lifetime updates</span></div>
         </div>
 
         <a
@@ -411,7 +414,7 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
             })
           }
         >
-          Subscribe Monthly
+          Subscribe Now
         </a>
       </div>
 
@@ -419,18 +422,18 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
       {/* --- PLAN PLUGIN (Lifetime) - MOST POPULAR --- */}
       <div className="pricing-card featured">
         <div className="badge">Most Popular</div>
-        <h3 className="plan-title">Plugin</h3>
-        <p className="plan-desc">Library + Framer Plugin</p>
-
+        
         <div className="price">
           <span className="price-amount">$89</span>
-          <span className="price-note">one-time payment</span>
+          <span className="price-note">Lifetime</span>
         </div>
 
         <div className="features">
           <div className="feature-item"><CircleCheck className="feature-icon" /> Full FramerKit library</div>
           <div className="feature-item"><CircleCheck className="feature-icon" /> Framer plugin access</div>
-          <div className="feature-item"><CircleCheck className="feature-icon" /> Single-user license</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> 1000+ Premium sections</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Wireframe & Design modes</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Fully responsive blocks</div>
           <div className="feature-item"><CircleCheck className="feature-icon" /> Lifetime updates</div>
           <div className="feature-item"><CircleCheck className="feature-icon" /> Commercial use</div>
         </div>
@@ -449,7 +452,7 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
             })
           }
         >
-          Get Plugin
+          Get Lifetime Access
         </a>
       </div>
     </div>
@@ -457,52 +460,173 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
 </section>
 
 
-      {/* FAQ + CONTACT */}
-      <section id="faq-contact" className="faq-section">
-        <div className="faq-container">
-          <h2 className="fk-gs-title">Frequently Asked Questions</h2>
-          <p className="fk-gs-text">Answers to common questions about FramerKit</p>
+   {/* FAQ SECTION */}
+<section id="faq-contact" className="faq-section">
+  <div className="faq-container">
+    <h2 className="fk-gs-title">Frequently Asked Questions</h2>
+    <p className="fk-gs-text">Everything you need to know about FramerKit</p>
 
-          <div className="faq-grid">
-            <div className="faq-item">
-              <h3 className="faq-question">Can I use components commercially?</h3>
-              <p className="faq-answer">
-                Yes — all paid plans include full commercial licensing with no limitations
-              </p>
-            </div>
-            <div className="faq-item">
-              <h3 className="faq-question">Do I get lifetime updates?</h3>
-              <p className="faq-answer">
-                Yes — all plans include lifetime updates as the library grows
-              </p>
-            </div>
-            <div className="faq-item">
-              <h3 className="faq-question">Do you add new components regularly?</h3>
-              <p className="faq-answer">
-                Yes! New layouts, UI components, and animations are announced weekly on X
-              </p>
-            </div>
-            <div className="faq-item">
-              <h3 className="faq-question">Does it work with any project?</h3>
-              <p className="faq-answer">
-                FramerKit components adapt to any style — just change fonts, colors, and spacing.
-              </p>
-            </div>
-            <div className="faq-item">
-              <h3 className="faq-question">Can I try before buying?</h3>
-              <p className="faq-answer">
-                Yes — in the demo version, 1 section from each category is free to explore
-              </p>
-            </div>
-            <div className="faq-item">
-              <h3 className="faq-question">Do you support team collaboration?</h3>
-              <p className="faq-answer">
-                Yes — Team plans allow multiple users with shared libraries and permissions
-              </p>
-            </div>
-          </div>
+    <div className="faq-grid">
+      
+      {/* 1. Что такое Фреймер */}
+      <div className="faq-item">
+        <h3 className="faq-question">What is Framer?</h3>
+        <p className="faq-answer">
+          Framer is the world's most powerful tool for building professional websites with a "no-code" approach. It allows you to design and publish high-end sites instantly, and FramerKit is built to make this process 10x faster
+        </p>
+      </div>
+
+{/* 2. Ссылка для новых пользователей + Бонус */}
+<div className="faq-item">
+  <h3 className="faq-question">Any discount for new Framer users?</h3>
+  <p className="faq-answer">
+    Yes! If you are new to the <strong>Framer platform</strong>, you can sign up through my{' '}
+    
+    <span className="tooltip-wrapper">
+      <a 
+        href="https://framer.link/framerkit" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        className="faq-link"
+      >
+          creator referral link
+        </a>
+        <div className="tooltip">
+          Get 3 months free
+          <div className="tooltip-arrow" />
         </div>
-      </section>
+      </span>
+    
+    .{' '}
+    New users get <strong>3 months of Framer Pro for free</strong> on any annual plan. This is a great way to save on your Framer subscription while supporting my work on the plugin!
+  </p>
+</div>
+
+      {/* 3. Про Wireframe Mode */}
+      <div className="faq-item">
+        <h3 className="faq-question">What is Wireframe & Design mode?</h3>
+        <p className="faq-answer">
+          It’s our signature feature. Use Wireframe mode to build the structure and UX of your site, then switch to Design mode to apply polished, high-fidelity styles with a single toggle
+        </p>
+      </div>
+
+{/* 4. Обновления в X */}
+<div className="faq-item">
+  <h3 className="faq-question">How often are new sections added?</h3>
+  <p className="faq-answer">
+    The library is constantly growing. I announce all new layouts and fresh releases on our{' '}
+    
+    <span className="tooltip-wrapper">
+      <a 
+        href="https://x.com/framer_kit" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        className="faq-link"
+      >
+        X (Twitter)
+      </a>
+      <div className="tooltip">
+        Follow on X
+        <div className="tooltip-arrow" />
+      </div>
+    </span>
+    
+    . Follow us to stay updated on the latest components!
+  </p>
+</div>
+
+      {/* 5. Про кастомизацию */}
+      <div className="faq-item">
+        <h3 className="faq-question">Can I customize the components?</h3>
+        <p className="faq-answer">
+          Absolutely. Every section is 100% editable. You can change colors, fonts, and layouts to match your brand identity without writing any code
+        </p>
+      </div>
+
+
+{/* 6. YouTube уроки */}
+<div className="faq-item">
+  <h3 className="faq-question">Are there any tutorials?</h3>
+  <p className="faq-answer">
+    Yes! I record deep-dive guides on how to build sites from scratch. You can watch all my tutorials on{' '}
+    
+    <span className="tooltip-wrapper" style={{ display: 'inline-flex' }}>
+      <a 
+        href="https://www.youtube.com/@framerkit_plugin" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        className="faq-link"
+      >
+        YouTube
+      </a>
+      <div className="tooltip">
+        Watch tutorials
+        <div className="tooltip-arrow" />
+      </div>
+    </span>
+  </p>
+</div>
+
+      {/* 7. Коммерческая лицензия */}
+      <div className="faq-item">
+        <h3 className="faq-question">Can I use it for client projects?</h3>
+        <p className="faq-answer">
+          Yes. All Pro plans include a full commercial license. You can build and sell unlimited websites for your clients using FramerKit components
+        </p>
+      </div>
+
+      {/* 8. Адаптивность */}
+      <div className="faq-item">
+        <h3 className="faq-question">Is it mobile-friendly?</h3>
+        <p className="faq-answer">
+          Every component is hand-crafted to be fully responsive. Your site will look perfect on Desktop, Tablet, and Mobile devices right out of the box
+        </p>
+      </div>
+
+     {/* 9. Поддержка и почта */}
+<div className="faq-item">
+  <h3 className="faq-question">What if I need help?</h3>
+  <p className="faq-answer">
+    If you have any questions, feel free to reach out via email at{' '}
+    <span className="email-wrapper" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+      <a href="mailto:support@framerkit.site" className="faq-link">
+        support@framerkit.site
+      </a>
+      
+      {/* Кнопка копирования — точная копия паттерна из AccordionPage */}
+      <div
+        className={`iconButton ${copiedEmail ? 'copied' : ''}`}
+        onClick={async () => {
+          await navigator.clipboard.writeText('support@framerkit.site');
+          setCopiedEmail(true);
+          setTimeout(() => setCopiedEmail(false), 4000);
+        }}
+        onMouseEnter={() => !copiedEmail && setHoveredEmail(true)}
+        onMouseLeave={() => setHoveredEmail(false)}
+        style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+      >
+        {copiedEmail ? (
+          <CircleCheck size={16} color="#22c55e" strokeWidth={2.5} />
+        ) : (
+          <Copy size={14} />
+        )}
+
+        {/* Tooltip — точная копия вашей структуры */}
+        {(copiedEmail || hoveredEmail) && (
+          <div className="tooltip">
+            {copiedEmail ? 'Copied' : 'Copy'}
+          </div>
+        )}
+      </div>
+    </span>
+    <br />
+    I'm always here to help you.
+  </p>
+</div>
+
+    </div>
+  </div>
+</section>
 
     </div>
   );
