@@ -385,7 +385,7 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
         <p className="plan-desc">Full access, billed monthly</p>
 
         <div className="price">
-          <span className="price-amount">$12</span>
+          <span className="price-amount">$15</span>
           <span className="price-note">per month</span>
         </div>
 
@@ -423,7 +423,7 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
         <p className="plan-desc">Library + Framer Plugin</p>
 
         <div className="price">
-          <span className="price-amount">$79</span>
+          <span className="price-amount">$89</span>
           <span className="price-note">one-time payment</span>
         </div>
 
