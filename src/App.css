@@ -2726,6 +2726,7 @@ body.menu-open {
   outline: none !important;
   border: none !important;
   box-shadow: none !important;
+}
 
 .iconButton:focus,
 .iconButton:focus-visible,
@@ -2772,12 +2773,6 @@ body.menu-open {
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
   border-bottom: 4px solid #6E3FF3;  /* Треугольник остриём вверх */
-}
-
-/* ===== Тёмная тема (тултип остаётся фиолетовым для контраста) ===== */
-[data-framer-theme="dark"] .toggle-tooltip {
-  background: #6E3FF3;
-  color: #fff;
 }
 
 [data-framer-theme="dark"] .toggle-tooltip::after {
