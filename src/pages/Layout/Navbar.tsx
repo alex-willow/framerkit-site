@@ -9,6 +9,10 @@ type ComponentItem = {
   image: string;
   url: string;
   type: "free" | "paid";
+  wireframe?: {
+    image: string;
+    url: string;
+  };
 };
 
 type NavbarPageProps = {
@@ -25,10 +29,10 @@ export default function NavbarPage({ isAuthenticated, setIsSignInOpen }: NavbarP
   const [filter, setFilter] = useState<"light" | "dark">("light");
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
+  const [isWireframeMode, setIsWireframeMode] = useState(true);
 
   const galleryRef = useRef<HTMLDivElement>(null);
 
-  // Загрузка данных
   useEffect(() => {
     const load = async () => {
       try {
@@ -40,14 +44,19 @@ export default function NavbarPage({ isAuthenticated, setIsSignInOpen }: NavbarP
         const loadedItems = json.navbar || [];
         setItems(loadedItems);
 
-        const imagePromises = loadedItems.map(
-          (item: ComponentItem) =>
-            new Promise<void>(resolve => {
-              const img = new Image();
-              img.onload = img.onerror = () => resolve();
-              img.src = item.image || PLACEHOLDER;
-            })
-        );
+        const imagePromises = loadedItems.flatMap((item: ComponentItem) => {
+          const images = [item.image || PLACEHOLDER];
+          if (item.wireframe?.image) images.push(item.wireframe.image);
+          
+          return images.map(
+            (src) =>
+              new Promise<void>((resolve) => {
+                const img = new Image();
+                img.onload = img.onerror = () => resolve();
+                img.src = src;
+              })
+          );
+        });
 
         await Promise.all(imagePromises);
         setLoading(false);
@@ -61,14 +70,12 @@ export default function NavbarPage({ isAuthenticated, setIsSignInOpen }: NavbarP
     load();
   }, []);
 
-  // Сброс внутренней галереи при смене фильтра
   useEffect(() => {
     if (galleryRef.current) {
       galleryRef.current.scrollTo({ top: 0 });
     }
-  }, [filter]);
+  }, [filter, isWireframeMode]);
 
-  // Сброс ВСЕЙ страницы под header при входе на страницу
   useEffect(() => {
     const section = document.getElementById("navbar-page");
     if (section) {
@@ -80,13 +87,13 @@ export default function NavbarPage({ isAuthenticated, setIsSignInOpen }: NavbarP
     filter === "dark" ? item.key.includes("dark") : !item.key.includes("dark")
   );
 
-  const handleCopy = async (item: ComponentItem) => {
+  const handleCopy = async (item: ComponentItem, url: string) => {
     if (!isAuthenticated && item.type === "paid") {
       setIsSignInOpen(true);
       return;
     }
 
-    await navigator.clipboard.writeText(item.url);
+    await navigator.clipboard.writeText(url);
     setCopiedKey(item.key);
     setTimeout(() => setCopiedKey(null), 4000);
   };
@@ -101,6 +108,9 @@ export default function NavbarPage({ isAuthenticated, setIsSignInOpen }: NavbarP
         filter={filter}
         onFilterChange={setFilter}
         loading={loading}
+        isWireframeMode={isWireframeMode}
+        onWireframeModeChange={setIsWireframeMode}
+        hideWireframeToggle={false}
       />
 
       <div className="gallery-scroll-area" ref={galleryRef}>
@@ -127,11 +137,26 @@ export default function NavbarPage({ isAuthenticated, setIsSignInOpen }: NavbarP
               {filtered.map(item => {
                 const canCopy = isAuthenticated || item.type === "free";
                 const isCopied = copiedKey === item.key;
+                
+                const displayImage = isWireframeMode && item.wireframe?.image
+                  ? item.wireframe.image
+                  : item.image || PLACEHOLDER;
+                
+                const displayUrl = isWireframeMode && item.wireframe?.url
+                  ? item.wireframe.url
+                  : item.url;
 
                 return (
-                  <div key={item.key} className="card">
+                  <div 
+                    key={`${item.key}-${isWireframeMode ? 'wireframe' : 'design'}`} 
+                    className={`card ${filter === "dark" ? "card-dark" : "card-light"}`}
+                  >
                     <div className="cardImage">
-                      <img src={item.image || PLACEHOLDER} alt={item.title} />
+                      <img 
+                        src={displayImage} 
+                        alt={item.title}
+                        loading="lazy"
+                      />
                     </div>
                     <div className="cardInfo">
                       <h3>{item.title}</h3>
@@ -139,17 +164,22 @@ export default function NavbarPage({ isAuthenticated, setIsSignInOpen }: NavbarP
                         className={`iconButton ${isCopied ? "copied" : ""} ${
                           !canCopy ? "locked" : ""
                         }`}
-                        onClick={() => handleCopy(item)}
+                        onClick={() => handleCopy(item, displayUrl)}
                         onMouseEnter={() => !isCopied && setHoveredKey(item.key)}
                         onMouseLeave={() => setHoveredKey(null)}
                       >
-                        {isCopied ? (
+                         {isCopied ? (
                           <CircleCheck size={20} color="#22c55e" strokeWidth={2.5} />
                         ) : canCopy ? (
-                          <Copy size={16} />
+                          <Copy size={16}
+                          color={filter === "dark" ? "#ccc" : "currentColor"} 
+                           />
                         ) : (
-                          <Lock size={16} />
+                          <Lock size={16}
+                          color={filter === "dark" ? "#ccc" : "currentColor"} 
+                           />
                         )}
+
 
                         {(isCopied || hoveredKey === item.key) && (
                           <div className="tooltip">

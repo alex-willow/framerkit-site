@@ -2560,3 +2560,226 @@ body.menu-open {
   }
 }
 
+
+
+/* Контейнер правой части */
+.section-header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Подписи "Mode", "Theme", "View" */
+.mode-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  user-select: none;
+}
+
+/* ===== Базовый стиль кнопки-переключателя (iconButton) ===== */
+.section-header-right .iconButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: transparent;
+  border-radius: 8px;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+
+
+/* Иконки внутри кнопок */
+.section-header-right .iconButton svg {
+  display: block;
+  transition: opacity 0.15s ease;
+}
+
+/* ===== Тёмная тема — единые стили ===== */
+[data-framer-theme="dark"] .mode-label {
+  color: #aaa;
+}
+
+[data-framer-theme="dark"] .section-header-right .iconButton {
+  border-color: #444;
+  color: #ccc;
+  background: transparent;
+}
+
+[data-framer-theme="dark"] .section-header-right .iconButton:hover {
+  background: #2a2a3a;
+  border-color: #555;
+  color: #fff;
+}
+
+[data-framer-theme="dark"] .section-header-right .iconButton.active {
+  background: #8B5CF6;
+  border-color: #8B5CF6;
+  color: white;
+}
+
+[data-framer-theme="dark"] .section-header-right .iconButton.active:hover {
+  background: #7c3aed;
+  border-color: #7c3aed;
+}
+
+/* ===== Разделитель между переключателями (опционально) ===== */
+.section-header-right > * + * {
+  position: relative;
+}
+
+.section-header-right .mode-label + .iconButton::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 16px;
+  background: #eee;
+}
+
+[data-framer-theme="dark"] .section-header-right .mode-label + .iconButton::before {
+  background: #444;
+}
+
+/* ===== Адаптив для мобильных ===== */
+@media (max-width: 640px) {
+  .section-header-row {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .section-header-right {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+  
+  /* Убираем разделители на мобильных */
+  .section-header-right .mode-label + .iconButton::before {
+    display: none;
+  }
+  
+  .section-header-right .iconButton {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+
+/* ===== Карточки: светлая тема ===== */
+.card-light {
+  background: #fff;
+  border: 1px solid #eee;
+}
+
+.card-light .cardInfo h3 {
+  color: #111;
+}
+
+.card-light .cardImage {
+  background: linear-gradient(110deg, #F4F2FF, #F0F6FF);
+}
+
+/* ===== Карточки: тёмная тема ===== */
+.card-dark {
+  background: #2A2A2A !important;
+  border: 1px solid #444 !important;
+}
+
+.card-dark .cardInfo h3 {
+  color: #fff !important;
+}
+
+.card-dark .cardImage {
+  background: linear-gradient(110deg, #2a2a4e, #262a44) !important;
+}
+
+/* ===== Skeleton в тёмной теме ===== */
+[data-framer-theme="dark"] .skeleton-card,
+.card-dark .skeleton-card {
+  background: #2A2A2A !important;
+}
+
+[data-framer-theme="dark"] .skeleton-card-image,
+.card-dark .skeleton-card-image {
+  background: linear-gradient(90deg, #2a2a4e, #333, #2a2a4e) !important;
+}
+
+/* ===== Пустое сообщение ===== */
+[data-framer-theme="dark"] .empty-message,
+.card-dark .empty-message {
+  color: #aaa !important;
+}
+
+
+.iconButton {
+  /* Сброс стандартных стилей */
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+
+.iconButton:focus,
+.iconButton:focus-visible,
+.iconButton:active {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* ===== Toggle Tooltip — ОТДЕЛЬНЫЕ стили для переключателей ===== */
+
+/* Контейнер кнопки должен быть relative для позиционирования */
+.section-header-right .iconButton {
+  position: relative;
+}
+
+/* Сам тултип — позиционирование СНИЗУ */
+.toggle-tooltip {
+  position: absolute;
+  top: 100%;              /* Позиция ПОД кнопкой */
+  left: 50%;
+  transform: translateX(-50%);
+  background: #6E3FF3;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+  z-index: 9999;
+  margin-top: 8px;        /* Отступ от кнопки */
+  pointer-events: none;
+}
+
+/* Треугольник — смотрит ВВЕРХ 🔼 (к кнопке) */
+.toggle-tooltip::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;           /* Позиционируем стрелку ВВЕРХ от тултипа */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 4px solid #6E3FF3;  /* Треугольник остриём вверх */
+}
+
+/* ===== Тёмная тема (тултип остаётся фиолетовым для контраста) ===== */
+[data-framer-theme="dark"] .toggle-tooltip {
+  background: #6E3FF3;
+  color: #fff;
+}
+
+[data-framer-theme="dark"] .toggle-tooltip::after {
+  border-bottom-color: #6E3FF3;
+}

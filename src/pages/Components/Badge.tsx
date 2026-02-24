@@ -128,7 +128,7 @@ export default function BadgePage({ isAuthenticated, setIsSignInOpen }: BadgePag
                 const isCopied = copiedKey === item.key;
 
                 return (
-                  <div key={item.key} className="card">
+                  <div key={item.key} className={`card ${filter === "dark" ? "card-dark" : "card-light"}`}>
                     <div className="cardImage">
                       <img src={item.image || PLACEHOLDER} alt={item.title} />
                     </div>
@@ -142,13 +142,18 @@ export default function BadgePage({ isAuthenticated, setIsSignInOpen }: BadgePag
                         onMouseEnter={() => !isCopied && setHoveredKey(item.key)}
                         onMouseLeave={() => setHoveredKey(null)}
                       >
-                        {isCopied ? (
+                      {isCopied ? (
                           <CircleCheck size={20} color="#22c55e" strokeWidth={2.5} />
                         ) : canCopy ? (
-                          <Copy size={16} />
+                          <Copy size={16}
+                          color={filter === "dark" ? "#ccc" : "currentColor"} 
+                           />
                         ) : (
-                          <Lock size={16} />
+                          <Lock size={16}
+                          color={filter === "dark" ? "#ccc" : "currentColor"} 
+                           />
                         )}
+
 
                         {(isCopied || hoveredKey === item.key) && (
                           <div className="tooltip">
