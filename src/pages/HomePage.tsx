@@ -332,6 +332,342 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
         </div>
       </section>
 
+     {/* TESTIMONIALS SECTION */}
+<section id="testimonials" className="testimonials-section">
+  <div className="faq-container">
+    <h2 className="fk-gs-title">What People Say</h2>
+    <p className="fk-gs-text">Feedback from designers and developers using FramerKit</p>
+
+    <div className="faq-grid">
+      
+      {/* Отзыв 1 */}
+      <div className="faq-item">
+        <p className="faq-answer">
+          "FramerKit saved me dozens of hours. The components are clean, responsive, and easy to customize. Best investment for my workflow!"
+        </p>
+        <div className="testimonial-author">
+          <div className="testimonial-left">
+            <img 
+              src="https://i.pravatar.cc/150?img=1" 
+              alt="Alex Morgan" 
+              className="testimonial-avatar"
+            />
+            <div className="testimonial-info">
+              <span className="testimonial-name">Alex Morgan</span>
+              <span className="testimonial-role">Freelance Designer</span>
+            </div>
+          </div>
+          <span className="tooltip-wrapper" style={{ display: 'inline-flex' }}>
+            <a 
+              href="https://x.com/framer_kit" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="faq-link testimonial-link"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+            <div className="tooltip">
+              Follow on X
+              <div className="tooltip-arrow" />
+            </div>
+          </span>
+        </div>
+      </div>
+
+      {/* Отзыв 2 */}
+      <div className="faq-item">
+        <p className="faq-answer">
+          "The Wireframe & Design mode is a game-changer. I can prototype fast and then polish everything in minutes. Highly recommend!"
+        </p>
+        <div className="testimonial-author">
+          <div className="testimonial-left">
+            <img 
+              src="https://i.pravatar.cc/150?img=5" 
+              alt="Sarah Chen" 
+              className="testimonial-avatar"
+            />
+            <div className="testimonial-info">
+              <span className="testimonial-name">Sarah Chen</span>
+              <span className="testimonial-role">Product Designer</span>
+            </div>
+          </div>
+          <span className="tooltip-wrapper" style={{ display: 'inline-flex' }}>
+            <a 
+              href="https://x.com/framer_kit" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="faq-link testimonial-link"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+            <div className="tooltip">
+              Follow on X
+              <div className="tooltip-arrow" />
+            </div>
+          </span>
+        </div>
+      </div>
+
+      {/* Отзыв 3 */}
+      <div className="faq-item">
+        <p className="faq-answer">
+          "Finally a kit that understands how designers work. Every component feels thoughtfully crafted. Worth every penny!"
+        </p>
+        <div className="testimonial-author">
+          <div className="testimonial-left">
+            <img 
+              src="https://i.pravatar.cc/150?img=11" 
+              alt="Mike Roberts" 
+              className="testimonial-avatar"
+            />
+            <div className="testimonial-info">
+              <span className="testimonial-name">Mike Roberts</span>
+              <span className="testimonial-role">Frontend Developer</span>
+            </div>
+          </div>
+          <span className="tooltip-wrapper" style={{ display: 'inline-flex' }}>
+            <a 
+              href="https://x.com/framer_kit" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="faq-link testimonial-link"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+            <div className="tooltip">
+              Follow on X
+              <div className="tooltip-arrow" />
+            </div>
+          </span>
+        </div>
+      </div>
+
+      {/* Отзыв 4 — НОВЫЙ */}
+      <div className="faq-item">
+        <p className="faq-answer">
+          "The responsive blocks work flawlessly across all devices. I can build a complete landing page in under an hour. FramerKit is a must-have!"
+        </p>
+        <div className="testimonial-author">
+          <div className="testimonial-left">
+            <img 
+              src="https://i.pravatar.cc/150?img=3" 
+              alt="Jessica Lee" 
+              className="testimonial-avatar"
+            />
+            <div className="testimonial-info">
+              <span className="testimonial-name">Jessica Lee</span>
+              <span className="testimonial-role">UX Designer</span>
+            </div>
+          </div>
+          <span className="tooltip-wrapper" style={{ display: 'inline-flex' }}>
+            <a 
+              href="https://x.com/framer_kit" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="faq-link testimonial-link"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+            <div className="tooltip">
+              Follow on X
+              <div className="tooltip-arrow" />
+            </div>
+          </span>
+        </div>
+      </div>
+
+      {/* Отзыв 5 — НОВЫЙ */}
+      <div className="faq-item">
+        <p className="faq-answer">
+          "Commercial license is a huge plus. I use FramerKit for all my client projects and they always love the results. Best ROI for my business!"
+        </p>
+        <div className="testimonial-author">
+          <div className="testimonial-left">
+            <img 
+              src="https://i.pravatar.cc/150?img=12" 
+              alt="Tom Anderson" 
+              className="testimonial-avatar"
+            />
+            <div className="testimonial-info">
+              <span className="testimonial-name">Tom Anderson</span>
+              <span className="testimonial-role">Agency Owner</span>
+            </div>
+          </div>
+          <span className="tooltip-wrapper" style={{ display: 'inline-flex' }}>
+            <a 
+              href="https://x.com/framer_kit" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="faq-link testimonial-link"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+            <div className="tooltip">
+              Follow on X
+              <div className="tooltip-arrow" />
+            </div>
+          </span>
+        </div>
+      </div>
+
+      {/* Отзыв 6 — НОВЫЙ */}
+      <div className="faq-item">
+        <p className="faq-answer">
+          "The plugin makes it so easy to drop components directly into Framer. No more copy-pasting from external files. Game changer for my workflow!"
+        </p>
+        <div className="testimonial-author">
+          <div className="testimonial-left">
+            <img 
+              src="https://i.pravatar.cc/150?img=7" 
+              alt="Nina Patel" 
+              className="testimonial-avatar"
+            />
+            <div className="testimonial-info">
+              <span className="testimonial-name">Nina Patel</span>
+              <span className="testimonial-role">UI/UX Designer</span>
+            </div>
+          </div>
+          <span className="tooltip-wrapper" style={{ display: 'inline-flex' }}>
+            <a 
+              href="https://x.com/framer_kit" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="faq-link testimonial-link"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+            <div className="tooltip">
+              Follow on X
+              <div className="tooltip-arrow" />
+            </div>
+          </span>
+        </div>
+      </div>
+
+      {/* Отзыв 7 — НОВЫЙ */}
+      <div className="faq-item">
+        <p className="faq-answer">
+          "I love how every component is built with best practices. Clean code, accessible markup, and beautiful design — all in one package."
+        </p>
+        <div className="testimonial-author">
+          <div className="testimonial-left">
+            <img 
+              src="https://i.pravatar.cc/150?img=15" 
+              alt="Chris Taylor" 
+              className="testimonial-avatar"
+            />
+            <div className="testimonial-info">
+              <span className="testimonial-name">Chris Taylor</span>
+              <span className="testimonial-role">Web Developer</span>
+            </div>
+          </div>
+          <span className="tooltip-wrapper" style={{ display: 'inline-flex' }}>
+            <a 
+              href="https://x.com/framer_kit" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="faq-link testimonial-link"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+            <div className="tooltip">
+              Follow on X
+              <div className="tooltip-arrow" />
+            </div>
+          </span>
+        </div>
+      </div>
+
+      {/* Отзыв 8 — НОВЫЙ */}
+      <div className="faq-item">
+        <p className="faq-answer">
+          "The constant updates and new components show the team really cares. I've been using FramerKit for 6 months and it just keeps getting better!"
+        </p>
+        <div className="testimonial-author">
+          <div className="testimonial-left">
+            <img 
+              src="https://i.pravatar.cc/150?img=20" 
+              alt="Laura Kim" 
+              className="testimonial-avatar"
+            />
+            <div className="testimonial-info">
+              <span className="testimonial-name">Laura Kim</span>
+              <span className="testimonial-role">Startup Founder</span>
+            </div>
+          </div>
+          <span className="tooltip-wrapper" style={{ display: 'inline-flex' }}>
+            <a 
+              href="https://x.com/framer_kit" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="faq-link testimonial-link"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+            <div className="tooltip">
+              Follow on X
+              <div className="tooltip-arrow" />
+            </div>
+          </span>
+        </div>
+      </div>
+
+      {/* Отзыв 9 — НОВЫЙ */}
+      <div className="faq-item">
+        <p className="faq-answer">
+          "As a teacher, I recommend FramerKit to all my students. It's the perfect balance of power and simplicity. They ship projects faster and with more confidence."
+        </p>
+        <div className="testimonial-author">
+          <div className="testimonial-left">
+            <img 
+              src="https://i.pravatar.cc/150?img=24" 
+              alt="Daniel Brown" 
+              className="testimonial-avatar"
+            />
+            <div className="testimonial-info">
+              <span className="testimonial-name">Daniel Brown</span>
+              <span className="testimonial-role">Design Instructor</span>
+            </div>
+          </div>
+          <span className="tooltip-wrapper" style={{ display: 'inline-flex' }}>
+            <a 
+              href="https://x.com/framer_kit" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="faq-link testimonial-link"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+            <div className="tooltip">
+              Follow on X
+              <div className="tooltip-arrow" />
+            </div>
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
       <section id="explore-sections" className="explore-sections-section">
         <div className="fk-explore-wrapper">
           <div className="fk-container"></div>

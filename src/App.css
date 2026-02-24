@@ -2386,3 +2386,177 @@ body.menu-open {
 .copy-email-btn.copy-success .copy-tooltip::after {
   border-top-color: #22c55e;
 }
+
+
+/* ===== TESTIMONIALS SECTION (в стиле FAQ) ===== */
+.testimonial-link {
+  display: none !important;
+}
+
+
+.testimonials-section {
+  
+  background: #ffffff;
+}
+
+.testimonials-section .faq-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Сетка отзывов */
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 40px;
+}
+
+/* Карточка отзыва — одинаковая высота */
+.faq-item {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Текст отзыва — растягивается */
+.faq-answer {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 20px;
+  flex: 1; /* Занимает всё доступное пространство */
+  min-height: 100px; /* Минимальная высота для выравнивания */
+}
+
+/* Автор отзыва: слева аватар+инфо, справа ссылка */
+.testimonial-author {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid #eee;
+  margin-top: auto; /* Прижимает к низу карточки */
+}
+
+/* Левая часть: аватар + имя/должность */
+.testimonial-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Аватар */
+.testimonial-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* Имя и должность */
+.testimonial-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.testimonial-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111;
+  line-height: 1.2;
+}
+
+.testimonial-role {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.2;
+}
+
+/* Ссылка на X (справа) */
+.testimonial-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6E3FF3;
+  transition: opacity 0.2s ease;
+  padding: 4px;
+  flex-shrink: 0;
+}
+
+.testimonial-link:hover {
+  opacity: 0.85;
+}
+
+/* Тултип — используем существующие стили */
+.tooltip-wrapper {
+  position: relative;
+  display: inline-flex;
+}
+
+.tooltip-wrapper .tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #6E3FF3;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 9999;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  margin-bottom: 8px;
+}
+
+.tooltip-wrapper .tooltip-arrow {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #6E3FF3;
+}
+
+.tooltip-wrapper:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Адаптив для мобильных */
+@media (max-width: 968px) {
+  .faq-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .faq-answer {
+    min-height: auto;
+  }
+  
+  .testimonial-author {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .testimonial-left {
+    width: 100%;
+  }
+}
+
