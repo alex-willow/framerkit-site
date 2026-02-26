@@ -5,6 +5,20 @@
     <link rel="icon" type="image/svg+xml" href="/Logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FramerKit</title>
+    <script>
+      (function() {
+        if (window.location.pathname.startsWith('/preview/')) {
+          var path = window.location.pathname;
+          
+          // Если нет .html — сразу перенаправляем на index.html
+          if (!path.endsWith('.html')) {
+            var newPath = path.endsWith('/') ? path + 'index.html' : path + '/index.html';
+            window.location.replace(newPath);
+            return;
+          }
+        }
+      })();
+    </script>
 
     <!-- Inter font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">

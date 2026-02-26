@@ -1,5 +1,5 @@
 import { Sun, Moon, Paintbrush, SquareDashed } from "lucide-react";
-import { useState } from "react"; // ← добавили useState
+import { useState, useEffect } from "react";
 
 type SectionHeaderProps = {
   title: string;
@@ -35,6 +35,27 @@ function ModeToggle({
 }: ModeToggleProps) {
   const [showTooltip, setShowTooltip] = useState(false);
 
+  // Сбрасывать тултип при потере фокуса окна/вкладки
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        setShowTooltip(false);
+      }
+    };
+
+    const handleBlur = () => {
+      setShowTooltip(false);
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('blur', handleBlur);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('blur', handleBlur);
+    };
+  }, []);
+
   return (
     <>
       <span className="mode-label">{label}</span>
@@ -51,11 +72,9 @@ function ModeToggle({
       >
         {isActive ? activeIcon : inactiveIcon}
         
-        {/* Отдельный класс toggle-tooltip — стили выше */}
         {showTooltip && (
           <div className="toggle-tooltip">
             {isActive ? activeLabel : inactiveLabel}
-            {/* Стрелка через ::after в CSS */}
           </div>
         )}
       </button>

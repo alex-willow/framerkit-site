@@ -9,6 +9,10 @@ type ComponentItem = {
   image: string;
   url: string;
   type: "free" | "paid";
+  wireframe?: {
+    image: string;
+    url: string;
+  };
 };
 
 const STATIC_SECTIONS = [
@@ -25,7 +29,11 @@ const STATIC_SECTIONS = [
   "footer"
 ];
 
-export default function RandomSectionCards() {
+type RandomSectionCardsProps = {
+  wireframeMode?: boolean;
+};
+
+export default function RandomSectionCards({ wireframeMode = false }: RandomSectionCardsProps) {
   const [cards, setCards] = useState<(ComponentItem | null)[]>(
     Array(STATIC_SECTIONS.length).fill(null)
   );
@@ -42,6 +50,21 @@ export default function RandomSectionCards() {
   const rotatingRef = useRef(false);
 
   const itemsBySection = useRef<Record<string, ComponentItem[]>>({});
+  const wireframeModeRef = useRef(wireframeMode);
+
+  // Обновляем ref при изменении пропса
+  useEffect(() => {
+    wireframeModeRef.current = wireframeMode;
+  }, [wireframeMode]);
+
+  // Функция получения изображения в зависимости от режима
+  const getDisplayImage = (item: ComponentItem): string => {
+    return wireframeMode && item.wireframe?.image 
+      ? item.wireframe.image 
+      : item.image;
+  };
+
+
 
   useEffect(() => {
     const load = async () => {
@@ -76,6 +99,14 @@ export default function RandomSectionCards() {
         return items[Math.floor(Math.random() * items.length)];
       });
 
+      // Preload изображений для текущего режима
+      initial.forEach(item => {
+        if (item) {
+          const img = new Image();
+          img.src = getDisplayImage(item);
+        }
+      });
+
       // Показываем скелетоны сначала
       setCards(Array(STATIC_SECTIONS.length).fill(null));
       setLoaded(Array(STATIC_SECTIONS.length).fill(false));
@@ -95,6 +126,8 @@ export default function RandomSectionCards() {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
   }, []);
+
+
 
   const rotateOne = () => {
     if (rotatingRef.current) return;
@@ -123,7 +156,7 @@ export default function RandomSectionCards() {
       return;
     }
 
-    const newCard = list[Math.floor(Math.random() * list.length)];
+    const newItem = list[Math.floor(Math.random() * list.length)];
     rotatingRef.current = true;
 
     setFading(prev => {
@@ -132,14 +165,15 @@ export default function RandomSectionCards() {
       return arr;
     });
 
+    // Preload нового изображения в текущем режиме
     const preload = new Image();
-    preload.src = newCard.image;
+    preload.src = getDisplayImage(newItem);
 
     const swap = () => {
       setTimeout(() => {
         setCards(prev => {
           const arr = [...prev];
-          arr[index] = newCard;
+          arr[index] = newItem;
           lastChangeRef.current[index] = Date.now();
           return arr;
         });
@@ -168,11 +202,15 @@ export default function RandomSectionCards() {
       {STATIC_SECTIONS.map((section, index) => {
         const item = cards[index];
         const count = itemsBySection.current[section]?.length || 0;
+        
+        // Получаем изображение и URL в зависимости от режима
+        const displayImage = item ? getDisplayImage(item) : null;
+  
 
         return (
           <Link
             key={section}
-            to={item ? `/layout/${section}` : "#"}
+            to={item ? `/layout/${section}${wireframeMode ? '?mode=wireframe' : ''}` : "#"}
             className="card"
             onMouseEnter={() => (hoveredRef.current[index] = true)}
             onMouseLeave={() => (hoveredRef.current[index] = false)}
@@ -211,11 +249,11 @@ export default function RandomSectionCards() {
             )}
 
             {/* Карточка с изображением */}
-            {loaded[index] && item && (
+            {loaded[index] && item && displayImage && (
               <>
                 <div className={`cardImage ${fading[index] ? "fadeOut" : "fadeIn"}`}>
                   <img
-                    src={item.image}
+                    src={displayImage}
                     alt={item.title}
                     onError={e =>
                       (e.currentTarget.src =

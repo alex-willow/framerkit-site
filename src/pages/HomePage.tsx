@@ -7,7 +7,8 @@ import "./gettingstarted.css";
 import styles from "./HomePage.module.css";
 import SimpleAvatarGroup from "../components/SimpleAvatarGroup";
 import { motion } from "framer-motion";
-import { Copy, CircleCheck } from "lucide-react";
+import { Copy, CircleCheck, Paintbrush, SquareDashed } from "lucide-react";
+
 import {
   RocketLaunch,
   ClipboardText,
@@ -41,6 +42,7 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
 
   const [copiedEmail, setCopiedEmail] = useState(false); // для FAQ email
   const [hoveredEmail, setHoveredEmail] = useState(false); // для FAQ email
+  const [isWireframeMode, setIsWireframeMode] = useState(true);
 
 
   // ================================
@@ -263,7 +265,7 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
                 >
                   <SimpleAvatarGroup size={40} overlap={6} />
                   <p className={styles.statsText}>
-                    1,200+ designers already use FramerKit
+                    1,400+ designers already use FramerKit
                   </p>
                   <p className={styles.statsNote}>
                     (and the number grows every day)
@@ -674,22 +676,53 @@ export default function HomePage({ onSectionChange }: HomePageProps) {
         </div>
       </section>
 
-      {/* LAYOUT SECTIONS */}
-      <section id="layout-sections" className="ls-section">
-        <div className="ls-wrapper">
-          <div className="ls-container">
-            <div className="ls-block">
-              <h2 className="fk-gs-title">Layout Sections</h2>
-              <p className="fk-gs-text">
-                Pre-built page sections like Navigation Bars, Hero Sections, Testimonials, FAQs, and more — fully responsive and ready to drop into your Framer project
-              </p>
-              <div className="gallery2">
-                <RandomSectionCards />
-              </div>
-            </div>
+{/* LAYOUT SECTIONS */}
+<section id="layout-sections" className="ls-section">
+  <div className="ls-wrapper">
+    <div className="ls-container">
+      <div className="ls-block">
+        
+        {/* 1. Заголовок */}
+        <h2 className="fk-gs-title">Layout Sections</h2>
+        
+        {/* 2. Подзаголовок */}
+        <p className="fk-gs-text">
+          Pre-built page sections like Navigation Bars, Hero Sections, Testimonials, FAQs, and more — fully responsive and ready to drop into your Framer project
+        </p>
+        
+        {/* 3. Переключатель (по центру или справа) */}
+        <div className="mode-toggle-wrapper">
+          <div className="mode-toggle-group">
+            <button
+              className={`mode-toggle-btn ${isWireframeMode ? 'active' : ''}`}
+              onClick={() => setIsWireframeMode(true)}
+              type="button"
+              aria-label="Wireframe mode"
+            >
+              <SquareDashed size={16} strokeWidth={2} />
+              <span>Wireframe</span>
+            </button>
+            <button
+              className={`mode-toggle-btn ${!isWireframeMode ? 'active' : ''}`}
+              onClick={() => setIsWireframeMode(false)}
+              type="button"
+              aria-label="Design mode"
+            >
+              <Paintbrush size={16} strokeWidth={2} />
+              <span>Design</span>
+            </button>
           </div>
         </div>
-      </section>
+        
+        {/* 4. Карточки */}
+        <div className="gallery2">
+          <RandomSectionCards wireframeMode={isWireframeMode} />
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* UI COMPONENTS */}
       <section id="ui-components" className="ui-section">
