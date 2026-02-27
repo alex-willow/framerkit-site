@@ -6,7 +6,7 @@ import type { Plugin } from 'vite';
 const previewRewritePlugin = (): Plugin => ({
   name: 'preview-rewrite',
   configureServer(server) {
-    server.middlewares.use((req, res, next) => {
+    server.middlewares.use((req, _res, next) => {
       const url = req.url || '';
       
       // Если запрос вида /preview/.../view — отдаём viewer.html
