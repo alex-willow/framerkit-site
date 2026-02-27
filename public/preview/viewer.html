@@ -99,38 +99,34 @@
   <!-- JavaScript -->
   <script>
 // ============================================
-// INIT — извлекаем путь и title из pathname
+// INIT — парсим путь с префиксом /p/
 // ============================================
 console.log('🔍 viewer.html loaded');
 
-// 1. Парсим путь
-const path = window.location.pathname; // /preview/navbar/navbar-04-wireframe
-const parts = path.split('/').filter(p => p); // ['preview', 'navbar', 'navbar-04-wireframe']
+const path = window.location.pathname; // /p/navbar/navbar-01-wireframe
+const parts = path.split('/').filter(p => p); // ['p', 'navbar', 'navbar-01-wireframe']
 
-// 2. Извлекаем имя компонента (последняя часть)
-const componentName = parts[parts.length - 1] || 'Preview'; // 'navbar-04-wireframe'
+// Извлекаем имя компонента (последняя часть)
+const componentName = parts[parts.length - 1] || 'Preview';
 
-// 3. Форматируем в читаемый title: navbar-04-wireframe → Navbar 04 Wireframe
+// Форматируем: navbar-01-wireframe → Navbar 01 Wireframe
 const formattedTitle = componentName
   .split('-')
   .map(word => {
-    // Если слово содержит цифры, добавляем пробел перед ними: navbar04 → navbar 04
     const withSpace = word.replace(/(\d)/g, ' $1').trim();
-    // Capitalize first letter
     return withSpace.charAt(0).toUpperCase() + withSpace.slice(1);
   })
   .join(' ');
 
-// 4. Устанавливаем title
 document.title = `${formattedTitle} | FramerKit`;
 const titleEl = document.querySelector('title');
 if (titleEl) titleEl.textContent = `${formattedTitle} | FramerKit`;
 
-// 5. Собираем путь к компоненту для iframe
-const componentPath = '/preview/' + parts.slice(1).join('/'); // /preview/navbar/navbar-04-wireframe
+// Собираем путь к компоненту (реальные файлы лежат в /preview/)
+const componentParts = parts.slice(1); // ['navbar', 'navbar-01-wireframe']
+const componentPath = '/preview/' + componentParts.join('/');
 console.log('🔍 Loading:', componentPath);
 
-// 6. Загружаем в iframe
 const previewFrame = document.getElementById('previewFrame');
 previewFrame.src = componentPath;
 

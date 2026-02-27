@@ -1,7 +1,7 @@
 {
   "rewrites": [
     {
-      "source": "/preview/:path*",
+      "source": "/p/:path*",
       "destination": "/preview/viewer.html"
     },
     {
