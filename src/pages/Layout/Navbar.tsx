@@ -193,7 +193,7 @@ export default function NavbarPage({ isAuthenticated, setIsSignInOpen }: NavbarP
                                 
                                 // ✅ Чистый URL без /view и без ?title=
                                 // Результат: /preview/navbar/navbar-04-wireframe
-                                const viewerUrl = `/preview/${cleanPath}`;
+                                const viewerUrl = `/p/${cleanPath}`;
                                 
                                 console.log('🔗 Opening:', viewerUrl);
                                 window.open(viewerUrl, '_blank', 'noopener,noreferrer');

@@ -5,32 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Preview | FramerKit</title>
   <link rel="stylesheet" href="/preview/viewer.css" />
-  
-  <!-- ✅ Фавикон (подставь свой путь) -->
-  <link rel="icon" type="image/png" href="/Logo.png" />
-  <link rel="apple-touch-icon" href="/Logo.png" />
-  
-  <!-- ✅ Мета-теги для красивого шеринга -->
-  <meta name="description" content="FramerKit Component Preview" />
-  <meta property="og:title" content="FramerKit Preview" />
-  <meta property="og:image" content="/Logo.png" />
-  
-  <!-- Стили -->
-  <link rel="stylesheet" href="/preview/viewer.css" />
 </head>
 <body>
   <!-- 🔥 TOOLBAR -->
   <div class="preview-toolbar">
- <div class="logo">
-  <img 
-    src="/Logo.png" 
-    alt="FramerKit" 
-    class="logo-image"
-    width="32"
-    height="32"
-  />
-  <span>FramerKit</span>
-</div>
+    <div class="logo">
+      <div class="logo-icon">F</div>
+      <span>FramerKit</span>
+    </div>
 
     <!-- Device Toggle -->
     <div class="device-toggle">
@@ -117,103 +99,49 @@
   <!-- JavaScript -->
   <script>
 // ============================================
-// INIT — надёжный парсинг пути с /p/
+// INIT — парсим путь с префиксом /p/
 // ============================================
-console.log('🔍 viewer.html STARTED');
-console.log('🔍 Full URL:', window.location.href);
-console.log('🔍 Pathname:', window.location.pathname);
+console.log('🔍 viewer.html loaded');
 
 const path = window.location.pathname; // /p/navbar/navbar-01-wireframe
-
-// Проверка: если путь не содержит /p/, возможно rewrite не сработал
-if (!path.startsWith('/p/') && !path.includes('viewer.html')) {
-  console.warn('⚠️ viewer.html loaded but path does not start with /p/');
-  console.warn('⚠️ Possible direct file access - rewrite may not be working');
-}
-
 const parts = path.split('/').filter(p => p); // ['p', 'navbar', 'navbar-01-wireframe']
-console.log('🔍 Path parts:', parts);
 
 // Извлекаем имя компонента (последняя часть)
-let componentName = parts[parts.length - 1] || '';
-console.log('🔍 Raw componentName:', componentName);
-
-// 🔥 Чистим название от лишних слов
-componentName = componentName
-  .replace(/-preview$/i, '')
-  .replace(/preview$/i, '')
-  .replace(/-wireframe$/i, '-wireframe')
-  .replace(/-+/g, '-')
-  .replace(/^-|-$/g, '');
-
-if (!componentName) componentName = 'Component';
-console.log('🔍 Clean componentName:', componentName);
+const componentName = parts[parts.length - 1] || 'Preview';
 
 // Форматируем: navbar-01-wireframe → Navbar 01 Wireframe
 const formattedTitle = componentName
   .split('-')
   .map(word => {
-    if (!word) return '';
     const withSpace = word.replace(/(\d)/g, ' $1').trim();
     return withSpace.charAt(0).toUpperCase() + withSpace.slice(1);
   })
-  .filter(w => w)
   .join(' ');
 
-console.log('🔍 Formatted title:', formattedTitle);
-
-// Устанавливаем заголовок
 document.title = `${formattedTitle} | FramerKit`;
 const titleEl = document.querySelector('title');
 if (titleEl) titleEl.textContent = `${formattedTitle} | FramerKit`;
 
-// Собираем путь к компоненту (реальные файлы в /preview/)
+// Собираем путь к компоненту (реальные файлы лежат в /preview/)
 const componentParts = parts.slice(1); // ['navbar', 'navbar-01-wireframe']
 const componentPath = '/preview/' + componentParts.join('/');
-console.log('✅ Final componentPath for iframe:', componentPath);
+console.log('🔍 Loading:', componentPath);
 
-// Загружаем в iframe
 const previewFrame = document.getElementById('previewFrame');
+previewFrame.src = componentPath;
 
-if (previewFrame && componentPath) {
-  console.log('🔗 Setting iframe src...');
-  
-  // Проверка загрузки
-  previewFrame.addEventListener('load', function onLoad() {
-    console.log('✅ iframe loaded successfully');
-    console.log('✅ iframe final src:', previewFrame.src);
-    
-    // Скрываем лоадер
-    const loader = document.getElementById('loadingOverlay');
-    if (loader) {
-      loader.style.opacity = '0';
-      setTimeout(() => { loader.style.display = 'none'; }, 300);
-    }
-    
-    // Удаляем listener чтобы не дублировался
-    previewFrame.removeEventListener('load', onLoad);
-  });
-  
-  previewFrame.addEventListener('error', function onError() {
-    console.error('❌ iframe failed to load');
-    console.error('❌ Tried to load:', componentPath);
-    
-    // Показываем ошибку пользователю
-    const loader = document.getElementById('loadingOverlay');
-    if (loader) {
-      loader.innerHTML = '<p style="color:red;padding:20px">Failed to load component</p>';
-    }
-    
-    previewFrame.removeEventListener('error', onError);
-  });
-  
-  // Устанавливаем src (в конце, после listeners)
-  previewFrame.src = componentPath;
-} else {
-  console.error('❌ previewFrame not found or componentPath empty');
-  console.error('❌ previewFrame:', document.getElementById('previewFrame'));
-  console.error('❌ componentPath:', componentPath);
-}
+previewFrame.addEventListener('load', () => {
+  console.log('✅ iframe loaded');
+  const loader = document.getElementById('loadingOverlay');
+  if (loader) {
+    loader.style.opacity = '0';
+    setTimeout(() => { loader.style.display = 'none'; }, 300);
+  }
+});
+
+previewFrame.addEventListener('error', () => {
+  console.error('❌ iframe failed to load:', componentPath);
+});
     const deviceBtns = document.querySelectorAll('.device-btn');
     const resizableWrapper = document.getElementById('resizableWrapper');
     const previewContainer = document.getElementById('previewContainer');
