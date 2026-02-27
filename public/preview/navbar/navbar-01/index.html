@@ -12,12 +12,36 @@
     <meta name="viewport" content="width=device-width">
     <meta name="generator" content="Framer f353506">
     <meta name="framer-search-index"
-        content="https://framerusercontent.com/sites/6R3ICRvTG9shTblYB487rC/searchIndex-OMFexLPKR3xM.json">
-    <link href="https://framerusercontent.com/sites/icons/default-favicon-light.v1.png" rel="icon"
-        media="(prefers-color-scheme: light)">
-    <link href="https://framerusercontent.com/sites/icons/default-favicon-dark.v1.png" rel="icon"
-        media="(prefers-color-scheme: dark)">
-    <link rel="apple-touch-icon" href="https://framerusercontent.com/sites/icons/default-touch-icon.v3.png">
+        <link rel="icon" type="image/png" href="/Logo.png" />
+        <link rel="apple-touch-icon" href="/Logo.png" />
+        <!-- Твой заголовок -->
+<title>Navbar 01 Preview | FramerKit</title>
+
+<!-- ✅ Скрипт-защита: не даёт JS изменить title -->
+<script>
+  (function() {
+    // Сохраняем твой заголовок
+    var myTitle = 'Navbar 01 Preview | FramerKit';
+    document.title = myTitle;
+    
+    // Блокируем изменение title через Object.defineProperty
+    Object.defineProperty(document, 'title', {
+      set: function(value) {
+        // Игнорируем попытки изменить, если это не наш заголовок
+        if (value !== myTitle) {
+          // Можно раскомментировать для отладки:
+          // console.log('Blocked title change:', value);
+          return;
+        }
+        // Если значение совпадает — разрешаем
+        document.head.querySelector('title').textContent = value;
+      },
+      get: function() {
+        return myTitle;
+      }
+    });
+  })();
+</script>
 
     <style data-framer-font-css>
         @font-face {
