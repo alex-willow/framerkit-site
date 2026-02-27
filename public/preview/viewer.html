@@ -99,39 +99,65 @@
   <!-- JavaScript -->
   <script>
 
-    
+ // ============================================
+// INIT — парсим путь из pathname (для Vercel)
+// ============================================
+console.log('🔍 viewer.html loaded');
+console.log('🔍 Full URL:', window.location.href);
+
 const urlParams = new URLSearchParams(window.location.search);
-  
-  // 1. Title
-  const componentTitle = urlParams.get('title') || 'Preview';
-  document.title = `${componentTitle} | FramerKit`;
-  const titleEl = document.querySelector('title');
-  if (titleEl) titleEl.textContent = `${componentTitle} | FramerKit`;
-  
-  // 2. Path к компоненту
-  const pathParam = urlParams.get('path'); // navbar/navbar-01
-  const componentPath = pathParam ? '/preview/' + pathParam : '';
-  
-  console.log('🔍 Loading:', componentPath);
-  
-  // 3. Загружаем в iframe
-  const previewFrame = document.getElementById('previewFrame');
-  if (componentPath) {
-    previewFrame.src = componentPath;
-    
-    previewFrame.addEventListener('load', () => {
-      console.log('✅ Loaded');
-      document.getElementById('loadingOverlay').style.opacity = '0';
-      setTimeout(() => {
-        document.getElementById('loadingOverlay').style.display = 'none';
-      }, 300);
-    });
-    
-    previewFrame.addEventListener('error', () => {
-      console.error('❌ Failed to load:', componentPath);
-    });
+
+// 1. Title (из query params)
+const componentTitle = urlParams.get('title') || 'Preview';
+document.title = `${componentTitle} | FramerKit`;
+const titleEl = document.querySelector('title');
+if (titleEl) titleEl.textContent = `${componentTitle} | FramerKit`;
+
+// 2. Path из pathname (Vercel rewrite)
+// URL: /preview/navbar/navbar-01-wireframe/view
+const path = window.location.pathname; 
+const parts = path.split('/').filter(p => p); // ['preview', 'navbar', 'navbar-01-wireframe', 'view']
+
+let componentPath = '';
+
+const previewIndex = parts.indexOf('preview');
+const viewIndex = parts.indexOf('view');
+
+if (previewIndex !== -1 && viewIndex !== -1 && viewIndex > previewIndex) {
+  // Берём части между 'preview' и 'view'
+  const componentParts = parts.slice(previewIndex + 1, viewIndex); // ['navbar', 'navbar-01-wireframe']
+  componentPath = '/preview/' + componentParts.join('/'); // /preview/navbar/navbar-01-wireframe
+  console.log('✅ componentPath from pathname:', componentPath);
+} else {
+  // Фолбэк: если pathname не распарсился, пробуем ?path= (для локалки)
+  const pathParam = urlParams.get('path');
+  if (pathParam) {
+    componentPath = '/preview/' + pathParam;
+    console.log('⚠️ componentPath from query:', componentPath);
+  } else {
+    console.error('❌ Could not parse path from:', path);
   }
+}
+
+// 3. Загружаем в iframe
+const previewFrame = document.getElementById('previewFrame');
+if (componentPath) {
+  console.log('🔗 Setting iframe src:', componentPath);
+  previewFrame.src = componentPath;
   
+  previewFrame.addEventListener('load', () => {
+    console.log('✅ iframe loaded');
+    const loader = document.getElementById('loadingOverlay');
+    if (loader) {
+      loader.style.opacity = '0';
+      setTimeout(() => { loader.style.display = 'none'; }, 300);
+    }
+  });
+  
+  previewFrame.addEventListener('error', () => {
+    console.error('❌ iframe failed to load:', componentPath);
+  });
+}
     const deviceBtns = document.querySelectorAll('.device-btn');
     const resizableWrapper = document.getElementById('resizableWrapper');
     const previewContainer = document.getElementById('previewContainer');
