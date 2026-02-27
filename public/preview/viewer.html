@@ -5,14 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Preview | FramerKit</title>
   <link rel="stylesheet" href="/preview/viewer.css" />
+  
+  <!-- ✅ Фавикон (подставь свой путь) -->
+  <link rel="icon" type="image/png" href="/Logo.png" />
+  <link rel="apple-touch-icon" href="/Logo.png" />
+  
+  <!-- ✅ Мета-теги для красивого шеринга -->
+  <meta name="description" content="FramerKit Component Preview" />
+  <meta property="og:title" content="FramerKit Preview" />
+  <meta property="og:image" content="/Logo.png" />
+  
+  <!-- Стили -->
+  <link rel="stylesheet" href="/preview/viewer.css" />
 </head>
 <body>
   <!-- 🔥 TOOLBAR -->
   <div class="preview-toolbar">
     <div class="logo">
-      <div class="logo-icon">F</div>
-      <span>FramerKit</span>
-    </div>
+        <img 
+          src="/Logo.png" 
+          alt="FramerKit" 
+          class="logo-image"
+          width="32"
+          height="32"
+        />
+        <span>FramerKit</span>
+      </div>
 
     <!-- Device Toggle -->
     <div class="device-toggle">
@@ -103,30 +121,44 @@
 // ============================================
 console.log('🔍 viewer.html loaded');
 
-const path = window.location.pathname; // /p/navbar/navbar-01-wireframe
-const parts = path.split('/').filter(p => p); // ['p', 'navbar', 'navbar-01-wireframe']
+const path = window.location.pathname;
+const parts = path.split('/').filter(p => p);
 
-// Извлекаем имя компонента (последняя часть)
-const componentName = parts[parts.length - 1] || 'Preview';
+// Извлекаем имя компонента
+let componentName = parts[parts.length - 1] || '';
 
-// Форматируем: navbar-01-wireframe → Navbar 01 Wireframe
+// Чистим от лишних слов
+componentName = componentName
+  .replace(/-preview$/i, '')
+  .replace(/preview$/i, '')
+  .replace(/-wireframe$/i, '-wireframe')
+  .replace(/-+/g, '-')
+  .replace(/^-|-$/g, '');
+
+if (!componentName) componentName = 'Component';
+
+// ✅ ИСПРАВЛЕННОЕ форматирование
 const formattedTitle = componentName
   .split('-')
   .map(word => {
-    const withSpace = word.replace(/(\d)/g, ' $1').trim();
+    if (!word) return '';
+    // Пробел только между буквой и цифрой
+    const withSpace = word.replace(/([a-zA-Z])(\d)/g, '$1 $2');
     return withSpace.charAt(0).toUpperCase() + withSpace.slice(1);
   })
   .join(' ');
 
+// Устанавливаем title
 document.title = `${formattedTitle} | FramerKit`;
 const titleEl = document.querySelector('title');
 if (titleEl) titleEl.textContent = `${formattedTitle} | FramerKit`;
 
-// Собираем путь к компоненту (реальные файлы лежат в /preview/)
-const componentParts = parts.slice(1); // ['navbar', 'navbar-01-wireframe']
+// Путь к компоненту
+const componentParts = parts.slice(1);
 const componentPath = '/preview/' + componentParts.join('/');
 console.log('🔍 Loading:', componentPath);
 
+// Загружаем в iframe
 const previewFrame = document.getElementById('previewFrame');
 previewFrame.src = componentPath;
 
