@@ -183,7 +183,7 @@ export default function NavbarPage({ isAuthenticated, setIsSignInOpen }: NavbarP
                                 let path = displayPreviewUrl.trim();
                                 let cleanPath = '';
                                 
-                                // Извлекаем чистый путь (например, "navbar/navbar-01-wireframe")
+                                // Извлекаем чистый путь
                                 if (path.startsWith('/')) {
                                   cleanPath = path.replace('/preview/', '').replace(/\/$/, '');
                                 } else if (path.startsWith('http')) {
@@ -191,9 +191,9 @@ export default function NavbarPage({ isAuthenticated, setIsSignInOpen }: NavbarP
                                   cleanPath = url.pathname.replace('/preview/', '').replace(/\/$/, '');
                                 }
                                 
-                                // ✅ Формируем КРАСИВЫЙ URL для Vercel
-                                // Результат: /preview/navbar/navbar-01-wireframe/view?title=Navbar%2001
-                                const viewerUrl = `/preview/${cleanPath}/view?title=${encodeURIComponent(item.title)}`;
+                                // ✅ Чистый URL без /view и без ?title=
+                                // Результат: /preview/navbar/navbar-04-wireframe
+                                const viewerUrl = `/preview/${cleanPath}`;
                                 
                                 console.log('🔗 Opening:', viewerUrl);
                                 window.open(viewerUrl, '_blank', 'noopener,noreferrer');

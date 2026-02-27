@@ -2,16 +2,15 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import type { Plugin } from 'vite';
 
-// 🔥 Создаём плагин для красивых URL (решает проблему с TypeScript)
+// Плагин для локального rewrite (чтобы работало на localhost)
 const previewRewritePlugin = (): Plugin => ({
   name: 'preview-rewrite',
   configureServer(server) {
     server.middlewares.use((req, _res, next) => {
       const url = req.url || '';
       
-      // Если запрос вида /preview/.../view — отдаём viewer.html
-      // Пример: /preview/navbar/navbar-01/view → /preview/viewer.html
-      if (url.match(/^\/preview\/.+\/view\/?$/)) {
+      // Если запрос начинается с /preview/... (но не viewer.html, css и т.д.)
+      if (url.match(/^\/preview\/(?!viewer\.html|viewer\.css).+/)) {
         console.log('🔧 REWRITE:', url, '→ /preview/viewer.html');
         req.url = '/preview/viewer.html';
       }
