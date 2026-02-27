@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Preview | FramerKit</title>
+  <link rel="stylesheet" href="/preview/viewer.css" />
+</head>
+<body>
+  <!-- 🔥 TOOLBAR -->
+  <div class="preview-toolbar">
+    <div class="logo">
+      <div class="logo-icon">F</div>
+      <span>FramerKit</span>
+    </div>
+
+    <!-- Device Toggle -->
+    <div class="device-toggle">
+      <button class="device-btn" data-device="desktop" title="Desktop (1200px)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="3" width="20" height="14" rx="2" />
+          <line x1="8" y1="21" x2="16" y2="21" />
+          <line x1="12" y1="17" x2="12" y2="21" />
+        </svg>
+      </button>
+      <button class="device-btn" data-device="tablet" title="Tablet (768px)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="4" y="2" width="16" height="20" rx="2" />
+          <line x1="12" y1="18" x2="12" y2="18.01" />
+        </svg>
+      </button>
+      <button class="device-btn" data-device="mobile" title="Mobile (375px)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="5" y="2" width="14" height="20" rx="2" />
+          <line x1="12" y1="18" x2="12" y2="18.01" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Width & Height Inputs -->
+    <div class="size-inputs">
+      <div class="size-input-group">
+        <input 
+          type="number" 
+          id="widthInput" 
+          value="1200" 
+          min="320" 
+          max="1920"
+          class="size-input"
+        />
+        <span class="size-label">W</span>
+      </div>
+      <div class="size-input-group">
+        <input 
+          type="number" 
+          id="heightInput" 
+          value="617" 
+          min="200" 
+          max="2000"
+          class="size-input"
+        />
+        <span class="size-label">H</span>
+      </div>
+    </div>
+
+    <!-- Fullscreen Button -->
+    <button class="fullscreen-btn" title="Fullscreen (F)">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- 📱 PREVIEW CONTAINER -->
+  <div class="preview-container" id="previewContainer">
+    <div class="resizable-wrapper desktop" id="resizableWrapper">
+      <!-- Loading overlay -->
+      <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+      </div>
+
+      <!-- Resize handles -->
+      <div class="resize-handle left" id="resizeLeft"></div>
+      <div class="resize-handle right" id="resizeRight"></div>
+
+      <!-- Iframe с компонентом -->
+      <iframe 
+        src="" 
+        class="preview-frame"
+        id="previewFrame"
+        loading="lazy"
+      ></iframe>
+    </div>
+
+    <!-- Width indicator -->
+    <div class="width-indicator" id="widthIndicator">1200px</div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+
+    
+const urlParams = new URLSearchParams(window.location.search);
+  
+  // 1. Title
+  const componentTitle = urlParams.get('title') || 'Preview';
+  document.title = `${componentTitle} | FramerKit`;
+  const titleEl = document.querySelector('title');
+  if (titleEl) titleEl.textContent = `${componentTitle} | FramerKit`;
+  
+  // 2. Path к компоненту
+  const pathParam = urlParams.get('path'); // navbar/navbar-01
+  const componentPath = pathParam ? '/preview/' + pathParam : '';
+  
+  console.log('🔍 Loading:', componentPath);
+  
+  // 3. Загружаем в iframe
+  const previewFrame = document.getElementById('previewFrame');
+  if (componentPath) {
+    previewFrame.src = componentPath;
+    
+    previewFrame.addEventListener('load', () => {
+      console.log('✅ Loaded');
+      document.getElementById('loadingOverlay').style.opacity = '0';
+      setTimeout(() => {
+        document.getElementById('loadingOverlay').style.display = 'none';
+      }, 300);
+    });
+    
+    previewFrame.addEventListener('error', () => {
+      console.error('❌ Failed to load:', componentPath);
+    });
+  }
+  
+    const deviceBtns = document.querySelectorAll('.device-btn');
+    const resizableWrapper = document.getElementById('resizableWrapper');
+    const previewContainer = document.getElementById('previewContainer');
+    const fullscreenBtn = document.querySelector('.fullscreen-btn');
+    const resizeLeft = document.getElementById('resizeLeft');
+    const resizeRight = document.getElementById('resizeRight');
+    const widthIndicator = document.getElementById('widthIndicator');
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    const widthInput = document.getElementById('widthInput');
+    const heightInput = document.getElementById('heightInput');
+    
+    let isFullscreen = false;
+    let isResizing = false;
+    let startX = 0;
+    let startWidth = 1200;
+    
+    // ============================================
+    // DEVICE SWITCH
+    // ============================================
+    deviceBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const device = btn.dataset.device;
+    
+        deviceBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    
+        let width = 1200;
+        if (device === 'tablet') width = 768;
+        if (device === 'mobile') width = 375;
+    
+        setWidth(width);
+      });
+    });
+    
+    // ============================================
+    // WIDTH / HEIGHT INPUT
+    // ============================================
+    widthInput.addEventListener('input', e => {
+      let value = parseInt(e.target.value) || 1200;
+      value = clamp(value, 320, 1920);
+      setWidth(value);
+      deviceBtns.forEach(b => b.classList.remove('active'));
+    });
+    
+    heightInput.addEventListener('input', e => {
+      let value = parseInt(e.target.value) || 600;
+      value = clamp(value, 200, 2000);
+      resizableWrapper.style.height = value + 'px';
+      deviceBtns.forEach(b => b.classList.remove('active'));
+    });
+    
+    // ============================================
+    // SET WIDTH (центр остаётся на месте)
+    // ============================================
+    function setWidth(width) {
+      resizableWrapper.style.width = width + 'px';
+      widthInput.value = Math.round(width);
+      showWidthIndicator(width);
+    }
+    
+    // ============================================
+    // FULLSCREEN
+    // ============================================
+    fullscreenBtn.addEventListener('click', toggleFullscreen);
+    
+    document.addEventListener('keydown', e => {
+      if (e.key === 'f' || e.key === 'F') toggleFullscreen();
+      if (e.key === 'Escape' && isFullscreen) toggleFullscreen();
+    });
+    
+    function toggleFullscreen() {
+      isFullscreen = !isFullscreen;
+      previewContainer.classList.toggle('fullscreen');
+      resizableWrapper.classList.toggle('fullscreen');
+    }
+    
+    // ============================================
+    // RESIZE (как у Framer — центр фиксирован)
+    // ============================================
+    function initResize(handle, side) {
+
+handle.addEventListener('pointerdown', e => {
+  isResizing = true;
+  startX = e.clientX;
+  startWidth = resizableWrapper.offsetWidth;
+
+  resizableWrapper.style.transition = 'none';
+
+  // 🔥 фикс залипания
+  previewFrame.style.pointerEvents = 'none';
+
+  handle.setPointerCapture(e.pointerId);
+
+  document.addEventListener('pointermove', onResize);
+  document.addEventListener('pointerup', stopResize);
+
+  e.preventDefault();
+});
+
+function onResize(e) {
+  if (!isResizing) return;
+
+  let delta = e.clientX - startX;
+  let newWidth = startWidth + (side === 'right' ? delta * 2 : -delta * 2);
+  newWidth = clamp(newWidth, 320, 1920);
+
+  setWidth(newWidth);
+}
+
+function stopResize(e) {
+  isResizing = false;
+
+  resizableWrapper.style.transition = 'width 0.25s ease';
+
+  // 🔥 возвращаем iframe
+  previewFrame.style.pointerEvents = 'auto';
+
+  document.removeEventListener('pointermove', onResize);
+  document.removeEventListener('pointerup', stopResize);
+
+  try {
+    handle.releasePointerCapture(e.pointerId);
+  } catch {}
+
+  widthIndicator.classList.remove('show');
+}
+}
+
+initResize(resizeLeft, 'left');
+initResize(resizeRight, 'right');
+    
+    // ============================================
+    // WIDTH INDICATOR
+    // ============================================
+    function showWidthIndicator(width) {
+      widthIndicator.textContent = Math.round(width) + 'px';
+      widthIndicator.classList.add('show');
+    }
+    
+    function clamp(value, min, max) {
+      return Math.max(min, Math.min(value, max));
+    }
+    
+    // ============================================
+    // LOADING
+    // ============================================
+    previewFrame.addEventListener('load', () => {
+      loadingOverlay.style.opacity = '0';
+      setTimeout(() => {
+        loadingOverlay.style.display = 'none';
+      }, 300);
+    });
+    </script>
+</body>
+</html>

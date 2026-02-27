@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Copy, CircleCheck, Lock } from "lucide-react";
+import { Copy, CircleCheck, Lock, Eye } from "lucide-react";
 import { motion } from "framer-motion";
 import SectionHeader from "../../components/SectionHeader";
 
@@ -9,9 +9,11 @@ type ComponentItem = {
   image: string;
   url: string;
   type: "free" | "paid";
+  previewUrl?: string;  // ✅ Добавил
   wireframe?: {
     image: string;
     url: string;
+    previewUrl?: string;  // ✅ Добавил
   };
 };
 
@@ -29,6 +31,7 @@ export default function HeroPage({ isAuthenticated, setIsSignInOpen }: HeroPageP
   const [filter, setFilter] = useState<"light" | "dark">("light");
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
+  const [hoveredPreviewKey, setHoveredPreviewKey] = useState<string | null>(null); // ✅ Добавил
   const [isWireframeMode, setIsWireframeMode] = useState(true);
 
   const galleryRef = useRef<HTMLDivElement>(null);
@@ -146,6 +149,11 @@ export default function HeroPage({ isAuthenticated, setIsSignInOpen }: HeroPageP
                   ? item.wireframe.url
                   : item.url;
 
+                // ✅ Определяем preview URL в зависимости от режима
+                const displayPreviewUrl = isWireframeMode 
+                  ? item.wireframe?.previewUrl 
+                  : item.previewUrl;
+
                 return (
                   <div 
                     key={`${item.key}-${isWireframeMode ? 'wireframe' : 'design'}`} 
@@ -160,35 +168,65 @@ export default function HeroPage({ isAuthenticated, setIsSignInOpen }: HeroPageP
                     </div>
                     <div className="cardInfo">
                       <h3>{item.title}</h3>
-                      <div
-                        className={`iconButton ${isCopied ? "copied" : ""} ${
-                          !canCopy ? "locked" : ""
-                        }`}
-                        onClick={() => handleCopy(item, displayUrl)}
-                        onMouseEnter={() => !isCopied && setHoveredKey(item.key)}
-                        onMouseLeave={() => setHoveredKey(null)}
-                      >
-                        {isCopied ? (
-                          <CircleCheck size={20} color="#22c55e" strokeWidth={2.5} />
-                        ) : canCopy ? (
-                          <Copy size={16}
-                          color={filter === "dark" ? "#ccc" : "currentColor"} 
-                           />
-                        ) : (
-                          <Lock size={16}
-                          color={filter === "dark" ? "#ccc" : "currentColor"} 
-                           />
-                        )}
-
-                        {(isCopied || hoveredKey === item.key) && (
-                          <div className="tooltip">
-                            {isCopied
-                              ? "Copied"
-                              : canCopy
-                              ? "Copy"
-                              : "Sign in to copy"}
+                      
+                      {/* ✅ Кнопки действий — в одну строку */}
+                      <div className="card-actions">
+                        
+                        {/* ✅ Кнопка Preview */}
+                        {displayPreviewUrl && (
+                          <div
+                            className="iconButton"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              
+                              try {
+                                // Извлекаем путь из URL
+                                const path = new URL(displayPreviewUrl.trim()).pathname;
+                                // Открываем viewer.html с параметром url
+                                const viewerUrl = `/preview/viewer.html?url=${encodeURIComponent(path)}`;
+                                window.open(viewerUrl, '_blank', 'noopener,noreferrer');
+                              } catch {
+                                // Фолбэк
+                                window.open(displayPreviewUrl, '_blank', 'noopener,noreferrer');
+                              }
+                            }}
+                            onMouseEnter={() => setHoveredPreviewKey(item.key)}
+                            onMouseLeave={() => setHoveredPreviewKey(null)}
+                            title="Live Preview"
+                          >
+                            <Eye size={16} color={filter === "dark" ? "#ccc" : "currentColor"} />
+                            
+                            {/* Тултип при наведении */}
+                            {hoveredPreviewKey === item.key && (
+                              <div className="tooltip">Preview</div>
+                            )}
                           </div>
                         )}
+                        
+                        {/* Кнопка Copy */}
+                        <div
+                          className={`iconButton ${isCopied ? "copied" : ""} ${
+                            !canCopy ? "locked" : ""
+                          }`}
+                          onClick={() => handleCopy(item, displayUrl)}
+                          onMouseEnter={() => !isCopied && setHoveredKey(item.key)}
+                          onMouseLeave={() => setHoveredKey(null)}
+                        >
+                          {isCopied ? (
+                            <CircleCheck size={20} color="#22c55e" strokeWidth={2.5} />
+                          ) : canCopy ? (
+                            <Copy size={16} color={filter === "dark" ? "#ccc" : "currentColor"} />
+                          ) : (
+                            <Lock size={16} color={filter === "dark" ? "#ccc" : "currentColor"} />
+                          )}
+
+                          {(isCopied || hoveredKey === item.key) && (
+                            <div className="tooltip">
+                              {isCopied ? "Copied" : canCopy ? "Copy" : "Sign in to copy"}
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>

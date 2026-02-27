@@ -1,0 +1,465 @@
+/* ============================================
+   FRAMERKIT PREVIEW VIEWER STYLES
+   ============================================ */
+
+   * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f0f0f0;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+  
+  /* ============================================
+     TOOLBAR
+     ============================================ */
+  .preview-toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: white;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 0 20px;
+    z-index: 1000;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .logo {
+    position: absolute;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+  .device-toggle {
+    display: flex;
+    background: #f0f0f0;
+    border-radius: 8px;
+    padding: 4px;
+    gap: 4px;
+  }
+  
+  .device-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #666;
+  }
+  
+  .device-btn:hover {
+    background: white;
+    color: #333;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  .device-btn.active {
+    background: #6E3FF3;
+    color: white;
+  }
+  
+  .device-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  /* ============================================
+     SIZE INPUTS
+     ============================================ */
+  .size-inputs {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  
+  .size-input-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #f0f0f0;
+    padding: 6px 12px;
+    border-radius: 6px;
+  }
+  
+  .size-input {
+    width: 60px;
+    border: none;
+    background: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    color: #333;
+  }
+  
+  .size-input:focus {
+    outline: 2px solid #6E3FF3;
+    outline-offset: 2px;
+  }
+  
+  .size-label {
+    font-size: 12px;
+    color: #666;
+    font-weight: 600;
+  }
+  
+  .fullscreen-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #666;
+    transition: all 0.2s;
+    margin-left: 8px;
+  }
+  
+  .fullscreen-btn:hover {
+    background: #f0f0f0;
+    color: #333;
+  }
+  
+  /* ============================================
+     PREVIEW CONTAINER
+     ============================================ */
+  .preview-container {
+    margin-top: 60px;
+    height: calc(100vh - 60px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* ============================================
+     RESIZABLE WRAPPER
+     ============================================ */
+  .resizable-wrapper {
+    position: relative;
+    height: calc(100vh - 100px);
+    display: flex;
+    transition: width 0.3s ease;
+  }
+  
+  .resizable-wrapper.desktop {
+    width: 1200px;
+  }
+  
+  .resizable-wrapper.tablet {
+    width: 768px;
+  }
+  
+  .resizable-wrapper.mobile {
+    width: 375px;
+  }
+  
+  .resizable-wrapper.fullscreen {
+    width: 100% !important;
+    max-width: 100%;
+    height: 100vh !important;
+  }
+  
+  /* ============================================
+     IFRAME
+     ============================================ */
+  .preview-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    background: white;
+    overflow: hidden;
+  }
+  /* ============================================
+   RESIZE HANDLES (Framer-style clean)
+   ============================================ */
+
+.resize-handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 16px;
+    cursor: col-resize;
+    z-index: 20;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Позиции */
+  .resize-handle.left {
+    left: -8px;
+  }
+  
+  .resize-handle.right {
+    right: -8px;
+  }
+  
+  /* Центральная полоска */
+  .resize-handle::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    
+    width: 4px;
+    height: 40px;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.18);
+    transition: all 0.2s ease;
+  }
+  
+  /* Hover */
+  .resize-handle:hover::before {
+    background: rgba(0, 0, 0, 0.35);
+  }
+  
+  /* Активное состояние (во время ресайза) */
+  .resize-handle.active::before {
+    background: #6E3FF3;
+    box-shadow: 0 0 0 8px rgba(110, 63, 243, 0.12);
+  }
+  
+  /* Лёгкая боковая подсветка только когда активно */
+  .resize-handle.left.active {
+    background: linear-gradient(
+      to right,
+      rgba(110,63,243,0.08),
+      transparent
+    );
+  }
+  
+  .resize-handle.right.active {
+    background: linear-gradient(
+      to left,
+      rgba(110,63,243,0.08),
+      transparent
+    );
+  }
+
+  /* Левая — отступ внутрь */
+.resize-handle.left::before {
+    right: 20px;   /* меняй 2px → 4px если нужно дальше */
+  }
+  
+  /* Правая — отступ внутрь */
+  .resize-handle.right::before {
+    left: 20px;    /* меняй если нужно */
+  }
+  
+  /* ============================================
+     WIDTH INDICATOR
+     ============================================ */
+  .width-indicator {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+    z-index: 100;
+  }
+  
+  .width-indicator.show {
+    opacity: 1;
+  }
+  
+  /* ============================================
+     FULLSCREEN MODE
+     ============================================ */
+  .preview-container.fullscreen {
+    padding: 0;
+  }
+  
+  .preview-container.fullscreen .resizable-wrapper {
+    height: 100vh;
+    border-radius: 0;
+  }
+  
+  .preview-container.fullscreen .preview-frame {
+    border-radius: 0;
+    box-shadow: none;
+  }
+  
+  .preview-container.fullscreen .resize-handle {
+    display: none;
+  }
+  
+  /* ============================================
+     LOADING STATE
+     ============================================ */
+  .loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    border-radius: 8px;
+    transition: opacity 0.3s;
+  }
+  
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #e0e0e0;
+    border-top-color: #6E3FF3;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* ============================================
+     RESPONSIVE
+     ============================================ */
+  @media (max-width: 768px) {
+    .preview-toolbar {
+      padding: 0 12px;
+    }
+  
+    .logo {
+      display: none;
+    }
+  
+    .device-toggle {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  
+    .size-inputs {
+      display: none;
+    }
+  
+    .fullscreen-btn {
+      position: absolute;
+      right: 12px;
+    }
+  
+    .preview-container {
+      padding: 10px;
+    }
+  
+    .resize-handle {
+      display: none !important;
+    }
+  }
+
+ /* ============================================
+   SHARED TOOLTIPS (для viewer.html и React)
+   ============================================ */
+
+/* Базовый класс для элемента с тултипом */
+.has-tooltip {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Тултип через data-атрибут (универсальный) */
+  .has-tooltip[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.2;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.15s ease, visibility 0.15s ease;
+    z-index: 1000;
+  }
+  
+  /* Показ при наведении */
+  .has-tooltip[data-tooltip]:hover::after,
+  .has-tooltip[data-tooltip].tooltip-show::after {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  /* Тултип для кнопок устройств (viewer.html) */
+  .device-btn[data-tooltip]::after {
+    bottom: -36px;
+  }
+  
+  /* Тултип для resize handles */
+  .resize-handle[data-tooltip]::after {
+    content: attr(data-tooltip);
+    background: rgba(110, 63, 243, 0.95);
+    bottom: -36px;
+  }
+  
+  /* Адаптив: скрываем на мобильных */
+  @media (max-width: 768px) {
+    .has-tooltip[data-tooltip]::after {
+      display: none;
+    }
+  }

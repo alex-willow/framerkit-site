@@ -33,6 +33,7 @@ export default function NavbarPage({ isAuthenticated, setIsSignInOpen }: NavbarP
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
   const [hoveredPreviewKey, setHoveredPreviewKey] = useState<string | null>(null);
   const [isWireframeMode, setIsWireframeMode] = useState(true);
+  
 
   const galleryRef = useRef<HTMLDivElement>(null);
 
@@ -149,7 +150,6 @@ export default function NavbarPage({ isAuthenticated, setIsSignInOpen }: NavbarP
                   ? item.wireframe.url
                   : item.url;
 
-                // Определяем preview URL в зависимости от режима
                 const displayPreviewUrl = isWireframeMode 
                   ? item.wireframe?.previewUrl 
                   : item.previewUrl;
@@ -169,10 +169,9 @@ export default function NavbarPage({ isAuthenticated, setIsSignInOpen }: NavbarP
                     <div className="cardInfo">
                       <h3>{item.title}</h3>
                       
-                      {/* Кнопки действий — в одну строку */}
                       <div className="card-actions">
                         
-                        {/* Кнопка Preview — стиль как у Copy/Lock */}
+                        {/* ✅ Кнопка Preview — чистый URL */}
                         {displayPreviewUrl && (
                           <div
                             className="iconButton"
@@ -181,12 +180,24 @@ export default function NavbarPage({ isAuthenticated, setIsSignInOpen }: NavbarP
                               e.stopPropagation();
                               
                               try {
-                                // Надёжное извлечение пути из URL
-                                const path = new URL(displayPreviewUrl.trim()).pathname;
-                                const url = `${window.location.origin}${path}`;
-                                window.open(url, '_blank', 'noopener,noreferrer');
-                              } catch {
-                                // Фолбэк если URL битый
+                                let path = displayPreviewUrl.trim();
+                                let cleanPath = '';
+                                
+                                // Извлекаем чистый путь
+                                if (path.startsWith('/')) {
+                                  cleanPath = path.replace('/preview/', '').replace(/\/$/, '');
+                                } else if (path.startsWith('http')) {
+                                  const url = new URL(path);
+                                  cleanPath = url.pathname.replace('/preview/', '').replace(/\/$/, '');
+                                }
+                                
+                                // ✅ Формируем URL: /preview/viewer.html?path=...&title=...
+                                const viewerUrl = `/preview/viewer.html?path=${encodeURIComponent(cleanPath)}&title=${encodeURIComponent(item.title)}`;
+                                
+                                console.log('🔗 Opening:', viewerUrl);
+                                window.open(viewerUrl, '_blank', 'noopener,noreferrer');
+                              } catch (err) {
+                                console.error('❌ Error:', err);
                                 window.open(displayPreviewUrl, '_blank', 'noopener,noreferrer');
                               }
                             }}
@@ -195,8 +206,6 @@ export default function NavbarPage({ isAuthenticated, setIsSignInOpen }: NavbarP
                             title="Live Preview"
                           >
                             <Eye size={16} color={filter === "dark" ? "#ccc" : "currentColor"} />
-                            
-                            {/* Тултип при наведении */}
                             {hoveredPreviewKey === item.key && (
                               <div className="tooltip">Preview</div>
                             )}
