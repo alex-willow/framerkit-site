@@ -172,8 +172,8 @@ export default function HeroPage({ isAuthenticated, setIsSignInOpen }: HeroPageP
                       {/* ✅ Кнопки действий — в одну строку */}
                       <div className="card-actions">
                         
-                        {/* ✅ Кнопка Preview */}
-                        {displayPreviewUrl && (
+                         {/* ✅ Кнопка Preview — чистый URL */}
+                         {displayPreviewUrl && (
                           <div
                             className="iconButton"
                             onClick={(e) => {
@@ -181,13 +181,25 @@ export default function HeroPage({ isAuthenticated, setIsSignInOpen }: HeroPageP
                               e.stopPropagation();
                               
                               try {
-                                // Извлекаем путь из URL
-                                const path = new URL(displayPreviewUrl.trim()).pathname;
-                                // Открываем viewer.html с параметром url
-                                const viewerUrl = `/preview/viewer.html?url=${encodeURIComponent(path)}`;
+                                let path = displayPreviewUrl.trim();
+                                let cleanPath = '';
+                                
+                                // Извлекаем чистый путь
+                                if (path.startsWith('/')) {
+                                  cleanPath = path.replace('/preview/', '').replace(/\/$/, '');
+                                } else if (path.startsWith('http')) {
+                                  const url = new URL(path);
+                                  cleanPath = url.pathname.replace('/preview/', '').replace(/\/$/, '');
+                                }
+                                
+                                // ✅ Чистый URL без /view и без ?title=
+                                // Результат: /preview/navbar/navbar-04-wireframe
+                                const viewerUrl = `/p/${cleanPath}`;
+                                
+                                console.log('🔗 Opening:', viewerUrl);
                                 window.open(viewerUrl, '_blank', 'noopener,noreferrer');
-                              } catch {
-                                // Фолбэк
+                              } catch (err) {
+                                console.error('❌ Error:', err);
                                 window.open(displayPreviewUrl, '_blank', 'noopener,noreferrer');
                               }
                             }}
@@ -196,8 +208,6 @@ export default function HeroPage({ isAuthenticated, setIsSignInOpen }: HeroPageP
                             title="Live Preview"
                           >
                             <Eye size={16} color={filter === "dark" ? "#ccc" : "currentColor"} />
-                            
-                            {/* Тултип при наведении */}
                             {hoveredPreviewKey === item.key && (
                               <div className="tooltip">Preview</div>
                             )}

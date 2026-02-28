@@ -4,33 +4,68 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Preview | FramerKit</title>
-  <link rel="stylesheet" href="/preview/viewer.css" />
   
-  <!-- ✅ Фавикон (подставь свой путь) -->
+  <!-- ✅ Шрифт Inter Display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Display:wght@700&display=swap" rel="stylesheet">
+  
+  <!-- ✅ Фавикон -->
   <link rel="icon" type="image/png" href="/Logo.png" />
   <link rel="apple-touch-icon" href="/Logo.png" />
   
-  <!-- ✅ Мета-теги для красивого шеринга -->
+  <!-- ✅ Мета-теги -->
   <meta name="description" content="FramerKit Component Preview" />
   <meta property="og:title" content="FramerKit Preview" />
   <meta property="og:image" content="/Logo.png" />
   
-  <!-- Стили -->
+  <!-- ✅ Внешние стили -->
   <link rel="stylesheet" href="/preview/viewer.css" />
+  
+  <!-- ✅ ВСТРОЕННЫЕ СТИЛИ ДЛЯ ЛОГОТИПА (гарантированно применятся) -->
+  <style>
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo-image {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      object-fit: cover;
+      display: block;
+      flex-shrink: 0;
+    }
+    .logo-text {
+      font-family: 'Inter Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: #0a0a0a;
+      letter-spacing: -0.02em;
+      line-height: 1em;
+      white-space: nowrap;
+    }
+    /* Тёмная тема */
+    .card-dark .logo-text,
+    [data-theme="dark"] .logo-text {
+      color: #ffffff;
+    }
+  </style>
 </head>
 <body>
   <!-- 🔥 TOOLBAR -->
   <div class="preview-toolbar">
     <div class="logo">
-        <img 
-          src="/Logo.png" 
-          alt="FramerKit" 
-          class="logo-image"
-          width="32"
-          height="32"
-        />
-        <span>FramerKit</span>
-      </div>
+      <img 
+        src="/Logo.png" 
+        alt="FramerKit" 
+        class="logo-image"
+        width="32"
+        height="32"
+      />
+      <span class="logo-text">FramerKit</span>
+    </div>
 
     <!-- Device Toggle -->
     <div class="device-toggle">
@@ -58,25 +93,11 @@
     <!-- Width & Height Inputs -->
     <div class="size-inputs">
       <div class="size-input-group">
-        <input 
-          type="number" 
-          id="widthInput" 
-          value="1200" 
-          min="320" 
-          max="1920"
-          class="size-input"
-        />
+        <input type="number" id="widthInput" value="1200" min="320" max="1920" class="size-input" />
         <span class="size-label">W</span>
       </div>
       <div class="size-input-group">
-        <input 
-          type="number" 
-          id="heightInput" 
-          value="617" 
-          min="200" 
-          max="2000"
-          class="size-input"
-        />
+        <input type="number" id="heightInput" value="617" min="200" max="2000" class="size-input" />
         <span class="size-label">H</span>
       </div>
     </div>
@@ -102,12 +123,7 @@
       <div class="resize-handle right" id="resizeRight"></div>
 
       <!-- Iframe с компонентом -->
-      <iframe 
-        src="" 
-        class="preview-frame"
-        id="previewFrame"
-        loading="lazy"
-      ></iframe>
+      <iframe src="" class="preview-frame" id="previewFrame" loading="lazy"></iframe>
     </div>
 
     <!-- Width indicator -->
@@ -116,64 +132,60 @@
 
   <!-- JavaScript -->
   <script>
-// ============================================
-// INIT — парсим путь с префиксом /p/
-// ============================================
-console.log('🔍 viewer.html loaded');
+    // ============================================
+    // INIT — парсим путь с префиксом /p/
+    // ============================================
+    console.log('🔍 viewer.html loaded');
 
-const path = window.location.pathname;
-const parts = path.split('/').filter(p => p);
+    const path = window.location.pathname;
+    const parts = path.split('/').filter(p => p);
 
-// Извлекаем имя компонента
-let componentName = parts[parts.length - 1] || '';
+    let componentName = parts[parts.length - 1] || '';
+    componentName = componentName
+      .replace(/-preview$/i, '')
+      .replace(/preview$/i, '')
+      .replace(/-wireframe$/i, '-wireframe')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '');
 
-// Чистим от лишних слов
-componentName = componentName
-  .replace(/-preview$/i, '')
-  .replace(/preview$/i, '')
-  .replace(/-wireframe$/i, '-wireframe')
-  .replace(/-+/g, '-')
-  .replace(/^-|-$/g, '');
+    if (!componentName) componentName = 'Component';
 
-if (!componentName) componentName = 'Component';
+    const formattedTitle = componentName
+      .split('-')
+      .map(word => {
+        if (!word) return '';
+        const withSpace = word.replace(/([a-zA-Z])(\d)/g, '$1 $2');
+        return withSpace.charAt(0).toUpperCase() + withSpace.slice(1);
+      })
+      .join(' ');
 
-// ✅ ИСПРАВЛЕННОЕ форматирование
-const formattedTitle = componentName
-  .split('-')
-  .map(word => {
-    if (!word) return '';
-    // Пробел только между буквой и цифрой
-    const withSpace = word.replace(/([a-zA-Z])(\d)/g, '$1 $2');
-    return withSpace.charAt(0).toUpperCase() + withSpace.slice(1);
-  })
-  .join(' ');
+    document.title = `${formattedTitle} | FramerKit`;
+    const titleEl = document.querySelector('title');
+    if (titleEl) titleEl.textContent = `${formattedTitle} | FramerKit`;
 
-// Устанавливаем title
-document.title = `${formattedTitle} | FramerKit`;
-const titleEl = document.querySelector('title');
-if (titleEl) titleEl.textContent = `${formattedTitle} | FramerKit`;
+    const componentParts = parts.slice(1);
+    const componentPath = '/preview/' + componentParts.join('/');
+    console.log('🔍 Loading:', componentPath);
 
-// Путь к компоненту
-const componentParts = parts.slice(1);
-const componentPath = '/preview/' + componentParts.join('/');
-console.log('🔍 Loading:', componentPath);
+    const previewFrame = document.getElementById('previewFrame');
+    previewFrame.src = componentPath;
 
-// Загружаем в iframe
-const previewFrame = document.getElementById('previewFrame');
-previewFrame.src = componentPath;
+    previewFrame.addEventListener('load', () => {
+      console.log('✅ iframe loaded');
+      const loader = document.getElementById('loadingOverlay');
+      if (loader) {
+        loader.style.opacity = '0';
+        setTimeout(() => { loader.style.display = 'none'; }, 300);
+      }
+    });
 
-previewFrame.addEventListener('load', () => {
-  console.log('✅ iframe loaded');
-  const loader = document.getElementById('loadingOverlay');
-  if (loader) {
-    loader.style.opacity = '0';
-    setTimeout(() => { loader.style.display = 'none'; }, 300);
-  }
-});
+    previewFrame.addEventListener('error', () => {
+      console.error('❌ iframe failed to load:', componentPath);
+    });
 
-previewFrame.addEventListener('error', () => {
-  console.error('❌ iframe failed to load:', componentPath);
-});
+    // ============================================
+    // ОСТАЛЬНОЙ КОД (deviceBtns, resize...)
+    // ============================================
     const deviceBtns = document.querySelectorAll('.device-btn');
     const resizableWrapper = document.getElementById('resizableWrapper');
     const previewContainer = document.getElementById('previewContainer');
@@ -190,27 +202,18 @@ previewFrame.addEventListener('error', () => {
     let startX = 0;
     let startWidth = 1200;
     
-    // ============================================
-    // DEVICE SWITCH
-    // ============================================
     deviceBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         const device = btn.dataset.device;
-    
         deviceBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-    
         let width = 1200;
         if (device === 'tablet') width = 768;
         if (device === 'mobile') width = 375;
-    
         setWidth(width);
       });
     });
     
-    // ============================================
-    // WIDTH / HEIGHT INPUT
-    // ============================================
     widthInput.addEventListener('input', e => {
       let value = parseInt(e.target.value) || 1200;
       value = clamp(value, 320, 1920);
@@ -225,18 +228,12 @@ previewFrame.addEventListener('error', () => {
       deviceBtns.forEach(b => b.classList.remove('active'));
     });
     
-    // ============================================
-    // SET WIDTH (центр остаётся на месте)
-    // ============================================
     function setWidth(width) {
       resizableWrapper.style.width = width + 'px';
       widthInput.value = Math.round(width);
       showWidthIndicator(width);
     }
     
-    // ============================================
-    // FULLSCREEN
-    // ============================================
     fullscreenBtn.addEventListener('click', toggleFullscreen);
     
     document.addEventListener('keydown', e => {
@@ -250,64 +247,40 @@ previewFrame.addEventListener('error', () => {
       resizableWrapper.classList.toggle('fullscreen');
     }
     
-    // ============================================
-    // RESIZE (как у Framer — центр фиксирован)
-    // ============================================
     function initResize(handle, side) {
+      handle.addEventListener('pointerdown', e => {
+        isResizing = true;
+        startX = e.clientX;
+        startWidth = resizableWrapper.offsetWidth;
+        resizableWrapper.style.transition = 'none';
+        previewFrame.style.pointerEvents = 'none';
+        handle.setPointerCapture(e.pointerId);
+        document.addEventListener('pointermove', onResize);
+        document.addEventListener('pointerup', stopResize);
+        e.preventDefault();
+      });
 
-handle.addEventListener('pointerdown', e => {
-  isResizing = true;
-  startX = e.clientX;
-  startWidth = resizableWrapper.offsetWidth;
+      function onResize(e) {
+        if (!isResizing) return;
+        let delta = e.clientX - startX;
+        let newWidth = startWidth + (side === 'right' ? delta * 2 : -delta * 2);
+        newWidth = clamp(newWidth, 320, 1920);
+        setWidth(newWidth);
+      }
 
-  resizableWrapper.style.transition = 'none';
-
-  // 🔥 фикс залипания
-  previewFrame.style.pointerEvents = 'none';
-
-  handle.setPointerCapture(e.pointerId);
-
-  document.addEventListener('pointermove', onResize);
-  document.addEventListener('pointerup', stopResize);
-
-  e.preventDefault();
-});
-
-function onResize(e) {
-  if (!isResizing) return;
-
-  let delta = e.clientX - startX;
-  let newWidth = startWidth + (side === 'right' ? delta * 2 : -delta * 2);
-  newWidth = clamp(newWidth, 320, 1920);
-
-  setWidth(newWidth);
-}
-
-function stopResize(e) {
-  isResizing = false;
-
-  resizableWrapper.style.transition = 'width 0.25s ease';
-
-  // 🔥 возвращаем iframe
-  previewFrame.style.pointerEvents = 'auto';
-
-  document.removeEventListener('pointermove', onResize);
-  document.removeEventListener('pointerup', stopResize);
-
-  try {
-    handle.releasePointerCapture(e.pointerId);
-  } catch {}
-
-  widthIndicator.classList.remove('show');
-}
-}
-
-initResize(resizeLeft, 'left');
-initResize(resizeRight, 'right');
+      function stopResize(e) {
+        isResizing = false;
+        resizableWrapper.style.transition = 'width 0.25s ease';
+        previewFrame.style.pointerEvents = 'auto';
+        document.removeEventListener('pointermove', onResize);
+        document.removeEventListener('pointerup', stopResize);
+        try { handle.releasePointerCapture(e.pointerId); } catch {}
+        widthIndicator.classList.remove('show');
+      }
+    }
+    initResize(resizeLeft, 'left');
+    initResize(resizeRight, 'right');
     
-    // ============================================
-    // WIDTH INDICATOR
-    // ============================================
     function showWidthIndicator(width) {
       widthIndicator.textContent = Math.round(width) + 'px';
       widthIndicator.classList.add('show');
@@ -317,15 +290,10 @@ initResize(resizeRight, 'right');
       return Math.max(min, Math.min(value, max));
     }
     
-    // ============================================
-    // LOADING
-    // ============================================
     previewFrame.addEventListener('load', () => {
       loadingOverlay.style.opacity = '0';
-      setTimeout(() => {
-        loadingOverlay.style.display = 'none';
-      }, 300);
+      setTimeout(() => { loadingOverlay.style.display = 'none'; }, 300);
     });
-    </script>
+  </script>
 </body>
 </html>
