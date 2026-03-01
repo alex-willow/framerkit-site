@@ -171,47 +171,56 @@ export default function NavbarPage({ isAuthenticated, setIsSignInOpen }: NavbarP
                       
                       <div className="card-actions">
                         
-                        {/* ✅ Кнопка Preview — чистый URL */}
-                        {displayPreviewUrl && (
-                          <div
-                            className="iconButton"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              e.stopPropagation();
-                              
-                              try {
-                                let path = displayPreviewUrl.trim();
-                                let cleanPath = '';
+                       {/* ✅ Кнопка Preview — с состоянием Coming soon */}
+                          {displayPreviewUrl ? (
+                            // 🔹 Есть превью — обычная кнопка
+                            <div
+                              className="iconButton"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
                                 
-                                // Извлекаем чистый путь
-                                if (path.startsWith('/')) {
-                                  cleanPath = path.replace('/preview/', '').replace(/\/$/, '');
-                                } else if (path.startsWith('http')) {
-                                  const url = new URL(path);
-                                  cleanPath = url.pathname.replace('/preview/', '').replace(/\/$/, '');
+                                try {
+                                  let path = displayPreviewUrl.trim();
+                                  let cleanPath = '';
+                                  
+                                  if (path.startsWith('/')) {
+                                    cleanPath = path.replace('/preview/', '').replace(/\/$/, '');
+                                  } else if (path.startsWith('http')) {
+                                    const url = new URL(path);
+                                    cleanPath = url.pathname.replace('/preview/', '').replace(/\/$/, '');
+                                  }
+                                  
+                                  const viewerUrl = `/p/${cleanPath}`;
+                                  console.log('🔗 Opening:', viewerUrl);
+                                  window.open(viewerUrl, '_blank', 'noopener,noreferrer');
+                                } catch (err) {
+                                  console.error('❌ Error:', err);
+                                  window.open(displayPreviewUrl, '_blank', 'noopener,noreferrer');
                                 }
-                                
-                                // ✅ Чистый URL без /view и без ?title=
-                                // Результат: /preview/navbar/navbar-04-wireframe
-                                const viewerUrl = `/p/${cleanPath}`;
-                                
-                                console.log('🔗 Opening:', viewerUrl);
-                                window.open(viewerUrl, '_blank', 'noopener,noreferrer');
-                              } catch (err) {
-                                console.error('❌ Error:', err);
-                                window.open(displayPreviewUrl, '_blank', 'noopener,noreferrer');
-                              }
-                            }}
-                            onMouseEnter={() => setHoveredPreviewKey(item.key)}
-                            onMouseLeave={() => setHoveredPreviewKey(null)}
-                            title="Live Preview"
-                          >
-                            <Eye size={16} color={filter === "dark" ? "#ccc" : "currentColor"} />
-                            {hoveredPreviewKey === item.key && (
-                              <div className="tooltip">Preview</div>
-                            )}
-                          </div>
-                        )}
+                              }}
+                              onMouseEnter={() => setHoveredPreviewKey(item.key)}
+                              onMouseLeave={() => setHoveredPreviewKey(null)}
+                              title="Live Preview"
+                            >
+                              <Eye size={16} color={filter === "dark" ? "#ccc" : "currentColor"} />
+                              {hoveredPreviewKey === item.key && (
+                                <div className="tooltip">Preview</div>
+                              )}
+                            </div>
+                          ) : (
+                            // 🔸 Нет превью — серый глаз + Coming soon
+                            <div
+                              className="iconButton disabled"
+                              title="Coming soon"
+                              style={{ cursor: 'not-allowed', opacity: 0.4 }}
+                            >
+                              <Eye size={16} color={filter === "dark" ? "#666" : "#999"} />
+                              {hoveredPreviewKey === item.key && (
+                                <div className="tooltip">Coming soon</div>
+                              )}
+                            </div>
+                          )}
                         
                         {/* Кнопка Copy */}
                         <div
