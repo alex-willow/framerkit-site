@@ -10,7 +10,7 @@
   
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: #f0f0f0;
+    background: #f3f3f5;
     min-height: 100vh;
     overflow: hidden;
   }
@@ -18,90 +18,195 @@
   /* ============================================
      TOOLBAR
      ============================================ */
+  
   .preview-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    background: #fff;
+    border-bottom: 1px solid #eaeaea;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     height: 60px;
-    background: white;
-    border-bottom: 1px solid #e0e0e0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    padding: 0 20px;
     z-index: 1000;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   }
   
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.logo-image {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  object-fit: cover;
-  display: block;
-}
-
-.logo-text {
-  font-family: 'Inter Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-weight: 900; /* Bold */
-  font-size: 20px;
-  color: #0a0a0a; /* Neutral [900] */
-  letter-spacing: -0.02em; /* -0.02 Em */
-  line-height: 1em;
-  white-space: nowrap;
-}
+  /* LEFT */
   
-
-  .device-toggle {
+  .toolbar-left {
     display: flex;
-    background: #f0f0f0;
-    border-radius: 8px;
-    padding: 4px;
-    gap: 4px;
+    align-items: center;
+    gap: 14px;
   }
   
-  .device-btn {
+  .back-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    background: #fff;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
-    border: none;
-    background: transparent;
-    border-radius: 6px;
+    transition: all 0.2s ease;
+  }
+  
+  .back-btn:hover {
+    background: #f5f5f5;
+  }
+  
+  .back-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  /* LOGO */
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .logo-image {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+  }
+  
+  .logo-text {
+    font-family: 'Inter Display', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: #111;
+    letter-spacing: -0.02em;
+  }
+  
+  /* CENTER */
+  
+  .toolbar-center {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: center;
+    flex: 1;
+  }
+  
+  /* FULLSCREEN */
+  
+  .fullscreen-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    background: #fff;
     cursor: pointer;
-    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
     color: #666;
   }
   
-  .device-btn:hover {
-    background: white;
-    color: #333;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  .fullscreen-btn:hover {
+    background: #f5f5f5;
+    color: #111;
   }
   
-  .device-btn.active {
-    background: #6E3FF3;
-    color: white;
+  .fullscreen-btn svg {
+    width: 18px;
+    height: 18px;
   }
   
-  .device-btn svg {
-    width: 20px;
-    height: 20px;
-  }
+  /* DEVICE TOGGLE */
   
-  /* ============================================
-     SIZE INPUTS
-     ============================================ */
+  /* DEVICE TOGGLE — Segmented Control Style */
+.device-toggle {
+  display: flex;
+  background: #F5F4FD;
+  border-radius: 10px;
+  padding: 4px;
+  gap: 4px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.device-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex: 1;
+  padding: 8px 12px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #666;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: 'Inter Display', sans-serif;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.device-btn svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.device-btn span {
+  display: inline-block;
+}
+
+/* Hover state */
+.device-btn:hover {
+  color: #111;
+}
+
+/* Active state */
+.device-btn.active {
+  background: #fff;
+  color: #6E3FF3;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* Тёмная тема */
+[data-theme="dark"] .device-toggle {
+  background: #2a2a4e;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .device-btn {
+  color: #9ca3af;
+}
+
+[data-theme="dark"] .device-btn:hover {
+  color: #fff;
+}
+
+[data-theme="dark"] .device-btn.active {
+  background: #1a1a2e;
+  color: #a78bfa;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Адаптив — скрываем текст на маленьких экранах */
+@media (max-width: 640px) {
+  .device-btn span {
+    display: none;
+  }
+  .device-btn {
+    padding: 8px;
+  }
+}
+  
+  /* SIZE INPUTS */
+  
   .size-inputs {
     display: flex;
     gap: 12px;
@@ -112,57 +217,80 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    background: #f0f0f0;
-    padding: 6px 12px;
+    background: #f0f0f3;
+    padding: 6px 10px;
     border-radius: 6px;
   }
   
   .size-input {
     width: 60px;
     border: none;
-    background: white;
-    padding: 4px 8px;
+    background: #fff;
+    padding: 4px 6px;
     border-radius: 4px;
     font-size: 14px;
     font-weight: 500;
     text-align: center;
-    color: #333;
   }
   
   .size-input:focus {
     outline: 2px solid #6E3FF3;
-    outline-offset: 2px;
+    outline-offset: 1px;
   }
   
   .size-label {
     font-size: 12px;
-    color: #666;
     font-weight: 600;
+    color: #666;
   }
   
-  .fullscreen-btn {
+  /* RIGHT */
+  
+  .toolbar-right {
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border: none;
-    background: transparent;
-    border-radius: 6px;
-    cursor: pointer;
-    color: #666;
-    transition: all 0.2s;
-    margin-left: 8px;
+    gap: 16px;
   }
   
-  .fullscreen-btn:hover {
-    background: #f0f0f0;
-    color: #333;
+  .section-info {
+    text-align: right;
+  }
+  
+  .section-group {
+    font-size: 12px;
+    color: #888;
+  }
+  
+  .section-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #111;
+  }
+  
+  /* COPY BUTTON */
+  
+  .copy-btn {
+    height: 36px;
+    padding: 0 14px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    background: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+  }
+  
+  .copy-btn:hover {
+    background: #f5f5f5;
   }
   
   /* ============================================
      PREVIEW CONTAINER
      ============================================ */
+  
   .preview-container {
     margin-top: 60px;
     height: calc(100vh - 60px);
@@ -171,145 +299,119 @@
     justify-content: center;
     padding: 20px;
     position: relative;
-    overflow: hidden;
   }
   
-  /* ============================================
-     RESIZABLE WRAPPER
-     ============================================ */
+  /* RESIZABLE */
+  
   .resizable-wrapper {
     position: relative;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 120px);
     display: flex;
-    transition: width 0.3s ease;
-  }
-  
-  .resizable-wrapper.desktop {
-    width: 1200px;
-  }
-  
-  .resizable-wrapper.tablet {
-    width: 768px;
-  }
-  
-  .resizable-wrapper.mobile {
-    width: 375px;
+    transition: width 0.25s ease;
   }
   
   .resizable-wrapper.fullscreen {
     width: 100% !important;
-    max-width: 100%;
-    height: 100vh !important;
+    height: 100% !important;  /* ← 100% от родителя, не 100vh */
+    border-radius: 0;
+    box-shadow: none;
   }
+
+  /* === Для iOS/мобильных — fallback если inset не поддерживается === */
+@supports not (inset: 0) {
+  .preview-container.fullscreen {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
   
-  /* ============================================
-     IFRAME
-     ============================================ */
+  /* IFRAME */
+  
   .preview-frame {
     width: 100%;
     height: 100%;
     border: none;
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    background: white;
-    overflow: hidden;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    pointer-events: auto;  
   }
+  
   /* ============================================
-   RESIZE HANDLES (Framer-style clean)
-   ============================================ */
-
+     RESIZE HANDLES
+     ============================================ */
+  
+  /* === RESIZE HANDLES — С ОТСТУПОМ ВНУТРЬ === */
 .resize-handle {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 16px;
-    cursor: col-resize;
-    z-index: 20;
-    background: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  /* Позиции */
-  .resize-handle.left {
-    left: -8px;
-  }
-  
-  .resize-handle.right {
-    right: -8px;
-  }
-  
-  /* Центральная полоска */
-  .resize-handle::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    
-    width: 4px;
-    height: 40px;
-    border-radius: 6px;
-    background: rgba(0, 0, 0, 0.18);
-    transition: all 0.2s ease;
-  }
-  
-  /* Hover */
-  .resize-handle:hover::before {
-    background: rgba(0, 0, 0, 0.35);
-  }
-  
-  /* Активное состояние (во время ресайза) */
-  .resize-handle.active::before {
-    background: #6E3FF3;
-    box-shadow: 0 0 0 8px rgba(110, 63, 243, 0.12);
-  }
-  
-  /* Лёгкая боковая подсветка только когда активно */
-  .resize-handle.left.active {
-    background: linear-gradient(
-      to right,
-      rgba(110,63,243,0.08),
-      transparent
-    );
-  }
-  
-  .resize-handle.right.active {
-    background: linear-gradient(
-      to left,
-      rgba(110,63,243,0.08),
-      transparent
-    );
-  }
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 24px;  /* ← Увеличиваем ширину зоны захвата */
+  cursor: ew-resize; 
+  z-index: 1001;
+  background: transparent;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  /* Левая — отступ внутрь */
-.resize-handle.left::before {
-    right: 20px;   /* меняй 2px → 4px если нужно дальше */
-  }
-  
-  /* Правая — отступ внутрь */
-  .resize-handle.right::before {
-    left: 20px;    /* меняй если нужно */
-  }
+/* Левый handle — отступ 8px ВНУТРЬ от левого края */
+.resize-handle.left {
+  left: -26px;  /* ← Было -8px, стало 8px */
+}
+
+/* Правый handle — отступ 8px ВНУТРЬ от правого края */
+.resize-handle.right {
+  right: -26px;  /* ← Было -8px, стало 8px */
+}
+
+/* Видимая полоска */
+.resize-handle::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;  /* ← Центрируем внутри 24px зоны */
+  transform: translate(-50%, -50%);
+  width: 4px;
+  height: 40px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.18);
+  transition: all 0.2s ease;
+  pointer-events: none;  /* Чтобы не мешала кликам по handle */
+}
+
+/* Hover */
+.resize-handle:hover::before {
+  background: rgba(0, 0, 0, 0.35);
+  height: 60px;
+}
+
+/* Активное состояние */
+.resize-handle.active::before {
+  background: #6E3FF3;
+  box-shadow: 0 0 0 8px rgba(110, 63, 243, 0.12);
+}
   
   /* ============================================
      WIDTH INDICATOR
      ============================================ */
+  
   .width-indicator {
     position: fixed;
-    bottom: 20px;
+    bottom: 24px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
+    background: rgba(0,0,0,0.85);
+    color: #fff;
     padding: 8px 16px;
     border-radius: 20px;
     font-size: 13px;
-    font-weight: 500;
     opacity: 0;
-    transition: opacity 0.2s;
+    transition: opacity 0.2s ease;
     pointer-events: none;
-    z-index: 100;
   }
   
   .width-indicator.show {
@@ -319,14 +421,25 @@
   /* ============================================
      FULLSCREEN MODE
      ============================================ */
-  .preview-container.fullscreen {
-    padding: 0;
-  }
   
-  .preview-container.fullscreen .resizable-wrapper {
-    height: 100vh;
-    border-radius: 0;
-  }
+     body:has(.preview-container.fullscreen) {
+      overflow: hidden;
+    }
+
+    .preview-container.fullscreen {
+      position: fixed;
+      inset: 0;  /* top: 0, right: 0, bottom: 0, left: 0 */
+      padding: 0;
+      margin: 0;
+      z-index: 2000;
+      background: #000;
+      overflow: hidden;  /* ← Блокируем скролл */
+      width: 100vw;
+      height: 100vh;
+      max-width: 100%;
+      max-height: 100%;
+    }
+
   
   .preview-container.fullscreen .preview-frame {
     border-radius: 0;
@@ -338,130 +451,89 @@
   }
   
   /* ============================================
-     LOADING STATE
+     LOADING
      ============================================ */
+  
   .loading-overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.9);
+    inset: 0;
+    background: rgba(255,255,255,0.9);
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 10px;
+    transition: opacity 0.3s ease;
     z-index: 50;
-    border-radius: 8px;
-    transition: opacity 0.3s;
   }
   
   .loading-spinner {
     width: 40px;
     height: 40px;
-    border: 3px solid #e0e0e0;
+    border: 3px solid #e5e5e5;
     border-top-color: #6E3FF3;
     border-radius: 50%;
     animation: spin 1s linear infinite;
   }
   
   @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  
-  /* ============================================
-     RESPONSIVE
-     ============================================ */
-  @media (max-width: 768px) {
-    .preview-toolbar {
-      padding: 0 12px;
-    }
-  
-    .logo {
-      display: none;
-    }
-  
-    .device-toggle {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-  
-    .size-inputs {
-      display: none;
-    }
-  
-    .fullscreen-btn {
-      position: absolute;
-      right: 12px;
-    }
-  
-    .preview-container {
-      padding: 10px;
-    }
-  
-    .resize-handle {
-      display: none !important;
-    }
+    to { transform: rotate(360deg); }
   }
 
- /* ============================================
-   SHARED TOOLTIPS (для viewer.html и React)
-   ============================================ */
+/* === Кнопка Show UI — В ЛЕВОМ ВЕРХНЕМ УГЛУ === */
+.show-ui-btn {
+  position: fixed;
+  left: 20px;
+  top: 80px;  /* ← Было top: 50%, теперь 80px (60px toolbar + 20px отступ) */
+  transform: none;  /* ← Убираем translateY */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: 'Inter Display', sans-serif;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+  z-index: 3000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
 
-/* Базовый класс для элемента с тултипом */
-.has-tooltip {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  /* Тултип через data-атрибут (универсальный) */
-  .has-tooltip[data-tooltip]::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    bottom: calc(100% + 8px);
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.85);
-    color: #fff;
-    padding: 6px 10px;
-    border-radius: 6px;
+.show-ui-btn:hover {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.show-ui-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Показываем через класс .visible */
+.show-ui-btn.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Адаптив */
+@media (max-width: 768px) {
+  .show-ui-btn {
+    top: 70px;
+    left: 12px;
+    padding: 8px 12px;
     font-size: 12px;
-    font-weight: 500;
-    line-height: 1.2;
-    white-space: nowrap;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 0.15s ease, visibility 0.15s ease;
-    z-index: 1000;
   }
-  
-  /* Показ при наведении */
-  .has-tooltip[data-tooltip]:hover::after,
-  .has-tooltip[data-tooltip].tooltip-show::after {
-    opacity: 1;
-    visibility: visible;
+  .show-ui-btn span {
+    display: none;
   }
-  
-  /* Тултип для кнопок устройств (viewer.html) */
-  .device-btn[data-tooltip]::after {
-    bottom: -36px;
-  }
-  
-  /* Тултип для resize handles */
-  .resize-handle[data-tooltip]::after {
-    content: attr(data-tooltip);
-    background: rgba(110, 63, 243, 0.95);
-    bottom: -36px;
-  }
-  
-  /* Адаптив: скрываем на мобильных */
-  @media (max-width: 768px) {
-    .has-tooltip[data-tooltip]::after {
-      display: none;
-    }
-  }
+}
+
+/* Тёмная тема */
+[data-theme="dark"] .show-ui-btn {
+  background: rgba(26, 26, 46, 0.9);
+  border: 1px solid rgba(110, 63, 243, 0.3);
+}

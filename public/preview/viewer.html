@@ -5,248 +5,399 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Preview | FramerKit</title>
   
-  <!-- ✅ Шрифт Inter Display -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter+Display:wght@700&display=swap" rel="stylesheet">
   
-  <!-- ✅ Фавикон -->
   <link rel="icon" type="image/png" href="/Logo.png" />
   <link rel="apple-touch-icon" href="/Logo.png" />
   
-  <!-- ✅ Мета-теги -->
   <meta name="description" content="FramerKit Component Preview" />
   <meta property="og:title" content="FramerKit Preview" />
   <meta property="og:image" content="/Logo.png" />
   
-  <!-- ✅ Внешние стили -->
   <link rel="stylesheet" href="/preview/viewer.css" />
-  
-  <!-- ✅ ВСТРОЕННЫЕ СТИЛИ ДЛЯ ЛОГОТИПА (гарантированно применятся) -->
-  <style>
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .logo-image {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      object-fit: cover;
-      display: block;
-      flex-shrink: 0;
-    }
-    .logo-text {
-      font-family: 'Inter Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      font-weight: 700;
-      font-size: 20px;
-      color: #0a0a0a;
-      letter-spacing: -0.02em;
-      line-height: 1em;
-      white-space: nowrap;
-    }
-    /* Тёмная тема */
-    .card-dark .logo-text,
-    [data-theme="dark"] .logo-text {
-      color: #ffffff;
-    }
-  </style>
 </head>
 <body>
   <!-- 🔥 TOOLBAR -->
   <div class="preview-toolbar">
-    <div class="logo">
-      <img 
-        src="/Logo.png" 
-        alt="FramerKit" 
-        class="logo-image"
-        width="32"
-        height="32"
-      />
-      <span class="logo-text">FramerKit</span>
-    </div>
-
-    <!-- Device Toggle -->
-    <div class="device-toggle">
-      <button class="device-btn" data-device="desktop" title="Desktop (1200px)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <rect x="2" y="3" width="20" height="14" rx="2" />
-          <line x1="8" y1="21" x2="16" y2="21" />
-          <line x1="12" y1="17" x2="12" y2="21" />
+    
+    <!-- Левая часть: Back + Logo -->
+    <div class="toolbar-left">
+      <button class="back-btn" id="backBtn" title="Back" aria-label="Go back">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
         </svg>
       </button>
-      <button class="device-btn" data-device="tablet" title="Tablet (768px)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <rect x="4" y="2" width="16" height="20" rx="2" />
-          <line x1="12" y1="18" x2="12" y2="18.01" />
-        </svg>
-      </button>
-      <button class="device-btn" data-device="mobile" title="Mobile (375px)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <rect x="5" y="2" width="14" height="20" rx="2" />
-          <line x1="12" y1="18" x2="12" y2="18.01" />
-        </svg>
-      </button>
-    </div>
-
-    <!-- Width & Height Inputs -->
-    <div class="size-inputs">
-      <div class="size-input-group">
-        <input type="number" id="widthInput" value="1200" min="320" max="1920" class="size-input" />
-        <span class="size-label">W</span>
-      </div>
-      <div class="size-input-group">
-        <input type="number" id="heightInput" value="617" min="200" max="2000" class="size-input" />
-        <span class="size-label">H</span>
+      <div class="logo">
+        <img src="/Logo.png" alt="FramerKit" class="logo-image" width="32" height="32"/>
+        <span class="logo-text">FramerKit</span>
       </div>
     </div>
-
-    <!-- Fullscreen Button -->
-    <button class="fullscreen-btn" title="Fullscreen (F)">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
-      </svg>
-    </button>
+    
+    <!-- Центр: Fullscreen + Device toggle -->
+    <div class="toolbar-center">
+      <button class="fullscreen-btn" id="fullscreenBtn" title="Fullscreen (F)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="15 3 21 3 21 9"/>
+          <polyline points="9 21 3 21 3 15"/>
+          <line x1="21" y1="3" x2="14" y2="10"/>
+          <line x1="3" y1="21" x2="10" y2="14"/>
+        </svg>
+      </button>
+      
+      <div class="device-toggle">
+        <button class="device-btn active" data-device="desktop" title="Desktop (1200px)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="3" width="20" height="14" rx="2"/>
+            <line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+          <span>Desktop</span>
+        </button>
+        <button class="device-btn" data-device="tablet" title="Tablet (810–1199px)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="4" y="2" width="16" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/>
+          </svg>
+          <span>Tablet</span>
+        </button>
+        <button class="device-btn" data-device="mobile" title="Mobile (≤809px)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/>
+          </svg>
+          <span>Mobile</span>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Правая часть: Название + Copy -->
+    <div class="toolbar-right">
+      <div class="section-info">
+        <div class="section-group" id="sectionGroup">Navbar</div>
+        <div class="section-name" id="sectionName">Navbar 01 Wireframe</div>
+      </div>
+      <button class="copy-btn" id="copyBtn" title="Copy for Framer">
+        <!-- Иконка Framer -->
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20.5 6C20.5 4.61929 19.3807 3.5 18 3.5H6C4.61929 3.5 3.5 4.61929 3.5 6V18C3.5 19.3807 4.61929 20.5 6 20.5H18C19.3807 20.5 20.5 19.3807 20.5 18V6Z" stroke="currentColor" stroke-width="2"/>
+          <path d="M7 7H17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M7 12H17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M7 17H12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span id="copyText">Copy for Framer</span>
+      </button>
+    </div>
   </div>
 
   <!-- 📱 PREVIEW CONTAINER -->
   <div class="preview-container" id="previewContainer">
     <div class="resizable-wrapper desktop" id="resizableWrapper">
-      <!-- Loading overlay -->
-      <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-spinner"></div>
-      </div>
-
-      <!-- Resize handles -->
+      <div class="loading-overlay" id="loadingOverlay"><div class="loading-spinner"></div></div>
       <div class="resize-handle left" id="resizeLeft"></div>
       <div class="resize-handle right" id="resizeRight"></div>
-
-      <!-- Iframe с компонентом -->
       <iframe src="" class="preview-frame" id="previewFrame" loading="lazy"></iframe>
     </div>
-
-    <!-- Width indicator -->
     <div class="width-indicator" id="widthIndicator">1200px</div>
   </div>
 
+  <!-- 🔘 Кнопка Show UI (видна только в fullscreen) -->
+  <button class="show-ui-btn" id="showUiBtn" title="Show UI" aria-label="Show user interface">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="3" y="3" width="18" height="18" rx="2"/>
+      <line x1="9" y1="9" x2="15" y2="15"/>
+      <line x1="15" y1="9" x2="9" y2="15"/>
+    </svg>
+    <span>Show UI</span>
+  </button>
+
   <!-- JavaScript -->
   <script>
-    // ============================================
-    // INIT — парсим путь с префиксом /p/
-    // ============================================
     console.log('🔍 viewer.html loaded');
-
+    console.log('📍 URL parts:', window.location.pathname.split('/').filter(p => p));
+  
     const path = window.location.pathname;
     const parts = path.split('/').filter(p => p);
-
+  
+    // === Форматирование названия ===
     let componentName = parts[parts.length - 1] || '';
-    componentName = componentName
-      .replace(/-preview$/i, '')
-      .replace(/preview$/i, '')
-      .replace(/-wireframe$/i, '-wireframe')
-      .replace(/-+/g, '-')
-      .replace(/^-|-$/g, '');
-
+    componentName = componentName.replace(/-preview$/i, '').replace(/preview$/i, '').replace(/-wireframe$/i, '-wireframe').replace(/-+/g, '-').replace(/^-|-$/g, '');
     if (!componentName) componentName = 'Component';
-
-    const formattedTitle = componentName
-      .split('-')
-      .map(word => {
-        if (!word) return '';
-        const withSpace = word.replace(/([a-zA-Z])(\d)/g, '$1 $2');
-        return withSpace.charAt(0).toUpperCase() + withSpace.slice(1);
-      })
-      .join(' ');
-
+  
+    const formattedTitle = componentName.split('-').map(word => {
+      if (!word) return '';
+      const withSpace = word.replace(/([a-zA-Z])(\d)/g, '$1 $2');
+      return withSpace.charAt(0).toUpperCase() + withSpace.slice(1);
+    }).filter(w => w).join(' ');
+  
     document.title = `${formattedTitle} | FramerKit`;
-    const titleEl = document.querySelector('title');
-    if (titleEl) titleEl.textContent = `${formattedTitle} | FramerKit`;
-
-    const componentParts = parts.slice(1);
-    const componentPath = '/preview/' + componentParts.join('/');
-    console.log('🔍 Loading:', componentPath);
-
+  
+    // === Загрузка iframe ===
+    const componentPath = '/preview/' + parts.slice(1).join('/');
     const previewFrame = document.getElementById('previewFrame');
     previewFrame.src = componentPath;
-
+  
     previewFrame.addEventListener('load', () => {
-      console.log('✅ iframe loaded');
       const loader = document.getElementById('loadingOverlay');
-      if (loader) {
-        loader.style.opacity = '0';
-        setTimeout(() => { loader.style.display = 'none'; }, 300);
-      }
+      if (loader) { loader.style.opacity = '0'; setTimeout(() => { loader.style.display = 'none'; }, 300); }
     });
-
-    previewFrame.addEventListener('error', () => {
-      console.error('❌ iframe failed to load:', componentPath);
-    });
-
-    // ============================================
-    // ОСТАЛЬНОЙ КОД (deviceBtns, resize...)
-    // ============================================
+  
+    // === UI Elements ===
     const deviceBtns = document.querySelectorAll('.device-btn');
     const resizableWrapper = document.getElementById('resizableWrapper');
     const previewContainer = document.getElementById('previewContainer');
-    const fullscreenBtn = document.querySelector('.fullscreen-btn');
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
     const resizeLeft = document.getElementById('resizeLeft');
     const resizeRight = document.getElementById('resizeRight');
     const widthIndicator = document.getElementById('widthIndicator');
     const loadingOverlay = document.getElementById('loadingOverlay');
-    const widthInput = document.getElementById('widthInput');
-    const heightInput = document.getElementById('heightInput');
+    const showUiBtn = document.getElementById('showUiBtn');
+    const copyBtn = document.getElementById('copyBtn');
+    const copyText = document.getElementById('copyText');
+  
+    const BREAKPOINTS = { desktop: 1200, tablet: 810, mobile: 390 };
+    let isFullscreen = false, isResizing = false, startX = 0, startWidth = 1200;
     
-    let isFullscreen = false;
-    let isResizing = false;
-    let startX = 0;
-    let startWidth = 1200;
+    // === Данные ===
+    let componentsData = [];
+    let currentComponent = null;
+    let displayUrl = '';
+    let componentType = 'free';
+  
+    // === 🔥 МАППИНГ: URL секция → JSON ключ 🔥 ===
+    const sectionToJsonKey = {
+      'hero-section': 'hero',
+      'navbar-section': 'navbar', 
+      'footer-section': 'footer',
+      'feature-section': 'feature',
+      'logo-section': 'logo',
+      'gallery-section': 'gallery',
+      'testimonial-section': 'testimonial',
+      'contact-section': 'contact',
+      'pricing-section': 'pricing',
+      'faq-section': 'faq',
+      'cta-section': 'cta',
+    };
+  
+    // === 🔥 ЗАГРУЗКА JSON + ПОЛНЫЙ ЛОГ 🔥 ===
+    async function loadComponentsData() {
+      const urlSection = parts[1] || 'hero';
+      const jsonKey = sectionToJsonKey[urlSection] || urlSection;
+      
+      const jsonUrl = `https://raw.githubusercontent.com/alex-willow/framerkit-data/main/${jsonKey}.json`;
+      console.log('🔗 1. Loading JSON:', jsonUrl);
+      
+      try {
+        const res = await fetch(jsonUrl);
+        console.log('🔗 2. Response status:', res.status, res.ok ? '✅' : '❌');
+        
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        
+        const json = await res.json();
+        console.log('🔗 3. Full JSON keys:', Object.keys(json));
+        console.log('🔗 4. Looking for key:', jsonKey, '→ found:', json[jsonKey] ? '✅' : '❌');
+        
+        componentsData = json[jsonKey] || json.components || [];
+        console.log('🔗 5. Components count:', componentsData.length);
+        console.log('🔗 6. Component keys:', componentsData.map(c => c.key));
+        
+        findAndPrepareComponent();
+      } catch (err) {
+        console.error('❌ JSON load failed:', err);
+        displayUrl = componentPath;
+      }
+    }
+  
+    // === Найти компонент и подготовить URL (КАК В REACT) ===
+function findAndPrepareComponent() {
+  const urlKey = parts[parts.length - 1] || '';  // 'hero-section-01-wireframe'
+  
+  // 🔹 Определяем режим из URL: если есть '-wireframe' → wireframe mode
+  const isWireframeMode = urlKey.includes('-wireframe');
+  const cleanKey = urlKey.replace(/-wireframe$/i, '').replace(/-preview$/i, '');
+  
+  console.log('🔍 Searching for key:', cleanKey, '| Wireframe mode:', isWireframeMode);
+  
+  currentComponent = componentsData.find(item => {
+    const k = item.key || '';
+    return k === cleanKey || k === urlKey;
+  });
+  
+  if (currentComponent) {
+    console.log('✅ Component found:', currentComponent.key);
     
+    // 🔹 Вычисляем displayUrl ТОЧНО как в React:
+    // Если wireframe mode И есть wireframe.url → берём его, иначе → regular url
+    const wireframeUrl = currentComponent.wireframe?.url;
+    const regularUrl = currentComponent.url;
+    
+    displayUrl = (isWireframeMode && wireframeUrl) 
+      ? wireframeUrl 
+      : regularUrl;
+    
+    // 🔹 Убираем пробелы
+    displayUrl = (displayUrl || '').trim().replace(/\s+$/g, '');
+    
+    componentType = currentComponent.type || 'free';
+    
+    console.log('🔗 displayUrl prepared:', displayUrl);
+    console.log('🏷️ componentType:', componentType);
+    
+    if (currentComponent.title) {
+      document.getElementById('sectionName').textContent = currentComponent.title;
+    }
+  } else {
+    console.warn('⚠️ Component NOT found. Available keys:', componentsData.map(c => c.key));
+    displayUrl = componentPath;
+  }
+}
+  
+    // === Загружаем при старте ===
+    loadComponentsData();
+  
+    // === Проверка авторизации ===
+    function checkAuth() {
+      const email = localStorage.getItem('rememberedEmail');
+      const key = localStorage.getItem('rememberedKey');
+      return !!(email && key);
+    }
+  
+    // === Device logic ===
+    function getClosestDevice(width) {
+      if (width >= 1200) return 'desktop';
+      if (width >= 810) return 'tablet';
+      return 'mobile';
+    }
+    function updateActiveDeviceBtn(width) {
+      const closest = getClosestDevice(width);
+      deviceBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.device === closest));
+    }
+    function setWidth(width) {
+      resizableWrapper.style.width = width + 'px';
+      showWidthIndicator(width);
+      updateActiveDeviceBtn(width);
+    }
+    function showWidthIndicator(width) {
+      widthIndicator.textContent = Math.round(width) + 'px';
+      widthIndicator.classList.add('show');
+      setTimeout(() => widthIndicator.classList.remove('show'), 1500);
+    }
     deviceBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         const device = btn.dataset.device;
+        if (isFullscreen) exitFullscreen();
         deviceBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        let width = 1200;
-        if (device === 'tablet') width = 768;
-        if (device === 'mobile') width = 375;
-        setWidth(width);
+        setWidth(BREAKPOINTS[device]);
       });
     });
-    
-    widthInput.addEventListener('input', e => {
-      let value = parseInt(e.target.value) || 1200;
-      value = clamp(value, 320, 1920);
-      setWidth(value);
-      deviceBtns.forEach(b => b.classList.remove('active'));
-    });
-    
-    heightInput.addEventListener('input', e => {
-      let value = parseInt(e.target.value) || 600;
-      value = clamp(value, 200, 2000);
-      resizableWrapper.style.height = value + 'px';
-      deviceBtns.forEach(b => b.classList.remove('active'));
-    });
-    
-    function setWidth(width) {
-      resizableWrapper.style.width = width + 'px';
-      widthInput.value = Math.round(width);
-      showWidthIndicator(width);
-    }
-    
-    fullscreenBtn.addEventListener('click', toggleFullscreen);
-    
+  
+    // === Fullscreen ===
+    if (fullscreenBtn) fullscreenBtn.addEventListener('click', toggleFullscreen);
     document.addEventListener('keydown', e => {
       if (e.key === 'f' || e.key === 'F') toggleFullscreen();
       if (e.key === 'Escape' && isFullscreen) toggleFullscreen();
     });
-    
     function toggleFullscreen() {
       isFullscreen = !isFullscreen;
       previewContainer.classList.toggle('fullscreen');
       resizableWrapper.classList.toggle('fullscreen');
+      const toolbar = document.querySelector('.preview-toolbar');
+      if (isFullscreen) {
+        if (toolbar) { toolbar.style.opacity = '0'; toolbar.style.pointerEvents = 'none'; }
+        if (showUiBtn) showUiBtn.classList.add('visible');
+        deviceBtns.forEach(btn => btn.classList.remove('active'));
+      } else {
+        if (toolbar) { toolbar.style.opacity = '1'; toolbar.style.pointerEvents = 'auto'; }
+        if (showUiBtn) showUiBtn.classList.remove('visible');
+        setWidth(BREAKPOINTS.desktop);
+        deviceBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.device === 'desktop'));
+      }
+      if (fullscreenBtn) {
+        fullscreenBtn.innerHTML = isFullscreen 
+          ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/></svg>'
+          : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>';
+      }
+    }
+    function exitFullscreen() {
+      if (isFullscreen) {
+        isFullscreen = false;
+        previewContainer.classList.remove('fullscreen');
+        resizableWrapper.classList.remove('fullscreen');
+        const toolbar = document.querySelector('.preview-toolbar');
+        if (toolbar) { toolbar.style.opacity = '1'; toolbar.style.pointerEvents = 'auto'; }
+        if (showUiBtn) showUiBtn.classList.remove('visible');
+        if (fullscreenBtn) {
+          fullscreenBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>';
+        }
+        setWidth(BREAKPOINTS.desktop);
+        deviceBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.device === 'desktop'));
+      }
+    }
+    if (showUiBtn) {
+      showUiBtn.addEventListener('click', () => {
+        if (isFullscreen) {
+          isFullscreen = false;
+          previewContainer.classList.remove('fullscreen');
+          resizableWrapper.classList.remove('fullscreen');
+          const toolbar = document.querySelector('.preview-toolbar');
+          if (toolbar) { toolbar.style.opacity = '1'; toolbar.style.pointerEvents = 'auto'; }
+          if (fullscreenBtn) {
+            fullscreenBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>';
+          }
+          if (showUiBtn) showUiBtn.classList.remove('visible');
+          setWidth(BREAKPOINTS.desktop);
+          deviceBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.device === 'desktop'));
+        }
+      });
+    }
+  
+    // === 🔥 КНОПКА COPY — С ЛОГОМ 🔥 ===
+    if (copyBtn) {
+      copyBtn.addEventListener('click', async () => {
+        console.log('📋 COPY CLICKED');
+        console.log('   - currentComponent:', currentComponent?.key || 'null');
+        console.log('   - displayUrl:', displayUrl || 'empty');
+        console.log('   - componentType:', componentType);
+        
+        if (componentsData.length === 0) {
+          copyText.textContent = 'Loading...';
+          await new Promise(resolve => setTimeout(resolve, 500));
+          if (!currentComponent) findAndPrepareComponent();
+        }
+        
+        if (!currentComponent || !displayUrl) {
+          console.warn('⚠️ Fallback: copying componentPath');
+          await navigator.clipboard.writeText(componentPath);
+          showCopyFeedback();
+          return;
+        }
+        
+        if (!checkAuth() && componentType === 'paid') {
+          console.log('⚠️ Paid + not auth → redirect');
+          window.location.href = 'https://www.framerkit.site?signin=true';
+          return;
+        }
+        
+        console.log('✅ Copying displayUrl:', displayUrl);
+        try {
+          await navigator.clipboard.writeText(displayUrl);
+          showCopyFeedback();
+          console.log('✅ Copy success');
+        } catch (err) {
+          console.error('❌ Copy failed:', err);
+        }
+      });
     }
     
+    function showCopyFeedback() {
+      copyBtn.classList.add('copied');
+      copyText.textContent = 'Copied!';
+      setTimeout(() => {
+        copyBtn.classList.remove('copied');
+        copyText.textContent = 'Copy for Framer';
+      }, 2000);
+    }
+  
+    // === Resize ===
     function initResize(handle, side) {
       handle.addEventListener('pointerdown', e => {
         isResizing = true;
@@ -254,12 +405,12 @@
         startWidth = resizableWrapper.offsetWidth;
         resizableWrapper.style.transition = 'none';
         previewFrame.style.pointerEvents = 'none';
+        handle.classList.add('active');
         handle.setPointerCapture(e.pointerId);
         document.addEventListener('pointermove', onResize);
         document.addEventListener('pointerup', stopResize);
         e.preventDefault();
       });
-
       function onResize(e) {
         if (!isResizing) return;
         let delta = e.clientX - startX;
@@ -267,32 +418,43 @@
         newWidth = clamp(newWidth, 320, 1920);
         setWidth(newWidth);
       }
-
       function stopResize(e) {
         isResizing = false;
         resizableWrapper.style.transition = 'width 0.25s ease';
-        previewFrame.style.pointerEvents = 'auto';
+        setTimeout(() => { previewFrame.style.pointerEvents = 'auto'; void previewFrame.offsetWidth; }, 10);
+        handle.classList.remove('active');
         document.removeEventListener('pointermove', onResize);
         document.removeEventListener('pointerup', stopResize);
         try { handle.releasePointerCapture(e.pointerId); } catch {}
-        widthIndicator.classList.remove('show');
       }
     }
     initResize(resizeLeft, 'left');
     initResize(resizeRight, 'right');
-    
-    function showWidthIndicator(width) {
-      widthIndicator.textContent = Math.round(width) + 'px';
-      widthIndicator.classList.add('show');
-    }
-    
-    function clamp(value, min, max) {
-      return Math.max(min, Math.min(value, max));
-    }
-    
+  
+    // === Back ===
+    document.getElementById('backBtn')?.addEventListener('click', () => {
+      if (window.history.length > 1) window.history.back();
+      else window.location.href = 'https://www.framerkit.site';
+    });
+  
+    // === Section name ===
+    const sectionGroup = parts[1] || 'Component';
+    document.getElementById('sectionGroup').textContent = sectionGroup.charAt(0).toUpperCase() + sectionGroup.slice(1);
+  
+    // === Init ===
+    document.addEventListener('DOMContentLoaded', () => {
+      setWidth(BREAKPOINTS.desktop);
+      deviceBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.device === 'desktop'));
+    });
+  
+    // === Pointer events fix ===
+    resizableWrapper.addEventListener('mouseenter', () => { if (!isResizing) previewFrame.style.pointerEvents = 'auto'; });
+    resizableWrapper.addEventListener('mousemove', () => { if (!isResizing && previewFrame.style.pointerEvents !== 'auto') previewFrame.style.pointerEvents = 'auto'; });
+  
+    function clamp(value, min, max) { return Math.max(min, Math.min(value, max)); }
+  
     previewFrame.addEventListener('load', () => {
-      loadingOverlay.style.opacity = '0';
-      setTimeout(() => { loadingOverlay.style.display = 'none'; }, 300);
+      if (loadingOverlay) { loadingOverlay.style.opacity = '0'; setTimeout(() => { loadingOverlay.style.display = 'none'; }, 300); }
     });
   </script>
 </body>
