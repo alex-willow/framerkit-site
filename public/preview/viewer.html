@@ -20,27 +20,34 @@
 </head>
 <body>
   <!-- 🔥 FLEX LAYOUT: Toolbar + Preview -->
+   
   <div class="preview-layout">
     
     <!-- 🔥 TOOLBAR -->
     <div class="preview-toolbar">
       
-      <!-- 🔹 LEFT: Back + Logo + Section Info -->
-      <div class="toolbar-left">
-   
 
-  <div class="logo"> <img src="/Logo.png" alt="FramerKit" class="logo-image" width="28" height="28"/> </div>
-
-        <div class="breadcrumb">
-          <span class="breadcrumb-section" id="sectionName"></span>
-        </div>
-      </div>
+   <!-- 🔹 LEFT: Logo + FramerKit + Section Name -->
+  <div class="toolbar-left">
+    <img src="/Logo.png" alt="FramerKit" class="logo-image" width="28" height="28"/>
+    <span class="logo-text">FramerKit</span>
+    
+    <!-- Разделитель между лого и названием секции -->
+    <div class="toolbar-divider"></div>
+    
+    <!-- Название секции -->
+    <div class="breadcrumb">
+      <span class="breadcrumb-section" id="sectionName"></span>
+      <span class="breadcrumb-mode" id="sectionMode">Wireframe</span>  <!-- 🔥 Верни эту строку -->
+    </div>
+  </div>
+        
 
       <!-- 🔹 CENTER: Preview Controls -->
       <div class="toolbar-center">
         <!-- Device Toggle -->
         <div class="device-toggle">
-          <button class="device-btn active" data-device="desktop" title="Desktop">
+          <button class="device-btn active" data-device="desktop">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <rect x="2" y="3" width="20" height="14" rx="2"/>
               <line x1="8" y1="21" x2="16" y2="21"/>
@@ -48,13 +55,13 @@
             </svg>
             <span>Desktop</span>
           </button>
-          <button class="device-btn" data-device="tablet" title="Tablet">
+          <button class="device-btn" data-device="tablet">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <rect x="4" y="2" width="16" height="20" rx="2"/>
             </svg>
             <span>Tablet</span>
           </button>
-          <button class="device-btn" data-device="mobile" title="Mobile">
+          <button class="device-btn" data-device="mobile">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <rect x="5" y="2" width="14" height="20" rx="2"/>
             </svg>
@@ -66,13 +73,14 @@
         <div class="toolbar-divider"></div>
 
         <!-- Fullscreen -->
-        <button class="fullscreen-btn" id="fullscreenBtn" title="Fullscreen (F)">
+        <button class="fullscreen-btn" id="fullscreenBtn" >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="15 3 21 3 21 9"/>
             <polyline points="9 21 3 21 3 15"/>
             <line x1="21" y1="3" x2="14" y2="10"/>
             <line x1="3" y1="21" x2="10" y2="14"/>
           </svg>
+          <span class="tooltip-fullscreen">Fullscreen</span>
         </button>
       </div>
 
@@ -83,6 +91,8 @@
           <button class="view-btn active" data-view="wireframe">Wireframe</button>
           <button class="view-btn" data-view="design">Design</button>
         </div>
+
+        <div class="toolbar-divider"></div>
 
         <!-- Copy Button -->
         <button class="copy-btn" id="copyBtn" type="button">
@@ -151,27 +161,35 @@
     const viewToggle = document.getElementById('viewToggle');
     const viewBtns = viewToggle ? viewToggle.querySelectorAll('.view-btn') : [];
     const previewFrame = document.getElementById('previewFrame');
+    
+    // 🔥 Элементы для Fullscreen tooltip (чтобы не пересоздавать)
+    const fullscreenIcon = document.getElementById('fullscreenIcon');
+    const fullscreenTooltip = document.getElementById('fullscreenTooltip');
   
     const BREAKPOINTS = { desktop: 1200, tablet: 810, mobile: 390 };
     let isFullscreen = false, isResizing = false, startX = 0, startWidth = 1200;
-    let componentsData = [], currentComponent = null, displayUrl = '', componentType = 'paid'; // 🔥 По умолчанию 'paid' (безопасный режим)
+    let componentsData = [], currentComponent = null, displayUrl = '', componentType = 'paid';
+    
+    // 🔥 Флаг для width indicator (защита от мерцания)
+    let indicatorTimeout = null;
   
     // === Иконки для Copy Button ===
     const ICON_COPY = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`;
     const ICON_CHECK = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>`;
     const ICON_LOCK = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`;
+    
+    // === Иконки для Fullscreen ===
+    const ICON_ENTER_FULLSCREEN = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>`;
+    const ICON_EXIT_FULLSCREEN = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/></svg>`;
   
-    // === 🔥 Copy Button — ПО УМОЛЧАНИЮ ЗАБЛОКИРОВАН (серый) ===
+    // === 🔥 Copy Button — ПО УМОЛЧАНИЮ ЗАБЛОКИРОВАН ===
     function initCopyButton() {
       if (!copyBtn) return;
       copyBtn.classList.add('locked');
       copyBtn.classList.remove('copied');
       copyBtn.querySelector('svg').outerHTML = ICON_LOCK;
-      copyBtn.title = 'Loading...';
       copyBtn.style.pointerEvents = 'none';
     }
-    
-    // Вызываем сразу при старте
     initCopyButton();
   
     // === МАППИНГ: URL секция → JSON ключ ===
@@ -197,7 +215,6 @@
         findAndPrepareComponent();
       } catch (err) {
         console.error('❌ JSON load failed:', err);
-        // Если JSON не загрузился — оставляем кнопку заблокированной
       }
     }
   
@@ -220,20 +237,15 @@
         displayUrl = (isWireframeMode && wireframeUrl) ? wireframeUrl : regularUrl;
         displayUrl = (displayUrl || '').trim();
         
-        // 🔹 1. Устанавливаем тип компонента (free/paid)
         componentType = currentComponent.type || 'paid';
         console.log('🔗 Type:', componentType);
         
-        // 🔹 2. Обновляем название
         const sectionNameEl = document.getElementById('sectionName');
         if (sectionNameEl && currentComponent.title) {
           sectionNameEl.textContent = currentComponent.title;
         }
         
-        // 🔹 3. Обновляем кнопку Copy (теперь с правильным типом)
         updateCopyButton();
-        
-        // 🔹 4. Обновляем View Toggle
         updateViewToggle();
         
       } else {
@@ -243,23 +255,17 @@
         if (sectionNameEl) {
           sectionNameEl.textContent = formattedTitle;
         }
-        // Если компонент не найден — оставляем кнопку заблокированной
       }
     }
   
-    // === 🔥 Загрузка iframe — ПРОСТАЯ ===
+    // === Загрузка iframe ===
     const componentPath = '/preview/' + parts.slice(1).join('/');
-    
-    // Сразу ставим src — превью начинает грузиться
     previewFrame.src = displayUrl || componentPath;
     
-    // Когда iframe загрузился — плавно скрываем overlay
     previewFrame.addEventListener('load', () => {
       if (loadingOverlay) {
         loadingOverlay.style.opacity = '0';
-        setTimeout(() => {
-          loadingOverlay.style.display = 'none';
-        }, 300);
+        setTimeout(() => { loadingOverlay.style.display = 'none'; }, 300);
       }
     });
   
@@ -270,15 +276,10 @@
       return !!(email && key);
     }
   
-    // === 🔥 Обновить состояние кнопки Copy — ТОЛЬКО после загрузки данных ===
+    // === Обновить состояние кнопки Copy ===
     function updateCopyButton() {
       if (!copyBtn) return;
-      
-      // 🔹 Если тип ещё не установлен — не меняем кнопку
-      if (!componentType) {
-        console.log('⏳ componentType not set yet');
-        return;
-      }
+      if (!componentType) return;
       
       const email = localStorage.getItem('rememberedEmail');
       const key = localStorage.getItem('rememberedKey');
@@ -288,15 +289,11 @@
       copyBtn.classList.remove('copied', 'locked');
       
       if (!canCopy) {
-        // 🔒 Locked — серая кнопка с замком
         copyBtn.classList.add('locked');
         copyBtn.querySelector('svg').outerHTML = ICON_LOCK;
-        copyBtn.title = 'Sign in to copy';
         copyBtn.style.pointerEvents = 'none';
       } else {
-        // ✅ Can copy — фиолетовая кнопка с иконкой Copy
         copyBtn.querySelector('svg').outerHTML = ICON_COPY;
-        copyBtn.title = 'Copy for Framer';
         copyBtn.style.pointerEvents = 'auto';
       }
     }
@@ -314,7 +311,6 @@
     if (viewToggle) {
       viewBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-          // 🔹 Сбрасываем copied состояние перед переключением
           if (copyBtn) {
             copyBtn.classList.remove('copied');
             copyBtn.querySelector('svg').outerHTML = ICON_COPY;
@@ -340,7 +336,6 @@
       copyBtn.addEventListener('click', async (e) => {
         e.preventDefault();
         
-        // Если данные ещё не загрузились — ждём
         if (!currentComponent || !displayUrl) {
           await new Promise(resolve => setTimeout(resolve, 300));
           if (!currentComponent) findAndPrepareComponent();
@@ -352,7 +347,6 @@
           return;
         }
         
-        // 🔹 Проверка: если платный и не авторизован — редирект
         if (!checkAuth() && componentType === 'paid') {
           // ✅ БЕЗ ПРОБЕЛОВ В URL
           window.location.href = 'https://www.framerkit.site?signin=true';
@@ -368,17 +362,15 @@
       });
     }
   
-    // === Показать состояние "Copied" — меняем ТОЛЬКО иконку ===
+    // === Показать состояние "Copied" ===
     function showCopiedState() {
       if (!copyBtn) return;
       copyBtn.querySelector('svg').outerHTML = ICON_CHECK;
       copyBtn.classList.add('copied');
-      copyBtn.title = 'Copied!';
       
       setTimeout(() => {
         copyBtn.classList.remove('copied');
         copyBtn.querySelector('svg').outerHTML = ICON_COPY;
-        copyBtn.title = 'Copy for Framer';
       }, 2000);
     }
   
@@ -394,25 +386,41 @@
       deviceBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.device === closest));
     }
     
+    // 🔥 Фикс: защита от мерцания width indicator
+    function showWidthIndicator(width) {
+      widthIndicator.textContent = Math.round(width) + 'px';
+      
+      // 🔹 Если уже показан — не перезапускаем анимацию
+      if (indicatorTimeout) {
+        clearTimeout(indicatorTimeout);
+      } else {
+        widthIndicator.classList.add('show');
+      }
+      
+      // 🔹 Скрываем через 2 секунды (было 1.5с)
+      indicatorTimeout = setTimeout(() => {
+        widthIndicator.classList.remove('show');
+        indicatorTimeout = null;
+      }, 2000);
+      
+      updateActiveDeviceBtn(width);
+    }
+    
     function setWidth(width) {
       const containerWidth = previewContainer.clientWidth - 40;
       const finalWidth = Math.min(width, containerWidth);
+      
       resizableWrapper.style.flex = (finalWidth === width) ? 'none' : '1';
       resizableWrapper.style.width = finalWidth + 'px';
+      
       showWidthIndicator(finalWidth);
       updateActiveDeviceBtn(finalWidth);
-    }
-    
-    function showWidthIndicator(width) {
-      widthIndicator.textContent = Math.round(width) + 'px';
-      widthIndicator.classList.add('show');
-      setTimeout(() => widthIndicator.classList.remove('show'), 1500);
     }
     
     deviceBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         const device = btn.dataset.device;
-        if (isFullscreen) exitFullscreen();
+        if (isFullscreen) toggleFullscreen(); // 🔥 Используем одну функцию
         deviceBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         setWidth(BREAKPOINTS[device]);
@@ -426,50 +434,47 @@
       if (e.key === 'Escape' && isFullscreen) toggleFullscreen();
     });
     
+    // 🔥 Единая функция toggleFullscreen (убрали дублирование exitFullscreen)
     function toggleFullscreen() {
       isFullscreen = !isFullscreen;
       previewContainer.classList.toggle('fullscreen');
       resizableWrapper.classList.toggle('fullscreen');
+      
       const toolbar = document.querySelector('.preview-toolbar');
       if (isFullscreen) {
-        if (toolbar) { toolbar.style.opacity = '0'; toolbar.style.pointerEvents = 'none'; }
+        if (toolbar) {
+          toolbar.style.opacity = '0';
+          toolbar.style.pointerEvents = 'none';
+        }
         if (showUiBtn) showUiBtn.classList.add('visible');
         deviceBtns.forEach(btn => btn.classList.remove('active'));
       } else {
-        if (toolbar) { toolbar.style.opacity = '1'; toolbar.style.pointerEvents = 'auto'; }
+        if (toolbar) {
+          toolbar.style.opacity = '1';
+          toolbar.style.pointerEvents = 'auto';
+        }
         if (showUiBtn) showUiBtn.classList.remove('visible');
         setWidth(BREAKPOINTS.desktop);
         deviceBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.device === 'desktop'));
       }
-    }
-    
-    function exitFullscreen() {
-      if (isFullscreen) {
-        isFullscreen = false;
-        previewContainer.classList.remove('fullscreen');
-        resizableWrapper.classList.remove('fullscreen');
-        const toolbar = document.querySelector('.preview-toolbar');
-        if (toolbar) { toolbar.style.opacity = '1'; toolbar.style.pointerEvents = 'auto'; }
-        if (showUiBtn) showUiBtn.classList.remove('visible');
-        setWidth(BREAKPOINTS.desktop);
-        deviceBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.device === 'desktop'));
+      
+      // 🔥 Обновляем ТОЛЬКО иконку и текст (не пересоздаём tooltip!)
+      if (fullscreenIcon && fullscreenTooltip) {
+        if (isFullscreen) {
+          fullscreenIcon.innerHTML = ICON_EXIT_FULLSCREEN;
+          fullscreenTooltip.textContent = 'Exit Fullscreen';
+        } else {
+          fullscreenIcon.innerHTML = ICON_ENTER_FULLSCREEN;
+          fullscreenTooltip.textContent = 'Fullscreen';
+        }
       }
     }
     
+    // 🔥 Show UI button — тоже использует toggleFullscreen
     if (showUiBtn) {
       showUiBtn.addEventListener('click', () => {
         if (isFullscreen) {
-          isFullscreen = false;
-          previewContainer.classList.remove('fullscreen');
-          resizableWrapper.classList.remove('fullscreen');
-          const toolbar = document.querySelector('.preview-toolbar');
-          if (toolbar) { toolbar.style.opacity = '1'; toolbar.style.pointerEvents = 'auto'; }
-          if (fullscreenBtn) {
-            fullscreenBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>';
-          }
-          if (showUiBtn) showUiBtn.classList.remove('visible');
-          setWidth(BREAKPOINTS.desktop);
-          deviceBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.device === 'desktop'));
+          toggleFullscreen(); // 🔥 Используем единую функцию
         }
       });
     }
@@ -530,13 +535,9 @@
   
     // === Init ===
     document.addEventListener('DOMContentLoaded', () => {
-      // 🔹 Кнопка уже заблокирована через initCopyButton()
-      
       setWidth(BREAKPOINTS.desktop);
       deviceBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.device === 'desktop'));
       updateViewToggle();
-      
-      // 🔹 Загружаем JSON — после этого обновится кнопка
       loadComponentsData();
     });
   
