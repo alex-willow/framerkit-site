@@ -37,7 +37,6 @@ export default function FramerKitDailyPage({
     }
   }, [location.pathname, galleryScrollRef]);
 
-  // Загрузка JSON и добавление типов
   useEffect(() => {
     const load = async () => {
       try {
@@ -46,15 +45,12 @@ export default function FramerKitDailyPage({
         );
         if (!res.ok) throw new Error("Failed to load");
         const json = await res.json();
-        const framerkitdaily: TemplateItem[] = json.framerkitdaily.map(
-          (item: TemplateItem, index: number) => ({
-            ...item,
-            type: index === 0 ? "free" : "paid", // первый бесплатный, остальные платные
-          })
-        );
+        
+        const framerkitdaily: TemplateItem[] = json.framerkitdaily || [];
         setItems(framerkitdaily);
-      } catch (e) {
  
+      } catch (e) {
+        console.error("Failed to load framerkitdaily:", e);
       } finally {
         setLoading(false);
       }
