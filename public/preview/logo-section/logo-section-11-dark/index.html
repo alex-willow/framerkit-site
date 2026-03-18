@@ -1,0 +1,2284 @@
+<head>
+    <meta charset="utf-8">
+    <base href="./">
+  
+  
+    <script>try { if (localStorage.get("__framer_force_showing_editorbar_since")) { const n = document.createElement("link"); n.rel = "modulepreload"; n.href = "https://framer.com/edit/init.mjs"; document.head.appendChild(n) } } catch (e) { }</script>
+    <!-- Start of headStart -->
+  
+    <!-- End of headStart -->
+    <meta name="viewport" content="width=device-width">
+    <meta name="generator" content="Framer f353506">
+    <meta name="description" content="Made with Framer">
+    <meta name="framer-search-index"
+        content="https://framerusercontent.com/sites/6R3ICRvTG9shTblYB487rC/searchIndex-FWrivrRPSOeo.json">
+    <meta name="framer-search-index-fallback"
+        content="https://framerusercontent.com/sites/6R3ICRvTG9shTblYB487rC/searchIndex-8yDN32lHb7GK.json">
+        <link rel="icon" type="image/png" href="/Logo.png" />
+        <link rel="apple-touch-icon" href="/Logo.png" />
+  
+        <!-- ✅ Скрипт-защита: не даёт JS изменить title -->
+  <script>
+    (function() {
+      // Сохраняем твой заголовок
+      var myTitle = 'Logo Section 11 | FramerKit';
+      document.title = myTitle;
+      
+      // Блокируем изменение title через Object.defineProperty
+      Object.defineProperty(document, 'title', {
+        set: function(value) {
+          // Игнорируем попытки изменить, если это не наш заголовок
+          if (value !== myTitle) {
+            // Можно раскомментировать для отладки:
+            // console.log('Blocked title change:', value);
+            return;
+          }
+          // Если значение совпадает — разрешаем
+          document.head.querySelector('title').textContent = value;
+        },
+        get: function() {
+          return myTitle;
+        }
+      });
+    })();
+  </script>
+
+    <style data-framer-font-css="">
+        /* cyrillic-ext */
+        @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 600;
+            font-display: swap;
+            src: url(https://fonts.gstatic.com/s/inter/v20/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuGKYAZJhiI2B.woff2) format('woff2');
+            unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+        }
+
+        /* cyrillic */
+        @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 600;
+            font-display: swap;
+            src: url(https://fonts.gstatic.com/s/inter/v20/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuGKYAZthiI2B.woff2) format('woff2');
+            unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+        }
+
+        /* greek-ext */
+        @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 600;
+            font-display: swap;
+            src: url(https://fonts.gstatic.com/s/inter/v20/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuGKYAZNhiI2B.woff2) format('woff2');
+            unicode-range: U+1F00-1FFF;
+        }
+
+        /* greek */
+        @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 600;
+            font-display: swap;
+            src: url(https://fonts.gstatic.com/s/inter/v20/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuGKYAZxhiI2B.woff2) format('woff2');
+            unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+        }
+
+        /* vietnamese */
+        @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 600;
+            font-display: swap;
+            src: url(https://fonts.gstatic.com/s/inter/v20/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuGKYAZBhiI2B.woff2) format('woff2');
+            unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+        }
+
+        /* latin-ext */
+        @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 600;
+            font-display: swap;
+            src: url(https://fonts.gstatic.com/s/inter/v20/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuGKYAZFhiI2B.woff2) format('woff2');
+            unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+        }
+
+        /* latin */
+        @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 600;
+            font-display: swap;
+            src: url(https://fonts.gstatic.com/s/inter/v20/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuGKYAZ9hiA.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+
+        @font-face {
+            font-family: "Inter";
+            src: url("https://framerusercontent.com/assets/5vvr9Vy74if2I6bQbJvbw7SY1pQ.woff2");
+            font-display: swap;
+            font-style: normal;
+            font-weight: 400;
+            unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F
+        }
+
+        @font-face {
+            font-family: "Inter";
+            src: url("https://framerusercontent.com/assets/EOr0mi4hNtlgWNn9if640EZzXCo.woff2");
+            font-display: swap;
+            font-style: normal;
+            font-weight: 400;
+            unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116
+        }
+
+        @font-face {
+            font-family: "Inter";
+            src: url("https://framerusercontent.com/assets/Y9k9QrlZAqio88Klkmbd8VoMQc.woff2");
+            font-display: swap;
+            font-style: normal;
+            font-weight: 400;
+            unicode-range: U+1F00-1FFF
+        }
+
+        @font-face {
+            font-family: "Inter";
+            src: url("https://framerusercontent.com/assets/OYrD2tBIBPvoJXiIHnLoOXnY9M.woff2");
+            font-display: swap;
+            font-style: normal;
+            font-weight: 400;
+            unicode-range: U+0370-03FF
+        }
+
+        @font-face {
+            font-family: "Inter";
+            src: url("https://framerusercontent.com/assets/JeYwfuaPfZHQhEG8U5gtPDZ7WQ.woff2");
+            font-display: swap;
+            font-style: normal;
+            font-weight: 400;
+            unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF
+        }
+
+        @font-face {
+            font-family: "Inter";
+            src: url("https://framerusercontent.com/assets/GrgcKwrN6d3Uz8EwcLHZxwEfC4.woff2");
+            font-display: swap;
+            font-style: normal;
+            font-weight: 400;
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2070, U+2074-207E, U+2080-208E, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD
+        }
+
+        @font-face {
+            font-family: "Inter";
+            src: url("https://framerusercontent.com/assets/b6Y37FthZeALduNqHicBT6FutY.woff2");
+            font-display: swap;
+            font-style: normal;
+            font-weight: 400;
+            unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB
+        }
+
+        @font-face {
+            font-family: "Inter Display";
+            src: url("https://framerusercontent.com/assets/ePuN3mCjzajIHnyCdvKBFiZkyY0.woff2");
+            font-display: swap;
+            font-style: normal;
+            font-weight: 500;
+            unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F
+        }
+
+        @font-face {
+            font-family: "Inter Display";
+            src: url("https://framerusercontent.com/assets/V3j1L0o5vPFKe26Sw4HcpXCfHo.woff2");
+            font-display: swap;
+            font-style: normal;
+            font-weight: 500;
+            unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116
+        }
+
+        @font-face {
+            font-family: "Inter Display";
+            src: url("https://framerusercontent.com/assets/F3kdpd2N0cToWV5huaZjjgM.woff2");
+            font-display: swap;
+            font-style: normal;
+            font-weight: 500;
+            unicode-range: U+1F00-1FFF
+        }
+
+        @font-face {
+            font-family: "Inter Display";
+            src: url("https://framerusercontent.com/assets/0iDmxkizU9goZoclqIqsV5rvETU.woff2");
+            font-display: swap;
+            font-style: normal;
+            font-weight: 500;
+            unicode-range: U+0370-03FF
+        }
+
+        @font-face {
+            font-family: "Inter Display";
+            src: url("https://framerusercontent.com/assets/r0mv3NegmA0akcQsNFotG32Las.woff2");
+            font-display: swap;
+            font-style: normal;
+            font-weight: 500;
+            unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF
+        }
+
+        @font-face {
+            font-family: "Inter Display";
+            src: url("https://framerusercontent.com/assets/iwWTDc49ENF2tCHbqlNARXw6Ug.woff2");
+            font-display: swap;
+            font-style: normal;
+            font-weight: 500;
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2070, U+2074-207E, U+2080-208E, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD
+        }
+
+        @font-face {
+            font-family: "Inter Display";
+            src: url("https://framerusercontent.com/assets/Ii21jnSJkulBKsHHXKlapi7fv9w.woff2");
+            font-display: swap;
+            font-style: normal;
+            font-weight: 500;
+            unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB
+        }
+
+        @font-face {
+            font-family: "Inter Placeholder";
+            src: local("Arial");
+            ascent-override: 89.79%;
+            descent-override: 22.36%;
+            line-gap-override: 0.00%;
+            size-adjust: 107.89%
+        }
+
+        @font-face {
+            font-family: "Inter Display Placeholder";
+            src: local("Arial");
+            ascent-override: 98.56%;
+            descent-override: 24.54%;
+            line-gap-override: 0.00%;
+            size-adjust: 98.29%
+        }
+    </style>
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <meta name="robots" content="max-image-preview:large">
+    <link rel="canonical" href="index.html">
+    <meta property="og:url" content="https://just-narwhal-630728.framer.app/">
+    <style data-framer-css-ssr-minified=""
+        data-framer-components="framer-lib-cursors-host framer-eUHKk PropertyOverrides framer-jJ7jq framer-lib-combinedCSSRules">
+        html,
+        body,
+        #main {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        :root {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-font-smoothing: inherit
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        figure {
+            margin: 0
+        }
+
+        body,
+        input,
+        textarea,
+        select,
+        button {
+            font-family: sans-serif;
+            font-size: 12px
+        }
+
+        @supports (z-index:calc(infinity)) {
+            #__framer-badge-container {
+                --infinity: infinity
+            }
+        }
+
+        #__framer-badge-container {
+            pointer-events: none;
+            width: 100%;
+            z-index: calc(var(--infinity, 2147480000));
+            justify-content: flex-end;
+            padding: 20px;
+            display: flex;
+            position: fixed;
+            bottom: 0
+        }
+
+        @supports (background:-webkit-named-image(i)) and (not (grid-template-rows:subgrid)) {
+            body {
+                --framer-will-change-override: transform
+            }
+        }
+
+        @supports (background:-webkit-named-image(i)) and (not (position-area:top right)) {
+            body {
+                --framer-will-change-filter-override: filter
+            }
+        }
+
+        [data-framer-component-type=Text] div div span,
+        [data-framer-component-type=Text] a div span,
+        [data-framer-component-type=Text] span span span,
+        [data-framer-component-type=Text] p span span,
+        [data-framer-component-type=Text] h1 span span,
+        [data-framer-component-type=Text] h2 span span,
+        [data-framer-component-type=Text] h3 span span,
+        [data-framer-component-type=Text] h4 span span,
+        [data-framer-component-type=Text] h5 span span,
+        [data-framer-component-type=Text] h6 span span,
+        [data-framer-component-type=Text] a {
+            font-family: var(--font-family);
+            font-style: var(--font-style);
+            font-weight: min(calc(var(--framer-font-weight-increase, 0) + var(--font-weight, 400)), 900);
+            color: var(--text-color);
+            letter-spacing: var(--letter-spacing);
+            font-size: var(--font-size);
+            text-transform: var(--text-transform);
+            --text-decoration: var(--framer-text-decoration-style, solid)var(--framer-text-decoration, none)var(--framer-text-decoration-color, currentcolor)var(--framer-text-decoration-thickness, auto);
+            --text-decoration-skip-ink: var(--framer-text-decoration-skip-ink);
+            --text-underline-offset: var(--framer-text-decoration-offset);
+            line-height: var(--line-height);
+            --font-family: var(--framer-font-family);
+            --font-style: var(--framer-font-style);
+            --font-weight: var(--framer-font-weight);
+            --text-color: var(--framer-text-color);
+            --letter-spacing: var(--framer-letter-spacing);
+            --font-size: var(--framer-font-size);
+            --text-transform: var(--framer-text-transform);
+            --line-height: var(--framer-line-height)
+        }
+
+        @supports not (color:color(display-p3 1 1 1)) {
+
+            p.framer-text,
+            div.framer-text,
+            h1.framer-text,
+            h2.framer-text,
+            h3.framer-text,
+            h4.framer-text,
+            h5.framer-text,
+            h6.framer-text,
+            li.framer-text,
+            ol.framer-text,
+            ul.framer-text,
+            span.framer-text:not([data-text-fill]) {
+                color: var(--framer-blockquote-text-color-rgb, var(--framer-blockquote-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))));
+                -webkit-text-stroke-color: var(--framer-text-stroke-color-rgb, var(--framer-text-stroke-color, initial))
+            }
+
+            mark.framer-text {
+                background-color: var(--framer-blockquote-text-background-color-rgb, var(--framer-blockquote-text-background-color, var(--framer-text-background-color-rgb, var(--framer-text-background-color, initial))))
+            }
+        }
+
+        @supports not (color:color(display-p3 1 1 1)) {
+
+            code.framer-text,
+            code.framer-text span.framer-text:not([data-text-fill]) {
+                color: var(--framer-blockquote-text-color-rgb, var(--framer-blockquote-text-color, var(--framer-code-text-color-rgb, var(--framer-code-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))))
+            }
+        }
+
+        @supports not (color:color(display-p3 1 1 1)) {
+
+            a.framer-text,
+            span.framer-text[data-nested-link] {
+                color: var(--framer-blockquote-text-color-rgb, var(--framer-blockquote-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))));
+                background-color: var(--framer-link-text-background-color-rgb, var(--framer-link-text-background-color, initial));
+                -webkit-text-decoration-color: var(--framer-link-text-decoration-color-rgb, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color-rgb, var(--framer-text-decoration-color, currentcolor))));
+                text-decoration-color: var(--framer-link-text-decoration-color-rgb, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color-rgb, var(--framer-text-decoration-color, currentcolor))))
+            }
+        }
+
+        @supports not (color:color(display-p3 1 1 1)) {
+
+            code.framer-text a.framer-text,
+            code.framer-text a.framer-text span.framer-text:not([data-text-fill]),
+            code.framer-text span.framer-text[data-nested-link],
+            code.framer-text span.framer-text[data-nested-link] span.framer-text:not([data-text-fill]) {
+                color: var(--framer-blockquote-text-color-rgb, var(--framer-blockquote-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-code-text-color-rgb, var(--framer-code-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))))))
+            }
+        }
+
+        @supports not (color:color(display-p3 1 1 1)) {
+
+            a.framer-text:hover,
+            span.framer-text[data-nested-link]:hover {
+                color: var(--framer-link-hover-text-color-rgb, var(--framer-link-hover-text-color, var(--framer-blockquote-text-color-rgb, var(--framer-blockquote-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))))));
+                background-color: var(--framer-link-hover-text-background-color-rgb, var(--framer-link-hover-text-background-color, var(--framer-link-text-background-color-rgb, var(--framer-link-text-background-color, var(--framer-text-background-color-rgb, var(--framer-text-background-color, initial))))));
+                -webkit-text-decoration-color: var(--framer-link-hover-text-decoration-color-rgb, var(--framer-link-hover-text-decoration-color, var(--framer-link-text-decoration-color-rgb, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color-rgb, var(--framer-text-decoration-color, currentcolor))))));
+                text-decoration-color: var(--framer-link-hover-text-decoration-color-rgb, var(--framer-link-hover-text-decoration-color, var(--framer-link-text-decoration-color-rgb, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color-rgb, var(--framer-text-decoration-color, currentcolor))))))
+            }
+        }
+
+        @supports not (color:color(display-p3 1 1 1)) {
+
+            code.framer-text a.framer-text:hover,
+            code.framer-text span.framer-text[data-nested-link]:hover {
+                color: var(--framer-link-hover-text-color-rgb, var(--framer-link-hover-text-color, var(--framer-blockquote-text-color-rgb, var(--framer-blockquote-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-code-text-color-rgb, var(--framer-code-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))))))))
+            }
+        }
+
+        @supports not (color:color(display-p3 1 1 1)) {
+
+            a.framer-text[data-framer-page-link-current],
+            span.framer-text[data-framer-page-link-current] {
+                color: var(--framer-link-current-text-color-rgb, var(--framer-link-current-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))));
+                background-color: var(--framer-link-current-text-background-color-rgb, var(--framer-link-current-text-background-color, var(--framer-link-text-background-color-rgb, var(--framer-link-text-background-color, var(--framer-text-background-color-rgb, var(--framer-text-background-color, initial))))));
+                -webkit-text-decoration-color: var(--framer-link-current-text-decoration-color-rgb, var(--framer-link-current-text-decoration-color, var(--framer-link-text-decoration-color-rgb, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color-rgb, var(--framer-text-decoration-color, currentcolor))))));
+                text-decoration-color: var(--framer-link-current-text-decoration-color-rgb, var(--framer-link-current-text-decoration-color, var(--framer-link-text-decoration-color-rgb, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color-rgb, var(--framer-text-decoration-color, currentcolor))))))
+            }
+        }
+
+        @supports not (color:color(display-p3 1 1 1)) {
+
+            code.framer-text a.framer-text[data-framer-page-link-current],
+            code.framer-text a.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]),
+            code.framer-text span.framer-text[data-framer-page-link-current],
+            code.framer-text span.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]) {
+                color: var(--framer-link-current-text-color-rgb, var(--framer-link-current-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-code-text-color-rgb, var(--framer-code-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))))));
+                background-color: var(--framer-link-current-text-background-color-rgb, var(--framer-link-current-text-background-color, var(--framer-link-text-background-color-rgb, var(--framer-link-text-background-color, var(--framer-text-background-color-rgb, var(--framer-text-background-color, initial))))))
+            }
+        }
+
+        @supports not (color:color(display-p3 1 1 1)) {
+
+            a.framer-text[data-framer-page-link-current]:hover,
+            span.framer-text[data-framer-page-link-current]:hover {
+                color: var(--framer-link-hover-text-color-rgb, var(--framer-link-hover-text-color, var(--framer-link-current-text-color-rgb, var(--framer-link-current-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-code-text-color-rgb, var(--framer-code-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))))))));
+                background-color: var(--framer-link-hover-text-background-color-rgb, var(--framer-link-hover-text-background-color, var(--framer-link-current-text-background-color-rgb, var(--framer-link-current-text-background-color, var(--framer-link-text-background-color-rgb, var(--framer-link-text-background-color, initial))))));
+                -webkit-text-decoration-color: var(--framer-link-hover-text-decoration-color-rgb, var(--framer-link-hover-text-decoration-color, var(--framer-link-current-text-decoration-color-rgb, var(--framer-link-current-text-decoration-color, var(--framer-link-text-decoration-color-rgb, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color-rgb, var(--framer-text-decoration-color, currentcolor))))))));
+                text-decoration-color: var(--framer-link-hover-text-decoration-color-rgb, var(--framer-link-hover-text-decoration-color, var(--framer-link-current-text-decoration-color-rgb, var(--framer-link-current-text-decoration-color, var(--framer-link-text-decoration-color-rgb, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color-rgb, var(--framer-text-decoration-color, currentcolor))))))))
+            }
+        }
+
+        @supports not (color:color(display-p3 1 1 1)) {
+
+            code.framer-text a.framer-text[data-framer-page-link-current]:hover,
+            code.framer-text a.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]),
+            code.framer-text span.framer-text[data-framer-page-link-current]:hover,
+            code.framer-text span.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]) {
+                color: var(--framer-link-hover-text-color-rgb, var(--framer-link-hover-text-color, var(--framer-link-current-text-color-rgb, var(--framer-link-current-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-code-text-color-rgb, var(--framer-code-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))))))));
+                background-color: var(--framer-link-hover-text-background-color-rgb, var(--framer-link-hover-text-background-color, var(--framer-link-current-text-background-color-rgb, var(--framer-link-current-text-background-color, var(--framer-link-text-background-color-rgb, var(--framer-link-text-background-color, initial))))))
+            }
+        }
+
+        @supports not (aspect-ratio:1) {
+            .framer-text-module:not([data-width=fit])[style*=aspect-ratio] {
+                position: relative !important
+            }
+
+            .framer-text-module:not([data-width=fit])[style*=aspect-ratio]:before {
+                content: "";
+                padding-bottom: calc(100%/calc(var(--aspect-ratio)));
+                display: block
+            }
+
+            .framer-text-module[data-width=fill]>:first-child,
+            .framer-text-module[data-width=fill]>.ssr-variant>:first-child,
+            .framer-text-module:not([data-width=fit])[style*=aspect-ratio]>:first-child,
+            .framer-text-module:not([data-width=fit])[style*=aspect-ratio]>.ssr-variant>:first-child {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100% !important
+            }
+        }
+
+        @supports not (overflow:clip) {
+            :root {
+                --overflow-clip-fallback: hidden
+            }
+        }
+
+        @supports (background:-webkit-named-image(i)) and (not (contain-intrinsic-size:inherit)) {
+
+            div.framer-text,
+            p.framer-text,
+            h1.framer-text,
+            h2.framer-text,
+            h3.framer-text,
+            h4.framer-text,
+            h5.framer-text,
+            h6.framer-text,
+            ol.framer-text,
+            ul.framer-text,
+            li.framer-text,
+            blockquote.framer-text,
+            .framer-text.framer-image {
+                display: var(--text-truncation-display-inline-for-safari-16, revert)
+            }
+
+            div.framer-text:after,
+            p.framer-text:after,
+            h1.framer-text:after,
+            h2.framer-text:after,
+            h3.framer-text:after,
+            h4.framer-text:after,
+            h5.framer-text:after,
+            h6.framer-text:after,
+            ol.framer-text:after,
+            ul.framer-text:after,
+            li.framer-text:after,
+            blockquote.framer-text:after,
+            .framer-text.framer-image:after {
+                content: var(--text-truncation-line-break-for-safari-16);
+                white-space: pre
+            }
+
+            .framer-text.framer-text-module,
+            .framer-text.framer-table-wrapper {
+                display: var(--text-truncation-display-none-for-safari-16, revert)
+            }
+
+            p.framer-text[data-text-fill] {
+                display: var(--text-truncation-display-inline-for-safari-16, inline-block)
+            }
+        }
+
+        @supports (corner-shape:superellipse(2)) {
+            :root {
+                --one-if-corner-shape-supported: 1
+            }
+        }
+
+        .framer-cursor-none,
+        .framer-cursor-none * {
+            cursor: none !important
+        }
+
+        .framer-pointer-events-none,
+        .framer-pointer-events-none * {
+            pointer-events: none !important
+        }
+
+        @supports (aspect-ratio:1) {
+            body {
+                --framer-aspect-ratio-supported: auto
+            }
+        }
+
+        .framer-eUHKk.framer-lux5qc,
+        .framer-eUHKk .framer-lux5qc {
+            display: block
+        }
+
+        .framer-eUHKk.framer-72rtr7 {
+            height: min-content;
+            overflow: var(--overflow-clip-fallback, clip);
+            flex-flow: column;
+            place-content: center flex-start;
+            align-items: center;
+            gap: 0;
+            width: 1200px;
+            padding: 0;
+            display: flex;
+            position: relative
+        }
+
+        .framer-eUHKk .framer-zo27g4 {
+            background-color: var(--token-820e67f8-fb8a-433b-8dc4-9f7cb5bf73fc, #0a0d14);
+            flex-flow: column;
+            flex: none;
+            place-content: center;
+            align-items: center;
+            gap: 0;
+            width: 100%;
+            height: min-content;
+            padding: 80px;
+            display: flex;
+            position: relative;
+            overflow: hidden
+        }
+
+        .framer-eUHKk .framer-he2mcf {
+            flex-flow: column;
+            flex: none;
+            place-content: center flex-start;
+            align-items: center;
+            gap: 64px;
+            width: 100%;
+            max-width: 1280px;
+            height: min-content;
+            padding: 0;
+            display: flex;
+            position: relative
+        }
+
+        .framer-eUHKk .framer-z077fr {
+            flex-flow: column;
+            flex: none;
+            place-content: center flex-start;
+            align-items: center;
+            gap: 16px;
+            width: 100%;
+            max-width: 680px;
+            height: min-content;
+            padding: 0;
+            display: flex;
+            position: relative
+        }
+
+        .framer-eUHKk .framer-u120d7-container {
+            flex: none;
+            width: auto;
+            height: auto;
+            position: relative
+        }
+
+        .framer-eUHKk .framer-lov24a {
+            --framer-link-text-color: #09f;
+            --framer-link-text-decoration: underline;
+            --framer-paragraph-spacing: 0px;
+            white-space: pre-wrap;
+            word-break: break-word;
+            word-wrap: break-word;
+            flex: none;
+            width: 100%;
+            height: auto;
+            position: relative
+        }
+
+        .framer-eUHKk .framer-78b8ou {
+            --framer-link-text-color: #09f;
+            --framer-link-text-decoration: underline;
+            --framer-paragraph-spacing: 0px;
+            opacity: .8;
+            white-space: pre-wrap;
+            word-break: break-word;
+            word-wrap: break-word;
+            flex: none;
+            width: 100%;
+            height: auto;
+            position: relative
+        }
+
+        .framer-eUHKk .framer-g84weg {
+            flex-flow: column;
+            flex: none;
+            place-content: center;
+            align-items: center;
+            gap: 24px;
+            width: 100%;
+            height: min-content;
+            padding: 0;
+            display: flex;
+            position: relative;
+            overflow: hidden
+        }
+
+        .framer-eUHKk .framer-bxxodl {
+            flex-flow: wrap;
+            flex: none;
+            place-content: center;
+            align-items: center;
+            gap: 24px;
+            width: 100%;
+            height: min-content;
+            padding: 0;
+            display: flex;
+            position: relative;
+            overflow: visible
+        }
+
+        .framer-eUHKk .framer-1w9cs4j,
+        .framer-eUHKk .framer-uquwxk,
+        .framer-eUHKk .framer-1f1bcgf,
+        .framer-eUHKk .framer-1j9ajx1 {
+            background-color: #2f2f2f;
+            flex-flow: row;
+            flex: 1 0 0;
+            place-content: center;
+            align-items: center;
+            gap: 10px;
+            width: 1px;
+            min-width: 400px;
+            height: min-content;
+            padding: 24px 12px;
+            display: flex;
+            position: relative;
+            overflow: visible
+        }
+
+        .framer-eUHKk .framer-tmxbwf {
+            aspect-ratio: 5.25581;
+            height: var(--framer-aspect-ratio-supported, 28px);
+            flex: none;
+            width: 147px;
+            position: relative
+        }
+
+        .framer-eUHKk .framer-ms0cou {
+            aspect-ratio: 5.18605;
+            height: var(--framer-aspect-ratio-supported, 28px);
+            flex: none;
+            width: 145px;
+            position: relative
+        }
+
+        .framer-eUHKk .framer-1g1auh1 {
+            aspect-ratio: 5.06977;
+            height: var(--framer-aspect-ratio-supported, 28px);
+            flex: none;
+            width: 142px;
+            position: relative
+        }
+
+        .framer-eUHKk .framer-1m53qla {
+            aspect-ratio: 5.16279;
+            height: var(--framer-aspect-ratio-supported, 28px);
+            flex: none;
+            width: 145px;
+            position: relative
+        }
+
+        @media (min-width:810px) and (max-width:1199.98px) {
+            .framer-eUHKk.framer-72rtr7 {
+                width: 810px
+            }
+
+            .framer-eUHKk .framer-zo27g4 {
+                padding: 40px
+            }
+
+            .framer-eUHKk .framer-he2mcf {
+                gap: 40px
+            }
+
+            .framer-eUHKk .framer-1w9cs4j,
+            .framer-eUHKk .framer-uquwxk,
+            .framer-eUHKk .framer-1f1bcgf,
+            .framer-eUHKk .framer-1j9ajx1 {
+                min-width: 300px
+            }
+        }
+
+        @media (max-width:809.98px) {
+            .framer-eUHKk.framer-72rtr7 {
+                width: 390px
+            }
+
+            .framer-eUHKk .framer-zo27g4 {
+                padding: 32px 16px
+            }
+
+            .framer-eUHKk .framer-g84weg {
+                gap: 32px
+            }
+        }
+
+        .ssr-variant {
+            display: contents
+        }
+
+        @supports (aspect-ratio:1) {
+            body {
+                --framer-aspect-ratio-supported: auto
+            }
+        }
+
+        .framer-jJ7jq.framer-ts8m6,
+        .framer-jJ7jq .framer-ts8m6 {
+            display: block
+        }
+
+        .framer-jJ7jq.framer-1peli3z {
+            will-change: var(--framer-will-change-override, transform);
+            flex-flow: row;
+            place-content: center;
+            align-items: center;
+            gap: 6px;
+            width: min-content;
+            height: min-content;
+            padding: 2px 10px;
+            display: flex;
+            position: relative;
+            overflow: hidden
+        }
+
+        .framer-jJ7jq .framer-1tg26el {
+            white-space: pre;
+            z-index: 0;
+            flex: none;
+            width: auto;
+            height: auto;
+            position: relative
+        }
+
+        .framer-jJ7jq[data-border=true]:after,
+        .framer-jJ7jq [data-border=true]:after {
+            content: "";
+            border-width: var(--border-top-width, 0)var(--border-right-width, 0)var(--border-bottom-width, 0)var(--border-left-width, 0);
+            border-color: var(--border-color, none);
+            border-style: var(--border-style, none);
+            box-sizing: border-box;
+            border-radius: inherit;
+            pointer-events: none;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0
+        }
+
+        body {
+            --framer-will-change-override: none
+        }
+
+        @supports (background:-webkit-named-image(i)) and (not (grid-template-rows:subgrid)) {
+            body {
+                --framer-will-change-override: transform
+            }
+        }
+
+        body {
+            --framer-will-change-filter-override: none
+        }
+
+        @supports (background:-webkit-named-image(i)) and (not (position-area:top right)) {
+            body {
+                --framer-will-change-filter-override: filter
+            }
+        }
+
+        [data-framer-component-type] {
+            position: absolute
+        }
+
+        [data-framer-component-type=Text] {
+            cursor: inherit
+        }
+
+        [data-framer-component-text-autosized] * {
+            white-space: pre
+        }
+
+        [data-framer-component-type=Text]>* {
+            text-align: var(--framer-text-alignment, start)
+        }
+
+        [data-framer-component-type=Text] span span,
+        [data-framer-component-type=Text] p span,
+        [data-framer-component-type=Text] h1 span,
+        [data-framer-component-type=Text] h2 span,
+        [data-framer-component-type=Text] h3 span,
+        [data-framer-component-type=Text] h4 span,
+        [data-framer-component-type=Text] h5 span,
+        [data-framer-component-type=Text] h6 span {
+            display: block
+        }
+
+        [data-framer-component-type=Text] span span span,
+        [data-framer-component-type=Text] p span span,
+        [data-framer-component-type=Text] h1 span span,
+        [data-framer-component-type=Text] h2 span span,
+        [data-framer-component-type=Text] h3 span span,
+        [data-framer-component-type=Text] h4 span span,
+        [data-framer-component-type=Text] h5 span span,
+        [data-framer-component-type=Text] h6 span span {
+            display: unset
+        }
+
+        [data-framer-component-type=Text] div div span,
+        [data-framer-component-type=Text] a div span,
+        [data-framer-component-type=Text] span span span,
+        [data-framer-component-type=Text] p span span,
+        [data-framer-component-type=Text] h1 span span,
+        [data-framer-component-type=Text] h2 span span,
+        [data-framer-component-type=Text] h3 span span,
+        [data-framer-component-type=Text] h4 span span,
+        [data-framer-component-type=Text] h5 span span,
+        [data-framer-component-type=Text] h6 span span,
+        [data-framer-component-type=Text] a {
+            font-family: var(--font-family);
+            font-style: var(--font-style);
+            font-weight: min(calc(var(--framer-font-weight-increase, 0) + var(--font-weight, 400)), 900);
+            color: var(--text-color);
+            letter-spacing: var(--letter-spacing);
+            font-size: var(--font-size);
+            text-transform: var(--text-transform);
+            --text-decoration: var(--framer-text-decoration-style, solid)var(--framer-text-decoration, none)var(--framer-text-decoration-color, currentcolor)var(--framer-text-decoration-thickness, auto);
+            --text-decoration-skip-ink: var(--framer-text-decoration-skip-ink);
+            --text-underline-offset: var(--framer-text-decoration-offset);
+            line-height: var(--line-height);
+            --font-family: var(--framer-font-family);
+            --font-style: var(--framer-font-style);
+            --font-weight: var(--framer-font-weight);
+            --text-color: var(--framer-text-color);
+            --letter-spacing: var(--framer-letter-spacing);
+            --font-size: var(--framer-font-size);
+            --text-transform: var(--framer-text-transform);
+            --line-height: var(--framer-line-height)
+        }
+
+        [data-framer-component-type=Text] a,
+        [data-framer-component-type=Text] a div span,
+        [data-framer-component-type=Text] a span span span,
+        [data-framer-component-type=Text] a p span span,
+        [data-framer-component-type=Text] a h1 span span,
+        [data-framer-component-type=Text] a h2 span span,
+        [data-framer-component-type=Text] a h3 span span,
+        [data-framer-component-type=Text] a h4 span span,
+        [data-framer-component-type=Text] a h5 span span,
+        [data-framer-component-type=Text] a h6 span span {
+            --font-family: var(--framer-link-font-family, var(--framer-font-family));
+            --font-style: var(--framer-link-font-style, var(--framer-font-style));
+            --font-weight: var(--framer-link-font-weight, var(--framer-font-weight));
+            --text-color: var(--framer-link-text-color, var(--framer-text-color));
+            --font-size: var(--framer-link-font-size, var(--framer-font-size));
+            --text-transform: var(--framer-link-text-transform, var(--framer-text-transform));
+            --text-decoration: var(--framer-link-text-decoration-style, var(--framer-text-decoration-style, solid))var(--framer-link-text-decoration, var(--framer-text-decoration, none))var(--framer-link-text-decoration-color, var(--framer-text-decoration-color, currentcolor))var(--framer-link-text-decoration-thickness, var(--framer-text-decoration-thickness, auto));
+            --text-decoration-skip-ink: var(--framer-link-text-decoration-skip-ink, var(--framer-text-decoration-skip-ink));
+            --text-underline-offset: var(--framer-link-text-decoration-offset, var(--framer-text-decoration-offset))
+        }
+
+        [data-framer-component-type=Text] a:hover,
+        [data-framer-component-type=Text] a div span:hover,
+        [data-framer-component-type=Text] a span span span:hover,
+        [data-framer-component-type=Text] a p span span:hover,
+        [data-framer-component-type=Text] a h1 span span:hover,
+        [data-framer-component-type=Text] a h2 span span:hover,
+        [data-framer-component-type=Text] a h3 span span:hover,
+        [data-framer-component-type=Text] a h4 span span:hover,
+        [data-framer-component-type=Text] a h5 span span:hover,
+        [data-framer-component-type=Text] a h6 span span:hover {
+            --font-family: var(--framer-link-hover-font-family, var(--framer-link-font-family, var(--framer-font-family)));
+            --font-style: var(--framer-link-hover-font-style, var(--framer-link-font-style, var(--framer-font-style)));
+            --font-weight: var(--framer-link-hover-font-weight, var(--framer-link-font-weight, var(--framer-font-weight)));
+            --text-color: var(--framer-link-hover-text-color, var(--framer-link-text-color, var(--framer-text-color)));
+            --font-size: var(--framer-link-hover-font-size, var(--framer-link-font-size, var(--framer-font-size)));
+            --text-transform: var(--framer-link-hover-text-transform, var(--framer-link-text-transform, var(--framer-text-transform)));
+            --text-decoration: var(--framer-link-hover-text-decoration-style, var(--framer-link-text-decoration-style, var(--framer-text-decoration-style, solid)))var(--framer-link-hover-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none)))var(--framer-link-hover-text-decoration-color, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color, currentcolor)))var(--framer-link-hover-text-decoration-thickness, var(--framer-link-text-decoration-thickness, var(--framer-text-decoration-thickness, auto)));
+            --text-decoration-skip-ink: var(--framer-link-hover-text-decoration-skip-ink, var(--framer-link-text-decoration-skip-ink, var(--framer-text-decoration-skip-ink)));
+            --text-underline-offset: var(--framer-link-hover-text-decoration-offset, var(--framer-link-text-decoration-offset, var(--framer-text-decoration-offset)))
+        }
+
+        [data-framer-component-type=Text].isCurrent a,
+        [data-framer-component-type=Text].isCurrent a div span,
+        [data-framer-component-type=Text].isCurrent a span span span,
+        [data-framer-component-type=Text].isCurrent a p span span,
+        [data-framer-component-type=Text].isCurrent a h1 span span,
+        [data-framer-component-type=Text].isCurrent a h2 span span,
+        [data-framer-component-type=Text].isCurrent a h3 span span,
+        [data-framer-component-type=Text].isCurrent a h4 span span,
+        [data-framer-component-type=Text].isCurrent a h5 span span,
+        [data-framer-component-type=Text].isCurrent a h6 span span {
+            --font-family: var(--framer-link-current-font-family, var(--framer-link-font-family, var(--framer-font-family)));
+            --font-style: var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style)));
+            --font-weight: var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight)));
+            --text-color: var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-text-color)));
+            --font-size: var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size)));
+            --text-transform: var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform)));
+            --text-decoration: var(--framer-link-current-text-decoration-style, var(--framer-link-text-decoration-style, var(--framer-text-decoration-style, solid)))var(--framer-link-current-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none)))var(--framer-link-current-text-decoration-color, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color, currentcolor)))var(--framer-link-current-text-decoration-thickness, var(--framer-link-text-decoration-thickness, var(--framer-text-decoration-thickness, auto)));
+            --text-decoration-skip-ink: var(--framer-link-current-text-decoration-skip-ink, var(--framer-link-text-decoration-skip-ink, var(--framer-text-decoration-skip-ink)));
+            --text-underline-offset: var(--framer-link-current-text-decoration-offset, var(--framer-link-text-decoration-offset, var(--framer-text-decoration-offset)))
+        }
+
+        [data-framer-component-type=RichTextContainer] {
+            outline: none;
+            flex-direction: column;
+            flex-shrink: 0;
+            justify-content: flex-start;
+            display: flex
+        }
+
+        p.framer-text,
+        div.framer-text,
+        figure.framer-text,
+        h1.framer-text,
+        h2.framer-text,
+        h3.framer-text,
+        h4.framer-text,
+        h5.framer-text,
+        h6.framer-text,
+        ol.framer-text,
+        ul.framer-text {
+            margin: 0;
+            padding: 0
+        }
+
+        p.framer-text,
+        div.framer-text,
+        h1.framer-text,
+        h2.framer-text,
+        h3.framer-text,
+        h4.framer-text,
+        h5.framer-text,
+        h6.framer-text,
+        li.framer-text,
+        ol.framer-text,
+        ul.framer-text,
+        mark.framer-text,
+        span.framer-text:not([data-text-fill]) {
+            font-family: var(--framer-font-family-preview, var(--framer-blockquote-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
+            font-style: var(--framer-font-style-preview, var(--framer-blockquote-font-style, var(--framer-font-style, normal)));
+            font-weight: var(--framer-font-weight-preview, var(--framer-blockquote-font-weight, var(--framer-font-weight, 400)));
+            color: var(--framer-blockquote-text-color, var(--framer-text-color, #000));
+            font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px))*var(--framer-font-size-scale, 1));
+            letter-spacing: var(--framer-blockquote-letter-spacing, var(--framer-letter-spacing, 0));
+            text-transform: var(--framer-blockquote-text-transform, var(--framer-text-transform, none));
+            -webkit-text-decoration-line: var(--framer-blockquote-text-decoration, var(--framer-text-decoration, initial));
+            text-decoration-line: var(--framer-blockquote-text-decoration, var(--framer-text-decoration, initial));
+            -webkit-text-decoration-style: var(--framer-blockquote-text-decoration-style, var(--framer-text-decoration-style, initial));
+            text-decoration-style: var(--framer-blockquote-text-decoration-style, var(--framer-text-decoration-style, initial));
+            -webkit-text-decoration-color: var(--framer-blockquote-text-decoration-color, var(--framer-text-decoration-color, initial));
+            text-decoration-color: var(--framer-blockquote-text-decoration-color, var(--framer-text-decoration-color, initial));
+            text-decoration-thickness: var(--framer-blockquote-text-decoration-thickness, var(--framer-text-decoration-thickness, initial));
+            text-decoration-skip-ink: var(--framer-blockquote-text-decoration-skip-ink, var(--framer-text-decoration-skip-ink, initial));
+            text-underline-offset: var(--framer-blockquote-text-decoration-offset, var(--framer-text-decoration-offset, initial));
+            line-height: var(--framer-blockquote-line-height, var(--framer-line-height, 1.2em));
+            text-align: var(--framer-blockquote-text-alignment, var(--framer-text-alignment, start));
+            -webkit-text-stroke-width: var(--framer-text-stroke-width, initial);
+            -webkit-text-stroke-color: var(--framer-text-stroke-color, initial);
+            -moz-font-feature-settings: var(--framer-font-open-type-features, initial);
+            -webkit-font-feature-settings: var(--framer-font-open-type-features, initial);
+            font-feature-settings: var(--framer-font-open-type-features, initial);
+            font-variation-settings: var(--framer-font-variation-axes-preview, var(--framer-font-variation-axes, normal));
+            text-wrap: var(--framer-text-wrap-override, var(--framer-text-wrap))
+        }
+
+        mark.framer-text,
+        p.framer-text,
+        div.framer-text,
+        h1.framer-text,
+        h2.framer-text,
+        h3.framer-text,
+        h4.framer-text,
+        h5.framer-text,
+        h6.framer-text,
+        li.framer-text,
+        ol.framer-text,
+        ul.framer-text {
+            background-color: var(--framer-blockquote-text-background-color, var(--framer-text-background-color, initial));
+            border-radius: var(--framer-blockquote-text-background-radius, var(--framer-text-background-radius, initial));
+            corner-shape: var(--framer-blockquote-text-background-corner-shape, var(--framer-text-background-corner-shape, initial));
+            padding: var(--framer-blockquote-text-background-padding, var(--framer-text-background-padding, initial))
+        }
+
+        @supports not (color:color(display-p3 1 1 1)) {
+
+            p.framer-text,
+            div.framer-text,
+            h1.framer-text,
+            h2.framer-text,
+            h3.framer-text,
+            h4.framer-text,
+            h5.framer-text,
+            h6.framer-text,
+            li.framer-text,
+            ol.framer-text,
+            ul.framer-text,
+            span.framer-text:not([data-text-fill]) {
+                color: var(--framer-blockquote-text-color-rgb, var(--framer-blockquote-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))));
+                -webkit-text-stroke-color: var(--framer-text-stroke-color-rgb, var(--framer-text-stroke-color, initial))
+            }
+
+            mark.framer-text {
+                background-color: var(--framer-blockquote-text-background-color-rgb, var(--framer-blockquote-text-background-color, var(--framer-text-background-color-rgb, var(--framer-text-background-color, initial))))
+            }
+        }
+
+        .framer-fit-text .framer-text {
+            white-space: nowrap;
+            white-space-collapse: preserve
+        }
+
+        strong.framer-text {
+            font-family: var(--framer-blockquote-font-family-bold, var(--framer-font-family-bold));
+            font-style: var(--framer-blockquote-font-style-bold, var(--framer-font-style-bold));
+            font-weight: var(--framer-blockquote-font-weight-bold, var(--framer-font-weight-bold, bolder));
+            font-variation-settings: var(--framer-blockquote-font-variation-axes-bold, var(--framer-font-variation-axes-bold))
+        }
+
+        em.framer-text {
+            font-family: var(--framer-blockquote-font-family-italic, var(--framer-font-family-italic));
+            font-style: var(--framer-blockquote-font-style-italic, var(--framer-font-style-italic, italic));
+            font-weight: var(--framer-blockquote-font-weight-italic, var(--framer-font-weight-italic));
+            font-variation-settings: var(--framer-blockquote-font-variation-axes-italic, var(--framer-font-variation-axes-italic))
+        }
+
+        em.framer-text>strong.framer-text {
+            font-family: var(--framer-blockquote-font-family-bold-italic, var(--framer-font-family-bold-italic));
+            font-style: var(--framer-blockquote-font-style-bold-italic, var(--framer-font-style-bold-italic, italic));
+            font-weight: var(--framer-blockquote-font-weight-bold-italic, var(--framer-font-weight-bold-italic, bolder));
+            font-variation-settings: var(--framer-blockquote-font-variation-axes-bold-italic, var(--framer-font-variation-axes-bold-italic))
+        }
+
+        p.framer-text:not(:first-child),
+        div.framer-text:not(:first-child),
+        h1.framer-text:not(:first-child),
+        h2.framer-text:not(:first-child),
+        h3.framer-text:not(:first-child),
+        h4.framer-text:not(:first-child),
+        h5.framer-text:not(:first-child),
+        h6.framer-text:not(:first-child),
+        ol.framer-text:not(:first-child),
+        ul.framer-text:not(:first-child),
+        blockquote.framer-text:not(:first-child),
+        table.framer-text:not(:first-child),
+        figure.framer-text:not(:first-child),
+        .framer-image.framer-text:not(:first-child) {
+            margin-top: var(--framer-blockquote-paragraph-spacing, var(--framer-paragraph-spacing, 0))
+        }
+
+        li.framer-text>ul.framer-text:nth-child(2),
+        li.framer-text>ol.framer-text:nth-child(2) {
+            margin-top: 0
+        }
+
+        .framer-text[data-text-fill] {
+            -webkit-text-fill-color: transparent;
+            padding: max(0em, calc(calc(1.3em - var(--framer-blockquote-line-height, var(--framer-line-height, 1.3em)))/2));
+            margin: min(0em, calc(calc(1.3em - var(--framer-blockquote-line-height, var(--framer-line-height, 1.3em)))/-2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            display: inline-block
+        }
+
+        code.framer-text,
+        code.framer-text span.framer-text:not([data-text-fill]) {
+            font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
+            font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
+            font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
+            color: var(--framer-blockquote-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)));
+            font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px))*var(--framer-font-size-scale, 1));
+            letter-spacing: var(--framer-blockquote-letter-spacing, var(--framer-letter-spacing, 0));
+            line-height: var(--framer-blockquote-line-height, var(--framer-line-height, 1.2em))
+        }
+
+        @supports not (color:color(display-p3 1 1 1)) {
+
+            code.framer-text,
+            code.framer-text span.framer-text:not([data-text-fill]) {
+                color: var(--framer-blockquote-text-color-rgb, var(--framer-blockquote-text-color, var(--framer-code-text-color-rgb, var(--framer-code-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))))
+            }
+        }
+
+        blockquote.framer-text {
+            unicode-bidi: initial;
+            margin-block-start: initial;
+            margin-block-end: initial;
+            margin-inline-start: initial;
+            margin-inline-end: initial
+        }
+
+        a.framer-text,
+        a.framer-text span.framer-text:not([data-text-fill]),
+        span.framer-text[data-nested-link],
+        span.framer-text[data-nested-link] span.framer-text:not([data-text-fill]) {
+            color: inherit;
+            font-family: var(--framer-font-family-preview, var(--framer-blockquote-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif))));
+            font-style: var(--framer-font-style-preview, var(--framer-blockquote-font-style, var(--framer-link-font-style, var(--framer-font-style, normal))));
+            font-weight: var(--framer-font-weight-preview, var(--framer-blockquote-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400))));
+            font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px))*var(--framer-font-size-scale, 1));
+            text-transform: var(--framer-blockquote-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
+            cursor: var(--framer-custom-cursors, pointer);
+            background-color: initial;
+            border-radius: var(--framer-link-text-background-radius, initial);
+            corner-shape: var(--framer-link-text-background-corner-shape, initial);
+            padding: var(--framer-link-text-background-padding, initial)
+        }
+
+        a.framer-text,
+        span.framer-text[data-nested-link] {
+            color: var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-text-color, #000)));
+            -webkit-text-decoration-line: var(--framer-blockquote-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, initial)));
+            text-decoration-line: var(--framer-blockquote-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, initial)));
+            -webkit-text-decoration-style: var(--framer-blockquote-text-decoration-style, var(--framer-link-text-decoration-style, var(--framer-text-decoration-style, initial)));
+            text-decoration-style: var(--framer-blockquote-text-decoration-style, var(--framer-link-text-decoration-style, var(--framer-text-decoration-style, initial)));
+            -webkit-text-decoration-color: var(--framer-blockquote-text-decoration-color, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color, initial)));
+            text-decoration-color: var(--framer-blockquote-text-decoration-color, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color, initial)));
+            text-decoration-thickness: var(--framer-blockquote-text-decoration-thickness, var(--framer-link-text-decoration-thickness, var(--framer-text-decoration-thickness, initial)));
+            text-decoration-skip-ink: var(--framer-blockquote-text-decoration-skip-ink, var(--framer-link-text-decoration-skip-ink, var(--framer-text-decoration-skip-ink, initial)));
+            text-underline-offset: var(--framer-blockquote-text-decoration-offset, var(--framer-link-text-decoration-offset, var(--framer-text-decoration-offset, initial)));
+            background-color: var(--framer-link-text-background-color, initial)
+        }
+
+        @supports not (color:color(display-p3 1 1 1)) {
+
+            a.framer-text,
+            span.framer-text[data-nested-link] {
+                color: var(--framer-blockquote-text-color-rgb, var(--framer-blockquote-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))));
+                background-color: var(--framer-link-text-background-color-rgb, var(--framer-link-text-background-color, initial));
+                -webkit-text-decoration-color: var(--framer-link-text-decoration-color-rgb, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color-rgb, var(--framer-text-decoration-color, currentcolor))));
+                text-decoration-color: var(--framer-link-text-decoration-color-rgb, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color-rgb, var(--framer-text-decoration-color, currentcolor))))
+            }
+        }
+
+        code.framer-text a.framer-text,
+        code.framer-text a.framer-text span.framer-text:not([data-text-fill]),
+        code.framer-text span.framer-text[data-nested-link],
+        code.framer-text span.framer-text[data-nested-link] span.framer-text:not([data-text-fill]) {
+            font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
+            font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
+            font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
+            color: inherit;
+            font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px))*var(--framer-font-size-scale, 1))
+        }
+
+        code.framer-text a.framer-text,
+        code.framer-text span.framer-text[data-nested-link] {
+            color: var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000))))
+        }
+
+        @supports not (color:color(display-p3 1 1 1)) {
+
+            code.framer-text a.framer-text,
+            code.framer-text a.framer-text span.framer-text:not([data-text-fill]),
+            code.framer-text span.framer-text[data-nested-link],
+            code.framer-text span.framer-text[data-nested-link] span.framer-text:not([data-text-fill]) {
+                color: var(--framer-blockquote-text-color-rgb, var(--framer-blockquote-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-code-text-color-rgb, var(--framer-code-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))))))
+            }
+        }
+
+        a.framer-text:hover,
+        a.framer-text:hover span.framer-text:not([data-text-fill]),
+        span.framer-text[data-nested-link]:hover,
+        span.framer-text[data-nested-link]:hover span.framer-text:not([data-text-fill]) {
+            font-family: var(--framer-font-family-preview, var(--framer-link-hover-font-family, var(--framer-blockquote-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)))));
+            font-style: var(--framer-font-style-preview, var(--framer-link-hover-font-style, var(--framer-blockquote-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)))));
+            font-weight: var(--framer-font-weight-preview, var(--framer-link-hover-font-weight, var(--framer-blockquote-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)))));
+            font-size: calc(var(--framer-link-hover-font-size, var(--framer-blockquote-font-size, var(--framer-font-size, 16px)))*var(--framer-font-size-scale, 1));
+            text-transform: var(--framer-link-hover-text-transform, var(--framer-blockquote-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none))));
+            border-radius: var(--framer-link-hover-text-background-radius, var(--framer-link-text-background-radius, var(--framer-text-background-radius, initial)));
+            corner-shape: var(--framer-link-hover-text-background-corner-shape, var(--framer-link-text-background-corner-shape, var(--framer-text-background-corner-shape, initial)));
+            padding: var(--framer-link-hover-text-background-padding, var(--framer-link-text-background-padding, var(--framer-text-background-padding, initial)))
+        }
+
+        a.framer-text:hover,
+        span.framer-text[data-nested-link]:hover {
+            color: var(--framer-link-hover-text-color, var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-text-color, #000))));
+            -webkit-text-decoration-line: var(--framer-link-hover-text-decoration, var(--framer-blockquote-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, initial))));
+            text-decoration-line: var(--framer-link-hover-text-decoration, var(--framer-blockquote-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, initial))));
+            -webkit-text-decoration-style: var(--framer-link-hover-text-decoration-style, var(--framer-blockquote-text-decoration-style, var(--framer-link-text-decoration-style, var(--framer-text-decoration-style, initial))));
+            text-decoration-style: var(--framer-link-hover-text-decoration-style, var(--framer-blockquote-text-decoration-style, var(--framer-link-text-decoration-style, var(--framer-text-decoration-style, initial))));
+            -webkit-text-decoration-color: var(--framer-link-hover-text-decoration-color, var(--framer-blockquote-text-decoration-color, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color, initial))));
+            text-decoration-color: var(--framer-link-hover-text-decoration-color, var(--framer-blockquote-text-decoration-color, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color, initial))));
+            text-decoration-thickness: var(--framer-link-hover-text-decoration-thickness, var(--framer-blockquote-text-decoration-thickness, var(--framer-link-text-decoration-thickness, var(--framer-text-decoration-thickness, initial))));
+            text-decoration-skip-ink: var(--framer-link-hover-text-decoration-skip-ink, var(--framer-blockquote-text-decoration-skip-ink, var(--framer-link-text-decoration-skip-ink, var(--framer-text-decoration-skip-ink, initial))));
+            text-underline-offset: var(--framer-link-hover-text-decoration-offset, var(--framer-blockquote-text-decoration-offset, var(--framer-link-text-decoration-offset, var(--framer-text-decoration-offset, initial))));
+            background-color: var(--framer-link-hover-text-background-color, var(--framer-link-text-background-color, var(--framer-text-background-color, initial)))
+        }
+
+        @supports not (color:color(display-p3 1 1 1)) {
+
+            a.framer-text:hover,
+            span.framer-text[data-nested-link]:hover {
+                color: var(--framer-link-hover-text-color-rgb, var(--framer-link-hover-text-color, var(--framer-blockquote-text-color-rgb, var(--framer-blockquote-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))))));
+                background-color: var(--framer-link-hover-text-background-color-rgb, var(--framer-link-hover-text-background-color, var(--framer-link-text-background-color-rgb, var(--framer-link-text-background-color, var(--framer-text-background-color-rgb, var(--framer-text-background-color, initial))))));
+                -webkit-text-decoration-color: var(--framer-link-hover-text-decoration-color-rgb, var(--framer-link-hover-text-decoration-color, var(--framer-link-text-decoration-color-rgb, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color-rgb, var(--framer-text-decoration-color, currentcolor))))));
+                text-decoration-color: var(--framer-link-hover-text-decoration-color-rgb, var(--framer-link-hover-text-decoration-color, var(--framer-link-text-decoration-color-rgb, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color-rgb, var(--framer-text-decoration-color, currentcolor))))))
+            }
+        }
+
+        code.framer-text a.framer-text:hover,
+        code.framer-text span.framer-text[data-nested-link]:hover {
+            color: var(--framer-link-hover-text-color, var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)))))
+        }
+
+        @supports not (color:color(display-p3 1 1 1)) {
+
+            code.framer-text a.framer-text:hover,
+            code.framer-text span.framer-text[data-nested-link]:hover {
+                color: var(--framer-link-hover-text-color-rgb, var(--framer-link-hover-text-color, var(--framer-blockquote-text-color-rgb, var(--framer-blockquote-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-code-text-color-rgb, var(--framer-code-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))))))))
+            }
+        }
+
+        a.framer-text[data-framer-page-link-current],
+        a.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]),
+        span.framer-text[data-framer-page-link-current],
+        span.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]) {
+            font-family: var(--framer-font-family-preview, var(--framer-link-current-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif))));
+            font-style: var(--framer-font-style-preview, var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style, normal))));
+            font-weight: var(--framer-font-weight-preview, var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400))));
+            font-size: calc(var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))*var(--framer-font-size-scale, 1));
+            text-transform: var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
+            border-radius: var(--framer-link-current-text-background-radius, var(--framer-link-text-background-radius, initial));
+            corner-shape: var(--framer-link-current-text-background-corner-shape, var(--framer-link-text-background-corner-shape, initial));
+            padding: var(--framer-link-current-text-background-padding, var(--framer-link-text-background-padding, initial))
+        }
+
+        a.framer-text[data-framer-page-link-current],
+        span.framer-text[data-framer-page-link-current] {
+            color: var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-text-color, #000)));
+            -webkit-text-decoration-line: var(--framer-link-current-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, initial)));
+            text-decoration-line: var(--framer-link-current-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, initial)));
+            -webkit-text-decoration-style: var(--framer-link-current-text-decoration-style, var(--framer-link-text-decoration-style, var(--framer-text-decoration-style, initial)));
+            text-decoration-style: var(--framer-link-current-text-decoration-style, var(--framer-link-text-decoration-style, var(--framer-text-decoration-style, initial)));
+            -webkit-text-decoration-color: var(--framer-link-current-text-decoration-color, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color, initial)));
+            text-decoration-color: var(--framer-link-current-text-decoration-color, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color, initial)));
+            text-decoration-thickness: var(--framer-link-current-text-decoration-thickness, var(--framer-link-text-decoration-thickness, var(--framer-text-decoration-thickness, initial)));
+            text-decoration-skip-ink: var(--framer-link-current-text-decoration-skip-ink, var(--framer-link-text-decoration-skip-ink, var(--framer-text-decoration-skip-ink, initial)));
+            text-underline-offset: var(--framer-link-current-text-decoration-offset, var(--framer-link-text-decoration-offset, var(--framer-text-decoration-offset, initial)));
+            background-color: var(--framer-link-current-text-background-color, var(--framer-link-text-background-color, var(--framer-text-background-color, initial)))
+        }
+
+        @supports not (color:color(display-p3 1 1 1)) {
+
+            a.framer-text[data-framer-page-link-current],
+            span.framer-text[data-framer-page-link-current] {
+                color: var(--framer-link-current-text-color-rgb, var(--framer-link-current-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))));
+                background-color: var(--framer-link-current-text-background-color-rgb, var(--framer-link-current-text-background-color, var(--framer-link-text-background-color-rgb, var(--framer-link-text-background-color, var(--framer-text-background-color-rgb, var(--framer-text-background-color, initial))))));
+                -webkit-text-decoration-color: var(--framer-link-current-text-decoration-color-rgb, var(--framer-link-current-text-decoration-color, var(--framer-link-text-decoration-color-rgb, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color-rgb, var(--framer-text-decoration-color, currentcolor))))));
+                text-decoration-color: var(--framer-link-current-text-decoration-color-rgb, var(--framer-link-current-text-decoration-color, var(--framer-link-text-decoration-color-rgb, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color-rgb, var(--framer-text-decoration-color, currentcolor))))))
+            }
+        }
+
+        code.framer-text a.framer-text[data-framer-page-link-current],
+        code.framer-text a.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]),
+        code.framer-text span.framer-text[data-framer-page-link-current],
+        code.framer-text span.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]) {
+            font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
+            font-style: var(--framer-code-font-style, var(--framer-font-style, normal));
+            font-weight: var(--framer-code-font-weight, var(--framer-font-weight, 400));
+            color: inherit;
+            font-size: calc(var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))*var(--framer-font-size-scale, 1))
+        }
+
+        code.framer-text a.framer-text[data-framer-page-link-current],
+        code.framer-text span.framer-text[data-framer-page-link-current] {
+            color: var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000))))
+        }
+
+        @supports not (color:color(display-p3 1 1 1)) {
+
+            code.framer-text a.framer-text[data-framer-page-link-current],
+            code.framer-text a.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]),
+            code.framer-text span.framer-text[data-framer-page-link-current],
+            code.framer-text span.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]) {
+                color: var(--framer-link-current-text-color-rgb, var(--framer-link-current-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-code-text-color-rgb, var(--framer-code-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))))));
+                background-color: var(--framer-link-current-text-background-color-rgb, var(--framer-link-current-text-background-color, var(--framer-link-text-background-color-rgb, var(--framer-link-text-background-color, var(--framer-text-background-color-rgb, var(--framer-text-background-color, initial))))))
+            }
+        }
+
+        a.framer-text[data-framer-page-link-current]:hover,
+        a.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]),
+        span.framer-text[data-framer-page-link-current]:hover,
+        span.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]) {
+            color: inherit;
+            font-family: var(--framer-font-family-preview, var(--framer-link-hover-font-family, var(--framer-link-current-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)))));
+            font-style: var(--framer-font-style-preview, var(--framer-link-hover-font-style, var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)))));
+            font-weight: var(--framer-font-weight-preview, var(--framer-link-hover-font-weight, var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)))));
+            font-size: calc(var(--framer-link-hover-font-size, var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px))))*var(--framer-font-size-scale, 1));
+            text-transform: var(--framer-link-hover-text-transform, var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none))));
+            border-radius: var(--framer-link-hover-text-background-radius, var(--framer-link-current-text-background-radius, var(--framer-link-text-background-radius, initial)));
+            corner-shape: var(--framer-link-hover-text-background-corner-shape, var(--framer-link-current-text-background-corner-shape, var(--framer-link-text-background-corner-shape, initial)));
+            padding: var(--framer-link-hover-text-background-padding, var(--framer-link-current-text-background-padding, var(--framer-link-text-background-padding, initial)))
+        }
+
+        a.framer-text[data-framer-page-link-current]:hover,
+        span.framer-text[data-framer-page-link-current]:hover {
+            color: var(--framer-link-hover-text-color, var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-text-color, #000))));
+            -webkit-text-decoration-line: var(--framer-link-hover-text-decoration, var(--framer-link-current-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, initial))));
+            text-decoration-line: var(--framer-link-hover-text-decoration, var(--framer-link-current-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, initial))));
+            -webkit-text-decoration-style: var(--framer-link-hover-text-decoration-style, var(--framer-link-current-text-decoration-style, var(--framer-link-text-decoration-style, var(--framer-text-decoration-style, initial))));
+            text-decoration-style: var(--framer-link-hover-text-decoration-style, var(--framer-link-current-text-decoration-style, var(--framer-link-text-decoration-style, var(--framer-text-decoration-style, initial))));
+            -webkit-text-decoration-color: var(--framer-link-hover-text-decoration-color, var(--framer-link-current-text-decoration-color, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color, initial))));
+            text-decoration-color: var(--framer-link-hover-text-decoration-color, var(--framer-link-current-text-decoration-color, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color, initial))));
+            text-decoration-thickness: var(--framer-link-hover-text-decoration-thickness, var(--framer-link-current-text-decoration-thickness, var(--framer-link-text-decoration-thickness, var(--framer-text-decoration-thickness, initial))));
+            text-decoration-skip-ink: var(--framer-link-hover-text-decoration-skip-ink, var(--framer-link-current-text-decoration-skip-ink, var(--framer-link-text-decoration-skip-ink, var(--framer-text-decoration-skip-ink, initial))));
+            text-underline-offset: var(--framer-link-hover-text-decoration-offset, var(--framer-link-current-text-decoration-offset, var(--framer-link-text-decoration-offset, var(--framer-text-decoration-offset, initial))));
+            background-color: var(--framer-link-hover-text-background-color, var(--framer-link-current-text-background-color, var(--framer-link-text-background-color, initial)))
+        }
+
+        @supports not (color:color(display-p3 1 1 1)) {
+
+            a.framer-text[data-framer-page-link-current]:hover,
+            span.framer-text[data-framer-page-link-current]:hover {
+                color: var(--framer-link-hover-text-color-rgb, var(--framer-link-hover-text-color, var(--framer-link-current-text-color-rgb, var(--framer-link-current-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-code-text-color-rgb, var(--framer-code-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))))))));
+                background-color: var(--framer-link-hover-text-background-color-rgb, var(--framer-link-hover-text-background-color, var(--framer-link-current-text-background-color-rgb, var(--framer-link-current-text-background-color, var(--framer-link-text-background-color-rgb, var(--framer-link-text-background-color, initial))))));
+                -webkit-text-decoration-color: var(--framer-link-hover-text-decoration-color-rgb, var(--framer-link-hover-text-decoration-color, var(--framer-link-current-text-decoration-color-rgb, var(--framer-link-current-text-decoration-color, var(--framer-link-text-decoration-color-rgb, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color-rgb, var(--framer-text-decoration-color, currentcolor))))))));
+                text-decoration-color: var(--framer-link-hover-text-decoration-color-rgb, var(--framer-link-hover-text-decoration-color, var(--framer-link-current-text-decoration-color-rgb, var(--framer-link-current-text-decoration-color, var(--framer-link-text-decoration-color-rgb, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color-rgb, var(--framer-text-decoration-color, currentcolor))))))))
+            }
+        }
+
+        code.framer-text a.framer-text[data-framer-page-link-current]:hover,
+        code.framer-text span.framer-text[data-framer-page-link-current]:hover {
+            color: var(--framer-link-hover-text-color, var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)))))
+        }
+
+        @supports not (color:color(display-p3 1 1 1)) {
+
+            code.framer-text a.framer-text[data-framer-page-link-current]:hover,
+            code.framer-text a.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]),
+            code.framer-text span.framer-text[data-framer-page-link-current]:hover,
+            code.framer-text span.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]) {
+                color: var(--framer-link-hover-text-color-rgb, var(--framer-link-hover-text-color, var(--framer-link-current-text-color-rgb, var(--framer-link-current-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-code-text-color-rgb, var(--framer-code-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))))))));
+                background-color: var(--framer-link-hover-text-background-color-rgb, var(--framer-link-hover-text-background-color, var(--framer-link-current-text-background-color-rgb, var(--framer-link-current-text-background-color, var(--framer-link-text-background-color-rgb, var(--framer-link-text-background-color, initial))))))
+            }
+        }
+
+        .framer-image.framer-text {
+            max-width: 100%;
+            height: auto;
+            display: block
+        }
+
+        .text-styles-preset-reset.framer-text {
+            --framer-font-family: Inter, Inter Placeholder, sans-serif;
+            --framer-font-style: normal;
+            --framer-font-weight: 500;
+            --framer-text-color: #000;
+            --framer-font-size: 16px;
+            --framer-letter-spacing: 0;
+            --framer-text-transform: none;
+            --framer-text-decoration: none;
+            --framer-text-decoration-style: none;
+            --framer-text-decoration-color: none;
+            --framer-text-decoration-thickness: none;
+            --framer-text-decoration-skip-ink: none;
+            --framer-text-decoration-offset: none;
+            --framer-line-height: 1.2em;
+            --framer-text-alignment: start;
+            --framer-font-open-type-features: normal;
+            --framer-text-background-color: initial;
+            --framer-text-background-radius: initial;
+            --framer-text-background-corner-shape: initial;
+            --framer-text-background-padding: initial
+        }
+
+        ol.framer-text {
+            --list-style-type: decimal
+        }
+
+        ul.framer-text,
+        ol.framer-text {
+            padding-inline-start: 0;
+            position: relative
+        }
+
+        li.framer-text {
+            counter-increment: list-item;
+            padding-inline-start: 2ch;
+            list-style: none
+        }
+
+        ol.framer-text>li.framer-text:before {
+            content: counter(list-item, var(--list-style-type))".";
+            font-variant-numeric: tabular-nums;
+            position: absolute;
+            inset-inline-start: 0
+        }
+
+        ol.framer-text>li.framer-text:nth-last-child(n+10),
+        ol.framer-text>li.framer-text:nth-last-child(n+10)~li {
+            padding-inline-start: 3ch
+        }
+
+        ol.framer-text>li.framer-text:nth-last-child(n+100),
+        ol.framer-text>li.framer-text:nth-last-child(n+100)~li {
+            padding-inline-start: 4ch
+        }
+
+        ol.framer-text>li.framer-text:nth-last-child(n+1000),
+        ol.framer-text>li.framer-text:nth-last-child(n+1000)~li {
+            padding-inline-start: 5ch
+        }
+
+        ol.framer-text>li.framer-text:nth-last-child(n+10000),
+        ol.framer-text>li.framer-text:nth-last-child(n+10000)~li {
+            padding-inline-start: 6ch
+        }
+
+        ol.framer-text>li.framer-text:nth-last-child(n+100000),
+        ol.framer-text>li.framer-text:nth-last-child(n+100000)~li {
+            padding-inline-start: 7ch
+        }
+
+        ol.framer-text>li.framer-text:nth-last-child(n+1000000),
+        ol.framer-text>li.framer-text:nth-last-child(n+1000000)~li {
+            padding-inline-start: 8ch
+        }
+
+        ul.framer-text>li.framer-text:before {
+            content: "•";
+            position: absolute;
+            inset-inline-start: 0
+        }
+
+        .framer-table-wrapper {
+            overflow-x: auto
+        }
+
+        table.framer-text,
+        .framer-table-wrapper table.framer-text {
+            border-collapse: separate;
+            border-spacing: 0;
+            table-layout: auto;
+            word-break: normal;
+            width: 100%
+        }
+
+        td.framer-text,
+        th.framer-text {
+            vertical-align: top;
+            min-width: 16ch
+        }
+
+        .framer-text-module[data-width=fill]>:first-child,
+        .framer-text-module[data-width=fill]>.ssr-variant>:first-child,
+        .framer-text-module:not([data-width=fit])[style*=aspect-ratio]>:first-child,
+        .framer-text-module:not([data-width=fit])[style*=aspect-ratio]>.ssr-variant>:first-child {
+            width: 100% !important
+        }
+
+        @supports not (aspect-ratio:1) {
+            .framer-text-module:not([data-width=fit])[style*=aspect-ratio] {
+                position: relative !important
+            }
+
+            .framer-text-module:not([data-width=fit])[style*=aspect-ratio]:before {
+                content: "";
+                padding-bottom: calc(100%/calc(var(--aspect-ratio)));
+                display: block
+            }
+
+            .framer-text-module[data-width=fill]>:first-child,
+            .framer-text-module[data-width=fill]>.ssr-variant>:first-child,
+            .framer-text-module:not([data-width=fit])[style*=aspect-ratio]>:first-child,
+            .framer-text-module:not([data-width=fit])[style*=aspect-ratio]>.ssr-variant>:first-child {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100% !important
+            }
+        }
+
+        [data-framer-component-type=DeprecatedRichText] {
+            cursor: inherit
+        }
+
+        [data-framer-component-type=DeprecatedRichText] .text-styles-preset-reset {
+            --framer-font-family: Inter, Inter Placeholder, sans-serif;
+            --framer-font-style: normal;
+            --framer-font-weight: 500;
+            --framer-text-color: #000;
+            --framer-font-size: 16px;
+            --framer-letter-spacing: 0;
+            --framer-text-transform: none;
+            --framer-text-decoration: none;
+            --framer-line-height: 1.2em;
+            --framer-text-alignment: start;
+            --framer-font-open-type-features: normal;
+            --font-variation-settings: normal
+        }
+
+        [data-framer-component-type=DeprecatedRichText] p,
+        [data-framer-component-type=DeprecatedRichText] div,
+        [data-framer-component-type=DeprecatedRichText] h1,
+        [data-framer-component-type=DeprecatedRichText] h2,
+        [data-framer-component-type=DeprecatedRichText] h3,
+        [data-framer-component-type=DeprecatedRichText] h4,
+        [data-framer-component-type=DeprecatedRichText] h5,
+        [data-framer-component-type=DeprecatedRichText] h6 {
+            margin: 0;
+            padding: 0
+        }
+
+        [data-framer-component-type=DeprecatedRichText] p,
+        [data-framer-component-type=DeprecatedRichText] div,
+        [data-framer-component-type=DeprecatedRichText] h1,
+        [data-framer-component-type=DeprecatedRichText] h2,
+        [data-framer-component-type=DeprecatedRichText] h3,
+        [data-framer-component-type=DeprecatedRichText] h4,
+        [data-framer-component-type=DeprecatedRichText] h5,
+        [data-framer-component-type=DeprecatedRichText] h6,
+        [data-framer-component-type=DeprecatedRichText] li,
+        [data-framer-component-type=DeprecatedRichText] ol,
+        [data-framer-component-type=DeprecatedRichText] ul,
+        [data-framer-component-type=DeprecatedRichText] span:not([data-text-fill]) {
+            font-family: var(--framer-font-family, Inter, Inter Placeholder, sans-serif);
+            font-style: var(--framer-font-style, normal);
+            font-weight: var(--framer-font-weight, 400);
+            color: var(--framer-text-color, #000);
+            font-size: var(--framer-font-size, 16px);
+            letter-spacing: var(--framer-letter-spacing, 0);
+            text-transform: var(--framer-text-transform, none);
+            -webkit-text-decoration: var(--framer-text-decoration, none);
+            text-decoration: var(--framer-text-decoration, none);
+            line-height: var(--framer-line-height, 1.2em);
+            text-align: var(--framer-text-alignment, start)
+        }
+
+        [data-framer-component-type=DeprecatedRichText] p:not(:first-child),
+        [data-framer-component-type=DeprecatedRichText] div:not(:first-child),
+        [data-framer-component-type=DeprecatedRichText] h1:not(:first-child),
+        [data-framer-component-type=DeprecatedRichText] h2:not(:first-child),
+        [data-framer-component-type=DeprecatedRichText] h3:not(:first-child),
+        [data-framer-component-type=DeprecatedRichText] h4:not(:first-child),
+        [data-framer-component-type=DeprecatedRichText] h5:not(:first-child),
+        [data-framer-component-type=DeprecatedRichText] h6:not(:first-child),
+        [data-framer-component-type=DeprecatedRichText] ol:not(:first-child),
+        [data-framer-component-type=DeprecatedRichText] ul:not(:first-child),
+        [data-framer-component-type=DeprecatedRichText] .framer-image:not(:first-child) {
+            margin-top: var(--framer-paragraph-spacing, 0)
+        }
+
+        [data-framer-component-type=DeprecatedRichText] span[data-text-fill] {
+            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            display: inline-block
+        }
+
+        [data-framer-component-type=DeprecatedRichText] a,
+        [data-framer-component-type=DeprecatedRichText] a span:not([data-text-fill]) {
+            font-family: var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
+            font-style: var(--framer-link-font-style, var(--framer-font-style, normal));
+            font-weight: var(--framer-link-font-weight, var(--framer-font-weight, 400));
+            color: var(--framer-link-text-color, var(--framer-text-color, #000));
+            font-size: var(--framer-link-font-size, var(--framer-font-size, 16px));
+            text-transform: var(--framer-link-text-transform, var(--framer-text-transform, none));
+            -webkit-text-decoration: var(--framer-link-text-decoration, var(--framer-text-decoration, none));
+            text-decoration: var(--framer-link-text-decoration, var(--framer-text-decoration, none))
+        }
+
+        [data-framer-component-type=DeprecatedRichText] a:hover,
+        [data-framer-component-type=DeprecatedRichText] a:hover span:not([data-text-fill]) {
+            font-family: var(--framer-link-hover-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
+            font-style: var(--framer-link-hover-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)));
+            font-weight: var(--framer-link-hover-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)));
+            color: var(--framer-link-hover-text-color, var(--framer-link-text-color, var(--framer-text-color, #000)));
+            font-size: var(--framer-link-hover-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)));
+            text-transform: var(--framer-link-hover-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
+            -webkit-text-decoration: var(--framer-link-hover-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none)));
+            text-decoration: var(--framer-link-hover-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none)))
+        }
+
+        [data-framer-component-type=DeprecatedRichText] a[data-framer-page-link-current],
+        [data-framer-component-type=DeprecatedRichText] a[data-framer-page-link-current] span:not([data-text-fill]):not([data-nested-link]) {
+            font-family: var(--framer-link-current-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
+            font-style: var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)));
+            font-weight: var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)));
+            color: var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-text-color, #000)));
+            font-size: var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)));
+            text-transform: var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
+            -webkit-text-decoration: var(--framer-link-current-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none)));
+            text-decoration: var(--framer-link-current-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none)))
+        }
+
+        [data-framer-component-type=DeprecatedRichText] a[data-framer-page-link-current]:hover,
+        [data-framer-component-type=DeprecatedRichText] a[data-framer-page-link-current]:hover span:not([data-text-fill]):not([data-nested-link]) {
+            font-family: var(--framer-link-hover-font-family, var(--framer-link-current-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif))));
+            font-style: var(--framer-link-hover-font-style, var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style, normal))));
+            font-weight: var(--framer-link-hover-font-weight, var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400))));
+            color: var(--framer-link-hover-text-color, var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-text-color, #000))));
+            font-size: var(--framer-link-hover-font-size, var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px))));
+            text-transform: var(--framer-link-hover-text-transform, var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none))));
+            -webkit-text-decoration: var(--framer-link-hover-text-decoration, var(--framer-link-current-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none))));
+            text-decoration: var(--framer-link-hover-text-decoration, var(--framer-link-current-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none))))
+        }
+
+        [data-framer-component-type=DeprecatedRichText] strong {
+            font-weight: bolder
+        }
+
+        [data-framer-component-type=DeprecatedRichText] em {
+            font-style: italic
+        }
+
+        [data-framer-component-type=DeprecatedRichText] .framer-image {
+            max-width: 100%;
+            height: auto;
+            display: block
+        }
+
+        [data-framer-component-type=DeprecatedRichText] ul,
+        [data-framer-component-type=DeprecatedRichText] ol {
+            width: 100%;
+            margin: 0;
+            padding-left: 0;
+            display: table
+        }
+
+        [data-framer-component-type=DeprecatedRichText] li {
+            counter-increment: list-item;
+            list-style: none;
+            display: table-row
+        }
+
+        [data-framer-component-type=DeprecatedRichText] ol>li:before {
+            box-sizing: border-box;
+            content: counter(list-item)".";
+            white-space: nowrap;
+            width: 2.25ch;
+            padding-right: .75ch;
+            display: table-cell
+        }
+
+        [data-framer-component-type=DeprecatedRichText] ul>li:before {
+            box-sizing: border-box;
+            content: "•";
+            width: 2.25ch;
+            padding-right: .75ch;
+            display: table-cell
+        }
+
+        :not([data-framer-generated])>[data-framer-stack-content-wrapper]>*,
+        :not([data-framer-generated])>[data-framer-stack-content-wrapper]>[data-framer-component-type],
+        :not([data-framer-generated])>[data-framer-stack-content-wrapper]>[data-framer-legacy-stack-gap-enabled]>*,
+        :not([data-framer-generated])>[data-framer-stack-content-wrapper]>[data-framer-legacy-stack-gap-enabled]>[data-framer-component-type] {
+            position: relative
+        }
+
+        .flexbox-gap-not-supported [data-framer-legacy-stack-gap-enabled=true]>*,
+        [data-framer-legacy-stack-gap-enabled=true][data-framer-stack-flexbox-gap=false] {
+            margin-top: calc(var(--stack-gap-y)/2);
+            margin-bottom: calc(var(--stack-gap-y)/2);
+            margin-right: calc(var(--stack-gap-x)/2);
+            margin-left: calc(var(--stack-gap-x)/2)
+        }
+
+        [data-framer-stack-content-wrapper][data-framer-stack-gap-enabled=true] {
+            row-gap: var(--stack-native-row-gap);
+            column-gap: var(--stack-native-column-gap)
+        }
+
+        .flexbox-gap-not-supported [data-framer-stack-content-wrapper][data-framer-stack-gap-enabled=true] {
+            row-gap: unset;
+            column-gap: unset
+        }
+
+        .flexbox-gap-not-supported [data-framer-stack-direction-reverse=false] [data-framer-legacy-stack-gap-enabled=true]>:first-child,
+        [data-framer-stack-direction-reverse=false] [data-framer-legacy-stack-gap-enabled=true][data-framer-stack-flexbox-gap=false]>:first-child,
+        .flexbox-gap-not-supported [data-framer-stack-direction-reverse=true] [data-framer-legacy-stack-gap-enabled=true]>:last-child,
+        [data-framer-stack-direction-reverse=true] [data-framer-legacy-stack-gap-enabled=true][data-framer-stack-flexbox-gap=false]>:last-child {
+            margin-top: 0;
+            margin-left: 0
+        }
+
+        .flexbox-gap-not-supported [data-framer-stack-direction-reverse=false] [data-framer-legacy-stack-gap-enabled=true]>:last-child,
+        [data-framer-stack-direction-reverse=false] [data-framer-legacy-stack-gap-enabled=true][data-framer-stack-flexbox-gap=false]>:last-child,
+        .flexbox-gap-not-supported [data-framer-stack-direction-reverse=true] [data-framer-legacy-stack-gap-enabled=true]>:first-child,
+        [data-framer-stack-direction-reverse=true] [data-framer-legacy-stack-gap-enabled=true][data-framer-stack-flexbox-gap=false]>:first-child {
+            margin-bottom: 0;
+            margin-right: 0
+        }
+
+        NavigationContainer [data-framer-component-type=NavigationContainer]>*,
+        [data-framer-component-type=NavigationContainer]>[data-framer-component-type] {
+            position: relative
+        }
+
+        [data-framer-component-type=Scroll]::-webkit-scrollbar {
+            display: none
+        }
+
+        [data-framer-component-type=ScrollContentWrapper]>* {
+            position: relative
+        }
+
+        [data-framer-component-type=NativeScroll] {
+            -webkit-overflow-scrolling: touch
+        }
+
+        [data-framer-component-type=NativeScroll]>* {
+            position: relative
+        }
+
+        [data-framer-component-type=NativeScroll].direction-both {
+            overflow: auto
+        }
+
+        [data-framer-component-type=NativeScroll].direction-vertical {
+            overflow: hidden auto
+        }
+
+        [data-framer-component-type=NativeScroll].direction-horizontal {
+            overflow: auto hidden
+        }
+
+        [data-framer-component-type=NativeScroll].direction-vertical>* {
+            width: 100% !important
+        }
+
+        [data-framer-component-type=NativeScroll].direction-horizontal>* {
+            height: 100% !important
+        }
+
+        [data-framer-component-type=NativeScroll].scrollbar-hidden::-webkit-scrollbar {
+            display: none
+        }
+
+        [data-framer-component-type=PageContentWrapper]>*,
+        [data-framer-component-type=PageContentWrapper]>[data-framer-component-type] {
+            position: relative
+        }
+
+        [data-framer-component-type=DeviceComponent].no-device>* {
+            width: 100% !important;
+            height: 100% !important
+        }
+
+        [data-is-present=false],
+        [data-is-present=false] * {
+            pointer-events: none !important
+        }
+
+        [data-framer-cursor=pointer] {
+            cursor: pointer
+        }
+
+        [data-framer-cursor=grab] {
+            cursor: grab
+        }
+
+        [data-framer-cursor=grab]:active {
+            cursor: grabbing
+        }
+
+        [data-framer-component-type=Frame] *,
+        [data-framer-component-type=Stack] * {
+            pointer-events: auto
+        }
+
+        [data-framer-generated] * {
+            pointer-events: unset
+        }
+
+        .svgContainer svg {
+            display: block
+        }
+
+        [data-reset=button] {
+            background: 0 0;
+            border-width: 0;
+            padding: 0
+        }
+
+        [data-hide-scrollbars=true]::-webkit-scrollbar {
+            width: 0;
+            height: 0
+        }
+
+        [data-hide-scrollbars=true]::-webkit-scrollbar-thumb {
+            background: 0 0
+        }
+
+        [data-hide-scrollbars=true] {
+            scrollbar-width: none
+        }
+
+        @supports not (overflow:clip) {
+            :root {
+                --overflow-clip-fallback: hidden
+            }
+        }
+
+        .framer-lightbox-container {
+            opacity: 1 !important;
+            pointer-events: auto !important
+        }
+
+        @supports (background:-webkit-named-image(i)) and (not (contain-intrinsic-size:inherit)) {
+
+            div.framer-text,
+            p.framer-text,
+            h1.framer-text,
+            h2.framer-text,
+            h3.framer-text,
+            h4.framer-text,
+            h5.framer-text,
+            h6.framer-text,
+            ol.framer-text,
+            ul.framer-text,
+            li.framer-text,
+            blockquote.framer-text,
+            .framer-text.framer-image {
+                display: var(--text-truncation-display-inline-for-safari-16, revert)
+            }
+
+            div.framer-text:after,
+            p.framer-text:after,
+            h1.framer-text:after,
+            h2.framer-text:after,
+            h3.framer-text:after,
+            h4.framer-text:after,
+            h5.framer-text:after,
+            h6.framer-text:after,
+            ol.framer-text:after,
+            ul.framer-text:after,
+            li.framer-text:after,
+            blockquote.framer-text:after,
+            .framer-text.framer-image:after {
+                content: var(--text-truncation-line-break-for-safari-16);
+                white-space: pre
+            }
+
+            .framer-text.framer-text-module,
+            .framer-text.framer-table-wrapper {
+                display: var(--text-truncation-display-none-for-safari-16, revert)
+            }
+
+            p.framer-text[data-text-fill] {
+                display: var(--text-truncation-display-inline-for-safari-16, inline-block)
+            }
+        }
+
+        @supports (corner-shape:superellipse(2)) {
+            :root {
+                --one-if-corner-shape-supported: 1
+            }
+        }
+    </style><!-- Start of headEnd -->
+
+    <!-- End of headEnd -->
+    <style type="text/css" data-framer-css="true"></style>
+    <style>
+        #__framer-editorbar-container {
+            align-items: center;
+            display: flex;
+            gap: 8px;
+            position: fixed;
+            z-index: calc(2147483647);
+            width: max-content;
+            cursor: pointer;
+        }
+
+        #__framer-editorbar-label {
+            background-color: #111;
+            border-radius: 8px;
+            font-family: "Inter", "Inter-Regular", system-ui, Arial, sans-serif;
+            font-size: 12px;
+            height: fit-content;
+            opacity: 0;
+            padding: 4px 8px;
+            transition: opacity 0.4s ease-out;
+            font-weight: 500;
+            flex-shrink: 0;
+            position: fixed;
+            width: max-content;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        #__framer-editorbar-button {
+            all: unset;
+            align-items: center;
+            border-radius: 15px;
+            display: flex;
+            height: 30px;
+            justify-content: center;
+            width: 30px;
+            flex-shrink: 0;
+        }
+
+        #__framer-editorbar-label.__framer-editorbar-button-tooltip-visible {
+            opacity: 1;
+        }
+
+        #__framer-editorbar-label,
+        #__framer-editorbar-button {
+            backdrop-filter: blur(10px);
+            background-color: rgba(34, 34, 34, 0.8);
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(0, 0, 0, 0.05) 0px 1px 0px 0px, rgba(255, 255, 255, 0.15) 0px 0px 0px 1px;
+            color: #fff;
+        }
+
+        #__framer-editorbar-loading-spinner {
+            width: 12px;
+            height: 12px;
+            -webkit-mask: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAApNJREFUSA2tlUtLlFEYgEe7mtFFQ8NLFBG1SJAwahtiLVy5ceVSEPQH1LZf0Lp9FO1bdYNyI7gyBFcS2kAzilYq3sfxeYZ55Zv6FGfohWfOd97vnPd23u9MXeZoaeb1Q7gPHXAFzsAS5GACxiEPqVKXqs1kmtAPQi+cAtedToz1PJ8ExxPwDl7CAlRImoN7rBiF86ABHTiGAzMIh8n3O+ifwWc4EL0n5TGTYQijvjNSxbUadozInUeGZ3nuh1WYgpIkM+hGMwYajAgdrfUn+AaLoLTCAxiAOxCZxL4RdB+gZMjxEjwHo4hS8Jh5DR9hz0mKaNizegoNEI7Wee6FXJTISG6AUgDr+QImoAiHie+mwZJow/PRps4uwnsnRj8Epqc4voVJJ8eULOtW4BFYYjPpgjc+3IWI2sh/wFeoVl6xYQ48dDGLfjOwc/ygQqz595hUMVouS9QHBm4l6k3HWpnBLqicgVrlCxujSbR1Swd+UDpQYRS/oVaZZ2MWwlZBB9Zdxf+QTYw8SRgq6sAvz7vH6JULEB9USVHFjzZskgPRQR4ayxoXXIdaHdg9HrB2rErByWxZERnYtrWUzD0esDbtTmXPhzXwHrKLxEUbYGbVyDkWWwkdadfqbPmwDXZSCyh2VAf8BM/nOOJH5Y0QopMt2I5U/KO4DZZJB47XwEX+ex0mGroMV8sLwp56gyuGwiyW4SZ4c8bt2cZzO7jBNeqtsRHbeZ1g9krsMbhfYPv/c5gecA+4yAVuitFszE5Hjva872OMdXagF19JIoOYWyozMTI3J0tmA6gLvXPfO1cc/XOqOLe/HbjwD8yCXRD3VNJROEgatiRZMJsKsbZHia3nAdphtq8fkiWyXJbBe8uM1aXKPouNnz2Bm1kwAAAAAElFTkSuQmCC);
+            mask: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAApNJREFUSA2tlUtLlFEYgEe7mtFFQ8NLFBG1SJAwahtiLVy5ceVSEPQH1LZf0Lp9FO1bdYNyI7gyBFcS2kAzilYq3sfxeYZ55Zv6FGfohWfOd97vnPd23u9MXeZoaeb1Q7gPHXAFzsAS5GACxiEPqVKXqs1kmtAPQi+cAtedToz1PJ8ExxPwDl7CAlRImoN7rBiF86ABHTiGAzMIh8n3O+ifwWc4EL0n5TGTYQijvjNSxbUadozInUeGZ3nuh1WYgpIkM+hGMwYajAgdrfUn+AaLoLTCAxiAOxCZxL4RdB+gZMjxEjwHo4hS8Jh5DR9hz0mKaNizegoNEI7Wee6FXJTISG6AUgDr+QImoAiHie+mwZJow/PRps4uwnsnRj8Epqc4voVJJ8eULOtW4BFYYjPpgjc+3IWI2sh/wFeoVl6xYQ48dDGLfjOwc/ygQqz595hUMVouS9QHBm4l6k3HWpnBLqicgVrlCxujSbR1Swd+UDpQYRS/oVaZZ2MWwlZBB9Zdxf+QTYw8SRgq6sAvz7vH6JULEB9USVHFjzZskgPRQR4ayxoXXIdaHdg9HrB2rErByWxZERnYtrWUzD0esDbtTmXPhzXwHrKLxEUbYGbVyDkWWwkdadfqbPmwDXZSCyh2VAf8BM/nOOJH5Y0QopMt2I5U/KO4DZZJB47XwEX+ex0mGroMV8sLwp56gyuGwiyW4SZ4c8bt2cZzO7jBNeqtsRHbeZ1g9krsMbhfYPv/c5gecA+4yAVuitFszE5Hjva872OMdXagF19JIoOYWyozMTI3J0tmA6gLvXPfO1cc/XOqOLe/HbjwD8yCXRD3VNJROEgatiRZMJsKsbZHia3nAdphtq8fkiWyXJbBe8uM1aXKPouNnz2Bm1kwAAAAAElFTkSuQmCC);
+            -webkit-mask-size: 12px;
+            mask-size: 12px;
+            background-color: #fff;
+
+
+            animation-duration: 800ms;
+            animation-iteration-count: infinite;
+            animation-name: __framer-loading-spin;
+            animation-timing-function: linear;
+        }
+
+        @keyframes __framer-loading-spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+    <style>
+        #__framer-editorbar {
+            /* https://sergeyski.com/css-color-scheme-and-iframes-lessons-learned-from-disqus-background-bug */
+            color-scheme: light dark;
+            overflow: hidden;
+            position: fixed;
+            border: none;
+            z-index: calc(2147483647);
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            touch-action: manipulation;
+        }
+
+        @supports (height: 100dvh) {
+            #__framer-editorbar {
+                height: 100dvh;
+            }
+        }
+
+        #__framer-editorbar.status_hidden {
+            display: none;
+        }
+
+        #__framer-editorbar.status_visually_hidden {
+            clip-path: circle(1px at calc(100% - 1px) calc(100% - 1px));
+            z-index: calc(2147483647 - 1);
+        }
+
+        #__framer-editorbar.status_measuring {
+            clip-path: unset;
+        }
+    </style>
+</head>
+
+<body>
+    <script async="" src="https://events.framer.com/script%EF%B9%96v=2.js"
+        data-fid="d7c1785f7ea39ca04e10623dd98134323b707f7cbfb740c175fa75adf6db67f5" data-no-nt=""></script>
+    <!-- Start of bodyStart -->
+
+    <!-- End of bodyStart -->
+
+    <div id="main"
+        data-framer-hydrate-v2="{&quot;routeId&quot;:&quot;augiA20Il&quot;,&quot;localeId&quot;:&quot;default&quot;,&quot;breakpoints&quot;:[{&quot;hash&quot;:&quot;72rtr7&quot;,&quot;mediaQuery&quot;:&quot;(min-width: 1200px)&quot;},{&quot;hash&quot;:&quot;1q0542m&quot;,&quot;mediaQuery&quot;:&quot;(min-width: 810px) and (max-width: 1199.98px)&quot;},{&quot;hash&quot;:&quot;py0iqs&quot;,&quot;mediaQuery&quot;:&quot;(max-width: 809.98px)&quot;}]}"
+        data-framer-ssr-released-at="2026-03-17T09:59:41.551Z" data-framer-page-optimized-at="2026-03-18T11:57:27.046Z"
+        data-framer-generated-page=""><!--$-->
+        <style data-framer-html-style="">
+            html body {
+                background: none;
+            }
+        </style>
+        <div data-framer-root="" class="framer-eUHKk framer-72rtr7" style="min-height:100vh;width:auto">
+            <div class="ssr-variant hidden-py0iqs hidden-1q0542m">
+                <section class="framer-zo27g4" data-framer-name="Logo Section 11 Dark">
+                    <div class="framer-he2mcf" data-framer-name="Container">
+                        <div class="framer-z077fr" data-framer-name="Container">
+                            <div class="framer-u120d7-container"><!--$-->
+                                <div class="framer-jJ7jq framer-1peli3z framer-v-1peli3z" data-border="true"
+                                    data-framer-name="Variant 1"
+                                    style="--border-bottom-width: 1px; --border-color: var(--token-618b8d64-f889-4132-97cd-235254c222e0, rgb(74, 80, 90)); --border-left-width: 1px; --border-right-width: 1px; --border-style: solid; --border-top-width: 1px; background-color: var(--token-820e67f8-fb8a-433b-8dc4-9f7cb5bf73fc, rgb(10, 13, 20)); border-bottom-left-radius: 8px; border-bottom-right-radius: 8px; border-top-left-radius: 8px; border-top-right-radius: 8px; opacity: 1;">
+                                    <div class="framer-1tg26el" data-framer-name="Text"
+                                        style="--extracted-r6o4lv: var(--variable-reference-ywVzjFF0W-xJY44F2Hb); --framer-link-text-color: rgb(0, 153, 255); --framer-link-text-decoration: underline; --variable-reference-ywVzjFF0W-xJY44F2Hb: var(--token-17e88760-d7d9-40c5-94e1-eb1440f969cb, rgb(255, 255, 255)); transform: none; opacity: 1;"
+                                        data-framer-component-type="RichTextContainer">
+                                        <p style="--font-selector:RlI7SW50ZXJEaXNwbGF5LU1lZGl1bQ==;--framer-font-family:&quot;Inter Display&quot;, &quot;Inter Display Placeholder&quot;, sans-serif;--framer-font-size:14px;--framer-font-weight:500;--framer-letter-spacing:-0.01em;--framer-line-height:20px;--framer-text-color:var(--extracted-r6o4lv, var(--variable-reference-ywVzjFF0W-xJY44F2Hb))"
+                                            class="framer-text">Badge</p>
+                                    </div>
+                                </div><!--/$-->
+                            </div>
+                            <div class="framer-lov24a" data-framer-name="Text" style="transform:none"
+                                data-framer-component-type="RichTextContainer">
+                                <h3 dir="auto"
+                                    style="--font-selector:R0Y7SW50ZXItNjAw;--framer-font-size:36px;--framer-font-weight:600;--framer-letter-spacing:-0.01em;--framer-line-height:1.3em;--framer-text-alignment:center;--framer-text-color:rgb(255, 255, 255)"
+                                    class="framer-text">Design Faster with FramerKit Components</h3>
+                            </div>
+                            <div class="framer-78b8ou" data-framer-name="Text" style="transform:none"
+                                data-framer-component-type="RichTextContainer">
+                                <p dir="auto"
+                                    style="--framer-line-height:26px;--framer-text-alignment:center;--framer-text-color:var(--token-17e88760-d7d9-40c5-94e1-eb1440f969cb, rgb(255, 255, 255))"
+                                    class="framer-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    Suspendisse varius enim in eros elementum tristique.</p>
+                            </div>
+                        </div>
+                        <div class="framer-g84weg" data-framer-name="Container">
+                            <div class="framer-bxxodl" data-framer-name="Logo Grid Frame">
+                                <div class="framer-1w9cs4j" data-framer-name="Logo Item Frame">
+                                    <div data-framer-component-type="SVG" data-framer-name="Logoipsum-custom-logo (1)"
+                                        style="image-rendering:pixelated;flex-shrink:0;fill:black;color:black"
+                                        class="framer-tmxbwf" aria-hidden="true">
+                                        <div class="svgContainer" style="width:100%;height:100%;aspect-ratio:inherit">
+                                            <svg style="width:100%;height:100%;" viewBox="0 0 226 43"
+                                                preserveAspectRatio="none" width="100%" height="100%">
+                                                <use href="#svg-1821417935_6052"></use>
+                                            </svg></div>
+                                    </div>
+                                </div>
+                                <div class="framer-uquwxk" data-framer-name="Logo Item Frame">
+                                    <div data-framer-component-type="SVG" data-framer-name="Logoipsum-custom-logo"
+                                        style="image-rendering:pixelated;flex-shrink:0;fill:black;color:black"
+                                        class="framer-ms0cou" aria-hidden="true">
+                                        <div class="svgContainer" style="width:100%;height:100%;aspect-ratio:inherit">
+                                            <svg style="width:100%;height:100%;" viewBox="0 0 223 43"
+                                                preserveAspectRatio="none" width="100%" height="100%">
+                                                <use href="#svg-184404440_4373"></use>
+                                            </svg></div>
+                                    </div>
+                                </div>
+                                <div class="framer-1f1bcgf" data-framer-name="Logo Item Frame">
+                                    <div data-framer-component-type="SVG" data-framer-name="Logoipsum-custom-logo (2)"
+                                        style="image-rendering:pixelated;flex-shrink:0;fill:black;color:black"
+                                        class="framer-1g1auh1" aria-hidden="true">
+                                        <div class="svgContainer" style="width:100%;height:100%;aspect-ratio:inherit">
+                                            <svg style="width:100%;height:100%;" viewBox="0 0 218 43"
+                                                preserveAspectRatio="none" width="100%" height="100%">
+                                                <use href="#svg-342960134_4213"></use>
+                                            </svg></div>
+                                    </div>
+                                </div>
+                                <div class="framer-1j9ajx1" data-framer-name="Logo Item Frame">
+                                    <div data-framer-component-type="SVG" data-framer-name="Logoipsum-custom-logo (3)"
+                                        style="image-rendering:pixelated;flex-shrink:0;fill:black;color:black"
+                                        class="framer-1m53qla" aria-hidden="true">
+                                        <div class="svgContainer" style="width:100%;height:100%;aspect-ratio:inherit">
+                                            <svg style="width:100%;height:100%;" viewBox="0 0 222 43"
+                                                preserveAspectRatio="none" width="100%" height="100%">
+                                                <use href="#svg3734279_6767"></use>
+                                            </svg></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div id="overlay"></div><!--/$-->
+    </div>
+    <script>(() => { function u() { function n(t, e, i) { let r = document.createElement("a"); r.href = t, r.target = i, r.rel = e, document.body.appendChild(r), r.click(), r.remove() } function o(t) { if (this.dataset.hydrated) { this.removeEventListener("click", o); return } t.preventDefault(), t.stopPropagation(); let e = this.getAttribute("href"); if (!e) return; if (/Mac|iPod|iPhone|iPad/u.test(navigator.userAgent) ? t.metaKey : t.ctrlKey) return n(e, "", "_blank"); let r = this.getAttribute("rel") ?? "", c = this.getAttribute("target") ?? ""; n(e, r, c) } function a(t) { if (this.dataset.hydrated) { this.removeEventListener("auxclick", o); return } t.preventDefault(), t.stopPropagation(); let e = this.getAttribute("href"); e && n(e, "", "_blank") } function s(t) { if (this.dataset.hydrated) { this.removeEventListener("keydown", s); return } if (t.key !== "Enter") return; t.preventDefault(), t.stopPropagation(); let e = this.getAttribute("href"); if (!e) return; let i = this.getAttribute("rel") ?? "", r = this.getAttribute("target") ?? ""; n(e, i, r) } document.querySelectorAll("[data-nested-link]").forEach(t => { t instanceof HTMLElement && (t.addEventListener("click", o), t.addEventListener("auxclick", a), t.addEventListener("keydown", s)) }) } return u })()()</script>
+    <script>!function () {
+            var w = "framer_variant"; function u(a, r) { let e = r.indexOf("#"), t = e === -1 ? r : r.substring(0, e), o = e === -1 ? "" : r.substring(e), n = t.indexOf("?"), h = n === -1 ? t : t.substring(0, n), d = n === -1 ? "" : t.substring(n), s = new URLSearchParams(d), m = new URLSearchParams(a); for (let [i, l] of m) s.has(i) || i !== w && s.append(i, l); let c = s.toString(); return c === "" ? t + o : h + "?" + c + o } var g = 'div#main a[href^="#"],div#main a[href^="/"],div#main a[href^="."]', f = "div#main a[data-framer-preserve-params]", S = document.currentScript?.hasAttribute("data-preserve-internal-params"); if (window.location.search && !navigator.webdriver && !/bot|-google|google-|yandex|ia_archiver|crawl|spider/iu.test(navigator.userAgent)) { let a = document.querySelectorAll(S ? `${g},${f}` : f); for (let r of a) { let e = u(window.location.search, r.href); r.setAttribute("href", e) } }
+        }()</script>
+
+    <script data-framer-appear-animation="no-preference"></script>
+    <script>typeof document < "u" && (window.process = { ...window.process, env: { ...window.process?.env, NODE_ENV: "production" } });</script>
+    <link rel="modulepreload" fetchpriority="low"
+        href="https://framerusercontent.com/sites/7clOZAxhLewE8zGylHxQu4/react.G3EGc0ga.mjs">
+    <link rel="modulepreload" fetchpriority="low"
+        href="https://framerusercontent.com/sites/7clOZAxhLewE8zGylHxQu4/rolldown-runtime.D3cOTcPh.mjs">
+    <link rel="modulepreload" fetchpriority="low"
+        href="https://framerusercontent.com/sites/7clOZAxhLewE8zGylHxQu4/framer.CsxXgfAp.mjs">
+    <link rel="modulepreload" fetchpriority="low"
+        href="https://framerusercontent.com/sites/7clOZAxhLewE8zGylHxQu4/motion.Dy7oBmdm.mjs">
+    <link rel="modulepreload" fetchpriority="low"
+        href="https://framerusercontent.com/sites/7clOZAxhLewE8zGylHxQu4/ohu2EzFjy9MgpLiFQfTArkQkRmFY67vkzWZSvya-9O0.DcHLVuW0.mjs">
+    <link rel="modulepreload" fetchpriority="low"
+        href="https://framerusercontent.com/sites/7clOZAxhLewE8zGylHxQu4/shared-lib.DnRmL9o-.mjs">
+    <script type="module" async="" data-framer-bundle="main" fetchpriority="low"
+        src="https://framerusercontent.com/sites/7clOZAxhLewE8zGylHxQu4/script_main.DARy0LxP.mjs"></script>
+    <div id="svg-templates"
+        style="position: absolute; overflow: hidden; bottom: 0; left: 0; width: 0; height: 0; z-index: 0; contain: strict"
+        aria-hidden="true">
+        <svg data-logo="logo" viewBox="0 0 226 43" id="svg-1821417935_6052">
+            <path
+                d="M37.984 14.482c-2.404-4.165-8.416-4.165-10.82 0l-3.572 6.185h7.157c4.248 0 7.456 3.001 8.266 6.653l.879-1.521a8.01 8.01 0 0 0 0-8.01l-1.91-3.307Z"
+                fill="#BB6BD9"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M28.192 1.783a8.697 8.697 0 0 1 7.53 4.348c2.03 3.516 4.05 7.039 6.081 10.555a10.213 10.213 0 0 1 0 10.215c-2.023 3.504-4.057 7.002-6.08 10.506a8.697 8.697 0 0 1-7.532 4.348c-4.348 0-8.694.029-13.042.028a8.697 8.697 0 0 1-7.53-4.348C5.592 33.924 3.568 30.41 1.54 26.9a10.213 10.213 0 0 1 0-10.214L7.62 6.158a8.697 8.697 0 0 1 7.53-4.348c4.348-.001 8.694-.028 13.043-.027Zm-10.427 2.23-2.616.001A6.493 6.493 0 0 0 9.53 7.26l-2.35 4.067-.05.09-.001.002c-2.264 4.068.574 9.078 5.185 9.272h7.446v-.024h.003l-3.584-6.209c-2.113-3.659-1.139-7.912 1.587-10.444Zm3.907 19.99c.985 1.708 1.968 3.417 2.957 5.122l.626 1.085c2.405 4.165-.602 9.37-5.412 9.37l-4.694-.002a6.492 6.492 0 0 1-5.62-3.246l-1.323-2.29c3.417 1.071 7.415-.059 9.609-3.39.095-.144.187-.292.275-.445l3.582-6.203Zm-1.927-1.102-2.688 4.654c-.296.514-.58 1.036-.877 1.55-2.405 4.164-8.416 4.164-10.82 0l-1.91-3.307a8.009 8.009 0 0 1 0-8.01l.879-1.521a8.59 8.59 0 0 0 2.846 4.683 8.32 8.32 0 0 0 5.415 1.951h7.155Zm3.819-.03h7.185c4.81 0 7.815 5.205 5.41 9.37l-2.346 4.063a6.492 6.492 0 0 1-5.622 3.246H25.58c2.724-2.532 3.698-6.784 1.586-10.442l-3.601-6.237Zm-1.887-3.297-3.59-6.218c-2.405-4.164.602-9.37 5.411-9.37l4.693.002a6.492 6.492 0 0 1 5.622 3.245L35.15 9.55c-3.568-1.125-7.772.152-9.896 3.83l-3.577 6.195Zm5.486-5.093c2.405-4.164 8.417-4.164 10.821 0l1.91 3.307a8.01 8.01 0 0 1 0 8.01l-.88 1.522c-.81-3.652-4.017-6.653-8.265-6.653h-7.157l3.572-6.186Z"
+                fill="#283841"></path>
+            <path
+                d="M25.58 39.55c2.724-2.532 3.698-6.784 1.585-10.442l-3.601-6.237h7.185c4.81 0 7.815 5.206 5.41 9.37l-2.346 4.064a6.492 6.492 0 0 1-5.622 3.245H25.58Z"
+                fill="#EB5757"></path>
+            <path
+                d="M8.206 34.042c3.565 1.118 7.762-.16 9.884-3.834l3.582-6.204 3.584 6.206c2.404 4.165-.603 9.37-5.413 9.37l-4.694-.002a6.493 6.493 0 0 1-5.62-3.245l-1.323-2.291Z"
+                fill="#F2994A"></path>
+            <path
+                d="m4.329 16.267-.88 1.521a8.009 8.009 0 0 0 0 8.01l1.91 3.307c2.405 4.165 8.416 4.165 10.82 0l3.583-6.204H12.59c-4.24 0-7.445-2.991-8.261-6.634Zm2.798-4.847a6.406 6.406 0 0 0 .001-.002l-.001.003Z"
+                fill="#F2C94C"></path>
+            <path
+                d="M17.765 4.014c-2.725 2.532-3.7 6.785-1.587 10.445l3.602 6.238h-7.19c-4.81 0-7.815-5.205-5.41-9.37L9.528 7.26a6.492 6.492 0 0 1 5.621-3.246h2.617Z"
+                fill="#27AE60"></path>
+            <path
+                d="m21.677 19.574-3.59-6.218c-2.405-4.164.602-9.37 5.411-9.37l4.693.002a6.492 6.492 0 0 1 5.622 3.245L35.15 9.55c-3.568-1.125-7.772.152-9.896 3.83l-3.577 6.195Z"
+                fill="#2F80ED"></path>
+            <path fill="#D7DAE0"
+                d="M74.51 35h-16.2V9.54h5.21v21.14h10.99V35Zm9.74.38q-2.87 0-4.98-1.24-2.1-1.24-3.23-3.46-1.14-2.21-1.14-5.15 0-2.97 1.14-5.18 1.13-2.22 3.23-3.46 2.11-1.24 4.98-1.24 2.89 0 4.98 1.24 2.09 1.24 3.23 3.46 1.14 2.21 1.14 5.18 0 2.94-1.14 5.15-1.14 2.22-3.23 3.46-2.09 1.24-4.98 1.24Zm0-4.04q1.36 0 2.29-.76.92-.76 1.38-2.08.46-1.33.46-2.98 0-1.7-.46-3.01-.46-1.32-1.38-2.07-.93-.75-2.29-.75-1.37 0-2.28.75-.92.75-1.38 2.07-.46 1.31-.46 3.01 0 1.65.46 2.98.46 1.32 1.38 2.08.91.76 2.28.76Zm19.12 11.21q-2.38 0-4.15-.6-1.78-.61-2.89-1.67t-1.54-2.41l4.41-1.23q.24.53.74 1.03.51.51 1.34.83.84.33 2.07.33 1.97 0 3.09-.9 1.12-.9 1.12-2.79v-3.52h-.4q-.34.77-.99 1.48-.65.72-1.7 1.17-1.05.46-2.6.46-2.16 0-3.92-1.01-1.76-1.01-2.81-3.08-1.05-2.07-1.05-5.23 0-3.23 1.07-5.4 1.07-2.17 2.83-3.26 1.77-1.1 3.89-1.1 1.61 0 2.7.54 1.1.54 1.77 1.35.68.81 1.02 1.57h.22v-3.22h5.04v18.96q0 2.58-1.19 4.29-1.18 1.72-3.27 2.57-2.08.84-4.8.84Zm.1-11.72q1.32 0 2.23-.65.92-.65 1.39-1.87.48-1.22.48-2.93 0-1.69-.48-2.96-.47-1.26-1.39-1.96-.91-.7-2.23-.7-1.35 0-2.26.72-.92.73-1.39 1.99-.47 1.27-.47 2.91 0 1.67.47 2.9.47 1.22 1.4 1.88.92.67 2.25.67Zm19.81 4.55q-2.87 0-4.98-1.24-2.1-1.24-3.24-3.46-1.13-2.21-1.13-5.15 0-2.97 1.13-5.18 1.14-2.22 3.24-3.46 2.11-1.24 4.98-1.24 2.88 0 4.98 1.24 2.09 1.24 3.23 3.46 1.13 2.21 1.13 5.18 0 2.94-1.13 5.15-1.14 2.22-3.23 3.46-2.1 1.24-4.98 1.24Zm0-4.04q1.36 0 2.29-.76.92-.76 1.38-2.08.46-1.33.46-2.98 0-1.7-.46-3.01-.46-1.32-1.38-2.07-.93-.75-2.29-.75-1.37 0-2.28.75-.92.75-1.38 2.07-.46 1.31-.46 3.01 0 1.65.46 2.98.46 1.32 1.38 2.08.91.76 2.28.76ZM139.05 35h-5.13V15.89h5.13V35Zm-2.57-21.6q-1.16 0-1.98-.77-.82-.77-.82-1.86 0-1.1.82-1.87t1.98-.77q1.17 0 2 .77.82.76.82 1.87 0 1.09-.82 1.86-.83.77-2 .77Zm9.78 28.74h-5.13V15.89h5.04v3.22h.24q.36-.76 1.02-1.56t1.73-1.35q1.08-.55 2.7-.55 2.12 0 3.88 1.1 1.76 1.09 2.81 3.28 1.06 2.19 1.06 5.45 0 3.18-1.03 5.38-1.03 2.19-2.79 3.33-1.76 1.13-3.96 1.13-1.56 0-2.63-.53-1.08-.52-1.75-1.3-.68-.78-1.04-1.55h-.15v10.2Zm4-10.93q1.33 0 2.24-.74.92-.73 1.39-2.03.47-1.3.47-2.98 0-1.67-.47-2.95-.47-1.28-1.38-2.02-.9-.73-2.25-.73-1.32 0-2.24.71-.92.7-1.4 1.98-.48 1.27-.48 3.01 0 1.73.49 3.02.48 1.29 1.41 2.01.92.72 2.22.72Zm18.25 4.17q-2.31 0-4.09-.66-1.77-.66-2.9-1.92-1.13-1.25-1.46-3.03l4.77-.82q.38 1.33 1.32 2 .94.67 2.51.67 1.45 0 2.31-.56.85-.55.85-1.41 0-.75-.6-1.23-.61-.48-1.86-.73l-3.3-.69q-2.77-.56-4.13-1.92-1.37-1.36-1.37-3.5 0-1.84 1.01-3.17 1.01-1.32 2.8-2.04 1.8-.72 4.22-.72 2.26 0 3.92.63 1.65.62 2.68 1.77 1.02 1.14 1.37 2.7l-4.55.8q-.29-.97-1.12-1.6-.83-.62-2.23-.62-1.26 0-2.12.53-.85.53-.85 1.4 0 .73.55 1.23.56.5 1.91.77l3.43.68q2.77.57 4.12 1.84t1.35 3.32q0 1.88-1.09 3.29-1.1 1.41-3.02 2.2-1.92.79-4.43.79Zm16.32-.14q-1.99 0-3.47-.86-1.49-.87-2.3-2.48-.81-1.62-.81-3.86V15.89h5.12v11.27q0 1.77.93 2.78.92 1.01 2.53 1.01 1.09 0 1.93-.47.83-.47 1.3-1.37.47-.89.47-2.16V15.89h5.13V35h-4.84l-.06-4.77h.29q-.76 2.41-2.3 3.71-1.55 1.3-3.92 1.3Zm18.06-.24h-5.13V15.89h4.75l.26 4.75h-.38q.45-1.76 1.31-2.87.86-1.11 2.02-1.64 1.17-.53 2.45-.53 2.07 0 3.33 1.31 1.27 1.31 1.86 4.04h-.59q.42-1.83 1.39-3.01.96-1.19 2.29-1.76 1.32-.58 2.78-.58 1.76 0 3.13.77 1.38.77 2.17 2.22.8 1.44.8 3.52V35h-5.13V23.09q0-1.63-.88-2.41-.88-.79-2.16-.79-.96 0-1.67.42t-1.09 1.17q-.39.75-.39 1.76V35h-4.95V22.95q0-1.4-.83-2.23-.83-.83-2.15-.83-.9 0-1.63.41-.72.41-1.14 1.21-.42.79-.42 1.94V35Z">
+            </path>
+        </svg>
+        <svg data-logo="logo" viewBox="0 0 223 43" id="svg-184404440_4373">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M9.313 5.38c-1.43 1-2.724 2.184-3.847 3.515 4.59-.426 10.42.27 17.189 3.654 7.228 3.615 13.05 3.737 17.1 2.955a19.888 19.888 0 0 0-1.378-3.199c-4.638.49-10.583-.158-17.511-3.622-4.4-2.2-8.278-3.106-11.553-3.302Zm26.355 3.07A19.95 19.95 0 0 0 20.76 1.782c-1.74 0-3.427.222-5.036.64 2.18.594 4.494 1.464 6.93 2.682 5.073 2.536 9.453 3.353 13.014 3.344Zm4.953 10.96c-4.894.967-11.652.769-19.755-3.283-7.576-3.788-13.605-3.74-17.672-2.836-.21.046-.415.095-.615.146a19.85 19.85 0 0 0-1.262 3.64c.326-.087.662-.17 1.01-.247 4.933-1.096 11.904-1.048 20.328 3.164 7.575 3.788 13.605 3.74 17.672 2.836a15.5 15.5 0 0 0 .411-.096 20.296 20.296 0 0 0-.117-3.323Zm-.536 7.545c-4.846.847-11.408.522-19.219-3.383-7.576-3.788-13.605-3.74-17.672-2.837-.902.2-1.714.445-2.43.703-.003.114-.004.23-.004.345 0 11.045 8.955 20 20 20 9.257 0 17.046-6.29 19.325-14.828Z"
+                fill="#7F57F1"></path>
+            <path fill="#D7DAE0"
+                d="M71.51 35h-16.2V9.54h5.21v21.14h10.99V35Zm9.74.38q-2.87 0-4.98-1.24-2.1-1.24-3.23-3.46-1.14-2.21-1.14-5.15 0-2.97 1.14-5.18 1.13-2.22 3.23-3.46 2.11-1.24 4.98-1.24 2.89 0 4.98 1.24 2.09 1.24 3.23 3.46 1.14 2.21 1.14 5.18 0 2.94-1.14 5.15-1.14 2.22-3.23 3.46-2.09 1.24-4.98 1.24Zm0-4.04q1.36 0 2.29-.76.92-.76 1.38-2.08.46-1.33.46-2.98 0-1.7-.46-3.01-.46-1.32-1.38-2.07-.93-.75-2.29-.75-1.37 0-2.28.75-.92.75-1.38 2.07-.46 1.31-.46 3.01 0 1.65.46 2.98.46 1.32 1.38 2.08.91.76 2.28.76Zm19.12 11.21q-2.38 0-4.15-.6-1.78-.61-2.89-1.67t-1.54-2.41l4.41-1.23q.24.53.74 1.03.51.51 1.34.83.84.33 2.07.33 1.97 0 3.09-.9 1.12-.9 1.12-2.79v-3.52h-.4q-.34.77-.99 1.48-.65.72-1.7 1.17-1.05.46-2.6.46-2.16 0-3.92-1.01-1.76-1.01-2.81-3.08-1.05-2.07-1.05-5.23 0-3.23 1.07-5.4 1.07-2.17 2.83-3.26 1.77-1.1 3.89-1.1 1.61 0 2.7.54 1.1.54 1.77 1.35.68.81 1.02 1.57h.22v-3.22h5.04v18.96q0 2.58-1.19 4.29-1.18 1.72-3.27 2.57-2.08.84-4.8.84Zm.1-11.72q1.32 0 2.23-.65.92-.65 1.39-1.87.48-1.22.48-2.93 0-1.69-.48-2.96-.47-1.26-1.39-1.96-.91-.7-2.23-.7-1.35 0-2.26.72-.92.73-1.39 1.99-.47 1.27-.47 2.91 0 1.67.47 2.9.47 1.22 1.4 1.88.92.67 2.25.67Zm19.81 4.55q-2.87 0-4.98-1.24-2.1-1.24-3.24-3.46-1.13-2.21-1.13-5.15 0-2.97 1.13-5.18 1.14-2.22 3.24-3.46 2.11-1.24 4.98-1.24 2.88 0 4.98 1.24 2.09 1.24 3.23 3.46 1.13 2.21 1.13 5.18 0 2.94-1.13 5.15-1.14 2.22-3.23 3.46-2.1 1.24-4.98 1.24Zm0-4.04q1.36 0 2.29-.76.92-.76 1.38-2.08.46-1.33.46-2.98 0-1.7-.46-3.01-.46-1.32-1.38-2.07-.93-.75-2.29-.75-1.37 0-2.28.75-.92.75-1.38 2.07-.46 1.31-.46 3.01 0 1.65.46 2.98.46 1.32 1.38 2.08.91.76 2.28.76ZM136.05 35h-5.13V15.89h5.13V35Zm-2.57-21.6q-1.16 0-1.98-.77-.82-.77-.82-1.86 0-1.1.82-1.87t1.98-.77q1.17 0 2 .77.82.76.82 1.87 0 1.09-.82 1.86-.83.77-2 .77Zm9.78 28.74h-5.13V15.89h5.04v3.22h.24q.36-.76 1.02-1.56t1.73-1.35q1.08-.55 2.7-.55 2.12 0 3.88 1.1 1.76 1.09 2.81 3.28 1.06 2.19 1.06 5.45 0 3.18-1.03 5.38-1.03 2.19-2.79 3.33-1.76 1.13-3.96 1.13-1.56 0-2.63-.53-1.08-.52-1.75-1.3-.68-.78-1.04-1.55h-.15v10.2Zm4-10.93q1.33 0 2.24-.74.92-.73 1.39-2.03.47-1.3.47-2.98 0-1.67-.47-2.95-.47-1.28-1.38-2.02-.9-.73-2.25-.73-1.32 0-2.24.71-.92.7-1.4 1.98-.48 1.27-.48 3.01 0 1.73.49 3.02.48 1.29 1.41 2.01.92.72 2.22.72Zm18.25 4.17q-2.31 0-4.09-.66-1.77-.66-2.9-1.92-1.13-1.25-1.46-3.03l4.77-.82q.38 1.33 1.32 2 .94.67 2.51.67 1.45 0 2.31-.56.85-.55.85-1.41 0-.75-.6-1.23-.61-.48-1.86-.73l-3.3-.69q-2.77-.56-4.13-1.92-1.37-1.36-1.37-3.5 0-1.84 1.01-3.17 1.01-1.32 2.8-2.04 1.8-.72 4.22-.72 2.26 0 3.92.63 1.65.62 2.68 1.77 1.02 1.14 1.37 2.7l-4.55.8q-.29-.97-1.12-1.6-.83-.62-2.23-.62-1.26 0-2.12.53-.85.53-.85 1.4 0 .73.55 1.23.56.5 1.91.77l3.43.68q2.77.57 4.12 1.84t1.35 3.32q0 1.88-1.09 3.29-1.1 1.41-3.02 2.2-1.92.79-4.43.79Zm16.32-.14q-1.99 0-3.47-.86-1.49-.87-2.3-2.48-.81-1.62-.81-3.86V15.89h5.12v11.27q0 1.77.93 2.78.92 1.01 2.53 1.01 1.09 0 1.93-.47.83-.47 1.3-1.37.47-.89.47-2.16V15.89h5.13V35h-4.84l-.06-4.77h.29q-.76 2.41-2.3 3.71-1.55 1.3-3.92 1.3Zm18.06-.24h-5.13V15.89h4.75l.26 4.75h-.38q.45-1.76 1.31-2.87.86-1.11 2.02-1.64 1.17-.53 2.45-.53 2.07 0 3.33 1.31 1.27 1.31 1.86 4.04h-.59q.42-1.83 1.39-3.01.96-1.19 2.29-1.76 1.32-.58 2.78-.58 1.76 0 3.13.77 1.38.77 2.17 2.22.8 1.44.8 3.52V35h-5.13V23.09q0-1.63-.88-2.41-.88-.79-2.16-.79-.96 0-1.67.42t-1.09 1.17q-.39.75-.39 1.76V35h-4.95V22.95q0-1.4-.83-2.23-.83-.83-2.15-.83-.9 0-1.63.41-.72.41-1.14 1.21-.42.79-.42 1.94V35Z">
+            </path>
+        </svg>
+        <svg data-logo="logo" viewBox="0 0 218 43" id="svg-342960134_4213">
+            <g fill-rule="evenodd" clip-rule="evenodd">
+                <path
+                    d="m19.87 6.35 2.637-4.567 7.476 4.316-2.636 4.567c-.463.801.23 1.774 1.138 1.6l5.052-.975 1.635 8.477-5.052.974c-8.172 1.576-14.411-7.185-10.25-14.392Z"
+                    fill="#3A724F"></path>
+                <path
+                    d="m15.302 37.216-2.637 4.567-7.477-4.317L7.825 32.9c.463-.8-.23-1.774-1.139-1.599l-5.051.974L0 23.797l5.052-.974c8.172-1.576 14.41 7.185 10.25 14.393Z"
+                    fill="#DC8E43"></path>
+                <path
+                    d="m15.53 6.35-2.636-4.567-7.477 4.316 2.637 4.567c.462.801-.231 1.774-1.139 1.6l-5.052-.975L.23 19.768l5.051.974c8.172 1.576 14.412-7.185 10.25-14.392Z"
+                    fill="#14424C"></path>
+                <path
+                    d="m19.65 37.216 2.636 4.567 7.477-4.317-2.637-4.567c-.462-.8.23-1.774 1.139-1.599l5.052.974 1.634-8.477-5.052-.974c-8.172-1.576-14.41 7.185-10.25 14.393Z"
+                    fill="#C85D1B"></path>
+            </g>
+            <path fill="#D7DAE0"
+                d="M66.51 35h-16.2V9.54h5.21v21.14h10.99V35Zm9.74.38q-2.87 0-4.98-1.24-2.1-1.24-3.23-3.46-1.14-2.21-1.14-5.15 0-2.97 1.14-5.18 1.13-2.22 3.23-3.46 2.11-1.24 4.98-1.24 2.89 0 4.98 1.24 2.09 1.24 3.23 3.46 1.14 2.21 1.14 5.18 0 2.94-1.14 5.15-1.14 2.22-3.23 3.46-2.09 1.24-4.98 1.24Zm0-4.04q1.36 0 2.29-.76.92-.76 1.38-2.08.46-1.33.46-2.98 0-1.7-.46-3.01-.46-1.32-1.38-2.07-.93-.75-2.29-.75-1.37 0-2.28.75-.92.75-1.38 2.07-.46 1.31-.46 3.01 0 1.65.46 2.98.46 1.32 1.38 2.08.91.76 2.28.76Zm19.12 11.21q-2.38 0-4.15-.6-1.78-.61-2.89-1.67t-1.54-2.41l4.41-1.23q.24.53.74 1.03.51.51 1.34.83.84.33 2.07.33 1.97 0 3.09-.9 1.12-.9 1.12-2.79v-3.52h-.4q-.34.77-.99 1.48-.65.72-1.7 1.17-1.05.46-2.6.46-2.16 0-3.92-1.01-1.76-1.01-2.81-3.08-1.05-2.07-1.05-5.23 0-3.23 1.07-5.4 1.07-2.17 2.83-3.26 1.77-1.1 3.89-1.1 1.61 0 2.7.54 1.1.54 1.77 1.35.68.81 1.02 1.57h.22v-3.22h5.04v18.96q0 2.58-1.19 4.29-1.18 1.72-3.27 2.57-2.08.84-4.8.84Zm.1-11.72q1.32 0 2.23-.65.92-.65 1.39-1.87.48-1.22.48-2.93 0-1.69-.48-2.96-.47-1.26-1.39-1.96-.91-.7-2.23-.7-1.35 0-2.26.72-.92.73-1.39 1.99-.47 1.27-.47 2.91 0 1.67.47 2.9.47 1.22 1.4 1.88.92.67 2.25.67Zm19.81 4.55q-2.87 0-4.98-1.24-2.1-1.24-3.24-3.46-1.13-2.21-1.13-5.15 0-2.97 1.13-5.18 1.14-2.22 3.24-3.46 2.11-1.24 4.98-1.24 2.88 0 4.98 1.24 2.09 1.24 3.23 3.46 1.13 2.21 1.13 5.18 0 2.94-1.13 5.15-1.14 2.22-3.23 3.46-2.1 1.24-4.98 1.24Zm0-4.04q1.36 0 2.29-.76.92-.76 1.38-2.08.46-1.33.46-2.98 0-1.7-.46-3.01-.46-1.32-1.38-2.07-.93-.75-2.29-.75-1.37 0-2.28.75-.92.75-1.38 2.07-.46 1.31-.46 3.01 0 1.65.46 2.98.46 1.32 1.38 2.08.91.76 2.28.76ZM131.05 35h-5.13V15.89h5.13V35Zm-2.57-21.6q-1.16 0-1.98-.77-.82-.77-.82-1.86 0-1.1.82-1.87t1.98-.77q1.17 0 2 .77.82.76.82 1.87 0 1.09-.82 1.86-.83.77-2 .77Zm9.78 28.74h-5.13V15.89h5.04v3.22h.24q.36-.76 1.02-1.56t1.73-1.35q1.08-.55 2.7-.55 2.12 0 3.88 1.1 1.76 1.09 2.81 3.28 1.06 2.19 1.06 5.45 0 3.18-1.03 5.38-1.03 2.19-2.79 3.33-1.76 1.13-3.96 1.13-1.56 0-2.63-.53-1.08-.52-1.75-1.3-.68-.78-1.04-1.55h-.15v10.2Zm4-10.93q1.33 0 2.24-.74.92-.73 1.39-2.03.47-1.3.47-2.98 0-1.67-.47-2.95-.47-1.28-1.38-2.02-.9-.73-2.25-.73-1.32 0-2.24.71-.92.7-1.4 1.98-.48 1.27-.48 3.01 0 1.73.49 3.02.48 1.29 1.41 2.01.92.72 2.22.72Zm18.25 4.17q-2.31 0-4.09-.66-1.77-.66-2.9-1.92-1.13-1.25-1.46-3.03l4.77-.82q.38 1.33 1.32 2 .94.67 2.51.67 1.45 0 2.31-.56.85-.55.85-1.41 0-.75-.6-1.23-.61-.48-1.86-.73l-3.3-.69q-2.77-.56-4.13-1.92-1.37-1.36-1.37-3.5 0-1.84 1.01-3.17 1.01-1.32 2.8-2.04 1.8-.72 4.22-.72 2.26 0 3.92.63 1.65.62 2.68 1.77 1.02 1.14 1.37 2.7l-4.55.8q-.29-.97-1.12-1.6-.83-.62-2.23-.62-1.26 0-2.12.53-.85.53-.85 1.4 0 .73.55 1.23.56.5 1.91.77l3.43.68q2.77.57 4.12 1.84t1.35 3.32q0 1.88-1.09 3.29-1.1 1.41-3.02 2.2-1.92.79-4.43.79Zm16.32-.14q-1.99 0-3.47-.86-1.49-.87-2.3-2.48-.81-1.62-.81-3.86V15.89h5.12v11.27q0 1.77.93 2.78.92 1.01 2.53 1.01 1.09 0 1.93-.47.83-.47 1.3-1.37.47-.89.47-2.16V15.89h5.13V35h-4.84l-.06-4.77h.29q-.76 2.41-2.3 3.71-1.55 1.3-3.92 1.3Zm18.06-.24h-5.13V15.89h4.75l.26 4.75h-.38q.45-1.76 1.31-2.87.86-1.11 2.02-1.64 1.17-.53 2.45-.53 2.07 0 3.33 1.31 1.27 1.31 1.86 4.04h-.59q.42-1.83 1.39-3.01.96-1.19 2.29-1.76 1.32-.58 2.78-.58 1.76 0 3.13.77 1.38.77 2.17 2.22.8 1.44.8 3.52V35h-5.13V23.09q0-1.63-.88-2.41-.88-.79-2.16-.79-.96 0-1.67.42t-1.09 1.17q-.39.75-.39 1.76V35h-4.95V22.95q0-1.4-.83-2.23-.83-.83-2.15-.83-.9 0-1.63.41-.72.41-1.14 1.21-.42.79-.42 1.94V35Z">
+            </path>
+        </svg>
+        <svg data-logo="logo" viewBox="0 0 222 43" id="svg3734279_6767">
+            <path
+                d="M23.32 8.266a12.114 12.114 0 0 0-6.56-6.56 12.1 12.1 0 0 0-4.64-.923c-.358 0-.714.02-1.07.053-.106.01-.211.023-.316.035-.262.03-.523.069-.782.116-.104.019-.208.036-.312.058-.347.073-.692.155-1.031.258-.002 0-.004 0-.006.002a12.32 12.32 0 0 0-1.008.36c-.037.016-.075.026-.112.04-.061.026-.117.059-.177.085-.243.105-.482.219-.72.34-.093.048-.188.095-.281.146a12.32 12.32 0 0 0-.916.549c-.002 0-.003.002-.005.003-.296.198-.58.413-.856.635-.083.067-.163.137-.245.206-.201.17-.397.348-.586.53-.048.047-.1.087-.147.134-.03.029-.053.06-.081.09-.25.255-.492.516-.718.792l-.006.008c-.224.273-.432.559-.631.85-.06.088-.115.177-.172.266-.143.222-.278.448-.407.678-.052.093-.104.185-.154.279-.165.315-.32.635-.457.965l-.002.004v.004c-.138.33-.255.667-.361 1.006-.032.1-.06.203-.088.304-.073.254-.136.51-.192.767-.022.104-.046.207-.066.31a12.54 12.54 0 0 0-.156 1.05v.008c-.035.355-.05.712-.052 1.069 0 .04-.006.08-.006.12h.007c0 .79.07 1.582.226 2.365a12.124 12.124 0 0 0 9.523 9.523A12.12 12.12 0 0 0 23.32 8.264v.002Zm-8.175 6.658a3.634 3.634 0 0 1-3.733 1.546 3.638 3.638 0 0 1-2.857-2.857 3.65 3.65 0 0 1-.058-.827 3.59 3.59 0 0 1 .047-.474c.01-.062.019-.124.032-.186.046-.21.104-.416.186-.614.082-.2.187-.386.302-.566.034-.053.072-.103.109-.154.092-.13.193-.251.3-.367.044-.046.086-.093.132-.137.31-.298.669-.538 1.062-.71.058-.025.117-.046.176-.068.149-.056.3-.102.456-.138.06-.014.122-.03.184-.041.21-.038.424-.063.639-.063a3.635 3.635 0 0 1 3.024 5.657l-.001-.001Z"
+                fill="url(#svg3734279_6767_a)" transform="translate(0 1)"></path>
+            <path
+                d="M22.2 35.396a12.12 12.12 0 0 0 2.043-6.734h-8.485a3.633 3.633 0 0 1-2.245 3.359 3.642 3.642 0 0 1-3.963-.788 3.63 3.63 0 0 1-.788-3.963 3.639 3.639 0 0 1 3.354-2.245h.005V16.54h-.003a12.11 12.11 0 0 0-9.208 4.243 12.121 12.121 0 1 0 19.289 14.612h.001Z"
+                fill="url(#svg3734279_6767_b)" transform="translate(0 1)"></path>
+            <path d="M27.879 16.54a12.121 12.121 0 1 1 0 24.243v-8.485a3.636 3.636 0 0 0 0-7.272V16.54Z"
+                fill="url(#svg3734279_6767_c)" transform="translate(0 1)"></path>
+            <path d="M27.879 41.783a12.121 12.121 0 1 1 0-24.242v8.485a3.636 3.636 0 0 0 0 7.272v8.485Z" fill="#1DC2C6">
+            </path>
+            <path
+                d="M24.242 13.904h-8.485l-.001.09a3.642 3.642 0 0 1-2.328 3.303c-.415.16-.858.243-1.308.243v8.485a12.112 12.112 0 0 0 10.078-5.387l.08-.121a12.123 12.123 0 0 0 1.963-6.614h.001Z"
+                fill="#9BE183"></path>
+            <path
+                d="M15.758 12.904a12.12 12.12 0 1 1 12.12 12.12V16.54a3.633 3.633 0 0 0 3.36-2.245 3.642 3.642 0 0 0-.788-3.963 3.63 3.63 0 0 0-3.963-.788 3.639 3.639 0 0 0-2.245 3.359h-8.485Z"
+                fill="url(#svg3734279_6767_d)" transform="translate(0 1)"></path>
+            <path fill="#D7DAE0"
+                d="M70.51 35h-16.2V9.54h5.21v21.14h10.99V35Zm9.74.38q-2.87 0-4.98-1.24-2.1-1.24-3.23-3.46-1.14-2.21-1.14-5.15 0-2.97 1.14-5.18 1.13-2.22 3.23-3.46 2.11-1.24 4.98-1.24 2.89 0 4.98 1.24 2.09 1.24 3.23 3.46 1.14 2.21 1.14 5.18 0 2.94-1.14 5.15-1.14 2.22-3.23 3.46-2.09 1.24-4.98 1.24Zm0-4.04q1.36 0 2.29-.76.92-.76 1.38-2.08.46-1.33.46-2.98 0-1.7-.46-3.01-.46-1.32-1.38-2.07-.93-.75-2.29-.75-1.37 0-2.28.75-.92.75-1.38 2.07-.46 1.31-.46 3.01 0 1.65.46 2.98.46 1.32 1.38 2.08.91.76 2.28.76Zm19.12 11.21q-2.38 0-4.15-.6-1.78-.61-2.89-1.67t-1.54-2.41l4.41-1.23q.24.53.74 1.03.51.51 1.34.83.84.33 2.07.33 1.97 0 3.09-.9 1.12-.9 1.12-2.79v-3.52h-.4q-.34.77-.99 1.48-.65.72-1.7 1.17-1.05.46-2.6.46-2.16 0-3.92-1.01-1.76-1.01-2.81-3.08-1.05-2.07-1.05-5.23 0-3.23 1.07-5.4 1.07-2.17 2.83-3.26 1.77-1.1 3.89-1.1 1.61 0 2.7.54 1.1.54 1.77 1.35.68.81 1.02 1.57h.22v-3.22h5.04v18.96q0 2.58-1.19 4.29-1.18 1.72-3.27 2.57-2.08.84-4.8.84Zm.1-11.72q1.32 0 2.23-.65.92-.65 1.39-1.87.48-1.22.48-2.93 0-1.69-.48-2.96-.47-1.26-1.39-1.96-.91-.7-2.23-.7-1.35 0-2.26.72-.92.73-1.39 1.99-.47 1.27-.47 2.91 0 1.67.47 2.9.47 1.22 1.4 1.88.92.67 2.25.67Zm19.81 4.55q-2.87 0-4.98-1.24-2.1-1.24-3.24-3.46-1.13-2.21-1.13-5.15 0-2.97 1.13-5.18 1.14-2.22 3.24-3.46 2.11-1.24 4.98-1.24 2.88 0 4.98 1.24 2.09 1.24 3.23 3.46 1.13 2.21 1.13 5.18 0 2.94-1.13 5.15-1.14 2.22-3.23 3.46-2.1 1.24-4.98 1.24Zm0-4.04q1.36 0 2.29-.76.92-.76 1.38-2.08.46-1.33.46-2.98 0-1.7-.46-3.01-.46-1.32-1.38-2.07-.93-.75-2.29-.75-1.37 0-2.28.75-.92.75-1.38 2.07-.46 1.31-.46 3.01 0 1.65.46 2.98.46 1.32 1.38 2.08.91.76 2.28.76ZM135.05 35h-5.13V15.89h5.13V35Zm-2.57-21.6q-1.16 0-1.98-.77-.82-.77-.82-1.86 0-1.1.82-1.87t1.98-.77q1.17 0 2 .77.82.76.82 1.87 0 1.09-.82 1.86-.83.77-2 .77Zm9.78 28.74h-5.13V15.89h5.04v3.22h.24q.36-.76 1.02-1.56t1.73-1.35q1.08-.55 2.7-.55 2.12 0 3.88 1.1 1.76 1.09 2.81 3.28 1.06 2.19 1.06 5.45 0 3.18-1.03 5.38-1.03 2.19-2.79 3.33-1.76 1.13-3.96 1.13-1.56 0-2.63-.53-1.08-.52-1.75-1.3-.68-.78-1.04-1.55h-.15v10.2Zm4-10.93q1.33 0 2.24-.74.92-.73 1.39-2.03.47-1.3.47-2.98 0-1.67-.47-2.95-.47-1.28-1.38-2.02-.9-.73-2.25-.73-1.32 0-2.24.71-.92.7-1.4 1.98-.48 1.27-.48 3.01 0 1.73.49 3.02.48 1.29 1.41 2.01.92.72 2.22.72Zm18.25 4.17q-2.31 0-4.09-.66-1.77-.66-2.9-1.92-1.13-1.25-1.46-3.03l4.77-.82q.38 1.33 1.32 2 .94.67 2.51.67 1.45 0 2.31-.56.85-.55.85-1.41 0-.75-.6-1.23-.61-.48-1.86-.73l-3.3-.69q-2.77-.56-4.13-1.92-1.37-1.36-1.37-3.5 0-1.84 1.01-3.17 1.01-1.32 2.8-2.04 1.8-.72 4.22-.72 2.26 0 3.92.63 1.65.62 2.68 1.77 1.02 1.14 1.37 2.7l-4.55.8q-.29-.97-1.12-1.6-.83-.62-2.23-.62-1.26 0-2.12.53-.85.53-.85 1.4 0 .73.55 1.23.56.5 1.91.77l3.43.68q2.77.57 4.12 1.84t1.35 3.32q0 1.88-1.09 3.29-1.1 1.41-3.02 2.2-1.92.79-4.43.79Zm16.32-.14q-1.99 0-3.47-.86-1.49-.87-2.3-2.48-.81-1.62-.81-3.86V15.89h5.12v11.27q0 1.77.93 2.78.92 1.01 2.53 1.01 1.09 0 1.93-.47.83-.47 1.3-1.37.47-.89.47-2.16V15.89h5.13V35h-4.84l-.06-4.77h.29q-.76 2.41-2.3 3.71-1.55 1.3-3.92 1.3Zm18.06-.24h-5.13V15.89h4.75l.26 4.75h-.38q.45-1.76 1.31-2.87.86-1.11 2.02-1.64 1.17-.53 2.45-.53 2.07 0 3.33 1.31 1.27 1.31 1.86 4.04h-.59q.42-1.83 1.39-3.01.96-1.19 2.29-1.76 1.32-.58 2.78-.58 1.76 0 3.13.77 1.38.77 2.17 2.22.8 1.44.8 3.52V35h-5.13V23.09q0-1.63-.88-2.41-.88-.79-2.16-.79-.96 0-1.67.42t-1.09 1.17q-.39.75-.39 1.76V35h-4.95V22.95q0-1.4-.83-2.23-.83-.83-2.15-.83-.9 0-1.63.41-.72.41-1.14 1.21-.42.79-.42 1.94V35Z">
+            </path>
+            <defs xmlns="http://www.w3.org/2000/svg">
+                <linearGradient id="svg3734279_6767_a" x1="33.562" y1="5.895" x2="6.902" y2="14.611"
+                    gradientUnits="userSpaceOnUse">
+                    <stop offset=".637" stop-color="#F16930"></stop>
+                    <stop offset=".959" stop-color="#F8C70E"></stop>
+                </linearGradient>
+                <linearGradient id="svg3734279_6767_b" x1="10.745" y1="28.513" x2="22.745" y2="32.013"
+                    gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#9BE183"></stop>
+                    <stop offset="1" stop-color="#256B52"></stop>
+                </linearGradient>
+                <linearGradient id="svg3734279_6767_c" x1="32.5" y1="30.783" x2="29.66" y2="23.129"
+                    gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#1DC2C6"></stop>
+                    <stop offset="1" stop-color="#23336B"></stop>
+                </linearGradient>
+                <linearGradient id="svg3734279_6767_d" x1="32.746" y1="17.17" x2="27" y2="10.783"
+                    gradientUnits="userSpaceOnUse">
+                    <stop offset=".245" stop-color="#1DC1C5"></stop>
+                    <stop offset="1" stop-color="#9CE182"></stop>
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
+    <!-- Start of bodyEnd -->
+
+    <!-- End of bodyEnd -->
+
+
+</body>
+
+</html>
