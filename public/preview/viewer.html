@@ -256,42 +256,18 @@
           sectionNameEl.textContent = formattedTitle;
         }
       }
-      previewFrame.src = displayUrl;
     }
   
-
+    // === Загрузка iframe ===
     const componentPath = '/preview/' + parts.slice(1).join('/');
-
-      // === 🔥 УМНЫЙ LOADER ===
-      let iframeLoaded = false;
-      let minLoadTimePassed = false;
-
-      // минимум времени показа loader (анти-мигание)
-      setTimeout(() => {
-        minLoadTimePassed = true;
-        tryHideLoader();
-      }, 500);
-
-      // iframe загрузился
-      previewFrame.addEventListener('load', () => {
-        iframeLoaded = true;
-
-        // даем время на рендер
-        setTimeout(() => {
-          tryHideLoader();
-        }, 150);
-      });
-
-      function tryHideLoader() {
-        if (!iframeLoaded || !minLoadTimePassed) return;
-
-        if (loadingOverlay) {
-          loadingOverlay.style.opacity = '0';
-          setTimeout(() => {
-            loadingOverlay.style.display = 'none';
-          }, 300);
-        }
+    previewFrame.src = displayUrl || componentPath;
+    
+    previewFrame.addEventListener('load', () => {
+      if (loadingOverlay) {
+        loadingOverlay.style.opacity = '0';
+        setTimeout(() => { loadingOverlay.style.display = 'none'; }, 300);
       }
+    });
   
     // === Проверка авторизации ===
     function checkAuth() {
