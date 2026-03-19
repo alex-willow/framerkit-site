@@ -2212,7 +2212,23 @@
 
     <!-- End of bodyEnd -->
 
+    <script>
+// Отправляем высоту родительскому окну
+function sendHeight() {
+  const height = document.body.scrollHeight;
+  window.parent.postMessage({ type: 'resize', height }, '*');
+}
 
+// При загрузке
+window.addEventListener('load', sendHeight);
+
+// При изменении размера (анимации, lazy images)
+const observer = new ResizeObserver(() => {
+  sendHeight();
+});
+
+observer.observe(document.body);
+</script>
 </body>
 
 </html>

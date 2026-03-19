@@ -2898,6 +2898,23 @@
 
     <!-- End of bodyEnd -->
 
+    <script>
+// Отправляем высоту при загрузке
+function sendHeight() {
+  const height = document.body.scrollHeight;
+  window.parent.postMessage({ type: 'resize', height }, '*');
+}
+
+// При загрузке страницы
+window.addEventListener('load', sendHeight);
+
+// При изменении размера (анимации, lazy images, и т.д.)
+const observer = new ResizeObserver(() => {
+  sendHeight();
+});
+
+observer.observe(document.body);
+</script>
 
 </body>
 

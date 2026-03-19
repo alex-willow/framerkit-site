@@ -777,6 +777,15 @@
             overflow: visible
         }
 
+        html, body {
+  margin: 0;
+  padding: 0;
+}
+
+[data-framer-root] {
+  min-height: auto !important;
+  height: auto !important;
+}
         .framer-WoLJu .framer-lkouzw {
             flex-flow: row;
             flex: none;
@@ -2304,7 +2313,38 @@
 
     <!-- End of bodyEnd -->
 
+    <script>
+function sendHeight() {
+  const height = Math.max(
+    document.body.scrollHeight,
+    document.body.offsetHeight,
+    document.documentElement.scrollHeight,
+    document.documentElement.offsetHeight
+  );
+  
+  requestAnimationFrame(() => {
+    window.parent.postMessage({ type: 'resize', height }, '*');
+  });
+}
 
+window.addEventListener('load', sendHeight);
+window.addEventListener('resize', sendHeight);
+
+const observer = new ResizeObserver(() => {
+  sendHeight();
+});
+observer.observe(document.body);
+observer.observe(document.documentElement);
+
+// 🔥 Дополнительно: проверяем изменение scrollHeight
+let lastScrollHeight = document.body.scrollHeight;
+setInterval(() => {
+  if (document.body.scrollHeight !== lastScrollHeight) {
+    lastScrollHeight = document.body.scrollHeight;
+    sendHeight();
+  }
+}, 200);
+</script>
 </body>
 
 </html>

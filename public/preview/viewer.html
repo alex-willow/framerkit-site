@@ -258,16 +258,36 @@
       }
     }
   
-    // === Загрузка iframe ===
-    const componentPath = '/preview/' + parts.slice(1).join('/');
-    previewFrame.src = displayUrl || componentPath;
+
+// === Загрузка iframe — ПРОСТОЕ РЕШЕНИЕ ===
+const componentPath = '/preview/' + parts.slice(1).join('/');
+
+// 🔹 Сразу ставим src
+previewFrame.src = displayUrl || componentPath;
+
+// 🔹 Блокируем клики пока грузится
+previewFrame.style.pointerEvents = 'none';
+
+// 🔹 Слушаем load + ждём 400ms для полной отрисовки
+previewFrame.addEventListener('load', () => {
+  console.log('🔄 iframe loaded, waiting for render...');
+  
+  // 🔹 Ждём 400ms чтобы картинки/стили внутри отрисовались
+  setTimeout(() => {
+    console.log('✅ showing preview content');
     
-    previewFrame.addEventListener('load', () => {
-      if (loadingOverlay) {
-        loadingOverlay.style.opacity = '0';
-        setTimeout(() => { loadingOverlay.style.display = 'none'; }, 300);
-      }
-    });
+    // 🔹 Плавно скрываем overlay
+    if (loadingOverlay) {
+      loadingOverlay.style.opacity = '0';
+      setTimeout(() => {
+        loadingOverlay.style.display = 'none';
+      }, 300);
+    }
+    
+    // 🔹 Разблокируем клики
+    previewFrame.style.pointerEvents = 'auto';
+  }, 400); // 🔥 Ключевая задержка для отрисовки
+});
   
     // === Проверка авторизации ===
     function checkAuth() {
