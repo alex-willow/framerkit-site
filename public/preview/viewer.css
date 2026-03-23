@@ -332,24 +332,55 @@ body {
 /* === PREVIEW CONTAINER === */
 .preview-container {
   flex: 1;
-  height: calc(100vh - 60px);
-  overflow: auto;
+  height: calc(100vh - 60px);  /* ✅ Фиксированная высота (не min-height) */
+  min-height: calc(100vh - 60px);  /* ✅ Не меньше высоты экрана минус тулбар */
+  max-height: calc(100vh - 60px);  /* ✅ Не больше — включаем скролл */
+    overflow-y: auto;    
   background: #f3f3f5;
   padding: 20px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;      /* ✅ Прижать к верху */
   justify-content: center;
   position: relative;
 }
 
+
+
+/* === RESIZABLE WRAPPER === */
 .resizable-wrapper {
   position: relative;
-  height: 100%;
   display: flex;
-  width: 1200px;              /* 🔥 Начальная ширина = desktop */
-  transition: width 0.25s ease;
+  flex-direction: column;
+  width: 1200px;
+  height: auto;              /* 🔥 важно */
+  min-height: 300px;    
+  opacity: 0;                     /* 🔥 Скрыт по умолчанию */
+  visibility: hidden;             /* 🔥 Не занимает место пока скрыт */
 }
 
+
+.resizable-wrapper.loaded {
+  opacity: 1;                     /* 🔥 Показан после загрузки */
+  visibility: visible;
+}
+
+/* === PREVIEW FRAME === */
+.preview-frame {
+  width: 100%;
+  height: 100%;                 /* ✅ Занимает всю высоту wrapper */
+  border: none;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  scrollbar-width: none;
+  
+  /* Скрываем скроллбар для Chrome/Safari/Edge */
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+}
 
 .resizable-wrapper.fullscreen {
   width: 100% !important;
@@ -358,15 +389,7 @@ body {
   box-shadow: none;
 }
 
-.preview-frame {
-  width: 100%;
-  height: 100%;
-  border: none;
-  border-radius: 10px;
-  background: #fff;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-  pointer-events: auto;
-}
+
 
 /* === RESIZE HANDLES === */
 .resize-handle {
@@ -414,6 +437,7 @@ body {
   background: #6E3FF3;
   box-shadow: 0 0 0 8px rgba(110, 63, 243, 0.12);
 }
+
 
 /* === WIDTH INDICATOR === */
 .width-indicator {
@@ -479,18 +503,6 @@ body:has(.preview-container.fullscreen) {
   pointer-events: auto;
 }
 
-.loading-spinner {
-  width: 40px;
-  height: 40px;
-  border: 3px solid #e5e5e5;
-  border-top-color: #6E3FF3;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
 
 /* === SHOW UI BUTTON === */
 .show-ui-btn {
