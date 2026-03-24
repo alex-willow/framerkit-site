@@ -332,19 +332,25 @@ body {
 /* === PREVIEW CONTAINER === */
 .preview-container {
   flex: 1;
-  height: calc(100vh - 60px);  /* ✅ Фиксированная высота (не min-height) */
-  min-height: calc(100vh - 60px);  /* ✅ Не меньше высоты экрана минус тулбар */
-  max-height: calc(100vh - 60px);  /* ✅ Не больше — включаем скролл */
-    overflow-y: auto;    
+  height: calc(100vh - 60px);
+  min-height: calc(100vh - 60px);
+  max-height: calc(100vh - 60px);
+  overflow-y: auto;   /* скролл внутри контейнера */
   background: #f3f3f5;
   padding: 20px;
+
   display: flex;
-  align-items: flex-start;      /* ✅ Прижать к верху */
-  justify-content: center;
+  justify-content: center; /* центрируем по горизонтали */
   position: relative;
 }
 
-
+/* === CENTERING WRAPPER === */
+.center-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* центрируем по вертикали */
+  min-height: 100%;        /* растягиваем на весь контейнер */
+}
 
 /* === RESIZABLE WRAPPER === */
 .resizable-wrapper {
@@ -352,34 +358,26 @@ body {
   display: flex;
   flex-direction: column;
   width: 1200px;
-  height: auto;              /* 🔥 важно */
+  height: auto;     
   min-height: 300px;    
-  opacity: 0;                     /* 🔥 Скрыт по умолчанию */
-  visibility: hidden;             /* 🔥 Не занимает место пока скрыт */
+  max-height: 100%;
+  opacity: 0;                     
+  visibility: hidden;             
 }
 
-
 .resizable-wrapper.loaded {
-  opacity: 1;                     /* 🔥 Показан после загрузки */
+  opacity: 1;                     
   visibility: visible;
 }
 
 /* === PREVIEW FRAME === */
 .preview-frame {
   width: 100%;
-  height: 100%;                 /* ✅ Занимает всю высоту wrapper */
+  height: 100%;                 
   border: none;
   border-radius: 10px;
   background: #fff;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-  scrollbar-width: none;
-  
-  /* Скрываем скроллбар для Chrome/Safari/Edge */
-  &::-webkit-scrollbar {
-    display: none;
-    width: 0;
-    height: 0;
-  }
 }
 
 .resizable-wrapper.fullscreen {
@@ -416,9 +414,9 @@ body {
 
 .resize-handle::before {
   content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  position: fixed;        /* остаётся fixed */
+  top: 50%;               /* середина окна */
+  transform: translateY(-50%);  /* сдвигаем на половину высоты полоски */
   transform: translate(-50%, -50%);
   width: 4px;
   height: 40px;
@@ -429,7 +427,7 @@ body {
 }
 
 .resize-handle:hover::before {
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.15);
   height: 60px;
 }
 

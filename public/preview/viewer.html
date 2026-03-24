@@ -255,56 +255,37 @@ previewFrame.addEventListener('load', () => {
     }
   };
   
-  const waitForStableHeight = (retries = 0, stableCount = 0, lastH = 0) => {
-  try {
-    const iframeDoc = previewFrame.contentDocument || previewFrame.contentWindow.document;
-    if (!iframeDoc) return;
-
-    const framerRoot = iframeDoc.querySelector('[data-framer-root]');
-    if (!framerRoot) return;
-
-    const currentH = framerRoot.scrollHeight;
-
-    // проверка стабильности
-    if (Math.abs(currentH - lastH) < 2) {
-      stableCount++;
-    } else {
-      stableCount = 0;
-    }
-
-    // 3 раза подряд не меняется → готово
-    if (stableCount >= 3 || retries > 40) {
+  // 🔥 Ждём пока контент полностью готов
+  const waitForReady = (retries = 0, maxRetries = 30) => {
+    if (checkImagesLoaded() || retries >= maxRetries) {
+      // 🔥 1. Сначала вычисляем высоту (невидимо)
       updateIframeHeight();
-
+      
+      // 🔥 2. Ждём 50ms чтобы высота применилась
       setTimeout(() => {
+        // 🔥 3. ТОЛЬКО ТЕПЕРЬ показываем контент — сразу с правильной высотой!
         resizableWrapper.classList.add('loaded');
-
+        
+        // 🔥 Скрываем overlay
         if (loadingOverlay) {
           loadingOverlay.style.opacity = '0';
-          setTimeout(() => {
-            loadingOverlay.style.display = 'none';
-          }, 300);
+          setTimeout(() => { loadingOverlay.style.display = 'none'; }, 300);
         }
-
+        
         previewFrame.style.pointerEvents = 'auto';
       }, 50);
-
-      return;
+    } else {
+      // 🔥 Ещё ждём 100ms и пробуем снова
+      setTimeout(() => waitForReady(retries + 1, maxRetries), 100);
     }
-
-    setTimeout(() => {
-      waitForStableHeight(retries + 1, stableCount, currentH);
-    }, 100);
-
-  } catch (e) {
-    console.log('waitForStableHeight error', e);
-  }
-};
+  };
   
   // 🔥 Начинаем проверку через 200ms
-  setTimeout(() => waitForStableHeight(), 150);
+  setTimeout(() => waitForReady(), 200);
 });
   
+
+
   
     // 🔥 Получаем высоту с учётом типа секции
     function updateIframeHeight() {
