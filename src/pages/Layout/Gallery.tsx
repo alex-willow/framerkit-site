@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from "react";
-import { Copy, CircleCheck, Lock, Eye } from "lucide-react"; // ✅ Добавил Eye
+import { useState, useEffect, useRef, useMemo } from "react";
+import { Copy, CircleCheck, Lock, Eye } from "lucide-react";
 import { motion } from "framer-motion";
 import SectionHeader from "../../components/SectionHeader";
 
@@ -9,11 +9,11 @@ type ComponentItem = {
   image: string;
   url: string;
   type: "free" | "paid";
-  previewUrl?: string;  // ✅ Добавил
+  previewUrl?: string;
   wireframe?: {
     image: string;
     url: string;
-    previewUrl?: string;  // ✅ Добавил
+    previewUrl?: string;
   };
 };
 
@@ -23,6 +23,7 @@ type GalleryPageProps = {
 };
 
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
+const FIXED_SKELETON_COUNT = 8;
 
 export default function GalleryPage({ isAuthenticated, setIsSignInOpen }: GalleryPageProps) {
   const [items, setItems] = useState<ComponentItem[]>([]);
@@ -31,37 +32,25 @@ export default function GalleryPage({ isAuthenticated, setIsSignInOpen }: Galler
   const [filter, setFilter] = useState<"light" | "dark">("light");
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
-  const [hoveredPreviewKey, setHoveredPreviewKey] = useState<string | null>(null); // ✅ Добавил
+  const [hoveredPreviewKey, setHoveredPreviewKey] = useState<string | null>(null);
   const [isWireframeMode, setIsWireframeMode] = useState(true);
 
   const galleryRef = useRef<HTMLDivElement>(null);
 
+  // ================================
+  // Загрузка данных
+  // ================================
   useEffect(() => {
     const load = async () => {
       try {
         const res = await fetch(
-          "https://raw.githubusercontent.com/alex-willow/framerkit-data/main/gallery.json"
+          "https://raw.githubusercontent.com/alex-willow/framerkit-data/main/gallery.json",
+          { cache: "force-cache" }
         );
-        if (!res.ok) throw new Error("Failed to load gallery components");
+        if (!res.ok) throw new Error("Failed to load gallery");
         const json = await res.json();
         const loadedItems = json.gallery || [];
         setItems(loadedItems);
-
-        const imagePromises = loadedItems.flatMap((item: ComponentItem) => {
-          const images = [item.image || PLACEHOLDER];
-          if (item.wireframe?.image) images.push(item.wireframe.image);
-          
-          return images.map(
-            (src) =>
-              new Promise<void>((resolve) => {
-                const img = new Image();
-                img.onload = img.onerror = () => resolve();
-                img.src = src;
-              })
-          );
-        });
-
-        await Promise.all(imagePromises);
         setLoading(false);
       } catch (err) {
         console.error(err);
@@ -69,16 +58,21 @@ export default function GalleryPage({ isAuthenticated, setIsSignInOpen }: Galler
         setLoading(false);
       }
     };
-
     load();
   }, []);
 
+  // ================================
+  // Сброс скролла при смене фильтра или wireframe
+  // ================================
   useEffect(() => {
     if (galleryRef.current) {
       galleryRef.current.scrollTo({ top: 0 });
     }
   }, [filter, isWireframeMode]);
 
+  // ================================
+  // Скролл к секции
+  // ================================
   useEffect(() => {
     const section = document.getElementById("gallery-page");
     if (section) {
@@ -86,10 +80,18 @@ export default function GalleryPage({ isAuthenticated, setIsSignInOpen }: Galler
     }
   }, []);
 
-  const filtered = items.filter(item =>
-    filter === "dark" ? item.key.includes("dark") : !item.key.includes("dark")
-  );
+  // ================================
+  // Фильтрация (useMemo)
+  // ================================
+  const filtered = useMemo(() => {
+    return items.filter(item =>
+      filter === "dark" ? item.key.includes("dark") : !item.key.includes("dark")
+    );
+  }, [items, filter]);
 
+  // ================================
+  // Copy
+  // ================================
   const handleCopy = async (item: ComponentItem, url: string) => {
     if (!isAuthenticated && item.type === "paid") {
       setIsSignInOpen(true);
@@ -101,8 +103,11 @@ export default function GalleryPage({ isAuthenticated, setIsSignInOpen }: Galler
     setTimeout(() => setCopiedKey(null), 4000);
   };
 
-  const skeletonCards = Array.from({ length: 6 });
+  const skeletonCards = Array.from({ length: FIXED_SKELETON_COUNT });
 
+  // ================================
+  // Render
+  // ================================
   return (
     <div id="gallery-page" style={{ padding: 0, scrollMarginTop: "64px" }}>
       <SectionHeader
@@ -129,132 +134,115 @@ export default function GalleryPage({ isAuthenticated, setIsSignInOpen }: Galler
         ) : error ? (
           <p style={{ color: "red", padding: "20px" }}>{error}</p>
         ) : filtered.length === 0 ? (
-          <div className="empty-message">No components available for the selected theme.</div>
+          <div className="empty-message">No components available for the selected theme</div>
         ) : (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-          >
-            <div className="gallery">
-              {filtered.map(item => {
-                const canCopy = isAuthenticated || item.type === "free";
-                const isCopied = copiedKey === item.key;
-                
-                const displayImage = isWireframeMode && item.wireframe?.image
-                  ? item.wireframe.image
-                  : item.image || PLACEHOLDER;
-                
-                const displayUrl = isWireframeMode && item.wireframe?.url
-                  ? item.wireframe.url
-                  : item.url;
+          <div className="gallery">
+            {filtered.map(item => {
+              const canCopy = isAuthenticated || item.type === "free";
+              const isCopied = copiedKey === item.key;
 
-                // ✅ Определяем preview URL в зависимости от режима
-                const displayPreviewUrl = isWireframeMode 
-                  ? item.wireframe?.previewUrl 
-                  : item.previewUrl;
+              const displayImage = isWireframeMode && item.wireframe?.image
+                ? item.wireframe.image
+                : item.image || PLACEHOLDER;
 
-                return (
-                  <div 
-                    key={`${item.key}-${isWireframeMode ? 'wireframe' : 'design'}`} 
-                    className={`card ${filter === "dark" ? "card-dark" : "card-light"}`}
-                  >
-                    <div className="cardImage">
-                      <img 
-                        src={displayImage} 
-                        alt={item.title}
-                        loading="lazy"
-                      />
-                    </div>
-                    <div className="cardInfo">
-                      <h3>{item.title}</h3>
-                      
-                      {/* ✅ Кнопки действий — в одну строку */}
-                      <div className="card-actions">
-                        
-                        {/* ✅ Кнопка Preview — с состоянием Coming soon */}
-                        {displayPreviewUrl ? (
-                          // 🔹 Есть превью — обычная кнопка
-                          <div
-                            className="iconButton"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              e.stopPropagation();
-                              
-                              try {
-                                let path = displayPreviewUrl.trim();
-                                let cleanPath = '';
-                                
-                                if (path.startsWith('/')) {
-                                  cleanPath = path.replace('/preview/', '').replace(/\/$/, '');
-                                } else if (path.startsWith('http')) {
-                                  const url = new URL(path);
-                                  cleanPath = url.pathname.replace('/preview/', '').replace(/\/$/, '');
-                                }
-                                
-                                const viewerUrl = `/p/${cleanPath}`;
-                                console.log('🔗 Opening:', viewerUrl);
-                                window.open(viewerUrl, '_blank', 'noopener,noreferrer');
-                              } catch (err) {
-                                console.error('❌ Error:', err);
-                                window.open(displayPreviewUrl, '_blank', 'noopener,noreferrer');
-                              }
-                            }}
-                            onMouseEnter={() => setHoveredPreviewKey(item.key)}
-                            onMouseLeave={() => setHoveredPreviewKey(null)}
-                            title=""
-                          >
-                            <Eye size={16} color={filter === "dark" ? "#ccc" : "currentColor"} />
-                            {hoveredPreviewKey === item.key && (
-                              <div className="tooltip">Preview</div>
-                            )}
-                          </div>
-                        ) : (
-                          // 🔸 Нет превью — серый глаз + Coming soon
-                          <div
-                            className="iconButton"
-                            onMouseEnter={() => setHoveredPreviewKey(item.key)}
-                            onMouseLeave={() => setHoveredPreviewKey(null)}
-                            title=""
-                            style={{ cursor: 'default' }}
-                          >
-                            <Eye size={16} color={filter === "dark" ? "#666" : "#999"} />
-                            {hoveredPreviewKey === item.key && (
-                              <div className="tooltip">Coming soon</div>
-                            )}
-                          </div>
-                        )}
-                        
-                        {/* Кнопка Copy */}
+              const displayUrl = isWireframeMode && item.wireframe?.url
+                ? item.wireframe.url
+                : item.url;
+
+              const displayPreviewUrl = isWireframeMode
+                ? item.wireframe?.previewUrl
+                : item.previewUrl;
+
+              return (
+                <motion.div
+                  key={item.key}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className={`card ${filter === "dark" ? "card-dark" : "card-light"}`}
+                >
+                  <div className="cardImage">
+                    <img src={displayImage} alt={item.title} loading="lazy" />
+                  </div>
+                  <div className="cardInfo">
+                    <h3>{item.title}</h3>
+                    <div className="card-actions">
+                      {/* Preview */}
+                      {displayPreviewUrl ? (
                         <div
-                          className={`iconButton ${isCopied ? "copied" : ""} ${
-                            !canCopy ? "locked" : ""
-                          }`}
-                          onClick={() => handleCopy(item, displayUrl)}
-                          onMouseEnter={() => !isCopied && setHoveredKey(item.key)}
-                          onMouseLeave={() => setHoveredKey(null)}
-                        >
-                          {isCopied ? (
-                            <CircleCheck size={20} color="#22c55e" strokeWidth={2.5} />
-                          ) : canCopy ? (
-                            <Copy size={16} color={filter === "dark" ? "#ccc" : "currentColor"} />
-                          ) : (
-                            <Lock size={16} color={filter === "dark" ? "#ccc" : "currentColor"} />
-                          )}
+                          className="iconButton"
+                          onClick={e => {
+                            e.preventDefault();
+                            e.stopPropagation();
 
-                          {(isCopied || hoveredKey === item.key) && (
-                            <div className="tooltip">
-                              {isCopied ? "Copied" : canCopy ? "Copy" : "Sign in to copy"}
-                            </div>
+                            try {
+                              let path = displayPreviewUrl.trim();
+                              let cleanPath = "";
+
+                              if (path.startsWith("/")) {
+                                cleanPath = path.replace("/preview/", "").replace(/\/$/, "");
+                              } else if (path.startsWith("http")) {
+                                const url = new URL(path);
+                                cleanPath = url.pathname.replace("/preview/", "").replace(/\/$/, "");
+                              }
+
+                              const viewerUrl = `/p/${cleanPath}`;
+                              window.open(viewerUrl, "_blank", "noopener,noreferrer");
+                            } catch {
+                              window.open(displayPreviewUrl, "_blank", "noopener,noreferrer");
+                            }
+                          }}
+                          onMouseEnter={() => setHoveredPreviewKey(item.key)}
+                          onMouseLeave={() => setHoveredPreviewKey(null)}
+                          title="Live Preview"
+                        >
+                          <Eye size={16} color={filter === "dark" ? "#ccc" : "currentColor"} />
+                          {hoveredPreviewKey === item.key && (
+                            <div className="tooltip">Preview</div>
                           )}
                         </div>
+                      ) : (
+                        <div
+                          className="iconButton disabled"
+                          title="Coming soon"
+                          style={{ cursor: "not-allowed", opacity: 0.4 }}
+                        >
+                          <Eye size={16} color={filter === "dark" ? "#666" : "#999"} />
+                          {hoveredPreviewKey === item.key && (
+                            <div className="tooltip">Coming soon</div>
+                          )}
+                        </div>
+                      )}
+
+                      {/* Copy */}
+                      <div
+                        className={`iconButton ${isCopied ? "copied" : ""} ${
+                          !canCopy ? "locked" : ""
+                        }`}
+                        onClick={() => handleCopy(item, displayUrl)}
+                        onMouseEnter={() => !isCopied && setHoveredKey(item.key)}
+                        onMouseLeave={() => setHoveredKey(null)}
+                      >
+                        {isCopied ? (
+                          <CircleCheck size={20} color="#22c55e" strokeWidth={2.5} />
+                        ) : canCopy ? (
+                          <Copy size={16} color={filter === "dark" ? "#ccc" : "currentColor"} />
+                        ) : (
+                          <Lock size={16} color={filter === "dark" ? "#ccc" : "currentColor"} />
+                        )}
+
+                        {(isCopied || hoveredKey === item.key) && (
+                          <div className="tooltip">
+                            {isCopied ? "Copied" : canCopy ? "Copy" : "Sign in to copy"}
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
-                );
-              })}
-            </div>
-          </motion.div>
+                </motion.div>
+              );
+            })}
+          </div>
         )}
       </div>
     </div>

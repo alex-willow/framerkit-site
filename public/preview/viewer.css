@@ -338,7 +338,6 @@ body {
   overflow-y: auto;   /* скролл внутри контейнера */
   background: #f3f3f5;
   padding: 20px;
-
   display: flex;
   justify-content: center; /* центрируем по горизонтали */
   position: relative;
@@ -347,9 +346,14 @@ body {
 /* === CENTERING WRAPPER === */
 .center-wrapper {
   display: flex;
-  flex-direction: column;
   justify-content: center; /* центрируем по вертикали */
-  min-height: 100%;        /* растягиваем на весь контейнер */
+  min-height: 0;           /* важно для flex, чтобы не растягивался */
+  align-items: center;   
+}
+
+/* === NAVBAR EXCEPTION === */
+.center-wrapper.navbar-exception {
+  justify-content: flex-start; /* прижимаем к верху */
 }
 
 /* === RESIZABLE WRAPPER === */
@@ -357,13 +361,14 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 1200px;
+  width: 1200px;       /* фиксированная ширина для обычного режима */
   height: auto;     
   min-height: 300px;    
   max-height: 100%;
   opacity: 0;                     
   visibility: hidden;             
 }
+
 
 .resizable-wrapper.loaded {
   opacity: 1;                     
@@ -380,11 +385,9 @@ body {
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
 
-.resizable-wrapper.fullscreen {
-  width: 100% !important;
+.center-wrapper.fullscreen {
   height: 100% !important;
-  border-radius: 0;
-  box-shadow: none;
+  justify-content: flex-start;
 }
 
 
@@ -468,7 +471,7 @@ body:has(.preview-container.fullscreen) {
   padding: 0;
   margin: 0;
   z-index: 2000;
-  background: #e0e0e0;
+  background: #F3F3F5;
   overflow: hidden;
   width: 100vw;
   height: 100vh;
@@ -632,4 +635,36 @@ body:has(.preview-container.fullscreen) {
   opacity: 1;
   visibility: visible;
   transform: translateX(-50%) translateY(12px);
+}
+
+/* === COPY TOAST === */
+.copy-toast {
+  position: fixed;
+  bottom: 24px;                 /* снизу экрана */
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: #fff;             /* белый фон */
+  color: #1f1f1f;              /* тёмный текст */
+  padding: 10px 16px;
+  border-radius: 12px;          /* закруглённые углы */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* тень */
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;                     /* расстояние между иконкой и текстом */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 3000;
+}
+
+.copy-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.copy-toast .icon {
+  font-size: 16px;
+  line-height: 1;
 }

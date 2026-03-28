@@ -90,17 +90,18 @@
 
     <!-- 🔥 PREVIEW CONTAINER -->
     <div class="preview-container" id="previewContainer">
-      <div class="resizable-wrapper desktop" id="resizableWrapper">
-        <div class="loading-overlay" id="loadingOverlay">
-          <div class="loading-spinner"></div>
+      <div class="center-wrapper navbar-exception">
+        <div class="resizable-wrapper desktop" id="resizableWrapper">
+          <div class="loading-overlay" id="loadingOverlay">
+            <div class="loading-spinner"></div>
+          </div>
+          <div class="resize-handle left" id="resizeLeft"></div>
+          <div class="resize-handle right" id="resizeRight"></div>
+          <iframe src="" class="preview-frame" id="previewFrame" loading="lazy"></iframe>
         </div>
-        <div class="resize-handle left" id="resizeLeft"></div>
-        <div class="resize-handle right" id="resizeRight"></div>
-        <iframe src="" class="preview-frame" id="previewFrame" loading="lazy"></iframe>
       </div>
       <div class="width-indicator" id="widthIndicator">1200px</div>
     </div>
-  </div>
 
   <!-- 🔘 Кнопка Show UI -->
   <button class="show-ui-btn" id="showUiBtn" title="Show UI" aria-label="Show user interface">
@@ -111,6 +112,11 @@
     </svg>
     <span>Show UI</span>
   </button>
+
+  <div id="copyToast" class="copy-toast">
+    <span class="icon">✅</span>
+    <span class="text">Component added to clipboard</span>
+  </div>
 
   <!-- JavaScript -->
   <script>
@@ -143,6 +149,15 @@
     const viewToggle = document.getElementById('viewToggle');
     const viewBtns = viewToggle ? viewToggle.querySelectorAll('.view-btn') : [];
     const previewFrame = document.getElementById('previewFrame');
+    const centerWrapper = document.querySelector('.center-wrapper');
+    const isNavbar = window.location.pathname.includes('navbar');
+
+    if (centerWrapper) {
+      if (isNavbar) centerWrapper.classList.add('navbar-exception');
+      else centerWrapper.classList.remove('navbar-exception');
+    }
+    
+
     
     const fullscreenIcon = document.getElementById('fullscreenIcon');
     const fullscreenTooltip = document.getElementById('fullscreenTooltip');
@@ -172,6 +187,33 @@
       copyBtn.style.pointerEvents = 'none';
     }
     initCopyButton();
+
+    function showCopyToast(message = "Component added to clipboard", duration = 2000) {
+  const toast = document.getElementById('copyToast');
+  if (!toast) return;
+
+  toast.querySelector('.text').textContent = message;
+  toast.classList.add('show');
+
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, duration);
+}
+
+function showCopiedState() {
+  if (!copyBtn) return;
+
+  copyBtn.querySelector('svg').outerHTML = ICON_CHECK;
+  copyBtn.classList.add('copied');
+
+  // 🔥 Показываем toast
+  showCopyToast();
+
+  setTimeout(() => {
+    copyBtn.classList.remove('copied');
+    copyBtn.querySelector('svg').outerHTML = ICON_COPY;
+  }, 2000);
+}
   
     // === МАППИНГ ===
     const sectionToJsonKey = {
@@ -287,53 +329,53 @@ previewFrame.addEventListener('load', () => {
 
 
   
-    // 🔥 Получаем высоту с учётом типа секции
-    function updateIframeHeight() {
-      try {
-        const iframeDoc = previewFrame.contentDocument || previewFrame.contentWindow.document;
-        if (!iframeDoc) return;
-        
-        const framerRoot = iframeDoc.querySelector('[data-framer-root]');
-        if (!framerRoot) return;
-        
-        // 🔹 Проверяем, это navbar?
-        const isNavbar = window.location.pathname.includes('navbar');
-        
-        // 🔹 Для navbar НЕ меняем стили — ломает dropdown!
-        if (isNavbar) {
-          const contentHeight = framerRoot.scrollHeight;
-          const newHeight = Math.max(contentHeight, 600);
-          
-          if (Math.abs(newHeight - lastHeight) > 2) {
-            resizableWrapper.style.height = newHeight + 'px';
-            lastHeight = newHeight;
-            console.log('✅ Navbar height:', newHeight + 'px');
-          }
-          return;
-        }
-        
-        // 🔹 ДЛЯ ОСТАЛЬНЫХ СЕКЦИЙ: Меняем стили с !important
-        framerRoot.style.setProperty('min-height', 'auto', 'important');
-        framerRoot.style.setProperty('height', 'auto', 'important');
-        
-        // 🔹 Ждём немного чтобы стили применились
-        setTimeout(() => {
-          const contentHeight = framerRoot.scrollHeight;
-          const newHeight = Math.max(contentHeight, 300);
-          
-          if (Math.abs(newHeight - lastHeight) > 2) {
-            requestAnimationFrame(() => {
-              resizableWrapper.style.height = newHeight + 'px';
-              lastHeight = newHeight;
-              console.log('✅ Section height:', newHeight + 'px');
-            });
-          }
-        }, 100);
-        
-      } catch (e) {
-        console.log('⚠️ CORS blocks iframe access:', e);
+function updateIframeHeight() {
+  try {
+    const iframeDoc = previewFrame.contentDocument || previewFrame.contentWindow.document;
+    if (!iframeDoc) return;
+
+    const framerRoot = iframeDoc.querySelector('[data-framer-root]');
+    if (!framerRoot) return;
+
+    const isNavbar = window.location.pathname.includes('navbar');
+    const contentHeight = framerRoot.scrollHeight;
+
+    let newHeight;
+
+    if (isNavbar) {
+      newHeight = Math.max(contentHeight, 600);
+      if (Math.abs(newHeight - lastHeight) > 2) {
+        resizableWrapper.style.height = newHeight + 'px';
+        lastHeight = newHeight;
       }
+      return;
     }
+
+    framerRoot.style.setProperty('min-height', 'auto', 'important');
+    framerRoot.style.setProperty('height', 'auto', 'important');
+
+    if (isFullscreen) {
+      newHeight = Math.max(contentHeight, window.innerHeight - 60);
+    } else {
+      // 🔹 Ограничиваем рост до текущей ширины контейнера
+      const maxAllowedHeight = framerRoot.clientHeight; 
+      newHeight = Math.min(Math.max(contentHeight, 300), maxAllowedHeight);
+    }
+
+    // 🔹 Округляем вниз, чтобы дробные пиксели не прыгали
+    newHeight = Math.floor(newHeight);
+
+    if (Math.abs(newHeight - lastHeight) > 2) {
+      requestAnimationFrame(() => {
+        resizableWrapper.style.height = newHeight + 'px';
+        lastHeight = newHeight;
+      });
+    }
+
+  } catch (e) {
+    console.log('⚠️ CORS blocks iframe access:', e);
+  }
+}
   
     // 🔥 Слушаем postMessage от iframe
     window.addEventListener('message', (event) => {
@@ -439,14 +481,19 @@ previewFrame.addEventListener('load', () => {
     }
   
     function showCopiedState() {
-      if (!copyBtn) return;
-      copyBtn.querySelector('svg').outerHTML = ICON_CHECK;
-      copyBtn.classList.add('copied');
-      setTimeout(() => {
-        copyBtn.classList.remove('copied');
-        copyBtn.querySelector('svg').outerHTML = ICON_COPY;
-      }, 2000);
-    }
+        if (!copyBtn) return;
+
+        copyBtn.querySelector('svg').outerHTML = ICON_CHECK;
+        copyBtn.classList.add('copied');
+
+        // 🔥 Показываем toast
+        showCopyToast("Component added to clipboard");
+
+        setTimeout(() => {
+          copyBtn.classList.remove('copied');
+          copyBtn.querySelector('svg').outerHTML = ICON_COPY;
+        }, 2000);
+      }
   
     // === Device logic ===
     function getClosestDevice(width) {
@@ -474,24 +521,18 @@ previewFrame.addEventListener('load', () => {
       updateActiveDeviceBtn(width);
     }
     
-    function setWidth(width) {
-      const containerWidth = previewContainer.clientWidth - 40;
-      const finalWidth = Math.min(width, containerWidth);
-      resizableWrapper.style.flex = (finalWidth === width) ? 'none' : '1';
-      resizableWrapper.style.width = finalWidth + 'px';
-      
-      // 🔥 Запросить новую высоту при изменении ширины
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setTimeout(() => {
-            updateIframeHeight();
-          }, 100);
-        });
-      });
-      
-      showWidthIndicator(finalWidth);
-      updateActiveDeviceBtn(finalWidth);
-    }
+function setWidth(width) {
+  const containerWidth = previewContainer.clientWidth - 40; // padding
+  const finalWidth = Math.min(width, containerWidth);       // никогда не выше
+  resizableWrapper.style.flex = (finalWidth === width) ? 'none' : '1';
+  resizableWrapper.style.width = finalWidth + 'px';
+
+  showWidthIndicator(finalWidth);
+  updateActiveDeviceBtn(finalWidth);
+
+  // 🔹 Обновляем высоту
+  requestAnimationFrame(() => updateIframeHeight());
+}
     
     deviceBtns.forEach(btn => {
       btn.addEventListener('click', () => {
@@ -508,52 +549,68 @@ previewFrame.addEventListener('load', () => {
       });
     });
   
-    // === Fullscreen ===
-    if (fullscreenBtn) fullscreenBtn.addEventListener('click', toggleFullscreen);
-    document.addEventListener('keydown', e => {
-      if (e.key === 'f' || e.key === 'F') toggleFullscreen();
-      if (e.key === 'Escape' && isFullscreen) toggleFullscreen();
-    });
-    
-    function toggleFullscreen() {
-      isFullscreen = !isFullscreen;
-      previewContainer.classList.toggle('fullscreen');
-      resizableWrapper.classList.toggle('fullscreen');
-      
-      const toolbar = document.querySelector('.preview-toolbar');
-      if (isFullscreen) {
-        if (toolbar) {
-          toolbar.style.opacity = '0';
-          toolbar.style.pointerEvents = 'none';
-        }
-        if (showUiBtn) showUiBtn.classList.add('visible');
-        deviceBtns.forEach(btn => btn.classList.remove('active'));
-      } else {
-        if (toolbar) {
-          toolbar.style.opacity = '1';
-          toolbar.style.pointerEvents = 'auto';
-        }
-        if (showUiBtn) showUiBtn.classList.remove('visible');
-        setWidth(BREAKPOINTS.desktop);
-        deviceBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.device === 'desktop'));
-      }
-      
-      if (fullscreenIcon && fullscreenTooltip) {
-        if (isFullscreen) {
-          fullscreenIcon.innerHTML = ICON_EXIT_FULLSCREEN;
-          fullscreenTooltip.textContent = 'Exit Fullscreen';
-        } else {
-          fullscreenIcon.innerHTML = ICON_ENTER_FULLSCREEN;
-          fullscreenTooltip.textContent = 'Fullscreen';
-        }
-      }
+   // === Fullscreen ===
+if (fullscreenBtn) fullscreenBtn.addEventListener('click', toggleFullscreen);
+document.addEventListener('keydown', e => {
+  if (e.key === 'f' || e.key === 'F') toggleFullscreen();
+  if (e.key === 'Escape' && isFullscreen) toggleFullscreen();
+});
+
+// 🔹 Сохраняем ширину перед fullscreen
+let prevWidth = resizableWrapper.offsetWidth;
+
+function toggleFullscreen() {
+  isFullscreen = !isFullscreen;
+  previewContainer.classList.toggle('fullscreen');
+  resizableWrapper.classList.toggle('fullscreen');
+
+  const toolbar = document.querySelector('.preview-toolbar');
+
+  if (isFullscreen) {
+    // сохраняем текущую ширину
+    prevWidth = resizableWrapper.offsetWidth;
+
+    // скрываем toolbar
+    if (toolbar) {
+      toolbar.style.opacity = '0';
+      toolbar.style.pointerEvents = 'none';
     }
-    
-    if (showUiBtn) {
-      showUiBtn.addEventListener('click', () => {
-        if (isFullscreen) toggleFullscreen();
-      });
+
+    if (showUiBtn) showUiBtn.classList.add('visible');
+
+    // снимаем активность со всех device кнопок
+    deviceBtns.forEach(btn => btn.classList.remove('active'));
+  } else {
+    // показываем toolbar
+    if (toolbar) {
+      toolbar.style.opacity = '1';
+      toolbar.style.pointerEvents = 'auto';
     }
+
+    if (showUiBtn) showUiBtn.classList.remove('visible');
+
+    // 🔹 НЕ меняем устройство — просто пересчитываем высоту для текущей ширины
+    setWidth(prevWidth);
+  }
+
+  // Обновляем иконку fullscreen
+  if (fullscreenIcon && fullscreenTooltip) {
+    if (isFullscreen) {
+      fullscreenIcon.innerHTML = ICON_EXIT_FULLSCREEN;
+      fullscreenTooltip.textContent = 'Exit Fullscreen';
+    } else {
+      fullscreenIcon.innerHTML = ICON_ENTER_FULLSCREEN;
+      fullscreenTooltip.textContent = 'Fullscreen';
+    }
+  }
+}
+
+// 🔹 Кнопка Show UI возвращает fullscreen в нормальное состояние
+if (showUiBtn) {
+  showUiBtn.addEventListener('click', () => {
+    if (isFullscreen) toggleFullscreen();
+  });
+}
   
     // === Resize horizontal ===
     function initResize(handle, side) {

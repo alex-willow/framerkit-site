@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { Copy, CircleCheck, Lock } from "lucide-react";
 import { motion } from "framer-motion";
 import SectionHeader from "../../components/SectionHeader";
@@ -17,6 +17,7 @@ type PricingCardPageProps = {
 };
 
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
+const FIXED_SKELETON_COUNT = 8;
 
 export default function PricingCardPage({ isAuthenticated, setIsSignInOpen }: PricingCardPageProps) {
   const [items, setItems] = useState<ComponentItem[]>([]);
@@ -28,11 +29,15 @@ export default function PricingCardPage({ isAuthenticated, setIsSignInOpen }: Pr
 
   const galleryRef = useRef<HTMLDivElement>(null);
 
+  // ================================
+  // Загрузка данных
+  // ================================
   useEffect(() => {
     const load = async () => {
       try {
         const res = await fetch(
-          "https://raw.githubusercontent.com/alex-willow/framerkit-data/components/pricingcard.json"
+          "https://raw.githubusercontent.com/alex-willow/framerkit-data/components/pricingcard.json",
+          { cache: "force-cache" }
         );
         if (!res.ok) throw new Error("Failed to load Pricing Card data");
         const json = await res.json();
@@ -40,17 +45,6 @@ export default function PricingCardPage({ isAuthenticated, setIsSignInOpen }: Pr
         // ⚠️ Используем ключ точно как в JSON
         const loadedItems = json.PricingCard || json.Pricingcard || [];
         setItems(loadedItems);
-
-        const imagePromises = loadedItems.map(
-          (item: ComponentItem) =>
-            new Promise<void>((resolve) => {
-              const img = new Image();
-              img.onload = img.onerror = () => resolve();
-              img.src = item.image || PLACEHOLDER;
-            })
-        );
-
-        await Promise.all(imagePromises);
         setLoading(false);
       } catch (err) {
         console.error(err);
@@ -58,23 +52,42 @@ export default function PricingCardPage({ isAuthenticated, setIsSignInOpen }: Pr
         setLoading(false);
       }
     };
-
     load();
   }, []);
 
+  // ================================
+  // Сброс скролла при смене фильтра
+  // ================================
   useEffect(() => {
-    if (galleryRef.current) galleryRef.current.scrollTo({ top: 0 });
+    if (galleryRef.current) {
+      galleryRef.current.scrollTo({ top: 0 });
+    }
   }, [filter]);
 
+  // ================================
+  // Скролл к секции
+  // ================================
   useEffect(() => {
     const section = document.getElementById("pricing-card-page");
-    if (section) section.scrollIntoView({ behavior: "auto", block: "start" });
+    if (section) {
+      section.scrollIntoView({ behavior: "auto", block: "start" });
+    }
   }, []);
 
-  const filtered = items.filter(item =>
-    filter === "dark" ? item.key.toLowerCase().includes("dark") : !item.key.toLowerCase().includes("dark")
-  );
+  // ================================
+  // Фильтрация (useMemo)
+  // ================================
+  const filtered = useMemo(() => {
+    return items.filter(item =>
+      filter === "dark"
+        ? item.key.toLowerCase().includes("dark")
+        : !item.key.toLowerCase().includes("dark")
+    );
+  }, [items, filter]);
 
+  // ================================
+  // Copy
+  // ================================
   const handleCopy = async (item: ComponentItem) => {
     if (!isAuthenticated && item.type === "paid") {
       setIsSignInOpen(true);
@@ -85,8 +98,11 @@ export default function PricingCardPage({ isAuthenticated, setIsSignInOpen }: Pr
     setTimeout(() => setCopiedKey(null), 4000);
   };
 
-  const skeletonCards = Array.from({ length: 6 });
+  const skeletonCards = Array.from({ length: FIXED_SKELETON_COUNT });
 
+  // ================================
+  // Render
+  // ================================
   return (
     <div id="pricing-card-page" style={{ padding: 0, scrollMarginTop: "64px" }}>
       <SectionHeader
@@ -110,61 +126,53 @@ export default function PricingCardPage({ isAuthenticated, setIsSignInOpen }: Pr
         ) : error ? (
           <p style={{ color: "red", padding: "20px" }}>{error}</p>
         ) : filtered.length === 0 ? (
-          <div className="empty-message">No components available for the selected theme.</div>
+          <div className="empty-message">No components available for the selected theme</div>
         ) : (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-          >
-            <div className="gallery">
-              {filtered.map(item => {
-                const canCopy = isAuthenticated || item.type === "free";
-                const isCopied = copiedKey === item.key;
+          <div className="gallery">
+            {filtered.map(item => {
+              const canCopy = isAuthenticated || item.type === "free";
+              const isCopied = copiedKey === item.key;
 
-                return (
-                  <div key={item.key} className={`card ${filter === "dark" ? "card-dark" : "card-light"}`}>
-                    <div className="cardImage">
-                      <img src={item.image || PLACEHOLDER} alt={item.title} />
-                    </div>
-                    <div className="cardInfo">
-                      <h3>{item.title}</h3>
-                      <div
-                        className={`iconButton ${isCopied ? "copied" : ""} ${
-                          !canCopy ? "locked" : ""
-                        }`}
-                        onClick={() => handleCopy(item)}
-                        onMouseEnter={() => !isCopied && setHoveredKey(item.key)}
-                        onMouseLeave={() => setHoveredKey(null)}
-                      >
-                         {isCopied ? (
-                          <CircleCheck size={20} color="#22c55e" strokeWidth={2.5} />
-                        ) : canCopy ? (
-                          <Copy size={16}
-                          color={filter === "dark" ? "#ccc" : "currentColor"} 
-                           />
-                        ) : (
-                          <Lock size={16}
-                          color={filter === "dark" ? "#ccc" : "currentColor"} 
-                           />
-                        )}
+              return (
+                <motion.div
+                  key={item.key}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className={`card ${filter === "dark" ? "card-dark" : "card-light"}`}
+                >
+                  <div className="cardImage">
+                    <img src={item.image || PLACEHOLDER} alt={item.title} loading="lazy" />
+                  </div>
+                  <div className="cardInfo">
+                    <h3>{item.title}</h3>
+                    <div
+                      className={`iconButton ${isCopied ? "copied" : ""} ${
+                        !canCopy ? "locked" : ""
+                      }`}
+                      onClick={() => handleCopy(item)}
+                      onMouseEnter={() => !isCopied && setHoveredKey(item.key)}
+                      onMouseLeave={() => setHoveredKey(null)}
+                    >
+                      {isCopied ? (
+                        <CircleCheck size={20} color="#22c55e" strokeWidth={2.5} />
+                      ) : canCopy ? (
+                        <Copy size={16} color={filter === "dark" ? "#ccc" : "currentColor"} />
+                      ) : (
+                        <Lock size={16} color={filter === "dark" ? "#ccc" : "currentColor"} />
+                      )}
 
-                        {(isCopied || hoveredKey === item.key) && (
-                          <div className="tooltip">
-                            {isCopied
-                              ? "Copied"
-                              : canCopy
-                              ? "Copy"
-                              : "Sign in to copy"}
-                          </div>
-                        )}
-                      </div>
+                      {(isCopied || hoveredKey === item.key) && (
+                        <div className="tooltip">
+                          {isCopied ? "Copied" : canCopy ? "Copy" : "Sign in to copy"}
+                        </div>
+                      )}
                     </div>
                   </div>
-                );
-              })}
-            </div>
-          </motion.div>
+                </motion.div>
+              );
+            })}
+          </div>
         )}
       </div>
     </div>
