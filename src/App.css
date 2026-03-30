@@ -5,7 +5,7 @@
   --framer-color-text: #0A0D14;
   --framer-color-text-secondary: #666;
   --framer-color-border: #eee;
-  --primary-color: #6E3FF3;
+  --primary-color: #3B2489;
   --primary-color-hover: #8a5cf3;
   --primary-color-active: #4a2e9f;
 
@@ -172,7 +172,7 @@ body {
   border: none;
   border-radius: 8px;
   background: transparent;
-  color: #6E3FF3;
+  color: #3B2489;
   cursor: pointer;
   transition: background 0.3s ease;
   white-space: nowrap;
@@ -199,7 +199,7 @@ body {
   font-weight: 600;
   border: none;
   border-radius: 8px;
-  background: #6E3FF3;
+  background: #3B2489;
   color: #ffffff;
   cursor: pointer;
   transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.1s ease;
@@ -342,7 +342,7 @@ body {
 
 .sidebar-item.active {
   background: #E0DFFF;
-  color: #6E3FF3;
+  color: #3B2489;
   font-weight: 600;
 }
 
@@ -639,7 +639,7 @@ body {
   font-weight: 500;
   border-radius: 6px;
   white-space: nowrap;
-  background: #6E3FF3;
+  background: #3B2489;
   color: #fff;
   opacity: 0;
   visibility: hidden;
@@ -656,7 +656,7 @@ body {
   transform: translateX(-50%);
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
-  border-top: 3px solid #6E3FF3;
+  border-top: 3px solid #3B2489;
   z-index: 9;
 }
 
@@ -677,7 +677,7 @@ body {
 
 .locked:hover .tooltip {
   content: "Sign in to copy";
-  background: #6E3FF3;
+  background: #3B2489;
 }
 
 [data-framer-theme="dark"] .cardInfo h3 {
@@ -877,7 +877,7 @@ body {
 
 .component-dropdown-option.active {
   background: rgba(110, 63, 243, 0.08);
-  color: #6E3FF3;
+  color: #3B2489;
   font-weight: 600;
 }
 
@@ -1420,7 +1420,7 @@ body.menu-open {
 }
 
 .featured {
-  border: 2px solid #6E3FF3;
+  border: 2px solid #3B2489;
   background: #ffffff;
 }
 
@@ -1429,7 +1429,7 @@ body.menu-open {
   top: -12px;
   left: 50%;
   transform: translateX(-50%);
-  background: #6E3FF3;
+  background: #3B2489;
   color: white;
   padding: 6px 14px;
   border-radius: 50px;
@@ -1511,7 +1511,7 @@ body.menu-open {
   font-size: 14px;
   font-weight: 600;
   border-radius: 8px;
-  background: #6E3FF3;
+  background: #3B2489;
   color: #ffffff; /* основной цвет текста */
   cursor: pointer;
   transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.1s ease;
@@ -1650,7 +1650,7 @@ body.menu-open {
   border: none;
   padding: 4px;
   cursor: pointer;
-  color: #6E3FF3; /* Твой фирменный фиолетовый */
+  color: #3B2489; /* Твой фирменный фиолетовый */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1800,7 +1800,7 @@ body.menu-open {
 .feature-icon {
   width: 18px;
   height: 18px;
-  color: #6e3ff3;
+  color: #3B2489;
   flex-shrink: 0;
 }
 
@@ -2151,7 +2151,7 @@ body.menu-open {
   font-weight: 500;
   border-radius: 6px;
   white-space: nowrap;
-  background: #6E3FF3;
+  background: #3B2489;
   color: #fff;
   opacity: 0;
   visibility: hidden;
@@ -2167,7 +2167,7 @@ body.menu-open {
   transform: translateX(-50%);
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
-  border-top: 3px solid #6E3FF3;
+  border-top: 3px solid #3B2489;
   z-index: 9;
 }
 
@@ -2214,7 +2214,7 @@ body.menu-open {
 .sidebar-banner {
   margin-top: 10px;
   padding: 16px;
-  background: linear-gradient(230deg, #875dfa 0%, #6E3FF3 100%);
+  background: linear-gradient(230deg, #875dfa 0%, #3B2489 100%);
   color: #fff;
   border-radius: 12px;
   text-align: center;
@@ -2297,7 +2297,7 @@ body.menu-open {
   bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
-  background: #6E3FF3; /* Ваш фиолетовый */
+  background: #3B2489; /* Ваш фиолетовый */
   color: #fff;
   font-size: 12px;
   font-weight: 500;
@@ -2322,7 +2322,7 @@ body.menu-open {
   height: 0;
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
-  border-top: 3px solid #6E3FF3;
+  border-top: 3px solid #3B2489;
 }
 
 /* Показываем при наведении на обёртку */
@@ -2338,7 +2338,7 @@ body.menu-open {
   bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
-  background: #6E3FF3;
+  background: #3B2489;
   color: #fff;
   font-size: 12px;
   font-weight: 500;
@@ -2362,7 +2362,7 @@ body.menu-open {
   height: 0;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  border-top: 5px solid #6E3FF3;
+  border-top: 5px solid #3B2489;
 }
 
 .tooltip-wrapper:hover .tooltip {
@@ -2378,7 +2378,7 @@ body.menu-open {
   bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
-  background: #6E3FF3;
+  background: #3B2489;
   color: #fff;
   font-size: 12px;
   font-weight: 500;
@@ -2400,7 +2400,7 @@ body.menu-open {
   height: 0;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  border-top: 5px solid #6E3FF3;
+  border-top: 5px solid #3B2489;
 }
 
 /* Зелёный стиль для "Copied" */
@@ -2510,7 +2510,7 @@ body.menu-open {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #6E3FF3;
+  color: #3B2489;
   transition: opacity 0.2s ease;
   padding: 4px;
   flex-shrink: 0;
@@ -2531,7 +2531,7 @@ body.menu-open {
   bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
-  background: #6E3FF3;
+  background: #3B2489;
   color: #fff;
   font-size: 12px;
   font-weight: 500;
@@ -2555,7 +2555,7 @@ body.menu-open {
   height: 0;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  border-top: 5px solid #6E3FF3;
+  border-top: 5px solid #3B2489;
 }
 
 .tooltip-wrapper:hover .tooltip {
@@ -2774,7 +2774,7 @@ body.menu-open {
   top: 100%;              /* Позиция ПОД кнопкой */
   left: 50%;
   transform: translateX(-50%);
-  background: #6E3FF3;
+  background: #3B2489;
   color: #fff;
   font-size: 12px;
   font-weight: 500;
@@ -2797,11 +2797,11 @@ body.menu-open {
   height: 0;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  border-bottom: 4px solid #6E3FF3;  /* Треугольник остриём вверх */
+  border-bottom: 4px solid #3B2489;  /* Треугольник остриём вверх */
 }
 
 [data-framer-theme="dark"] .toggle-tooltip::after {
-  border-bottom-color: #6E3FF3;
+  border-bottom-color: #3B2489;
 }
 
 /* ===== Mode Toggle (в стиле бокового меню) ===== */
@@ -2865,7 +2865,7 @@ body.menu-open {
 
 /* Hover эффект */
 .mode-toggle-btn:hover {
-  color: #6E3FF3;
+  color: #3B2489;
   background: rgba(110, 63, 243, 0.05);
   outline: none !important;
   border: none !important;
@@ -2874,7 +2874,7 @@ body.menu-open {
 /* Активная кнопка */
 .mode-toggle-btn.active {
   background: #ffffff;
-  color: #6E3FF3;
+  color: #3B2489;
   box-shadow: 0 2px 8px rgba(110, 63, 243, 0.12);
   outline: none !important;
   border: none !important;
@@ -2894,7 +2894,7 @@ body.menu-open {
 }
 
 [data-framer-theme="dark"] .mode-toggle-btn.active {
-  background: #6E3FF3;
+  background: #3B2489;
   color: white;
   box-shadow: 0 2px 8px rgba(110, 63, 243, 0.3);
 }
