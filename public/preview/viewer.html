@@ -120,593 +120,582 @@
 
   <!-- JavaScript -->
   <script>
-  console.log('🔍 viewer.html loaded');
-  const path = window.location.pathname;
-  const parts = path.split('/').filter(p => p);
-
-  // === Форматирование названия ===
-  let componentName = parts[parts.length - 1] || '';
-  componentName = componentName.replace(/-preview$/i, '').replace(/preview$/i, '').replace(/-wireframe$/i, '-wireframe').replace(/-+/g, '-').replace(/^-|-$/g, '');
-  if (!componentName) componentName = 'Component';
-  const formattedTitle = componentName.split('-').map(word => {
-    if (!word) return '';
-    const withSpace = word.replace(/([a-zA-Z])(\d)/g, '$1 $2');
-    return withSpace.charAt(0).toUpperCase() + withSpace.slice(1);
-  }).filter(w => w).join(' ');
-  document.title = `${formattedTitle} | FramerKit`;
-
-  // === UI Elements ===
-  const deviceBtns = document.querySelectorAll('.device-btn');
-  const resizableWrapper = document.getElementById('resizableWrapper');
-  const previewContainer = document.getElementById('previewContainer');
-  const fullscreenBtn = document.getElementById('fullscreenBtn');
-  const resizeLeft = document.getElementById('resizeLeft');
-  const resizeRight = document.getElementById('resizeRight');
-  const widthIndicator = document.getElementById('widthIndicator');
-  const loadingOverlay = document.getElementById('loadingOverlay');
-  const showUiBtn = document.getElementById('showUiBtn');
-  const copyBtn = document.getElementById('copyBtn');
-  const viewToggle = document.getElementById('viewToggle');
-  const viewBtns = viewToggle ? viewToggle.querySelectorAll('.view-btn') : [];
-  const previewFrame = document.getElementById('previewFrame');
-  const centerWrapper = document.querySelector('.center-wrapper');
-  const isNavbar = window.location.pathname.includes('navbar');
-
-  if (centerWrapper) {
-    if (isNavbar) centerWrapper.classList.add('navbar-exception');
-    else centerWrapper.classList.remove('navbar-exception');
-  }
-
-  const fullscreenIcon = document.getElementById('fullscreenIcon');
-  const fullscreenTooltip = document.getElementById('fullscreenTooltip');
-
-  const BREAKPOINTS = { desktop: 1200, tablet: 810, mobile: 390 };
-  let isFullscreen = false, isResizing = false, startX = 0, startWidth = 1200;
-  let componentsData = [], currentComponent = null, displayUrl = '', componentType = 'paid';
-  let indicatorTimeout = null;
-  let lastHeight = 0;
-  let heightDebounce = null;
+    console.log('🔍 viewer.html loaded');
+    const path = window.location.pathname;
+    const parts = path.split('/').filter(p => p);
   
-  // 🔥 Ширина хранится в переменной — не сбрасывается при смене iframe
-  let currentWidth = BREAKPOINTS.desktop;
-
-  // === Иконки ===
-  const ICON_COPY = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`;
-  const ICON_CHECK = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>`;
-  const ICON_LOCK = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`;
-  const ICON_ENTER_FULLSCREEN = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>`;
-  const ICON_EXIT_FULLSCREEN = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/></svg>`;
-
-  // === Copy Button ===
-  function initCopyButton() {
-    if (!copyBtn) return;
-    copyBtn.classList.add('locked');
-    copyBtn.classList.remove('copied');
-    copyBtn.querySelector('svg').outerHTML = ICON_LOCK;
-    copyBtn.style.pointerEvents = 'none';
-  }
-  initCopyButton();
-
-  function showCopyToast(message = "Component added to clipboard", duration = 2000) {
-    const toast = document.getElementById('copyToast');
-    if (!toast) return;
-    toast.querySelector('.text').textContent = message;
-    toast.classList.add('show');
-    setTimeout(() => { toast.classList.remove('show'); }, duration);
-  }
-
-  function showCopiedState() {
-    if (!copyBtn) return;
-    copyBtn.querySelector('svg').outerHTML = ICON_CHECK;
-    copyBtn.classList.add('copied');
-    showCopyToast();
-    setTimeout(() => {
+    // === Форматирование названия ===
+    let componentName = parts[parts.length - 1] || '';
+    componentName = componentName.replace(/-preview$/i, '').replace(/preview$/i, '').replace(/-wireframe$/i, '-wireframe').replace(/-+/g, '-').replace(/^-|-$/g, '');
+    if (!componentName) componentName = 'Component';
+    const formattedTitle = componentName.split('-').map(word => {
+      if (!word) return '';
+      const withSpace = word.replace(/([a-zA-Z])(\d)/g, '$1 $2');
+      return withSpace.charAt(0).toUpperCase() + withSpace.slice(1);
+    }).filter(w => w).join(' ');
+    document.title = `${formattedTitle} | FramerKit`;
+  
+    // === UI Elements ===
+    const deviceBtns = document.querySelectorAll('.device-btn');
+    const resizableWrapper = document.getElementById('resizableWrapper');
+    const previewContainer = document.getElementById('previewContainer');
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+    const resizeLeft = document.getElementById('resizeLeft');
+    const resizeRight = document.getElementById('resizeRight');
+    const widthIndicator = document.getElementById('widthIndicator');
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    const showUiBtn = document.getElementById('showUiBtn');
+    const copyBtn = document.getElementById('copyBtn');
+    const viewToggle = document.getElementById('viewToggle');
+    const viewBtns = viewToggle ? viewToggle.querySelectorAll('.view-btn') : [];
+    const previewFrame = document.getElementById('previewFrame');
+    const centerWrapper = document.querySelector('.center-wrapper');
+    const isNavbar = window.location.pathname.includes('navbar');
+  
+    if (centerWrapper) {
+      if (isNavbar) centerWrapper.classList.add('navbar-exception');
+      else centerWrapper.classList.remove('navbar-exception');
+    }
+  
+    const fullscreenIcon = document.getElementById('fullscreenIcon');
+    const fullscreenTooltip = document.getElementById('fullscreenTooltip');
+  
+    const BREAKPOINTS = { desktop: 1200, tablet: 810, mobile: 390 };
+    let isFullscreen = false, isResizing = false, startX = 0, startWidth = 1200;
+    let componentsData = [], currentComponent = null, displayUrl = '', componentType = 'paid';
+    let indicatorTimeout = null;
+  
+    // 🔥 Для авто-высоты
+    let lastHeight = 0;
+    let heightDebounce = null;
+  
+    // 🔥 Для предзагрузки
+    let preloadDone = false;
+  
+    // === Иконки ===
+    const ICON_COPY = `<svg width="16" height="16" viewBox="0 0 24  24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`;
+    const ICON_CHECK = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>`;
+    const ICON_LOCK = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`;
+    const ICON_ENTER_FULLSCREEN = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>`;
+    const ICON_EXIT_FULLSCREEN = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/></svg>`;
+  
+    // === Copy Button ===
+    function initCopyButton() {
+      if (!copyBtn) return;
+      copyBtn.classList.add('locked');
       copyBtn.classList.remove('copied');
-      copyBtn.querySelector('svg').outerHTML = ICON_COPY;
-    }, 2000);
-  }
-
-  // === МАППИНГ ===
-  const sectionToJsonKey = {
-    'hero-section': 'hero', 'navbar-section': 'navbar', 'footer-section': 'footer',
-    'feature-section': 'feature', 'logo-section': 'logo', 'gallery-section': 'gallery',
-    'testimonial-section': 'testimonial', 'contact-section': 'contact',
-    'pricing-section': 'pricing', 'faq-section': 'faq', 'cta-section': 'cta',
-  };
-
-  // === Загрузка JSON ===
-  async function loadComponentsData() {
-    const urlSection = parts[1] || 'hero';
-    const jsonKey = sectionToJsonKey[urlSection] || urlSection;
-    const jsonUrl = `https://raw.githubusercontent.com/alex-willow/framerkit-data/main/${jsonKey}.json`;
-    
-    try {
-      const res = await fetch(jsonUrl);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const json = await res.json();
-      componentsData = json[jsonKey] || json.components || [];
-      findAndPrepareComponent();
-    } catch (err) {
-      console.error('❌ JSON load failed:', err);
+      copyBtn.querySelector('svg').outerHTML = ICON_LOCK;
+      copyBtn.style.pointerEvents = 'none';
     }
-  }
-
-  // === Найти компонент ===
-  function findAndPrepareComponent() {
-    const urlKey = parts[parts.length - 1] || '';
-    const isWireframeMode = urlKey.includes('-wireframe');
-    const cleanKey = urlKey.replace(/-wireframe$/i, '').replace(/-preview$/i, '');
-    
-    currentComponent = componentsData.find(item => {
-      const k = item.key || '';
-      return k === cleanKey || k === urlKey;
-    });
-    
-    if (currentComponent) {
-      console.log('✅ Found:', currentComponent.key);
-      const wireframeUrl = currentComponent.wireframe?.url;
-      const regularUrl = currentComponent.url;
-      displayUrl = (isWireframeMode && wireframeUrl) ? wireframeUrl : regularUrl;
-      displayUrl = (displayUrl || '').trim();
-      componentType = currentComponent.type || 'paid';
-      console.log('🔗 Type:', componentType);
-      const sectionNameEl = document.getElementById('sectionName');
-      if (sectionNameEl && currentComponent.title) {
-        sectionNameEl.textContent = currentComponent.title;
-      }
-      updateCopyButton();
-      updateViewToggle();
+    initCopyButton();
+  
+    function showCopyToast(message = "Component added to clipboard", duration = 2000) {
+      const toast = document.getElementById('copyToast');
+      if (!toast) return;
+      toast.querySelector('.text').textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, duration);
+    }
+  
+    function showCopiedState() {
+      if (!copyBtn) return;
+      copyBtn.querySelector('svg').outerHTML = ICON_CHECK;
+      copyBtn.classList.add('copied');
+      showCopyToast();
+      setTimeout(() => {
+        copyBtn.classList.remove('copied');
+        copyBtn.querySelector('svg').outerHTML = ICON_COPY;
+      }, 2000);
+    }
+  
+    // === МАППИНГ ===
+    const sectionToJsonKey = {
+      'hero-section': 'hero', 'navbar-section': 'navbar', 'footer-section': 'footer',
+      'feature-section': 'feature', 'logo-section': 'logo', 'gallery-section': 'gallery',
+      'testimonial-section': 'testimonial', 'contact-section': 'contact',
+      'pricing-section': 'pricing', 'faq-section': 'faq', 'cta-section': 'cta',
+    };
+  
+    // === Загрузка JSON ===
+    async function loadComponentsData() {
+      const urlSection = parts[1] || 'hero';
+      const jsonKey = sectionToJsonKey[urlSection] || urlSection;
+      const jsonUrl = `https://raw.githubusercontent.com/alex-willow/framerkit-data/main/${jsonKey}.json`;
       
-      // 🔥 Предзагружаем второй вариант после загрузки данных
-      preloadAlternateView();
-    } else {
-      console.warn('⚠️ Component NOT found');
-      displayUrl = '/preview/' + parts.slice(1).join('/');
-      const sectionNameEl = document.getElementById('sectionName');
-      if (sectionNameEl) {
-        sectionNameEl.textContent = formattedTitle;
+      try {
+        const res = await fetch(jsonUrl);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const json = await res.json();
+        componentsData = json[jsonKey] || json.components || [];
+        findAndPrepareComponent();
+      } catch (err) {
+        console.error('❌ JSON load failed:', err);
       }
     }
-  }
-
-  // === 🔥 Предзагрузка второго варианта (через невидимый iframe) ===
-  function preloadAlternateView() {
-    if (!currentComponent) return;
-    
-    const isWireframeMode = window.location.pathname.includes('-wireframe');
-    const urlToPreload = isWireframeMode ? currentComponent.url : currentComponent.wireframe?.url;
-    
-    if (urlToPreload) {
-      // 🔹 Создаём невидимый iframe — браузер закэширует ресурсы
-      const preloadIframe = document.createElement('iframe');
-      preloadIframe.src = urlToPreload;
-      preloadIframe.style.display = 'none';
-      preloadIframe.loading = 'lazy';
-      document.body.appendChild(preloadIframe);
+  
+    // === Найти компонент ===
+    function findAndPrepareComponent() {
+      const urlKey = parts[parts.length - 1] || '';
+      const isWireframeMode = urlKey.includes('-wireframe');
+      const cleanKey = urlKey.replace(/-wireframe$/i, '').replace(/-preview$/i, '');
       
-      // 🔹 Удаляем после загрузки (кеш останется)
-      preloadIframe.onload = () => {
-        console.log('✅ Preloaded alternate view:', urlToPreload);
-        setTimeout(() => {
-          if (preloadIframe.parentNode) {
-            preloadIframe.parentNode.removeChild(preloadIframe);
-          }
-        }, 1000);
+      currentComponent = componentsData.find(item => {
+        const k = item.key || '';
+        return k === cleanKey || k === urlKey;
+      });
+      
+      if (currentComponent) {
+        console.log('✅ Found:', currentComponent.key);
+        const wireframeUrl = currentComponent.wireframe?.url;
+        const regularUrl = currentComponent.url;
+        displayUrl = (isWireframeMode && wireframeUrl) ? wireframeUrl : regularUrl;
+        displayUrl = (displayUrl || '').trim();
+        componentType = currentComponent.type || 'paid';
+        console.log('🔗 Type:', componentType);
+        const sectionNameEl = document.getElementById('sectionName');
+        if (sectionNameEl && currentComponent.title) {
+          sectionNameEl.textContent = currentComponent.title;
+        }
+        updateCopyButton();
+        updateViewToggle();
+      } else {
+        console.warn('⚠️ Component NOT found');
+        displayUrl = '/preview/' + parts.slice(1).join('/');
+        const sectionNameEl = document.getElementById('sectionName');
+        if (sectionNameEl) {
+          sectionNameEl.textContent = formattedTitle;
+        }
+      }
+    }
+  
+    // === 🔥 Предзагрузка второго варианта (кеширование браузера) ===
+    function preloadAlternateView() {
+      if (preloadDone || !currentComponent) return;
+      
+      const isWireframeMode = window.location.pathname.includes('-wireframe');
+      const urlToPreload = isWireframeMode ? currentComponent.url : currentComponent.wireframe?.url;
+      
+      if (urlToPreload) {
+        // 🔹 Fetch с mode: 'no-cors' — браузер закэширует ресурсы, но не даст прочитать контент
+        // Это ускоряет последующую загрузку без ошибок CORS
+        fetch(urlToPreload, { mode: 'no-cors', cache: 'force-cache' })
+          .then(() => {
+            console.log('✅ Preloaded alternate view:', urlToPreload);
+            preloadDone = true;
+          })
+          .catch(() => {
+            // Игнорируем ошибки — это не критично
+            preloadDone = true;
+          });
+      }
+    }
+  
+    // === Загрузка iframe ===
+    const componentPath = '/preview/' + parts.slice(1).join('/');
+    previewFrame.src = displayUrl || componentPath;
+    previewFrame.style.pointerEvents = 'none';
+    previewFrame.classList.add('loading'); // 🔹 Начальное состояние
+  
+    // 🔥 Единый обработчик load — сначала высота, ПОТОМ показ
+    previewFrame.addEventListener('load', () => {
+      console.log('🔄 iframe loaded');
+      
+      // 🔹 Убираем класс loading для плавного появления
+      previewFrame.classList.remove('loading');
+      
+      const checkImagesLoaded = () => {
+        try {
+          const iframeDoc = previewFrame.contentDocument || previewFrame.contentWindow.document;
+          if (!iframeDoc) return false;
+          const images = iframeDoc.querySelectorAll('img');
+          return Array.from(images).every(img => img.complete && img.naturalHeight !== 0);
+        } catch (e) {
+          return false;
+        }
       };
-    }
-  }
-
-  // === Загрузка основного iframe ===
-  const componentPath = '/preview/' + parts.slice(1).join('/');
-  previewFrame.src = displayUrl || componentPath;
-  previewFrame.style.pointerEvents = 'none';
-  previewFrame.classList.add('loading');
-
-  // 🔥 Обработчик load — сначала высота, ПОТОМ показ
-  previewFrame.addEventListener('load', () => {
-    console.log('🔄 iframe loaded');
-    previewFrame.classList.remove('loading');
-    
-    const checkImagesLoaded = () => {
+      
+      const waitForReady = (retries = 0, maxRetries = 30) => {
+        if (checkImagesLoaded() || retries >= maxRetries) {
+          // 🔥 1. Сначала вычисляем высоту (невидимо)
+          updateIframeHeight();
+          
+          // 🔥 2. Ждём 50ms чтобы высота применилась
+          setTimeout(() => {
+            // 🔥 3. ТОЛЬКО ТЕПЕРЬ показываем контент — сразу с правильной высотой!
+            resizableWrapper.classList.add('loaded');
+            
+            // 🔥 Скрываем overlay
+            if (loadingOverlay) {
+              loadingOverlay.style.opacity = '0';
+              setTimeout(() => { loadingOverlay.style.display = 'none'; }, 300);
+            }
+            
+            previewFrame.style.pointerEvents = 'auto';
+            
+            // 🔥 4. Предзагружаем второй вариант
+            preloadAlternateView();
+          }, 50);
+        } else {
+          // 🔥 Ещё ждём 100ms и пробуем снова
+          setTimeout(() => waitForReady(retries + 1, maxRetries), 100);
+        }
+      };
+      
+      // 🔥 Начинаем проверку через 200ms
+      setTimeout(() => waitForReady(), 200);
+    });
+  
+    function updateIframeHeight() {
       try {
         const iframeDoc = previewFrame.contentDocument || previewFrame.contentWindow.document;
-        if (!iframeDoc) return false;
-        const images = iframeDoc.querySelectorAll('img');
-        return Array.from(images).every(img => img.complete && img.naturalHeight !== 0);
-      } catch (e) {
-        return false;
-      }
-    };
-    
-    const waitForReady = (retries = 0, maxRetries = 30) => {
-      if (checkImagesLoaded() || retries >= maxRetries) {
-        updateIframeHeight();
-        
-        setTimeout(() => {
-          resizableWrapper.classList.add('loaded');
-          
-          if (loadingOverlay) {
-            loadingOverlay.style.opacity = '0';
-            setTimeout(() => { loadingOverlay.style.display = 'none'; }, 300);
+        if (!iframeDoc) return;
+  
+        const framerRoot = iframeDoc.querySelector('[data-framer-root]');
+        if (!framerRoot) return;
+  
+        const isNavbar = window.location.pathname.includes('navbar');
+        const contentHeight = framerRoot.scrollHeight;
+  
+        let newHeight;
+  
+        if (isNavbar) {
+          newHeight = Math.max(contentHeight, 600);
+          if (Math.abs(newHeight - lastHeight) > 2) {
+            resizableWrapper.style.height = newHeight + 'px';
+            lastHeight = newHeight;
           }
-          
-          previewFrame.style.pointerEvents = 'auto';
-        }, 50);
-      } else {
-        setTimeout(() => waitForReady(retries + 1, maxRetries), 100);
-      }
-    };
-    
-    setTimeout(() => waitForReady(), 200);
-  });
-
-  function updateIframeHeight() {
-    try {
-      const iframeDoc = previewFrame.contentDocument || previewFrame.contentWindow.document;
-      if (!iframeDoc) return;
-
-      const framerRoot = iframeDoc.querySelector('[data-framer-root]');
-      if (!framerRoot) return;
-
-      const isNavbar = window.location.pathname.includes('navbar');
-      const contentHeight = framerRoot.scrollHeight;
-
-      let newHeight;
-
-      if (isNavbar) {
-        newHeight = Math.max(contentHeight, 600);
-        if (Math.abs(newHeight - lastHeight) > 2) {
-          resizableWrapper.style.height = newHeight + 'px';
-          lastHeight = newHeight;
+          return;
         }
-        return;
-      }
-
-      framerRoot.style.setProperty('min-height', 'auto', 'important');
-      framerRoot.style.setProperty('height', 'auto', 'important');
-
-      if (isFullscreen) {
-        newHeight = Math.max(contentHeight, window.innerHeight - 60);
-      } else {
-        const maxAllowedHeight = framerRoot.clientHeight; 
-        newHeight = Math.min(Math.max(contentHeight, 300), maxAllowedHeight);
-      }
-
-      newHeight = Math.floor(newHeight);
-
-      if (Math.abs(newHeight - lastHeight) > 2) {
-        requestAnimationFrame(() => {
-          resizableWrapper.style.height = newHeight + 'px';
-          lastHeight = newHeight;
-        });
-      }
-
-    } catch (e) {
-      console.log('⚠️ CORS blocks iframe access:', e);
-    }
-  }
-
-  // 🔥 postMessage от iframe
-  window.addEventListener('message', (event) => {
-    if (event.data?.type === 'resize') {
-      const newHeight = event.data.height;
-      if (heightDebounce) clearTimeout(heightDebounce);
-      
-      heightDebounce = setTimeout(() => {
-        if (newHeight && Math.abs(newHeight - lastHeight) > 2) {
+  
+        framerRoot.style.setProperty('min-height', 'auto', 'important');
+        framerRoot.style.setProperty('height', 'auto', 'important');
+  
+        if (isFullscreen) {
+          newHeight = Math.max(contentHeight, window.innerHeight - 60);
+        } else {
+          const maxAllowedHeight = framerRoot.clientHeight; 
+          newHeight = Math.min(Math.max(contentHeight, 300), maxAllowedHeight);
+        }
+  
+        newHeight = Math.floor(newHeight);
+  
+        if (Math.abs(newHeight - lastHeight) > 2) {
           requestAnimationFrame(() => {
             resizableWrapper.style.height = newHeight + 'px';
             lastHeight = newHeight;
           });
         }
-      }, 100);
+  
+      } catch (e) {
+        console.log('⚠️ CORS blocks iframe access:', e);
+      }
     }
-  });
-
-  // === Авторизация ===
-  function checkAuth() {
-    const email = localStorage.getItem('rememberedEmail');
-    const key = localStorage.getItem('rememberedKey');
-    return !!(email && key);
-  }
-
-  // === Copy Button state ===
-  function updateCopyButton() {
-    if (!copyBtn) return;
-    if (!componentType) return;
-    const email = localStorage.getItem('rememberedEmail');
-    const key = localStorage.getItem('rememberedKey');
-    const isAuthenticated = !!(email && key);
-    const canCopy = isAuthenticated || componentType === 'free';
-    
-    copyBtn.classList.remove('copied', 'locked');
-    if (!canCopy) {
-      copyBtn.classList.add('locked');
-      copyBtn.querySelector('svg').outerHTML = ICON_LOCK;
-      copyBtn.style.pointerEvents = 'none';
-    } else {
-      copyBtn.querySelector('svg').outerHTML = ICON_COPY;
-      copyBtn.style.pointerEvents = 'auto';
-    }
-  }
-
-  // === View Toggle — 🔥 БЕЗ ПЕРЕЗАГРУЗКИ ===
-  function updateViewToggle() {
-    if (!viewToggle) return;
-    const isWireframe = window.location.pathname.includes('-wireframe');
-    viewBtns.forEach(btn => {
-      const isTarget = btn.dataset.view === (isWireframe ? 'wireframe' : 'design');
-      btn.classList.toggle('active', isTarget);
+  
+    // 🔥 Слушаем postMessage от iframe
+    window.addEventListener('message', (event) => {
+      if (event.data?.type === 'resize') {
+        const newHeight = event.data.height;
+        if (heightDebounce) clearTimeout(heightDebounce);
+        
+        heightDebounce = setTimeout(() => {
+          if (newHeight && Math.abs(newHeight - lastHeight) > 2) {
+            requestAnimationFrame(() => {
+              resizableWrapper.style.height = newHeight + 'px';
+              lastHeight = newHeight;
+            });
+          }
+        }, 100);
+      }
     });
-  }
-
-  if (viewToggle) {
-    viewBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        if (copyBtn) {
-          copyBtn.classList.remove('copied');
-          copyBtn.querySelector('svg').outerHTML = ICON_COPY;
+  
+    // === Авторизация ===
+    function checkAuth() {
+      const email = localStorage.getItem('rememberedEmail');
+      const key = localStorage.getItem('rememberedKey');
+      return !!(email && key);
+    }
+  
+    // === Copy Button state ===
+    function updateCopyButton() {
+      if (!copyBtn) return;
+      if (!componentType) return;
+      const email = localStorage.getItem('rememberedEmail');
+      const key = localStorage.getItem('rememberedKey');
+      const isAuthenticated = !!(email && key);
+      const canCopy = isAuthenticated || componentType === 'free';
+      
+      copyBtn.classList.remove('copied', 'locked');
+      if (!canCopy) {
+        copyBtn.classList.add('locked');
+        copyBtn.querySelector('svg').outerHTML = ICON_LOCK;
+        copyBtn.style.pointerEvents = 'none';
+      } else {
+        copyBtn.querySelector('svg').outerHTML = ICON_COPY;
+        copyBtn.style.pointerEvents = 'auto';
+      }
+    }
+  
+    // === View Toggle ===
+    function updateViewToggle() {
+      if (!viewToggle) return;
+      const isWireframe = window.location.pathname.includes('-wireframe');
+      viewBtns.forEach(btn => {
+        const isTarget = btn.dataset.view === (isWireframe ? 'wireframe' : 'design');
+        btn.classList.toggle('active', isTarget);
+      });
+    }
+  
+    if (viewToggle) {
+      viewBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (copyBtn) {
+            copyBtn.classList.remove('copied');
+            copyBtn.querySelector('svg').outerHTML = ICON_COPY;
+          }
+          
+          const targetView = btn.dataset.view;
+          const isCurrentlyWireframe = window.location.pathname.includes('-wireframe');
+          
+          // 🔹 Если уже в нужном режиме — ничего не делаем
+          if ((targetView === 'wireframe' && isCurrentlyWireframe) || 
+              (targetView === 'design' && !isCurrentlyWireframe)) {
+            return;
+          }
+          
+          // 🔹 Сохраняем текущую ширину в sessionStorage
+          const currentWidth = resizableWrapper.offsetWidth;
+          sessionStorage.setItem('framerkit_preview_width', currentWidth);
+          
+          // 🔹 Формируем новый URL
+          const currentPath = window.location.pathname;
+          let newPath = currentPath;
+          if (targetView === 'wireframe' && !isCurrentlyWireframe) {
+            const lastSegment = parts[parts.length - 1];
+            newPath = currentPath.replace(lastSegment, lastSegment + '-wireframe');
+          } else if (targetView === 'design' && isCurrentlyWireframe) {
+            newPath = currentPath.replace('-wireframe', '');
+          }
+          
+          // 🔹 Перезагружаем с сохранением ширины в hash
+          window.location.href = newPath + '#w=' + currentWidth;
+        });
+      });
+    }
+  
+    // === Copy click ===
+    if (copyBtn) {
+      copyBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        if (!currentComponent || !displayUrl) {
+          await new Promise(resolve => setTimeout(resolve, 300));
+          if (!currentComponent) findAndPrepareComponent();
         }
-        
-        const targetView = btn.dataset.view;
-        const isCurrentlyWireframe = window.location.pathname.includes('-wireframe');
-        
-        // 🔹 Если уже в нужном режиме — ничего не делаем
-        if ((targetView === 'wireframe' && isCurrentlyWireframe) || 
-            (targetView === 'design' && !isCurrentlyWireframe)) {
+        if (!currentComponent || !displayUrl) {
+          await navigator.clipboard.writeText(componentPath);
+          showCopiedState();
           return;
         }
-        
-        // 🔹 Обновляем UI кнопок
-        viewBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        
-        // 🔹 Показываем лоадер
-        if (loadingOverlay) {
-          loadingOverlay.style.display = 'flex';
-          loadingOverlay.style.opacity = '1';
+        if (!checkAuth() && componentType === 'paid') {
+          window.location.href = 'https://www.framerkit.site?signin=true';
+          return;
         }
-        resizableWrapper.classList.remove('loaded');
-        previewFrame.classList.add('loading');
-        previewFrame.style.pointerEvents = 'none';
-        
-        // 🔹 Меняем URL в зависимости от режима
-        if (targetView === 'wireframe' && currentComponent?.wireframe?.url) {
-          displayUrl = currentComponent.wireframe.url;
-        } else if (targetView === 'design' && currentComponent?.url) {
-          displayUrl = currentComponent.url;
+        try {
+          await navigator.clipboard.writeText(displayUrl);
+          showCopiedState();
+        } catch (err) {
+          console.error('❌ Copy failed:', err);
         }
-        
-        // 🔹 Меняем src iframe — БЕЗ перезагрузки страницы!
-        // 🔹 Ширина (currentWidth) сохраняется в переменной
-        previewFrame.src = displayUrl;
-        
-        // 🔹 Обновляем URL в адресной строке (только для истории/шеринга)
-        const currentPath = window.location.pathname;
-        let newPath = currentPath;
-        if (targetView === 'wireframe' && !isCurrentlyWireframe) {
-          const lastSegment = parts[parts.length - 1];
-          newPath = currentPath.replace(lastSegment, lastSegment + '-wireframe');
-        } else if (targetView === 'design' && isCurrentlyWireframe) {
-          newPath = currentPath.replace('-wireframe', '');
-        }
-        if (newPath !== currentPath) {
-          window.history.replaceState({}, '', newPath);
-        }
-        
-        // 🔹 Обновляем для копирования
-        updateCopyButton();
       });
-    });
-  }
-
-  // === Copy click ===
-  if (copyBtn) {
-    copyBtn.addEventListener('click', async (e) => {
-      e.preventDefault();
-      if (!currentComponent || !displayUrl) {
-        await new Promise(resolve => setTimeout(resolve, 300));
-        if (!currentComponent) findAndPrepareComponent();
-      }
-      if (!currentComponent || !displayUrl) {
-        await navigator.clipboard.writeText(componentPath);
-        showCopiedState();
-        return;
-      }
-      if (!checkAuth() && componentType === 'paid') {
-        window.location.href = 'https://www.framerkit.site?signin=true';
-        return;
-      }
-      try {
-        await navigator.clipboard.writeText(displayUrl);
-        showCopiedState();
-      } catch (err) {
-        console.error('❌ Copy failed:', err);
-      }
-    });
-  }
-
-  // === Device logic ===
-  function getClosestDevice(width) {
-    if (width >= 1200) return 'desktop';
-    if (width >= 810) return 'tablet';
-    return 'mobile';
-  }
-  
-  function updateActiveDeviceBtn(width) {
-    const closest = getClosestDevice(width);
-    deviceBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.device === closest));
-  }
-  
-  function showWidthIndicator(width) {
-    widthIndicator.textContent = Math.round(width) + 'px';
-    if (indicatorTimeout) {
-      clearTimeout(indicatorTimeout);
-    } else {
-      widthIndicator.classList.add('show');
     }
-    indicatorTimeout = setTimeout(() => {
-      widthIndicator.classList.remove('show');
-      indicatorTimeout = null;
-    }, 2000);
-    updateActiveDeviceBtn(width);
-  }
-
-  function setWidth(width) {
-    const containerWidth = previewContainer.clientWidth - 40;
-    const finalWidth = Math.min(width, containerWidth);
-    
-    // 🔥 Сохраняем в глобальную переменную
-    currentWidth = finalWidth;
-    
-    resizableWrapper.style.flex = (finalWidth === width) ? 'none' : '1';
-    resizableWrapper.style.width = finalWidth + 'px';
-
-    showWidthIndicator(finalWidth);
-    updateActiveDeviceBtn(finalWidth);
-    requestAnimationFrame(() => updateIframeHeight());
-  }
   
-  deviceBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const device = btn.dataset.device;
-      if (isFullscreen) toggleFullscreen();
-      deviceBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      setWidth(BREAKPOINTS[device]);
-      setTimeout(() => { updateIframeHeight(); }, 300);
-    });
-  });
-
-  // === Fullscreen ===
-  if (fullscreenBtn) fullscreenBtn.addEventListener('click', toggleFullscreen);
-  document.addEventListener('keydown', e => {
-    if (e.key === 'f' || e.key === 'F') toggleFullscreen();
-    if (e.key === 'Escape' && isFullscreen) toggleFullscreen();
-  });
-
-  let prevWidth = BREAKPOINTS.desktop;
-
-  function toggleFullscreen() {
-    isFullscreen = !isFullscreen;
-    previewContainer.classList.toggle('fullscreen');
-    resizableWrapper.classList.toggle('fullscreen');
-
-    const toolbar = document.querySelector('.preview-toolbar');
-
-    if (isFullscreen) {
-      prevWidth = currentWidth;
-      if (toolbar) {
-        toolbar.style.opacity = '0';
-        toolbar.style.pointerEvents = 'none';
-      }
-      if (showUiBtn) showUiBtn.classList.add('visible');
-      deviceBtns.forEach(btn => btn.classList.remove('active'));
-    } else {
-      if (toolbar) {
-        toolbar.style.opacity = '1';
-        toolbar.style.pointerEvents = 'auto';
-      }
-      if (showUiBtn) showUiBtn.classList.remove('visible');
-      setWidth(prevWidth);
+    // === Device logic ===
+    function getClosestDevice(width) {
+      if (width >= 1200) return 'desktop';
+      if (width >= 810) return 'tablet';
+      return 'mobile';
     }
-
-    if (fullscreenIcon && fullscreenTooltip) {
-      if (isFullscreen) {
-        fullscreenIcon.innerHTML = ICON_EXIT_FULLSCREEN;
-        fullscreenTooltip.textContent = 'Exit Fullscreen';
+    
+    function updateActiveDeviceBtn(width) {
+      const closest = getClosestDevice(width);
+      deviceBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.device === closest));
+    }
+    
+    function showWidthIndicator(width) {
+      widthIndicator.textContent = Math.round(width) + 'px';
+      if (indicatorTimeout) {
+        clearTimeout(indicatorTimeout);
       } else {
-        fullscreenIcon.innerHTML = ICON_ENTER_FULLSCREEN;
-        fullscreenTooltip.textContent = 'Fullscreen';
+        widthIndicator.classList.add('show');
       }
+      indicatorTimeout = setTimeout(() => {
+        widthIndicator.classList.remove('show');
+        indicatorTimeout = null;
+      }, 2000);
+      updateActiveDeviceBtn(width);
     }
-  }
-
-  if (showUiBtn) {
-    showUiBtn.addEventListener('click', () => {
-      if (isFullscreen) toggleFullscreen();
-    });
-  }
-
-  // === Resize horizontal ===
-  function initResize(handle, side) {
-    handle.addEventListener('pointerdown', e => {
-      isResizing = true;
-      startX = e.clientX;
-      startWidth = resizableWrapper.offsetWidth;
-      resizableWrapper.style.transition = 'none';
-      handle.classList.add('active');
-      handle.setPointerCapture(e.pointerId);
-      document.addEventListener('pointermove', onResize);
-      document.addEventListener('pointerup', stopResize);
-      e.preventDefault();
-    });
-    function onResize(e) {
-      if (!isResizing) return;
-      let delta = e.clientX - startX;
-      let newWidth = startWidth + (side === 'right' ? delta * 2 : -delta * 2);
-      newWidth = clamp(newWidth, 320, 1920);
-      setWidth(newWidth);
+  
+    function setWidth(width) {
+      const containerWidth = previewContainer.clientWidth - 40;
+      const finalWidth = Math.min(width, containerWidth);
+      resizableWrapper.style.flex = (finalWidth === width) ? 'none' : '1';
+      resizableWrapper.style.width = finalWidth + 'px';
+  
+      showWidthIndicator(finalWidth);
+      updateActiveDeviceBtn(finalWidth);
+      requestAnimationFrame(() => updateIframeHeight());
     }
-    function stopResize(e) {
-      isResizing = false;
-      resizableWrapper.style.transition = 'width 0.25s ease';
-      setTimeout(() => { previewFrame.style.pointerEvents = 'auto'; }, 10);
-      handle.classList.remove('active');
-      document.removeEventListener('pointermove', onResize);
-      document.removeEventListener('pointerup', stopResize);
-      try { handle.releasePointerCapture(e.pointerId); } catch {}
-    }
-  }
-  initResize(resizeLeft, 'left');
-  initResize(resizeRight, 'right');
-
-  // === Back ===
-  document.getElementById('backBtn')?.addEventListener('click', () => {
-    if (window.history.length > 1) window.history.back();
-    else {
-      window.location.href = 'https://www.framerkit.site';
-    }
-  });
-
-  // === Адаптив окна ===
-  window.addEventListener('resize', () => {
-    const containerWidth = previewContainer.clientWidth - 40;
-    const currentWidthVal = resizableWrapper.offsetWidth;
-    if (currentWidthVal > containerWidth) {
-      resizableWrapper.style.flex = '1';
-      resizableWrapper.style.width = containerWidth + 'px';
-      showWidthIndicator(containerWidth);
-      updateActiveDeviceBtn(containerWidth);
-    }
-    updateIframeHeight();
-  });
-
-  // === Init ===
-  document.addEventListener('DOMContentLoaded', () => {
-    // 🔥 Инициализируем с сохранённой шириной (если есть в sessionStorage)
-    const saved = sessionStorage.getItem('framerkit_preview_width');
-    if (saved) {
-      currentWidth = parseInt(saved, 10);
-    }
-    
-    setWidth(currentWidth);
     
     deviceBtns.forEach(btn => {
-      const device = getClosestDevice(currentWidth);
-      btn.classList.toggle('active', btn.dataset.device === device);
+      btn.addEventListener('click', () => {
+        const device = btn.dataset.device;
+        if (isFullscreen) toggleFullscreen();
+        deviceBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        setWidth(BREAKPOINTS[device]);
+        setTimeout(() => {
+          updateIframeHeight();
+        }, 300);
+      });
+    });
+  
+    // === Fullscreen ===
+    if (fullscreenBtn) fullscreenBtn.addEventListener('click', toggleFullscreen);
+    document.addEventListener('keydown', e => {
+      if (e.key === 'f' || e.key === 'F') toggleFullscreen();
+      if (e.key === 'Escape' && isFullscreen) toggleFullscreen();
+    });
+  
+    let prevWidth = resizableWrapper.offsetWidth;
+  
+    function toggleFullscreen() {
+      isFullscreen = !isFullscreen;
+      previewContainer.classList.toggle('fullscreen');
+      resizableWrapper.classList.toggle('fullscreen');
+  
+      const toolbar = document.querySelector('.preview-toolbar');
+  
+      if (isFullscreen) {
+        prevWidth = resizableWrapper.offsetWidth;
+        if (toolbar) {
+          toolbar.style.opacity = '0';
+          toolbar.style.pointerEvents = 'none';
+        }
+        if (showUiBtn) showUiBtn.classList.add('visible');
+        deviceBtns.forEach(btn => btn.classList.remove('active'));
+      } else {
+        if (toolbar) {
+          toolbar.style.opacity = '1';
+          toolbar.style.pointerEvents = 'auto';
+        }
+        if (showUiBtn) showUiBtn.classList.remove('visible');
+        setWidth(prevWidth);
+      }
+  
+      if (fullscreenIcon && fullscreenTooltip) {
+        if (isFullscreen) {
+          fullscreenIcon.innerHTML = ICON_EXIT_FULLSCREEN;
+          fullscreenTooltip.textContent = 'Exit Fullscreen';
+        } else {
+          fullscreenIcon.innerHTML = ICON_ENTER_FULLSCREEN;
+          fullscreenTooltip.textContent = 'Fullscreen';
+        }
+      }
+    }
+  
+    if (showUiBtn) {
+      showUiBtn.addEventListener('click', () => {
+        if (isFullscreen) toggleFullscreen();
+      });
+    }
+  
+    // === Resize horizontal ===
+    function initResize(handle, side) {
+      handle.addEventListener('pointerdown', e => {
+        isResizing = true;
+        startX = e.clientX;
+        startWidth = resizableWrapper.offsetWidth;
+        resizableWrapper.style.transition = 'none';
+        handle.classList.add('active');
+        handle.setPointerCapture(e.pointerId);
+        document.addEventListener('pointermove', onResize);
+        document.addEventListener('pointerup', stopResize);
+        e.preventDefault();
+      });
+      function onResize(e) {
+        if (!isResizing) return;
+        let delta = e.clientX - startX;
+        let newWidth = startWidth + (side === 'right' ? delta * 2 : -delta * 2);
+        newWidth = clamp(newWidth, 320, 1920);
+        setWidth(newWidth);
+      }
+      function stopResize(e) {
+        isResizing = false;
+        resizableWrapper.style.transition = 'width 0.25s ease';
+        setTimeout(() => { previewFrame.style.pointerEvents = 'auto'; }, 10);
+        handle.classList.remove('active');
+        document.removeEventListener('pointermove', onResize);
+        document.removeEventListener('pointerup', stopResize);
+        try { handle.releasePointerCapture(e.pointerId); } catch {}
+      }
+    }
+    initResize(resizeLeft, 'left');
+    initResize(resizeRight, 'right');
+  
+    // === Back ===
+    document.getElementById('backBtn')?.addEventListener('click', () => {
+      if (window.history.length > 1) window.history.back();
+      else {
+        window.location.href = 'https://www.framerkit.site';
+      }
+    });
+  
+    // === Адаптив окна ===
+    window.addEventListener('resize', () => {
+      const containerWidth = previewContainer.clientWidth - 40;
+      const currentWidth = resizableWrapper.offsetWidth;
+      if (currentWidth > containerWidth) {
+        resizableWrapper.style.flex = '1';
+        resizableWrapper.style.width = containerWidth + 'px';
+        showWidthIndicator(containerWidth);
+        updateActiveDeviceBtn(containerWidth);
+      }
+      updateIframeHeight();
+    });
+  
+    // === Init ===
+    document.addEventListener('DOMContentLoaded', () => {
+      // 🔹 Восстановление ширины после перезагрузки
+      const hash = window.location.hash;
+      const widthMatch = hash.match(/#w=(\d+)/);
+      let initialWidth = BREAKPOINTS.desktop;
+      
+      if (widthMatch) {
+        initialWidth = parseInt(widthMatch[1], 10);
+        history.replaceState(null, null, window.location.pathname);
+      } else {
+        const saved = sessionStorage.getItem('framerkit_preview_width');
+        if (saved) initialWidth = parseInt(saved, 10);
+      }
+      
+      setWidth(initialWidth);
+      
+      deviceBtns.forEach(btn => {
+        const device = getClosestDevice(initialWidth);
+        btn.classList.toggle('active', btn.dataset.device === device);
+      });
+      
+      updateViewToggle();
+      loadComponentsData();
+    });
+  
+    // === Pointer events ===
+    resizableWrapper.addEventListener('mouseenter', () => { 
+      if (!isResizing) previewFrame.style.pointerEvents = 'auto'; 
     });
     
-    updateViewToggle();
-    loadComponentsData();
-  });
-
-  // === Pointer events ===
-  resizableWrapper.addEventListener('mouseenter', () => { 
-    if (!isResizing) previewFrame.style.pointerEvents = 'auto'; 
-  });
-  
-  function clamp(value, min, max) { return Math.max(min, Math.min(value, max)); }
-</script>
+    function clamp(value, min, max) { return Math.max(min, Math.min(value, max)); }
+  </script>
 </body>
 </html>
