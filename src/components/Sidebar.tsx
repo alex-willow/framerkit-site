@@ -1,14 +1,12 @@
 import { useState, useEffect, useRef } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom"; // 🔥 Добавили Link
 import { ChevronDown, ChevronUp, LogOut } from "lucide-react";
-
 
 const trackEvent = (event: string, params?: Record<string, any>) => {
   if (typeof window !== "undefined" && (window as any).gtag) {
     (window as any).gtag("event", event, params);
   }
 };
-
 
 type SidebarProps = {
   activeSection: string;
@@ -37,8 +35,6 @@ export default function Sidebar({
   const [layoutOpen, setLayoutOpen] = useState(false);
   const [componentsOpen, setComponentsOpen] = useState(false);
   const [templatesOpen, setTemplatesOpen] = useState(false);
-
-
 
   const homeSections = [
     { id: "overview", label: "Overview" },
@@ -83,7 +79,6 @@ export default function Sidebar({
   const componentIds = componentSections.map(s => s.id);
 
   useEffect(() => {
-    // layout
     if (
       location.pathname.startsWith("/layout") ||
       layoutIds.includes(activeSection)
@@ -94,7 +89,6 @@ export default function Sidebar({
       return;
     }
   
-    // components
     if (
       location.pathname.startsWith("/components") ||
       componentIds.includes(activeSection)
@@ -105,7 +99,6 @@ export default function Sidebar({
       return;
     }
   
-    // templates
     if (location.pathname.startsWith("/templates")) {
       setTemplatesOpen(true);
       setLayoutOpen(false);
@@ -128,29 +121,24 @@ export default function Sidebar({
       });
     }
   }, [activeSection, location.pathname]);
-  
-
-
 
   const handleHomeSectionClick = (id: string) => {
     onSectionChange(id);
     if (isMobile) onMenuClose();
     if (location.pathname === "/") {
-      // Уже на главной — скроллим
       const el = document.getElementById(id);
       if (el) {
         el.scrollIntoView({ behavior: "auto", block: "start" });
       }
     } else {
-      // Переходим на главную + хэш
       navigate(`/#${id}`);
     }
   };
 
-  const handleOtherSectionClick = (id: string, basePath: string) => {
-    onSectionChange(id);
-    if (isMobile) onMenuClose();
-    navigate(`/${basePath}/${id}`);
+  // 🔥 НОВАЯ ФУНКЦИЯ: Возвращает путь для Link
+  const getLinkPath = (id: string, basePath?: string) => {
+    if (!basePath) return `/#${id}`;
+    return `/${basePath}/${id}`;
   };
 
   const isActive = (id: string, basePath?: string) => {
@@ -159,15 +147,20 @@ export default function Sidebar({
     return location.pathname === `/${id}`;
   };
 
+  // 🔥 ИСПРАВЛЕНО: renderSectionItems теперь возвращает <Link>
   const renderSectionItems = (list: { id: string; label: string }[], basePath: string) =>
     list.map(({ id, label }) => (
-      <button
+      <Link
         key={id}
+        to={getLinkPath(id, basePath)}
         className={`sidebar-item ${isActive(id, basePath) ? "active" : ""}`}
-        onClick={() => handleOtherSectionClick(id, basePath)}
+        onClick={() => {
+          onSectionChange(id);
+          if (isMobile) onMenuClose();
+        }}
       >
         {label}
-      </button>
+      </Link>
     ));
 
   const CollapsibleSection = ({
@@ -182,10 +175,11 @@ export default function Sidebar({
     children: React.ReactNode;
   }) => (
     <div className="collapsible-section">
+      {/* 🔥 Заголовок секции — кнопка, потому что это действие (открыть/закрыть) */}
       <div
         className="sidebar-header collapsible"
         onClick={() => setOpen(!open)}
-        style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
+        style={{ display: "flex", justifyContent: "space-between", alignItems: "center", cursor: "pointer" }}
       >
         <span>{title}</span>
         {open ? <ChevronDown size={16} /> : <ChevronUp size={16} />}
@@ -196,43 +190,49 @@ export default function Sidebar({
 
   const renderTemplatesSection = () => (
     <CollapsibleSection title="Templates" open={templatesOpen} setOpen={setTemplatesOpen}>
-      <button
+      {/* 🔥 Template item — тоже ссылка */}
+      <Link
+        to="/templates/framerkitdaily"
         className={`sidebar-item ${location.pathname === "/templates/framerkitdaily" ? "active" : ""}`}
         onClick={() => {
           onSectionChange("framerkitdaily");
           if (isMobile) onMenuClose();
-          navigate("/templates/framerkitdaily");
         }}
       >
         Framer Kit Daily
-      </button>
+      </Link>
     </CollapsibleSection>
   );
 
   const sidebarContent = (
     <div className="sidebar-inner" style={{ display: "flex", flexDirection: "column", height: "100%" }}>
-      {/* Logo */}
+      {/* Logo — ссылка на главную */}
       {!isMobile && (
-        <div className="sidebar-logo-container" onClick={() => navigate("/")}>
+        <Link to="/" className="sidebar-logo-container" onClick={() => onSectionChange("overview")}>
           <img src="/Logo.png" alt="FramerKit" className="sidebar-logo-icon" />
           <h1 className="sidebar-logo-text">FramerKit</h1>
-        </div>
+        </Link>
       )}
 
-          <div
-            ref={scrollRef}
-            className="sidebar-scroll"
-            style={{ flexGrow: 1, overflowY: "auto" }}
-          >
+      <div
+        ref={scrollRef}
+        className="sidebar-scroll"
+        style={{ flexGrow: 1, overflowY: "auto" }}
+      >
         <div className="sidebar-header">Getting Started</div>
+        
+        {/* 🔥 Home sections — ссылки с хэшем */}
         {homeSections.map(({ id, label }) => (
-          <button
+          <Link
             key={id}
+            to={`/#${id}`}
             className={`sidebar-item ${isActive(id) ? "active" : ""}`}
-            onClick={() => handleHomeSectionClick(id)}
+            onClick={() => {
+              handleHomeSectionClick(id);
+            }}
           >
             {label}
-          </button>
+          </Link>
         ))}
 
         <CollapsibleSection title="Layout Sections" open={layoutOpen} setOpen={setLayoutOpen}>
@@ -248,44 +248,46 @@ export default function Sidebar({
 
       <div className="sidebar-bottom">
         {isAuthenticated ? (
+          // 🔥 Logout — остаётся кнопкой, это действие!
           <button className="logoutButton" onClick={onLogout}>
             <LogOut size={16} /> Log out
           </button>
         ) : (
           <>
+            {/* 🔥 Get Full Access — кнопка, это действие (скролл + трекинг) */}
             <button
-                  className="authButton"
-                  onClick={() => {
-                    trackEvent("cta_click", {
-                      location: "sidebar",
-                      action: "get_full_access",
-                    });
+              className="authButton"
+              onClick={() => {
+                trackEvent("cta_click", {
+                  location: "sidebar",
+                  action: "get_full_access",
+                });
 
-                    if (location.pathname === "/") {
-                      const el = document.getElementById("get-framerkit");
-                      if (el) {
-                        el.scrollIntoView({ behavior: "smooth", block: "start" });
-                      }
-                    } else {
-                      navigate("/#get-framerkit");
-                    }
-                  }}
-                >
-                  Get Full Access
-                </button>
+                if (location.pathname === "/") {
+                  const el = document.getElementById("get-framerkit");
+                  if (el) {
+                    el.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }
+                } else {
+                  navigate("/#get-framerkit");
+                }
+              }}
+            >
+              Get Full Access
+            </button>
 
-                <button
-                  className="loginButton"
-                  onClick={() => {
-                    trackEvent("login_click", {
-                      location: "sidebar",
-                    });
-                    onSignInOpen?.();
-                  }}
-                >
-                  Log in
-                </button>
-
+            {/* 🔥 Login — кнопка, это действие (открыть модалку) */}
+            <button
+              className="loginButton"
+              onClick={() => {
+                trackEvent("login_click", {
+                  location: "sidebar",
+                });
+                onSignInOpen?.();
+              }}
+            >
+              Log in
+            </button>
           </>
         )}
       </div>
