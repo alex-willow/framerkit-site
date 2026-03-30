@@ -25,20 +25,21 @@ type NavbarPageProps = {
 
 // ✅ Исправлен PLACEHOLDER (убраны пробелы)
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
+const FIXED_SKELETON_COUNT = 8;
 
 export default function NavbarPage({
   isAuthenticated,
   setIsSignInOpen,
 }: NavbarPageProps) {
   const [items, setItems] = useState<ComponentItem[]>([]);
+  // 🔥 Добавлен state загрузки (как в PricingPage)
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [filter, setFilter] = useState<"light" | "dark">("light");
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
   const [hoveredPreviewKey, setHoveredPreviewKey] = useState<string | null>(null);
   const [isWireframeMode, setIsWireframeMode] = useState(true);
-
-  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
 
   const galleryRef = useRef<HTMLDivElement>(null);
 
@@ -56,9 +57,11 @@ export default function NavbarPage({
 
         const json = await res.json();
         setItems(json.navbar || []);
+        setLoading(false); // 🔥 Отключаем загрузку
       } catch (err) {
         console.error(err);
         setError("Failed to load navbar components");
+        setLoading(false); // 🔥 Отключаем загрузку даже при ошибке
       }
     };
 
@@ -89,17 +92,6 @@ export default function NavbarPage({
         : !item.key.includes("dark")
     );
   }, [items, filter]);
-
-  // ================================
-  // IMAGE LOAD
-  // ================================
-  const handleImageLoad = (key: string) => {
-    setLoadedImages(prev => {
-      const next = new Set(prev);
-      next.add(key);
-      return next;
-    });
-  };
 
   // ================================
   // PREVIEW
@@ -136,6 +128,9 @@ export default function NavbarPage({
     setTimeout(() => setCopiedKey(null), 4000);
   };
 
+  // 🔥 Массив для скелетонов
+  const skeletonCards = Array.from({ length: FIXED_SKELETON_COUNT });
+
   // ================================
   // RENDER
   // ================================
@@ -159,13 +154,23 @@ export default function NavbarPage({
         count={filtered.length}
         filter={filter}
         onFilterChange={setFilter}
-        loading={false}
+        loading={loading} // 🔥 Передаем статус загрузки в хедер
         isWireframeMode={isWireframeMode}
         onWireframeModeChange={setIsWireframeMode}
       />
 
       <div className="gallery-scroll-area" ref={galleryRef}>
-        {error ? (
+        {/* 🔥 Проверка: загрузка / ошибка / контент */}
+        {loading ? (
+          <div className="skeleton-gallery">
+            {skeletonCards.map((_, i) => (
+              <div key={i} className="skeleton-card">
+                <div className="skeleton-card-image" />
+                <div className="skeleton-card-info" />
+              </div>
+            ))}
+          </div>
+        ) : error ? (
           <p style={{ color: "red", padding: "20px" }}>{error}</p>
         ) : filtered.length === 0 ? (
           <div className="empty-message">
@@ -191,8 +196,6 @@ export default function NavbarPage({
                 ? item.wireframe?.previewUrl
                 : item.previewUrl;
 
-              const isLoaded = loadedImages.has(item.key);
-
               return (
                 <motion.div
                   key={item.key}
@@ -202,7 +205,6 @@ export default function NavbarPage({
                   className={`card ${filter === "dark" ? "card-dark" : "card-light"}`}
                 >
                   <div className="cardImage">
-                    {/* 🔥 Alt-текст с ключевыми словами */}
                     <img 
                       src={displayImage} 
                       alt={`${item.title} - ${isWireframeMode ? 'Wireframe' : 'Design'} navbar component for Framer`} 
@@ -219,23 +221,7 @@ export default function NavbarPage({
                           onClick={e => {
                             e.preventDefault();
                             e.stopPropagation();
-
-                            try {
-                              let path = displayPreviewUrl.trim();
-                              let cleanPath = "";
-
-                              if (path.startsWith("/")) {
-                                cleanPath = path.replace("/preview/", "").replace(/\/$/, "");
-                              } else if (path.startsWith("http")) {
-                                const url = new URL(path);
-                                cleanPath = url.pathname.replace("/preview/", "").replace(/\/$/, "");
-                              }
-
-                              const viewerUrl = `/p/${cleanPath}`;
-                              window.open(viewerUrl, "_blank", "noopener,noreferrer");
-                            } catch {
-                              window.open(displayPreviewUrl, "_blank", "noopener,noreferrer");
-                            }
+                            openPreview(displayPreviewUrl);
                           }}
                           onMouseEnter={() => setHoveredPreviewKey(item.key)}
                           onMouseLeave={() => setHoveredPreviewKey(null)}
@@ -291,7 +277,7 @@ export default function NavbarPage({
         )}
       </div>
 
-      {/* 🔥 SEO-контент для поисковиков (текст внизу страницы) */}
+      {/* 🔥 SEO-контент для поисковиков */}
       <article 
         className="seo-content" 
         style={{ 
