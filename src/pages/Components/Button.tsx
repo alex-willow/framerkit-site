@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import { Copy, CircleCheck, Lock } from "lucide-react";
 import { motion } from "framer-motion";
 import SectionHeader from "../../components/SectionHeader";
+import SEO from "../../components/SEO";
 
 type ComponentItem = {
   key: string;
@@ -16,6 +17,7 @@ type ButtonPageProps = {
   setIsSignInOpen: (open: boolean) => void;
 };
 
+// ✅ Исправлен PLACEHOLDER (убраны пробелы)
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
 const FIXED_SKELETON_COUNT = 8;
 
@@ -102,6 +104,19 @@ export default function ButtonPage({ isAuthenticated, setIsSignInOpen }: ButtonP
   // ================================
   return (
     <div id="button-page" style={{ padding: 0, scrollMarginTop: "64px" }}>
+      
+      {/* 🔥 SEO META TAGS */}
+      <SEO
+        title="Button Components for Framer"
+        description="Interactive button components for Framer. Light & dark themes. Copy-paste ready CTA buttons, icon buttons, and button groups for web interfaces."
+        keywords="framer button component, CTA button, icon button, button group, framer ui kit, copy paste button, responsive button"
+        image="/og-button.jpg"
+        canonical="https://www.framerkit.site/components/button"
+      />
+
+      {/* 🔥 H1 для поисковиков (визуально скрыт, но индексируется) */}
+      <h1 className="sr-only">Button Components for Framer — Interactive CTA Elements</h1>
+
       <SectionHeader
         title="Button"
         count={filtered.length}
@@ -123,7 +138,7 @@ export default function ButtonPage({ isAuthenticated, setIsSignInOpen }: ButtonP
         ) : error ? (
           <p style={{ color: "red", padding: "20px" }}>{error}</p>
         ) : filtered.length === 0 ? (
-          <div className="empty-message">No components available for the selected theme</div>
+          <div className="empty-message">No button components available for the selected theme</div>
         ) : (
           <div className="gallery">
             {filtered.map(item => {
@@ -139,7 +154,12 @@ export default function ButtonPage({ isAuthenticated, setIsSignInOpen }: ButtonP
                   className={`card ${filter === "dark" ? "card-dark" : "card-light"}`}
                 >
                   <div className="cardImage">
-                    <img src={item.image || PLACEHOLDER} alt={item.title} loading="lazy" />
+                    {/* 🔥 Alt-текст с ключевыми словами */}
+                    <img 
+                      src={item.image || PLACEHOLDER} 
+                      alt={`${item.title} - Button component for Framer`} 
+                      loading="lazy" 
+                    />
                   </div>
                   <div className="cardInfo">
                     <h3>{item.title}</h3>
@@ -172,6 +192,36 @@ export default function ButtonPage({ isAuthenticated, setIsSignInOpen }: ButtonP
           </div>
         )}
       </div>
+
+      {/* 🔥 SEO-контент для поисковиков (текст внизу страницы) */}
+      <article 
+        className="seo-content" 
+        style={{ 
+          padding: '40px 20px', 
+          color: 'var(--framer-color-text-secondary)',
+          maxWidth: '800px',
+          margin: '0 auto'
+        }}
+      >
+        <h2 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '16px', color: 'var(--framer-color-text)' }}>
+          Button Components for Framer
+        </h2>
+        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
+          Drive user actions with these professional button components for Framer. 
+          Each button is designed for clear call-to-action, intuitive interaction, and visual hierarchy, 
+          featuring multiple styles (solid, outline, ghost), icon support, and hover states that guide users 
+          through your interface with confidence.
+        </p>
+        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
+          Perfect for landing pages, forms, navigation menus, and interactive dashboards. 
+          All components support light and dark themes, with instant copy-paste functionality 
+          for rapid implementation in your Framer projects.
+        </p>
+        <p style={{ lineHeight: 1.6 }}>
+          <strong>Features:</strong> Responsive layout · Dark/Light themes · Multiple styles · 
+          Instant copy-paste · Framer-compatible · Icon support · Hover/focus states · Mobile-optimized sizing.
+        </p>
+      </article>
     </div>
   );
 }

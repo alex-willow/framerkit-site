@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import { Copy, CircleCheck, Lock } from "lucide-react";
 import { motion } from "framer-motion";
 import SectionHeader from "../../components/SectionHeader";
+import SEO from "../../components/SEO";
 
 type ComponentItem = {
   key: string;
@@ -16,6 +17,7 @@ type InputPageProps = {
   setIsSignInOpen: (open: boolean) => void;
 };
 
+// ✅ Исправлен PLACEHOLDER (убраны пробелы)
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
 const FIXED_SKELETON_COUNT = 8;
 
@@ -102,6 +104,19 @@ export default function InputPage({ isAuthenticated, setIsSignInOpen }: InputPag
   // ================================
   return (
     <div id="input-page" style={{ padding: 0, scrollMarginTop: "64px" }}>
+      
+      {/* 🔥 SEO META TAGS */}
+      <SEO
+        title="Input Components for Framer"
+        description="Form input components for Framer. Light & dark themes. Copy-paste ready text fields, search inputs, and form controls for web projects."
+        keywords="framer input component, text field, search input, form control, framer ui kit, copy paste input, responsive input field"
+        image="/og-input.jpg"
+        canonical="https://www.framerkit.site/components/input"
+      />
+
+      {/* 🔥 H1 для поисковиков (визуально скрыт, но индексируется) */}
+      <h1 className="sr-only">Input Components for Framer — Text Fields & Form Controls</h1>
+
       <SectionHeader
         title="Input"
         count={filtered.length}
@@ -123,7 +138,7 @@ export default function InputPage({ isAuthenticated, setIsSignInOpen }: InputPag
         ) : error ? (
           <p style={{ color: "red", padding: "20px" }}>{error}</p>
         ) : filtered.length === 0 ? (
-          <div className="empty-message">No components available for the selected theme</div>
+          <div className="empty-message">No input components available for the selected theme</div>
         ) : (
           <div className="gallery">
             {filtered.map(item => {
@@ -139,7 +154,12 @@ export default function InputPage({ isAuthenticated, setIsSignInOpen }: InputPag
                   className={`card ${filter === "dark" ? "card-dark" : "card-light"}`}
                 >
                   <div className="cardImage">
-                    <img src={item.image || PLACEHOLDER} alt={item.title} loading="lazy" />
+                    {/* 🔥 Alt-текст с ключевыми словами */}
+                    <img 
+                      src={item.image || PLACEHOLDER} 
+                      alt={`${item.title} - Input component for Framer`} 
+                      loading="lazy" 
+                    />
                   </div>
                   <div className="cardInfo">
                     <h3>{item.title}</h3>
@@ -172,6 +192,36 @@ export default function InputPage({ isAuthenticated, setIsSignInOpen }: InputPag
           </div>
         )}
       </div>
+
+      {/* 🔥 SEO-контент для поисковиков (текст внизу страницы) */}
+      <article 
+        className="seo-content" 
+        style={{ 
+          padding: '40px 20px', 
+          color: 'var(--framer-color-text-secondary)',
+          maxWidth: '800px',
+          margin: '0 auto'
+        }}
+      >
+        <h2 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '16px', color: 'var(--framer-color-text)' }}>
+          Input Components for Framer
+        </h2>
+        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
+          Create seamless user experiences with these professional input components for Framer. 
+          Each input is designed for clarity and accessibility, featuring clean borders, 
+          focus states, placeholder text, and optional icons that guide users through 
+          form interactions with confidence on any device.
+        </p>
+        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
+          Perfect for contact forms, search bars, login pages, and data entry interfaces. 
+          All components support light and dark themes, with instant copy-paste functionality 
+          for rapid implementation in your Framer projects.
+        </p>
+        <p style={{ lineHeight: 1.6 }}>
+          <strong>Features:</strong> Responsive layout · Dark/Light themes · Focus states · 
+          Instant copy-paste · Framer-compatible · Icon support · Validation ready · Mobile-optimized.
+        </p>
+      </article>
     </div>
   );
 }

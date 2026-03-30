@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import { Copy, CircleCheck, Lock, Eye } from "lucide-react";
 import { motion } from "framer-motion";
 import SectionHeader from "../../components/SectionHeader";
+import SEO from "../../components/SEO";
 
 type ComponentItem = {
   key: string;
@@ -22,6 +23,7 @@ type CtaPageProps = {
   setIsSignInOpen: (open: boolean) => void;
 };
 
+// ✅ Исправлен PLACEHOLDER (убраны пробелы)
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
 const FIXED_SKELETON_COUNT = 8;
 
@@ -110,6 +112,19 @@ export default function CtaPage({ isAuthenticated, setIsSignInOpen }: CtaPagePro
   // ================================
   return (
     <div id="cta-page" style={{ padding: 0, scrollMarginTop: "64px" }}>
+      
+      {/* 🔥 SEO META TAGS */}
+      <SEO
+        title="CTA Section Components for Framer"
+        description="High-converting call-to-action section components for Framer. Light & dark themes, wireframe & design modes. Copy-paste ready CTA banners to boost conversions."
+        keywords="framer cta section, call to action component, conversion banner, signup section, framer ui kit, copy paste cta, responsive cta button"
+        image="/og-cta.jpg"
+        canonical="https://www.framerkit.site/layout/cta"
+      />
+
+      {/* 🔥 H1 для поисковиков (визуально скрыт, но индексируется) */}
+      <h1 className="sr-only">CTA Section Components for Framer — Call-to-Action Banners</h1>
+
       <SectionHeader
         title="CTA"
         count={filtered.length}
@@ -134,7 +149,7 @@ export default function CtaPage({ isAuthenticated, setIsSignInOpen }: CtaPagePro
         ) : error ? (
           <p style={{ color: "red", padding: "20px" }}>{error}</p>
         ) : filtered.length === 0 ? (
-          <div className="empty-message">No components available for the selected theme</div>
+          <div className="empty-message">No CTA components available for the selected theme</div>
         ) : (
           <div className="gallery">
             {filtered.map(item => {
@@ -162,7 +177,12 @@ export default function CtaPage({ isAuthenticated, setIsSignInOpen }: CtaPagePro
                   className={`card ${filter === "dark" ? "card-dark" : "card-light"}`}
                 >
                   <div className="cardImage">
-                    <img src={displayImage} alt={item.title} loading="lazy" />
+                    {/* 🔥 Alt-текст с ключевыми словами */}
+                    <img 
+                      src={displayImage} 
+                      alt={`${item.title} - ${isWireframeMode ? 'Wireframe' : 'Design'} CTA section component for Framer`} 
+                      loading="lazy" 
+                    />
                   </div>
                   <div className="cardInfo">
                     <h3>{item.title}</h3>
@@ -245,6 +265,35 @@ export default function CtaPage({ isAuthenticated, setIsSignInOpen }: CtaPagePro
           </div>
         )}
       </div>
+
+      {/* 🔥 SEO-контент для поисковиков (текст внизу страницы) */}
+      <article 
+        className="seo-content" 
+        style={{ 
+          padding: '40px 20px', 
+          color: 'var(--framer-color-text-secondary)',
+          maxWidth: '800px',
+          margin: '0 auto'
+        }}
+      >
+        <h2 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '16px', color: 'var(--framer-color-text)' }}>
+          Call-to-Action Section Components for Framer
+        </h2>
+        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
+          Drive conversions with these high-impact CTA section components for Framer. 
+          Each call-to-action banner is designed to capture attention and encourage user action, 
+          featuring compelling headlines, prominent buttons, and persuasive microcopy.
+        </p>
+        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
+          Perfect for landing pages, product launches, newsletter signups, and sales funnels. 
+          All components support light and dark themes, with wireframe mode for rapid prototyping 
+          and design mode for pixel-perfect previews before implementation.
+        </p>
+        <p style={{ lineHeight: 1.6 }}>
+          <strong>Features:</strong> Responsive layout · Dark/Light themes · Wireframe mode · 
+          Instant copy-paste · Framer-compatible · Conversion-optimized · Mobile-first design · A/B test ready.
+        </p>
+      </article>
     </div>
   );
 }

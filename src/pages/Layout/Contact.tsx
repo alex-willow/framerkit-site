@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import { Copy, CircleCheck, Lock, Eye } from "lucide-react";
 import { motion } from "framer-motion";
 import SectionHeader from "../../components/SectionHeader";
+import SEO from "../../components/SEO";
 
 type ComponentItem = {
   key: string;
@@ -22,6 +23,7 @@ type ContactPageProps = {
   setIsSignInOpen: (open: boolean) => void;
 };
 
+// ✅ Исправлен PLACEHOLDER (убраны пробелы)
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
 const FIXED_SKELETON_COUNT = 8;
 
@@ -110,6 +112,19 @@ export default function ContactPage({ isAuthenticated, setIsSignInOpen }: Contac
   // ================================
   return (
     <div id="contact-page" style={{ padding: 0, scrollMarginTop: "64px" }}>
+      
+      {/* 🔥 SEO META TAGS */}
+      <SEO
+        title="Contact Section Components for Framer"
+        description="Professional contact section components for Framer. Light & dark themes, wireframe & design modes. Copy-paste ready contact forms and layouts for business websites."
+        keywords="framer contact section, contact form component, get in touch section, business contact layout, framer ui kit, copy paste contact, responsive contact form"
+        image="/og-contact.jpg"
+        canonical="https://www.framerkit.site/layout/contact"
+      />
+
+      {/* 🔥 H1 для поисковиков (визуально скрыт, но индексируется) */}
+      <h1 className="sr-only">Contact Section Components for Framer — Business Contact Forms</h1>
+
       <SectionHeader
         title="Contact"
         count={filtered.length}
@@ -134,7 +149,7 @@ export default function ContactPage({ isAuthenticated, setIsSignInOpen }: Contac
         ) : error ? (
           <p style={{ color: "red", padding: "20px" }}>{error}</p>
         ) : filtered.length === 0 ? (
-          <div className="empty-message">No components available for the selected theme</div>
+          <div className="empty-message">No contact components available for the selected theme</div>
         ) : (
           <div className="gallery">
             {filtered.map(item => {
@@ -162,7 +177,12 @@ export default function ContactPage({ isAuthenticated, setIsSignInOpen }: Contac
                   className={`card ${filter === "dark" ? "card-dark" : "card-light"}`}
                 >
                   <div className="cardImage">
-                    <img src={displayImage} alt={item.title} loading="lazy" />
+                    {/* 🔥 Alt-текст с ключевыми словами */}
+                    <img 
+                      src={displayImage} 
+                      alt={`${item.title} - ${isWireframeMode ? 'Wireframe' : 'Design'} contact section component for Framer`} 
+                      loading="lazy" 
+                    />
                   </div>
                   <div className="cardInfo">
                     <h3>{item.title}</h3>
@@ -245,6 +265,35 @@ export default function ContactPage({ isAuthenticated, setIsSignInOpen }: Contac
           </div>
         )}
       </div>
+
+      {/* 🔥 SEO-контент для поисковиков (текст внизу страницы) */}
+      <article 
+        className="seo-content" 
+        style={{ 
+          padding: '40px 20px', 
+          color: 'var(--framer-color-text-secondary)',
+          maxWidth: '800px',
+          margin: '0 auto'
+        }}
+      >
+        <h2 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '16px', color: 'var(--framer-color-text)' }}>
+          Contact Section Components for Framer
+        </h2>
+        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
+          Make it easy for visitors to reach you with these professional contact section components for Framer. 
+          Each layout includes contact forms, maps, social links, and business information — all designed 
+          to encourage conversions and build trust with your audience.
+        </p>
+        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
+          Perfect for business websites, agency portfolios, SaaS landing pages, and e-commerce stores. 
+          All components support light and dark themes, with wireframe mode for rapid prototyping 
+          and design mode for pixel-perfect previews before implementation.
+        </p>
+        <p style={{ lineHeight: 1.6 }}>
+          <strong>Features:</strong> Responsive layout · Dark/Light themes · Wireframe mode · 
+          Instant copy-paste · Framer-compatible · Form-ready · Mobile-optimized · Map integration ready.
+        </p>
+      </article>
     </div>
   );
 }

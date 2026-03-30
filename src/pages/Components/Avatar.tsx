@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import { Copy, CircleCheck, Lock } from "lucide-react";
 import { motion } from "framer-motion";
 import SectionHeader from "../../components/SectionHeader";
+import SEO from "../../components/SEO";
 
 type ComponentItem = {
   key: string;
@@ -16,6 +17,7 @@ type AvatarPageProps = {
   setIsSignInOpen: (open: boolean) => void;
 };
 
+// ✅ Исправлен PLACEHOLDER (убраны пробелы)
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
 const FIXED_SKELETON_COUNT = 8;
 
@@ -102,6 +104,19 @@ export default function AvatarPage({ isAuthenticated, setIsSignInOpen }: AvatarP
   // ================================
   return (
     <div id="avatar-page" style={{ padding: 0, scrollMarginTop: "64px" }}>
+      
+      {/* 🔥 SEO META TAGS */}
+      <SEO
+        title="Avatar Components for Framer"
+        description="User avatar components for Framer. Light & dark themes. Copy-paste ready profile pictures, user icons, and avatar groups for team sections."
+        keywords="framer avatar component, user profile picture, avatar icon, team member avatar, framer ui kit, copy paste avatar, responsive avatar"
+        image="/og-avatar.jpg"
+        canonical="https://www.framerkit.site/components/avatar"
+      />
+
+      {/* 🔥 H1 для поисковиков (визуально скрыт, но индексируется) */}
+      <h1 className="sr-only">Avatar Components for Framer — User Profile Pictures</h1>
+
       <SectionHeader
         title="Avatar"
         count={filtered.length}
@@ -123,7 +138,7 @@ export default function AvatarPage({ isAuthenticated, setIsSignInOpen }: AvatarP
         ) : error ? (
           <p style={{ color: "red", padding: "20px" }}>{error}</p>
         ) : filtered.length === 0 ? (
-          <div className="empty-message">No components available for the selected theme</div>
+          <div className="empty-message">No avatar components available for the selected theme</div>
         ) : (
           <div className="gallery">
             {filtered.map(item => {
@@ -139,7 +154,12 @@ export default function AvatarPage({ isAuthenticated, setIsSignInOpen }: AvatarP
                   className={`card ${filter === "dark" ? "card-dark" : "card-light"}`}
                 >
                   <div className="cardImage">
-                    <img src={item.image || PLACEHOLDER} alt={item.title} loading="lazy" />
+                    {/* 🔥 Alt-текст с ключевыми словами */}
+                    <img 
+                      src={item.image || PLACEHOLDER} 
+                      alt={`${item.title} - Avatar component for Framer`} 
+                      loading="lazy" 
+                    />
                   </div>
                   <div className="cardInfo">
                     <h3>{item.title}</h3>
@@ -172,6 +192,35 @@ export default function AvatarPage({ isAuthenticated, setIsSignInOpen }: AvatarP
           </div>
         )}
       </div>
+
+      {/* 🔥 SEO-контент для поисковиков (текст внизу страницы) */}
+      <article 
+        className="seo-content" 
+        style={{ 
+          padding: '40px 20px', 
+          color: 'var(--framer-color-text-secondary)',
+          maxWidth: '800px',
+          margin: '0 auto'
+        }}
+      >
+        <h2 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '16px', color: 'var(--framer-color-text)' }}>
+          Avatar Components for Framer
+        </h2>
+        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
+          Add a personal touch to your designs with these professional avatar components for Framer. 
+          Each avatar is designed for user profiles, team sections, and comment areas, featuring 
+          clean circular layouts, status indicators, and responsive sizing that adapts to any context.
+        </p>
+        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
+          Perfect for user dashboards, team pages, social features, and community platforms. 
+          All components support light and dark themes, with instant copy-paste functionality 
+          for rapid implementation in your Framer projects.
+        </p>
+        <p style={{ lineHeight: 1.6 }}>
+          <strong>Features:</strong> Responsive layout · Dark/Light themes · Status indicators · 
+          Instant copy-paste · Framer-compatible · Multiple sizes · Initials fallback · Mobile-optimized.
+        </p>
+      </article>
     </div>
   );
 }

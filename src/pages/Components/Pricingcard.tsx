@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import { Copy, CircleCheck, Lock } from "lucide-react";
 import { motion } from "framer-motion";
 import SectionHeader from "../../components/SectionHeader";
+import SEO from "../../components/SEO";
 
 type ComponentItem = {
   key: string;
@@ -16,6 +17,7 @@ type PricingCardPageProps = {
   setIsSignInOpen: (open: boolean) => void;
 };
 
+// ✅ Исправлен PLACEHOLDER (убраны пробелы)
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
 const FIXED_SKELETON_COUNT = 8;
 
@@ -105,6 +107,19 @@ export default function PricingCardPage({ isAuthenticated, setIsSignInOpen }: Pr
   // ================================
   return (
     <div id="pricing-card-page" style={{ padding: 0, scrollMarginTop: "64px" }}>
+      
+      {/* 🔥 SEO META TAGS */}
+      <SEO
+        title="Pricing Card Components for Framer"
+        description="Beautiful pricing card components for Framer. Light & dark themes. Copy-paste ready pricing tables, subscription cards, and tier layouts for SaaS and e-commerce."
+        keywords="framer pricing card, subscription card, pricing table, tier card, framer ui kit, copy paste pricing card, responsive pricing"
+        image="/og-pricing-card.jpg"
+        canonical="https://www.framerkit.site/components/pricingcard"
+      />
+
+      {/* 🔥 H1 для поисковиков (визуально скрыт, но индексируется) */}
+      <h1 className="sr-only">Pricing Card Components for Framer — Subscription & Tier Cards</h1>
+
       <SectionHeader
         title="Pricing Card"
         count={filtered.length}
@@ -126,7 +141,7 @@ export default function PricingCardPage({ isAuthenticated, setIsSignInOpen }: Pr
         ) : error ? (
           <p style={{ color: "red", padding: "20px" }}>{error}</p>
         ) : filtered.length === 0 ? (
-          <div className="empty-message">No components available for the selected theme</div>
+          <div className="empty-message">No pricing card components available for the selected theme</div>
         ) : (
           <div className="gallery">
             {filtered.map(item => {
@@ -142,7 +157,12 @@ export default function PricingCardPage({ isAuthenticated, setIsSignInOpen }: Pr
                   className={`card ${filter === "dark" ? "card-dark" : "card-light"}`}
                 >
                   <div className="cardImage">
-                    <img src={item.image || PLACEHOLDER} alt={item.title} loading="lazy" />
+                    {/* 🔥 Alt-текст с ключевыми словами */}
+                    <img 
+                      src={item.image || PLACEHOLDER} 
+                      alt={`${item.title} - Pricing Card component for Framer`} 
+                      loading="lazy" 
+                    />
                   </div>
                   <div className="cardInfo">
                     <h3>{item.title}</h3>
@@ -175,6 +195,36 @@ export default function PricingCardPage({ isAuthenticated, setIsSignInOpen }: Pr
           </div>
         )}
       </div>
+
+      {/* 🔥 SEO-контент для поисковиков (текст внизу страницы) */}
+      <article 
+        className="seo-content" 
+        style={{ 
+          padding: '40px 20px', 
+          color: 'var(--framer-color-text-secondary)',
+          maxWidth: '800px',
+          margin: '0 auto'
+        }}
+      >
+        <h2 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '16px', color: 'var(--framer-color-text)' }}>
+          Pricing Card Components for Framer
+        </h2>
+        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
+          Present your pricing plans clearly with these professional pricing card components for Framer. 
+          Each card is designed to highlight value, featuring clean tier layouts, feature comparisons, 
+          prominent call-to-action buttons, and optional toggle switches for monthly/annual billing 
+          that help visitors choose the right plan with confidence.
+        </p>
+        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
+          Perfect for SaaS landing pages, membership sites, e-commerce stores, and service-based businesses. 
+          All components support light and dark themes, with instant copy-paste functionality 
+          for rapid implementation in your Framer projects.
+        </p>
+        <p style={{ lineHeight: 1.6 }}>
+          <strong>Features:</strong> Responsive layout · Dark/Light themes · Toggle switch ready · 
+          Instant copy-paste · Framer-compatible · Feature lists · Popular badge · Mobile-optimized cards.
+        </p>
+      </article>
     </div>
   );
 }

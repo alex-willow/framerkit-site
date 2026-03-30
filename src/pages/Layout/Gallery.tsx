@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import { Copy, CircleCheck, Lock, Eye } from "lucide-react";
 import { motion } from "framer-motion";
 import SectionHeader from "../../components/SectionHeader";
+import SEO from "../../components/SEO";
 
 type ComponentItem = {
   key: string;
@@ -22,6 +23,7 @@ type GalleryPageProps = {
   setIsSignInOpen: (open: boolean) => void;
 };
 
+// ✅ Исправлен PLACEHOLDER (убраны пробелы)
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
 const FIXED_SKELETON_COUNT = 8;
 
@@ -110,6 +112,19 @@ export default function GalleryPage({ isAuthenticated, setIsSignInOpen }: Galler
   // ================================
   return (
     <div id="gallery-page" style={{ padding: 0, scrollMarginTop: "64px" }}>
+      
+      {/* 🔥 SEO META TAGS */}
+      <SEO
+        title="Gallery Section Components for Framer"
+        description="Beautiful gallery and portfolio section components for Framer. Light & dark themes, wireframe & design modes. Copy-paste ready image grids and masonry layouts."
+        keywords="framer gallery section, portfolio grid component, image gallery layout, masonry gallery, framer ui kit, copy paste gallery, responsive photo grid"
+        image="/og-gallery.jpg"
+        canonical="https://www.framerkit.site/layout/gallery"
+      />
+
+      {/* 🔥 H1 для поисковиков (визуально скрыт, но индексируется) */}
+      <h1 className="sr-only">Gallery Section Components for Framer — Portfolio Image Grids</h1>
+
       <SectionHeader
         title="Gallery"
         count={filtered.length}
@@ -134,7 +149,7 @@ export default function GalleryPage({ isAuthenticated, setIsSignInOpen }: Galler
         ) : error ? (
           <p style={{ color: "red", padding: "20px" }}>{error}</p>
         ) : filtered.length === 0 ? (
-          <div className="empty-message">No components available for the selected theme</div>
+          <div className="empty-message">No gallery components available for the selected theme</div>
         ) : (
           <div className="gallery">
             {filtered.map(item => {
@@ -162,7 +177,12 @@ export default function GalleryPage({ isAuthenticated, setIsSignInOpen }: Galler
                   className={`card ${filter === "dark" ? "card-dark" : "card-light"}`}
                 >
                   <div className="cardImage">
-                    <img src={displayImage} alt={item.title} loading="lazy" />
+                    {/* 🔥 Alt-текст с ключевыми словами */}
+                    <img 
+                      src={displayImage} 
+                      alt={`${item.title} - ${isWireframeMode ? 'Wireframe' : 'Design'} gallery section component for Framer`} 
+                      loading="lazy" 
+                    />
                   </div>
                   <div className="cardInfo">
                     <h3>{item.title}</h3>
@@ -245,6 +265,35 @@ export default function GalleryPage({ isAuthenticated, setIsSignInOpen }: Galler
           </div>
         )}
       </div>
+
+      {/* 🔥 SEO-контент для поисковиков (текст внизу страницы) */}
+      <article 
+        className="seo-content" 
+        style={{ 
+          padding: '40px 20px', 
+          color: 'var(--framer-color-text-secondary)',
+          maxWidth: '800px',
+          margin: '0 auto'
+        }}
+      >
+        <h2 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '16px', color: 'var(--framer-color-text)' }}>
+          Gallery Section Components for Framer
+        </h2>
+        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
+          Showcase your work with these beautiful gallery section components for Framer. 
+          Each gallery layout features responsive image grids, masonry layouts, and lightbox-ready designs 
+          that help photographers, designers, and creatives display their portfolios in style.
+        </p>
+        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
+          Perfect for portfolio websites, photography studios, design agencies, and creative portfolios. 
+          All components support light and dark themes, with wireframe mode for rapid prototyping 
+          and design mode for pixel-perfect previews before implementation.
+        </p>
+        <p style={{ lineHeight: 1.6 }}>
+          <strong>Features:</strong> Responsive layout · Dark/Light themes · Wireframe mode · 
+          Instant copy-paste · Framer-compatible · Lightbox ready · Lazy loading · Mobile-optimized grids.
+        </p>
+      </article>
     </div>
   );
 }

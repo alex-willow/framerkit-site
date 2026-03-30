@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import { Copy, CircleCheck, Lock } from "lucide-react";
 import { motion } from "framer-motion";
 import SectionHeader from "../../components/SectionHeader";
+import SEO from "../../components/SEO";
 
 type ComponentItem = {
   key: string;
@@ -16,6 +17,7 @@ type BadgePageProps = {
   setIsSignInOpen: (open: boolean) => void;
 };
 
+// ✅ Исправлен PLACEHOLDER (убраны пробелы)
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
 const FIXED_SKELETON_COUNT = 8;
 
@@ -102,6 +104,19 @@ export default function BadgePage({ isAuthenticated, setIsSignInOpen }: BadgePag
   // ================================
   return (
     <div id="badge-page" style={{ padding: 0, scrollMarginTop: "64px" }}>
+      
+      {/* 🔥 SEO META TAGS */}
+      <SEO
+        title="Badge Components for Framer"
+        description="Status badge and label components for Framer. Light & dark themes. Copy-paste ready notification badges, tags, and status indicators for UI elements."
+        keywords="framer badge component, status badge, label tag, notification badge, framer ui kit, copy paste badge, responsive badge"
+        image="/og-badge.jpg"
+        canonical="https://www.framerkit.site/components/badge"
+      />
+
+      {/* 🔥 H1 для поисковиков (визуально скрыт, но индексируется) */}
+      <h1 className="sr-only">Badge Components for Framer — Status Labels & Tags</h1>
+
       <SectionHeader
         title="Badge"
         count={filtered.length}
@@ -123,7 +138,7 @@ export default function BadgePage({ isAuthenticated, setIsSignInOpen }: BadgePag
         ) : error ? (
           <p style={{ color: "red", padding: "20px" }}>{error}</p>
         ) : filtered.length === 0 ? (
-          <div className="empty-message">No components available for the selected theme</div>
+          <div className="empty-message">No badge components available for the selected theme</div>
         ) : (
           <div className="gallery">
             {filtered.map(item => {
@@ -139,7 +154,12 @@ export default function BadgePage({ isAuthenticated, setIsSignInOpen }: BadgePag
                   className={`card ${filter === "dark" ? "card-dark" : "card-light"}`}
                 >
                   <div className="cardImage">
-                    <img src={item.image || PLACEHOLDER} alt={item.title} loading="lazy" />
+                    {/* 🔥 Alt-текст с ключевыми словами */}
+                    <img 
+                      src={item.image || PLACEHOLDER} 
+                      alt={`${item.title} - Badge component for Framer`} 
+                      loading="lazy" 
+                    />
                   </div>
                   <div className="cardInfo">
                     <h3>{item.title}</h3>
@@ -172,6 +192,36 @@ export default function BadgePage({ isAuthenticated, setIsSignInOpen }: BadgePag
           </div>
         )}
       </div>
+
+      {/* 🔥 SEO-контент для поисковиков (текст внизу страницы) */}
+      <article 
+        className="seo-content" 
+        style={{ 
+          padding: '40px 20px', 
+          color: 'var(--framer-color-text-secondary)',
+          maxWidth: '800px',
+          margin: '0 auto'
+        }}
+      >
+        <h2 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '16px', color: 'var(--framer-color-text)' }}>
+          Badge Components for Framer
+        </h2>
+        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
+          Highlight important information with these professional badge components for Framer. 
+          Each badge is designed for status indicators, notification counts, category tags, and 
+          promotional labels, featuring clean pill shapes, vibrant colors, and flexible positioning 
+          that enhances any interface without cluttering your design.
+        </p>
+        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
+          Perfect for dashboards, e-commerce product cards, user profiles, and admin panels. 
+          All components support light and dark themes, with instant copy-paste functionality 
+          for rapid implementation in your Framer projects.
+        </p>
+        <p style={{ lineHeight: 1.6 }}>
+          <strong>Features:</strong> Responsive layout · Dark/Light themes · Multiple styles · 
+          Instant copy-paste · Framer-compatible · Positioning variants · Color variants · Mobile-optimized sizing.
+        </p>
+      </article>
     </div>
   );
 }

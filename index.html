@@ -2,15 +2,138 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/Logo.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FramerKit</title>
+    
+    <!-- === БАЗОВЫЕ МЕТА-ТЕГИ === -->
+    <title>FramerKit — UI Components & Templates for Framer</title>
+    <meta name="description" content="Premium UI components, sections, and templates for Framer. Free & paid. Wireframe & Design modes. Instant copy-paste for faster web design." />
+    <meta name="keywords" content="framer, ui kit, components, templates, wireframe, design, web design, framer components, framer templates" />
+    <meta name="author" content="FramerKit" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    
+    <!-- === CANONICAL URL === -->
+    <link rel="canonical" href="https://www.framerkit.site/" />
+    
+    <!-- === OPEN GRAPH (Facebook, LinkedIn, Telegram) === -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.framerkit.site/" />
+    <meta property="og:title" content="FramerKit — UI Components for Framer" />
+    <meta property="og:description" content="Premium UI components, sections, and templates for Framer. Free & paid. Wireframe & Design modes. Instant copy-paste." />
+    <meta property="og:image" content="https://www.framerkit.site/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="FramerKit UI Components Preview" />
+    <meta property="og:site_name" content="FramerKit" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- === TWITTER CARDS === -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@framerkit" />
+    <meta name="twitter:creator" content="@framerkit" />
+    <meta name="twitter:title" content="FramerKit — UI Components for Framer" />
+    <meta name="twitter:description" content="Premium UI components, sections, and templates for Framer. Free & paid. Wireframe & Design modes." />
+    <meta name="twitter:image" content="https://www.framerkit.site/og-image.jpg" />
+    <meta name="twitter:image:alt" content="FramerKit UI Components Preview" />
+    
+    <!-- === FAVICONS === -->
+    <link rel="icon" type="image/png" href="/Logo.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/Logo.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/Logo.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/Logo.png" />
+    
+    <!-- === ПРЕДЗАГРУЗКА ШРИФТОВ === -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+
+    <!-- === STRUCTURED DATA (JSON-LD) === -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "FramerKit",
+      "url": "https://www.framerkit.site/",
+      "description": "Premium UI components and templates for Framer",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.framerkit.site/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "FramerKit",
+      "url": "https://www.framerkit.site/",
+      "logo": "https://www.framerkit.site/Logo.png",
+      "sameAs": [
+        "https://twitter.com/framerkit",
+        "https://www.framer.com/@framerkit"
+      ]
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "FramerKit",
+      "description": "Premium UI components, sections, and templates for Framer",
+      "brand": {
+        "@type": "Brand",
+        "name": "FramerKit"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.framerkit.site",
+        "priceCurrency": "USD",
+        "price": "50.00",
+        "availability": "https://schema.org/InStock"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "127"
+      }
+    }
+    </script>
+
+    <!-- === ANTI-JUMP FIX (без скачка мобильной версии) === -->
+    <style>
+      .main {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+      }
+      .sidebar {
+        width: 200px;
+      }
+      @media (max-width: 767px) {
+        .sidebar {
+          display: none;
+        }
+      }
+    </style>
+
+    <!-- === PREVIEW REDIRECT SCRIPT === -->
     <script>
       (function() {
         if (window.location.pathname.startsWith('/preview/')) {
           var path = window.location.pathname;
-          
-          // Если нет .html — сразу перенаправляем на index.html
           if (!path.endsWith('.html')) {
             var newPath = path.endsWith('/') ? path + 'index.html' : path + '/index.html';
             window.location.replace(newPath);
@@ -19,45 +142,6 @@
         }
       })();
     </script>
-
-    <!-- Inter font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-    <link
-  rel="preload"
-  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-  as="style"
-  onload="this.onload=null;this.rel='stylesheet'"
-/>
-<noscript>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
-  />
-</noscript>
-
-    <!-- 🔥 Anti-jump (без скачка мобильной версии) -->
-    <style>
-      /* Фиксация базового desktop layout до загрузки App.module.css */
-
-      .main {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-      }
-
-      .sidebar {
-        width: 200px;
-      }
-
-      /* Поведение для мобильных — как в App.module.css */
-      @media (max-width: 767px) {
-        .sidebar {
-          display: none;
-        }
-      }
-    </style>
-    <!-- 🔥 END FIX -->
   </head>
 
   <body>

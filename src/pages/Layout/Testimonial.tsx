@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import { Copy, CircleCheck, Lock, Eye } from "lucide-react";
 import { motion } from "framer-motion";
 import SectionHeader from "../../components/SectionHeader";
+import SEO from "../../components/SEO";
 
 type ComponentItem = {
   key: string;
@@ -22,6 +23,7 @@ type TestimonialPageProps = {
   setIsSignInOpen: (open: boolean) => void;
 };
 
+// ✅ Исправлен PLACEHOLDER (убраны пробелы)
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
 const FIXED_SKELETON_COUNT = 8;
 
@@ -110,6 +112,19 @@ export default function TestimonialPage({ isAuthenticated, setIsSignInOpen }: Te
   // ================================
   return (
     <div id="testimonial-page" style={{ padding: 0, scrollMarginTop: "64px" }}>
+      
+      {/* 🔥 SEO META TAGS */}
+      <SEO
+        title="Testimonial Section Components for Framer"
+        description="Professional testimonial section components for Framer. Light & dark themes, wireframe & design modes. Copy-paste ready customer review layouts to build trust and social proof."
+        keywords="framer testimonial section, customer reviews component, social proof layout, client testimonials, framer ui kit, copy paste testimonials, responsive review section"
+        image="/og-testimonial.jpg"
+        canonical="https://www.framerkit.site/layout/testimonial"
+      />
+
+      {/* 🔥 H1 для поисковиков (визуально скрыт, но индексируется) */}
+      <h1 className="sr-only">Testimonial Section Components for Framer — Customer Review Layouts</h1>
+
       <SectionHeader
         title="Testimonial"
         count={filtered.length}
@@ -134,7 +149,7 @@ export default function TestimonialPage({ isAuthenticated, setIsSignInOpen }: Te
         ) : error ? (
           <p style={{ color: "red", padding: "20px" }}>{error}</p>
         ) : filtered.length === 0 ? (
-          <div className="empty-message">No components available for the selected theme</div>
+          <div className="empty-message">No testimonial components available for the selected theme</div>
         ) : (
           <div className="gallery">
             {filtered.map(item => {
@@ -162,7 +177,12 @@ export default function TestimonialPage({ isAuthenticated, setIsSignInOpen }: Te
                   className={`card ${filter === "dark" ? "card-dark" : "card-light"}`}
                 >
                   <div className="cardImage">
-                    <img src={displayImage} alt={item.title} loading="lazy" />
+                    {/* 🔥 Alt-текст с ключевыми словами */}
+                    <img 
+                      src={displayImage} 
+                      alt={`${item.title} - ${isWireframeMode ? 'Wireframe' : 'Design'} testimonial section component for Framer`} 
+                      loading="lazy" 
+                    />
                   </div>
                   <div className="cardInfo">
                     <h3>{item.title}</h3>
@@ -245,6 +265,35 @@ export default function TestimonialPage({ isAuthenticated, setIsSignInOpen }: Te
           </div>
         )}
       </div>
+
+      {/* 🔥 SEO-контент для поисковиков (текст внизу страницы) */}
+      <article 
+        className="seo-content" 
+        style={{ 
+          padding: '40px 20px', 
+          color: 'var(--framer-color-text-secondary)',
+          maxWidth: '800px',
+          margin: '0 auto'
+        }}
+      >
+        <h2 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '16px', color: 'var(--framer-color-text)' }}>
+          Testimonial Section Components for Framer
+        </h2>
+        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
+          Build trust and credibility with these professional testimonial section components for Framer. 
+          Each testimonial layout is designed to showcase customer reviews, client feedback, and social proof 
+          in an engaging format that helps visitors feel confident in choosing your product or service.
+        </p>
+        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
+          Perfect for SaaS landing pages, agency websites, e-commerce stores, and service-based businesses. 
+          All components support light and dark themes, with wireframe mode for rapid prototyping 
+          and design mode for pixel-perfect previews before implementation.
+        </p>
+        <p style={{ lineHeight: 1.6 }}>
+          <strong>Features:</strong> Responsive layout · Dark/Light themes · Wireframe mode · 
+          Instant copy-paste · Framer-compatible · Avatar ready · Star ratings · Mobile-optimized cards · Auto-scroll ready.
+        </p>
+      </article>
     </div>
   );
 }

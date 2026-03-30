@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import { Copy, CircleCheck, Lock } from "lucide-react";
 import { motion } from "framer-motion";
 import SectionHeader from "../../components/SectionHeader";
+import SEO from "../../components/SEO";
 
 type ComponentItem = {
   key: string;
@@ -16,6 +17,7 @@ type IconPageProps = {
   setIsSignInOpen: (open: boolean) => void;
 };
 
+// ✅ Исправлен PLACEHOLDER (убраны пробелы)
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
 const FIXED_SKELETON_COUNT = 8;
 
@@ -102,6 +104,19 @@ export default function IconPage({ isAuthenticated, setIsSignInOpen }: IconPageP
   // ================================
   return (
     <div id="icon-page" style={{ padding: 0, scrollMarginTop: "64px" }}>
+      
+      {/* 🔥 SEO META TAGS */}
+      <SEO
+        title="Icon Components for Framer"
+        description="Scalable icon components for Framer. Light & dark themes. Copy-paste ready SVG icons, icon buttons, and icon sets for web interfaces."
+        keywords="framer icon component, SVG icon, icon button, icon set, framer ui kit, copy paste icon, responsive icon"
+        image="/og-icon.jpg"
+        canonical="https://www.framerkit.site/components/icon"
+      />
+
+      {/* 🔥 H1 для поисковиков (визуально скрыт, но индексируется) */}
+      <h1 className="sr-only">Icon Components for Framer — Scalable SVG Icons</h1>
+
       <SectionHeader
         title="Icon"
         count={filtered.length}
@@ -123,7 +138,7 @@ export default function IconPage({ isAuthenticated, setIsSignInOpen }: IconPageP
         ) : error ? (
           <p style={{ color: "red", padding: "20px" }}>{error}</p>
         ) : filtered.length === 0 ? (
-          <div className="empty-message">No components available for the selected theme</div>
+          <div className="empty-message">No icon components available for the selected theme</div>
         ) : (
           <div className="gallery">
             {filtered.map(item => {
@@ -139,7 +154,12 @@ export default function IconPage({ isAuthenticated, setIsSignInOpen }: IconPageP
                   className={`card ${filter === "dark" ? "card-dark" : "card-light"}`}
                 >
                   <div className="cardImage">
-                    <img src={item.image || PLACEHOLDER} alt={item.title} loading="lazy" />
+                    {/* 🔥 Alt-текст с ключевыми словами */}
+                    <img 
+                      src={item.image || PLACEHOLDER} 
+                      alt={`${item.title} - Icon component for Framer`} 
+                      loading="lazy" 
+                    />
                   </div>
                   <div className="cardInfo">
                     <h3>{item.title}</h3>
@@ -172,6 +192,36 @@ export default function IconPage({ isAuthenticated, setIsSignInOpen }: IconPageP
           </div>
         )}
       </div>
+
+      {/* 🔥 SEO-контент для поисковиков (текст внизу страницы) */}
+      <article 
+        className="seo-content" 
+        style={{ 
+          padding: '40px 20px', 
+          color: 'var(--framer-color-text-secondary)',
+          maxWidth: '800px',
+          margin: '0 auto'
+        }}
+      >
+        <h2 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '16px', color: 'var(--framer-color-text)' }}>
+          Icon Components for Framer
+        </h2>
+        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
+          Enhance your designs with these scalable icon components for Framer. 
+          Each icon is designed for clarity and versatility, featuring clean SVG paths, 
+          consistent stroke widths, and flexible sizing that adapts to any interface 
+          without losing sharpness on high-DPI displays.
+        </p>
+        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
+          Perfect for navigation menus, action buttons, feature lists, and status indicators. 
+          All components support light and dark themes, with instant copy-paste functionality 
+          for rapid implementation in your Framer projects.
+        </p>
+        <p style={{ lineHeight: 1.6 }}>
+          <strong>Features:</strong> Responsive layout · Dark/Light themes · SVG format · 
+          Instant copy-paste · Framer-compatible · Multiple sizes · Stroke customization · Mobile-optimized.
+        </p>
+      </article>
     </div>
   );
 }

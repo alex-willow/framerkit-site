@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import { Copy, CircleCheck, Lock, Eye } from "lucide-react";
 import { motion } from "framer-motion";
 import SectionHeader from "../../components/SectionHeader";
+import SEO from "../../components/SEO";
 
 type ComponentItem = {
   key: string;
@@ -22,6 +23,7 @@ type FeaturePageProps = {
   setIsSignInOpen: (open: boolean) => void;
 };
 
+// ✅ Исправлен PLACEHOLDER (убраны пробелы)
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
 const FIXED_SKELETON_COUNT = 8;
 
@@ -110,6 +112,19 @@ export default function FeaturePage({ isAuthenticated, setIsSignInOpen }: Featur
   // ================================
   return (
     <div id="feature-page" style={{ padding: 0, scrollMarginTop: "64px" }}>
+      
+      {/* 🔥 SEO META TAGS */}
+      <SEO
+        title="Feature Section Components for Framer"
+        description="Professional feature section components for Framer. Light & dark themes, wireframe & design modes. Copy-paste ready feature grids and lists to showcase your product benefits."
+        keywords="framer feature section, product features component, benefits grid, feature list layout, framer ui kit, copy paste features, responsive feature section"
+        image="/og-feature.jpg"
+        canonical="https://www.framerkit.site/layout/feature"
+      />
+
+      {/* 🔥 H1 для поисковиков (визуально скрыт, но индексируется) */}
+      <h1 className="sr-only">Feature Section Components for Framer — Product Benefits Layouts</h1>
+
       <SectionHeader
         title="Feature"
         count={filtered.length}
@@ -134,7 +149,7 @@ export default function FeaturePage({ isAuthenticated, setIsSignInOpen }: Featur
         ) : error ? (
           <p style={{ color: "red", padding: "20px" }}>{error}</p>
         ) : filtered.length === 0 ? (
-          <div className="empty-message">No components available for the selected theme</div>
+          <div className="empty-message">No feature components available for the selected theme</div>
         ) : (
           <div className="gallery">
             {filtered.map(item => {
@@ -162,7 +177,12 @@ export default function FeaturePage({ isAuthenticated, setIsSignInOpen }: Featur
                   className={`card ${filter === "dark" ? "card-dark" : "card-light"}`}
                 >
                   <div className="cardImage">
-                    <img src={displayImage} alt={item.title} loading="lazy" />
+                    {/* 🔥 Alt-текст с ключевыми словами */}
+                    <img 
+                      src={displayImage} 
+                      alt={`${item.title} - ${isWireframeMode ? 'Wireframe' : 'Design'} feature section component for Framer`} 
+                      loading="lazy" 
+                    />
                   </div>
                   <div className="cardInfo">
                     <h3>{item.title}</h3>
@@ -245,6 +265,35 @@ export default function FeaturePage({ isAuthenticated, setIsSignInOpen }: Featur
           </div>
         )}
       </div>
+
+      {/* 🔥 SEO-контент для поисковиков (текст внизу страницы) */}
+      <article 
+        className="seo-content" 
+        style={{ 
+          padding: '40px 20px', 
+          color: 'var(--framer-color-text-secondary)',
+          maxWidth: '800px',
+          margin: '0 auto'
+        }}
+      >
+        <h2 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '16px', color: 'var(--framer-color-text)' }}>
+          Feature Section Components for Framer
+        </h2>
+        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
+          Showcase your product's key benefits with these professional feature section components for Framer. 
+          Each layout is designed to highlight value propositions through clean icon grids, compelling headlines, 
+          and concise descriptions that help visitors understand your offering at a glance.
+        </p>
+        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
+          Perfect for SaaS landing pages, app websites, product launches, and service portfolios. 
+          All components support light and dark themes, with wireframe mode for rapid prototyping 
+          and design mode for pixel-perfect previews before implementation.
+        </p>
+        <p style={{ lineHeight: 1.6 }}>
+          <strong>Features:</strong> Responsive layout · Dark/Light themes · Wireframe mode · 
+          Instant copy-paste · Framer-compatible · Icon-ready · Mobile-optimized · Conversion-focused design.
+        </p>
+      </article>
     </div>
   );
 }

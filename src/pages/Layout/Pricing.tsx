@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import { Copy, CircleCheck, Lock, Eye } from "lucide-react";
 import { motion } from "framer-motion";
 import SectionHeader from "../../components/SectionHeader";
+import SEO from "../../components/SEO";
 
 type ComponentItem = {
   key: string;
@@ -22,6 +23,7 @@ type PricingPageProps = {
   setIsSignInOpen: (open: boolean) => void;
 };
 
+// ✅ Исправлен PLACEHOLDER (убраны пробелы)
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
 const FIXED_SKELETON_COUNT = 8;
 
@@ -110,6 +112,19 @@ export default function PricingPage({ isAuthenticated, setIsSignInOpen }: Pricin
   // ================================
   return (
     <div id="pricing-page" style={{ padding: 0, scrollMarginTop: "64px" }}>
+      
+      {/* 🔥 SEO META TAGS */}
+      <SEO
+        title="Pricing Section Components for Framer"
+        description="Professional pricing table components for Framer. Light & dark themes, wireframe & design modes. Copy-paste ready pricing cards with tiers, toggle switches, and CTAs."
+        keywords="framer pricing section, pricing table component, subscription plans, pricing cards layout, framer ui kit, copy paste pricing, responsive pricing table"
+        image="/og-pricing.jpg"
+        canonical="https://www.framerkit.site/layout/pricing"
+      />
+
+      {/* 🔥 H1 для поисковиков (визуально скрыт, но индексируется) */}
+      <h1 className="sr-only">Pricing Section Components for Framer — Subscription Plan Tables</h1>
+
       <SectionHeader
         title="Pricing"
         count={filtered.length}
@@ -134,7 +149,7 @@ export default function PricingPage({ isAuthenticated, setIsSignInOpen }: Pricin
         ) : error ? (
           <p style={{ color: "red", padding: "20px" }}>{error}</p>
         ) : filtered.length === 0 ? (
-          <div className="empty-message">No components available for the selected theme</div>
+          <div className="empty-message">No pricing components available for the selected theme</div>
         ) : (
           <div className="gallery">
             {filtered.map(item => {
@@ -162,7 +177,12 @@ export default function PricingPage({ isAuthenticated, setIsSignInOpen }: Pricin
                   className={`card ${filter === "dark" ? "card-dark" : "card-light"}`}
                 >
                   <div className="cardImage">
-                    <img src={displayImage} alt={item.title} loading="lazy" />
+                    {/* 🔥 Alt-текст с ключевыми словами */}
+                    <img 
+                      src={displayImage} 
+                      alt={`${item.title} - ${isWireframeMode ? 'Wireframe' : 'Design'} pricing section component for Framer`} 
+                      loading="lazy" 
+                    />
                   </div>
                   <div className="cardInfo">
                     <h3>{item.title}</h3>
@@ -245,6 +265,35 @@ export default function PricingPage({ isAuthenticated, setIsSignInOpen }: Pricin
           </div>
         )}
       </div>
+
+      {/* 🔥 SEO-контент для поисковиков (текст внизу страницы) */}
+      <article 
+        className="seo-content" 
+        style={{ 
+          padding: '40px 20px', 
+          color: 'var(--framer-color-text-secondary)',
+          maxWidth: '800px',
+          margin: '0 auto'
+        }}
+      >
+        <h2 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '16px', color: 'var(--framer-color-text)' }}>
+          Pricing Section Components for Framer
+        </h2>
+        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
+          Convert visitors into customers with these professional pricing section components for Framer. 
+          Each pricing table is designed to clearly present your subscription tiers, highlight popular plans, 
+          and encourage sign-ups with compelling call-to-action buttons and feature comparisons.
+        </p>
+        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
+          Perfect for SaaS landing pages, membership sites, e-commerce stores, and service-based businesses. 
+          All components support light and dark themes, with wireframe mode for rapid prototyping 
+          and design mode for pixel-perfect previews before implementation.
+        </p>
+        <p style={{ lineHeight: 1.6 }}>
+          <strong>Features:</strong> Responsive layout · Dark/Light themes · Wireframe mode · 
+          Instant copy-paste · Framer-compatible · Toggle switch ready · Feature comparison · Mobile-optimized cards.
+        </p>
+      </article>
     </div>
   );
 }

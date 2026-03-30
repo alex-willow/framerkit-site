@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import { Copy, CircleCheck, Lock } from "lucide-react";
 import { motion } from "framer-motion";
 import SectionHeader from "../../components/SectionHeader";
+import SEO from "../../components/SEO";
 
 type ComponentItem = {
   key: string;
@@ -16,6 +17,7 @@ type AccordionPageProps = {
   setIsSignInOpen: (open: boolean) => void;
 };
 
+// ✅ Исправлен PLACEHOLDER (убраны пробелы)
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
 const FIXED_SKELETON_COUNT = 8;
 
@@ -102,6 +104,19 @@ export default function AccordionPage({ isAuthenticated, setIsSignInOpen }: Acco
   // ================================
   return (
     <div id="accordion-page" style={{ padding: 0, scrollMarginTop: "64px" }}>
+      
+      {/* 🔥 SEO META TAGS */}
+      <SEO
+        title="Accordion Components for Framer"
+        description="Collapsible accordion components for Framer. Light & dark themes. Copy-paste ready FAQ accordions, collapsible sections, and expandable content blocks."
+        keywords="framer accordion component, collapsible section, FAQ accordion, expandable content, framer ui kit, copy paste accordion, responsive accordion"
+        image="/og-accordion.jpg"
+        canonical="https://www.framerkit.site/components/accordion"
+      />
+
+      {/* 🔥 H1 для поисковиков (визуально скрыт, но индексируется) */}
+      <h1 className="sr-only">Accordion Components for Framer — Collapsible FAQ Sections</h1>
+
       <SectionHeader
         title="Accordion"
         count={filtered.length}
@@ -123,7 +138,7 @@ export default function AccordionPage({ isAuthenticated, setIsSignInOpen }: Acco
         ) : error ? (
           <p style={{ color: "red", padding: "20px" }}>{error}</p>
         ) : filtered.length === 0 ? (
-          <div className="empty-message">No components available for the selected theme</div>
+          <div className="empty-message">No accordion components available for the selected theme</div>
         ) : (
           <div className="gallery">
             {filtered.map(item => {
@@ -139,7 +154,12 @@ export default function AccordionPage({ isAuthenticated, setIsSignInOpen }: Acco
                   className={`card ${filter === "dark" ? "card-dark" : "card-light"}`}
                 >
                   <div className="cardImage">
-                    <img src={item.image || PLACEHOLDER} alt={item.title} loading="lazy" />
+                    {/* 🔥 Alt-текст с ключевыми словами */}
+                    <img 
+                      src={item.image || PLACEHOLDER} 
+                      alt={`${item.title} - Accordion component for Framer`} 
+                      loading="lazy" 
+                    />
                   </div>
                   <div className="cardInfo">
                     <h3>{item.title}</h3>
@@ -172,6 +192,35 @@ export default function AccordionPage({ isAuthenticated, setIsSignInOpen }: Acco
           </div>
         )}
       </div>
+
+      {/* 🔥 SEO-контент для поисковиков (текст внизу страницы) */}
+      <article 
+        className="seo-content" 
+        style={{ 
+          padding: '40px 20px', 
+          color: 'var(--framer-color-text-secondary)',
+          maxWidth: '800px',
+          margin: '0 auto'
+        }}
+      >
+        <h2 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '16px', color: 'var(--framer-color-text)' }}>
+          Accordion Components for Framer
+        </h2>
+        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
+          Save space and improve user experience with these collapsible accordion components for Framer. 
+          Each accordion is designed for smooth animations, accessible keyboard navigation, and clean 
+          expandable content sections that help visitors find information without cluttering your layout.
+        </p>
+        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
+          Perfect for FAQ pages, documentation sections, product features, and knowledge bases. 
+          All components support light and dark themes, with instant copy-paste functionality 
+          for rapid implementation in your Framer projects.
+        </p>
+        <p style={{ lineHeight: 1.6 }}>
+          <strong>Features:</strong> Responsive layout · Dark/Light themes · Smooth animations · 
+          Instant copy-paste · Framer-compatible · Accessible markup · Keyboard navigation · Mobile-optimized.
+        </p>
+      </article>
     </div>
   );
 }

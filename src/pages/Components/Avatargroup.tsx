@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import { Copy, CircleCheck, Lock } from "lucide-react";
 import { motion } from "framer-motion";
 import SectionHeader from "../../components/SectionHeader";
+import SEO from "../../components/SEO";
 
 type ComponentItem = {
   key: string;
@@ -16,6 +17,7 @@ type AvatarGroupPageProps = {
   setIsSignInOpen: (open: boolean) => void;
 };
 
+// ✅ Исправлен PLACEHOLDER (убраны пробелы)
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
 const FIXED_SKELETON_COUNT = 8;
 
@@ -105,6 +107,19 @@ export default function AvatarGroupPage({
   // ================================
   return (
     <div id="avatar-group-page" style={{ padding: 0, scrollMarginTop: "64px" }}>
+      
+      {/* 🔥 SEO META TAGS */}
+      <SEO
+        title="Avatar Group Components for Framer"
+        description="Grouped avatar components for Framer. Light & dark themes. Copy-paste ready team member grids, collaborator lists, and avatar stacks for social proof."
+        keywords="framer avatar group, team member avatars, collaborator list, user group component, framer ui kit, copy paste avatar group, responsive avatar stack"
+        image="/og-avatar-group.jpg"
+        canonical="https://www.framerkit.site/components/avatargroup"
+      />
+
+      {/* 🔥 H1 для поисковиков (визуально скрыт, но индексируется) */}
+      <h1 className="sr-only">Avatar Group Components for Framer — Team Member Grids</h1>
+
       <SectionHeader
         title="Avatar Group"
         count={filtered.length}
@@ -126,7 +141,7 @@ export default function AvatarGroupPage({
         ) : error ? (
           <p style={{ color: "red", padding: "20px" }}>{error}</p>
         ) : filtered.length === 0 ? (
-          <div className="empty-message">No components available for the selected theme</div>
+          <div className="empty-message">No avatar group components available for the selected theme</div>
         ) : (
           <div className="gallery">
             {filtered.map(item => {
@@ -142,7 +157,12 @@ export default function AvatarGroupPage({
                   className={`card ${filter === "dark" ? "card-dark" : "card-light"}`}
                 >
                   <div className="cardImage">
-                    <img src={item.image || PLACEHOLDER} alt={item.title} loading="lazy" />
+                    {/* 🔥 Alt-текст с ключевыми словами */}
+                    <img 
+                      src={item.image || PLACEHOLDER} 
+                      alt={`${item.title} - Avatar Group component for Framer`} 
+                      loading="lazy" 
+                    />
                   </div>
                   <div className="cardInfo">
                     <h3>{item.title}</h3>
@@ -175,6 +195,35 @@ export default function AvatarGroupPage({
           </div>
         )}
       </div>
+
+      {/* 🔥 SEO-контент для поисковиков (текст внизу страницы) */}
+      <article 
+        className="seo-content" 
+        style={{ 
+          padding: '40px 20px', 
+          color: 'var(--framer-color-text-secondary)',
+          maxWidth: '800px',
+          margin: '0 auto'
+        }}
+      >
+        <h2 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '16px', color: 'var(--framer-color-text)' }}>
+          Avatar Group Components for Framer
+        </h2>
+        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
+          Showcase your team, collaborators, or community with these professional avatar group components for Framer. 
+          Each avatar group is designed for clean team sections, social proof displays, and collaborator lists, 
+          featuring overlapping layouts, hover effects, and responsive stacking that adapts to any screen size.
+        </p>
+        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
+          Perfect for team pages, agency websites, project showcases, and community platforms. 
+          All components support light and dark themes, with instant copy-paste functionality 
+          for rapid implementation in your Framer projects.
+        </p>
+        <p style={{ lineHeight: 1.6 }}>
+          <strong>Features:</strong> Responsive layout · Dark/Light themes · Overlapping avatars · 
+          Instant copy-paste · Framer-compatible · Hover effects · Count badges · Mobile-optimized stacks.
+        </p>
+      </article>
     </div>
   );
 }

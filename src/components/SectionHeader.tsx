@@ -35,17 +35,11 @@ function ModeToggle({
 }: ModeToggleProps) {
   const [showTooltip, setShowTooltip] = useState(false);
 
-  // Сбрасывать тултип при потере фокуса окна/вкладки
   useEffect(() => {
     const handleVisibilityChange = () => {
-      if (document.hidden) {
-        setShowTooltip(false);
-      }
+      if (document.hidden) setShowTooltip(false);
     };
-
-    const handleBlur = () => {
-      setShowTooltip(false);
-    };
+    const handleBlur = () => setShowTooltip(false);
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
     window.addEventListener('blur', handleBlur);
@@ -71,7 +65,6 @@ function ModeToggle({
         title=""
       >
         {isActive ? activeIcon : inactiveIcon}
-        
         {showTooltip && (
           <div className="toggle-tooltip">
             {isActive ? activeLabel : inactiveLabel}
@@ -79,6 +72,40 @@ function ModeToggle({
         )}
       </button>
     </>
+  );
+}
+
+// 🔥 Новый компонент: сегментированные кнопки Wireframe/Design
+function WireframeToggle({
+  isWireframeMode,
+  onWireframeModeChange,
+}: {
+  isWireframeMode: boolean;
+  onWireframeModeChange: (mode: boolean) => void;
+}) {
+  return (
+    <div className="mode-toggle-wrapper">
+      <div className="mode-toggle-group">
+        <button
+          className={`mode-toggle-btn ${isWireframeMode ? 'active' : ''}`}
+          onClick={() => onWireframeModeChange(true)}
+          type="button"
+          aria-label="Wireframe mode"
+        >
+          <SquareDashed size={16} strokeWidth={2} />
+          <span>Wireframe</span>
+        </button>
+        <button
+          className={`mode-toggle-btn ${!isWireframeMode ? 'active' : ''}`}
+          onClick={() => onWireframeModeChange(false)}
+          type="button"
+          aria-label="Design mode"
+        >
+          <Paintbrush size={16} strokeWidth={2} />
+          <span>Design</span>
+        </button>
+      </div>
+    </div>
   );
 }
 
@@ -101,28 +128,19 @@ export default function SectionHeader({
           <h2 className="section-title">{title}</h2>
           <p className="section-subtitle">
             {loading ? "Loading..." : `${count} ${templateLabel}`}
-            {!hideThemeSwitcher && onFilterChange && (
-              <> · {filter === "light" ? "Light" : "Dark"} theme</>
-            )}
-            {!hideWireframeToggle && onWireframeModeChange && (
-              <> · {isWireframeMode ? "Wireframe" : "Design"} view</>
-            )}
           </p>
         </div>
 
         <div className="section-header-right">
+          {/* 🔥 Новый переключатель Wireframe/Design */}
           {!hideWireframeToggle && onWireframeModeChange && (
-            <ModeToggle
-              label="View"
-              isActive={isWireframeMode}
-              onToggle={() => onWireframeModeChange(!isWireframeMode)}
-              activeIcon={<SquareDashed size={18} strokeWidth={2} />}
-              inactiveIcon={<Paintbrush size={18} strokeWidth={2} />}
-              activeLabel="Design view"
-              inactiveLabel="Wireframe view"
+            <WireframeToggle
+              isWireframeMode={isWireframeMode}
+              onWireframeModeChange={onWireframeModeChange}
             />
           )}
 
+          {/* 🔹 Старый переключатель темы (остался как был) */}
           {!hideThemeSwitcher && onFilterChange && (
             <ModeToggle
               label="Theme"

@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.framerkit.site/sitemap.xml
+
+# Запрет индексации служебных путей
+Disallow: /preview/
+Disallow: /p/
+Disallow: /api/
+Disallow: /*?*

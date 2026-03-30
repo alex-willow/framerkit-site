@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import { Copy, CircleCheck, Lock } from "lucide-react";
 import { motion } from "framer-motion";
 import SectionHeader from "../../components/SectionHeader";
+import SEO from "../../components/SEO";
 
 type ComponentItem = {
   key: string;
@@ -16,6 +17,7 @@ type AccordionGroupPageProps = {
   setIsSignInOpen: (open: boolean) => void;
 };
 
+// ✅ Исправлен PLACEHOLDER (убраны пробелы)
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
 const FIXED_SKELETON_COUNT = 8;
 
@@ -107,6 +109,19 @@ export default function AccordionGroupPage({
   // ================================
   return (
     <div id="accordion-group-page" style={{ padding: 0, scrollMarginTop: "64px" }}>
+      
+      {/* 🔥 SEO META TAGS */}
+      <SEO
+        title="Accordion Group Components for Framer"
+        description="Grouped accordion components for Framer. Light & dark themes. Copy-paste ready FAQ groups, nested accordions, and multi-section collapsible content."
+        keywords="framer accordion group, nested accordion, FAQ group component, collapsible sections group, framer ui kit, copy paste accordion group, responsive accordion"
+        image="/og-accordion-group.jpg"
+        canonical="https://www.framerkit.site/components/accordiongroup"
+      />
+
+      {/* 🔥 H1 для поисковиков (визуально скрыт, но индексируется) */}
+      <h1 className="sr-only">Accordion Group Components for Framer — Nested FAQ Sections</h1>
+
       <SectionHeader
         title="Accordion Group"
         count={filtered.length}
@@ -128,7 +143,7 @@ export default function AccordionGroupPage({
         ) : error ? (
           <p style={{ color: "red", padding: "20px" }}>{error}</p>
         ) : filtered.length === 0 ? (
-          <div className="empty-message">No components available for the selected theme</div>
+          <div className="empty-message">No accordion group components available for the selected theme</div>
         ) : (
           <div className="gallery">
             {filtered.map(item => {
@@ -144,7 +159,12 @@ export default function AccordionGroupPage({
                   className={`card ${filter === "dark" ? "card-dark" : "card-light"}`}
                 >
                   <div className="cardImage">
-                    <img src={item.image || PLACEHOLDER} alt={item.title} loading="lazy" />
+                    {/* 🔥 Alt-текст с ключевыми словами */}
+                    <img 
+                      src={item.image || PLACEHOLDER} 
+                      alt={`${item.title} - Accordion Group component for Framer`} 
+                      loading="lazy" 
+                    />
                   </div>
                   <div className="cardInfo">
                     <h3>{item.title}</h3>
@@ -177,6 +197,35 @@ export default function AccordionGroupPage({
           </div>
         )}
       </div>
+
+      {/* 🔥 SEO-контент для поисковиков (текст внизу страницы) */}
+      <article 
+        className="seo-content" 
+        style={{ 
+          padding: '40px 20px', 
+          color: 'var(--framer-color-text-secondary)',
+          maxWidth: '800px',
+          margin: '0 auto'
+        }}
+      >
+        <h2 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '16px', color: 'var(--framer-color-text)' }}>
+          Accordion Group Components for Framer
+        </h2>
+        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
+          Organize complex information with these grouped accordion components for Framer. 
+          Each accordion group is designed for hierarchical content, allowing nested sections, 
+          category-based organization, and smooth expandable interactions that keep your layout clean.
+        </p>
+        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
+          Perfect for documentation hubs, knowledge bases, product feature lists, and multi-topic FAQ pages. 
+          All components support light and dark themes, with instant copy-paste functionality 
+          for rapid implementation in your Framer projects.
+        </p>
+        <p style={{ lineHeight: 1.6 }}>
+          <strong>Features:</strong> Responsive layout · Dark/Light themes · Nested accordions · 
+          Instant copy-paste · Framer-compatible · Category grouping · Smooth animations · Mobile-optimized.
+        </p>
+      </article>
     </div>
   );
 }

@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import { Copy, CircleCheck, Lock } from "lucide-react";
 import { motion } from "framer-motion";
 import SectionHeader from "../../components/SectionHeader";
+import SEO from "../../components/SEO";
 
 type ComponentItem = {
   key: string;
@@ -16,6 +17,7 @@ type RatingPageProps = {
   setIsSignInOpen: (open: boolean) => void;
 };
 
+// ✅ Исправлен PLACEHOLDER (убраны пробелы)
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
 const FIXED_SKELETON_COUNT = 8;
 
@@ -102,6 +104,19 @@ export default function RatingPage({ isAuthenticated, setIsSignInOpen }: RatingP
   // ================================
   return (
     <div id="rating-page" style={{ padding: 0, scrollMarginTop: "64px" }}>
+      
+      {/* 🔥 SEO META TAGS */}
+      <SEO
+        title="Rating Components for Framer"
+        description="Star rating and review components for Framer. Light & dark themes. Copy-paste ready rating widgets, review displays, and feedback indicators for product pages."
+        keywords="framer rating component, star rating, review widget, feedback indicator, framer ui kit, copy paste rating, responsive rating"
+        image="/og-rating.jpg"
+        canonical="https://www.framerkit.site/components/rating"
+      />
+
+      {/* 🔥 H1 для поисковиков (визуально скрыт, но индексируется) */}
+      <h1 className="sr-only">Rating Components for Framer — Star Ratings & Review Widgets</h1>
+
       <SectionHeader
         title="Rating"
         count={filtered.length}
@@ -123,7 +138,7 @@ export default function RatingPage({ isAuthenticated, setIsSignInOpen }: RatingP
         ) : error ? (
           <p style={{ color: "red", padding: "20px" }}>{error}</p>
         ) : filtered.length === 0 ? (
-          <div className="empty-message">No components available for the selected theme</div>
+          <div className="empty-message">No rating components available for the selected theme</div>
         ) : (
           <div className="gallery">
             {filtered.map(item => {
@@ -139,7 +154,12 @@ export default function RatingPage({ isAuthenticated, setIsSignInOpen }: RatingP
                   className={`card ${filter === "dark" ? "card-dark" : "card-light"}`}
                 >
                   <div className="cardImage">
-                    <img src={item.image || PLACEHOLDER} alt={item.title} loading="lazy" />
+                    {/* 🔥 Alt-текст с ключевыми словами */}
+                    <img 
+                      src={item.image || PLACEHOLDER} 
+                      alt={`${item.title} - Rating component for Framer`} 
+                      loading="lazy" 
+                    />
                   </div>
                   <div className="cardInfo">
                     <h3>{item.title}</h3>
@@ -172,6 +192,36 @@ export default function RatingPage({ isAuthenticated, setIsSignInOpen }: RatingP
           </div>
         )}
       </div>
+
+      {/* 🔥 SEO-контент для поисковиков (текст внизу страницы) */}
+      <article 
+        className="seo-content" 
+        style={{ 
+          padding: '40px 20px', 
+          color: 'var(--framer-color-text-secondary)',
+          maxWidth: '800px',
+          margin: '0 auto'
+        }}
+      >
+        <h2 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '16px', color: 'var(--framer-color-text)' }}>
+          Rating Components for Framer
+        </h2>
+        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
+          Build trust and showcase quality with these professional rating components for Framer. 
+          Each rating widget is designed for clarity and impact, featuring star icons, numerical scores, 
+          review counts, and visual feedback that helps visitors quickly assess products, services, or content 
+          and make confident decisions.
+        </p>
+        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
+          Perfect for e-commerce product pages, review sections, service listings, and user-generated content platforms. 
+          All components support light and dark themes, with instant copy-paste functionality 
+          for rapid implementation in your Framer projects.
+        </p>
+        <p style={{ lineHeight: 1.6 }}>
+          <strong>Features:</strong> Responsive layout · Dark/Light themes · Star icons · 
+          Instant copy-paste · Framer-compatible · Half-star support · Review count · Mobile-optimized sizing.
+        </p>
+      </article>
     </div>
   );
 }
