@@ -23,11 +23,12 @@ type NavbarPageProps = {
 };
 
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
-const FIXED_SKELETON_COUNT = 8;
 
-export default function NavbarPage({ isAuthenticated, setIsSignInOpen }: NavbarPageProps) {
+export default function NavbarPage({
+  isAuthenticated,
+  setIsSignInOpen,
+}: NavbarPageProps) {
   const [items, setItems] = useState<ComponentItem[]>([]);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [filter, setFilter] = useState<"light" | "dark">("light");
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
@@ -35,62 +36,92 @@ export default function NavbarPage({ isAuthenticated, setIsSignInOpen }: NavbarP
   const [hoveredPreviewKey, setHoveredPreviewKey] = useState<string | null>(null);
   const [isWireframeMode, setIsWireframeMode] = useState(true);
 
+  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
+
   const galleryRef = useRef<HTMLDivElement>(null);
 
   // ================================
-  // Загрузка данных
+  // DATA LOAD
   // ================================
   useEffect(() => {
     const load = async () => {
       try {
         const res = await fetch(
           "https://raw.githubusercontent.com/alex-willow/framerkit-data/main/navbar.json",
-          { cache: "force-cache" } // ускоряем повторные заходы
+          { cache: "force-cache" }
         );
         if (!res.ok) throw new Error("Failed to load navbar");
+
         const json = await res.json();
-        const loadedItems = json.navbar || [];
-        setItems(loadedItems);
-        setLoading(false);
+        setItems(json.navbar || []);
       } catch (err) {
         console.error(err);
         setError("Failed to load navbar components");
-        setLoading(false);
       }
     };
+
     load();
   }, []);
 
   // ================================
-  // Сброс скролла при смене фильтра или wireframe
+  // SCROLL
   // ================================
   useEffect(() => {
-    if (galleryRef.current) {
-      galleryRef.current.scrollTo({ top: 0 });
-    }
+    galleryRef.current?.scrollTo({ top: 0 });
   }, [filter, isWireframeMode]);
 
-  // ================================
-  // Скролл к секции
-  // ================================
   useEffect(() => {
-    const section = document.getElementById("navbar-page");
-    if (section) {
-      section.scrollIntoView({ behavior: "auto", block: "start" });
-    }
+    document.getElementById("navbar-page")?.scrollIntoView({
+      behavior: "auto",
+      block: "start",
+    });
   }, []);
 
   // ================================
-  // Фильтрация
+  // FILTER
   // ================================
   const filtered = useMemo(() => {
     return items.filter(item =>
-      filter === "dark" ? item.key.includes("dark") : !item.key.includes("dark")
+      filter === "dark"
+        ? item.key.includes("dark")
+        : !item.key.includes("dark")
     );
   }, [items, filter]);
 
   // ================================
-  // Copy
+  // IMAGE LOAD
+  // ================================
+  const handleImageLoad = (key: string) => {
+    setLoadedImages(prev => {
+      const next = new Set(prev);
+      next.add(key);
+      return next;
+    });
+  };
+
+  // ================================
+  // PREVIEW (FIXED ✅)
+  // ================================
+  const openPreview = (url: string) => {
+    try {
+      let path = url.trim();
+      let cleanPath = "";
+
+      if (path.startsWith("/")) {
+        cleanPath = path.replace("/preview/", "").replace(/\/$/, "");
+      } else if (path.startsWith("http")) {
+        const u = new URL(path);
+        cleanPath = u.pathname.replace("/preview/", "").replace(/\/$/, "");
+      }
+
+      window.open(`/p/${cleanPath}`, "_blank", "noopener,noreferrer");
+    } catch {
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
+  };
+
+  // ================================
+  // COPY
   // ================================
   const handleCopy = async (item: ComponentItem, url: string) => {
     if (!isAuthenticated && item.type === "paid") {
@@ -103,10 +134,8 @@ export default function NavbarPage({ isAuthenticated, setIsSignInOpen }: NavbarP
     setTimeout(() => setCopiedKey(null), 4000);
   };
 
-  const skeletonCards = Array.from({ length: FIXED_SKELETON_COUNT });
-
   // ================================
-  // Render
+  // RENDER
   // ================================
   return (
     <div id="navbar-page" style={{ padding: 0, scrollMarginTop: "64px" }}>
@@ -115,125 +144,122 @@ export default function NavbarPage({ isAuthenticated, setIsSignInOpen }: NavbarP
         count={filtered.length}
         filter={filter}
         onFilterChange={setFilter}
-        loading={loading}
+        loading={false}
         isWireframeMode={isWireframeMode}
         onWireframeModeChange={setIsWireframeMode}
-        hideWireframeToggle={false}
       />
 
       <div className="gallery-scroll-area" ref={galleryRef}>
-        {loading ? (
-          <div className="skeleton-gallery">
-            {skeletonCards.map((_, i) => (
-              <div key={i} className="skeleton-card">
-                <div className="skeleton-card-image" />
-                <div className="skeleton-card-info" />
-              </div>
-            ))}
-          </div>
-        ) : error ? (
+        {error ? (
           <p style={{ color: "red", padding: "20px" }}>{error}</p>
         ) : filtered.length === 0 ? (
-          <div className="empty-message">No components available for the selected theme</div>
+          <div className="empty-message">
+            No components available for the selected theme
+          </div>
         ) : (
           <div className="gallery">
             {filtered.map(item => {
               const canCopy = isAuthenticated || item.type === "free";
               const isCopied = copiedKey === item.key;
 
-              const displayImage = isWireframeMode && item.wireframe?.image
-                ? item.wireframe.image
-                : item.image || PLACEHOLDER;
+              const displayImage =
+                isWireframeMode && item.wireframe?.image
+                  ? item.wireframe.image
+                  : item.image || PLACEHOLDER;
 
-              const displayUrl = isWireframeMode && item.wireframe?.url
-                ? item.wireframe.url
-                : item.url;
+              const displayUrl =
+                isWireframeMode && item.wireframe?.url
+                  ? item.wireframe.url
+                  : item.url;
 
               const displayPreviewUrl = isWireframeMode
                 ? item.wireframe?.previewUrl
                 : item.previewUrl;
 
+              const isLoaded = loadedImages.has(item.key);
+
               return (
                 <motion.div
                   key={item.key}
                   initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  animate={{
+                    opacity: isLoaded ? 1 : 0,
+                    y: isLoaded ? 0 : 10,
+                  }}
                   transition={{ duration: 0.2 }}
-                  className={`card ${filter === "dark" ? "card-dark" : "card-light"}`}
+                  className={`card ${
+                    filter === "dark" ? "card-dark" : "card-light"
+                  }`}
                 >
+                  {/* IMAGE */}
                   <div className="cardImage">
-                    <img src={displayImage} alt={item.title} loading="lazy" />
+                    {!isLoaded && <div className="image-placeholder" />}
+
+                    <img
+                      src={displayImage}
+                      alt={item.title}
+                      loading="lazy"
+                      onLoad={() => handleImageLoad(item.key)}
+                      style={{
+                        opacity: isLoaded ? 1 : 0,
+                        position: "absolute",
+                        inset: 0,
+                      }}
+                    />
                   </div>
+
+                  {/* INFO */}
                   <div className="cardInfo">
                     <h3>{item.title}</h3>
+
                     <div className="card-actions">
-                      {/* Preview */}
+                      {/* PREVIEW */}
                       {displayPreviewUrl ? (
                         <div
                           className="iconButton"
-                          onClick={e => {
-                            e.preventDefault();
-                            e.stopPropagation();
-
-                            try {
-                              let path = displayPreviewUrl.trim();
-                              let cleanPath = "";
-
-                              if (path.startsWith("/")) {
-                                cleanPath = path.replace("/preview/", "").replace(/\/$/, "");
-                              } else if (path.startsWith("http")) {
-                                const url = new URL(path);
-                                cleanPath = url.pathname.replace("/preview/", "").replace(/\/$/, "");
-                              }
-
-                              const viewerUrl = `/p/${cleanPath}`;
-                              window.open(viewerUrl, "_blank", "noopener,noreferrer");
-                            } catch {
-                              window.open(displayPreviewUrl, "_blank", "noopener,noreferrer");
-                            }
-                          }}
-                          onMouseEnter={() => setHoveredPreviewKey(item.key)}
-                          onMouseLeave={() => setHoveredPreviewKey(null)}
-                          title="Live Preview"
+                          onClick={() => openPreview(displayPreviewUrl)}
+                          onMouseEnter={() =>
+                            setHoveredPreviewKey(item.key)
+                          }
+                          onMouseLeave={() =>
+                            setHoveredPreviewKey(null)
+                          }
                         >
-                          <Eye size={16} color={filter === "dark" ? "#ccc" : "currentColor"} />
+                          <Eye size={16} />
                           {hoveredPreviewKey === item.key && (
                             <div className="tooltip">Preview</div>
                           )}
                         </div>
                       ) : (
-                        <div
-                          className="iconButton disabled"
-                          title="Coming soon"
-                          style={{ cursor: "not-allowed", opacity: 0.4 }}
-                        >
-                          <Eye size={16} color={filter === "dark" ? "#666" : "#999"} />
-                          {hoveredPreviewKey === item.key && (
-                            <div className="tooltip">Coming soon</div>
-                          )}
+                        <div className="iconButton disabled">
+                          <Eye size={16} />
                         </div>
                       )}
 
-                      {/* Copy */}
+                      {/* COPY */}
                       <div
-                        className={`iconButton ${isCopied ? "copied" : ""} ${
-                          !canCopy ? "locked" : ""
-                        }`}
+                        className={`iconButton ${isCopied ? "copied" : ""}`}
                         onClick={() => handleCopy(item, displayUrl)}
-                        onMouseEnter={() => !isCopied && setHoveredKey(item.key)}
+                        onMouseEnter={() =>
+                          !isCopied && setHoveredKey(item.key)
+                        }
                         onMouseLeave={() => setHoveredKey(null)}
                       >
                         {isCopied ? (
-                          <CircleCheck size={20} color="#22c55e" strokeWidth={2.5} />
+                          <CircleCheck size={20} color="#22c55e" />
                         ) : canCopy ? (
-                          <Copy size={16} color={filter === "dark" ? "#ccc" : "currentColor"} />
+                          <Copy size={16} />
                         ) : (
-                          <Lock size={16} color={filter === "dark" ? "#ccc" : "currentColor"} />
+                          <Lock size={16} />
                         )}
 
                         {(isCopied || hoveredKey === item.key) && (
                           <div className="tooltip">
-                            {isCopied ? "Copied" : canCopy ? "Copy" : "Sign in to copy"}
+                            {isCopied
+                              ? "Copied"
+                              : canCopy
+                              ? "Copy"
+                              : "Sign in"}
                           </div>
                         )}
                       </div>

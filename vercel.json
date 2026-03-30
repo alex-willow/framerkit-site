@@ -1,12 +1,51 @@
 {
   "rewrites": [
+
+    {
+      "source": "/assets/:path*",
+      "destination": "https://framerusercontent.com/assets/:path*"
+    },
+    {
+      "source": "/sites/:path*",
+      "destination": "https://framerusercontent.com/sites/:path*"
+    },
+    {
+      "source": "/framer/:path*",
+      "destination": "https://framerusercontent.com/:path*"
+    },
+
+
     {
       "source": "/p/:path*",
       "destination": "/preview/viewer.html"
     },
+
+
     {
       "source": "/(.*)",
       "destination": "/index.html"
+    }
+  ],
+
+  "headers": [
+
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/sites/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     }
   ]
 }
