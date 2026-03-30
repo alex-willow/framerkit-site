@@ -106,25 +106,56 @@ export default function Footer({
         </div>
 
         <div className="footer-col">
-          <h4 className="footer-title">Social</h4>
-          <div className="footer-socials">
-            <a href="https://x.com/framer_kit" target="_blank" rel="noopener noreferrer">
-              <TwitterLogo size={20} />
-            </a>
-            <a href="https://www.instagram.com/framer.kit/" target="_blank" rel="noopener noreferrer">
-              <InstagramLogo size={20} />
-            </a>
-            <a href="https://www.youtube.com/@framerkit_plugin" target="_blank" rel="noopener noreferrer">
-              <YoutubeLogo size={20} />
-            </a>
-            <a href="https://www.tiktok.com/@framer_plugin" target="_blank" rel="noopener noreferrer">
-              <TiktokLogo size={20} />
-            </a>
-          </div>
-        </div>
-      </div>
+            <h4 className="footer-title">Social</h4>
+            <div className="footer-socials">
+              
+              {/* X / Twitter */}
+              <a 
+                href="https://x.com/framer_kit" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                aria-label="Follow FramerKit on X"
+                className="footer-social-link"
+              >
+                <TwitterLogo size={20} />
+              </a>
 
-   
+              {/* Instagram */}
+              <a 
+                href="https://www.instagram.com/framer.kit/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                aria-label="Follow FramerKit on Instagram"
+                className="footer-social-link"
+              >
+                <InstagramLogo size={20} />
+              </a>
+
+              {/* YouTube */}
+              <a 
+                href="https://www.youtube.com/@framerkit_plugin" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                aria-label="Subscribe to FramerKit on YouTube"
+                className="footer-social-link"
+              >
+                <YoutubeLogo size={20} />
+              </a>
+
+              {/* TikTok */}
+              <a 
+                href="https://www.tiktok.com/@framer_plugin" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                aria-label="Follow FramerKit on TikTok"
+                className="footer-social-link"
+              >
+                <TiktokLogo size={20} />
+              </a>
+
+            </div>
+          </div>
+        </div>   
     </footer>
   );
 }
