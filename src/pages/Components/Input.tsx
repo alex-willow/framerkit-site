@@ -19,13 +19,33 @@ type InputPageProps = {
 
 // ✅ Исправлен PLACEHOLDER (убраны пробелы)
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
-const FIXED_SKELETON_COUNT = 8;
 
 export default function InputPage({ isAuthenticated, setIsSignInOpen }: InputPageProps) {
   const [items, setItems] = useState<ComponentItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [filter, setFilter] = useState<"light" | "dark">("light");
+
+  useEffect(() => {
+    const currentTheme = document.documentElement.getAttribute("data-framer-theme")
+      || document.body.getAttribute("data-framer-theme")
+      || document.querySelector("[data-framer-theme]")?.getAttribute("data-framer-theme");
+    if (currentTheme === "light" || currentTheme === "dark") {
+      setFilter(currentTheme);
+    }
+
+    const handleGlobalThemeChange = (event: Event) => {
+      const nextTheme = (event as CustomEvent<"light" | "dark">).detail;
+      if (nextTheme === "light" || nextTheme === "dark") {
+        setFilter(nextTheme);
+      }
+    };
+
+    window.addEventListener("framerkit-theme-change", handleGlobalThemeChange as EventListener);
+    return () => {
+      window.removeEventListener("framerkit-theme-change", handleGlobalThemeChange as EventListener);
+    };
+  }, []);
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
 
@@ -97,8 +117,6 @@ export default function InputPage({ isAuthenticated, setIsSignInOpen }: InputPag
     setTimeout(() => setCopiedKey(null), 4000);
   };
 
-  const skeletonCards = Array.from({ length: FIXED_SKELETON_COUNT });
-
   // ================================
   // Render
   // ================================
@@ -127,14 +145,7 @@ export default function InputPage({ isAuthenticated, setIsSignInOpen }: InputPag
 
       <div className="gallery-scroll-area" ref={galleryRef}>
         {loading ? (
-          <div className="skeleton-gallery">
-            {skeletonCards.map((_, i) => (
-              <div key={i} className="skeleton-card">
-                <div className="skeleton-card-image" />
-                <div className="skeleton-card-info" />
-              </div>
-            ))}
-          </div>
+          <div style={{ minHeight: '200px' }}></div>
         ) : error ? (
           <p style={{ color: "red", padding: "20px" }}>{error}</p>
         ) : filtered.length === 0 ? (
@@ -203,24 +214,6 @@ export default function InputPage({ isAuthenticated, setIsSignInOpen }: InputPag
           margin: '0 auto'
         }}
       >
-        <h2 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '16px', color: 'var(--framer-color-text)' }}>
-          Input Components for Framer
-        </h2>
-        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
-          Create seamless user experiences with these professional input components for Framer. 
-          Each input is designed for clarity and accessibility, featuring clean borders, 
-          focus states, placeholder text, and optional icons that guide users through 
-          form interactions with confidence on any device.
-        </p>
-        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
-          Perfect for contact forms, search bars, login pages, and data entry interfaces. 
-          All components support light and dark themes, with instant copy-paste functionality 
-          for rapid implementation in your Framer projects.
-        </p>
-        <p style={{ lineHeight: 1.6 }}>
-          <strong>Features:</strong> Responsive layout · Dark/Light themes · Focus states · 
-          Instant copy-paste · Framer-compatible · Icon support · Validation ready · Mobile-optimized.
-        </p>
       </article>
     </div>
   );

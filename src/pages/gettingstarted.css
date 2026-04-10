@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
 /* ===== GETTING STARTED SECTION ===== */
 #getting-started {
     padding: 80px 0;
@@ -18,14 +20,14 @@
   }
 
   .explore-content-wrapper {
-    
     width: 100%;
     margin: 0 auto;
-    padding: 0 20px; /* отступы по бокам на мобильных */
+    padding: 0 16px; /* отступы по бокам на мобильных */
     box-sizing: border-box;
   }
   
   .fk-gs-title {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
     font-size: clamp(24px, 4vw, 36px);
     font-weight: 800;
     color: #2B0691;
@@ -170,13 +172,13 @@
   .fk-gs-wrapper {
     display: flex;
     flex-direction: column;
-    padding: 40px 20px;
+    padding: 40px 16px;
     width: 100%;
   }
 
   @media (max-width: 640px) {
    .fk-gs-wrapper {
-      padding: 40px 0;
+      padding: 40px 16px;
     }
   }
 
@@ -206,7 +208,7 @@
   }
   .content {
     margin-left: 0;
-    padding: 0px 20px 20px; /* верхний отступ = высота твоего sticky */
+    padding: 0px 16px 20px; /* консистентный padding */
   }
   .gallery2 {
     grid-template-columns: 1fr;
@@ -236,7 +238,7 @@
   }
   .content {
     margin-left: 0;
-    padding: 0px 20px 20px; /* верхний отступ = высота твоего sticky */
+    padding: 0px 16px 20px; /* консистентный padding */
   }
   .gallery3 {
     grid-template-columns: 1fr;

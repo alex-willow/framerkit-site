@@ -17,6 +17,102 @@
   <meta property="og:image" content="/Logo.png" />
   
   <link rel="stylesheet" href="/preview/viewer.css" />
+  <style>
+    /* === CSS Variables for Theming === */
+    :root {
+      --bg-color: #f5f5f5;
+      --toolbar-bg: #ffffff;
+      --toolbar-border: #e5e7eb;
+      --text-primary: #1f2937;
+      --text-secondary: #6b7280;
+      --text-muted: #9ca3af;
+      --accent-color: #6E3FF3;
+      --button-bg: #f3f4f6;
+      --button-hover: #e5e7eb;
+      --button-active: #6E3FF3;
+      --button-active-text: #ffffff;
+      --toast-bg: #1f2937;
+      --toast-text: #ffffff;
+      --indicator-bg: rgba(0, 0, 0, 0.8);
+      --indicator-text: #ffffff;
+      --preview-bg: #ffffff;
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #0f0f0f;
+      --toolbar-bg: #1a1a1a;
+      --toolbar-border: #2a2a2a;
+      --text-primary: #f5f5f5;
+      --text-secondary: #a0a0a0;
+      --text-muted: #6b6b6b;
+      --accent-color: #a78bfa;
+      --button-bg: #2a2a2a;
+      --button-hover: #3a3a3a;
+      --button-active: #6E3FF3;
+      --button-active-text: #ffffff;
+      --toast-bg: #2a2a2a;
+      --toast-text: #f5f5f5;
+      --indicator-bg: rgba(255, 255, 255, 0.9);
+      --indicator-text: #0f0f0f;
+      --preview-bg: #0f0f0f;
+    }
+
+    body {
+      background: var(--bg-color);
+      color: var(--text-primary);
+    }
+
+    .preview-toolbar {
+      background: var(--toolbar-bg);
+      border-bottom-color: var(--toolbar-border);
+    }
+
+    .logo-text {
+      color: var(--text-primary);
+    }
+
+    .breadcrumb-section {
+      color: var(--text-primary);
+    }
+
+    .breadcrumb-mode {
+      color: var(--text-secondary);
+    }
+
+    .toolbar-divider {
+      background: var(--toolbar-border);
+    }
+
+    /* device-btn и view-btn стили в viewer.css */
+
+    .fullscreen-btn {
+      color: var(--text-secondary);
+    }
+
+    .fullscreen-btn:hover {
+      background: var(--button-hover);
+      color: var(--text-primary);
+    }
+
+    .width-indicator {
+      background: var(--indicator-bg);
+      color: var(--indicator-text);
+    }
+
+    .copy-toast {
+      background: var(--toast-bg);
+      color: var(--toast-text);
+    }
+
+    .show-ui-btn {
+      background: var(--button-active);
+      color: var(--button-active-text);
+    }
+
+    .resizable-wrapper {
+      background: var(--preview-bg);
+    }
+  </style>
 </head>
 <body>
   <!-- 🔥 FLEX LAYOUT: Toolbar + Preview -->
@@ -26,8 +122,10 @@
     <div class="preview-toolbar">
       <!-- 🔹 LEFT: Logo + FramerKit + Section Name -->
       <div class="toolbar-left">
-        <img src="/Logo.png" alt="FramerKit" class="logo-image" width="28" height="28"/>
-        <span class="logo-text">FramerKit</span>
+        <a href="/" class="logo-wrapper">
+          <img src="/Logo.png" alt="FramerKit" class="logo-image" width="28" height="28"/>
+          <span class="logo-text">FramerKit</span>
+        </a>
         <div class="toolbar-divider"></div>
         <div class="breadcrumb">
           <span class="breadcrumb-section" id="sectionName"></span>
@@ -67,7 +165,6 @@
             <line x1="21" y1="3" x2="14" y2="10"/>
             <line x1="3" y1="21" x2="10" y2="14"/>
           </svg>
-          <span class="tooltip-fullscreen">Fullscreen</span>
         </button>
       </div>
 
@@ -121,6 +218,24 @@
   <!-- JavaScript -->
   <script>
     console.log('🔍 viewer.html loaded');
+
+    // === Theme Management ===
+    // Load theme from main site localStorage key
+    function loadTheme() {
+      const savedTheme = localStorage.getItem('theme');
+      const theme = savedTheme === 'dark' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+    }
+
+    // Initialize theme on load
+    loadTheme();
+
+    // Listen for theme changes from main site
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'theme') {
+        loadTheme();
+      }
+    });
     const path = window.location.pathname;
     const parts = path.split('/').filter(p => p);
   
@@ -618,7 +733,7 @@ if (showUiBtn) {
         isResizing = true;
         startX = e.clientX;
         startWidth = resizableWrapper.offsetWidth;
-        resizableWrapper.style.transition = 'none';
+        resizableWrapper.classList.add('no-transition');
         handle.classList.add('active');
         handle.setPointerCapture(e.pointerId);
         document.addEventListener('pointermove', onResize);
@@ -634,7 +749,7 @@ if (showUiBtn) {
       }
       function stopResize(e) {
         isResizing = false;
-        resizableWrapper.style.transition = 'width 0.25s ease';
+        resizableWrapper.classList.remove('no-transition');
         setTimeout(() => { previewFrame.style.pointerEvents = 'auto'; }, 10);
         handle.classList.remove('active');
         document.removeEventListener('pointermove', onResize);

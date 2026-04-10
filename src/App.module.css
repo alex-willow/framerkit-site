@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
 :root {
   /* === Цвета и шрифты === */
   --framer-color-bg: #fff;
@@ -16,7 +18,7 @@
   --framer-color-text-secondary-dark: #bbb;
   --framer-color-border-dark: #444;
 
-  --font-family: "Inter Display", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family: 'Inter', Arial, sans-serif;
   --border-radius: 10px;
   --box-shadow-small: 0 2px 8px rgba(16, 24, 40, 0.06);
   --box-shadow-medium: 0 8px 30px rgba(16, 24, 40, 0.08);
@@ -57,15 +59,16 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  height: 50px;
   z-index: 100;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
-  background: rgb(255, 255, 255);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(230, 230, 230, 0.5);
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--framer-color-border);
+  box-sizing: border-box;
+  height: 60px;
 }
 
 .headerLeft {
@@ -76,6 +79,7 @@ body {
 
 .header h1 {
   margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-size: 18px;
   font-weight: 800;
   letter-spacing: -0.2px;
@@ -86,16 +90,108 @@ body {
   color: var(--framer-color-text-dark);
 }
 
+[data-framer-theme="dark"] .header {
+  background: var(--framer-color-bg-dark);
+  border-bottom-color: var(--framer-color-border-dark);
+}
+
+[data-framer-theme="dark"] .nav-menu-toggle {
+  color: var(--framer-color-text-dark);
+}
+
 .logo {
   width: 28px;
   height: auto;
   display: block;
 }
 
+.logo-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.landing-navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+}
+
+.logo-text {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
 .headerActions {
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+/* Theme toggle button in mobile header */
+.theme-toggle-btn-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--framer-color-text); /* Цвет иконки */
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.theme-toggle-btn-header:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.theme-toggle-btn-header:focus,
+.theme-toggle-btn-header:focus-visible,
+.theme-toggle-btn-header:active {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Иконка в кнопке */
+.theme-toggle-btn-header svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+[data-framer-theme="dark"] .theme-toggle-btn-header {
+  color: var(--framer-color-text-dark);
+}
+
+[data-framer-theme="dark"] .theme-toggle-btn-header:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-menu-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--framer-color-text);
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
 }
 
 /* === Кнопки авторизации === */
@@ -250,11 +346,13 @@ body {
 }
 
 .sidebar-header {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-size: 16px;
   font-weight: 800;
   color: var(--framer-color-text);
   padding: 8px 12px;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
+  display: block;
 }
 
 [data-framer-theme="dark"] .sidebar-header {
@@ -412,17 +510,22 @@ body {
     display: none;
   }
   .content {
-    margin-left: 0;
-    padding: 0px 20px 20px; /* верхний отступ = высота твоего sticky */
-  }
-  .gallery {
-    grid-template-columns: 1fr;
+    margin-left: 0; /* Remove sidebar offset on mobile */
+    padding: 30px 0 20px; /* Убираем горизонтальный padding */
+    max-width: 100vw; /* Ensure content doesn't exceed viewport on mobile */
+    width: 100%;
   }
   .title {
     font-size: 24px;
     font-weight: 700;
     margin: 0px 0 4px;
     color: var(--framer-color-text);
+  }
+  .header {
+    border-bottom: 1px solid var(--framer-color-border); /* Линия под мобильным хедером */
+  }
+  [data-framer-theme="dark"] .header {
+    border-bottom-color: var(--framer-color-border-dark); /* Линия в темной теме */
   }
 }
 
@@ -615,7 +718,7 @@ body {
   border-radius: 6px;
   background: #ffffff;
   color: #111827;
-  font-family: Inter, sans-serif;
+  font-family: Arial, sans-serif;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -690,18 +793,91 @@ body {
 
 /* === Sticky Section Header === */
 .section-header-sticky {
-  padding-top: 10px;
-  background: #ffffff;
-  z-index: 10;
   position: sticky;
   top: 0;
+  z-index: 90;
+  height: 60px;
+  min-height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0; /* No horizontal padding for full-width border */
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--framer-color-border);
 }
 
 /* 📱 Мобильная версия: фиксируем реальную позицию */
 @media (max-width: 767px) {
   .section-header-sticky {
-    background: #ffffff;
-    top: 10px;          /* высота мобильного header */
+    height: 60px;
+    padding: 0; /* No horizontal padding */
+    z-index: 80;
+    border-bottom: none; /* Убираем линию в мобильной версии */
+  }
+
+  [data-framer-theme="dark"] .section-header-sticky {
+    border-bottom: none; /* Убираем линию в темной теме */
+  }
+
+  .section-header-row {
+    width: 100%; /* Растягиваем на всю ширину */
+    padding: 0 16px; /* Padding на мобильной */
+    box-sizing: border-box;
+  }
+
+  .section-header-controls-left {
+    width: 100%; /* Растягиваем на всю ширину */
+    margin-right: 0; /* Убираем auto margin */
+  }
+
+  .section-header-controls-right {
+    display: none; /* Скрываем правую часть (тема) */
+  }
+
+  /* Скрываем переключатель темы в мобильной версии секции */
+  .section-header-right .theme-toggle-btn {
+    display: none;
+  }
+
+  /* Header actions for mobile theme toggle */
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .mode-toggle-wrapper {
+    width: 100%; /* Растягиваем обёртку на всю ширину */
+    padding: 0 16px; /* Горизонтальный padding для консистентности */
+    justify-content: space-between; /* Распределяем содержимое */
+    box-sizing: border-box;
+  }
+
+  .mode-toggle-group {
+    height: 32px;
+    width: 100%; /* Растягиваем на всю ширину */
+    justify-content: space-between; /* Распределяем кнопки */
+    border: none; /* Убираем тонкую линию под кнопками */
+  }
+
+  .mode-toggle-btn {
+    padding: 0 10px;
+    font-size: 12px;
+    flex: 1; /* Кнопки занимают равную ширину */
+  }
+
+  .mode-toggle-btn span {
+    display: inline; /* Показываем текст на мобильных */
+  }
+}
+
+/* Скрываем переключатель темы на планшетах */
+@media (max-width: 1024px) {
+  .section-header-right .theme-toggle-btn,
+  .section-header-controls-right .theme-toggle-btn {
+    display: none;
   }
 }
 
@@ -713,15 +889,21 @@ body {
     background: #ffffff;
     padding-bottom: 0px;
   }
-
-  /* Добавим небольшой отступ чтобы заголовок не прилипал */
-  .section-header-sticky {
-    padding-top: 0px; /* Dropdown + spacing */
-  }
 }
 
 [data-framer-theme="dark"] .section-header-sticky {
   background: var(--framer-color-bg-dark);
+  border-bottom-color: var(--framer-color-border-dark);
+}
+
+/* Ряд с заголовком и кнопками */
+.section-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  padding: 0 20px; /* Horizontal padding for content */
 }
 
 /* === Scroll Area (галерея) === */

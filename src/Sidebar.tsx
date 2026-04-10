@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { ChevronDown, ChevronUp, LogOut } from "lucide-react";
 
 type SidebarProps = {
@@ -167,10 +167,10 @@ export default function Sidebar({
     <div className="sidebar-inner" style={{ display: "flex", flexDirection: "column", height: "100%" }}>
       {/* Logo on top — показываем только на десктопе */}
       {!isMobile && (
-        <div className="sidebar-logo-container" onClick={() => (window.location.href = "/")}>
+        <Link to="/" className="sidebar-logo-container" onClick={() => (window.location.href = "/")}>
           <img src="/Logo.png" alt="FramerKit" className="sidebar-logo-icon" />
-          <h1 className="sidebar-logo-text">FramerKit</h1>
-        </div>
+          <span className="sidebar-logo-text">FramerKit</span>
+        </Link>
       )}
 
       {/* Scrollable section content */}

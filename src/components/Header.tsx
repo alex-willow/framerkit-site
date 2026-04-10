@@ -1,32 +1,45 @@
-import { Menu } from "lucide-react";
-import "./Header.css";
+import { Menu, Sun, Moon } from "lucide-react";
+import { Link } from "react-router-dom";
 
 type HeaderProps = {
   isMobile: boolean;
   onMenuToggle: () => void;
+  theme?: "light" | "dark";
+  onThemeToggle?: () => void;
 };
 
-export default function Header({ isMobile, onMenuToggle }: HeaderProps) {
+export default function Header({ isMobile, onMenuToggle, theme = "light", onThemeToggle }: HeaderProps) {
   if (!isMobile) return null;
 
   return (
     <header className="header">
-      <div
-        className="headerLeft"
+      <Link
+        to="/"
+        className="landing-navbar-logo"
         onClick={() => (window.location.href = "/")}
-        style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: "8px" }}
       >
-        <img src="/Logo.png" alt="FramerKit" className="logo" style={{ height: "32px" }} />
-        <h1 style={{ fontSize: "20px", margin: 0 }}>FramerKit</h1>
-      </div>
+        <img src="/Logo.png" alt="FramerKit" className="logo-icon" />
+        <span className="logo-text">FramerKit</span>
+      </Link>
 
-      <button
-          className="mobile-hamburger"
+      <div className="header-actions">
+        {onThemeToggle && (
+          <button
+            className="theme-toggle-btn-header"
+            onClick={onThemeToggle}
+            aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
+          >
+            {theme === "dark" ? <Moon size={20} /> : <Sun size={20} />}
+          </button>
+        )}
+        <button
+          className="nav-menu-toggle"
           onClick={onMenuToggle}
           aria-label="Open menu"
         >
           <Menu size={24} />
         </button>
+      </div>
     </header>
   );
 }

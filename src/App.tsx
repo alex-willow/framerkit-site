@@ -11,9 +11,15 @@ import ReactGA from "react-ga4";
 import { Analytics } from "@vercel/analytics/react";
 
 import MainLayout from "./layouts/MainLayout";
+import LandingNavbar from './components/LandingNavbar';
+import Sidebar from './components/Sidebar';
 
 // Pages
+import LandingPage from './pages/LandingPage'; 
 import HomePage from "./pages/HomePage";
+import LayoutPage from './pages/LayoutPage';
+import ComponentPage from './pages/ComponentPage';
+import TemplatesPage from './pages/TemplatesPage';
 
 // Layout Pages
 import NavbarPage from "./pages/Layout/Navbar";
@@ -47,6 +53,11 @@ import AvatarGroupPage from "./pages/Components/Avatargroup";
 import FramerKitDaily from "./pages/Templates/FramerKitDaily";
 import SignInModal from "./SignInModal";
 
+import LearnPage from './pages/LearnPage';
+import BlogPage from './pages/BlogPage';
+import LearnCategoryPage from './pages/LearnCategoryPage';
+import BlogCategoryPage from './pages/BlogCategoryPage';
+
 // ================================
 // 🔑 GA4 ID
 // ================================
@@ -58,6 +69,9 @@ const supabase = createClient(
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlieGFrZnhxb3FpeXBmaGdrcGRzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA4MTQxMDcsImV4cCI6MjA1NjM5MDEwN30.tWculxF6xgGw4NQEWPBp7uH_gsl5HobP9wQn3Tf9yyw"
 );
 
+// ================================
+// 🔥 Основной компонент
+// ================================
 function AppContent() {
   const [isSignInOpen, setIsSignInOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -70,9 +84,34 @@ function AppContent() {
   const [isMobile, setIsMobile] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("overview");
+  const [theme, setTheme] = useState<"light" | "dark">(() => {
+    const savedTheme = localStorage.getItem("theme");
+    return savedTheme === "dark" ? "dark" : "light";
+  });
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  // Unified theme toggle function that saves to localStorage
+  const handleThemeToggle = () => {
+    const nextTheme = theme === "light" ? "dark" : "light";
+    setTheme(nextTheme);
+    localStorage.setItem("theme", nextTheme);
+    window.dispatchEvent(
+      new CustomEvent("themeChange", { detail: { theme: nextTheme } })
+    );
+  };
+  
+
+  // 🔥 ОПРЕДЕЛЯЕМ: это чистый лендинг или документация с хэшем?
+  const isLandingPage = location.pathname === "/" && !location.hash;
+
+  // Сбрасываем activeSection при переходе на лендинг
+  useEffect(() => {
+    if (isLandingPage && activeSection !== "overview") {
+      setActiveSection("overview");
+    }
+  }, [isLandingPage, activeSection]);
 
   // ================================
   // 🔥 GA4 INIT (ONCE)
@@ -91,8 +130,28 @@ function AppContent() {
     });
   }, [location.pathname, location.search, location.hash]);
 
+  useEffect(() => {
+    document.documentElement.setAttribute("data-framer-theme", theme);
+    document.body.setAttribute("data-framer-theme", theme);
+    window.dispatchEvent(new CustomEvent("framerkit-theme-change", { detail: theme }));
+  }, [theme]);
+
+  useEffect(() => {
+    const handleGlobalThemeChange = (event: Event) => {
+      const nextTheme = (event as CustomEvent<"light" | "dark">).detail;
+      if (nextTheme === "light" || nextTheme === "dark") {
+        setTheme(nextTheme);
+      }
+    };
+
+    window.addEventListener("framerkit-theme-change", handleGlobalThemeChange as EventListener);
+    return () => {
+      window.removeEventListener("framerkit-theme-change", handleGlobalThemeChange as EventListener);
+    };
+  }, []);
+
   // ================================
-  // MOBILE CHECK
+  // 📱 MOBILE CHECK
   // ================================
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth <= 767);
@@ -101,17 +160,10 @@ function AppContent() {
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  // ================================
-  // SYNC ACTIVE SECTION WITH HASH
-  // ================================
-  useEffect(() => {
-    if (location.pathname === "/" && location.hash) {
-      setActiveSection(location.hash.replace("#", ""));
-    }
-  }, [location.pathname, location.hash]);
+
 
   // ================================
-  // LOGOUT
+  // 🔐 LOGOUT
   // ================================
   const handleLogout = async () => {
     const email = localStorage.getItem("rememberedEmail");
@@ -132,7 +184,7 @@ function AppContent() {
   };
 
   // ================================
-  // SECTION CHANGE HANDLER
+  // 🧭 SECTION CHANGE HANDLER
   // ================================
   const handleSetActiveSection = (section: string) => {
     ReactGA.event({
@@ -154,6 +206,7 @@ function AppContent() {
     ];
 
     if (homeSections.includes(section)) {
+      // Навигация через хэш на главной странице
       navigate(`/#${section}`);
       return;
     }
@@ -201,68 +254,125 @@ function AppContent() {
   };
 
   return (
-    <>
-      <MainLayout
-        activeSection={activeSection}
-        onSectionChange={handleSetActiveSection}
-        isAuthenticated={isAuthenticated}
-        onLogout={handleLogout}
-        onSignInOpen={() => {
-          ReactGA.event({
-            category: "Auth",
-            action: "open_sign_in",
-          });
-          setIsSignInOpen(true);
-        }}
-        isMobile={isMobile}
-        isMenuOpen={isMenuOpen}
-        onMenuToggle={() => setIsMenuOpen(!isMenuOpen)}
-      >
-        <Routes>
-          <Route
-            path="/"
-            element={<HomePage onSectionChange={handleSetActiveSection} />}
-          />
+    <div data-framer-theme={theme}>
+      {/* 🔥 УСЛОВНЫЙ РЕНДЕР: Лендинг ИЛИ Документация */}
+      
+      {isLandingPage ? (
+  // === 🏠 ЛЕНДИНГ ===
+  <>
+    {/* 🔥 Отдельный навбар для лендинга */}
+    <LandingNavbar
+      isMobile={isMobile}
+      isMenuOpen={isMenuOpen}
+      onMenuToggle={() => setIsMenuOpen(!isMenuOpen)}
+      theme={theme}
+      onThemeToggle={handleThemeToggle}
+      isAuthenticated={isAuthenticated}
+      onLogout={handleLogout}
+      onSignInOpen={() => {
+        ReactGA.event({ category: "Auth", action: "open_sign_in" });
+        setIsSignInOpen(true);
+      }}
+      onGetAccess={() => {
+        ReactGA.event({
+          category: "CTA",
+          action: "get_full_access",
+          label: "landing_navbar"
+        });
+        const el = document.getElementById("get-framerkit");
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }}
+    />
+    <LandingPage theme={theme} />  
+  </>
+) : (
+  // === 📚 ДОКУМЕНТАЦИЯ ===
+  <MainLayout
+    activeSection={activeSection}
+    onSectionChange={handleSetActiveSection}
+    theme={theme}
+    onThemeToggle={handleThemeToggle}
+    isAuthenticated={isAuthenticated}
+    onLogout={handleLogout}
+    onSignInOpen={() => setIsSignInOpen(true)}
+    isMobile={isMobile}
+    isMenuOpen={isMenuOpen}
+    onMenuToggle={() => setIsMenuOpen(!isMenuOpen)}
+  >
+    {/* 🔥 Твой существующий Sidebar для документации */}
+    <Sidebar
+      activeSection={activeSection}
+      onSectionChange={handleSetActiveSection}
+      isMobile={isMobile}
+      isMenuOpen={isMenuOpen}
+      onMenuClose={() => setIsMenuOpen(false)}
+      isAuthenticated={isAuthenticated}
+      onLogout={handleLogout}
+      onSignInOpen={() => setIsSignInOpen(true)}
+    />
+          <Routes>
+            {/* 🔥 HomePage обрабатывает все хэш-секции: /#overview, /#getting-started и т.д. */}
+            <Route
+              path="/*"
+              element={
+                <HomePage
+                  onSectionChange={handleSetActiveSection}
+                  theme={theme}
+                  onThemeToggle={handleThemeToggle}
+                />
+              }
+            />
+            
+            {/* === Layout Sections === */}
+            <Route path="/layout" element={<LayoutPage 
+              theme={theme}
+              onThemeToggle={handleThemeToggle}
+            />} />
+            <Route path="/layout/navbar" element={<NavbarPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
+            <Route path="/layout/hero" element={<HeroPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
+            <Route path="/layout/logo" element={<LogoPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
+            <Route path="/layout/feature" element={<FeaturePage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
+            <Route path="/layout/gallery" element={<GalleryPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
+            <Route path="/layout/testimonial" element={<TestimonialPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
+            <Route path="/layout/contact" element={<ContactPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
+            <Route path="/layout/pricing" element={<PricingPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
+            <Route path="/layout/faq" element={<FaqLayoutPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
+            <Route path="/layout/cta" element={<CtaPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
+            <Route path="/layout/footer" element={<FooterPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
 
-          {/* Layout */}
-          <Route path="/layout/navbar" element={<NavbarPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-          <Route path="/layout/hero" element={<HeroPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-          <Route path="/layout/logo" element={<LogoPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-          <Route path="/layout/feature" element={<FeaturePage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-          <Route path="/layout/gallery" element={<GalleryPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-          <Route path="/layout/testimonial" element={<TestimonialPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-          <Route path="/layout/contact" element={<ContactPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-          <Route path="/layout/pricing" element={<PricingPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-          <Route path="/layout/faq" element={<FaqLayoutPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-          <Route path="/layout/cta" element={<CtaPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-          <Route path="/layout/footer" element={<FooterPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
+            {/* === Components === */}
+            <Route path="/components" element={<ComponentPage 
+              theme={theme}
+              onThemeToggle={handleThemeToggle}
+            />} />
+            <Route path="/components/accordion" element={<AccordionPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
+            <Route path="/components/avatar" element={<AvatarPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
+            <Route path="/components/badge" element={<BadgePage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
+            <Route path="/components/button" element={<ButtonPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
+            <Route path="/components/card" element={<CardPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
+            <Route path="/components/icon" element={<IconPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
+            <Route path="/components/input" element={<InputPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
+            <Route path="/components/form" element={<FormPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
+            <Route path="/components/pricingcard" element={<PricingCardPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
+            <Route path="/components/rating" element={<RatingPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
+            <Route path="/components/testimonialcard" element={<TestimonialCardPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
+            <Route path="/components/accordiongroup" element={<AccordionGroupPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
+            <Route path="/components/avatargroup" element={<AvatarGroupPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
 
-          {/* Components */}
-          <Route path="/components/accordion" element={<AccordionPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-          <Route path="/components/avatar" element={<AvatarPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-          <Route path="/components/badge" element={<BadgePage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-          <Route path="/components/button" element={<ButtonPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-          <Route path="/components/card" element={<CardPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-          <Route path="/components/icon" element={<IconPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-          <Route path="/components/input" element={<InputPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-          <Route path="/components/form" element={<FormPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-          <Route path="/components/pricingcard" element={<PricingCardPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-          <Route path="/components/rating" element={<RatingPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-          <Route path="/components/testimonialcard" element={<TestimonialCardPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-          <Route path="/components/accordiongroup" element={<AccordionGroupPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-          <Route path="/components/avatargroup" element={<AvatarGroupPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
+            {/* === Templates === */}
+            <Route path="/templates" element={<TemplatesPage />} />
+            <Route path="/templates/framerkitdaily" element={<FramerKitDaily isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
 
-          {/* Templates */}
-          <Route path="/templates/framerkitdaily" element={<FramerKitDaily isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
+            {/* === Learn & Blog === */}
+            <Route path="/learn" element={<LearnPage />} />
+            <Route path="/learn/:category" element={<LearnCategoryPage />} />
+            <Route path="/blog" element={<BlogPage />} />
+            <Route path="/blog/:category" element={<BlogCategoryPage />} />
+          </Routes>
+        </MainLayout>
+      )}
 
-          {/* fallback */}
-          <Route
-            path="*"
-            element={<HomePage onSectionChange={handleSetActiveSection} />}
-          />
-        </Routes>
-      </MainLayout>
-
+      {/* 🔐 Sign In Modal (глобальный, поверх всего) */}
       <SignInModal
         isOpen={isSignInOpen}
         onClose={() => setIsSignInOpen(false)}
@@ -274,10 +384,13 @@ function AppContent() {
           setIsAuthenticated(true);
         }}
       />
-    </>
+    </div>
   );
 }
 
+// ================================
+// 🔥 Экспорт с Router
+// ================================
 export default function App() {
   return (
     <Router>

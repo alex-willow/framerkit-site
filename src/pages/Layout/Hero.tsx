@@ -25,19 +25,55 @@ type HeroPageProps = {
 
 // ✅ Исправлен PLACEHOLDER (убраны пробелы)
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
-const FIXED_SKELETON_COUNT = 8;
+
 
 export default function HeroPage({ isAuthenticated, setIsSignInOpen }: HeroPageProps) {
   const [items, setItems] = useState<ComponentItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [filter, setFilter] = useState<"light" | "dark">("light");
+
+  // Load theme from localStorage on mount (same as landing page)
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "light" || savedTheme === "dark") {
+      setFilter(savedTheme);
+    }
+  }, []);
+
+  // Listen for theme changes from SectionHeader and other components
+  useEffect(() => {
+    const handleThemeChange = (event: Event) => {
+      const customEvent = event as CustomEvent<{ theme: "light" | "dark" }>;
+      const nextTheme = customEvent.detail?.theme;
+      if (nextTheme === "light" || nextTheme === "dark") {
+        setFilter(nextTheme);
+      }
+    };
+
+    window.addEventListener("themeChange", handleThemeChange as EventListener);
+    return () => {
+      window.removeEventListener("themeChange", handleThemeChange as EventListener);
+    };
+  }, []);
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
   const [hoveredPreviewKey, setHoveredPreviewKey] = useState<string | null>(null);
   const [isWireframeMode, setIsWireframeMode] = useState(true);
 
   const galleryRef = useRef<HTMLDivElement>(null);
+
+  // Загружаем wireframeMode из localStorage при монтировании
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("wireframeMode");
+      if (saved !== null) {
+        setIsWireframeMode(saved === "true");
+      }
+    } catch (e) {
+      console.warn("Failed to load wireframeMode from localStorage", e);
+    }
+  }, []);
 
   // ================================
   // Загрузка данных
@@ -105,7 +141,7 @@ export default function HeroPage({ isAuthenticated, setIsSignInOpen }: HeroPageP
     setTimeout(() => setCopiedKey(null), 4000);
   };
 
-  const skeletonCards = Array.from({ length: FIXED_SKELETON_COUNT });
+ 
 
   // ================================
   // Render
@@ -134,18 +170,12 @@ export default function HeroPage({ isAuthenticated, setIsSignInOpen }: HeroPageP
         isWireframeMode={isWireframeMode}
         onWireframeModeChange={setIsWireframeMode}
         hideWireframeToggle={false}
+        renderMetaBelow={true}
       />
 
       <div className="gallery-scroll-area" ref={galleryRef}>
         {loading ? (
-          <div className="skeleton-gallery">
-            {skeletonCards.map((_, i) => (
-              <div key={i} className="skeleton-card">
-                <div className="skeleton-card-image" />
-                <div className="skeleton-card-info" />
-              </div>
-            ))}
-          </div>
+          <div style={{ minHeight: '200px' }}></div>
         ) : error ? (
           <p style={{ color: "red", padding: "20px" }}>{error}</p>
         ) : filtered.length === 0 ? (
@@ -214,9 +244,8 @@ export default function HeroPage({ isAuthenticated, setIsSignInOpen }: HeroPageP
                           }}
                           onMouseEnter={() => setHoveredPreviewKey(item.key)}
                           onMouseLeave={() => setHoveredPreviewKey(null)}
-                          title="Live Preview"
                         >
-                          <Eye size={16} color={filter === "dark" ? "#ccc" : "currentColor"} />
+                          <Eye size={16} color={filter === "dark" ? "#ccc" : "#5b6170"} />
                           {hoveredPreviewKey === item.key && (
                             <div className="tooltip">Preview</div>
                           )}
@@ -224,7 +253,6 @@ export default function HeroPage({ isAuthenticated, setIsSignInOpen }: HeroPageP
                       ) : (
                         <div
                           className="iconButton disabled"
-                          title="Coming soon"
                           style={{ cursor: "not-allowed", opacity: 0.4 }}
                         >
                           <Eye size={16} color={filter === "dark" ? "#666" : "#999"} />
@@ -246,9 +274,9 @@ export default function HeroPage({ isAuthenticated, setIsSignInOpen }: HeroPageP
                         {isCopied ? (
                           <CircleCheck size={20} color="#22c55e" strokeWidth={2.5} />
                         ) : canCopy ? (
-                          <Copy size={16} color={filter === "dark" ? "#ccc" : "currentColor"} />
+                          <Copy size={16} color={filter === "dark" ? "#ccc" : "#5b6170"} />
                         ) : (
-                          <Lock size={16} color={filter === "dark" ? "#ccc" : "currentColor"} />
+                          <Lock size={16} color={filter === "dark" ? "#ccc" : "#5b6170"} />
                         )}
 
                         {(isCopied || hoveredKey === item.key) && (
@@ -266,34 +294,6 @@ export default function HeroPage({ isAuthenticated, setIsSignInOpen }: HeroPageP
         )}
       </div>
 
-      {/* 🔥 SEO-контент для поисковиков (текст внизу страницы) */}
-      <article 
-        className="seo-content" 
-        style={{ 
-          padding: '40px 20px', 
-          color: 'var(--framer-color-text-secondary)',
-          maxWidth: '800px',
-          margin: '0 auto'
-        }}
-      >
-        <h2 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '16px', color: 'var(--framer-color-text)' }}>
-          Hero Section Components for Framer
-        </h2>
-        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
-          Create stunning first impressions with these hero section components for Framer. 
-          Each hero banner is designed for high conversion, featuring clear headlines, call-to-action buttons, 
-          and engaging visuals that capture attention instantly.
-        </p>
-        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
-          Perfect for landing pages, product launches, SaaS websites, and portfolio sites. 
-          All components support light and dark themes, with wireframe mode for rapid prototyping 
-          and design mode for pixel-perfect previews.
-        </p>
-        <p style={{ lineHeight: 1.6 }}>
-          <strong>Features:</strong> Responsive layout · Dark/Light themes · Wireframe mode · 
-          Instant copy-paste · Framer-compatible · CTA-optimized · Mobile-first design.
-        </p>
-      </article>
     </div>
   );
 }

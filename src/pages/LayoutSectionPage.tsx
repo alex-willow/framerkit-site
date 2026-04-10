@@ -44,7 +44,7 @@ export default function LayoutSectionPage() {
   }, []);
 
   return (
-    <div style={{ padding: 20 }}>
+    <div style={{ padding: 0 }}>
       <div className="section-header-sticky">
         <h2 className="title">Layout Section</h2>
         <div className="subtitleRow">
@@ -53,7 +53,7 @@ export default function LayoutSectionPage() {
         <div className="title-divider" />
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20, marginTop: 20 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20, marginTop: 20, padding: "0 20px 20px" }}>
         {loading ? (
           Array.from({ length: 6 }).map((_, i) => <div key={i} className="skeleton" />)
         ) : (

@@ -1,21 +1,25 @@
 /* HomePage.module.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 .heroSection {
     position: relative;
-    min-height: calc(100vh - 50px); /* занимает почти весь экран */
-    width: calc(100% + 40px);       /* компенсируем padding родителя слева/справа */
-    margin-left: -20px;             /* компенсируем padding слева */
-    margin-right: -20px;            /* компенсируем padding справа */
+    min-height: calc(100vh - 60px);
+    width: 100%;
     
     display: flex;
-    justify-content: center; /* центр по горизонтали */
-    align-items: center;     /* центр по вертикали */
+    justify-content: center;
+    align-items: center;
     
-    padding: 0 20px;         /* убираем верхний отступ, оставляем внутренние боковые padding */
+    padding: 96px 24px 64px;
     box-sizing: border-box;
     text-align: center;
     overflow: hidden;
+    background: #ffffff;
   }
+
+:global([data-framer-theme="dark"]) .heroSection {
+  background: #14151c;
+}
   
   /* Свет в левом верхнем углу */
 .lightTop {
@@ -49,13 +53,12 @@
   
   
   .container {
-    max-width: 800px;
+    max-width: 920px;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 24px;
-    /* теперь контент по центру секции */
+    gap: 20px;
   }
   
   
@@ -64,7 +67,7 @@
 .logos {
     display: flex;
     justify-content: center;
-    gap: 8px;
+    gap: 12px;
     margin: 0;
   }
   
@@ -79,6 +82,10 @@
     justify-content: center;
     overflow: hidden;
   }
+
+:global([data-framer-theme="dark"]) .logos .logo-item {
+  background: #232430;
+}
   
   .logos .logo-item img {
     width: 40px;
@@ -90,31 +97,73 @@
 
   /* === Заголовок === */
 .title {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-weight: 800;
-  color: #2B0691;
+  color: #111827;
   margin: 0;
   text-align: center;
   line-height: 1.1;
 }
 
+/* Символы заголовка с анимацией */
+.animatedChar {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  display: inline-block;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  will-change: transform, opacity, filter;
+}
+
+:global([data-framer-theme="dark"]) .title {
+  color: #f3f4f6;
+}
+
 /* Каждая строка заголовка */
 .titleLine {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   display: block;
   width: 100%;
   white-space: normal;       /* разрешаем перенос */
   overflow: visible;         /* не обрезаем текст */
   text-overflow: clip;       /* убираем многоточие */
-  font-size: clamp(32px, 6vw, 64px);
-  letter-spacing: -0.5px;
+  font-size: clamp(36px, 6vw, 64px);
+  letter-spacing: -0.04em;
 }
 
 /* Подзаголовок */
 .subtitle {
-  font-size: 16px;
+  font-size: 18px;
   line-height: 1.6;
-  color: #666;
+  color: #4b5563;
   margin: 0;
   max-width: 600px;
+}
+
+:global([data-framer-theme="dark"]) .subtitle {
+  color: #c5c9d3;
+}
+
+:global([data-framer-theme="dark"]) .heroSection::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 180px;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(20, 21, 28, 0) 0%, #111111 100%);
+}
+
+:global([data-framer-theme="dark"]) .heroSection :global(.logoutButton) {
+  border-color: rgba(255, 255, 255, 0.28) !important;
+  color: #e5e7eb !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+
+:global([data-framer-theme="dark"]) .heroSection :global(.logoutButton):hover {
+  background: rgba(110, 63, 243, 0.18) !important;
+  border-color: rgba(110, 63, 243, 0.35) !important;
 }
 
 @media (max-width: 767px) {
@@ -136,7 +185,7 @@
   
   .buttons {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     width: 100%;
     max-width: 400px;
     justify-content: center;
@@ -168,16 +217,24 @@
   
   .statsText {
     font-size: 14px;
-    color: #666;
+    color: #374151;
     margin: 0;
   }
+
+:global([data-framer-theme="dark"]) .statsText {
+  color: #e5e7eb;
+}
   
   .statsNote {
     font-size: 12px;
-    color: #999;
+    color: #6b7280;
     font-style: italic;
     margin: 0;
   }
+
+:global([data-framer-theme="dark"]) .statsNote {
+  color: #9ca3af;
+}
   
   /* ===== МОБИЛЬНАЯ ВЕРСИЯ ===== */
   @media (max-width: 768px) {
@@ -186,7 +243,7 @@
     }
   
     .subtitle {
-      font-size: 1.1rem;
+      font-size: 1rem;
     }
   
     .logos img {
@@ -214,6 +271,6 @@
   
     /* На мобильных хедер выше — увеличиваем отступ сверху */
     .heroSection {
-      padding: 80px 20px 40px;
+      padding: 84px 16px 48px;
     }
   }

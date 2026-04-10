@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef } from "react";
-import { useNavigate, useLocation, Link } from "react-router-dom"; // 🔥 Добавили Link
-import { ChevronDown, ChevronUp, LogOut } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { useNavigate, useLocation, Link } from "react-router-dom";
+import { LogOut } from "lucide-react";
 
 const trackEvent = (event: string, params?: Record<string, any>) => {
   if (typeof window !== "undefined" && (window as any).gtag) {
@@ -32,19 +32,17 @@ export default function Sidebar({
   const navigate = useNavigate();
   const location = useLocation();
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [layoutOpen, setLayoutOpen] = useState(false);
-  const [componentsOpen, setComponentsOpen] = useState(false);
-  const [templatesOpen, setTemplatesOpen] = useState(false);
 
+  // 🔥 Getting Started
   const homeSections = [
     { id: "overview", label: "Overview" },
-    { id: "getting-started", label: "Getting Started" },
-    { id: "layout-sections", label: "Layout Sections" },
-    { id: "ui-components", label: "UI Components" },
-    { id: "get-framerkit", label: "Get FramerKit" },
-    { id: "faq-contact", label: "FAQ" },
+    { id: "what-is-framer", label: "What is Framer?" },
+    { id: "how-it-works", label: "How it Works" },
+    { id: "quick-start", label: "Quick Start" },
+    { id: "video", label: "Video Tutorial" },
   ];
 
+  // 🔥 Layout Sections (все сразу видны)
   const layoutSections = [
     { id: "navbar", label: "Navbar" },
     { id: "hero", label: "Hero" },
@@ -59,6 +57,7 @@ export default function Sidebar({
     { id: "footer", label: "Footer" },
   ];
 
+  // 🔥 Components (все сразу видны)
   const componentSections = [
     { id: "accordion", label: "Accordion" },
     { id: "accordiongroup", label: "Accordion Group" },
@@ -75,38 +74,26 @@ export default function Sidebar({
     { id: "testimonialcard", label: "Testimonial Card" },
   ];
 
-  const layoutIds = layoutSections.map(s => s.id);
-  const componentIds = componentSections.map(s => s.id);
+  // 🔥 Templates
+  const templatesSections = [
+    { id: "framerkitdaily", label: "Framer Kit Daily" },
+  ];
 
-  useEffect(() => {
-    if (
-      location.pathname.startsWith("/layout") ||
-      layoutIds.includes(activeSection)
-    ) {
-      setLayoutOpen(true);
-      setComponentsOpen(false);
-      setTemplatesOpen(false);
-      return;
-    }
-  
-    if (
-      location.pathname.startsWith("/components") ||
-      componentIds.includes(activeSection)
-    ) {
-      setComponentsOpen(true);
-      setLayoutOpen(false);
-      setTemplatesOpen(false);
-      return;
-    }
-  
-    if (location.pathname.startsWith("/templates")) {
-      setTemplatesOpen(true);
-      setLayoutOpen(false);
-      setComponentsOpen(false);
-      return;
-    }
-  }, [location.pathname, activeSection]);
-  
+  // 🔥 Learn (заглушки)
+  const learnCategories = [
+    { id: "getting-started", label: "Getting Started", count: 0 },
+    { id: "components", label: "Components", count: 0 },
+    { id: "animations", label: "Animations", count: 0 },
+  ];
+
+  // 🔥 Blog (заглушки)
+  const blogCategories = [
+    { id: "tutorials", label: "Tutorials", count: 0 },
+    { id: "tips", label: "Tips & Tricks", count: 0 },
+    { id: "updates", label: "Updates", count: 0 },
+  ];
+
+  // 🔥 Скролл к активному элементу
   useEffect(() => {
     if (!scrollRef.current) return;
   
@@ -135,7 +122,6 @@ export default function Sidebar({
     }
   };
 
-  // 🔥 НОВАЯ ФУНКЦИЯ: Возвращает путь для Link
   const getLinkPath = (id: string, basePath?: string) => {
     if (!basePath) return `/#${id}`;
     return `/${basePath}/${id}`;
@@ -147,7 +133,7 @@ export default function Sidebar({
     return location.pathname === `/${id}`;
   };
 
-  // 🔥 ИСПРАВЛЕНО: renderSectionItems теперь возвращает <Link>
+  // 🔥 Рендер элементов секций
   const renderSectionItems = (list: { id: string; label: string }[], basePath: string) =>
     list.map(({ id, label }) => (
       <Link
@@ -163,136 +149,142 @@ export default function Sidebar({
       </Link>
     ));
 
-  const CollapsibleSection = ({
-    title,
-    open,
-    setOpen,
-    children,
-  }: {
-    title: string;
-    open: boolean;
-    setOpen: (v: boolean) => void;
-    children: React.ReactNode;
-  }) => (
-    <div className="collapsible-section">
-      {/* 🔥 Заголовок секции — кнопка, потому что это действие (открыть/закрыть) */}
-      <div
-        className="sidebar-header collapsible"
-        onClick={() => setOpen(!open)}
-        style={{ display: "flex", justifyContent: "space-between", alignItems: "center", cursor: "pointer" }}
-      >
-        <span>{title}</span>
-        {open ? <ChevronDown size={16} /> : <ChevronUp size={16} />}
-      </div>
-      <div className={`collapsible-content ${open ? "open" : ""}`}>{children}</div>
-    </div>
-  );
-
-  const renderTemplatesSection = () => (
-    <CollapsibleSection title="Templates" open={templatesOpen} setOpen={setTemplatesOpen}>
-      {/* 🔥 Template item — тоже ссылка */}
+  // 🔥 Рендер категорий со счётчиком
+  const renderCategoryItems = (
+    list: Array<{ id: string; label: string; count: number }>,
+    basePath: string
+  ) =>
+    list.map(({ id, label, count }) => (
       <Link
-        to="/templates/framerkitdaily"
-        className={`sidebar-item ${location.pathname === "/templates/framerkitdaily" ? "active" : ""}`}
+        key={id}
+        to={`/${basePath}/${id}`}
+        className={`sidebar-item ${location.pathname === `/${basePath}/${id}` ? "active" : ""}`}
         onClick={() => {
-          onSectionChange("framerkitdaily");
           if (isMobile) onMenuClose();
         }}
       >
-        Framer Kit Daily
+        <span>{label}</span>
+        {count > 0 && <span className="item-count">{count}</span>}
       </Link>
-    </CollapsibleSection>
-  );
+    ));
 
-  const sidebarContent = (
-    <div className="sidebar-inner" style={{ display: "flex", flexDirection: "column", height: "100%" }}>
-      {/* Logo — ссылка на главную */}
-      {!isMobile && (
-        <Link to="/" className="sidebar-logo-container" onClick={() => onSectionChange("overview")}>
-          <img src="/Logo.png" alt="FramerKit" className="sidebar-logo-icon" />
-          <h1 className="sidebar-logo-text">FramerKit</h1>
-        </Link>
-      )}
-
-      <div
-        ref={scrollRef}
-        className="sidebar-scroll"
-        style={{ flexGrow: 1, overflowY: "auto" }}
-      >
-        <div className="sidebar-header">Getting Started</div>
-        
-        {/* 🔥 Home sections — ссылки с хэшем */}
-        {homeSections.map(({ id, label }) => (
+    const sidebarContent = (
+      <div className="sidebar-inner" style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+        {/* Logo */}
+        {!isMobile && (
           <Link
-            key={id}
-            to={`/#${id}`}
-            className={`sidebar-item ${isActive(id) ? "active" : ""}`}
+            to="/"
+            className="sidebar-logo-container"
             onClick={() => {
-              handleHomeSectionClick(id);
+              onSectionChange("overview");
+              // Сбрасываем URL на / и убираем hash
+              navigate("/", { replace: true });
+              window.history.replaceState(null, "", "/");
+              // Скроллим наверх
+              window.scrollTo({ top: 0, behavior: "smooth" });
             }}
           >
-            {label}
+            <img src="/Logo.png" alt="FramerKit" className="sidebar-logo-icon" />
+            <span className="sidebar-logo-text">FramerKit</span>
           </Link>
-        ))}
-
-        <CollapsibleSection title="Layout Sections" open={layoutOpen} setOpen={setLayoutOpen}>
-          {renderSectionItems(layoutSections, "layout")}
-        </CollapsibleSection>
-
-        <CollapsibleSection title="Components" open={componentsOpen} setOpen={setComponentsOpen}>
-          {renderSectionItems(componentSections, "components")}
-        </CollapsibleSection>
-
-        {renderTemplatesSection()}
-      </div>
-
-      <div className="sidebar-bottom">
-        {isAuthenticated ? (
-          // 🔥 Logout — остаётся кнопкой, это действие!
-          <button className="logoutButton" onClick={onLogout}>
-            <LogOut size={16} /> Log out
-          </button>
-        ) : (
-          <>
-            {/* 🔥 Get Full Access — кнопка, это действие (скролл + трекинг) */}
-            <button
-              className="authButton"
-              onClick={() => {
-                trackEvent("cta_click", {
-                  location: "sidebar",
-                  action: "get_full_access",
-                });
-
-                if (location.pathname === "/") {
-                  const el = document.getElementById("get-framerkit");
-                  if (el) {
-                    el.scrollIntoView({ behavior: "smooth", block: "start" });
-                  }
-                } else {
-                  navigate("/#get-framerkit");
-                }
-              }}
-            >
-              Get Full Access
-            </button>
-
-            {/* 🔥 Login — кнопка, это действие (открыть модалку) */}
-            <button
-              className="loginButton"
-              onClick={() => {
-                trackEvent("login_click", {
-                  location: "sidebar",
-                });
-                onSignInOpen?.();
-              }}
-            >
-              Log in
-            </button>
-          </>
         )}
+    
+        <div
+          ref={scrollRef}
+          className="sidebar-scroll"
+          style={{ flexGrow: 1, overflowY: "auto" }}
+        >
+          {/* 🔥 Getting Started */}
+          <div className="sidebar-section">
+            
+            {homeSections.map(({ id, label }) => (
+              <Link
+                key={id}
+                to={`/#${id}`}
+                className={`sidebar-item ${isActive(id) ? "active" : ""}`}
+                onClick={() => handleHomeSectionClick(id)}
+              >
+                {label}
+              </Link>
+            ))}
+          </div>
+    
+          {/* 🔥 Layout Sections */}
+          <div className="sidebar-section">
+            <span className="sidebar-header">Layout Sections</span>
+            {renderSectionItems(layoutSections, "layout")}
+          </div>
+    
+          {/* 🔥 Components */}
+          <div className="sidebar-section">
+            <span className="sidebar-header">Components</span>
+            {renderSectionItems(componentSections, "components")}
+          </div>
+    
+          {/* 🔥 Templates */}
+          <div className="sidebar-section">
+            <span className="sidebar-header">Templates</span>
+            {renderSectionItems(templatesSections, "templates")}
+          </div>
+    
+          {/* 🔥 Learn */}
+          <div className="sidebar-section">
+            <span className="sidebar-header">Learn</span>
+            {renderCategoryItems(learnCategories, "learn")}
+          </div>
+    
+          {/* 🔥 Blog */}
+          <div className="sidebar-section">
+            <span className="sidebar-header">Blog</span>
+            {renderCategoryItems(blogCategories, "blog")}
+          </div>
+        </div>
+    
+        {/* Sidebar bottom */}
+        <div className="sidebar-bottom">
+          {isAuthenticated ? (
+            <button className="logoutButton" onClick={onLogout}>
+              <LogOut size={16} /> Log out
+            </button>
+          ) : (
+            <>
+              <button
+                className="authButton"
+                onClick={() => {
+                  trackEvent("cta_click", {
+                    location: "sidebar",
+                    action: "get_full_access",
+                  });
+    
+                  if (location.pathname === "/") {
+                    const el = document.getElementById("get-framerkit");
+                    if (el) {
+                      el.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }
+                  } else {
+                    navigate("/#get-framerkit");
+                  }
+                }}
+              >
+                Get Full Access
+              </button>
+    
+              <button
+                className="loginButton"
+                onClick={() => {
+                  trackEvent("login_click", {
+                    location: "sidebar",
+                  });
+                  onSignInOpen?.();
+                }}
+              >
+                Log in
+              </button>
+            </>
+          )}
+        </div>
       </div>
-    </div>
-  );
+    );
 
   if (isMobile) {
     return (

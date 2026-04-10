@@ -12,10 +12,10 @@ type SectionHeaderProps = {
   isWireframeMode?: boolean;
   onWireframeModeChange?: (mode: boolean) => void;
   hideWireframeToggle?: boolean;
+  renderMetaBelow?: boolean;
 };
 
 type ModeToggleProps = {
-  label: string;
   isActive: boolean;
   onToggle: () => void;
   activeIcon: React.ReactNode;
@@ -25,7 +25,6 @@ type ModeToggleProps = {
 };
 
 function ModeToggle({
-  label,
   isActive,
   onToggle,
   activeIcon,
@@ -52,21 +51,21 @@ function ModeToggle({
 
   return (
     <>
-      <span className="mode-label">{label}</span>
       <button
         type="button"
-        className={`iconButton ${isActive ? "active" : ""}`}
-        onClick={onToggle}
+        className={`theme-toggle-btn ${isActive ? "active" : ""}`}
+        onClick={() => {
+          setShowTooltip(false);
+          onToggle();
+        }}
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
-        onFocus={() => setShowTooltip(true)}
-        onBlur={() => setShowTooltip(false)}
         aria-label={isActive ? activeLabel : inactiveLabel}
         title=""
       >
         {isActive ? activeIcon : inactiveIcon}
         {showTooltip && (
-          <div className="toggle-tooltip">
+          <div className="toggle-tooltip theme-toggle-tooltip">
             {isActive ? activeLabel : inactiveLabel}
           </div>
         )}
@@ -120,42 +119,66 @@ export default function SectionHeader({
   isWireframeMode = false,
   onWireframeModeChange,
   hideWireframeToggle = false,
+  renderMetaBelow = false,
 }: SectionHeaderProps) {
+  const metaText = loading ? "Loading..." : `${count} ${templateLabel}`;
+
+  const wireframeControl =
+    !hideWireframeToggle && onWireframeModeChange ? (
+      <WireframeToggle
+        isWireframeMode={isWireframeMode}
+        onWireframeModeChange={onWireframeModeChange}
+      />
+    ) : null;
+
+  const themeControl =
+    !hideThemeSwitcher && onFilterChange ? (
+      <ModeToggle
+        isActive={filter === "dark"}
+        onToggle={() => {
+          const nextTheme = filter === "light" ? "dark" : "light";
+          onFilterChange(nextTheme);
+          // Save to localStorage like landing page
+          localStorage.setItem("theme", nextTheme);
+          // Dispatch global event for other components
+          window.dispatchEvent(
+            new CustomEvent("themeChange", { detail: { theme: nextTheme } })
+          );
+          window.dispatchEvent(
+            new CustomEvent("framerkit-theme-change", { detail: nextTheme })
+          );
+        }}
+        activeIcon={<Moon size={20} color="#4c1d95" strokeWidth={2} />}
+        inactiveIcon={<Sun size={20} color="#374151" strokeWidth={2} />}
+        activeLabel="Dark theme"
+        inactiveLabel="Light theme"
+      />
+    ) : null;
+
   return (
-    <div className="section-header-sticky">
-      <div className="section-header-row">
-        <div className="section-header-left">
-          <h2 className="section-title">{title}</h2>
-          <p className="section-subtitle">
-            {loading ? "Loading..." : `${count} ${templateLabel}`}
-          </p>
-        </div>
-
-        <div className="section-header-right">
-          {/* 🔥 Новый переключатель Wireframe/Design */}
-          {!hideWireframeToggle && onWireframeModeChange && (
-            <WireframeToggle
-              isWireframeMode={isWireframeMode}
-              onWireframeModeChange={onWireframeModeChange}
-            />
-          )}
-
-          {/* 🔹 Старый переключатель темы (остался как был) */}
-          {!hideThemeSwitcher && onFilterChange && (
-            <ModeToggle
-              label="Theme"
-              isActive={filter === "dark"}
-              onToggle={() => onFilterChange(filter === "light" ? "dark" : "light")}
-              activeIcon={<Moon size={18} />}
-              inactiveIcon={<Sun size={18} />}
-              activeLabel="Dark theme"
-              inactiveLabel="Light theme"
-            />
+    <>
+      <div className="section-header-sticky">
+        <div className="section-header-row">
+          {renderMetaBelow ? (
+            <>
+              <div className="section-header-controls-left">{wireframeControl}</div>
+              <div className="section-header-controls-right">{themeControl}</div>
+            </>
+          ) : (
+            <>
+              <div className="section-header-left">
+                <h2 className="section-title">{title}</h2>
+                <p className="section-subtitle">{metaText}</p>
+              </div>
+              <div className="section-header-right">
+                {wireframeControl}
+                {themeControl}
+              </div>
+            </>
           )}
         </div>
+        <div className="section-header-divider" />
       </div>
-
-      <div className="section-header-divider" />
-    </div>
+    </>
   );
 }

@@ -27,7 +27,39 @@ const COMPONENT_SECTIONS = [
   "testimonialcard"
 ];
 
-export default function RandomComponentCards() {
+type RandomComponentCardsProps = {
+  theme?: "light" | "dark";
+  darkOnly?: boolean;
+};
+
+export default function RandomComponentCards({ theme = "light", darkOnly = false }: RandomComponentCardsProps) {
+  const isDarkVariant = (item: ComponentItem): boolean => {
+    const haystack = [
+      item.key,
+      item.title,
+      item.image,
+      item.url,
+      (item as any).previewUrl,
+    ]
+      .filter(Boolean)
+      .join(" ")
+      .toLowerCase();
+    return haystack.includes("dark");
+  };
+
+  const formatComponentLabel = (section: string) => {
+    const map: Record<string, string> = {
+      accordiongroup: "Accordion Group",
+      avatargroup: "Avatar Group",
+      pricingcard: "Pricing Card",
+      testimonialcard: "Testimonial Card",
+    };
+    return map[section] || section.charAt(0).toUpperCase() + section.slice(1);
+  };
+
+  const getComponentCountLabel = (section: string, count: number) =>
+    `${formatComponentLabel(section)} (${count})`;
+
   const [cards, setCards] = useState<(ComponentItem | null)[]>(
     Array(COMPONENT_SECTIONS.length).fill(null)
   );
@@ -62,7 +94,15 @@ export default function RandomComponentCards() {
           const json = await res.json();
           const jsonKey = Object.keys(json).find(k => k.toLowerCase() === sec.toLowerCase());
           const allItems: ComponentItem[] = jsonKey ? json[jsonKey] : [];
-          data[sec] = allItems.filter(item => !item.key.toLowerCase().includes("dark"));
+          const darkItems = allItems.filter((item) => isDarkVariant(item));
+          const lightItems = allItems.filter((item) => !isDarkVariant(item));
+          if (darkOnly) {
+            data[sec] = darkItems;
+          } else {
+            data[sec] = theme === "dark"
+              ? (darkItems.length ? darkItems : allItems)
+              : (lightItems.length ? lightItems : allItems);
+          }
         } catch {
           data[sec] = [];
         }
@@ -95,7 +135,7 @@ export default function RandomComponentCards() {
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
-  }, []);
+  }, [theme]);
 
   const rotateOne = () => {
     if (rotatingRef.current) return;
@@ -179,14 +219,7 @@ export default function RandomComponentCards() {
             onMouseLeave={() => (hoveredRef.current[index] = false)}
             style={{ textDecoration: "none", color: "inherit" }}
           >
-            {/* Скелетон */}
-            {!loaded[index] && (
-              <div className="skeleton-card">
-                <div className="skeleton-card-image" />
-                <div className="skeleton-card-info" />
-              </div>
-            )}
-
+            
             {/* Карточка с названием и фоном, без изображения */}
             {loaded[index] && !item && (
               <div
@@ -201,7 +234,7 @@ export default function RandomComponentCards() {
               >
                 <div className="cardInfo">
                   <h3>
-                    {section.charAt(0).toUpperCase() + section.slice(1)} · 0
+                    {getComponentCountLabel(section, 0)}
                   </h3>
                   <div className="iconButton2">
                     <ArrowUpRight size={16} className="explore-icon" />
@@ -223,10 +256,9 @@ export default function RandomComponentCards() {
                     }
                   />
                 </div>
-
                 <div className="cardInfo">
                   <h3>
-                    {section.charAt(0).toUpperCase() + section.slice(1)} · {count}
+                    {getComponentCountLabel(section, count)}
                   </h3>
                   <div className="iconButton2">
                     <ArrowUpRight size={16} className="explore-icon" />

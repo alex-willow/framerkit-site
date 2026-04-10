@@ -2,7 +2,6 @@ import { useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
-import Footer from "../components/Footer";
 
 type MainLayoutProps = {
   children: React.ReactNode;
@@ -24,6 +23,7 @@ export default function MainLayout({
   activeSection,
   onSectionChange,
   theme,
+  onThemeToggle,
   isAuthenticated,
   onLogout,
   onSignInOpen,
@@ -84,10 +84,12 @@ export default function MainLayout({
   }, [location.pathname, location.hash, contentRef]);
 
   return (
-    <div className="container" data-theme={theme}>
+    <div className="container" data-theme={theme} data-framer-theme={theme}>
       <Header
         isMobile={isMobile}
         onMenuToggle={onMenuToggle}
+        theme={theme}
+        onThemeToggle={onThemeToggle}
       />
 
       <div className="app-layout">
@@ -104,7 +106,6 @@ export default function MainLayout({
 
         <main className="content" ref={contentRef}>
           {children}
-          <Footer activeSection={activeSection} onSectionChange={onSectionChange} />
         </main>
       </div>
     </div>

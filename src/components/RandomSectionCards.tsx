@@ -31,9 +31,38 @@ const STATIC_SECTIONS = [
 
 type RandomSectionCardsProps = {
   wireframeMode?: boolean;
+  theme?: "light" | "dark";
+  darkOnly?: boolean;
 };
 
-export default function RandomSectionCards({ wireframeMode = false }: RandomSectionCardsProps) {
+export default function RandomSectionCards({
+  wireframeMode = false,
+  theme = "light",
+  darkOnly = false,
+}: RandomSectionCardsProps) {
+  const isDarkVariant = (item: ComponentItem): boolean => {
+    const haystack = [
+      item.key,
+      item.title,
+      item.image,
+      item.url,
+      (item as any).previewUrl,
+      item.wireframe?.image,
+      item.wireframe?.url,
+      (item.wireframe as any)?.previewUrl,
+    ]
+      .filter(Boolean)
+      .join(" ")
+      .toLowerCase();
+    return haystack.includes("dark");
+  };
+
+  const formatSectionLabel = (section: string) =>
+    section.charAt(0).toUpperCase() + section.slice(1);
+
+  const getSectionCountLabel = (section: string, count: number) =>
+    `${formatSectionLabel(section)} (${count})`;
+
   const [cards, setCards] = useState<(ComponentItem | null)[]>(
     Array(STATIC_SECTIONS.length).fill(null)
   );
@@ -79,9 +108,17 @@ export default function RandomSectionCards({ wireframeMode = false }: RandomSect
           if (res.ok) {
             const json = await res.json();
             const allItems: ComponentItem[] = json[sec] || [];
-            data[sec] = allItems.filter(
-              (item) => !item.key.toLowerCase().includes("dark")
-            );
+            const darkItems = allItems.filter((item) => isDarkVariant(item));
+            const lightItems = allItems.filter((item) => !isDarkVariant(item));
+            if (darkOnly) {
+              data[sec] = darkItems;
+            } else {
+              data[sec] = theme === "dark"
+                ? (darkItems.length ? darkItems : allItems)
+                : (lightItems.length ? lightItems : allItems);
+            }
+
+            
           } else {
             data[sec] = [];
           }
@@ -125,7 +162,11 @@ export default function RandomSectionCards({ wireframeMode = false }: RandomSect
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
-  }, []);
+  }, [theme, darkOnly]); 
+
+    
+
+
 
 
 
@@ -216,7 +257,8 @@ export default function RandomSectionCards({ wireframeMode = false }: RandomSect
             onMouseLeave={() => (hoveredRef.current[index] = false)}
             style={{ textDecoration: "none", color: "inherit" }}
           >
-            {/* Скелетон */}
+            
+            {/* Заглушка во время загрузки */}
             {!loaded[index] && (
               <div className="skeleton-card">
                 <div className="skeleton-card-image" />
@@ -229,7 +271,7 @@ export default function RandomSectionCards({ wireframeMode = false }: RandomSect
               <div
                 className="card-name-only"
                 style={{
-                  background: "var(--framer-color-bg)",
+                  background: "transparent",
                   height: "100%",
                   borderRadius: "8px",
                   display: "flex",
@@ -239,7 +281,7 @@ export default function RandomSectionCards({ wireframeMode = false }: RandomSect
               >
                 <div className="cardInfo">
                   <h3>
-                    {section.charAt(0).toUpperCase() + section.slice(1)} · 0
+                    {getSectionCountLabel(section, 0)}
                   </h3>
                   <div className="iconButton2">
                     <ArrowUpRight size={16} className="explore-icon" />
@@ -263,7 +305,7 @@ export default function RandomSectionCards({ wireframeMode = false }: RandomSect
                 </div>
                 <div className="cardInfo">
                   <h3>
-                    {section.charAt(0).toUpperCase() + section.slice(1)} · {count}
+                    {getSectionCountLabel(section, count)}
                   </h3>
                   <div className="iconButton2">
                     <ArrowUpRight size={16} className="explore-icon" />

@@ -1,5 +1,5 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -11,6 +11,18 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  overflow-x: hidden; /* Prevent horizontal scrolling on html level */
+  position: relative;
+}
+
+#root {
+  overflow-x: hidden; /* Prevent horizontal scrolling on root level */
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
 }
 
 a {
@@ -26,9 +38,12 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  position: relative; /* Ensure proper positioning */
+  overscroll-behavior-y: contain; /* Prevent pull-to-refresh globally */
 }
 
 h1 {

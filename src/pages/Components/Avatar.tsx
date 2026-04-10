@@ -19,13 +19,33 @@ type AvatarPageProps = {
 
 // ✅ Исправлен PLACEHOLDER (убраны пробелы)
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
-const FIXED_SKELETON_COUNT = 8;
 
 export default function AvatarPage({ isAuthenticated, setIsSignInOpen }: AvatarPageProps) {
   const [items, setItems] = useState<ComponentItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [filter, setFilter] = useState<"light" | "dark">("light");
+
+  useEffect(() => {
+    const currentTheme = document.documentElement.getAttribute("data-framer-theme")
+      || document.body.getAttribute("data-framer-theme")
+      || document.querySelector("[data-framer-theme]")?.getAttribute("data-framer-theme");
+    if (currentTheme === "light" || currentTheme === "dark") {
+      setFilter(currentTheme);
+    }
+
+    const handleGlobalThemeChange = (event: Event) => {
+      const nextTheme = (event as CustomEvent<"light" | "dark">).detail;
+      if (nextTheme === "light" || nextTheme === "dark") {
+        setFilter(nextTheme);
+      }
+    };
+
+    window.addEventListener("framerkit-theme-change", handleGlobalThemeChange as EventListener);
+    return () => {
+      window.removeEventListener("framerkit-theme-change", handleGlobalThemeChange as EventListener);
+    };
+  }, []);
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
 
@@ -97,8 +117,6 @@ export default function AvatarPage({ isAuthenticated, setIsSignInOpen }: AvatarP
     setTimeout(() => setCopiedKey(null), 4000);
   };
 
-  const skeletonCards = Array.from({ length: FIXED_SKELETON_COUNT });
-
   // ================================
   // Render
   // ================================
@@ -127,14 +145,7 @@ export default function AvatarPage({ isAuthenticated, setIsSignInOpen }: AvatarP
 
       <div className="gallery-scroll-area" ref={galleryRef}>
         {loading ? (
-          <div className="skeleton-gallery">
-            {skeletonCards.map((_, i) => (
-              <div key={i} className="skeleton-card">
-                <div className="skeleton-card-image" />
-                <div className="skeleton-card-info" />
-              </div>
-            ))}
-          </div>
+          <div style={{ minHeight: '200px' }}></div>
         ) : error ? (
           <p style={{ color: "red", padding: "20px" }}>{error}</p>
         ) : filtered.length === 0 ? (
@@ -203,23 +214,6 @@ export default function AvatarPage({ isAuthenticated, setIsSignInOpen }: AvatarP
           margin: '0 auto'
         }}
       >
-        <h2 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '16px', color: 'var(--framer-color-text)' }}>
-          Avatar Components for Framer
-        </h2>
-        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
-          Add a personal touch to your designs with these professional avatar components for Framer. 
-          Each avatar is designed for user profiles, team sections, and comment areas, featuring 
-          clean circular layouts, status indicators, and responsive sizing that adapts to any context.
-        </p>
-        <p style={{ marginBottom: '12px', lineHeight: 1.6 }}>
-          Perfect for user dashboards, team pages, social features, and community platforms. 
-          All components support light and dark themes, with instant copy-paste functionality 
-          for rapid implementation in your Framer projects.
-        </p>
-        <p style={{ lineHeight: 1.6 }}>
-          <strong>Features:</strong> Responsive layout · Dark/Light themes · Status indicators · 
-          Instant copy-paste · Framer-compatible · Multiple sizes · Initials fallback · Mobile-optimized.
-        </p>
       </article>
     </div>
   );

@@ -1,20 +1,17 @@
 .mobile-hamburger {
     appearance: none;
     -webkit-appearance: none;
-  
-    background: transparent;
+    background: none;
     border: none;
-    padding: 8px;
-  
-    color: #000000; /* ← ВАЖНО: задаём цвет SVG */
-  
+    padding: 4px;
+    color: var(--framer-color-text);
     cursor: pointer;
-  
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  
     -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Dark theme for hamburger icon */
+  [data-framer-theme="dark"] .mobile-hamburger {
+    color: var(--framer-color-text-dark);
   }
   
   /* убираем iOS / Android подсветку */
