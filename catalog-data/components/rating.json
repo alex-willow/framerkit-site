@@ -1,0 +1,181 @@
+{
+  "rating": [
+    {
+      "key": "Rating-01",
+      "title": "Rating 01",
+      "image": "https://storage.googleapis.com/framerkit/Rating%2001.png",
+      "url": "https://framer.com/m/Rating-01-SP6j.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Rating-02",
+      "title": "Rating 02",
+      "image": "https://storage.googleapis.com/framerkit/Rating%2002.png",
+      "url": "https://framer.com/m/Rating-02-GT6e.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Rating-03",
+      "title": "Rating 03",
+      "image": "https://storage.googleapis.com/framerkit/Rating%2003.png",
+      "url": "https://framer.com/m/Rating-03-SGI5.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Rating-04",
+      "title": "Rating 04",
+      "image": "https://storage.googleapis.com/framerkit/Rating%2004.png",
+      "url": "https://framer.com/m/Rating-04-asZ5.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Rating-05",
+      "title": "Rating 05",
+      "image": "https://storage.googleapis.com/framerkit/Rating%2005.png",
+      "url": "https://framer.com/m/Rating-05-nh7X.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Rating-06",
+      "title": "Rating 06",
+      "image": "https://storage.googleapis.com/framerkit/Rating%2006.png",
+      "url": "https://framer.com/m/Rating-06-Plgl.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Rating-07",
+      "title": "Rating 07",
+      "image": "https://storage.googleapis.com/framerkit/Rating%2007.png",
+      "url": "https://framer.com/m/Rating-07-Lg3M.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Rating-08",
+      "title": "Rating 08",
+      "image": "https://storage.googleapis.com/framerkit/Rating%2008.png",
+      "url": "https://framer.com/m/Rating-08-em3B.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Rating-09",
+      "title": "Rating 09",
+      "image": "https://storage.googleapis.com/framerkit/Rating%2009.png",
+      "url": "https://framer.com/m/Rating-09-ApIC.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Rating-10",
+      "title": "Rating 10",
+      "image": "https://storage.googleapis.com/framerkit/Rating%2010.png",
+      "url": "https://framer.com/m/Rating-10-CptZ.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Rating-11",
+      "title": "Rating 11",
+      "image": "https://storage.googleapis.com/framerkit/Rating%2011.png",
+      "url": "https://framer.com/m/Rating-11-b8Xs.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+
+    {
+      "key": "Rating-01-dark",
+      "title": "Rating 01",
+      "image": "https://storage.googleapis.com/framerkit/Rating%2001%20Dark.png",
+      "url": "https://framer.com/m/Rating-01-Dark-0uNG.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Rating-02-dark",
+      "title": "Rating 02",
+      "image": "https://storage.googleapis.com/framerkit/Rating%2002%20Dark.png",
+      "url": "https://framer.com/m/Rating-02-Dark-aZcT.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Rating-03-dark",
+      "title": "Rating 03",
+      "image": "https://storage.googleapis.com/framerkit/Rating%2003%20Dark.png",
+      "url": "https://framer.com/m/Rating-03-Dark-UIxS.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Rating-04-dark",
+      "title": "Rating 04",
+      "image": "https://storage.googleapis.com/framerkit/Rating%2004%20Dark.png",
+      "url": "https://framer.com/m/Rating-04-Dark-Kaqy.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Rating-05-dark",
+      "title": "Rating 05",
+      "image": "https://storage.googleapis.com/framerkit/Rating%2005%20Dark.png",
+      "url": "https://framer.com/m/Rating-05-Dark-b7hN.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Rating-06-dark",
+      "title": "Rating 06",
+      "image": "https://storage.googleapis.com/framerkit/Rating%2006%20Dark.png",
+      "url": "https://framer.com/m/Rating-06-Dark-NhH0.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Rating-07-dark",
+      "title": "Rating 07",
+      "image": "https://storage.googleapis.com/framerkit/Rating%2007%20Dark.png",
+      "url": "https://framer.com/m/Rating-07-Dark-AQta.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Rating-08-dark",
+      "title": "Rating 08",
+      "image": "https://storage.googleapis.com/framerkit/Rating%2008%20Dark.png",
+      "url": "https://framer.com/m/Rating-08-Dark-qeGG.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Rating-09-dark",
+      "title": "Rating 09",
+      "image": "https://storage.googleapis.com/framerkit/Rating%2009%20Dark.png",
+      "url": "https://framer.com/m/Rating-09-Dark-cGaj.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Rating-10-dark",
+      "title": "Rating 10",
+      "image": "https://storage.googleapis.com/framerkit/Rating%2010%20Dark.png",
+      "url": "https://framer.com/m/Rating-10-Dark-MGwS.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Rating-11-dark",
+      "title": "Rating 11",
+      "image": "https://storage.googleapis.com/framerkit/Rating%2011%20Dark.png",
+      "url": "https://framer.com/m/Rating-11-Dark-Ri4z.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    }
+  ]
+}

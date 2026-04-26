@@ -1,39 +1,11 @@
-// src/utils/constants.ts
-export const STATIC_SECTIONS = [
-  "navbar",
-  "hero",
-  "logo",
-  "feature",
-  "gallery",
-  "testimonial",
-  "contact",
-  "pricing",
-  "faq",
-  "cta",
-  "footer",
-];
+import {
+  COMPONENT_SECTIONS as COMPONENT_MANIFEST,
+  GETTING_STARTED_PAGES,
+  LAYOUT_SECTIONS,
+  TEMPLATE_SECTIONS,
+} from "../shared/catalogManifest";
 
-export const COMPONENT_SECTIONS = [
-  "accordion",
-  "accordion-group",
-  "avatar",
-  "avatar-group",
-  "badge",
-  "button",
-  "card",
-  "icon",
-  "input",
-  "form",
-  "pricing-card",
-  "rating",
-  "testimonial",
-];
-
-export const TEMPLATES = ["templates/framerkitdaily"];
-
-export const GETTING_STARTED_PAGES = [
-  "Overview",
-  "Installation",
-  "How It Works",
-  "FAQ",
-];
+export const STATIC_SECTIONS = LAYOUT_SECTIONS.map((item) => item.id);
+export const COMPONENT_SECTIONS = COMPONENT_MANIFEST.map((item) => item.id);
+export const TEMPLATES = TEMPLATE_SECTIONS.map((item) => `templates/${item.id}`);
+export { GETTING_STARTED_PAGES };

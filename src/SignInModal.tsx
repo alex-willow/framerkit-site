@@ -1,12 +1,18 @@
 import { useState, useEffect, useRef } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { createPortal } from "react-dom";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./SignInModal.css";
+import {
+  CATALOG_ADMIN_ENDPOINT,
+  SUPABASE_ANON_KEY,
+  SUPABASE_URL,
+} from "./lib/env";
+import { buildAdminHeaders } from "./lib/adminApi";
 
 const supabase = createClient(
-  "https://ibxakfxqoqiypfhgkpds.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlieGFrZnhxb3FpeXBmaGdrcGRzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA4MTQxMDcsImV4cCI6MjA1NjM5MDEwN30.tWculxF6xgGw4NQEWPBp7uH_gsl5HobP9wQn3Tf9yyw"
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY
 );
 
 type SignInModalProps = {
@@ -29,8 +35,6 @@ export default function SignInModal({
   const [showModal, setShowModal] = useState(false);
 
   const navigate = useNavigate();
-  const location = useLocation();
-
   const modalRef = useRef<HTMLDivElement>(null);
   const mouseDownInside = useRef(false);
 
@@ -71,6 +75,50 @@ export default function SignInModal({
     const cleanKey = key.trim();
 
     try {
+      const isAdminAttempt = !cleanEmail.includes("@");
+      const tryAdminAuth = async (): Promise<"ok" | "invalid" | "error" | "disabled"> => {
+        if (!CATALOG_ADMIN_ENDPOINT) return "disabled";
+        try {
+          const credentials = btoa(`${cleanEmail}:${cleanKey}`);
+          const response = await fetch(CATALOG_ADMIN_ENDPOINT, {
+            method: "POST",
+            headers: buildAdminHeaders(credentials),
+            body: JSON.stringify({ action: "auth" }),
+          });
+
+          if (response.status === 401) return "invalid";
+          if (!response.ok) return "error";
+          const payload = (await response.json()) as { ok?: boolean };
+          return payload.ok === true ? "ok" : "invalid";
+        } catch {
+          return "error";
+        }
+      };
+
+      const adminAuthStatus = await tryAdminAuth();
+      const isAdmin = adminAuthStatus === "ok";
+      if (isAdmin) {
+        const adminAuthToken = btoa(`${cleanEmail}:${cleanKey}`);
+        localStorage.setItem("rememberedEmail", cleanEmail);
+        localStorage.setItem("rememberedKey", "__admin__");
+        localStorage.setItem("framerkitAdmin", "true");
+        localStorage.setItem("framerkitAdminAuth", adminAuthToken);
+        onLogin();
+        onClose();
+        return;
+      }
+
+      if (isAdminAttempt) {
+        if (adminAuthStatus === "disabled") {
+          setErrorMessage("Admin endpoint is not configured.");
+        } else if (adminAuthStatus === "invalid") {
+          setErrorMessage("Invalid admin login or password.");
+        } else {
+          setErrorMessage("Admin auth is unavailable now. Please try again.");
+        }
+        return;
+      }
+
       const { data: users, error } = await supabase
         .from("framer_kit")
         .select("*")
@@ -94,6 +142,8 @@ export default function SignInModal({
         } else {
           localStorage.setItem("rememberedEmail", cleanEmail);
           localStorage.setItem("rememberedKey", cleanKey);
+          localStorage.removeItem("framerkitAdmin");
+          localStorage.removeItem("framerkitAdminAuth");
 
           onLogin();
           onClose();
@@ -108,16 +158,15 @@ export default function SignInModal({
 
   // 🔑 Переход к секции покупки
   const goToPricing = () => {
-    if (location.pathname === "/") {
-      const el = document.getElementById("get-framerkit");
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
+    const el = document.getElementById("get-framerkit");
+    if (el) {
+      el.scrollIntoView({ behavior: "auto", block: "start" });
       onClose();
-    } else {
-      navigate("/#get-framerkit");
-      onClose();
+      return;
     }
+
+    navigate("/#get-framerkit");
+    onClose();
   };
 
   if (!isOpen) return null;
@@ -136,14 +185,14 @@ export default function SignInModal({
         </p>
 
         <form className="auth-form" onSubmit={handleLogin}>
-          <label className="auth-label">Email</label>
+          <label className="auth-label">Email or Admin Login</label>
           <input
             className="auth-input"
-            type="email"
+            type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            placeholder="Enter your email"
+            placeholder="Enter your email or admin login"
           />
 
           <label className="auth-label">License Key</label>
@@ -160,7 +209,7 @@ export default function SignInModal({
 
           <button
             type="submit"
-            className={`auth-button ${loading ? "loading" : ""}`}
+            className={`authButton auth-button ${loading ? "loading" : ""}`}
             disabled={loading}
           >
             {loading ? "Signing in..." : "Sign in"}

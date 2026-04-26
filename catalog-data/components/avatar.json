@@ -1,0 +1,20 @@
+{
+  "avatar": [
+    {
+      "key": "Avatar-01",
+      "title": "Avatar 01",
+      "image": "https://storage.googleapis.com/framerkit/Avatar%20With%20Status.png",
+      "url": "https://framer.com/m/Avatar-01-uTiu.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Avatar-01-dark",
+      "title": "Avatar 01",
+      "image": "https://storage.googleapis.com/framerkit/Avatar%20With%20Status%20Dark.png",
+      "url": "https://framer.com/m/Avatar-01-Dark-hNM9.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    }
+  ]
+}

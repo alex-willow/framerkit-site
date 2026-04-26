@@ -1,0 +1,1573 @@
+{
+  "feature": [
+  {
+    "key": "feature-section-01",
+    "title": "Feature Section 01",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-01.gif",
+    "url": "https://framer.com/m/Feature-Section-01-re2D.js",
+    "type": "free",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-01",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2001%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-01-Wireframe-GUvJ.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-01-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-02",
+    "title": "Feature Section 02",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-02.gif",
+    "url": "https://framer.com/m/Feature-Section-02-ABjv.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-02",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2002%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-02-Wireframe-4LLo.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-02-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-03",
+    "title": "Feature Section 03",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-03.gif",
+    "url": "https://framer.com/m/Feature-Section-03-wZKS.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-03",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2003%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-03-Wireframe-d5Sf.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-03-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-04",
+    "title": "Feature Section 04",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-04.gif",
+    "url": "https://framer.com/m/Feature-Section-04-64ed.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-04",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2004%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-04-Wireframe-Deg1.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-04-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-05",
+    "title": "Feature Section 05",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-05.gif",
+    "url": "https://framer.com/m/Feature-Section-05-wjtg.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-05",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2005%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-05-Wireframe-872t.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-05-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-06",
+    "title": "Feature Section 06",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-06.gif",
+    "url": "https://framer.com/m/Feature-Section-06-xOaq.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-06",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2006%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-06-Wireframe-EcZj.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-06-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-07",
+    "title": "Feature Section 07",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-07.gif",
+    "url": "https://framer.com/m/Feature-Section-07-ZLHp.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-07",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2007%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-07-Wireframe-MOrE.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-07-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-08",
+    "title": "Feature Section 08",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-08.gif",
+    "url": "https://framer.com/m/Feature-Section-08-vlVy.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-08",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2008%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-08-Wireframe-8QPd.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-08-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-09",
+    "title": "Feature Section 09",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-09.gif",
+    "url": "https://framer.com/m/Feature-Section-09-9Qc0.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-09",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2009%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-09-Wireframe-EpsD.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-09-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-10",
+    "title": "Feature Section 10",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-10.gif",
+    "url": "https://framer.com/m/Feature-Section-10-Xwxe.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-10",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2010%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-10-Wireframe-zFqW.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-10-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-11",
+    "title": "Feature Section 11",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-11.gif",
+    "url": "https://framer.com/m/Feature-Section-11-AHGr.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-11",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2011%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-11-Wireframe-4KD3.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-11-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-12",
+    "title": "Feature Section 12",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-12.gif",
+    "url": "https://framer.com/m/Feature-Section-12-bsQC.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-12",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2012%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-12-Wireframe-Ic64.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-12-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-13",
+    "title": "Feature Section 13",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-13.gif",
+    "url": "https://framer.com/m/Feature-Section-13-O5Hy.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-13",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2013%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-13-Wireframe-QgEm.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-13-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-14",
+    "title": "Feature Section 14",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-14.gif",
+    "url": "https://framer.com/m/Feature-Section-14-kEHL.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-14",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2014%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-14-Wireframe-aSK8.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-14-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-15",
+    "title": "Feature Section 15",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-15.gif",
+    "url": "https://framer.com/m/Feature-Section-15-2sv2.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-15",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2015%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-15-Wireframe-o2Oc.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-15-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-16",
+    "title": "Feature Section 16",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-16.gif",
+    "url": "https://framer.com/m/Feature-Section-16-FxQ5.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-16",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2016%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-16-Wireframe-eULH.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-16-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-17",
+    "title": "Feature Section 17",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-17.gif",
+    "url": "https://framer.com/m/Feature-Section-17-0mDw.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-17",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2017%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-17-Wireframe-GuL2.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-17-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-18",
+    "title": "Feature Section 18",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-18.gif",
+    "url": "https://framer.com/m/Feature-Section-18-JDwt.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-18",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2018%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-18-Wireframe-tIYw.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-18-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-19",
+    "title": "Feature Section 19",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-19.gif",
+    "url": "https://framer.com/m/Feature-Section-19-TyII.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-19",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2019%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-19-Wireframe-IMcm.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-19-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-20",
+    "title": "Feature Section 20",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-20.gif",
+    "url": "https://framer.com/m/Feature-Section-20-vkqC.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-20",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2020%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-20-Wireframe-adTt.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-20-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-21",
+    "title": "Feature Section 21",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-21.gif",
+    "url": "https://framer.com/m/Feature-Section-21-71le.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-21",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2021%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-21-Wireframe-oIYT.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-21-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-22",
+    "title": "Feature Section 22",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-22.gif",
+    "url": "https://framer.com/m/Feature-Section-22-fDs0.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-22",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2022%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-22-Wireframe-PxBH.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-22-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-23",
+    "title": "Feature Section 23",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-23.gif",
+    "url": "https://framer.com/m/Feature-Section-23-iPPc.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-23",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2023%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-23-Wireframe-dEb4.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-23-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-24",
+    "title": "Feature Section 24",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-24.gif",
+    "url": "https://framer.com/m/Feature-Section-24-myLq.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-24",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2024%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-24-Wireframe-K8yK.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-24-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-25",
+    "title": "Feature Section 25",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-25.gif",
+    "url": "https://framer.com/m/Feature-Section-25-spCY.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-25",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2025%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-25-Wireframe-H6Qw.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-25-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-26",
+    "title": "Feature Section 26",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-26.gif",
+    "url": "https://framer.com/m/Feature-Section-26-XFgK.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-26",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2026%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-26-Wireframe-tDsu.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-26-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-27",
+    "title": "Feature Section 27",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-27.gif",
+    "url": "https://framer.com/m/Feature-Section-27-Uf3B.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-27",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2027%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-27-Wireframe-2jmD.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-27-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-28",
+    "title": "Feature Section 28",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-28.gif",
+    "url": "https://framer.com/m/Feature-Section-28-2lDh.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-28",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2028%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-28-Wireframe-Z3N2.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-28-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-29",
+    "title": "Feature Section 29",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-29.gif",
+    "url": "https://framer.com/m/Feature-Section-29-oDz0.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-29",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2029%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-29-Wireframe-gplC.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-29-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-30",
+    "title": "Feature Section 30",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-30.gif",
+    "url": "https://framer.com/m/Feature-Section-30-U3Lf.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-30",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2030%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-30-Wireframe-73vk.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-30-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-31",
+    "title": "Feature Section 31",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-31.gif",
+    "url": "https://framer.com/m/Feature-Section-31-Hcf7.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-31",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2031%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-31-Wireframe-JcNw.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-31-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-32",
+    "title": "Feature Section 32",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-32.gif",
+    "url": "https://framer.com/m/Feature-Section-32-1Oyy.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-32",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2032%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-32-Wireframe-XCsI.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-32-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-33",
+    "title": "Feature Section 33",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-33.gif",
+    "url": "https://framer.com/m/Feature-Section-33-V01Z.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-33",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2033%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-33-Wireframe-yEhJ.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-33-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-34",
+    "title": "Feature Section 34",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-34.gif",
+    "url": "https://framer.com/m/Feature-Section-34-W3wQ.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-34",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2034%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-34-Wireframe-7csu.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-34-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-35",
+    "title": "Feature Section 35",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-35.gif",
+    "url": "https://framer.com/m/Feature-Section-35-A1Su.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-35",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2035%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-35-Wireframe-AILR.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-35-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-36",
+    "title": "Feature Section 36",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-36.gif",
+    "url": "https://framer.com/m/Feature-Section-36-MdPH.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-36",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2036%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-36-Wireframe-tNU9.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-36-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-37",
+    "title": "Feature Section 37",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-37.gif",
+    "url": "https://framer.com/m/Feature-Section-37-kCSI.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-37",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2037%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-37-Wireframe-Y6Cf.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-37-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-38",
+    "title": "Feature Section 38",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-38.gif",
+    "url": "https://framer.com/m/Feature-Section-38-dU8r.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-38",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2038%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-38-Wireframe-jeFR.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-38-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-39",
+    "title": "Feature Section 39",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-39.gif",
+    "url": "https://framer.com/m/Feature-Section-39-sBov.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-39",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2039%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-39-Wireframe-sEPB.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-39-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-40",
+    "title": "Feature Section 40",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-40.gif",
+    "url": "https://framer.com/m/Feature-Section-40-YVV1.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-40",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2040%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-40-Wireframe-sDRo.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-40-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-41",
+    "title": "Feature Section 41",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-41.gif",
+    "url": "https://framer.com/m/Feature-Section-41-g9VH.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-41",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2041%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-41-Wireframe-uhiK.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-41-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-42",
+    "title": "Feature Section 42",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-42.gif",
+    "url": "https://framer.com/m/Feature-Section-42-fwiy.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-42",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2042%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-42-Wireframe-fTq2.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-42-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-43",
+    "title": "Feature Section 43",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-43.gif",
+    "url": "https://framer.com/m/Feature-Section-43-16re.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-43",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2043%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-43-Wireframe-6XQq.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-43-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-44",
+    "title": "Feature Section 44",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-44.gif",
+    "url": "https://framer.com/m/Feature-Section-44-4FxT.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-44",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2044%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-44-Wireframe-kCmL.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-44-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-45",
+    "title": "Feature Section 45",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-45.gif",
+    "url": "https://framer.com/m/Feature-Section-45-PVBh.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-45",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2045%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-45-Wireframe-5XAg.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-45-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-46",
+    "title": "Feature Section 46",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-46.gif",
+    "url": "https://framer.com/m/Feature-Section-46-RL9p.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-46",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2046%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-46-Wireframe-D1oC.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-46-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-47",
+    "title": "Feature Section 47",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-47.gif",
+    "url": "https://framer.com/m/Feature-Section-47-3j2H.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-47",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2047%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-47-Wireframe-vRrY.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-47-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-48",
+    "title": "Feature Section 48",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-48.gif",
+    "url": "https://framer.com/m/Feature-Section-48-lMbJ.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-48",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2048%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-48-Wireframe-qYGU.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-48-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-49",
+    "title": "Feature Section 49",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-49.gif",
+    "url": "https://framer.com/m/Feature-Section-49-kua9.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-49",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2049%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-49-Wireframe-6Fsx.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-49-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-50",
+    "title": "Feature Section 50",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-50.gif",
+    "url": "https://framer.com/m/Feature-Section-50-qCXz.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-50",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2050%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-50-Wireframe-J0JM.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-50-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-51",
+    "title": "Feature Section 51",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-51.gif",
+    "url": "https://framer.com/m/Feature-Section-51-IsEr.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-51",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2051%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-51-Wireframe-mMnC.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-51-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-52",
+    "title": "Feature Section 52",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-52.gif",
+    "url": "https://framer.com/m/Feature-Section-52-jyyI.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-52",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2052%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-52-Wireframe-5hZA.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-52-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-53",
+    "title": "Feature Section 53",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-53.gif",
+    "url": "https://framer.com/m/Feature-Section-53-is6q.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-53",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2053%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-53-Wireframe-mv7N.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-53-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-54",
+    "title": "Feature Section 54",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-54.gif",
+    "url": "https://framer.com/m/Feature-Section-54-nljC.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-54",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2054%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-54-Wireframe-5Li7.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-54-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-55",
+    "title": "Feature Section 55",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-55.gif",
+    "url": "https://framer.com/m/Feature-Section-55-jgks.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-55",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2055%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-55-Wireframe-1lD1.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-55-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-56",
+    "title": "Feature Section 56",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Design%20/Feature-Section-56.gif",
+    "url": "https://framer.com/m/Feature-Section-56-GZZj.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-56",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Light/Wireframe/Feature%20Section%2056%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-56-Wireframe-AfDc.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-56-wireframe"
+    }
+  },
+ 
+  {
+    "key": "feature-section-01-dark",
+    "title": "Feature Section 01",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-01-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-01-Dark-2UEm.js",
+    "type": "free",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-01-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2001%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-01-Dark-Wireframe-JPLl.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-01-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-02-dark",
+    "title": "Feature Section 02",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-02-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-02-Dark-GUMC.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-02-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2002%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-02-Dark-Wireframe-aZ8a.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-02-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-03-dark",
+    "title": "Feature Section 03",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-03-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-03-Dark-FAiP.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-03-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2003%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-03-Dark-Wireframe-xG7J.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-03-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-04-dark",
+    "title": "Feature Section 04",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-04-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-04-Dark-HG3s.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-04-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2004%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-04-Dark-Wireframe-hFSS.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-04-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-05-dark",
+    "title": "Feature Section 05",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-05-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-05-Dark-nL9J.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-05-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2005%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-05-Dark-Wireframe-KnZ5.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-05-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-06-dark",
+    "title": "Feature Section 06",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-06-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-06-Dark-eVCy.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-06-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2006%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-06-Dark-Wireframe-igDI.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-06-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-07-dark",
+    "title": "Feature Section 07",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-07-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-07-Dark-uyAv.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-07-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2007%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-07-Dark-Wireframe-maD5.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-07-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-08-dark",
+    "title": "Feature Section 08",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-08-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-08-Dark-mPVk.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-08-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2008%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-08-Dark-Wireframe-F2C4.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-08-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-09-dark",
+    "title": "Feature Section 09",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-09-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-09-Dark-QMHm.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-09-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2009%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-09-Dark-Wireframe-whIh.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-09-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-10-dark",
+    "title": "Feature Section 10",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-10-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-10-Dark-bWEE.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-10-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2010%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-10-Dark-Wireframe-eYXX.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-10-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-11-dark",
+    "title": "Feature Section 11",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-11-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-11-Dark-yo52.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-11-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2011%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-11-Dark-Wireframe-bxMh.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-11-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-12-dark",
+    "title": "Feature Section 12",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-12-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-12-Dark-554r.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-12-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2012%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-12-Dark-Wireframe-hHGv.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-12-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-13-dark",
+    "title": "Feature Section 13",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-13-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-13-Dark-bpTj.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-13-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2013%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-13-Dark-Wireframe-myl5.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-13-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-14-dark",
+    "title": "Feature Section 14",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-14-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-14-Dark-NsgO.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-14-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2014%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-14-Dark-Wireframe-ngCw.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-14-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-15-dark",
+    "title": "Feature Section 15",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-15-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-15-Dark-hR9W.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-15-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2015%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-15-Dark-Wireframe-EeaF.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-15-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-16-dark",
+    "title": "Feature Section 16",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-16-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-16-Dark-N1bJ.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-16-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2016%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-16-Dark-Wireframe-ofji.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-16-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-17-dark",
+    "title": "Feature Section 17",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-17-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-17-Dark-9P3p.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-17-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2017%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-17-Dark-Wireframe-18EY.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-17-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-18-dark",
+    "title": "Feature Section 18",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-18-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-18-Dark-O6gj.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-18-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2018%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-18-Dark-Wireframe-tq9c.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-18-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-19-dark",
+    "title": "Feature Section 19",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-19-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-19-Dark-ruuF.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-19-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2019%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-19-Dark-Wireframe-h2ll.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-19-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-20-dark",
+    "title": "Feature Section 20",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-20-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-20-Dark-MmkC.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-20-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2020%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-20-Dark-Wireframe-lWER.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-20-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-21-dark",
+    "title": "Feature Section 21",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-21-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-21-Dark-3ZiO.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-21-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2021%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-21-Dark-Wireframe-NaCl.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-21-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-22-dark",
+    "title": "Feature Section 22",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-22-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-22-Dark-Q0Me.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-22-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2022%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-22-Dark-Wireframe-I2bg.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-22-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-23-dark",
+    "title": "Feature Section 23",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-23-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-23-Dark-uRip.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-23-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2023%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-23-Dark-Wireframe-xaMo.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-23-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-24-dark",
+    "title": "Feature Section 24",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-24-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-24-Dark-NkCO.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-24-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2024%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-24-Dark-Wireframe-I3UA.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-24-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-25-dark",
+    "title": "Feature Section 25",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-25-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-25-Dark-bckZ.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-25-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2025%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-25-Dark-Wireframe-4oPr.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-25-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-26-dark",
+    "title": "Feature Section 26",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-26-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-26-Dark-BxlP.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-26-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2026%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-26-Dark-Wireframe-MPwC.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-26-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-27-dark",
+    "title": "Feature Section 27",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-27-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-27-Dark-4xhI.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-27-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2027%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-27-Dark-Wireframe-2uOP.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-27-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-28-dark",
+    "title": "Feature Section 28",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-28-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-28-Dark-OH0h.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-28-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2028%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-28-Dark-Wireframe-zKIQ.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-28-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-29-dark",
+    "title": "Feature Section 29",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-29-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-29-Dark-erY8.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-29-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2029%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-29-Dark-Wireframe-Ei5M.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-29-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-30-dark",
+    "title": "Feature Section 30",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-30-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-30-Dark-CCYs.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-30-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2030%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-30-Dark-Wireframe-FfKk.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-30-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-31-dark",
+    "title": "Feature Section 31",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-31-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-31-Dark-PHm2.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-31-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2031%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-31-Dark-Wireframe-RDbC.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-31-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-32-dark",
+    "title": "Feature Section 32",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-32-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-32-Dark-WvGr.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-32-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2032%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-32-Dark-Wireframe-Qxik.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-32-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-33-dark",
+    "title": "Feature Section 33",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-33-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-33-Dark-77OT.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-33-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2033%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-33-Dark-Wireframe-i8rx.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-33-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-34-dark",
+    "title": "Feature Section 34",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-34-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-34-Dark-jClT.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-34-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2034%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-34-Dark-Wireframe-q0dt.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-34-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-35-dark",
+    "title": "Feature Section 35",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-35-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-35-Dark-Ef2D.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-35-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2035%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-35-Dark-Wireframe-KH7F.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-35-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-36-dark",
+    "title": "Feature Section 36",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-36-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-36-Dark-wlEE.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-36-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2036%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-36-Dark-Wireframe-FbdP.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-36-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-37-dark",
+    "title": "Feature Section 37",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-37-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-37-Dark-y53D.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-37-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2037%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-37-Dark-Wireframe-GTf5.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-37-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-38-dark",
+    "title": "Feature Section 38",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-38-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-38-Dark-0ERV.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-38-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2038%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-38-Dark-Wireframe-VAh7.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-38-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-39-dark",
+    "title": "Feature Section 39",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-39-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-39-Dark-ExHd.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-39-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2039%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-39-Dark-Wireframe-yBZy.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-39-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-40-dark",
+    "title": "Feature Section 40",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-40-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-40-Dark-kPZM.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-40-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2040%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-40-Dark-Wireframe-bMpF.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-40-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-41-dark",
+    "title": "Feature Section 41",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-41-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-41-Dark-724e.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-41-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2041%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-41-Dark-Wireframe-nAVD.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-41-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-42-dark",
+    "title": "Feature Section 42",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-42-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-42-Dark-96or.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-42-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2042%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-42-Dark-Wireframe-R9uq.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-42-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-43-dark",
+    "title": "Feature Section 43",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-43-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-43-Dark-4wLY.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-43-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2043%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-43-Dark-Wireframe-8OQ6.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-43-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-44-dark",
+    "title": "Feature Section 44",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-44-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-44-Dark-Z4wk.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-44-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2044%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-44-Dark-Wireframe-38pE.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-44-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-45-dark",
+    "title": "Feature Section 45",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-45-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-45-Dark-5LlH.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-45-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2045%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-45-Dark-Wireframe-X2zE.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-45-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-46-dark",
+    "title": "Feature Section 46",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-46-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-46-Dark-tSyL.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-46-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2046%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-46-Dark-Wireframe-5QoI.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-46-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-47-dark",
+    "title": "Feature Section 47",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-47-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-47-Dark-qUK7.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-47-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2047%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-47-Dark-Wireframe-Yy4F.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-47-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-48-dark",
+    "title": "Feature Section 48",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-48-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-48-Dark-hSUG.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-48-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2048%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-48-Dark-Wireframe-u801.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-48-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-49-dark",
+    "title": "Feature Section 49",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-49-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-49-Dark-nJPZ.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-49-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2049%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-49-Dark-Wireframe-oQZR.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-49-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-50-dark",
+    "title": "Feature Section 50",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-50-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-50-Dark-iBM1.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-50-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2050%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-50-Dark-Wireframe-0zel.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-50-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-51-dark",
+    "title": "Feature Section 51",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-51-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-51-Dark-ls7q.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-51-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2051%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-51-Dark-Wireframe-CIjv.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-51-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-52-dark",
+    "title": "Feature Section 52",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-52-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-52-Dark-FlG6.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-52-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2052%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-52-Dark-Wireframe-wuKS.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-52-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-53-dark",
+    "title": "Feature Section 53",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-53-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-53-Dark-w4mX.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-53-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2053%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-53-Dark-Wireframe-0Q8F.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-53-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-54-dark",
+    "title": "Feature Section 54",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-54-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-54-Dark-692h.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-54-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2054%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-54-Dark-Wireframe-Wizj.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-54-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-55-dark",
+    "title": "Feature Section 55",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-55-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-55-Dark-dPFf.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-55-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2055%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-55-Dark-Wireframe-AupF.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-55-dark-wireframe"
+    }
+  },
+  {
+    "key": "feature-section-56-dark",
+    "title": "Feature Section 56",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Design%20/Feature-Section-56-Dark.gif",
+    "url": "https://framer.com/m/Feature-Section-56-Dark-FdWl.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-56-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Feature%20Section/Dark/Wireframe/Feature%20Section%2056%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Feature-Section-56-Dark-Wireframe-1Z3v.js",
+      "previewUrl": "https://framerkit.site/preview/feature-section/feature-section-56-dark-wireframe"
+    }
+  }
+  ]
+}

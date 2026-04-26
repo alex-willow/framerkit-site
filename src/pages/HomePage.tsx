@@ -1,30 +1,41 @@
 import { useEffect, useRef, useState, type MouseEvent } from "react";
-import { Link } from "react-router-dom"; 
 import {
-  ArrowsClockwise,
   CalendarBlank,
-  CheckCircle,
   Clock,
-  DeviceMobile,
   Eye,
-  GearSix,
-  GlobeHemisphereWest,
-  Info,
-  Lightning,
-  LinkSimple,
-  PaintBrush,
   PuzzlePiece,
-  Question,
+  Copy,
   MagnifyingGlass,
-  RocketLaunch,
-  Sparkle,
   Target,
-  VideoCamera,
-  CopySimple,
+  Play,
+  PlayCircle,
 } from "phosphor-react";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, CircleCheck, CircleAlert } from "lucide-react";
 import "./framerkit.css";
 import "./gettingstarted.css";
+import { trackGtagEvent } from "../utils/gtag";
+import SEO from "../components/SEO";
+import HoverVideo from "../components/HoverVideo";
+
+
+type HeroCollectionItem = {
+  key: string;
+  title: string;
+  image: string;
+  url: string;
+  previewUrl?: string;
+};
+
+const DOC_SECTIONS = [
+  "overview",
+  "how-it-works",
+  "quick-start",
+  "using-the-plugin",
+  "video-tutorial",
+];
+
+
+
 
 
 
@@ -32,31 +43,33 @@ type HomePageProps = {
   onSectionChange: (sectionId: string) => void;
   theme: "light" | "dark";
   onThemeToggle: () => void;
+  isAuthenticated: boolean;
+  onLogout: () => void;
+  onSignInOpen: () => void;
+  onGetAccess: () => void;
 };
 
-export default function HomePage({ onSectionChange, theme, onThemeToggle }: HomePageProps) {
+export default function HomePage({
+  onSectionChange,
+  theme,
+  onThemeToggle,
+  isAuthenticated,
+  onLogout,
+  onSignInOpen,
+  onGetAccess,
+}: HomePageProps) {
   const isDarkTheme = theme === "dark";
   const [showTooltip, setShowTooltip] = useState(false);
 
-  const sections = [
-    "overview",
-    "what-is-framer",
-    "how-it-works",
-    "quick-start",
-    "video",
-  ];
-
-  const trackEvent = (event: string, params?: Record<string, any>) => {
-    if (typeof window !== "undefined" && (window as any).gtag) {
-      (window as any).gtag("event", event, params);
-    }
-  };
-
   const onSectionChangeRef = useRef(onSectionChange);
-  onSectionChangeRef.current = onSectionChange;
   const suppressSidebarUntilRef = useRef(0);
+  
 
-  const handlePathCardClick = (e: MouseEvent<HTMLAnchorElement>, id: string) => {
+  useEffect(() => {
+    onSectionChangeRef.current = onSectionChange;
+  }, [onSectionChange]);
+
+  const handlePathCardClick = (e: MouseEvent<HTMLDivElement>, id: string) => {
     e.preventDefault();
     const el = document.getElementById(id);
     if (!el) return;
@@ -104,7 +117,7 @@ export default function HomePage({ onSectionChange, theme, onThemeToggle }: Home
       }
     );
 
-    sections.forEach((id) => {
+    DOC_SECTIONS.forEach((id) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
     });
@@ -123,7 +136,7 @@ export default function HomePage({ onSectionChange, theme, onThemeToggle }: Home
         if (entry.isIntersecting && !fired) {
           fired = true;
 
-          trackEvent("view_pricing", {
+          trackGtagEvent("view_pricing", {
             section: "get-framerkit",
           });
 
@@ -140,7 +153,27 @@ export default function HomePage({ onSectionChange, theme, onThemeToggle }: Home
 
   return (
     <div className="home-docs-layout" data-framer-theme={theme}>
+      <SEO
+        title="Getting Started"
+        description="FramerKit getting started guide: overview, workflow, quick start, plugin usage, and tutorials."
+        keywords="framerkit getting started, framer plugin guide, framer components tutorial"
+        canonical="https://www.framerkit.site/"
+      />
       <div className="home-overview-topbar">
+        {isAuthenticated ? (
+          <button className="logoutButton" onClick={onLogout}>
+            Log out
+          </button>
+        ) : (
+          <>
+            <button className="logoutButton" onClick={onSignInOpen}>
+              Log in
+            </button>
+            <button className="authButton" onClick={onGetAccess}>
+              Get Full Access
+            </button>
+          </>
+        )}
         <button
           type="button"
           className={`theme-toggle-btn ${isDarkTheme ? "active" : ""}`}
@@ -161,363 +194,140 @@ export default function HomePage({ onSectionChange, theme, onThemeToggle }: Home
           )}
         </button>
       </div>
-      {/* ============================================
-    OVERVIEW SECTION - PROFESSIONAL DOCUMENTATION
+     {/* ============================================
+    OVERVIEW SECTION - CLEAN DOCS STRUCTURE
 ============================================= */}
 <section id="overview" className="docs-overview">
   
-  {/* 🔥 1. Welcome Header */}
+  {/* 1. Header */}
   <div className="docs-welcome">
-    <h1 className="docs-welcome-title">Welcome to FramerKit</h1>
+    <h1 className="docs-welcome-title">Overview</h1>
     <p className="docs-welcome-text">
-      Your complete guide to building faster with Framer. 
-      Explore our components, learn the basics, and start shipping projects today.
+    FramerKit is a Framer component library with ready-made sections designed to help you build complete pages faster using copy, paste, and customize workflow.
     </p>
   </div>
 
-  {/* 🔥 2. Getting Started Path (Links to next sections) */}
+  {/* 2. How to use */}
   <div className="docs-content-block">
-    <h2 className="docs-section-title">Getting Started</h2>
-    <p className="docs-section-description">
-      New to FramerKit? Start here to understand the basics.
-    </p>
-    
-    <div className="docs-path-grid">
-      <Link to="/#what-is-framer" className="path-card" onClick={(e) => handlePathCardClick(e, "what-is-framer")}>
-        <div className="path-card-icon"><Question size={18} weight="duotone" /></div>
-        <div className="path-card-content">
-          <h3 className="path-card-title">What is Framer?</h3>
-          <p className="path-card-description">
-            Understand the platform and why FramerKit is built for it.
-          </p>
-        </div>
-        <span className="path-card-arrow">→</span>
-      </Link>
+  
 
-      <Link to="/#how-it-works" className="path-card" onClick={(e) => handlePathCardClick(e, "how-it-works")}>
-        <div className="path-card-icon"><GearSix size={18} weight="duotone" /></div>
+    <div className="docs-path-grid">
+
+      <div className="path-card" onClick={(e) => handlePathCardClick(e, "how-it-works")} style={{ cursor: 'pointer' }}>
+        <div className="path-card-icon"><MagnifyingGlass size={18} weight="duotone" /></div>
         <div className="path-card-content">
           <h3 className="path-card-title">How it Works</h3>
           <p className="path-card-description">
-            Learn the workflow: Browse, Copy, Customize in 3 simple steps.
+          Learn the basic workflow: browse components, copy them, and use them inside Framer projects.
           </p>
         </div>
-        <span className="path-card-arrow">→</span>
-      </Link>
+      </div>
 
-      <Link to="/#quick-start" className="path-card" onClick={(e) => handlePathCardClick(e, "quick-start")}>
-        <div className="path-card-icon"><RocketLaunch size={18} weight="duotone" /></div>
+      <div className="path-card" onClick={(e) => handlePathCardClick(e, "quick-start")} style={{ cursor: 'pointer' }}>
+        <div className="path-card-icon"><Play size={18} weight="duotone" /></div>
         <div className="path-card-content">
           <h3 className="path-card-title">Quick Start</h3>
           <p className="path-card-description">
-            Step-by-step guide to your first component in 60 seconds.
+          Try your first component in under a minute with a simple step-by-step guide.
           </p>
         </div>
-        <span className="path-card-arrow">→</span>
-      </Link>
+      </div>
 
-      <Link to="/#video" className="path-card" onClick={(e) => handlePathCardClick(e, "video")}>
-        <div className="path-card-icon"><VideoCamera size={18} weight="duotone" /></div>
+      <div className="path-card" onClick={(e) => handlePathCardClick(e, "using-the-plugin")} style={{ cursor: 'pointer' }}>
+        <div className="path-card-icon"><PuzzlePiece size={18} weight="duotone" /></div>
+        <div className="path-card-content">
+          <h3 className="path-card-title">Using the Plugin</h3>
+          <p className="path-card-description">
+          Access and insert FramerKit components directly inside Framer without leaving your project.
+          </p>
+        </div>
+      </div>
+
+      <div className="path-card" onClick={(e) => handlePathCardClick(e, "video-tutorial")} style={{ cursor: 'pointer' }}>
+        <div className="path-card-icon"><PlayCircle size={18} weight="duotone" /></div>
         <div className="path-card-content">
           <h3 className="path-card-title">Video Tutorial</h3>
           <p className="path-card-description">
-            Watch a 3-minute walkthrough of the entire process.
+          Watch a short walkthrough of how to use FramerKit from start to finish.
           </p>
         </div>
-        <span className="path-card-arrow">→</span>
-      </Link>
-    </div>
-  </div>
-
-</section>
-
- {/* ============================================
-    WHAT IS FRAMER? SECTION
-============================================= */}
-<section id="what-is-framer" className="docs-section">
-  <div className="fk-gs-wrapper">
-    <div className="fk-gs-container">
-      
-      {/* 🔥 1. Заголовок и описание */}
-
-      <h1 className="docs-title">What is Framer?</h1>
-      <p className="fk-gs-text">
-        Framer is a professional website builder that combines the freedom of design tools 
-        (like Figma) with the power of a fully functional CMS and hosting platform.
-      </p>
-      <p className="fk-gs-text">
-        Unlike traditional website builders, Framer gives you <strong>complete creative control</strong> — 
-        you can design anything you imagine, and it publishes as a real, production-ready website instantly.
-      </p>
-      
-      {/* 🔥 2. Highlight Box */}
-      <div className="docs-highlight-box">
-        <p className="highlight-text">
-          <Info size={16} weight="duotone" style={{ marginRight: 6, verticalAlign: "text-bottom" }} />
-          <strong>Think of it this way:</strong> If Figma is for designing interfaces, 
-          Framer is for designing <em>and publishing</em> them — without writing code.
-        </p>
-      </div>
-
-      {/* 🔥 3. Key Features */}
-      <h3 className="docs-subsection-title">Why Designers Love Framer</h3>
-      
-      <div className="fk-gs-grid">
-        <div className="fk-gs-card">
-          <div className="feature-icon"><PaintBrush size={18} weight="duotone" /></div>
-          <div className="fk-gs-card-content">
-            <h3>Design Freedom</h3>
-            <p>Complete canvas control. No templates, no restrictions. Design pixel-perfect layouts exactly how you envision them.</p>
-          </div>
-        </div>
-        
-        <div className="fk-gs-card">
-          <div className="feature-icon"><Lightning size={18} weight="duotone" /></div>
-          <div className="fk-gs-card-content">
-            <h3>Instant Publishing</h3>
-            <p>One click to publish. Framer handles hosting, SSL, CDN, and performance optimization automatically.</p>
-          </div>
-        </div>
-        
-        <div className="fk-gs-card">
-          <div className="feature-icon"><DeviceMobile size={18} weight="duotone" /></div>
-          <div className="fk-gs-card-content">
-            <h3>Responsive by Default</h3>
-            <p>Built-in responsive tools. Design once, and your site adapts beautifully to desktop, tablet, and mobile.</p>
-          </div>
-        </div>
-        
-        <div className="fk-gs-card">
-          <div className="feature-icon"><ArrowsClockwise size={18} weight="duotone" /></div>
-          <div className="fk-gs-card-content">
-            <h3>Figma Import</h3>
-            <p>Copy-paste directly from Figma. Your designs transfer with layers, styles, and constraints intact.</p>
-          </div>
-        </div>
-      </div>
-
-      {/* 🔥 4. Comparison Table */}
-      <h3 className="docs-subsection-title">Framer vs Traditional Builders</h3>
-      
-      <div className="docs-table-wrapper">
-        <table className="docs-comparison-table">
-          <thead>
-            <tr>
-              <th>Feature</th>
-              <th>Framer</th>
-              <th>WordPress</th>
-              <th>Webflow</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Learning Curve</strong></td>
-              <td className="highlight-good">Easy (2-3 days)</td>
-              <td>Medium</td>
-              <td>Steep (2-3 weeks)</td>
-            </tr>
-            <tr>
-              <td><strong>Design Freedom</strong></td>
-              <td className="highlight-good">Complete</td>
-              <td>Limited by themes</td>
-              <td>Complete</td>
-            </tr>
-            <tr>
-              <td><strong>Setup Time</strong></td>
-              <td className="highlight-good">Instant</td>
-              <td>Hours</td>
-              <td>Medium</td>
-            </tr>
-            <tr>
-              <td><strong>FramerKit Compatible</strong></td>
-              <td className="highlight-good"><CheckCircle size={16} weight="duotone" style={{ marginRight: 6, verticalAlign: "text-bottom" }} />Yes</td>
-              <td>❌ No</td>
-              <td>❌ No</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      {/* 🔥 5. CTA Box */}
-      <div className="docs-cta-box">
-        <h3 className="cta-box-title">Ready to Try Framer?</h3>
-        <p className="cta-box-text">
-          Sign up through my referral link and get <strong>3 months of Framer Pro for free</strong> on any annual plan.
-        </p>
-        <a 
-          href="https://framer.link/framerkit" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="btn-primary"
-        >
-          Get Started with Framer
-        </a>
       </div>
 
     </div>
   </div>
+
+
 </section>
-
-
+ 
 {/* ============================================
     HOW IT WORKS SECTION
 ============================================= */}
 <section id="how-it-works" className="docs-section">
   
-  {/* 🔥 1. Header */}
+  {/* 1. Header */}
   <div className="docs-header">
-
     <h1 className="docs-title">How it Works</h1>
     <p className="docs-subtitle">
-      A simple 3-step flow: find a block, copy it, and customize it in Framer.
+      FramerKit fits directly into your workflow. Follow these simple steps to go from component to finished layout.
     </p>
   </div>
 
-  {/* 🔥 2. The 3-Step Workflow (Visual) */}
-  <div className="workflow-diagram">
-    
-    {/* Step 1 */}
-    <div className="workflow-step">
-      <div className="step-visual">
-        <span className="step-icon-large"><MagnifyingGlass size={18} weight="duotone" /></span>
-        <div className="step-screenshot-placeholder">
-          <span>Find a section</span>
-        </div>
+  {/* 2. Steps */}
+  <div className="docs-content-block">
+
+    {/* STEP 1 */}
+    <div className="docs-step">
+      <div className="docs-step-header">
+        <span className="docs-step-number">1</span>
+        <h3 className="docs-step-title">Browse Components</h3>
       </div>
-      <div className="step-content">
-        <h3 className="step-title">1. Browse</h3>
-        <p className="step-description">
-          Open the library and pick the section or component you need. Use categories to find the right block quickly.
-        </p>
-      </div>
+
+      <p className="docs-text">
+        Open the library and explore available components. Use categories or search to quickly find what fits your layout.
+      </p>
+
+
+      <HoverVideo src="/videos/browse-components.mp4" />
     </div>
 
-    {/* Arrow Connector */}
-    <div className="workflow-arrow">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M5 12h14M12 5l7 7-7 7"/>
-      </svg>
-    </div>
-
-    {/* Step 2 */}
-    <div className="workflow-step">
-      <div className="step-visual">
-        <span className="step-icon-large"><CopySimple size={18} weight="duotone" /></span>
-        <div className="step-screenshot-placeholder">
-          <span>Copy to clipboard</span>
-        </div>
-      </div>
-      <div className="step-content">
-        <h3 className="step-title">2. Copy</h3>
-        <p className="step-description">
-          Click the Copy button. The block is instantly copied and ready to paste into your Framer project.
-        </p>
-      </div>
-    </div>
-
-    {/* Arrow Connector */}
-    <div className="workflow-arrow">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M5 12h14M12 5l7 7-7 7"/>
-      </svg>
-    </div>
-
-    {/* Step 3 */}
-    <div className="workflow-step">
-      <div className="step-visual">
-        <span className="step-icon-large"><PaintBrush size={28} weight="duotone" /></span>
-        <div className="step-screenshot-placeholder">
-          <span>Paste and edit</span>
-        </div>
-      </div>
-      <div className="step-content">
-        <h3 className="step-title">3. Customize</h3>
-        <p className="step-description">
-          Paste in Framer (Ctrl/Cmd + V), then adjust text, spacing, colors, and styles to match your project.
-        </p>
-      </div>
-    </div>
-
+  {/* STEP 2 */}
+<div className="docs-step">
+  <div className="docs-step-header">
+    <span className="docs-step-number">2</span>
+    <h3 className="docs-step-title">Copy the Component</h3>
   </div>
 
-  {/* 🔥 3. Visual Example: Copy-Paste Demo */}
-  <div className="docs-content-block">
-    <h2 className="docs-subsection-title">See it in Action</h2>
-    <p className="docs-text">
-      Quick preview of the copy-paste workflow:
-    </p>
-    
-    <div className="copy-paste-demo">
-      <div className="demo-column">
-        <div className="demo-header">
-          <span className="demo-badge">FramerKit</span>
-          <span className="demo-action">Copy block</span>
-        </div>
-        <div className="demo-preview">
-          <div className="demo-component-placeholder">
-            <span><PuzzlePiece size={14} weight="duotone" style={{ marginRight: 6, verticalAlign: "text-bottom" }} />Button Component</span>
-          </div>
-          <button className="demo-copy-btn"><CopySimple size={14} weight="duotone" style={{ marginRight: 6, verticalAlign: "text-bottom" }} />Copy</button>
-        </div>
-      </div>
-      
-      <div className="demo-arrow">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M5 12h14M12 5l7 7-7 7"/>
-        </svg>
-      </div>
-      
-      <div className="demo-column">
-        <div className="demo-header">
-          <span className="demo-badge">Framer</span>
-          <span className="demo-action">Paste and edit</span>
-        </div>
-        <div className="demo-preview">
-          <div className="demo-canvas-placeholder">
-            <span><Sparkle size={14} weight="duotone" style={{ marginRight: 6, verticalAlign: "text-bottom" }} />Component appears on canvas</span>
-          </div>
-        </div>
-      </div>
-    </div>
+  <p className="docs-text">
+    Click the Copy button on any component. The code is instantly copied and ready to paste into your Framer project.
+  </p>
+
+  <HoverVideo
+  src="/videos/copy-component.mp4"
+/>
+
+  <span className="docs-video-caption">
+    Copy any component in one click
+  </span>
+</div>
+
+
+   {/* STEP 3 */}
+<div className="docs-step">
+  <div className="docs-step-header">
+    <span className="docs-step-number">3</span>
+    <h3 className="docs-step-title">Paste into Framer</h3>
   </div>
 
-  {/* 🔥 4. Pro Tips */}
-  <div className="docs-content-block">
-    <h2 className="docs-subsection-title">Pro Tips</h2>
-    
-    <div className="docs-tips-grid">
-      <div className="tip-card">
-        <div className="tip-icon"><Lightning size={18} weight="duotone" /></div>
-        <h3 className="tip-title">Use Keyboard Shortcuts</h3>
-        <p className="tip-description">
-          Press <kbd>Ctrl+K</kbd> (or <kbd>Cmd+K</kbd>) to search components instantly. Save time browsing.
-        </p>
-      </div>
-      
-      <div className="tip-card">
-        <div className="tip-icon"><Target size={18} weight="duotone" /></div>
-        <h3 className="tip-title">Start with Wireframe Mode</h3>
-        <p className="tip-description">
-          Build the structure first in Wireframe mode, then switch to Design mode for polished styles.
-        </p>
-      </div>
-      
-      <div className="tip-card">
-        <div className="tip-icon"><LinkSimple size={18} weight="duotone" /></div>
-        <h3 className="tip-title">Copy Section Links</h3>
-        <p className="tip-description">
-          Share specific components with your team by copying the URL. Perfect for collaboration.
-        </p>
-      </div>
-      
-      <div className="tip-card">
-        <div className="tip-icon"><ArrowsClockwise size={18} weight="duotone" /></div>
-        <h3 className="tip-title">Mix and Match</h3>
-        <p className="tip-description">
-          Don't be afraid to combine components from different sections. That's where the magic happens.
-        </p>
-      </div>
-    </div>
+  <p className="docs-text">
+    Open your Framer project, select a Frame, and paste the component using Cmd/Ctrl + V.
+    After inserting, make sure to set the section to <strong>Fill</strong> on tablet and mobile breakpoints so it adapts correctly.
+  </p>
+
+  <HoverVideo
+    src="/videos/paste-into-framer.mp4"
+  />
+</div>
+
   </div>
 
 </section>
@@ -527,202 +337,125 @@ export default function HomePage({ onSectionChange, theme, onThemeToggle }: Home
 ============================================= */}
 <section id="quick-start" className="docs-section">
   
-  {/* 🔥 1. Header */}
   <div className="docs-header">
-    
     <h1 className="docs-title">Quick Start</h1>
     <p className="docs-subtitle">
-      Get your first FramerKit component in 60 seconds. No setup, no accounts — just copy, paste, and go.
+    See how FramerKit works in practice by using a real component that is already prepared for you. You can copy it instantly, paste it into your project, and explore how it behaves inside Framer while customizing it to fit your layout.
     </p>
   </div>
 
-  {/* 🔥 2. Prerequisites Check */}
+  {/* Component Preview + Steps Side by Side */}
   <div className="docs-content-block">
-    <h2 className="docs-subsection-title">Before You Start</h2>
-    <p className="docs-text">
-      Make sure you have these ready:
+    <h3 className="docs-section-title" style={{ marginBottom: '8px' }}>Try it yourself</h3>
+    <p className="docs-text" style={{ marginBottom: '16px' }}>
+      Copy your first component and paste it into Framer to understand how quickly you can build and customize real sections.
     </p>
-    
-    <div className="prerequisites-grid">
-      <div className="prerequisite-item">
-        <span className="prerequisite-icon"><CheckCircle size={18} weight="duotone" /></span>
-        <div>
-          <h4 className="prerequisite-title">Framer Account</h4>
-          <p className="prerequisite-description">
-            Free account is enough to get started. <a href="https://framer.com" target="_blank" rel="noopener" className="inline-link">Sign up here</a>.
-          </p>
-        </div>
-      </div>
+    <div className="quick-start-layout">
+      {/* Card - Left */}
+      <QuickStartHeroCard theme={theme} />
       
-      <div className="prerequisite-item">
-        <span className="prerequisite-icon"><CheckCircle size={18} weight="duotone" /></span>
-        <div>
-          <h4 className="prerequisite-title">Framer App</h4>
-          <p className="prerequisite-description">
-            Download the desktop app for the best experience, or use the web version.
-          </p>
+      {/* Steps - Right */}
+      <div className="steps-list">
+        <div className="step-item">
+          <span className="step-number">1</span>
+          <span className="step-text">Click "Copy Component"</span>
         </div>
-      </div>
-      
-      <div className="prerequisite-item">
-        <span className="prerequisite-icon"><CheckCircle size={18} weight="duotone" /></span>
-        <div>
-          <h4 className="prerequisite-title">FramerKit Access</h4>
-          <p className="prerequisite-description">
-            Browse free components, or <Link to="/#get-framerkit" className="inline-link">get full access</Link> for 1000+ premium items.
-          </p>
+        <div className="step-item">
+          <span className="step-number">2</span>
+          <span className="step-text">Open Framer and create a Frame</span>
+        </div>
+        <div className="step-item">
+          <span className="step-number">3</span>
+          <span className="step-text">Press Cmd/Ctrl + V to paste</span>
+        </div>
+        <div className="step-item">
+          <span className="step-number">4</span>
+          <span className="step-text">Customize content and styles</span>
         </div>
       </div>
     </div>
   </div>
 
-  {/* 🔥 3. Step-by-Step Guide */}
+  {/* Info Note */}
   <div className="docs-content-block">
-    <h2 className="docs-subsection-title">Step-by-Step Guide</h2>
-    <p className="docs-text">
-      Follow these 5 steps to add your first component:
+    <div className="info-note">
+      <CircleAlert size={18} style={{ flexShrink: 0, marginTop: '2px' }} />
+      <span style={{ color: 'inherit' }}>Click the Preview button{' '}<Eye size={18} style={{ verticalAlign: 'middle', margin: '0 4px' }} />{' '}to open an interactive sandbox for any component. This is the safest way to ensure the section fits your design perfectly before adding it to your project.</span>
+    </div>
+  </div>
+
+  
+
+</section>
+
+{/* ============================================
+    USING THE PLUGIN
+============================================= */}
+<section id="using-the-plugin" className="docs-section">
+  
+  {/* Header */}
+  <div className="docs-header">
+    <h1 className="docs-title">Use FramerKit Inside Framer</h1>
+    <p className="docs-subtitle">
+      FramerKit can also be used directly inside Framer through the plugin. This gives you a faster way to access components while building your project.
     </p>
-    
-    <div className="steps-vertical">
-      {/* Step 1 */}
-      <div className="step-vertical-item">
-        <div className="step-number-badge">1</div>
-        <div className="step-vertical-content">
-          <h3 className="step-vertical-title">Open FramerKit</h3>
-          <p className="step-vertical-description">
-            Go to <strong>framerkit.site</strong> and browse the library. Use the sidebar or search to find what you need.
-          </p>
-          <div className="step-visual-mini">
-            <span className="visual-placeholder-text"><GlobeHemisphereWest size={16} weight="duotone" /> framerkit.site</span>
-          </div>
-        </div>
-      </div>
-      
-      {/* Step 2 */}
-      <div className="step-vertical-item">
-        <div className="step-number-badge">2</div>
-        <div className="step-vertical-content">
-          <h3 className="step-vertical-title">Preview the Component</h3>
-          <p className="step-vertical-description">
-            Click any component to see it in detail. Toggle between <strong>Wireframe</strong> and <strong>Design</strong> modes to see different styles.
-          </p>
-          <div className="step-visual-mini">
-            <span className="visual-placeholder-text"><Eye size={16} weight="duotone" /> Preview Mode</span>
-          </div>
-        </div>
-      </div>
-      
-      {/* Step 3 */}
-      <div className="step-vertical-item">
-        <div className="step-number-badge">3</div>
-        <div className="step-vertical-content">
-          <h3 className="step-vertical-title">Click "Copy"</h3>
-          <p className="step-vertical-description">
-            Hit the <strong>Copy</strong> button. The component is instantly copied to your clipboard — no login required for free items.
-          </p>
-          <div className="step-visual-mini">
-            <span className="visual-placeholder-text">📋 Copied!</span>
-          </div>
-        </div>
-      </div>
-      
-      {/* Step 4 */}
-      <div className="step-vertical-item">
-        <div className="step-number-badge">4</div>
-        <div className="step-vertical-content">
-          <h3 className="step-vertical-title">Open Framer</h3>
-          <p className="step-vertical-description">
-            Launch Framer and open your project. Create a new frame or select an existing one where you want to paste the component.
-          </p>
-          <div className="step-visual-mini">
-            <span className="visual-placeholder-text"><PaintBrush size={16} weight="duotone" /> Framer Canvas</span>
-          </div>
-        </div>
-      </div>
-      
-      {/* Step 5 */}
-      <div className="step-vertical-item">
-        <div className="step-number-badge">5</div>
-        <div className="step-vertical-content">
-          <h3 className="step-vertical-title">Paste & Customize</h3>
-          <p className="step-vertical-description">
-            Press <kbd>Ctrl+V</kbd> (or <kbd>Cmd+V</kbd>). The component appears on your canvas. Change colors, fonts, text — make it yours!
-          </p>
-          <div className="step-visual-mini">
-            <span className="visual-placeholder-text"><Sparkle size={16} weight="duotone" /> Ready to edit</span>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 
-  {/* 🔥 4. Interactive Demo Placeholder */}
+  {/* Steps */}
   <div className="docs-content-block">
-    <h2 className="docs-subsection-title">Try It Yourself</h2>
-    <p className="docs-text">
-      Practice with this example component:
-    </p>
-    
-    <div className="interactive-demo">
-      <div className="demo-panel">
-        <div className="demo-panel-header">
-          <span className="demo-panel-title">FramerKit Preview</span>
-          <span className="demo-panel-badge">Free</span>
-        </div>
-        <div className="demo-panel-content">
-          <div className="demo-component-preview">
-            <button className="demo-button-primary">Get Started</button>
-          </div>
-        </div>
-        <div className="demo-panel-footer">
-          <button className="demo-copy-button">📋 Copy Component</button>
-        </div>
-      </div>
-      
-      <div className="demo-instructions">
-        <p><strong>1.</strong> Click "Copy Component" above</p>
-        <p><strong>2.</strong> Open Framer and create a new frame</p>
-        <p><strong>3.</strong> Press Ctrl+V to paste</p>
-        <p><strong>4.</strong> Customize colors, text, and styles</p>
-      </div>
-    </div>
-  </div>
 
-  {/* 🔥 5. Troubleshooting */}
-  <div className="docs-content-block">
-    <h2 className="docs-subsection-title">Troubleshooting</h2>
-    
-    <div className="troubleshooting-grid">
-      <div className="troubleshooting-item">
-        <h4 className="troubleshooting-question">Component not pasting?</h4>
-        <p className="troubleshooting-answer">
-          Make sure you're pasting into a <strong>Frame</strong> in Framer, not directly onto the canvas. Create a new frame first if needed.
-        </p>
+    {/* STEP 1 */}
+    <div className="docs-step">
+      <div className="docs-step-header">
+        <span className="docs-step-number">1</span>
+        <h3 className="docs-step-title">Open the Plugin</h3>
       </div>
-      
-      <div className="troubleshooting-item">
-        <h4 className="troubleshooting-question">Styles look different?</h4>
-        <p className="troubleshooting-answer">
-          Components adapt to your Framer project's theme. You can override any style in the Design panel after pasting.
-        </p>
-      </div>
-      
-      <div className="troubleshooting-item">
-        <h4 className="troubleshooting-question">Can't find the Copy button?</h4>
-        <p className="troubleshooting-answer">
-          Some premium components require authentication. <Link to="/#get-framerkit" className="inline-link">Get full access</Link> to unlock all features.
-        </p>
-      </div>
-      
-      <div className="troubleshooting-item">
-        <h4 className="troubleshooting-question">Need more help?</h4>
-        <p className="troubleshooting-answer">
-          Check our <Link to="/#faq-contact" className="inline-link">FAQ</Link> or <a href="mailto:support@framerkit.site" className="inline-link">email support</a>.
-        </p>
-      </div>
-    </div>
-  </div>
 
+      <p className="docs-text">
+        Open the FramerKit plugin inside Framer to access the full component library without leaving your workspace.
+      </p>
+
+      <HoverVideo
+        src="/videos/plugin-open.mp4"
+        
+      />
+    </div>
+
+    {/* STEP 2 */}
+    <div className="docs-step">
+      <div className="docs-step-header">
+        <span className="docs-step-number">2</span>
+        <h3 className="docs-step-title">Browse & Copy Components</h3>
+      </div>
+
+      <p className="docs-text">
+        Browse the library and copy any component with one click. It is instantly ready to use.
+      </p>
+
+      <HoverVideo
+        src="/videos/plugin-browse-copy.mp4"
+        
+      />
+    </div>
+
+    {/* STEP 3 */}
+    <div className="docs-step">
+      <div className="docs-step-header">
+        <span className="docs-step-number">3</span>
+        <h3 className="docs-step-title">Paste into Your Project</h3>
+      </div>
+
+      <p className="docs-text">
+        Paste the component into your Framer canvas and start customizing it right away.
+      </p>
+
+      <HoverVideo
+        src="/videos/plugin-paste.mp4"
+        
+      />
+    </div>
+
+  </div>
 
 </section>
 
@@ -730,7 +463,7 @@ export default function HomePage({ onSectionChange, theme, onThemeToggle }: Home
     video-tutorial
 ============================================= */}
 
-<section id="video" className="docs-section">
+<section id="video-tutorial" className="docs-section">
   
   
   {/* 🔥 1. Header */}
@@ -773,6 +506,150 @@ export default function HomePage({ onSectionChange, theme, onThemeToggle }: Home
 
 </section>
 
+    </div>
+  );
+}
+
+{/* Quick Start Hero Card Component - Theme Aware */}
+function QuickStartHeroCard({ theme }: { theme: "light" | "dark" }) {
+  const [copied, setCopied] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [hoveredPreview, setHoveredPreview] = useState(false);
+  const [heroData, setHeroData] = useState<{ image: string; url: string; previewUrl?: string; title: string } | null>(null);
+
+  useEffect(() => {
+    const loadHero = async () => {
+      try {
+        const res = await fetch("https://raw.githubusercontent.com/alex-willow/framerkit-data/main/hero.json");
+        if (!res.ok) return;
+        const json = await res.json();
+        const heroes: HeroCollectionItem[] = Array.isArray(json.hero) ? json.hero : [];
+        // Get hero matching current theme
+        const isDark = theme === "dark";
+        const themeHero = heroes.find((h) => {
+          const haystack = [h.key, h.title, h.image, h.url].join(" ").toLowerCase();
+          return isDark ? haystack.includes("dark") : !haystack.includes("dark");
+        }) || heroes[0];
+
+        if (themeHero) {
+          setHeroData({
+            image: themeHero.image,
+            url: themeHero.url,
+            previewUrl: themeHero.previewUrl,
+            title: themeHero.title || `Hero 01 ${isDark ? "Dark" : "Light"}`
+          });
+        }
+      } catch {
+        // Silent fail
+      }
+    };
+    loadHero();
+  }, [theme]);
+
+  const handleCopy = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!heroData?.url) {
+      console.error("No URL to copy");
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(heroData.url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 4000);
+    } catch (err) {
+      console.error("Failed to copy:", err);
+      // Fallback: try execCommand
+      const textarea = document.createElement("textarea");
+      textarea.value = heroData.url;
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand("copy");
+        setCopied(true);
+        setTimeout(() => setCopied(false), 4000);
+      } catch (e) {
+        console.error("Fallback copy failed:", e);
+      }
+      document.body.removeChild(textarea);
+    }
+  };
+
+  const handlePreview = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!heroData?.previewUrl) return;
+    try {
+      const path = heroData.previewUrl.trim();
+      let cleanPath = "";
+      if (path.startsWith("/")) {
+        cleanPath = path.replace("/preview/", "").replace(/\/$/, "");
+      } else if (path.startsWith("http")) {
+        const url = new URL(path);
+        cleanPath = url.pathname.replace("/preview/", "").replace(/\/$/, "");
+      }
+      const viewerUrl = `/p/${cleanPath}`;
+      window.open(viewerUrl, "_blank", "noopener,noreferrer");
+    } catch {
+      window.open(heroData.previewUrl, "_blank", "noopener,noreferrer");
+    }
+  };
+
+  if (!heroData) {
+    return (
+      <div className={`card ${theme === "dark" ? "card-dark" : "card-light"}`}>
+        <div className="skeleton-card-image" style={{ height: 180 }} />
+        <div className="skeleton-card-info" />
+      </div>
+    );
+  }
+
+  return (
+    <div className={`card quick-start-hero-card ${theme === "dark" ? "card-dark" : "card-light"}`}>
+      <div className="cardImage quick-start-hero-media">
+        <img
+          src={heroData.image}
+          alt={heroData.title}
+          loading="lazy"
+          className="quick-start-hero-image"
+          onError={(e) => {
+            e.currentTarget.src = "https://via.placeholder.com/320x180?text=Hero+01";
+          }}
+        />
+      </div>
+      <div className="cardInfo">
+        <h3>{heroData.title}</h3>
+        <div className="card-actions">
+          {heroData.previewUrl && (
+            <div
+              className="iconButton"
+              onClick={handlePreview}
+              onMouseEnter={() => setHoveredPreview(true)}
+              onMouseLeave={() => setHoveredPreview(false)}
+            >
+              <Eye size={18} />
+              {hoveredPreview && <div className="tooltip">Preview</div>}
+            </div>
+          )}
+          <div
+            className={`iconButton ${copied ? "copied" : ""}`}
+            onClick={handleCopy}
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+          >
+            {copied ? (
+              <CircleCheck size={20} color="#22c55e" strokeWidth={2.5} />
+            ) : (
+              <Copy size={18} />
+            )}
+            {(copied || hovered) && (
+              <div className="tooltip">{copied ? "Copied" : "Copy"}</div>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

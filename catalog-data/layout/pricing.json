@@ -1,0 +1,566 @@
+{
+  "pricing": [
+  
+  {
+    "key": "pricing-section-01",
+    "title": "Pricing Section 01",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Design/Pricing-Section-01.gif",
+    "url": "https://framer.com/m/Pricing-Section-01-KTXu.js",
+    "type": "free",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-01",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Wireframe/Pricing%20Section%2001%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-01-Wireframe-dvc3.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-01-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-02",
+    "title": "Pricing Section 02",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Design/Pricing-Section-02.gif",
+    "url": "https://framer.com/m/Pricing-Section-02-qagY.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-02",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Wireframe/Pricing%20Section%2002%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-02-Wireframe-Qnz8.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-02-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-03",
+    "title": "Pricing Section 03",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Design/Pricing-Section-03.gif",
+    "url": "https://framer.com/m/Pricing-Section-03-VcPL.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-03",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Wireframe/Pricing%20Section%2003%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-03-Wireframe-xg4I.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-03-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-04",
+    "title": "Pricing Section 04",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Design/Pricing-Section-04.gif",
+    "url": "https://framer.com/m/Pricing-Section-04-ZaFZ.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-04",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Wireframe/Pricing%20Section%2004%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-04-Wireframe-rcL7.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-04-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-05",
+    "title": "Pricing Section 05",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Design/Pricing-Section-05.gif",
+    "url": "https://framer.com/m/Pricing-Section-05-dMhr.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-05",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Wireframe/Pricing%20Section%2005%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-05-Wireframe-fVnZ.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-05-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-06",
+    "title": "Pricing Section 06",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Design/Pricing-Section-06.gif",
+    "url": "https://framer.com/m/Pricing-Section-06-Hk8L.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-06",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Wireframe/Pricing%20Section%2006%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-06-Wireframe-SnSs.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-06-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-07",
+    "title": "Pricing Section 07",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Design/Pricing-Section-07.gif",
+    "url": "https://framer.com/m/Pricing-Section-07-QQOj.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-07",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Wireframe/Pricing%20Section%2007%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-07-Wireframe-yTrD.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-07-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-08",
+    "title": "Pricing Section 08",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Design/Pricing-Section-08.gif",
+    "url": "https://framer.com/m/Pricing-Section-08-jtTj.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-08",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Wireframe/Pricing%20Section%2008%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-08-Wireframe-xfDm.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-08-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-09",
+    "title": "Pricing Section 09",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Design/Pricing-Section-09.gif",
+    "url": "https://framer.com/m/Pricing-Section-09-Ca9K.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-09",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Wireframe/Pricing%20Section%2009%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-09-Wireframe-lJfw.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-09-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-10",
+    "title": "Pricing Section 10",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Design/Pricing-Section-10.gif",
+    "url": "https://framer.com/m/Pricing-Section-10-OBni0N.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-10",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Wireframe/Pricing%20Section%2010%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-10-Wireframe-cE8t.js",
+      "previewUrl": "https://framer.com/m/Pricing-Section-10-Wireframe-fxfRto.js"
+    }
+  },
+  {
+    "key": "pricing-section-11",
+    "title": "Pricing Section 11",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Design/Pricing-Section-11.gif",
+    "url": "https://framer.com/m/Pricing-Section-11-Z2Fz.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-11",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Wireframe/Pricing%20Section%2011%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-11-Wireframe-vksU.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-11-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-12",
+    "title": "Pricing Section 12",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Design/Pricing-Section-12.gif",
+    "url": "https://framer.com/m/Pricing-Section-12-dmlq.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-12",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Wireframe/Pricing%20Section%2012%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-12-Wireframe-ZkDU.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-12-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-13",
+    "title": "Pricing Section 13",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Design/Pricing-Section-13.gif",
+    "url": "https://framer.com/m/Pricing-Section-13-QAYG.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-13",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Wireframe/Pricing%20Section%2013%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-13-Wireframe-1Dua.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-13-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-14",
+    "title": "Pricing Section 14",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Design/Pricing-Section-14.gif",
+    "url": "https://framer.com/m/Pricing-Section-14-FuHz.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-14",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Wireframe/Pricing%20Section%2014%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-14-Wireframe-HZxN.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-14-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-15",
+    "title": "Pricing Section 15",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Design/Pricing-Section-15.gif",
+    "url": "https://framer.com/m/Pricing-Section-15-uzso.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-15",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Wireframe/Pricing%20Section%2015%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-15-Wireframe-3YKM.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-15-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-16",
+    "title": "Pricing Section 16",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Design/Pricing-Section-16.gif",
+    "url": "https://framer.com/m/Pricing-Section-16-BAsv.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-16",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Wireframe/Pricing%20Section%2016%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-16-Wireframe-ZDKD.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-16-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-17",
+    "title": "Pricing Section 17",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Design/Pricing-Section-17.gif",
+    "url": "https://framer.com/m/Pricing-Section-17-JpPA.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-17",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Wireframe/Pricing%20Section%2017%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-17-Wireframe-iCfE.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-17-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-18",
+    "title": "Pricing Section 18",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Design/Pricing-Section-18.gif",
+    "url": "https://framer.com/m/Pricing-Section-18-LHDz.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-18",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Wireframe/Pricing%20Section%2018%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-18-Wireframe-uAtM.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-18-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-19",
+    "title": "Pricing Section 19",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Design/Pricing-Section-19.gif",
+    "url": "https://framer.com/m/Pricing-Section-19-cg7O.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-19",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Wireframe/Pricing%20Section%2019%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-19-Wireframe-zKR8.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-19-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-20",
+    "title": "Pricing Section 20",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Design/Pricing-Section-20.gif",
+    "url": "https://framer.com/m/Pricing-Section-20-pO7Q.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-20",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Light/Wireframe/Pricing%20Section%2020%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-20-Wireframe-G3sm.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-20-wireframe"
+    }
+  },
+  
+  {
+    "key": "pricing-section-01-dark",
+    "title": "Pricing Section 01",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Design/Pricing-Section-01-Dark.gif",
+    "url": "https://framer.com/m/Pricing-Section-01-Dark-pSQS.js",
+    "type": "free",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-01-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Wireframe/Pricing%20Section%2001%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-01-Dark-Wireframe-B2Qf.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-01-dark-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-02-dark",
+    "title": "Pricing Section 02",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Design/Pricing-Section-02-Dark.gif",
+    "url": "https://framer.com/m/Pricing-Section-02-Dark-vwV8.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-02-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Wireframe/Pricing%20Section%2002%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-02-Dark-Wireframe-qZjr.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-02-dark-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-03-dark",
+    "title": "Pricing Section 03",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Design/Pricing-Section-03-Dark.gif",
+    "url": "https://framer.com/m/Pricing-Section-03-Dark-lnNW.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-03-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Wireframe/Pricing%20Section%2003%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-03-Dark-Wireframe-uVJm.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-03-dark-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-04-dark",
+    "title": "Pricing Section 04",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Design/Pricing-Section-04-Dark.gif",
+    "url": "https://framer.com/m/Pricing-Section-04-Dark-mQXm.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-04-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Wireframe/Pricing%20Section%2004%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-04-Dark-Wireframe-o6r4.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-04-dark-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-05-dark",
+    "title": "Pricing Section 05",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Design/Pricing-Section-05-Dark.gif",
+    "url": "https://framer.com/m/Pricing-Section-05-Dark-Np2B.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-05-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Wireframe/Pricing%20Section%2005%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-05-Dark-Wireframe-H4Jw.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-05-dark-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-06-dark",
+    "title": "Pricing Section 06",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Design/Pricing-Section-06-Dark.gif",
+    "url": "https://framer.com/m/Pricing-Section-06-Dark-OH1B.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-06-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Wireframe/Pricing%20Section%2006%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-06-Dark-Wireframe-OgWM.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-06-dark-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-07-dark",
+    "title": "Pricing Section 07",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Design/Pricing-Section-07-Dark.gif",
+    "url": "https://framer.com/m/Pricing-Section-07-Dark-QMnz.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-07-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Wireframe/Pricing%20Section%2007%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-07-Dark-Wireframe-Iufy.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-07-dark-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-08-dark",
+    "title": "Pricing Section 08",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Design/Pricing-Section-08-Dark.gif",
+    "url": "https://framer.com/m/Pricing-Section-08-Dark-frsz.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-08-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Wireframe/Pricing%20Section%2008%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-08-Dark-Wireframe-eAMK.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-08-dark-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-09-dark",
+    "title": "Pricing Section 09",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Design/Pricing-Section-09-Dark.gif",
+    "url": "https://framer.com/m/Pricing-Section-09-Dark-gZqt.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-09-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Wireframe/Pricing%20Section%2009%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-09-Dark-Wireframe-gOJ4.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-09-dark-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-10-dark",
+    "title": "Pricing Section 10",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Design/Pricing-Section-10-Dark.gif",
+    "url": "https://framer.com/m/Pricing-Section-10-Dark-yQyw.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-10-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Wireframe/Pricing%20Section%2010%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-10-Dark-Wireframe-fh6p.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-10-dark-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-11-dark",
+    "title": "Pricing Section 11",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Design/Pricing-Section-11-Dark.gif",
+    "url": "https://framer.com/m/Pricing-Section-11-Dark-Y9p7.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-11-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Wireframe/Pricing%20Section%2011%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-11-Dark-Wireframe-tyaO.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-11-dark-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-12-dark",
+    "title": "Pricing Section 12",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Design/Pricing-Section-12-Dark.gif",
+    "url": "https://framer.com/m/Pricing-Section-12-Dark-Tnzb.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-12-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Wireframe/Pricing%20Section%2012%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-12-Dark-Wireframe-Kzrp.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-12-dark-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-13-dark",
+    "title": "Pricing Section 13",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Design/Pricing-Section-13-Dark.gif",
+    "url": "https://framer.com/m/Pricing-Section-13-Dark-s3zq.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-13-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Wireframe/Pricing%20Section%2013%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-13-Dark-Wireframe-HYCy.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-13-dark-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-14-dark",
+    "title": "Pricing Section 14",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Design/Pricing-Section-14-Dark.gif",
+    "url": "https://framer.com/m/Pricing-Section-14-Dark-Ytjc.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-14-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Wireframe/Pricing%20Section%2014%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-14-Dark-Wireframe-MnZb.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-14-dark-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-15-dark",
+    "title": "Pricing Section 15",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Design/Pricing-Section-15-Dark.gif",
+    "url": "https://framer.com/m/Pricing-Section-15-Dark-AEwO.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-15-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Wireframe/Pricing%20Section%2015%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-15-Dark-Wireframe-7V5Z.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-15-dark-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-16-dark",
+    "title": "Pricing Section 16",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Design/Pricing-Section-16-Dark.gif",
+    "url": "https://framer.com/m/Pricing-Section-16-Dark-bb2F.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-16-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Wireframe/Pricing%20Section%2016%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-16-Dark-Wireframe-704p.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-16-dark-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-17-dark",
+    "title": "Pricing Section 17",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Design/Pricing-Section-17-Dark.gif",
+    "url": "https://framer.com/m/Pricing-Section-17-Dark-9GzZ.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-17-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Wireframe/Pricing%20Section%2017%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-17-Dark-Wireframe-g52S.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-17-dark-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-18-dark",
+    "title": "Pricing Section 18",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Design/Pricing-Section-18-Dark.gif",
+    "url": "https://framer.com/m/Pricing-Section-18-Dark-oAyd.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-18-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Wireframe/Pricing%20Section%2018%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-18-Dark-Wireframe-esO4.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-18-dark-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-19-dark",
+    "title": "Pricing Section 19",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Design/Pricing-Section-19-Dark.gif",
+    "url": "https://framer.com/m/Pricing-Section-19-Dark-3USd.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-19-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Wireframe/Pricing%20Section%2019%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-19-Dark-Wireframe-jvRS.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-19-dark-wireframe"
+    }
+  },
+  {
+    "key": "pricing-section-20-dark",
+    "title": "Pricing Section 20",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Design/Pricing-Section-20-Dark.gif",
+    "url": "https://framer.com/m/Pricing-Section-20-Dark-JPmM.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-20-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Pricing%20Section/Dark/Wireframe/Pricing%20Section%2020%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Pricing-Section-20-Dark-Wireframe-kI9u.js",
+      "previewUrl": "https://framerkit.site/preview/pricing-section/pricing-section-20-dark-wireframe"
+    }
+  }
+  ]
+}

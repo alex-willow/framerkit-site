@@ -1,7 +1,13 @@
 import { useRef, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Moon, Sun } from "lucide-react";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
+import DocsRightToc from "../components/DocsRightToc";
+
+type WindowWithGtag = Window & {
+  gtag?: (command: string, id: string, params?: Record<string, string>) => void;
+};
 
 type MainLayoutProps = {
   children: React.ReactNode;
@@ -33,8 +39,45 @@ export default function MainLayout({
   galleryScrollRef,
 }: MainLayoutProps) {
   const location = useLocation();
+  const navigate = useNavigate();
   const internalRef = useRef<HTMLDivElement>(null);
   const contentRef = galleryScrollRef || internalRef;
+  const isCatalogPage =
+    location.pathname === "/layout" ||
+    location.pathname.startsWith("/layout/") ||
+    location.pathname === "/components" ||
+    location.pathname.startsWith("/components/") ||
+    location.pathname === "/templates" ||
+    location.pathname.startsWith("/templates/") ||
+    location.pathname === "/learn/lessons" ||
+    location.pathname.startsWith("/learn/lessons/") ||
+    location.pathname === "/learn/articles" ||
+    location.pathname.startsWith("/learn/articles/") ||
+    location.pathname === "/resources" ||
+    location.pathname.startsWith("/resources/") ||
+    location.pathname === "/updates" ||
+    location.pathname.startsWith("/updates/") ||
+    location.pathname === "/support" ||
+    location.pathname.startsWith("/support/");
+  const isLearnTopStickyPage =
+    location.pathname === "/learn/lessons" ||
+    location.pathname.startsWith("/learn/lessons/") ||
+    location.pathname === "/learn/articles" ||
+    location.pathname.startsWith("/learn/articles/") ||
+    location.pathname === "/support" ||
+    location.pathname.startsWith("/support/");
+  const showDocsRightToc = !isMobile && location.pathname === "/";
+  const docsTocSections = [
+    { id: "overview", label: "Overview" },
+    { id: "how-it-works", label: "How it Works" },
+    { id: "quick-start", label: "Quick Start" },
+    { id: "using-the-plugin", label: "Using the Plugin" },
+    { id: "video-tutorial", label: "Video Tutorial" },
+  ];
+
+  const handlePricingClick = () => {
+    navigate("/#get-framerkit");
+  };
 
   // ===============================
   // GA: Инициализация
@@ -63,8 +106,9 @@ export default function MainLayout({
   // GA: Отслеживание страниц
   // ===============================
   useEffect(() => {
-    if ((window as any).gtag) {
-      (window as any).gtag("config", "G-GNZGR575KN", {
+    const windowWithGtag = window as WindowWithGtag;
+    if (windowWithGtag.gtag) {
+      windowWithGtag.gtag("config", "G-GNZGR575KN", {
         page_path: location.pathname + location.hash,
       });
     }
@@ -105,7 +149,44 @@ export default function MainLayout({
         />
 
         <main className="content" ref={contentRef}>
+          {!isMobile && isCatalogPage && (
+            <div
+              className={`desktop-header-actions ${
+                isLearnTopStickyPage ? "desktop-header-actions-sticky" : ""
+              }`}
+            >
+              {isAuthenticated ? (
+                <button className="logoutButton" onClick={onLogout}>
+                  Log out
+                </button>
+              ) : (
+                <>
+                  <button className="logoutButton" onClick={onSignInOpen}>
+                    Log in
+                  </button>
+                  <button
+                    className="authButton"
+                    onClick={handlePricingClick}
+                  >
+                    Get Full Access
+                  </button>
+                </>
+              )}
+              {onThemeToggle && (
+                <button
+                  type="button"
+                  className={`theme-toggle-btn ${theme === "dark" ? "active" : ""}`}
+                  onClick={onThemeToggle}
+                  aria-label={theme === "dark" ? "Dark theme" : "Light theme"}
+                  title=""
+                >
+                  {theme === "dark" ? <Moon size={20} /> : <Sun size={20} />}
+                </button>
+              )}
+            </div>
+          )}
           {children}
+          {showDocsRightToc && <DocsRightToc sections={docsTocSections} />}
         </main>
       </div>
     </div>

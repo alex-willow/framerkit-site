@@ -1,0 +1,52 @@
+{
+  "button": [
+    {
+      "key": "Button-01",
+      "title": "Button 01",
+      "image": "https://storage.googleapis.com/framerkit/Primary%20Button.png",
+      "url": "https://framer.com/m/Primary-Button-A7Lw.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Button-02",
+      "title": "Button 02",
+      "image": "https://storage.googleapis.com/framerkit/Secondary%20Button.png",
+      "url": "https://framer.com/m/Secondary-Button-WbvQ.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Button-03",
+      "title": "Button 03",
+      "image": "https://storage.googleapis.com/framerkit/Link%20Button.png",
+      "url": "https://framer.com/m/Link-Button-NkSv.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Button-01-dark",
+      "title": "Button 01",
+      "image": "https://storage.googleapis.com/framerkit/Primary%20Button%20Dark.png",
+      "url": "https://framer.com/m/Primary-Button-Dark-A6lL.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Button-02-dark",
+      "title": "Button 02",
+      "image": "https://storage.googleapis.com/framerkit/Secondary%20Button%20Dark.png",
+      "url": "https://framer.com/m/Secondary-Button-Dark-BZTr.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Button-03-dark",
+      "title": "Button 03",
+      "image": "https://storage.googleapis.com/framerkit/Link%20Button%20Dark.png",
+      "url": "https://framer.com/m/Link-Button-Dark-7XRk.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    }
+  ]
+}

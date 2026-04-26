@@ -1,100 +1,87 @@
+import { useEffect, useState } from "react";
 import RandomComponentCards from "../components/RandomComponentCards";
 import RandomComponentCardsDark from "../components/RandomComponentCardsDark";
-import TopBar from "../components/TopBar";
-import Sidebar from "../components/Sidebar";
-import { useState, useEffect } from "react";
+import SectionHeader from "../components/SectionHeader";
+import SEO from "../components/SEO";
+import AdminCreateSectionCard from "../components/AdminCreateSectionCard";
 
 type ComponentPageProps = {
   theme: "light" | "dark";
-  onThemeToggle: () => void;
+  isAdmin: boolean;
 };
 
-export default function ComponentPage({ theme, onThemeToggle }: ComponentPageProps) {
-  const [isMobile, setIsMobile] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [componentCount, setComponentCount] = useState(0);
+export default function ComponentPage({ isAdmin }: ComponentPageProps) {
+  const [filter, setFilter] = useState<"light" | "dark">(() => {
+    const saved = localStorage.getItem("theme");
+    return saved === "dark" ? "dark" : "light";
+  });
+  const componentCount = 13;
 
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth <= 767);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
+    const saved = localStorage.getItem("theme");
+    if (saved === "dark" || saved === "light") {
+      setFilter(saved);
+    }
 
-  useEffect(() => {
-    const loadComponentCount = async () => {
-      const COMPONENT_SECTIONS = [
-        "accordion", "accordiongroup", "avatar", "avatargroup", "badge", 
-        "button", "card", "icon", "input", "form", "pricingcard", 
-        "rating", "testimonialcard"
-      ];
-      
-      let totalCount = 0;
-      
-      for (const section of COMPONENT_SECTIONS) {
-        try {
-          const res = await fetch(
-            `https://raw.githubusercontent.com/alex-willow/framerkit-data/components/${section}.json`,
-            { cache: "force-cache" }
-          );
-          if (res.ok) {
-            const data = await res.json();
-            totalCount += (data[section] || []).length;
-          }
-        } catch (err) {
-          console.error(`Failed to load ${section} data:`, err);
-        }
+    const handleThemeChange = (event: Event) => {
+      const customEvent = event as CustomEvent<{ theme?: "light" | "dark" } | "light" | "dark">;
+      const nextTheme =
+        typeof customEvent.detail === "string"
+          ? customEvent.detail
+          : customEvent.detail?.theme;
+
+      if (nextTheme === "light" || nextTheme === "dark") {
+        setFilter(nextTheme);
       }
-      
-      setComponentCount(totalCount);
     };
 
-    loadComponentCount();
+    window.addEventListener("framerkit-theme-change", handleThemeChange as EventListener);
+
+    return () => {
+      window.removeEventListener("framerkit-theme-change", handleThemeChange as EventListener);
+    };
   }, []);
 
   return (
-    <div className="home-docs-layout">
-      <TopBar theme={theme} onThemeToggle={onThemeToggle} />
-      
-      <div className="app-layout">
-        <Sidebar
-          activeSection="components"
-          onSectionChange={() => {}}
-          isMobile={isMobile}
-          isMenuOpen={isMenuOpen}
-          onMenuClose={() => setIsMenuOpen(false)}
-        />
-        
-        <main className="content">
-          <section id="ui-components" className="ui-section">
-            <div className="ui-wrapper">
-              <div className="ui-container">
-                <div className="ui-block">
-                  
-                  {/* 1.  */}
-                  <h2 className="fk-gs-title">UI Components {componentCount > 0 && `(${componentCount})`}</h2>
-                  
-                  {/* 2.  */}
-                  <p className="fk-gs-text">
-                    Reusable interface elements like Buttons, Cards, Avatars, Forms, and Pricing Blocks  designed to be mixed, matched, and fully customized to your brand.
-                  </p>
-                  
-                </div>
-              </div>
-            </div>
-          </section>
-          
-          {/* 3. Full-width gallery */}
-          <div className="gallery-scroll-area">
-            <div className="gallery">
-              {theme === "dark" ? (
-                <RandomComponentCardsDark />
-              ) : (
-                <RandomComponentCards theme={theme} />
-              )}
-            </div>
-          </div>
-        </main>
+    <div className="layout-catalog-page">
+      <SEO
+        title="UI Components"
+        description="Explore FramerKit UI components and pick ready-to-use blocks for faster page building."
+        keywords="framer ui components, framerkit components, button card input accordion"
+        canonical="https://www.framerkit.site/components"
+      />
+      <div className="component-page-header">
+        <nav className="component-breadcrumb">
+          <span className="breadcrumb-current">UI Components</span>
+        </nav>
+        <h2 className="component-page-title">UI Components</h2>
+        <p className="component-page-description">
+          A practical library of reusable UI blocks. Start with the component you need, adapt the content
+          and style, and keep one consistent system across your whole site.
+        </p>
+      </div>
+
+      <SectionHeader
+        title="UI Components"
+        count={componentCount}
+        filter={filter}
+        onFilterChange={setFilter}
+        loading={false}
+        hideTitle={true}
+        hideThemeSwitcher={true}
+        hideWireframeToggle={true}
+        renderMetaBelow={true}
+      />
+
+      <div className="gallery-scroll-area layout-catalog-scroll-area">
+        <div className="gallery layout-catalog-grid">
+          <AdminCreateSectionCard group="components" theme={filter} isAdmin={isAdmin} />
+          {filter === "dark" ? (
+            <RandomComponentCardsDark isAdmin={isAdmin} />
+          ) : (
+            <RandomComponentCards theme={filter} isAdmin={isAdmin} />
+          )}
+        </div>
       </div>
     </div>
   );

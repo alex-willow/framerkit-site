@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import { Copy, CircleCheck, Lock, Eye } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import SectionHeader from "../../components/SectionHeader";
 import SEO from "../../components/SEO";
+import { fetchJsonWithCache, readJsonCache } from "../../lib/remoteCache";
 
 type ComponentItem = {
   key: string;
@@ -25,13 +27,19 @@ type LogoPageProps = {
 
 // ✅ Исправлен PLACEHOLDER (убраны пробелы)
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
+const DATA_URL = "https://raw.githubusercontent.com/alex-willow/framerkit-data/main/logo.json";
+const CACHE_KEY = `remote:${DATA_URL}`;
+const DATA_KEY = "logo" as const;
 
 
 export default function LogoPage({ isAuthenticated, setIsSignInOpen }: LogoPageProps) {
-  const [items, setItems] = useState<ComponentItem[]>([]);
-  const [loading, setLoading] = useState(true);
+  const initialItems = readJsonCache<Record<string, ComponentItem[]>>(CACHE_KEY)?.[DATA_KEY] || [];
+  const [items, setItems] = useState<ComponentItem[]>(initialItems);
+  const [loading, setLoading] = useState(initialItems.length === 0);
   const [error, setError] = useState<string | null>(null);
   const [filter, setFilter] = useState<"light" | "dark">("light");
+  const [availabilityFilter, setAvailabilityFilter] = useState<"paid" | "free">("free");
+  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
 
   // Load theme from localStorage on mount (same as landing page)
   useEffect(() => {
@@ -51,29 +59,34 @@ export default function LogoPage({ isAuthenticated, setIsSignInOpen }: LogoPageP
       }
     };
 
-    window.addEventListener("themeChange", handleThemeChange as EventListener);
+    window.addEventListener("framerkit-component-theme-change", handleThemeChange as EventListener);
     return () => {
-      window.removeEventListener("themeChange", handleThemeChange as EventListener);
+      window.removeEventListener("framerkit-component-theme-change", handleThemeChange as EventListener);
     };
   }, []);
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
   const [hoveredPreviewKey, setHoveredPreviewKey] = useState<string | null>(null);
-  const [isWireframeMode, setIsWireframeMode] = useState(true);
+  // Инициализируем wireframeMode прямо из localStorage
+  const [isWireframeMode, setIsWireframeMode] = useState(() => {
+    try {
+      const saved = localStorage.getItem("wireframeMode");
+      return saved !== null ? saved === "true" : true;
+    } catch {
+      return true;
+    }
+  });
 
   const galleryRef = useRef<HTMLDivElement>(null);
 
-  // Загружаем wireframeMode из localStorage при монтировании
+  // Сохраняем wireframeMode при изменении
   useEffect(() => {
     try {
-      const saved = localStorage.getItem("wireframeMode");
-      if (saved !== null) {
-        setIsWireframeMode(saved === "true");
-      }
+      localStorage.setItem("wireframeMode", isWireframeMode.toString());
     } catch (e) {
-      console.warn("Failed to load wireframeMode from localStorage", e);
+      console.warn("Failed to save wireframeMode to localStorage", e);
     }
-  }, []);
+  }, [isWireframeMode]);
 
   // ================================
   // Загрузка данных
@@ -81,12 +94,10 @@ export default function LogoPage({ isAuthenticated, setIsSignInOpen }: LogoPageP
   useEffect(() => {
     const load = async () => {
       try {
-        const res = await fetch(
-          "https://raw.githubusercontent.com/alex-willow/framerkit-data/main/logo.json",
-          { cache: "force-cache" }
+        const json = await fetchJsonWithCache<Record<string, ComponentItem[]>>(
+          CACHE_KEY,
+          DATA_URL
         );
-        if (!res.ok) throw new Error("Failed to load logo");
-        const json = await res.json();
         const loadedItems = json.logo || [];
         setItems(loadedItems);
         setLoading(false);
@@ -122,10 +133,16 @@ export default function LogoPage({ isAuthenticated, setIsSignInOpen }: LogoPageP
   // Фильтрация (useMemo)
   // ================================
   const filtered = useMemo(() => {
-    return items.filter(item =>
-      filter === "dark" ? item.key.includes("dark") : !item.key.includes("dark")
-    );
-  }, [items, filter]);
+    const base = items.filter((item) => {
+      const themeMatch =
+        filter === "dark" ? item.key.includes("dark") : !item.key.includes("dark");
+
+      if (!themeMatch) return false;
+      return item.type === availabilityFilter;
+    });
+
+    return sortDirection === "asc" ? base : [...base].reverse();
+  }, [items, filter, availabilityFilter, sortDirection]);
 
   // ================================
   // Copy
@@ -161,6 +178,20 @@ export default function LogoPage({ isAuthenticated, setIsSignInOpen }: LogoPageP
       {/* 🔥 H1 для поисковиков (визуально скрыт, но индексируется) */}
       <h1 className="sr-only">Logo Section Components for Framer — Brand Logo Grids</h1>
 
+      {/* Header intro */}
+
+      <div className="component-page-header">
+        <nav className="component-breadcrumb">
+          <Link to="/layout" className="breadcrumb-link">Layout Sections</Link>
+          <span className="breadcrumb-separator">/</span>
+          <span className="breadcrumb-current">Logo</span>
+        </nav>
+        <h2 className="component-page-title">Logo Components</h2>
+        <p className="component-page-description">
+          Use logo sections to build trust with partners, clients, or integrations. Place them after the hero or key value section so credibility supports your main message.
+        </p>
+      </div>
+
       <SectionHeader
         title="Logo"
         count={filtered.length}
@@ -169,6 +200,10 @@ export default function LogoPage({ isAuthenticated, setIsSignInOpen }: LogoPageP
         loading={loading}
         isWireframeMode={isWireframeMode}
         onWireframeModeChange={setIsWireframeMode}
+        availabilityFilter={availabilityFilter}
+        onAvailabilityFilterChange={setAvailabilityFilter}
+        sortDirection={sortDirection}
+        onSortDirectionChange={setSortDirection}
         hideWireframeToggle={false}
         renderMetaBelow={true}
       />
@@ -201,12 +236,13 @@ export default function LogoPage({ isAuthenticated, setIsSignInOpen }: LogoPageP
               return (
                 <motion.div
                   key={item.key}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
                   transition={{ duration: 0.2 }}
                   className={`card ${filter === "dark" ? "card-dark" : "card-light"}`}
                 >
                   <div className="cardImage">
+                    {item.type === "free" && <span className="card-free-badge">Free</span>}
                     {/* 🔥 Alt-текст с ключевыми словами */}
                     <img 
                       src={displayImage} 
@@ -226,7 +262,7 @@ export default function LogoPage({ isAuthenticated, setIsSignInOpen }: LogoPageP
                             e.stopPropagation();
 
                             try {
-                              let path = displayPreviewUrl.trim();
+                              const path = displayPreviewUrl.trim();
                               let cleanPath = "";
 
                               if (path.startsWith("/")) {
@@ -245,7 +281,7 @@ export default function LogoPage({ isAuthenticated, setIsSignInOpen }: LogoPageP
                           onMouseEnter={() => setHoveredPreviewKey(item.key)}
                           onMouseLeave={() => setHoveredPreviewKey(null)}
                         >
-                          <Eye size={16} color={filter === "dark" ? "#ccc" : "#5b6170"} />
+                          <Eye size={16} color="currentColor" />
                           {hoveredPreviewKey === item.key && (
                             <div className="tooltip">Preview</div>
                           )}
@@ -255,7 +291,7 @@ export default function LogoPage({ isAuthenticated, setIsSignInOpen }: LogoPageP
                           className="iconButton disabled"
                           style={{ cursor: "not-allowed", opacity: 0.4 }}
                         >
-                          <Eye size={16} color={filter === "dark" ? "#666" : "#999"} />
+                          <Eye size={16} color="currentColor" />
                           {hoveredPreviewKey === item.key && (
                             <div className="tooltip">Coming soon</div>
                           )}
@@ -274,9 +310,9 @@ export default function LogoPage({ isAuthenticated, setIsSignInOpen }: LogoPageP
                         {isCopied ? (
                           <CircleCheck size={20} color="#22c55e" strokeWidth={2.5} />
                         ) : canCopy ? (
-                          <Copy size={16} color={filter === "dark" ? "#ccc" : "#5b6170"} />
+                          <Copy size={16} color="currentColor" />
                         ) : (
-                          <Lock size={16} color={filter === "dark" ? "#ccc" : "#5b6170"} />
+                          <Lock size={16} color="currentColor" />
                         )}
 
                         {(isCopied || hoveredKey === item.key) && (

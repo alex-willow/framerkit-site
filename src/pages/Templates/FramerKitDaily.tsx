@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Eye, Paperclip, Lock } from "lucide-react";
 import SectionHeader from "../../components/SectionHeader";
+import SEO from "../../components/SEO";
+import { fetchJsonWithCache, readJsonCache } from "../../lib/remoteCache";
 
 interface TemplateItem {
   key: string;
@@ -18,14 +20,19 @@ interface FramerKitDailyPageProps {
 }
 
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
+const DATA_URL =
+  "https://raw.githubusercontent.com/alex-willow/framerkit-data/refs/heads/main/framerkitdaily";
+const CACHE_KEY = `remote:${DATA_URL}`;
+const DATA_KEY = "framerkitdaily" as const;
 
 export default function FramerKitDailyPage({
   galleryScrollRef,
   isAuthenticated = false,
   setIsSignInOpen,
 }: FramerKitDailyPageProps) {
-  const [items, setItems] = useState<TemplateItem[]>([]);
-  const [loading, setLoading] = useState(true);
+  const initialItems = readJsonCache<Record<string, TemplateItem[]>>(CACHE_KEY)?.[DATA_KEY] || [];
+  const [items, setItems] = useState<TemplateItem[]>(initialItems);
+  const [loading, setLoading] = useState(initialItems.length === 0);
   const location = useLocation();
 
   // Скролл наверх при смене страницы
@@ -40,12 +47,10 @@ export default function FramerKitDailyPage({
   useEffect(() => {
     const load = async () => {
       try {
-        const res = await fetch(
-          "https://raw.githubusercontent.com/alex-willow/framerkit-data/refs/heads/main/framerkitdaily"
+        const json = await fetchJsonWithCache<Record<string, TemplateItem[]>>(
+          CACHE_KEY,
+          DATA_URL
         );
-        if (!res.ok) throw new Error("Failed to load");
-        const json = await res.json();
-        
         const framerkitdaily: TemplateItem[] = json.framerkitdaily || [];
         setItems(framerkitdaily);
  
@@ -60,11 +65,32 @@ export default function FramerKitDailyPage({
 
   return (
     <div id="framerkitdaily-page" >
+      <SEO
+        title="FramerKit Daily"
+        description="FramerKit Daily template collection with ready-to-use screens and reusable building blocks."
+        keywords="framer template, framerkit daily, starter template, website template"
+        canonical="https://www.framerkit.site/templates/framerkitdaily"
+      />
+
+      <div className="component-page-header">
+        <nav className="component-breadcrumb">
+          <Link to="/templates" className="breadcrumb-link">Templates</Link>
+          <span className="breadcrumb-separator">›</span>
+          <span className="breadcrumb-current">FramerKit Daily</span>
+        </nav>
+        <h2 className="component-page-title">FramerKit Daily Template</h2>
+        <p className="component-page-description">
+          A ready template feed you can use as a starting point for daily content publishing and quick launch pages.
+        </p>
+      </div>
+
       <SectionHeader
         title="FramerKit Daily Templates"
         count={items.length}
         loading={loading}
         hideThemeSwitcher={true}
+        hideTitle={true}
+        renderMetaBelow={true}
         templateLabel="templates"
       />
 
@@ -109,13 +135,8 @@ function DailyCard({
   isAuthenticated = false,
   setIsSignInOpen,
 }: DailyCardProps) {
-  const [visible, setVisible] = useState(false);
   const hasPreview = Boolean(item.preview);
-
-  // показываем карточку после монтирования
-  useEffect(() => {
-    setVisible(true);
-  }, []);
+  const visible = true;
 
   const canAccess = isAuthenticated || item.type === "free";
 
@@ -142,7 +163,7 @@ function DailyCard({
       <div className="daily-title-row">
         <span className="daily-day">{`Day ${dayNumber}`}</span>
 
-        <div className="daily-actions">
+        <div className="daily-actions card-actions">
           {/* Preview */}
           <div className={`iconButton ${!hasPreview ? "disabled" : ""}`}>
             <a

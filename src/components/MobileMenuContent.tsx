@@ -13,6 +13,46 @@ type MobileMenuContentProps = {
   onGetAccess?: () => void;
 };
 
+type CollapsibleItemProps = {
+  title: string;
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  children: React.ReactNode;
+};
+
+function CollapsibleItem({
+  title,
+  open,
+  setOpen,
+  children,
+}: CollapsibleItemProps) {
+  return (
+    <div className="collapsible-item" style={{ marginBottom: "8px" }}>
+      <button
+        className="collapsible-header"
+        onClick={() => setOpen(!open)}
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          width: "100%",
+          padding: "12px 0",
+          background: "none",
+          border: "none",
+          cursor: "pointer",
+          color: "var(--framer-color-text)",
+          fontWeight: 600,
+          textAlign: "left",
+        }}
+      >
+        <span>{title}</span>
+        {open ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+      </button>
+      {open && <div className="collapsible-children" style={{ paddingLeft: "16px" }}>{children}</div>}
+    </div>
+  );
+}
+
 export default function MobileMenuContent({
   activeSection,
   onSectionChange,
@@ -67,32 +107,6 @@ export default function MobileMenuContent({
       if (el) el.scrollIntoView({ behavior: "smooth" });
     }
   };
-
-  const CollapsibleItem = ({ title, open, setOpen, children }: any) => (
-    <div className="collapsible-item" style={{ marginBottom: "8px" }}>
-      <button 
-        className="collapsible-header"
-        onClick={() => setOpen(!open)}
-        style={{ 
-          display: "flex", 
-          justifyContent: "space-between", 
-          alignItems: "center",
-          width: "100%",
-          padding: "12px 0",
-          background: "none",
-          border: "none",
-          cursor: "pointer",
-          color: "var(--framer-color-text)",
-          fontWeight: 600,
-          textAlign: "left"
-        }}
-      >
-        <span>{title}</span>
-        {open ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-      </button>
-      {open && <div className="collapsible-children" style={{ paddingLeft: "16px" }}>{children}</div>}
-    </div>
-  );
 
   return (
     <div className="mobile-menu-content-inner" style={{ padding: "20px" }}>

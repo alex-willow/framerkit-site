@@ -1,0 +1,36 @@
+{
+  "icon": [
+    {
+      "key": "Icon-01",
+      "title": "Icon 01",
+      "image": "https://storage.googleapis.com/framerkit/Icon%2001.png",
+      "url": "https://framer.com/m/Icon-01-Q7We.js",
+      "type": "paid",
+      "dragType": "detachedComponentLayers"
+    },
+    {
+      "key": "Icon-02",
+      "title": "Icon 02",
+      "image": "https://storage.googleapis.com/framerkit/Icon%2002.png",
+      "url": "https://framer.com/m/Icon-02-ztQL.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Icon-01-dark",
+      "title": "Icon 01",
+      "image": "https://storage.googleapis.com/framerkit/Icon%2001%20Dark.png",
+      "url": "https://framer.com/m/Icon-01-Dark-fYOo.js",
+      "type": "paid",
+      "dragType": "detachedComponentLayers"
+    },
+    {
+      "key": "Icon-02-dark",
+      "title": "Icon 02",
+      "image": "https://storage.googleapis.com/framerkit/Icon%2002%20Dark.png",
+      "url": "https://framer.com/m/Icon-02-Dark-hJ3Y.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    }
+  ]
+}

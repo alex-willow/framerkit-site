@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import { Copy, CircleCheck, Lock } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import SectionHeader from "../../components/SectionHeader";
 import SEO from "../../components/SEO";
+import { fetchJsonWithCache } from "../../lib/remoteCache";
 
 type ComponentItem = {
   key: string;
@@ -35,15 +37,16 @@ export default function PricingCardPage({ isAuthenticated, setIsSignInOpen }: Pr
     }
 
     const handleGlobalThemeChange = (event: Event) => {
-      const nextTheme = (event as CustomEvent<"light" | "dark">).detail;
+      const detail = (event as CustomEvent<{ theme?: "light" | "dark" } | "light" | "dark">).detail;
+      const nextTheme = typeof detail === "string" ? detail : detail?.theme;
       if (nextTheme === "light" || nextTheme === "dark") {
         setFilter(nextTheme);
       }
     };
 
-    window.addEventListener("framerkit-theme-change", handleGlobalThemeChange as EventListener);
+    window.addEventListener("framerkit-component-theme-change", handleGlobalThemeChange as EventListener);
     return () => {
-      window.removeEventListener("framerkit-theme-change", handleGlobalThemeChange as EventListener);
+      window.removeEventListener("framerkit-component-theme-change", handleGlobalThemeChange as EventListener);
     };
   }, []);
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
@@ -57,12 +60,10 @@ export default function PricingCardPage({ isAuthenticated, setIsSignInOpen }: Pr
   useEffect(() => {
     const load = async () => {
       try {
-        const res = await fetch(
-          "https://raw.githubusercontent.com/alex-willow/framerkit-data/components/pricingcard.json",
-          { cache: "force-cache" }
+        const json = await fetchJsonWithCache<Record<string, ComponentItem[]>>(
+          "remote:https://raw.githubusercontent.com/alex-willow/framerkit-data/components/pricingcard.json",
+          "https://raw.githubusercontent.com/alex-willow/framerkit-data/components/pricingcard.json"
         );
-        if (!res.ok) throw new Error("Failed to load Pricing Card data");
-        const json = await res.json();
 
         // ⚠️ Используем ключ точно как в JSON
         const loadedItems = json.PricingCard || json.Pricingcard || [];
@@ -138,12 +139,29 @@ export default function PricingCardPage({ isAuthenticated, setIsSignInOpen }: Pr
       {/* 🔥 H1 для поисковиков (визуально скрыт, но индексируется) */}
       <h1 className="sr-only">Pricing Card Components for Framer — Subscription & Tier Cards</h1>
 
+      {/* Header intro */}
+
+      <div className="component-page-header">
+        <nav className="component-breadcrumb">
+          <Link to="/components" className="breadcrumb-link">UI Components</Link>
+          <span className="breadcrumb-separator">/</span>
+          <span className="breadcrumb-current">Pricing Card</span>
+        </nav>
+        <h2 className="component-page-title">Pricing Card Components</h2>
+        <p className="component-page-description">
+          Pricing cards help users compare plans in seconds. Highlight the recommended option, key limits,
+          and a clear CTA so decision-making feels easy.
+        </p>
+      </div>
+
       <SectionHeader
         title="Pricing Card"
         count={filtered.length}
         filter={filter}
         onFilterChange={setFilter}
         loading={loading}
+        hideTitle
+        renderMetaBelow={true}
       />
 
       <div className="gallery-scroll-area" ref={galleryRef}>
@@ -162,8 +180,8 @@ export default function PricingCardPage({ isAuthenticated, setIsSignInOpen }: Pr
               return (
                 <motion.div
                   key={item.key}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
                   transition={{ duration: 0.2 }}
                   className={`card ${filter === "dark" ? "card-dark" : "card-light"}`}
                 >

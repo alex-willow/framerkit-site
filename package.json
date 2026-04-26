@@ -5,7 +5,18 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:site": "vite",
+    "dev:plugin": "npm --prefix ../Framerkit run dev",
+    "sync:catalog": "node scripts/sync-catalog-manifest.mjs",
+    "catalog:add": "node scripts/catalog-add.mjs",
+    "catalog:pull": "node scripts/pull-catalog-data.mjs",
+    "catalog:upload": "node scripts/upload-catalog-data.mjs",
+    "dev:all": "npm run sync:catalog && node scripts/dev-all.mjs",
     "build": "tsc -b && vite build",
+    "build:site": "tsc -b && vite build",
+    "build:plugin": "npm --prefix ../Framerkit run build",
+    "build:all": "npm run sync:catalog && npm run build:site && npm run build:plugin",
+    "pack:plugin": "npm --prefix ../Framerkit run pack",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -34,6 +45,7 @@
     "globals": "^16.5.0",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
-    "vite": "^7.2.4"
+    "vite": "^7.2.4",
+    "puppeteer": "^24.42.0"
   }
 }

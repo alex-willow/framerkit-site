@@ -1,0 +1,453 @@
+{
+  "card": [
+    {
+      "key": "Card-01",
+      "title": "Card 01",
+      "image": "https://storage.googleapis.com/framerkit/Card%2001.png",
+      "url": "https://framer.com/m/Card-01-WPLt.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-02",
+      "title": "Card 02",
+      "image": "https://storage.googleapis.com/framerkit/Card%2002.png",
+      "url": "https://framer.com/m/Card-02-hUKT.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-03",
+      "title": "Card 03",
+      "image": "https://storage.googleapis.com/framerkit/Card%2003.png",
+      "url": "https://framer.com/m/Card-03-lQNg.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-04",
+      "title": "Card 04",
+      "image": "https://storage.googleapis.com/framerkit/Card%2004.png",
+      "url": "https://framer.com/m/Card-04-8dxc.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-05",
+      "title": "Card 05",
+      "image": "https://storage.googleapis.com/framerkit/Card%2005.png",
+      "url": "https://framer.com/m/Card-05-Kpum.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-06",
+      "title": "Card 06",
+      "image": "https://storage.googleapis.com/framerkit/Card%2006.png",
+      "url": "https://framer.com/m/Card-06-mt79.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-07",
+      "title": "Card 07",
+      "image": "https://storage.googleapis.com/framerkit/Card%2007.png",
+      "url": "https://framer.com/m/Card-07-pfeh.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-08",
+      "title": "Card 08",
+      "image": "https://storage.googleapis.com/framerkit/Card%2008.png",
+      "url": "https://framer.com/m/Card-08-7srI.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-09",
+      "title": "Card 09",
+      "image": "https://storage.googleapis.com/framerkit/Card%2009.png",
+      "url": "https://framer.com/m/Card-09-tuN4.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-10",
+      "title": "Card 10",
+      "image": "https://storage.googleapis.com/framerkit/Card%2010.png",
+      "url": "https://framer.com/m/Card-10-v50M.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-11",
+      "title": "Card 11",
+      "image": "https://storage.googleapis.com/framerkit/Card%2011.png",
+      "url": "https://framer.com/m/Card-11-gQe3.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-12",
+      "title": "Card 12",
+      "image": "https://storage.googleapis.com/framerkit/Card%2012.png",
+      "url": "https://framer.com/m/Card-12-eoda.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-13",
+      "title": "Card 13",
+      "image": "https://storage.googleapis.com/framerkit/Card%2013.png",
+      "url": "https://framer.com/m/Card-13-g0hc.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-14",
+      "title": "Card 14",
+      "image": "https://storage.googleapis.com/framerkit/Card%2014.png",
+      "url": "https://framer.com/m/Card-14-LX3n.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-15",
+      "title": "Card 15",
+      "image": "https://storage.googleapis.com/framerkit/Card%2015.png",
+      "url": "https://framer.com/m/Card-15-XBMq.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-16",
+      "title": "Card 16",
+      "image": "https://storage.googleapis.com/framerkit/Card%2016.png",
+      "url": "https://framer.com/m/Card-16-nCKd.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-17",
+      "title": "Card 17",
+      "image": "https://storage.googleapis.com/framerkit/Card%2017.png",
+      "url": "https://framer.com/m/Card-17-3Fi3.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-18",
+      "title": "Card 18",
+      "image": "https://storage.googleapis.com/framerkit/Card%2018.png",
+      "url": "https://framer.com/m/Card-18-Tgjc.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-19",
+      "title": "Card 19",
+      "image": "https://storage.googleapis.com/framerkit/Card%2019.png",
+      "url": "https://framer.com/m/Card-19-jHs6.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-20",
+      "title": "Card 20",
+      "image": "https://storage.googleapis.com/framerkit/Card%2020.png",
+      "url": "https://framer.com/m/Card-20-VAwI.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-21",
+      "title": "Card 21",
+      "image": "https://storage.googleapis.com/framerkit/Card%2021.png",
+      "url": "https://framer.com/m/Card-21-efvs.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-22",
+      "title": "Card 22",
+      "image": "https://storage.googleapis.com/framerkit/Card%2022.png",
+      "url": "https://framer.com/m/Card-22-qIwQ.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-23",
+      "title": "Card 23",
+      "image": "https://storage.googleapis.com/framerkit/Card%2023.png",
+      "url": "https://framer.com/m/Card-23-GoAx.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-24",
+      "title": "Card 24",
+      "image": "https://storage.googleapis.com/framerkit/Card%2024.png",
+      "url": "https://framer.com/m/Card-24-Q3xs.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-25",
+      "title": "Card 25",
+      "image": "https://storage.googleapis.com/framerkit/Card%2025.png",
+      "url": "https://framer.com/m/Card-25-uuhC.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-26",
+      "title": "Card 26",
+      "image": "https://storage.googleapis.com/framerkit/Card%2026.png",
+      "url": "https://framer.com/m/Card-26-o7Op.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-27",
+      "title": "Card 27",
+      "image": "https://storage.googleapis.com/framerkit/Card%2027.png",
+      "url": "https://framer.com/m/Card-27-4q5s.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-28",
+      "title": "Card 28",
+      "image": "https://storage.googleapis.com/framerkit/Card%2028.png",
+      "url": "https://framer.com/m/Card-28-6NnK.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+
+    {
+      "key": "Card-01-dark",
+      "title": "Card 01",
+      "image": "https://storage.googleapis.com/framerkit/Card%2001%20Dark.png",
+      "url": "https://framer.com/m/Card-01-Dark-6Fpb.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-02-dark",
+      "title": "Card 02",
+      "image": "https://storage.googleapis.com/framerkit/Card%2002%20Dark.png",
+      "url": "https://framer.com/m/Card-02-Dark-8Pys.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-03-dark",
+      "title": "Card 03",
+      "image": "https://storage.googleapis.com/framerkit/Card%2003%20Dark.png",
+      "url": "https://framer.com/m/Card-03-Dark-zCgA.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-04-dark",
+      "title": "Card 04",
+      "image": "https://storage.googleapis.com/framerkit/Card%2004%20Dark.png",
+      "url": "https://framer.com/m/Card-04-Dark-xSYy.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-05-dark",
+      "title": "Card 05",
+      "image": "https://storage.googleapis.com/framerkit/Card%2005%20Dark.png",
+      "url": "https://framer.com/m/Card-05-Dark-sA8H.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-06-dark",
+      "title": "Card 06",
+      "image": "https://storage.googleapis.com/framerkit/Card%2006%20Dark.png",
+      "url": "https://framer.com/m/Card-06-Dark-zC4Q.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-07-dark",
+      "title": "Card 07",
+      "image": "https://storage.googleapis.com/framerkit/Card%2007%20Dark.png",
+      "url": "https://framer.com/m/Card-07-Dark-RzWq.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-08-dark",
+      "title": "Card 08",
+      "image": "https://storage.googleapis.com/framerkit/Card%2008%20Dark.png",
+      "url": "https://framer.com/m/Card-08-Dark-Xw0Q.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-09-dark",
+      "title": "Card 09",
+      "image": "https://storage.googleapis.com/framerkit/Card%2009%20Dark.png",
+      "url": "https://framer.com/m/Card-09-Dark-Nc8g.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-10-dark",
+      "title": "Card 10",
+      "image": "https://storage.googleapis.com/framerkit/Card%2010%20Dark.png",
+      "url": "https://framer.com/m/Card-10-Dark-ppn0.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-11-dark",
+      "title": "Card 11",
+      "image": "https://storage.googleapis.com/framerkit/Card%2011%20Dark.png",
+      "url": "https://framer.com/m/Card-11-Dark-lhDL.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-12-dark",
+      "title": "Card 12",
+      "image": "https://storage.googleapis.com/framerkit/Card%2012%20Dark.png",
+      "url": "https://framer.com/m/Card-12-Dark-8Fei.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-13-dark",
+      "title": "Card 13",
+      "image": "https://storage.googleapis.com/framerkit/Card%2013%20Dark.png",
+      "url": "https://framer.com/m/Card-13-Dark-7sBY.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-14-dark",
+      "title": "Card 14",
+      "image": "https://storage.googleapis.com/framerkit/Card%2014%20Dark.png",
+      "url": "https://framer.com/m/Card-14-Dark-nbjW.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-15-dark",
+      "title": "Card 15",
+      "image": "https://storage.googleapis.com/framerkit/Card%2015%20Dark.png",
+      "url": "https://framer.com/m/Card-15-Dark-MYbk.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-16-dark",
+      "title": "Card 16",
+      "image": "https://storage.googleapis.com/framerkit/Card%2016%20Dark.png",
+      "url": "https://framer.com/m/Card-16-Dark-rVEI.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-17-dark",
+      "title": "Card 17",
+      "image": "https://storage.googleapis.com/framerkit/Card%2017%20Dark.png",
+      "url": "https://framer.com/m/Card-17-Dark-VB2e.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-18-dark",
+      "title": "Card 18",
+      "image": "https://storage.googleapis.com/framerkit/Card%2018%20Dark.png",
+      "url": "https://framer.com/m/Card-18-Dark-y5rn.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-19-dark",
+      "title": "Card 19",
+      "image": "https://storage.googleapis.com/framerkit/Card%2019%20Dark.png",
+      "url": "https://framer.com/m/Card-19-Dark-sYgq.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-20-dark",
+      "title": "Card 20",
+      "image": "https://storage.googleapis.com/framerkit/Card%2020%20Dark.png",
+      "url": "https://framer.com/m/Card-20-Dark-0QC4.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-21-dark",
+      "title": "Card 21",
+      "image": "https://storage.googleapis.com/framerkit/Card%2021%20Dark.png",
+      "url": "https://framer.com/m/Card-21-Dark-VoQu.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-22-dark",
+      "title": "Card 22",
+      "image": "https://storage.googleapis.com/framerkit/Card%2022%20Dark.png",
+      "url": "https://framer.com/m/Card-22-Dark-h1V6.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-23-dark",
+      "title": "Card 23",
+      "image": "https://storage.googleapis.com/framerkit/Card%2023%20Dark.png",
+      "url": "https://framer.com/m/Card-23-Dark-6n6k.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-24-dark",
+      "title": "Card 24",
+      "image": "https://storage.googleapis.com/framerkit/Card%2024%20Dark.png",
+      "url": "https://framer.com/m/Card-24-Dark-GeD0.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-25-dark",
+      "title": "Card 25",
+      "image": "https://storage.googleapis.com/framerkit/Card%2025%20Dark.png",
+      "url": "https://framer.com/m/Card-25-Dark-YFq6.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-26-dark",
+      "title": "Card 26",
+      "image": "https://storage.googleapis.com/framerkit/Card%2026%20Dark.png",
+      "url": "https://framer.com/m/Card-26-Dark-CSXu.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-27-dark",
+      "title": "Card 27",
+      "image": "https://storage.googleapis.com/framerkit/Card%2027%20Dark.png",
+      "url": "https://framer.com/m/Card-27-Dark-pvEW.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Card-28-dark",
+      "title": "Card 28",
+      "image": "https://storage.googleapis.com/framerkit/Card%2028%20Dark.png",
+      "url": "https://framer.com/m/Card-28-Dark-RarS.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    }
+  ]
+}

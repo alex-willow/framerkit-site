@@ -1,73 +1,114 @@
-# React + TypeScript + Vite
+# FramerKit Site
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Marketing site and documentation portal for FramerKit, built with Vite, React, and TypeScript.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Vite
+- React 19
+- TypeScript
+- React Router
+- Supabase
+- Vercel Analytics
+- GA4
 
-## React Compiler
+## Local Setup
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. Install dependencies:
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Create a local env file from the example:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+cp .env.example .env
 ```
+
+3. Fill in the required values in `.env`.
+
+4. Start the dev server:
+
+```bash
+npm run dev
+```
+
+## Site + Plugin Workflow
+
+Plugin is expected at `../Framerkit` (relative to this site folder).
+Single source of catalog config lives in:
+
+`src/shared/catalogManifest.ts`
+
+It is synced to plugin at:
+
+`../Framerkit/src/config/catalogManifest.ts`
+
+Run both together:
+
+```bash
+npm run dev:all
+```
+
+`dev:all` now uses a process runner that:
+- checks plugin folder existence (`../Framerkit`)
+- starts site and plugin together
+- stops both when one crashes or when you stop with `Ctrl + C`
+
+Run separately:
+
+```bash
+npm run dev:site
+npm run dev:plugin
+npm run sync:catalog
+npm run catalog:add -- --group components --id tabs --label "Tabs" --json-key tabs
+npm run catalog:pull
+npm run catalog:upload
+```
+
+## Environment Variables
+
+Client-side app:
+
+- `VITE_SUPABASE_URL`
+- `VITE_SUPABASE_ANON_KEY`
+- `VITE_GA_ID`
+
+Server-side checkout flow:
+
+- `POLAR_API_KEY`
+- `POLAR_PRODUCT_ID`
+
+Support form endpoint:
+
+- `VITE_SUPPORT_FORM_ENDPOINT`
+- `VITE_CATALOG_ENDPOINT`
+- `VITE_SUPPORT_EMAIL` (optional fallback email shown in UI)
+
+## Scripts
+
+```bash
+npm run dev
+npm run dev:all
+npm run dev:site
+npm run dev:plugin
+npm run build
+npm run build:all
+npm run catalog:add -- --group components --id tabs --label "Tabs" --json-key tabs
+npm run catalog:pull
+npm run catalog:upload
+npm run build:site
+npm run build:plugin
+npm run pack:plugin
+npm run lint
+npm run preview
+```
+
+## Notes
+
+- Production build output goes to `dist/`.
+- Preview pages are served from `public/preview`.
+- Routes under `/p/...` are rewritten to the preview viewer in local development.
+- Support form backend setup guide: `SUPPORT_FORM_SETUP.md`.
+- Catalog backend setup guide: `CATALOG_SETUP.md`.

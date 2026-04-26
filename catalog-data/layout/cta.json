@@ -1,0 +1,426 @@
+{
+  "cta": [
+ 
+  {
+    "key": "cta-section-01",
+    "title": "CTA Section 01",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Light/Design/CTA-Section-01.gif",
+    "url": "https://framer.com/m/CTA-Section-01-xhf5.js",
+    "type": "free",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-01",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Light/Wireframe/CTA%20Section%2001%20Wireframe.png",
+      "url": "https://framer.com/m/CTA-Section-01-Wireframe-ZcoF.js",
+      "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-01-wireframe"
+    }
+  },
+  {
+    "key": "cta-section-02",
+    "title": "CTA Section 02",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Light/Design/CTA-Section-02.gif",
+    "url": "https://framer.com/m/CTA-Section-02-cPuK.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-02",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Light/Wireframe/CTA%20Section%2002%20Wireframe.png",
+      "url": "https://framer.com/m/CTA-Section-02-Wireframe-zjHt.js",
+      "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-02-wireframe"
+    }
+  },
+  {
+    "key": "cta-section-03",
+    "title": "CTA Section 03",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Light/Design/CTA-Section-03.gif",
+    "url": "https://framer.com/m/CTA-Section-03-bswL.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-03",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Light/Wireframe/CTA%20Section%2003%20Wireframe.png",
+      "url": "https://framer.com/m/CTA-Section-03-Wireframe-yZ1J.js",
+      "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-03-wireframe"
+    }
+  },
+  {
+    "key": "cta-section-04",
+    "title": "CTA Section 04",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Light/Design/CTA-Section-04.gif",
+    "url": "https://framer.com/m/CTA-Section-04-Hz88.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-04",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Light/Wireframe/CTA%20Section%2004%20Wireframe.png",
+      "url": "https://framer.com/m/CTA-Section-04-Wireframe-cRDy.js",
+      "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-04-wireframe"
+    }
+  },
+  {
+    "key": "cta-section-05",
+    "title": "CTA Section 05",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Light/Design/CTA-Section-05.gif",
+    "url": "https://framer.com/m/CTA-Section-05-gjv6.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-05",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Light/Wireframe/CTA%20Section%2005%20Wireframe.png",
+      "url": "https://framer.com/m/CTA-Section-05-Wireframe-HGyk.js",
+      "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-05-wireframe"
+    }
+  },
+  {
+    "key": "cta-section-06",
+    "title": "CTA Section 06",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Light/Design/CTA-Section-06.gif",
+    "url": "https://framer.com/m/CTA-Section-06-TqLF.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-06",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Light/Wireframe/CTA%20Section%2006%20Wireframe.png",
+      "url": "https://framer.com/m/CTA-Section-06-Wireframe-N6TY.js",
+      "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-06-wireframe"
+    }
+  },
+  {
+    "key": "cta-section-07",
+    "title": "CTA Section 07",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Light/Design/CTA-Section-07.gif",
+    "url": "https://framer.com/m/CTA-Section-07-dEjt.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-07",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Light/Wireframe/CTA%20Section%2007%20Wireframe.png",
+      "url": "https://framer.com/m/CTA-Section-07-Wireframe-7yES.js",
+      "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-07-wireframe"
+    }
+  },
+  {
+    "key": "cta-section-08",
+    "title": "CTA Section 08",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Light/Design/CTA-Section-08.gif",
+    "url": "https://framer.com/m/CTA-Section-08-I6nu.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-08",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Light/Wireframe/CTA%20Section%2008%20Wireframe.png",
+      "url": "https://framer.com/m/CTA-Section-08-Wireframe-xZqA.js",
+      "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-08-wireframe"
+    }
+  },
+  {
+    "key": "cta-section-09",
+    "title": "CTA Section 09",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Light/Design/CTA-Section-09.gif",
+    "url": "https://framer.com/m/CTA-Section-09-SGzq.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-09",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Light/Wireframe/CTA%20Section%2009%20Wireframe.png",
+      "url": "https://framer.com/m/CTA-Section-09-Wireframe-JfLP.js",
+      "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-09-wireframe"
+    }
+  },
+  {
+    "key": "cta-section-10",
+    "title": "CTA Section 10",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Light/Design/CTA-Section-10.gif",
+    "url": "https://framer.com/m/CTA-Section-10-nmzw.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-10",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Light/Wireframe/CTA%20Section%2010%20Wireframe.png",
+      "url": "https://framer.com/m/CTA-Section-10-Wireframe-02Bc.js",
+      "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-10-wireframe"
+    }
+  },
+  {
+    "key": "cta-section-11",
+    "title": "CTA Section 11",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Light/Design/CTA-Section-11.gif",
+    "url": "https://framer.com/m/CTA-Section-11-LTV1.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-11",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Light/Wireframe/CTA%20Section%2011%20Wireframe.png",
+      "url": "https://framer.com/m/CTA-Section-11-Wireframe-zKUA.js",
+      "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-11-wireframe"
+    }
+  },
+  {
+    "key": "cta-section-12",
+    "title": "CTA Section 12",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Light/Design/CTA-Section-12.gif",
+    "url": "https://framer.com/m/CTA-Section-12-0i5s.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-12",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Light/Wireframe/CTA%20Section%2012%20Wireframe.png",
+      "url": "https://framer.com/m/CTA-Section-12-Wireframe-Ux4g.js",
+      "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-12-wireframe"
+    }
+  },
+  {
+    "key": "cta-section-13",
+    "title": "CTA Section 13",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Light/Design/CTA-Section-13.gif",
+    "url": "https://framer.com/m/CTA-Section-13-NrOI.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-13",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Light/Wireframe/CTA%20Section%2013%20Wireframe.png",
+      "url": "https://framer.com/m/CTA-Section-13-Wireframe-mzTq.js",
+      "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-13-wireframe"
+    }
+  },
+  {
+    "key": "cta-section-14",
+    "title": "CTA Section 14",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Light/Design/CTA-Section-14.gif",
+    "url": "https://framer.com/m/CTA-Section-14-Ir3i.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-14",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Light/Wireframe/CTA%20Section%2014%20Wireframe.png",
+      "url": "https://framer.com/m/CTA-Section-14-Wireframe-sMr9.js",
+      "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-14-wireframe"
+    }
+  },
+  {
+    "key": "cta-section-15",
+    "title": "CTA Section 15",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Light/Design/CTA-Section-15.gif",
+    "url": "https://framer.com/m/CTA-Section-15-RFAF.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-15",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Light/Wireframe/CTA%20Section%2015%20Wireframe.png",
+      "url": "https://framer.com/m/CTA-Section-15-Wireframe-krbK.js",
+      "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-15-wireframe"
+    }
+  },
+
+  {
+    "key": "cta-section-01-dark",
+    "title": "CTA Section 01",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Dark/Design/CTA-Section-01-Dark.gif",
+    "url": "https://framer.com/m/CTA-Section-01-Dark-inUo.js",
+    "type": "free",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-01-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Dark/Wireframe/CTA%20Section%2001%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/CTA-Section-01-Dark-Wireframe-jWoB.js",
+      "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-01-dark-wireframe"
+    }
+  },
+  {
+    "key": "cta-section-02-dark",
+    "title": "CTA Section 02",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Dark/Design/CTA-Section-02-Dark.gif",
+    "url": "https://framer.com/m/CTA-Section-02-Dark-CesW.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-02-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Dark/Wireframe/CTA%20Section%2002%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/CTA-Section-02-Dark-Wireframe-Xy3N.js",
+      "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-02-dark-wireframe"
+    }
+  },
+  {
+    "key": "cta-section-03-dark",
+    "title": "CTA Section 03",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Dark/Design/CTA-Section-03-Dark.gif",
+    "url": "https://framer.com/m/CTA-Section-03-Dark-sPZH.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-03-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Dark/Wireframe/CTA%20Section%2003%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/CTA-Section-03-Dark-Wireframe-GgSH.js",
+      "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-03-dark-wireframe"
+    }
+  },
+  {
+    "key": "cta-section-04-dark",
+    "title": "CTA Section 04",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Dark/Design/CTA-Section-04-Dark.gif",
+    "url": "https://framer.com/m/CTA-Section-04-Dark-OZcJ.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-04-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Dark/Wireframe/CTA%20Section%2004%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/CTA-Section-04-Dark-Wireframe-dKDg.js",
+      "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-04-dark-wireframe"
+    }
+  },
+  {
+    "key": "cta-section-05-dark",
+    "title": "CTA Section 05",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Dark/Design/CTA-Section-05-Dark.gif",
+    "url": "https://framer.com/m/CTA-Section-05-Dark-1fWY.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-05-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Dark/Wireframe/CTA%20Section%2005%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/CTA-Section-05-Dark-Wireframe-3cRt.js",
+      "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-05-dark-wireframe"
+    }
+  },
+  {
+    "key": "cta-section-06-dark",
+    "title": "CTA Section 06",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Dark/Design/CTA-Section-06-Dark.gif",
+    "url": "https://framer.com/m/CTA-Section-06-Dark-NOli.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-06-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Dark/Wireframe/CTA%20Section%2006%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/CTA-Section-06-Dark-Wireframe-Xyg9.js",
+      "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-06-dark-wireframe"
+    }
+  },
+  {
+    "key": "cta-section-07-dark",
+    "title": "CTA Section 07",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Dark/Design/CTA-Section-07-Dark.gif",
+    "url": "https://framer.com/m/CTA-Section-07-Dark-TUmw.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-07-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Dark/Wireframe/CTA%20Section%2007%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/CTA-Section-07-Dark-Wireframe-sBQR.js",
+      "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-07-dark-wireframe"
+    }
+  },
+  {
+    "key": "cta-section-08-dark",
+    "title": "CTA Section 08",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Dark/Design/CTA-Section-08-Dark.gif",
+    "url": "https://framer.com/m/CTA-Section-08-Dark-Aslu.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-08-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Dark/Wireframe/CTA%20Section%2008%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/CTA-Section-08-Dark-Wireframe-NyiI.js",
+      "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-08-dark-wireframe"
+    }
+  },
+  {
+    "key": "cta-section-09-dark",
+    "title": "CTA Section 09",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Dark/Design/CTA-Section-09-Dark.gif",
+    "url": "https://framer.com/m/CTA-Section-09-Dark-o5GJ.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-09-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Dark/Wireframe/CTA%20Section%2009%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/CTA-Section-09-Dark-Wireframe-XNHS.js",
+      "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-09-dark-wireframe"
+    }
+  },
+  {
+    "key": "cta-section-10-dark",
+    "title": "CTA Section 10",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Dark/Design/CTA-Section-10-Dark.gif",
+    "url": "https://framer.com/m/CTA-Section-10-Dark-fG24.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-10-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Dark/Wireframe/CTA%20Section%2010%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/CTA-Section-10-Dark-Wireframe-mQjW.js",
+      "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-10-dark-wireframe"
+    }
+  },
+  {
+    "key": "cta-section-11-dark",
+    "title": "CTA Section 11",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Dark/Design/CTA-Section-11-Dark.gif",
+    "url": "https://framer.com/m/CTA-Section-11-Dark-AcnC.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-11-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Dark/Wireframe/CTA%20Section%2011%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/CTA-Section-11-Dark-Wireframe-nSp4.js",
+      "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-11-dark-wireframe"
+    }
+  },
+  {
+    "key": "cta-section-12-dark",
+    "title": "CTA Section 12",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Dark/Design/CTA-Section-12-Dark.gif",
+    "url": "https://framer.com/m/CTA-Section-12-Dark-tAsY.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-12-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Dark/Wireframe/CTA%20Section%2012%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/CTA-Section-12-Dark-Wireframe-1Dds.js",
+      "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-12-dark-wireframe"
+    }
+  },
+  {
+    "key": "cta-section-13-dark",
+    "title": "CTA Section 13",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Dark/Design/CTA-Section-13-Dark.gif",
+    "url": "https://framer.com/m/CTA-Section-13-Dark-kVtA.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-13-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Dark/Wireframe/CTA%20Section%2013%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/CTA-Section-13-Dark-Wireframe-r8ym.js",
+      "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-13-dark-wireframe"
+    }
+  },
+  {
+    "key": "cta-section-14-dark",
+    "title": "CTA Section 14",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Dark/Design/CTA-Section-14-Dark.gif",
+    "url": "https://framer.com/m/CTA-Section-14-Dark-1mLY.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-14-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Dark/Wireframe/CTA%20Section%2014%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/CTA-Section-14-Dark-Wireframe-7ntp.js",
+      "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-14-dark-wireframe"
+    }
+  },
+  {
+    "key": "cta-section-15-dark",
+    "title": "CTA Section 15",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Dark/Design/CTA-Section-15-Dark.gif",
+    "url": "https://framer.com/m/CTA-Section-15-Dark-acGk.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-15-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/CTA%20Section/Dark/Wireframe/CTA%20Section%2015%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/CTA-Section-15-Dark-Wireframe-gYNB.js",
+      "previewUrl": "https://framerkit.site/preview/cta-section/cta-section-15-dark-wireframe"
+    }
+  }
+  ]
+}

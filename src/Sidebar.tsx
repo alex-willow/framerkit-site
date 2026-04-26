@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { ChevronDown, ChevronUp, LogOut } from "lucide-react";
 
@@ -12,6 +12,47 @@ type SidebarProps = {
   onLogout?: () => void;
   onSignInOpen?: () => void;
 };
+
+type CollapsibleSectionProps = {
+  title: string;
+  open: boolean;
+  onToggle: () => void;
+  onTitleClick?: () => void;
+  titleActive?: boolean;
+  children: React.ReactNode;
+};
+
+function CollapsibleSection({
+  title,
+  open,
+  onToggle,
+  onTitleClick,
+  titleActive = false,
+  children,
+}: CollapsibleSectionProps) {
+  return (
+    <div className="collapsible-section">
+      <div className="sidebar-header collapsible">
+        <button
+          type="button"
+          className={`sidebar-header-button ${titleActive ? "active" : ""}`}
+          onClick={onTitleClick ?? onToggle}
+        >
+          {title}
+        </button>
+        <button
+          type="button"
+          className="sidebar-header-toggle"
+          onClick={onToggle}
+          aria-label={open ? `Collapse ${title}` : `Expand ${title}`}
+        >
+          {open ? <ChevronDown size={16} /> : <ChevronUp size={16} />}
+        </button>
+      </div>
+      <div className={`collapsible-content ${open ? "open" : ""}`}>{children}</div>
+    </div>
+  );
+}
 
 export default function Sidebar({
   activeSection,
@@ -29,15 +70,12 @@ export default function Sidebar({
   const [layoutOpen, setLayoutOpen] = useState(false);
   const [componentsOpen, setComponentsOpen] = useState(false);
   const [templatesOpen, setTemplatesOpen] = useState(false);
-
-  const homeSections = [
-    { id: "overview", label: "Overview" },
-    { id: "getting-started", label: "Getting Started" },
-    { id: "layout-sections", label: "Layout Sections" },
-    { id: "ui-components", label: "UI Components" },
-    { id: "get-framerkit", label: "Get FramerKit" },
-    { id: "faq-contact", label: "FAQ" },
-  ];
+  const routeLayoutOpen = location.pathname.startsWith("/layout");
+  const routeComponentsOpen = location.pathname.startsWith("/components");
+  const routeTemplatesOpen = location.pathname.startsWith("/templates");
+  const isLayoutOpen = routeLayoutOpen || layoutOpen;
+  const isComponentsOpen = routeComponentsOpen || componentsOpen;
+  const isTemplatesOpen = routeTemplatesOpen || templatesOpen;
 
   const layoutSections = [
     { id: "navbar", label: "Navbar" },
@@ -69,36 +107,16 @@ export default function Sidebar({
     { id: "testimonialcard", label: "Testimonial Card" },
   ];
 
-  useEffect(() => {
-    if (!isMenuOpen) return;
-    const path = location.pathname;
-    if (path.startsWith("/components")) {
-      setComponentsOpen(true);
-      setLayoutOpen(false);
-      setTemplatesOpen(false);
-    } else if (path.startsWith("/layout")) {
-      setLayoutOpen(true);
-      setComponentsOpen(false);
-      setTemplatesOpen(false);
-    } else if (path.startsWith("/templates")) {
-      setTemplatesOpen(true);
-      setLayoutOpen(false);
-      setComponentsOpen(false);
-    } else {
-      setLayoutOpen(false);
-      setComponentsOpen(false);
-      setTemplatesOpen(false);
-    }
-  }, [isMenuOpen, location.pathname]);
-
-  const handleHomeSectionClick = (id: string) => {
-    onSectionChange(id);
+  const handleDocumentationClick = () => {
+    onSectionChange("overview");
     if (isMobile) onMenuClose();
-    if (location.pathname !== "/") {
-      navigate("/", { state: { scrollTo: id } });
-      return;
-    }
-    document.getElementById(id)?.scrollIntoView({ behavior: "auto" });
+    navigate("/#overview");
+  };
+
+  const handleResourcesClick = () => {
+    onSectionChange("resources");
+    if (isMobile) onMenuClose();
+    navigate("/resources");
   };
 
   const handleOtherSectionClick = (id: string, basePath: string) => {
@@ -107,9 +125,17 @@ export default function Sidebar({
     navigate(`/${basePath}/${id}`);
   };
 
+  const handleSectionOverviewClick = (basePath: string) => {
+    onSectionChange(basePath);
+    if (isMobile) onMenuClose();
+    navigate(`/${basePath}`);
+  };
+
   const isActive = (id: string, basePath?: string) => {
+    if (id === "documentation") return location.pathname === "/" && Boolean(location.hash);
     if (location.pathname === "/") return activeSection === id;
     if (basePath) return location.pathname === `/${basePath}/${id}`;
+    if (id === "resources") return location.pathname === "/resources" || location.pathname.startsWith("/resources/");
     return location.pathname === `/${id}`;
   };
 
@@ -124,32 +150,12 @@ export default function Sidebar({
       </button>
     ));
 
-  const CollapsibleSection = ({
-    title,
-    open,
-    setOpen,
-    children,
-  }: {
-    title: string;
-    open: boolean;
-    setOpen: (v: boolean) => void;
-    children: React.ReactNode;
-  }) => (
-    <div className="collapsible-section">
-      <div
-        className="sidebar-header collapsible"
-        onClick={() => setOpen(!open)}
-        style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
-      >
-        <span>{title}</span>
-        {open ? <ChevronDown size={16} /> : <ChevronUp size={16} />}
-      </div>
-      <div className={`collapsible-content ${open ? "open" : ""}`}>{children}</div>
-    </div>
-  );
-
   const renderTemplatesSection = () => (
-    <CollapsibleSection title="Templates" open={templatesOpen} setOpen={setTemplatesOpen}>
+    <CollapsibleSection
+      title="Templates"
+      open={isTemplatesOpen}
+      onToggle={() => setTemplatesOpen((current) => !current)}
+    >
       <button
         className={`sidebar-item ${location.pathname === "/templates/framerkitdaily" ? "active" : ""}`}
         onClick={() => {
@@ -175,22 +181,51 @@ export default function Sidebar({
 
       {/* Scrollable section content */}
       <div className="sidebar-scroll" style={{ flexGrow: 1, overflowY: "auto" }}>
-        <div className="sidebar-header">Getting Started</div>
-        {homeSections.map(({ id, label }) => (
-          <button
-            key={id}
-            className={`sidebar-item ${isActive(id) ? "active" : ""}`}
-            onClick={() => handleHomeSectionClick(id)}
-          >
-            {label}
-          </button>
-        ))}
+        <div className="sidebar-header">Documentation</div>
+        <button
+          className={`sidebar-item ${isActive("documentation") ? "active" : ""}`}
+          onClick={handleDocumentationClick}
+        >
+          Documentation
+        </button>
 
-        <CollapsibleSection title="Layout Sections" open={layoutOpen} setOpen={setLayoutOpen}>
+        <div className="sidebar-divider" role="separator" aria-hidden="true" />
+        <button
+          className={`sidebar-item ${isActive("resources") ? "active" : ""}`}
+          onClick={handleResourcesClick}
+        >
+          Resources
+        </button>
+
+        <CollapsibleSection
+          title="Layout Sections"
+          open={isLayoutOpen}
+          onToggle={() => setLayoutOpen((current) => !current)}
+          onTitleClick={() => handleSectionOverviewClick("layout")}
+          titleActive={location.pathname === "/layout"}
+        >
+          <button
+            className={`sidebar-item ${location.pathname === "/layout" ? "active" : ""}`}
+            onClick={() => handleSectionOverviewClick("layout")}
+          >
+            Overview
+          </button>
           {renderSectionItems(layoutSections, "layout")}
         </CollapsibleSection>
 
-        <CollapsibleSection title="Components" open={componentsOpen} setOpen={setComponentsOpen}>
+        <CollapsibleSection
+          title="Components"
+          open={isComponentsOpen}
+          onToggle={() => setComponentsOpen((current) => !current)}
+          onTitleClick={() => handleSectionOverviewClick("components")}
+          titleActive={location.pathname === "/components"}
+        >
+          <button
+            className={`sidebar-item ${location.pathname === "/components" ? "active" : ""}`}
+            onClick={() => handleSectionOverviewClick("components")}
+          >
+            Overview
+          </button>
           {renderSectionItems(componentSections, "components")}
         </CollapsibleSection>
 

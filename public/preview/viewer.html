@@ -449,62 +449,88 @@ function updateIframeHeight() {
     const iframeDoc = previewFrame.contentDocument || previewFrame.contentWindow.document;
     if (!iframeDoc) return;
 
-    const framerRoot = iframeDoc.querySelector('[data-framer-root]');
+    const componentRoot =
+      iframeDoc.querySelector('[data-framer-root]') ||
+      iframeDoc.querySelector('#main > section, #main > div') ||
+      iframeDoc.querySelector('#main');
+    const framerRoot = componentRoot || iframeDoc.body;
     if (!framerRoot) return;
 
     const isNavbar = window.location.pathname.includes('navbar');
-    const contentHeight = framerRoot.scrollHeight;
+    if (!isNavbar) {
+      framerRoot.style.setProperty('min-height', 'auto', 'important');
+      framerRoot.style.setProperty('height', 'auto', 'important');
+    }
+
+    const rootRect = framerRoot.getBoundingClientRect();
+    const main = iframeDoc.querySelector('#main');
+    const componentMeasurements = [
+      framerRoot.scrollHeight || 0,
+      framerRoot.offsetHeight || 0,
+      rootRect.height || 0,
+      main?.scrollHeight || 0,
+      main?.offsetHeight || 0,
+    ];
+    const fallbackMeasurements = componentRoot
+      ? []
+      : [
+          iframeDoc.body?.scrollHeight || 0,
+          iframeDoc.documentElement?.scrollHeight || 0,
+        ];
+    const contentHeight = Math.max(...componentMeasurements, ...fallbackMeasurements);
 
     let newHeight;
 
     if (isNavbar) {
       newHeight = Math.max(contentHeight, 600);
-      if (Math.abs(newHeight - lastHeight) > 2) {
-        resizableWrapper.style.height = newHeight + 'px';
-        lastHeight = newHeight;
-      }
+      setPreviewHeight(newHeight);
       return;
     }
-
-    framerRoot.style.setProperty('min-height', 'auto', 'important');
-    framerRoot.style.setProperty('height', 'auto', 'important');
 
     if (isFullscreen) {
       newHeight = Math.max(contentHeight, window.innerHeight - 60);
     } else {
-      // 🔹 Ограничиваем рост до текущей ширины контейнера
-      const maxAllowedHeight = framerRoot.clientHeight; 
-      newHeight = Math.min(Math.max(contentHeight, 300), maxAllowedHeight);
+      newHeight = Math.max(contentHeight, 300);
     }
 
     // 🔹 Округляем вниз, чтобы дробные пиксели не прыгали
     newHeight = Math.floor(newHeight);
 
-    if (Math.abs(newHeight - lastHeight) > 2) {
-      requestAnimationFrame(() => {
-        resizableWrapper.style.height = newHeight + 'px';
-        lastHeight = newHeight;
-      });
-    }
+    setPreviewHeight(newHeight);
 
   } catch (e) {
     console.log('⚠️ CORS blocks iframe access:', e);
   }
 }
   
+function updatePreviewAlignment(height) {
+  if (!centerWrapper || !previewContainer) return;
+  const availableHeight = Math.max(0, previewContainer.clientHeight - 40);
+  centerWrapper.classList.toggle('content-overflows', height > availableHeight);
+}
+
+function setPreviewHeight(height) {
+  const newHeight = Math.max(Math.floor(height), 300);
+  updatePreviewAlignment(newHeight);
+
+  if (Math.abs(newHeight - lastHeight) > 2) {
+    requestAnimationFrame(() => {
+      resizableWrapper.style.height = newHeight + 'px';
+      lastHeight = newHeight;
+    });
+  }
+}
+
     // 🔥 Слушаем postMessage от iframe
     window.addEventListener('message', (event) => {
       if (event.data?.type === 'resize') {
-        const newHeight = event.data.height;
+        const newHeight = Number(event.data.height);
         if (heightDebounce) clearTimeout(heightDebounce);
         
         heightDebounce = setTimeout(() => {
-          if (newHeight && Math.abs(newHeight - lastHeight) > 2) {
-            requestAnimationFrame(() => {
-              resizableWrapper.style.height = newHeight + 'px';
-              lastHeight = newHeight;
-              console.log('✅ Height from postMessage:', newHeight + 'px');
-            });
+          if (Number.isFinite(newHeight) && newHeight > 0) {
+            setPreviewHeight(newHeight);
+            console.log('✅ Height from postMessage:', newHeight + 'px');
           }
         }, 100);
       }

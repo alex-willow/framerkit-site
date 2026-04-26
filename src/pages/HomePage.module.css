@@ -1,5 +1,4 @@
 /* HomePage.module.css */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 .heroSection {
     position: relative;
@@ -15,44 +14,201 @@
     text-align: center;
     overflow: hidden;
     background: #ffffff;
+    user-select: none;
+    -webkit-user-select: none;
   }
+
+.heroSection button,
+.heroSection a,
+.heroSection input,
+.heroSection textarea {
+  user-select: auto;
+  -webkit-user-select: auto;
+}
 
 :global([data-framer-theme="dark"]) .heroSection {
   background: #14151c;
 }
-  
-  /* Свет в левом верхнем углу */
+
+/* Клеточный фон (grid pattern) с маской снизу */
+.gridPattern {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-repeat: repeat;
+  background-position: center top;
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, rgba(15, 23, 42, 0.11) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.11) 1px, transparent 1px);
+  opacity: 0.5;
+  z-index: 0;
+  pointer-events: none;
+  /* Маска: видно сверху, исчезает книзу */
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 85%);
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 85%);
+}
+
+:global(.hero-grid-snake-layer) {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+:global([data-framer-theme="dark"]) .gridPattern {
+  background-image:
+    linear-gradient(to right, rgba(226, 232, 240, 0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(226, 232, 240, 0.12) 1px, transparent 1px);
+  opacity: 0.44;
+  /* В темной теме маска чуть сильнее */
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 90%);
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 90%);
+}
+
+  /* Реалистичные лучи света сверху - sun rays */
+.lightRays {
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 600px;
+  background: repeating-linear-gradient(
+    180deg,
+    rgba(255,255,255,0) 0px,
+    rgba(255,255,255,0) 20px,
+    rgba(255,255,255,0.06) 40px,
+    rgba(255,255,255,0.12) 60px,
+    rgba(255,255,255,0.06) 80px,
+    rgba(255,255,255,0) 100px
+  );
+  filter: blur(8px);
+  opacity: 0.8;
+  z-index: 0;
+  pointer-events: none;
+  animation: rayShimmer 6s ease-in-out infinite;
+}
+
+/* Второй слой - расходящиеся лучи под углом */
+.lightRays::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -50%;
+  right: -50%;
+  bottom: 0;
+  background: conic-gradient(
+    from 180deg at 50% 0%,
+    transparent 0deg,
+    rgba(255,255,255,0.04) 15deg,
+    rgba(255,255,255,0.1) 30deg,
+    rgba(255,255,255,0.04) 45deg,
+    transparent 60deg,
+    transparent 120deg,
+    rgba(255,255,255,0.04) 135deg,
+    rgba(255,255,255,0.1) 150deg,
+    rgba(255,255,255,0.04) 165deg,
+    transparent 180deg
+  );
+  filter: blur(40px);
+  animation: rayShimmer2 10s ease-in-out infinite;
+}
+
+/* Световое пятно сверху - источник света */
+.lightRays::after {
+  content: '';
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  height: 200px;
+  background: radial-gradient(
+    ellipse at center top,
+    rgba(255,255,255,0.4) 0%,
+    rgba(255,255,255,0.2) 30%,
+    transparent 70%
+  );
+  filter: blur(60px);
+}
+
+@keyframes rayShimmer {
+  0%, 100% { 
+    opacity: 0.6;
+    transform: translateX(-50%) scaleY(1);
+  }
+  50% { 
+    opacity: 1;
+    transform: translateX(-50%) scaleY(1.05);
+  }
+}
+
+@keyframes rayShimmer2 {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+:global([data-framer-theme="dark"]) .lightRays {
+  background: repeating-linear-gradient(
+    180deg,
+    rgba(255,255,255,0) 0px,
+    rgba(255,255,255,0) 20px,
+    rgba(255,255,255,0.04) 40px,
+    rgba(255,255,255,0.08) 60px,
+    rgba(255,255,255,0.04) 80px,
+    rgba(255,255,255,0) 100px
+  );
+  opacity: 0.6;
+}
+
+:global([data-framer-theme="dark"]) .lightRays::before {
+  background: conic-gradient(
+    from 180deg at 50% 0%,
+    transparent 0deg,
+    rgba(255,255,255,0.03) 15deg,
+    rgba(255,255,255,0.06) 30deg,
+    rgba(255,255,255,0.03) 45deg,
+    transparent 60deg,
+    transparent 120deg,
+    rgba(255,255,255,0.03) 135deg,
+    rgba(255,255,255,0.06) 150deg,
+    rgba(255,255,255,0.03) 165deg,
+    transparent 180deg
+  );
+}
+
+:global([data-framer-theme="dark"]) .lightRays::after {
+  background: radial-gradient(
+    ellipse at center top,
+    rgba(255,255,255,0.3) 0%,
+    rgba(255,255,255,0.15) 30%,
+    transparent 70%
+  );
+}
+
+/* Свет в левом верхнем углу - скрыт */
 .lightTop {
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-radius: 100%;
-    filter: blur(60px);
-    opacity: 0.2;
-    z-index: 0;
-    pointer-events: none;
-    width: clamp(200px, 25vw, 400px);  /* масштабируется по ширине экрана */
-    height: clamp(200px, 25vw, 400px);
-    background: linear-gradient(135deg, #6E3FF3 0%, #FF6BDD 100%);
+    display: none;
   }
   
-  /* Свет в правом верхнем углу */
+  /* Свет в правом верхнем углу - скрыт */
   .lightMid {
-    position: absolute;
-    top: 0;
-    right: 0;
-    border-radius: 100%;
-    filter: blur(60px);
-    opacity: 0.15;
-    z-index: 0;
-    pointer-events: none;
-    width: clamp(200px, 25vw, 400px);  /* масштабируется по ширине экрана */
-    height: clamp(200px, 25vw, 400px);
-    background: linear-gradient(135deg, #6E3FF3 0%, #FF6BDD 100%);
+    display: none;
   }
-  
-  
+
+/* Лучи света и видео убраны */
+.lightRays,
+.lightVideo {
+  display: none;
+}
   .container {
+    position: relative;
+    z-index: 2;
     max-width: 920px;
     width: 100%;
     display: flex;
@@ -60,44 +216,73 @@
     align-items: center;
     gap: 20px;
   }
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: rgba(255, 255, 255, 0.84);
+  color: #445064;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+  backdrop-filter: blur(8px);
+}
+
+.eyebrow svg {
+  flex-shrink: 0;
+  color: #6E3FF3;
+}
+
+:global([data-framer-theme="dark"]) .eyebrow {
+  background: rgba(35, 36, 48, 0.82);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #d2d8e3;
+}
+
+:global([data-framer-theme="dark"]) .eyebrow svg {
+  color: #b8a5ff;
+}
   
   
-/* Логотипы */
-/* Логотипы */
 .logos {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin: 0;
-  }
-  
-  .logos .logo-item {
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
-    background: #fff; /* ← белый фон, как на скриншоте */
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 0;
+}
+
+.logos .logo-item {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
 
 :global([data-framer-theme="dark"]) .logos .logo-item {
   background: #232430;
 }
-  
-  .logos .logo-item img {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
-    
-  }
+
+.logos .logo-item img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
   
 
   /* === Заголовок === */
 .title {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: var(--font-family-heading);
   font-weight: 800;
   color: #111827;
   margin: 0;
@@ -107,7 +292,7 @@
 
 /* Символы заголовка с анимацией */
 .animatedChar {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: var(--font-family-heading);
   display: inline-block;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -121,7 +306,7 @@
 
 /* Каждая строка заголовка */
 .titleLine {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: var(--font-family-heading);
   display: block;
   width: 100%;
   white-space: normal;       /* разрешаем перенос */
@@ -133,11 +318,11 @@
 
 /* Подзаголовок */
 .subtitle {
-  font-size: 18px;
-  line-height: 1.6;
+  font-size: var(--docs-font-subtitle);
+  line-height: 1.65;
   color: #4b5563;
   margin: 0;
-  max-width: 600px;
+  max-width: 680px;
 }
 
 :global([data-framer-theme="dark"]) .subtitle {
@@ -183,23 +368,24 @@
 
   
   
-  .buttons {
-    display: flex;
-    gap: 10px;
-    width: 100%;
-    max-width: 400px;
-    justify-content: center;
-  }
+.buttons {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  max-width: 460px;
+  justify-content: center;
+  align-items: center;
+}
 
   
   
   /* Аватарки */
-  .testimonials {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-  }
+.testimonials {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
   
   .avatarRow {
     display: flex;
@@ -215,22 +401,24 @@
     box-shadow: 0 0 0 2px #e0d6ff;
   }
   
-  .statsText {
-    font-size: 14px;
-    color: #374151;
-    margin: 0;
-  }
+.statsText {
+  font-size: 14px;
+  color: #374151;
+  margin: 0;
+  font-weight: 600;
+}
 
 :global([data-framer-theme="dark"]) .statsText {
   color: #e5e7eb;
 }
   
-  .statsNote {
-    font-size: 12px;
-    color: #6b7280;
-    font-style: italic;
-    margin: 0;
-  }
+.statsNote {
+  font-size: 12px;
+  color: #6b7280;
+  font-style: normal;
+  margin: 0;
+  line-height: 1.5;
+}
 
 :global([data-framer-theme="dark"]) .statsNote {
   color: #9ca3af;

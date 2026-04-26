@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import { Copy, CircleCheck, Lock, Eye } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import SectionHeader from "../../components/SectionHeader";
 import SEO from "../../components/SEO";
+import { fetchJsonWithCache, readJsonCache } from "../../lib/remoteCache";
 
 type ComponentItem = {
   key: string;
@@ -25,12 +27,18 @@ type GalleryPageProps = {
 
 // ✅ Исправлен PLACEHOLDER (убраны пробелы)
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
+const DATA_URL = "https://raw.githubusercontent.com/alex-willow/framerkit-data/main/gallery.json";
+const CACHE_KEY = `remote:${DATA_URL}`;
+const DATA_KEY = "gallery" as const;
 
 export default function GalleryPage({ isAuthenticated, setIsSignInOpen }: GalleryPageProps) {
-  const [items, setItems] = useState<ComponentItem[]>([]);
-  const [loading, setLoading] = useState(true);
+  const initialItems = readJsonCache<Record<string, ComponentItem[]>>(CACHE_KEY)?.[DATA_KEY] || [];
+  const [items, setItems] = useState<ComponentItem[]>(initialItems);
+  const [loading, setLoading] = useState(initialItems.length === 0);
   const [error, setError] = useState<string | null>(null);
   const [filter, setFilter] = useState<"light" | "dark">("light");
+  const [availabilityFilter, setAvailabilityFilter] = useState<"paid" | "free">("free");
+  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
 
   useEffect(() => {
     const currentTheme = document.documentElement.getAttribute("data-framer-theme")
@@ -41,23 +49,41 @@ export default function GalleryPage({ isAuthenticated, setIsSignInOpen }: Galler
     }
 
     const handleGlobalThemeChange = (event: Event) => {
-      const nextTheme = (event as CustomEvent<"light" | "dark">).detail;
+      const detail = (event as CustomEvent<{ theme?: "light" | "dark" } | "light" | "dark">).detail;
+      const nextTheme = typeof detail === "string" ? detail : detail?.theme;
       if (nextTheme === "light" || nextTheme === "dark") {
         setFilter(nextTheme);
       }
     };
 
-    window.addEventListener("framerkit-theme-change", handleGlobalThemeChange as EventListener);
+    window.addEventListener("framerkit-component-theme-change", handleGlobalThemeChange as EventListener);
     return () => {
-      window.removeEventListener("framerkit-theme-change", handleGlobalThemeChange as EventListener);
+      window.removeEventListener("framerkit-component-theme-change", handleGlobalThemeChange as EventListener);
     };
   }, []);
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
   const [hoveredPreviewKey, setHoveredPreviewKey] = useState<string | null>(null);
-  const [isWireframeMode, setIsWireframeMode] = useState(true);
+  // Инициализируем wireframeMode прямо из localStorage
+  const [isWireframeMode, setIsWireframeMode] = useState(() => {
+    try {
+      const saved = localStorage.getItem("wireframeMode");
+      return saved !== null ? saved === "true" : true;
+    } catch {
+      return true;
+    }
+  });
 
   const galleryRef = useRef<HTMLDivElement>(null);
+
+  // Сохраняем wireframeMode при изменении
+  useEffect(() => {
+    try {
+      localStorage.setItem("wireframeMode", isWireframeMode.toString());
+    } catch (e) {
+      console.warn("Failed to save wireframeMode to localStorage", e);
+    }
+  }, [isWireframeMode]);
 
   // ================================
   // Загрузка данных
@@ -65,12 +91,10 @@ export default function GalleryPage({ isAuthenticated, setIsSignInOpen }: Galler
   useEffect(() => {
     const load = async () => {
       try {
-        const res = await fetch(
-          "https://raw.githubusercontent.com/alex-willow/framerkit-data/main/gallery.json",
-          { cache: "force-cache" }
+        const json = await fetchJsonWithCache<Record<string, ComponentItem[]>>(
+          CACHE_KEY,
+          DATA_URL
         );
-        if (!res.ok) throw new Error("Failed to load gallery");
-        const json = await res.json();
         const loadedItems = json.gallery || [];
         setItems(loadedItems);
         setLoading(false);
@@ -106,10 +130,16 @@ export default function GalleryPage({ isAuthenticated, setIsSignInOpen }: Galler
   // Фильтрация (useMemo)
   // ================================
   const filtered = useMemo(() => {
-    return items.filter(item =>
-      filter === "dark" ? item.key.includes("dark") : !item.key.includes("dark")
-    );
-  }, [items, filter]);
+    const base = items.filter((item) => {
+      const themeMatch =
+        filter === "dark" ? item.key.includes("dark") : !item.key.includes("dark");
+
+      if (!themeMatch) return false;
+      return item.type === availabilityFilter;
+    });
+
+    return sortDirection === "asc" ? base : [...base].reverse();
+  }, [items, filter, availabilityFilter, sortDirection]);
 
   // ================================
   // Copy
@@ -143,6 +173,19 @@ export default function GalleryPage({ isAuthenticated, setIsSignInOpen }: Galler
       {/* 🔥 H1 для поисковиков (визуально скрыт, но индексируется) */}
       <h1 className="sr-only">Gallery Section Components for Framer — Portfolio Image Grids</h1>
 
+      {/* 🔥 Breadcrumb + Header */}
+      <div className="component-page-header">
+        <nav className="component-breadcrumb">
+          <Link to="/layout" className="breadcrumb-link">Layout Sections</Link>
+          <span className="breadcrumb-separator">/</span>
+          <span className="breadcrumb-current">Gallery</span>
+        </nav>
+        <h2 className="component-page-title">Gallery Components</h2>
+        <p className="component-page-description">
+          Use gallery sections when visuals carry the decision: products, portfolio, or before/after work. Keep layout clean and let the strongest examples appear first.
+        </p>
+      </div>
+
       <SectionHeader
         title="Gallery"
         count={filtered.length}
@@ -151,6 +194,10 @@ export default function GalleryPage({ isAuthenticated, setIsSignInOpen }: Galler
         loading={loading}
         isWireframeMode={isWireframeMode}
         onWireframeModeChange={setIsWireframeMode}
+        availabilityFilter={availabilityFilter}
+        onAvailabilityFilterChange={setAvailabilityFilter}
+        sortDirection={sortDirection}
+        onSortDirectionChange={setSortDirection}
         hideWireframeToggle={false}
         renderMetaBelow={true}
       />
@@ -183,12 +230,13 @@ export default function GalleryPage({ isAuthenticated, setIsSignInOpen }: Galler
               return (
                 <motion.div
                   key={item.key}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
                   transition={{ duration: 0.2 }}
                   className={`card ${filter === "dark" ? "card-dark" : "card-light"}`}
                 >
                   <div className="cardImage">
+                    {item.type === "free" && <span className="card-free-badge">Free</span>}
                     {/* 🔥 Alt-текст с ключевыми словами */}
                     <img 
                       src={displayImage} 
@@ -208,7 +256,7 @@ export default function GalleryPage({ isAuthenticated, setIsSignInOpen }: Galler
                             e.stopPropagation();
 
                             try {
-                              let path = displayPreviewUrl.trim();
+                              const path = displayPreviewUrl.trim();
                               let cleanPath = "";
 
                               if (path.startsWith("/")) {
@@ -227,7 +275,7 @@ export default function GalleryPage({ isAuthenticated, setIsSignInOpen }: Galler
                           onMouseEnter={() => setHoveredPreviewKey(item.key)}
                           onMouseLeave={() => setHoveredPreviewKey(null)}
                         >
-                          <Eye size={16} color={filter === "dark" ? "#ccc" : "#5b6170"} />
+                          <Eye size={16} color="currentColor" />
                           {hoveredPreviewKey === item.key && (
                             <div className="tooltip">Preview</div>
                           )}
@@ -237,7 +285,7 @@ export default function GalleryPage({ isAuthenticated, setIsSignInOpen }: Galler
                           className="iconButton disabled"
                           style={{ cursor: "not-allowed", opacity: 0.4 }}
                         >
-                          <Eye size={16} color={filter === "dark" ? "#666" : "#999"} />
+                          <Eye size={16} color="currentColor" />
                           {hoveredPreviewKey === item.key && (
                             <div className="tooltip">Coming soon</div>
                           )}
@@ -256,9 +304,9 @@ export default function GalleryPage({ isAuthenticated, setIsSignInOpen }: Galler
                         {isCopied ? (
                           <CircleCheck size={20} color="#22c55e" strokeWidth={2.5} />
                         ) : canCopy ? (
-                          <Copy size={16} color={filter === "dark" ? "#ccc" : "#5b6170"} />
+                          <Copy size={16} color="currentColor" />
                         ) : (
-                          <Lock size={16} color={filter === "dark" ? "#ccc" : "#5b6170"} />
+                          <Lock size={16} color="currentColor" />
                         )}
 
                         {(isCopied || hoveredKey === item.key) && (

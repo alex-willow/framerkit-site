@@ -1,0 +1,53 @@
+{
+  "accordion": [
+    {
+      "key": "Accordion-01",
+      "title": "Accordion 01",
+      "image": "https://storage.googleapis.com/framerkit/Accordion%2001.png",
+      "url": "https://framer.com/m/Accordion-01-EDvy.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Accordion-02",
+      "title": "Accordion 02",
+      "image": "https://storage.googleapis.com/framerkit/Accordion%2002.png",
+      "url": "https://framer.com/m/Accordion-02-djX3.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Accordion-03",
+      "title": "Accordion 03",
+      "image": "https://storage.googleapis.com/framerkit/Accordion%2003.png",
+      "url": "https://framer.com/m/Accordion-03-1qgU.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+
+    {
+      "key": "Accordion-01-dark",
+      "title": "Accordion 01",
+      "image": "https://storage.googleapis.com/framerkit/Accordion%2001%20Dark.png",
+      "url": "https://framer.com/m/Accordion-01-Dark-MKl0.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Accordion-02-dark",
+      "title": "Accordion 02",
+      "image": "https://storage.googleapis.com/framerkit/Accordion%2002%20Dark.png",
+      "url": "https://framer.com/m/Accordion-02-Dark-ysTT.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Accordion-03-dark",
+      "title": "Accordion 03",
+      "image": "https://storage.googleapis.com/framerkit/Accordion%2003%20Dark.png",
+      "url": "https://framer.com/m/Accordion-03-Dark-bwdO.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    }
+  ]
+}

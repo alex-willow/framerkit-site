@@ -6,11 +6,18 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const API_KEY = "cc61ca74-d783-46f2-94f2-7e276f6ce927"; // вставь сюда свой ключ Polar
-const PRODUCT_ID = "f87cb57a-2189-4c7b-9b88-588ef917096c"; // ID вашего продукта в Polar
+const API_KEY = process.env.POLAR_API_KEY;
+const PRODUCT_ID = process.env.POLAR_PRODUCT_ID;
 
 app.post("/create-checkout", async (req, res) => {
   try {
+    if (!API_KEY || !PRODUCT_ID) {
+      res.status(500).json({
+        error: "Polar API credentials are not configured.",
+      });
+      return;
+    }
+
     const { email } = req.body; // email покупателя
 
     const response = await fetch("https://api.polar.sh/v1/checkouts", {

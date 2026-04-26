@@ -1,0 +1,20 @@
+{
+  "avatargroup": [
+    {
+      "key": "Avatargroup-01",
+      "title": "Avatar Group 01",
+      "image": "https://storage.googleapis.com/framerkit/AvatarGroup.png",
+      "url": "https://framer.com/m/AvatarGroup-01-cmsR.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Avatargroup-01-dark",
+      "title": "Avatar Group 01",
+      "image": "https://storage.googleapis.com/framerkit/Avatar%20Group%20Dark.png",
+      "url": "https://framer.com/m/AvatarGroup-01-Dark-izcD.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    }
+  ]
+}

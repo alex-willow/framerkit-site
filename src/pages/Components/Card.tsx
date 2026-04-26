@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import { Copy, CircleCheck, Lock } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import SectionHeader from "../../components/SectionHeader";
 import SEO from "../../components/SEO";
+import { fetchJsonWithCache, readJsonCache } from "../../lib/remoteCache";
 
 type ComponentItem = {
   key: string;
@@ -19,10 +21,14 @@ type CardPageProps = {
 
 // ✅ Исправлен PLACEHOLDER (убраны пробелы)
 const PLACEHOLDER = "https://via.placeholder.com/280x160?text=No+Image";
+const DATA_URL = "https://raw.githubusercontent.com/alex-willow/framerkit-data/components/card.json";
+const CACHE_KEY = `remote:${DATA_URL}`;
+const DATA_KEY = "card" as const;
 
 export default function CardPage({ isAuthenticated, setIsSignInOpen }: CardPageProps) {
-  const [items, setItems] = useState<ComponentItem[]>([]);
-  const [loading, setLoading] = useState(true);
+  const initialItems = readJsonCache<Record<string, ComponentItem[]>>(CACHE_KEY)?.[DATA_KEY] || [];
+  const [items, setItems] = useState<ComponentItem[]>(initialItems);
+  const [loading, setLoading] = useState(initialItems.length === 0);
   const [error, setError] = useState<string | null>(null);
   const [filter, setFilter] = useState<"light" | "dark">("light");
 
@@ -35,15 +41,16 @@ export default function CardPage({ isAuthenticated, setIsSignInOpen }: CardPageP
     }
 
     const handleGlobalThemeChange = (event: Event) => {
-      const nextTheme = (event as CustomEvent<"light" | "dark">).detail;
+      const detail = (event as CustomEvent<{ theme?: "light" | "dark" } | "light" | "dark">).detail;
+      const nextTheme = typeof detail === "string" ? detail : detail?.theme;
       if (nextTheme === "light" || nextTheme === "dark") {
         setFilter(nextTheme);
       }
     };
 
-    window.addEventListener("framerkit-theme-change", handleGlobalThemeChange as EventListener);
+    window.addEventListener("framerkit-component-theme-change", handleGlobalThemeChange as EventListener);
     return () => {
-      window.removeEventListener("framerkit-theme-change", handleGlobalThemeChange as EventListener);
+      window.removeEventListener("framerkit-component-theme-change", handleGlobalThemeChange as EventListener);
     };
   }, []);
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
@@ -57,12 +64,10 @@ export default function CardPage({ isAuthenticated, setIsSignInOpen }: CardPageP
   useEffect(() => {
     const load = async () => {
       try {
-        const res = await fetch(
-          "https://raw.githubusercontent.com/alex-willow/framerkit-data/components/card.json",
-          { cache: "force-cache" }
+        const json = await fetchJsonWithCache<Record<string, ComponentItem[]>>(
+          CACHE_KEY,
+          DATA_URL
         );
-        if (!res.ok) throw new Error("Failed to load card data");
-        const json = await res.json();
         const loadedItems = json.card || [];
         setItems(loadedItems);
         setLoading(false);
@@ -135,12 +140,29 @@ export default function CardPage({ isAuthenticated, setIsSignInOpen }: CardPageP
       {/* 🔥 H1 для поисковиков (визуально скрыт, но индексируется) */}
       <h1 className="sr-only">Card Components for Framer — Content & Product Cards</h1>
 
+      {/* Header intro */}
+
+      <div className="component-page-header">
+        <nav className="component-breadcrumb">
+          <Link to="/components" className="breadcrumb-link">UI Components</Link>
+          <span className="breadcrumb-separator">/</span>
+          <span className="breadcrumb-current">Card</span>
+        </nav>
+        <h2 className="component-page-title">Card Components</h2>
+        <p className="component-page-description">
+          Cards package content into clean, scannable units. Use them for feature lists, blog previews,
+          dashboards, and any repeatable content block.
+        </p>
+      </div>
+
       <SectionHeader
         title="Card"
         count={filtered.length}
         filter={filter}
         onFilterChange={setFilter}
         loading={loading}
+        hideTitle
+        renderMetaBelow={true}
       />
 
       <div className="gallery-scroll-area" ref={galleryRef}>
@@ -159,8 +181,8 @@ export default function CardPage({ isAuthenticated, setIsSignInOpen }: CardPageP
               return (
                 <motion.div
                   key={item.key}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
                   transition={{ duration: 0.2 }}
                   className={`card ${filter === "dark" ? "card-dark" : "card-light"}`}
                 >

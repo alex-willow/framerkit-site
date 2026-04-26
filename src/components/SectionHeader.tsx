@@ -1,5 +1,15 @@
-import { Sun, Moon, Paintbrush, SquareDashed } from "lucide-react";
-import { useState, useEffect } from "react";
+import {
+  Sun,
+  Moon,
+  Paintbrush,
+  SquareDashed,
+  ArrowUpDown,
+  Gift,
+  Lock,
+  Search,
+  X,
+} from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 type SectionHeaderProps = {
   title: string;
@@ -13,6 +23,15 @@ type SectionHeaderProps = {
   onWireframeModeChange?: (mode: boolean) => void;
   hideWireframeToggle?: boolean;
   renderMetaBelow?: boolean;
+  hideTitle?: boolean;
+  availabilityFilter?: "paid" | "free";
+  onAvailabilityFilterChange?: (filter: "paid" | "free") => void;
+  sortDirection?: "asc" | "desc";
+  onSortDirectionChange?: (direction: "asc" | "desc") => void;
+  controlsAlign?: "distributed" | "left";
+  searchValue?: string;
+  onSearchValueChange?: (value: string) => void;
+  searchPlaceholder?: string;
 };
 
 type ModeToggleProps = {
@@ -24,6 +43,16 @@ type ModeToggleProps = {
   inactiveLabel: string;
 };
 
+const resetControlInteraction = (target?: EventTarget | null) => {
+  if (target instanceof HTMLElement) {
+    target.blur();
+    return;
+  }
+  if (document.activeElement instanceof HTMLElement) {
+    document.activeElement.blur();
+  }
+};
+
 function ModeToggle({
   isActive,
   onToggle,
@@ -32,43 +61,18 @@ function ModeToggle({
   activeLabel,
   inactiveLabel,
 }: ModeToggleProps) {
-  const [showTooltip, setShowTooltip] = useState(false);
-
-  useEffect(() => {
-    const handleVisibilityChange = () => {
-      if (document.hidden) setShowTooltip(false);
-    };
-    const handleBlur = () => setShowTooltip(false);
-
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-    window.addEventListener('blur', handleBlur);
-
-    return () => {
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-      window.removeEventListener('blur', handleBlur);
-    };
-  }, []);
-
   return (
     <>
       <button
         type="button"
-        className={`theme-toggle-btn ${isActive ? "active" : ""}`}
+        className={`component-theme-toggle-btn ${isActive ? "active" : ""}`}
         onClick={() => {
-          setShowTooltip(false);
           onToggle();
         }}
-        onMouseEnter={() => setShowTooltip(true)}
-        onMouseLeave={() => setShowTooltip(false)}
+        onMouseUp={(event) => resetControlInteraction(event.currentTarget)}
         aria-label={isActive ? activeLabel : inactiveLabel}
-        title=""
       >
         {isActive ? activeIcon : inactiveIcon}
-        {showTooltip && (
-          <div className="toggle-tooltip theme-toggle-tooltip">
-            {isActive ? activeLabel : inactiveLabel}
-          </div>
-        )}
       </button>
     </>
   );
@@ -88,6 +92,7 @@ function WireframeToggle({
         <button
           className={`mode-toggle-btn ${isWireframeMode ? 'active' : ''}`}
           onClick={() => onWireframeModeChange(true)}
+          onMouseUp={(event) => resetControlInteraction(event.currentTarget)}
           type="button"
           aria-label="Wireframe mode"
         >
@@ -97,12 +102,157 @@ function WireframeToggle({
         <button
           className={`mode-toggle-btn ${!isWireframeMode ? 'active' : ''}`}
           onClick={() => onWireframeModeChange(false)}
+          onMouseUp={(event) => resetControlInteraction(event.currentTarget)}
           type="button"
           aria-label="Design mode"
         >
           <Paintbrush size={16} strokeWidth={2} />
           <span>Design</span>
         </button>
+      </div>
+    </div>
+  );
+}
+
+function AvailabilityToggle({
+  value,
+  onChange,
+}: {
+  value: "paid" | "free";
+  onChange: (next: "paid" | "free") => void;
+}) {
+  return (
+    <div className="availability-toggle-wrapper">
+      <div className="availability-toggle-group">
+        <button
+          className={`availability-toggle-btn ${value === "free" ? "active" : ""}`}
+          onClick={() => onChange("free")}
+          onMouseUp={(event) => resetControlInteraction(event.currentTarget)}
+          type="button"
+          aria-label="Show free only"
+        >
+          <Gift size={14} strokeWidth={2} />
+          Free
+        </button>
+        <button
+          className={`availability-toggle-btn ${value === "paid" ? "active" : ""}`}
+          onClick={() => onChange("paid")}
+          onMouseUp={(event) => resetControlInteraction(event.currentTarget)}
+          type="button"
+          aria-label="Show all"
+        >
+          <Lock size={14} strokeWidth={2} />
+          All
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function SortToggle({
+  direction,
+  onChange,
+}: {
+  direction: "asc" | "desc";
+  onChange: (next: "asc" | "desc") => void;
+}) {
+  const isDesc = direction === "desc";
+  return (
+    <button
+      type="button"
+      className={`section-sort-toggle-btn ${isDesc ? "active" : ""}`}
+      onClick={() => onChange(isDesc ? "asc" : "desc")}
+      onMouseUp={(event) => resetControlInteraction(event.currentTarget)}
+      aria-label={isDesc ? "Descending order" : "Ascending order"}
+    >
+      <ArrowUpDown size={16} strokeWidth={2} />
+    </button>
+  );
+}
+
+function InlineSearch({
+  value,
+  onChange,
+  placeholder = "Search...",
+}: {
+  value: string;
+  onChange: (value: string) => void;
+  placeholder?: string;
+}) {
+  const [isExpanded, setIsExpanded] = useState(Boolean(value));
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    if (value && !isExpanded) {
+      setIsExpanded(true);
+    }
+  }, [isExpanded, value]);
+
+  useEffect(() => {
+    if (!isExpanded) return;
+    window.requestAnimationFrame(() => {
+      inputRef.current?.focus();
+      inputRef.current?.select();
+    });
+  }, [isExpanded]);
+
+  const collapseIfEmpty = () => {
+    if (!value.trim()) {
+      setIsExpanded(false);
+    }
+  };
+
+  return (
+    <div
+      className={`section-inline-search-shell ${
+        isExpanded ? "is-expanded" : "is-collapsed"
+      }`}
+    >
+      <button
+        type="button"
+        className={`section-inline-search-collapsed ${
+          isExpanded ? "is-hidden" : "is-active"
+        }`}
+        onClick={() => setIsExpanded(true)}
+        onMouseUp={(event) => resetControlInteraction(event.currentTarget)}
+        aria-label="Open search"
+        aria-hidden={isExpanded}
+        tabIndex={isExpanded ? -1 : 0}
+      >
+        <Search className="section-inline-search-icon" size={15} strokeWidth={2} />
+      </button>
+      <div
+        className={`section-inline-search-expanded ${
+          isExpanded ? "is-active" : "is-hidden"
+        }`}
+        aria-hidden={!isExpanded}
+      >
+        <div className="section-inline-search-expanded-icon">
+          <Search className="section-inline-search-icon" size={15} strokeWidth={2} />
+        </div>
+        <input
+          ref={inputRef}
+          type="text"
+          value={value}
+          onChange={(event) => onChange(event.target.value)}
+          onBlur={collapseIfEmpty}
+          placeholder={placeholder}
+          aria-label={placeholder}
+          autoComplete="off"
+          tabIndex={isExpanded ? 0 : -1}
+        />
+        {value ? (
+          <button
+            type="button"
+            className="section-inline-search-clear"
+            onClick={() => onChange("")}
+            onMouseUp={(event) => resetControlInteraction(event.currentTarget)}
+            aria-label="Clear search"
+            tabIndex={isExpanded ? 0 : -1}
+          >
+            <X size={14} strokeWidth={2} />
+          </button>
+        ) : null}
       </div>
     </div>
   );
@@ -120,7 +270,31 @@ export default function SectionHeader({
   onWireframeModeChange,
   hideWireframeToggle = false,
   renderMetaBelow = false,
+  hideTitle = false,
+  availabilityFilter,
+  onAvailabilityFilterChange,
+  sortDirection,
+  onSortDirectionChange,
+  controlsAlign = "distributed",
+  searchValue,
+  onSearchValueChange,
+  searchPlaceholder,
 }: SectionHeaderProps) {
+  useEffect(() => {
+    const clearInteraction = () => resetControlInteraction();
+    const handleVisibilityChange = () => {
+      if (document.hidden) clearInteraction();
+    };
+
+    window.addEventListener("blur", clearInteraction);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      window.removeEventListener("blur", clearInteraction);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
+
   const metaText = loading ? "Loading..." : `${count} ${templateLabel}`;
 
   const wireframeControl =
@@ -138,40 +312,90 @@ export default function SectionHeader({
         onToggle={() => {
           const nextTheme = filter === "light" ? "dark" : "light";
           onFilterChange(nextTheme);
-          // Save to localStorage like landing page
-          localStorage.setItem("theme", nextTheme);
-          // Dispatch global event for other components
           window.dispatchEvent(
-            new CustomEvent("themeChange", { detail: { theme: nextTheme } })
-          );
-          window.dispatchEvent(
-            new CustomEvent("framerkit-theme-change", { detail: nextTheme })
+            new CustomEvent("framerkit-component-theme-change", {
+              detail: { theme: nextTheme },
+            })
           );
         }}
-        activeIcon={<Moon size={20} color="#4c1d95" strokeWidth={2} />}
-        inactiveIcon={<Sun size={20} color="#374151" strokeWidth={2} />}
+        activeIcon={<Moon size={20} strokeWidth={2} />}
+        inactiveIcon={<Sun size={20} strokeWidth={2} />}
         activeLabel="Dark theme"
         inactiveLabel="Light theme"
       />
     ) : null;
 
+  const availabilityControl =
+    availabilityFilter && onAvailabilityFilterChange ? (
+      <AvailabilityToggle
+        value={availabilityFilter}
+        onChange={onAvailabilityFilterChange}
+      />
+    ) : null;
+
+  const sortControl =
+    sortDirection && onSortDirectionChange ? (
+      <SortToggle direction={sortDirection} onChange={onSortDirectionChange} />
+    ) : null;
+
+  const searchControl =
+    typeof searchValue === "string" && onSearchValueChange ? (
+      <InlineSearch
+        value={searchValue}
+        onChange={onSearchValueChange}
+        placeholder={searchPlaceholder}
+      />
+    ) : null;
+
   return (
     <>
-      <div className="section-header-sticky">
-        <div className="section-header-row">
+      <div className={`section-header-sticky ${searchControl ? "section-header-sticky--with-search" : ""}`}>
+        <div
+          className={`section-header-row ${
+            renderMetaBelow ? "section-header-row--controls" : ""
+          } ${searchControl ? "section-header-row--with-search" : ""}`}
+        >
           {renderMetaBelow ? (
             <>
-              <div className="section-header-controls-left">{wireframeControl}</div>
-              <div className="section-header-controls-right">{themeControl}</div>
+              {controlsAlign === "left" ? (
+                <>
+                  <div className="section-header-controls-left section-header-inline-controls">
+                    {searchControl}
+                    {availabilityControl}
+                    {wireframeControl}
+                    {sortControl}
+                    {themeControl}
+                  </div>
+                  <div className="section-header-controls-right" />
+                </>
+              ) : (
+                <>
+                  <div className="section-header-controls-left section-header-inline-controls">
+                    {wireframeControl}
+                    {themeControl}
+                  </div>
+                  <div className="section-header-controls-center section-header-inline-controls" />
+                  <div className="section-header-controls-right section-header-inline-controls">
+                    {searchControl}
+                    {availabilityControl}
+                    {sortControl}
+                  </div>
+                </>
+              )}
             </>
           ) : (
             <>
-              <div className="section-header-left">
-                <h2 className="section-title">{title}</h2>
-                <p className="section-subtitle">{metaText}</p>
-              </div>
-              <div className="section-header-right">
+              {!hideTitle && (
+                <div className="section-header-left">
+                  <h2 className="section-title">{title}</h2>
+                  <p className="section-subtitle">{metaText}</p>
+                </div>
+              )}
+              <div className="section-header-right" style={hideTitle ? { marginLeft: 'auto' } : undefined}>
+                {searchControl}
+                {availabilityControl}
                 {wireframeControl}
+                {sortControl}
                 {themeControl}
               </div>
             </>

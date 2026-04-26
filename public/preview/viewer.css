@@ -525,6 +525,7 @@ body {
   background: #f3f3f5;  /* Серый в светлой теме */
   padding: 20px;
   display: flex;
+  align-items: stretch;
   justify-content: center; /* центрируем по горизонтали */
   position: relative;
   transition: background 0.2s ease;
@@ -545,14 +546,19 @@ body {
 /* === CENTERING WRAPPER === */
 .center-wrapper {
   display: flex;
-  justify-content: center; /* центрируем по вертикали */
+  justify-content: center;
+  width: 100%;
   min-height: 0;           /* важно для flex, чтобы не растягивался */
-  align-items: center;   
+  align-items: center;
+}
+
+.center-wrapper.content-overflows {
+  align-items: flex-start;
 }
 
 /* === NAVBAR EXCEPTION === */
 .center-wrapper.navbar-exception {
-  justify-content: flex-start; /* прижимаем к верху */
+  align-items: flex-start;
 }
 
 /* === RESIZABLE WRAPPER === */
@@ -564,7 +570,7 @@ body {
   width: 1200px;       /* фиксированная ширина для обычного режима */
   height: auto;     
   min-height: 300px;    
-  max-height: 100%;
+  max-height: none;
   opacity: 0;                     
   visibility: hidden;
   transition: box-shadow 0.2s ease, width 0.4s cubic-bezier(0.4, 0, 0.2, 1);

@@ -1,5 +1,20 @@
 import RandomComponentCards from "./RandomComponentCards";
 
-export default function RandomComponentCardsDark() {
-  return <RandomComponentCards darkOnly={true} theme="dark" />;
+type RandomComponentCardsDarkProps = {
+  wireframeMode?: boolean;
+  isAdmin?: boolean;
+};
+
+export default function RandomComponentCardsDark({
+  wireframeMode = false,
+  isAdmin = false,
+}: RandomComponentCardsDarkProps) {
+  return (
+    <RandomComponentCards
+      darkOnly={true}
+      theme="dark"
+      wireframeMode={wireframeMode}
+      isAdmin={isAdmin}
+    />
+  );
 }

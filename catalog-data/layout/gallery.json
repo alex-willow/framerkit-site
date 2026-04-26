@@ -1,0 +1,285 @@
+{
+  "gallery": [
+  {
+    "key": "Gallery-01",
+    "title": "Gallery 01",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Light/Design%20/Gallery-01.gif",
+    "url": "https://framer.com/m/Gallery-01-xB72.js",
+    "type": "free",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-01",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Light/Wireframe/Gallery%2001%20Wireframe.png",
+      "url": "https://framer.com/m/Gallery-01-Wireframe-Z7Hy.js",
+      "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-01-wireframe"
+    }
+  },
+  {
+    "key": "Gallery-02",
+    "title": "Gallery 02",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Light/Design%20/Gallery-02.gif",
+    "url": "https://framer.com/m/Gallery-02-vHn7.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-02",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Light/Wireframe/Gallery%2002%20Wireframe.png",
+      "url": "https://framer.com/m/Gallery-02-Wireframe-XB0H.js",
+      "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-02-wireframe"
+    }
+  },
+  {
+    "key": "Gallery-03",
+    "title": "Gallery 03",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Light/Design%20/Gallery-03.gif",
+    "url": "https://framer.com/m/Gallery-03-M49V.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-03",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Light/Wireframe/Gallery%2003%20Wireframe.png",
+      "url": "https://framer.com/m/Gallery-03-Wireframe-3J97.js",
+      "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-03-wireframe"
+    }
+  },
+  {
+    "key": "Gallery-04",
+    "title": "Gallery 04",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Light/Design%20/Gallery-04.gif",
+    "url": "https://framer.com/m/Gallery-04-OYv6.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-04",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Light/Wireframe/Gallery%2004%20Wireframe.png",
+      "url": "https://framer.com/m/Gallery-04-Wireframe-5stX.js",
+      "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-04-wireframe"
+    }
+  },
+  {
+    "key": "Gallery-05",
+    "title": "Gallery 05",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Light/Design%20/Gallery-05.gif",
+    "url": "https://framer.com/m/Gallery-05-17Xg.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-05",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Light/Wireframe/Gallery%2005%20Wireframe.png",
+      "url": "https://framer.com/m/Gallery-05-Wireframe-kNHd.js",
+      "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-05-wireframe"
+    }
+  },
+  {
+    "key": "Gallery-06",
+    "title": "Gallery 06",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Light/Design%20/Gallery-06.gif",
+    "url": "https://framer.com/m/Gallery-06-eZ8y.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-06",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Light/Wireframe/Gallery%2006%20Wireframe.png",
+      "url": "https://framer.com/m/Gallery-06-Wireframe-9j9P.js",
+      "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-06-wireframe"
+    }
+  },
+  {
+    "key": "Gallery-07",
+    "title": "Gallery 07",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Light/Design%20/Gallery-07.gif",
+    "url": "https://framer.com/m/Gallery-07-V3Rh.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-07",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Light/Wireframe/Gallery%2007%20Wireframe.png",
+      "url": "https://framer.com/m/Gallery-07-Wireframe-V8Hp.js",
+      "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-07-wireframe"
+    }
+  },
+  {
+    "key": "Gallery-08",
+    "title": "Gallery 08",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Light/Design%20/Gallery-08.gif",
+    "url": "https://framer.com/m/Gallery-08-5xp4.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-08",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Light/Wireframe/Gallery%2008%20Wireframe.png",
+      "url": "https://framer.com/m/Gallery-08-Wireframe-nMXX.js",
+      "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-08-wireframe"
+    }
+  },
+  {
+    "key": "Gallery-09",
+    "title": "Gallery 09",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Light/Design%20/Gallery-09.gif",
+    "url": "https://framer.com/m/Gallery-09-ZDhA.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-09",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Light/Wireframe/Gallery%2009%20Wireframe.png",
+      "url": "https://framer.com/m/Gallery-09-Wireframe-Jswe.js",
+      "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-09-wireframe"
+    }
+  },
+  {
+    "key": "Gallery-10",
+    "title": "Gallery 10",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Light/Design%20/Gallery-10.gif",
+    "url": "https://framer.com/m/Gallery-10-jgBQ.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-10",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Light/Wireframe/Gallery%2010%20Wireframe.png",
+      "url": "https://framer.com/m/Gallery-10-Wireframe-az6u.js",
+      "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-10-wireframe"
+    }
+  },
+     
+  {
+    "key": "Gallery-01-dark",
+    "title": "Gallery 01",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Dark/Design%20/Gallery-01-Dark.gif",
+    "url": "https://framer.com/m/Gallery-01-Dark-w7pt.js",
+    "type": "free",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-01-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Dark/Wireframe/Gallery%2001%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Gallery-01-Dark-Wireframe-tyPJ.js",
+      "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-01-dark-wireframe"
+    }
+  },
+  {
+    "key": "Gallery-02-dark",
+    "title": "Gallery 02",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Dark/Design%20/Gallery-02-Dark.gif",
+    "url": "https://framer.com/m/Gallery-02-Dark-Tje6.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-02-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Dark/Wireframe/Gallery%2002%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Gallery-02-Dark-Wireframe-ZRBe.js",
+      "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-02-dark-wireframe"
+    }
+  },
+  {
+    "key": "Gallery-03-dark",
+    "title": "Gallery 03",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Dark/Design%20/Gallery-03-Dark.gif",
+    "url": "https://framer.com/m/Gallery-03-Dark-Amb1.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-03-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Dark/Wireframe/Gallery%2003%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Gallery-03-Dark-Wireframe-PeIi.js",
+      "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-03-dark-wireframe"
+    }
+  },
+  {
+    "key": "Gallery-04-dark",
+    "title": "Gallery 04",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Dark/Design%20/Gallery-04-Dark.gif",
+    "url": "https://framer.com/m/Gallery-04-Dark-lRd4.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-04-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Dark/Wireframe/Gallery%2004%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Gallery-04-Dark-Wireframe-jKbd.js",
+      "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-04-dark-wireframe"
+    }
+  },
+  {
+    "key": "Gallery-05-dark",
+    "title": "Gallery 05",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Dark/Design%20/Gallery-05-Dark.gif",
+    "url": "https://framer.com/m/Gallery-05-Dark-vxRo.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-05-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Dark/Wireframe/Gallery%2005%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Gallery-05-Dark-Wireframe-RqJe.js",
+      "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-05-dark-wireframe"
+    }
+  },
+  {
+    "key": "Gallery-06-dark",
+    "title": "Gallery 06",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Dark/Design%20/Gallery-06-Dark.gif",
+    "url": "https://framer.com/m/Gallery-06-Dark-xKyY.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-06-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Dark/Wireframe/Gallery%2006%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Gallery-06-Dark-Wireframe-BzV1.js",
+      "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-06-dark-wireframe"
+    }
+  },
+  {
+    "key": "Gallery-07-dark",
+    "title": "Gallery 07",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Dark/Design%20/Gallery-07-Dark.gif",
+    "url": "https://framer.com/m/Gallery-07-Dark-ZVxR.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-07-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Dark/Wireframe/Gallery%2007%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Gallery-07-Dark-Wireframe-mrGA.js",
+      "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-07-dark-wireframe"
+    }
+  },
+  {
+    "key": "Gallery-08-dark",
+    "title": "Gallery 08",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Dark/Design%20/Gallery-08-Dark.gif",
+    "url": "https://framer.com/m/Gallery-08-Dark-jMX1.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-08-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Dark/Wireframe/Gallery%2008%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Gallery-08-Dark-Wireframe-I221.js",
+      "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-08-dark-wireframe"
+    }
+  },
+  {
+    "key": "Gallery-09-dark",
+    "title": "Gallery 09",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Dark/Design%20/Gallery-09-Dark.gif",
+    "url": "https://framer.com/m/Gallery-09-Dark-o1p1.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-09-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Dark/Wireframe/Gallery%2009%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Gallery-09-Dark-Wireframe-a9lS.js",
+      "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-09-dark-wireframe"
+    }
+  },
+  {
+    "key": "Gallery-10-dark",
+    "title": "Gallery 10",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Dark/Design%20/Gallery-10-Dark.gif",
+    "url": "https://framer.com/m/Gallery-10-Dark-IQYC.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-10-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Gallery/Dark/Wireframe/Gallery%2010%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Gallery-10-Dark-Wireframe-AFks.js",
+      "previewUrl": "https://framerkit.site/preview/gallery-section/gallery-10-dark-wireframe"
+    }
+  }
+  ]
+}

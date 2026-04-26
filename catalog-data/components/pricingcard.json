@@ -1,0 +1,197 @@
+{
+  "Pricingcard": [
+    {
+      "key": "Pricingcard-01",
+      "title": "Pricing Card 01",
+      "image": "https://storage.googleapis.com/framerkit/Pricing%20Card%2001.png",
+      "url": "https://framer.com/m/Pricing-Card-01-ejCJ.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Pricingcard-02",
+      "title": "Pricing Card 02",
+      "image": "https://storage.googleapis.com/framerkit/Pricing%20Card%2002.png",
+      "url": "https://framer.com/m/Pricing-Card-02-wQkq.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Pricingcard-03",
+      "title": "Pricing Card 03",
+      "image": "https://storage.googleapis.com/framerkit/Pricing%20Card%2003.png",
+      "url": "https://framer.com/m/Pricing-Card-03-GsVr.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Pricingcard-04",
+      "title": "Pricing Card 04",
+      "image": "https://storage.googleapis.com/framerkit/Pricing%20Card%2004.png",
+      "url": "https://framer.com/m/Pricing-Card-04-DBas.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Pricingcard-05",
+      "title": "Pricing Card 05",
+      "image": "https://storage.googleapis.com/framerkit/Pricing%20Card%2005.png",
+      "url": "https://framer.com/m/Pricing-Card-05-lwNm.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Pricingcard-06",
+      "title": "Pricing Card 06",
+      "image": "https://storage.googleapis.com/framerkit/Pricing%20Card%2006.png",
+      "url": "https://framer.com/m/Pricing-Card-06-rnWg.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Pricingcard-07",
+      "title": "Pricing Card 07",
+      "image": "https://storage.googleapis.com/framerkit/Pricing%20Card%2007.png",
+      "url": "https://framer.com/m/Pricing-Card-07-b6JN.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Pricingcard-08",
+      "title": "Pricing Card 08",
+      "image": "https://storage.googleapis.com/framerkit/Pricing%20Card%2008.png",
+      "url": "https://framer.com/m/Pricing-Card-08-Kjcg.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Pricingcard-09",
+      "title": "Pricing Card 09",
+      "image": "https://storage.googleapis.com/framerkit/Pricing%20Card%2009.png",
+      "url": "https://framer.com/m/Pricing-Card-09-mNtz.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Pricingcard-10",
+      "title": "Pricing Card 10",
+      "image": "https://storage.googleapis.com/framerkit/Pricing%20Card%2010.png",
+      "url": "https://framer.com/m/Pricing-Card-10-hW5m.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Pricingcard-11",
+      "title": "Pricing Card 11",
+      "image": "https://storage.googleapis.com/framerkit/Pricing%20Card%2011.png",
+      "url": "https://framer.com/m/Pricing-Card-11-mLiG.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Pricingcard-12",
+      "title": "Pricing Card 12",
+      "image": "https://storage.googleapis.com/framerkit/Pricing%20Card%2012.png",
+      "url": "https://framer.com/m/Pricing-Card-12-pJVH.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+
+    {
+      "key": "Pricingcard-01-dark",
+      "title": "Pricing Card 01",
+      "image": "https://storage.googleapis.com/framerkit/Pricing%20Card%2001%20Dark.png",
+      "url": "https://framer.com/m/Pricing-Card-01-Dark-9Zgt.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Pricingcard-02-dark",
+      "title": "Pricing Card 02",
+      "image": "https://storage.googleapis.com/framerkit/Pricing%20Card%2002%20Dark.png",
+      "url": "https://framer.com/m/Pricing-Card-02-Dark-fioK.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Pricingcard-03-dark",
+      "title": "Pricing Card 03",
+      "image": "https://storage.googleapis.com/framerkit/Pricing%20Card%2003%20Dark.png",
+      "url": "https://framer.com/m/Pricing-Card-03-Dark-qGTG.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Pricingcard-04-dark",
+      "title": "Pricing Card 04",
+      "image": "https://storage.googleapis.com/framerkit/Pricing%20Card%2004%20Dark.png",
+      "url": "https://framer.com/m/Pricing-Card-04-Dark-aOo4.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Pricingcard-05-dark",
+      "title": "Pricing Card 05",
+      "image": "https://storage.googleapis.com/framerkit/Pricing%20Card%2005%20Dark.png",
+      "url": "https://framer.com/m/Pricing-Card-05-Dark-RCQJ.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Pricingcard-06-dark",
+      "title": "Pricing Card 06",
+      "image": "https://storage.googleapis.com/framerkit/Pricing%20Card%2006%20Dark.png",
+      "url": "https://framer.com/m/Pricing-Card-06-Dark-l6Mi.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Pricingcard-07-dark",
+      "title": "Pricing Card 07",
+      "image": "https://storage.googleapis.com/framerkit/Pricing%20Card%2007%20Dark.png",
+      "url": "https://framer.com/m/Pricing-Card-07-Dark-3YoY.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Pricingcard-08-dark",
+      "title": "Pricing Card 08",
+      "image": "https://storage.googleapis.com/framerkit/Pricing%20Card%2008%20Dark.png",
+      "url": "https://framer.com/m/Pricing-Card-08-Dark-uC7P.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Pricingcard-09-dark",
+      "title": "Pricing Card 09",
+      "image": "https://storage.googleapis.com/framerkit/Pricing%20Card%2009%20Dark.png",
+      "url": "https://framer.com/m/Pricing-Card-09-Dark-hRJX.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Pricingcard-10-dark",
+      "title": "Pricing Card 10",
+      "image": "https://storage.googleapis.com/framerkit/Pricing%20Card%2010%20Dark.png",
+      "url": "https://framer.com/m/Pricing-Card-10-Dark-D2aR.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Pricingcard-11-dark",
+      "title": "Pricing Card 11",
+      "image": "https://storage.googleapis.com/framerkit/Pricing%20Card%2011%20Dark.png",
+      "url": "https://framer.com/m/Pricing-Card-11-Dark-welM.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Pricingcard-12-dark",
+      "title": "Pricing Card 12",
+      "image": "https://storage.googleapis.com/framerkit/Pricing%20Card%2012%20Dark.png",
+      "url": "https://framer.com/m/Pricing-Card-12-Dark-RrON.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    }
+  ]
+}

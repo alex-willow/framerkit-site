@@ -3,12 +3,14 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
+  Navigate,
   useNavigate,
   useLocation,
 } from "react-router-dom";
 import { createClient } from "@supabase/supabase-js";
 import ReactGA from "react-ga4";
 import { Analytics } from "@vercel/analytics/react";
+import { GA_ID, SUPABASE_ANON_KEY, SUPABASE_URL } from "./lib/env";
 
 import MainLayout from "./layouts/MainLayout";
 import LandingNavbar from './components/LandingNavbar';
@@ -20,53 +22,24 @@ import HomePage from "./pages/HomePage";
 import LayoutPage from './pages/LayoutPage';
 import ComponentPage from './pages/ComponentPage';
 import TemplatesPage from './pages/TemplatesPage';
-
-// Layout Pages
-import NavbarPage from "./pages/Layout/Navbar";
-import HeroPage from "./pages/Layout/Hero";
-import LogoPage from "./pages/Layout/Logo";
-import FeaturePage from "./pages/Layout/Feature";
-import GalleryPage from "./pages/Layout/Gallery";
-import TestimonialPage from "./pages/Layout/Testimonial";
-import ContactPage from "./pages/Layout/Contact";
-import PricingPage from "./pages/Layout/Pricing";
-import FaqLayoutPage from "./pages/Layout/Faq";
-import CtaPage from "./pages/Layout/Cta";
-import FooterPage from "./pages/Layout/Footer";
-
-// Components Pages
-import AccordionPage from "./pages/Components/Accordion";
-import AvatarPage from "./pages/Components/Avatar";
-import BadgePage from "./pages/Components/Badge";
-import ButtonPage from "./pages/Components/Button";
-import CardPage from "./pages/Components/Card";
-import IconPage from "./pages/Components/Icon";
-import InputPage from "./pages/Components/Input";
-import FormPage from "./pages/Components/Form";
-import PricingCardPage from "./pages/Components/Pricingcard";
-import RatingPage from "./pages/Components/Rating";
-import TestimonialCardPage from "./pages/Components/Testimonialcard";
-import AccordionGroupPage from "./pages/Components/Accordiongroup";
-import AvatarGroupPage from "./pages/Components/Avatargroup";
+import CatalogSectionPage from "./pages/CatalogSectionPage";
 
 // Templates
 import FramerKitDaily from "./pages/Templates/FramerKitDaily";
 import SignInModal from "./SignInModal";
 
-import LearnPage from './pages/LearnPage';
-import BlogPage from './pages/BlogPage';
-import LearnCategoryPage from './pages/LearnCategoryPage';
-import BlogCategoryPage from './pages/BlogCategoryPage';
+import ResourcesPage from "./pages/ResourcesPage";
+import ResourceArticlePage from "./pages/ResourceArticlePage";
+import UpdatesPage from "./pages/UpdatesPage";
+import SupportPage from "./pages/SupportPage";
 
 // ================================
 // 🔑 GA4 ID
 // ================================
-const GA_ID = "G-GNZGR575KN";
-
 // Supabase client
 const supabase = createClient(
-  "https://ibxakfxqoqiypfhgkpds.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlieGFrZnhxb3FpeXBmaGdrcGRzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA4MTQxMDcsImV4cCI6MjA1NjM5MDEwN30.tWculxF6xgGw4NQEWPBp7uH_gsl5HobP9wQn3Tf9yyw"
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY
 );
 
 // ================================
@@ -80,6 +53,9 @@ function AppContent() {
         localStorage.getItem("rememberedEmail") &&
           localStorage.getItem("rememberedKey")
       )
+  );
+  const [isAdmin, setIsAdmin] = useState(
+    () => localStorage.getItem("framerkitAdmin") === "true"
   );
   const [isMobile, setIsMobile] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -103,15 +79,12 @@ function AppContent() {
   };
   
 
-  // 🔥 ОПРЕДЕЛЯЕМ: это чистый лендинг или документация с хэшем?
-  const isLandingPage = location.pathname === "/" && !location.hash;
+  // 🔥 ОПРЕДЕЛЯЕМ: это лендинг или документация с хэшем?
+  // Разрешаем pricing hash как часть лендинга, чтобы переход был прямым и без визуального "доскролла".
+  const isLandingHash = location.hash === "#get-framerkit";
+  const isLandingPage = location.pathname === "/" && (!location.hash || isLandingHash);
 
-  // Сбрасываем activeSection при переходе на лендинг
-  useEffect(() => {
-    if (isLandingPage && activeSection !== "overview") {
-      setActiveSection("overview");
-    }
-  }, [isLandingPage, activeSection]);
+  const currentActiveSection = isLandingPage ? "overview" : activeSection;
 
   // ================================
   // 🔥 GA4 INIT (ONCE)
@@ -175,7 +148,10 @@ function AppContent() {
     }
     localStorage.removeItem("rememberedEmail");
     localStorage.removeItem("rememberedKey");
+    localStorage.removeItem("framerkitAdmin");
+    localStorage.removeItem("framerkitAdminAuth");
     setIsAuthenticated(false);
+    setIsAdmin(false);
 
     ReactGA.event({
       category: "Auth",
@@ -288,7 +264,7 @@ function AppContent() {
 ) : (
   // === 📚 ДОКУМЕНТАЦИЯ ===
   <MainLayout
-    activeSection={activeSection}
+    activeSection={currentActiveSection}
     onSectionChange={handleSetActiveSection}
     theme={theme}
     onThemeToggle={handleThemeToggle}
@@ -301,7 +277,7 @@ function AppContent() {
   >
     {/* 🔥 Твой существующий Sidebar для документации */}
     <Sidebar
-      activeSection={activeSection}
+      activeSection={currentActiveSection}
       onSectionChange={handleSetActiveSection}
       isMobile={isMobile}
       isMenuOpen={isMenuOpen}
@@ -312,62 +288,81 @@ function AppContent() {
     />
           <Routes>
             {/* 🔥 HomePage обрабатывает все хэш-секции: /#overview, /#getting-started и т.д. */}
-            <Route
-              path="/*"
-              element={
+            <Route path="/" element={
                 <HomePage
                   onSectionChange={handleSetActiveSection}
                   theme={theme}
                   onThemeToggle={handleThemeToggle}
+                  isAuthenticated={isAuthenticated}
+                  onLogout={handleLogout}
+                  onSignInOpen={() => setIsSignInOpen(true)}
+                  onGetAccess={() => {
+                    const target = document.getElementById("get-framerkit");
+                    if (target) {
+                      target.scrollIntoView({ behavior: "smooth", block: "start" });
+                      window.history.replaceState(null, "", "/#get-framerkit");
+                    } else {
+                      navigate("/#get-framerkit");
+                    }
+                  }}
                 />
               }
             />
             
             {/* === Layout Sections === */}
-            <Route path="/layout" element={<LayoutPage 
-              theme={theme}
-              onThemeToggle={handleThemeToggle}
-            />} />
-            <Route path="/layout/navbar" element={<NavbarPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-            <Route path="/layout/hero" element={<HeroPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-            <Route path="/layout/logo" element={<LogoPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-            <Route path="/layout/feature" element={<FeaturePage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-            <Route path="/layout/gallery" element={<GalleryPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-            <Route path="/layout/testimonial" element={<TestimonialPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-            <Route path="/layout/contact" element={<ContactPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-            <Route path="/layout/pricing" element={<PricingPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-            <Route path="/layout/faq" element={<FaqLayoutPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-            <Route path="/layout/cta" element={<CtaPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-            <Route path="/layout/footer" element={<FooterPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
+            <Route path="/layout" element={<LayoutPage isAdmin={isAdmin} />} />
+            <Route
+              path="/layout/:sectionId"
+              element={
+                <CatalogSectionPage
+                  group="layout"
+                  isAuthenticated={isAuthenticated}
+                  isAdmin={isAdmin}
+                  setIsSignInOpen={setIsSignInOpen}
+                />
+              }
+            />
 
             {/* === Components === */}
-            <Route path="/components" element={<ComponentPage 
-              theme={theme}
-              onThemeToggle={handleThemeToggle}
-            />} />
-            <Route path="/components/accordion" element={<AccordionPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-            <Route path="/components/avatar" element={<AvatarPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-            <Route path="/components/badge" element={<BadgePage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-            <Route path="/components/button" element={<ButtonPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-            <Route path="/components/card" element={<CardPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-            <Route path="/components/icon" element={<IconPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-            <Route path="/components/input" element={<InputPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-            <Route path="/components/form" element={<FormPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-            <Route path="/components/pricingcard" element={<PricingCardPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-            <Route path="/components/rating" element={<RatingPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-            <Route path="/components/testimonialcard" element={<TestimonialCardPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-            <Route path="/components/accordiongroup" element={<AccordionGroupPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
-            <Route path="/components/avatargroup" element={<AvatarGroupPage isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
+            <Route path="/components" element={<ComponentPage theme={theme} isAdmin={isAdmin} />} />
+            <Route
+              path="/components/:sectionId"
+              element={
+                <CatalogSectionPage
+                  group="components"
+                  isAuthenticated={isAuthenticated}
+                  isAdmin={isAdmin}
+                  setIsSignInOpen={setIsSignInOpen}
+                />
+              }
+            />
 
             {/* === Templates === */}
-            <Route path="/templates" element={<TemplatesPage />} />
+            <Route path="/templates" element={<TemplatesPage theme={theme} isAdmin={isAdmin} />} />
             <Route path="/templates/framerkitdaily" element={<FramerKitDaily isAuthenticated={isAuthenticated} setIsSignInOpen={setIsSignInOpen} />} />
+            <Route
+              path="/templates/:sectionId"
+              element={
+                <CatalogSectionPage
+                  group="templates"
+                  isAuthenticated={isAuthenticated}
+                  isAdmin={isAdmin}
+                  setIsSignInOpen={setIsSignInOpen}
+                />
+              }
+            />
 
-            {/* === Learn & Blog === */}
-            <Route path="/learn" element={<LearnPage />} />
-            <Route path="/learn/:category" element={<LearnCategoryPage />} />
-            <Route path="/blog" element={<BlogPage />} />
-            <Route path="/blog/:category" element={<BlogCategoryPage />} />
+            {/* === Resources (Learn + Blog) === */}
+        {/* === LEARN === */}
+            <Route path="/learn/lessons" element={<ResourcesPage type="lessons" />} />
+            <Route path="/learn/articles" element={<ResourcesPage type="articles" />} />
+
+            <Route path="/learn/lessons/:slug" element={<ResourceArticlePage />} />
+            <Route path="/learn/articles/:slug" element={<ResourceArticlePage />} />
+            <Route path="/updates" element={<UpdatesPage />} />
+            <Route path="/support" element={<SupportPage />} />
+            <Route path="/feedback" element={<Navigate to="/support" replace />} />
+     
           </Routes>
         </MainLayout>
       )}
@@ -382,6 +377,7 @@ function AppContent() {
             action: "login_success",
           });
           setIsAuthenticated(true);
+          setIsAdmin(localStorage.getItem("framerkitAdmin") === "true");
         }}
       />
     </div>

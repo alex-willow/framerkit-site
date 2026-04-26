@@ -170,6 +170,7 @@
   .auth-button {
     width: 100%;
     height: 40px;
+    padding: 6px 12px;
     font-size: 13px;
     font-weight: 600;
     border: none;
@@ -183,14 +184,18 @@
     justify-content: center;
     align-items: center;
     gap: 4px;
+    box-shadow: none;
   }
   
   .auth-button:hover {
     background: #5A32D3;
+    box-shadow: none;
   }
   
   .auth-button:active {
+    background: #6E3FF3;
     transform: translateY(0.5px);
+    box-shadow: none;
   }
   
   .auth-button.loading {
@@ -212,11 +217,11 @@
   }
   
   
-  .auth-link {
-    cursor: pointer;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease, text-decoration 0.3s ease;
+.auth-link {
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease, text-decoration 0.3s ease;
   }
 
   .auth-link:hover {
@@ -236,5 +241,6 @@
 .auth-footer .auth-link {
   transition: none;
 }
+
 
   

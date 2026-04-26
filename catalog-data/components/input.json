@@ -1,0 +1,133 @@
+{
+  "input": [
+    {
+      "key": "Input-01",
+      "title": "Input 01",
+      "image": "https://storage.googleapis.com/framerkit/Input%2001.png",
+      "url": "https://framer.com/m/Input-01-ZFQE.js",
+      "type": "paid",
+      "dragType": "detachedComponentLayers"
+    },
+    {
+      "key": "Input-02",
+      "title": "Input 02",
+      "image": "https://storage.googleapis.com/framerkit/Input%2002.png",
+      "url": "https://framer.com/m/Input-02-Tbhm.js",
+      "type": "paid",
+      "dragType": "detachedComponentLayers"
+    },
+    {
+      "key": "Input-03",
+      "title": "Input 03",
+      "image": "https://storage.googleapis.com/framerkit/Input%2003.png",
+      "url": "https://framer.com/m/Input-03-9Quj.js",
+      "type": "paid",
+      "dragType": "detachedComponentLayers"
+    },
+    {
+      "key": "Input-04",
+      "title": "Input 04",
+      "image": "https://storage.googleapis.com/framerkit/Input%2004.png",
+      "url": "https://framer.com/m/Input-04-fkoC.js",
+      "type": "paid",
+      "dragType": "detachedComponentLayers"
+    },
+    {
+      "key": "Input-05",
+      "title": "Input 05",
+      "image": "https://storage.googleapis.com/framerkit/Input%2005.png",
+      "url": "https://framer.com/m/Input-05-oW9n.js",
+      "type": "paid",
+      "dragType": "detachedComponentLayers"
+    },
+    {
+      "key": "Input-06",
+      "title": "Input 06",
+      "image": "https://storage.googleapis.com/framerkit/Input%2006.png",
+      "url": "https://framer.com/m/Input-06-UlRm.js",
+      "type": "paid",
+      "dragType": "detachedComponentLayers"
+    },
+    {
+      "key": "Input-07",
+      "title": "Input 07",
+      "image": "https://storage.googleapis.com/framerkit/Input%2007.png",
+      "url": "https://framer.com/m/Input-07-sJSh.js",
+      "type": "paid",
+      "dragType": "detachedComponentLayers"
+    },
+    {
+      "key": "Input-08",
+      "title": "Input 08",
+      "image": "https://storage.googleapis.com/framerkit/Input%2008.png",
+      "url": "https://framer.com/m/Input-08-3PVd.js",
+      "type": "paid",
+      "dragType": "detachedComponentLayers"
+    },
+
+    {
+      "key": "Input-01-dark",
+      "title": "Input 01",
+      "image": "https://storage.googleapis.com/framerkit/Input%2001%20Dark.png",
+      "url": "https://framer.com/m/Input-01-Dark-JZB2.js",
+      "type": "paid",
+      "dragType": "detachedComponentLayers"
+    },
+    {
+      "key": "Input-02-dark",
+      "title": "Input 02",
+      "image": "https://storage.googleapis.com/framerkit/Input%2002%20Dark.png",
+      "url": "https://framer.com/m/Input-02-Dark-Xnub.js",
+      "type": "paid",
+      "dragType": "detachedComponentLayers"
+    },
+    {
+      "key": "Input-03-dark",
+      "title": "Input 03",
+      "image": "https://storage.googleapis.com/framerkit/Input%2003%20Dark.png",
+      "url": "https://framer.com/m/Input-03-Dark-8tQG.js",
+      "type": "paid",
+      "dragType": "detachedComponentLayers"
+    },
+    {
+      "key": "Input-04-dark",
+      "title": "Input 04",
+      "image": "https://storage.googleapis.com/framerkit/Input%2004%20Dark.png",
+      "url": "https://framer.com/m/Input-04-Dark-lvvK.js",
+      "type": "paid",
+      "dragType": "detachedComponentLayers"
+    },
+    {
+      "key": "Input-05-dark",
+      "title": "Input 05",
+      "image": "https://storage.googleapis.com/framerkit/Input%2005%20Dark.png",
+      "url": "https://framer.com/m/Input-05-Dark-Aupi.js",
+      "type": "paid",
+      "dragType": "detachedComponentLayers"
+    },
+    {
+      "key": "Input-06-dark",
+      "title": "Input 06",
+      "image": "https://storage.googleapis.com/framerkit/Input%2006%20Dark.png",
+      "url": "https://framer.com/m/Input-06-Dark-Mwl2.js",
+      "type": "paid",
+      "dragType": "detachedComponentLayers"
+    },
+    {
+      "key": "Input-07-dark",
+      "title": "Input 07",
+      "image": "https://storage.googleapis.com/framerkit/Input%2007%20Dark.png",
+      "url": "https://framer.com/m/Input-07-Dark-UrLD.js",
+      "type": "paid",
+      "dragType": "detachedComponentLayers"
+    },
+    {
+      "key": "Input-08-dark",
+      "title": "Input 08",
+      "image": "https://storage.googleapis.com/framerkit/Input%2008%20Dark.png",
+      "url": "https://framer.com/m/Input-08-Dark-Dsz2.js",
+      "type": "paid",
+      "dragType": "detachedComponentLayers"
+    }
+  ]
+}

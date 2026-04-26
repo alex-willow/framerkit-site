@@ -1,0 +1,101 @@
+{
+  "badge": [
+    {
+      "key": "Badge-01",
+      "title": "Badge 01",
+      "image": "https://storage.googleapis.com/framerkit/Badge%2001.png",
+      "url": "https://framer.com/m/Badge-01-ANLr.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Badge-02",
+      "title": "Badge 02",
+      "image": "https://storage.googleapis.com/framerkit/Badge%2002.png",
+      "url": "https://framer.com/m/Badge-02-YLJU.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Badge-03",
+      "title": "Badge 03",
+      "image": "https://storage.googleapis.com/framerkit/Badge%2003.png",
+      "url": "https://framer.com/m/Badge-03-1lBm.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Badge-04",
+      "title": "Badge 04",
+      "image": "https://storage.googleapis.com/framerkit/Badge%2004.png",
+      "url": "https://framer.com/m/Badge-04-pJX4.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Badge-05",
+      "title": "Badge 05",
+      "image": "https://storage.googleapis.com/framerkit/Badge%2005.png",
+      "url": "https://framer.com/m/Badge-05-NWk8.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Badge-06",
+      "title": "Badge 06",
+      "image": "https://storage.googleapis.com/framerkit/Badge%2006.png",
+      "url": "https://framer.com/m/Badge-06-xWL8.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+
+    {
+      "key": "Badge-01-dark",
+      "title": "Badge 01",
+      "image": "https://storage.googleapis.com/framerkit/Badge%2001%20Dark.png",
+      "url": "https://framer.com/m/Badge-01-Dark-sDZF.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Badge-02-dark",
+      "title": "Badge 02",
+      "image": "https://storage.googleapis.com/framerkit/Badge%2002%20Dark.png",
+      "url": "https://framer.com/m/Badge-02-Dark-aEqW.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Badge-03-dark",
+      "title": "Badge 03",
+      "image": "https://storage.googleapis.com/framerkit/Badge%2003%20Dark.png",
+      "url": "https://framer.com/m/Badge-03-Dark-HNDD.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Badge-04-dark",
+      "title": "Badge 04",
+      "image": "https://storage.googleapis.com/framerkit/Badge%2004%20Dark.png",
+      "url": "https://framer.com/m/Badge-04-Dark-udH5.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Badge-05-dark",
+      "title": "Badge 05",
+      "image": "https://storage.googleapis.com/framerkit/Badge%2005%20Dark.png",
+      "url": "https://framer.com/m/Badge-05-Dark-5Ojq.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    },
+    {
+      "key": "Badge-06-dark",
+      "title": "Badge 06",
+      "image": "https://storage.googleapis.com/framerkit/Badge%2006%20Dark.png",
+      "url": "https://framer.com/m/Badge-06-Dark-rOUd.js",
+      "type": "paid",
+      "dragType": "componentInstance"
+    }
+  ]
+}

@@ -1,66 +1,77 @@
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import SectionHeader from "../components/SectionHeader";
+import SEO from "../components/SEO";
+import AdminCreateSectionCard from "../components/AdminCreateSectionCard";
+import RandomTemplateCards from "../components/RandomTemplateCards";
+import { useCatalogManifest } from "../hooks/useCatalogManifest";
 
-export default function TemplatesPage() {
+type TemplatesPageProps = {
+  theme: "light" | "dark";
+  isAdmin: boolean;
+};
+
+export default function TemplatesPage({ isAdmin }: TemplatesPageProps) {
+  const { manifest } = useCatalogManifest();
+  const [filter, setFilter] = useState<"light" | "dark">(() => {
+    const saved = localStorage.getItem("theme");
+    return saved === "dark" ? "dark" : "light";
+  });
+
+  useEffect(() => {
+    const handleThemeChange = (event: Event) => {
+      const customEvent = event as CustomEvent<{ theme?: "light" | "dark" } | "light" | "dark">;
+      const nextTheme =
+        typeof customEvent.detail === "string"
+          ? customEvent.detail
+          : customEvent.detail?.theme;
+
+      if (nextTheme === "light" || nextTheme === "dark") {
+        setFilter(nextTheme);
+      }
+    };
+
+    window.addEventListener("framerkit-theme-change", handleThemeChange as EventListener);
+
+    return () => {
+      window.removeEventListener("framerkit-theme-change", handleThemeChange as EventListener);
+    };
+  }, []);
+
   return (
-    <div className="templates-overview" style={{ padding: '40px 20px', maxWidth: '1200px', margin: '0 auto' }}>
-      <header style={{ marginBottom: '40px' }}>
-        <h1 style={{ fontSize: '32px', fontWeight: 700, marginBottom: '12px' }}>
-          📦 Templates
-        </h1>
-        <p style={{ fontSize: '16px', color: 'var(--framer-color-text-secondary)' }}>
-          Полные шаблоны сайтов на основе FramerKit
+    <div className="layout-catalog-page">
+      <SEO
+        title="Templates"
+        description="Browse FramerKit templates and open full-page starters ready for production."
+        keywords="framer templates, framerkit templates, website starter templates"
+        canonical="https://www.framerkit.site/templates"
+      />
+
+      <div className="component-page-header">
+        <nav className="component-breadcrumb">
+          <span className="breadcrumb-current">Templates</span>
+        </nav>
+        <h2 className="component-page-title">Templates</h2>
+        <p className="component-page-description">
+          Ready-made full-page starters. Choose a template and open it as a base for your next project.
         </p>
-      </header>
+      </div>
 
-      <div className="templates-grid" style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', 
-        gap: '24px' 
-      }}>
-        {/* Пример шаблона */}
-        <Link 
-          to="/templates/framerkitdaily"
-          className="template-card"
-          style={{
-            padding: '24px',
-            border: '1px solid var(--framer-color-border)',
-            borderRadius: '12px',
-            textDecoration: 'none',
-            color: 'inherit',
-            display: 'block'
-          }}
-        >
-          <div style={{ 
-            width: '100%', 
-            height: '160px', 
-            background: 'linear-gradient(135deg, #6E3FF3 0%, #9B7FEB 100%)',
-            borderRadius: '8px',
-            marginBottom: '16px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'white',
-            fontWeight: 600
-          }}>
-            Framer Kit Daily
-          </div>
-          <h3 style={{ fontSize: '18px', fontWeight: 600, marginBottom: '8px' }}>
-            Framer Kit Daily
-          </h3>
-          <p style={{ fontSize: '14px', color: 'var(--framer-color-text-secondary)' }}>
-            Шаблон для ежедневного контент-плана и блога
-          </p>
-        </Link>
+      <SectionHeader
+        title="Templates"
+        count={manifest.templates.length}
+        filter={filter}
+        onFilterChange={setFilter}
+        loading={false}
+        hideTitle={true}
+        hideThemeSwitcher={true}
+        hideWireframeToggle={true}
+        renderMetaBelow={true}
+      />
 
-        {/* Заглушка для будущих шаблонов */}
-        <div className="template-card placeholder" style={{
-          padding: '24px',
-          border: '2px dashed var(--framer-color-border)',
-          borderRadius: '12px',
-          textAlign: 'center',
-          color: 'var(--framer-color-text-secondary)'
-        }}>
-          <p>🚧 Скоро новые шаблоны</p>
+      <div className="gallery-scroll-area layout-catalog-scroll-area">
+        <div className="gallery layout-catalog-grid">
+          <AdminCreateSectionCard group="templates" theme={filter} isAdmin={isAdmin} />
+          <RandomTemplateCards theme={filter} isAdmin={isAdmin} />
         </div>
       </div>
     </div>

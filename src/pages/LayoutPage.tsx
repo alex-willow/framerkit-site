@@ -1,93 +1,107 @@
-import { useState, useEffect } from "react";
-import { Paintbrush, SquareDashed } from "lucide-react";
+import { useEffect, useState } from "react";
 import RandomSectionCards from "../components/RandomSectionCards";
 import RandomSectionCardsDark from "../components/RandomSectionCardsDark";
-import TopBar from "../components/TopBar";
-import Sidebar from "../components/Sidebar";
+import SectionHeader from "../components/SectionHeader";
+import SEO from "../components/SEO";
+import AdminCreateSectionCard from "../components/AdminCreateSectionCard";
 
 type LayoutPageProps = {
-  theme: "light" | "dark";
-  onThemeToggle: () => void;
+  isAdmin: boolean;
 };
 
-export default function LayoutPage({ theme, onThemeToggle }: LayoutPageProps) {
-  const [isWireframeMode, setIsWireframeMode] = useState(true);
-  const [isMobile, setIsMobile] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+export default function LayoutPage({ isAdmin }: LayoutPageProps) {
+  const [filter, setFilter] = useState<"light" | "dark">(() => {
+    const saved = localStorage.getItem("theme");
+    return saved === "dark" ? "dark" : "light";
+  });
+  const [isWireframeMode, setIsWireframeMode] = useState(() => {
+    try {
+      const saved = localStorage.getItem("wireframeMode");
+      return saved !== null ? saved === "true" : true;
+    } catch {
+      return true;
+    }
+  });
+  const layoutCount = 11;
 
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth <= 767);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
+    try {
+      localStorage.setItem("wireframeMode", isWireframeMode.toString());
+    } catch (error) {
+      console.warn("Failed to save wireframeMode to localStorage", error);
+    }
+  }, [isWireframeMode]);
+
+  useEffect(() => {
+    const handleThemeChange = (event: Event) => {
+      const customEvent = event as CustomEvent<{ theme?: "light" | "dark" } | "light" | "dark">;
+      const nextTheme =
+        typeof customEvent.detail === "string"
+          ? customEvent.detail
+          : customEvent.detail?.theme;
+
+      if (nextTheme === "light" || nextTheme === "dark") {
+        setFilter(nextTheme);
+      }
+    };
+
+    window.addEventListener("framerkit-theme-change", handleThemeChange as EventListener);
+
+    return () => {
+      window.removeEventListener("framerkit-theme-change", handleThemeChange as EventListener);
+    };
   }, []);
 
   return (
-    <div className="home-docs-layout">
-      <TopBar theme={theme} onThemeToggle={onThemeToggle} />
-      
-      <div className="app-layout">
-        <Sidebar
-          activeSection="layout"
-          onSectionChange={() => {}}
-          isMobile={isMobile}
-          isMenuOpen={isMenuOpen}
-          onMenuClose={() => setIsMenuOpen(false)}
-        />
-        
-        <main className="content">
-          <section className="ls-section">
-            <div className="ls-wrapper">
-              <div className="ls-container">
-                <div className="ls-block">
-                  
-                  {/* 1.  */}
-                  <h2 className="fk-gs-title">Layout Sections</h2>
-                  
-                  {/* 2.  */}
-                  <p className="fk-gs-text">
-                    Pre-built page sections like Navigation Bars, Hero Sections, Testimonials, FAQs, and more  fully responsive and ready to drop into your Framer project
-                  </p>
-                  
-                  {/* 3.  */}
-                  <div className="mode-toggle-wrapper">
-                    <div className="mode-toggle-group">
-                      <button
-                        className={`mode-toggle-btn ${isWireframeMode ? 'active' : ''}`}
-                        onClick={() => setIsWireframeMode(true)}
-                        type="button"
-                        aria-label="Wireframe mode"
-                      >
-                        <SquareDashed size={16} strokeWidth={2} />
-                        <span>Wireframe</span>
-                      </button>
-                      <button
-                        className={`mode-toggle-btn ${!isWireframeMode ? 'active' : ''}`}
-                        onClick={() => setIsWireframeMode(false)}
-                        type="button"
-                        aria-label="Design mode"
-                      >
-                        <Paintbrush size={16} strokeWidth={2} />
-                        <span>Design</span>
-                      </button>
-                    </div>
-                  </div>
-                  
-                </div>
-              </div>
-            </div>
-          </section>
-          
-          <div className="gallery-scroll-area">
-            <div className="gallery">
-              {theme === "dark" ? (
-                <RandomSectionCardsDark wireframeMode={isWireframeMode} />
-              ) : (
-                <RandomSectionCards wireframeMode={isWireframeMode} theme={theme} />
-              )}
-            </div>
-          </div>
-        </main>
+    <div className="layout-catalog-page">
+      <SEO
+        title="Layout Sections"
+        description="Browse FramerKit layout sections in one place and choose the exact block variant you need."
+        keywords="framer layout sections, framerkit layout, navbar hero footer sections"
+        canonical="https://www.framerkit.site/layout"
+      />
+
+      {/* 🔥 Breadcrumb + Header */}
+      <div className="component-page-header">
+        <nav className="component-breadcrumb">
+          <span className="breadcrumb-current">Layout Sections</span>
+        </nav>
+        <h2 className="component-page-title">Layout Sections</h2>
+        <p className="component-page-description">
+          Quick start: choose a section type, switch between Wireframe and Design, then copy and paste the
+          exact variant you need. Both options are ready blocks, so you can pick by screenshot and insert
+          the one that matches your page faster.
+        </p>
+      </div>
+
+      <SectionHeader
+        title="Layout Sections"
+        count={layoutCount}
+        filter={filter}
+        onFilterChange={setFilter}
+        loading={false}
+        hideThemeSwitcher={true}
+        isWireframeMode={isWireframeMode}
+        onWireframeModeChange={setIsWireframeMode}
+        hideWireframeToggle={false}
+        hideTitle={true}
+        renderMetaBelow={true}
+        controlsAlign="left"
+      />
+
+      <div className="gallery-scroll-area layout-catalog-scroll-area">
+        <div className="gallery layout-catalog-grid">
+          <AdminCreateSectionCard group="layout" theme={filter} isAdmin={isAdmin} />
+          {filter === "dark" ? (
+            <RandomSectionCardsDark wireframeMode={isWireframeMode} isAdmin={isAdmin} />
+          ) : (
+            <RandomSectionCards
+              wireframeMode={isWireframeMode}
+              theme={filter}
+              isAdmin={isAdmin}
+            />
+          )}
+        </div>
       </div>
     </div>
   );

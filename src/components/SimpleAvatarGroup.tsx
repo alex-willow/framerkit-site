@@ -4,11 +4,13 @@ import { useState } from "react";
 interface SimpleAvatarGroupProps {
   size?: number;       // размер аватара в px
   overlap?: number;    // на сколько пикселей каждый аватар накладывается на следующий
+  theme?: "light" | "dark";  // тема для стилизации границ
 }
 
 export default function SimpleAvatarGroup({
   size = 40,
   overlap = 8, // по умолчанию накладываем на 8px
+  theme = "light",
 }: SimpleAvatarGroupProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
@@ -31,10 +33,10 @@ export default function SimpleAvatarGroup({
             width: size,
             height: size,
             borderRadius: "50%",
-            border: "2px solid #fff",
-            boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+            border: theme === "dark" ? "2px solid #3a3a5e" : "2px solid #fff",
+            boxShadow: theme === "dark" ? "0 2px 8px rgba(0,0,0,0.4)" : "0 2px 4px rgba(0,0,0,0.1)",
             overflow: "hidden",
-            backgroundColor: "#f5f5f5",
+            backgroundColor: theme === "dark" ? "#4a4a6e" : "#f5f5f5",
             transform: hoveredIndex === index ? "translateY(-4px) scale(1.05)" : "none",
             transition: "transform 0.2s ease",
             zIndex: hoveredIndex === index ? 10 : 1,

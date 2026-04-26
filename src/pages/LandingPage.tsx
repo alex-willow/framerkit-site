@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom"; 
+import { useState, useEffect, useLayoutEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom"; 
 import { motion } from "framer-motion";
 import SimpleAvatarGroup from "../components/SimpleAvatarGroup";
 import ComponentRunner from "../components/ComponentRunner";
@@ -7,10 +7,13 @@ import RandomSectionCards from "../components/RandomSectionCards";
 import RandomSectionCardsDark from "../components/RandomSectionCardsDark";
 import RandomComponentCards from "../components/RandomComponentCards";
 import RandomComponentCardsDark from "../components/RandomComponentCardsDark";
+import HeroGridSnake from "../components/HeroGridSnake";
 import "./framerkit.css";
 import "./gettingstarted.css";
 import styles from "./HomePage.module.css";
-import { Copy, CircleCheck, Paintbrush, SquareDashed } from "lucide-react";
+import { CircleCheck, Paintbrush, Sparkles, SquareDashed } from "lucide-react";
+import { trackGtagEvent } from "../utils/gtag";
+import SEO from "../components/SEO";
 import {
   RocketLaunch,
   ClipboardText,
@@ -23,31 +26,91 @@ type LandingPageProps = {
   theme?: "light" | "dark";
 };
 
+type FaqItem = {
+  question: string;
+  answer: React.ReactNode;
+};
+
 export default function LandingPage({ theme = "light" }: LandingPageProps) {
 
   const navigate = useNavigate(); // 🔥 Хук для навигации
+  const location = useLocation();
 
-  const trackEvent = (event: string, params?: Record<string, any>) => {
-    if (typeof window !== "undefined" && (window as any).gtag) {
-      (window as any).gtag("event", event, params);
-    }
-  };
-
-  const [copiedEmail, setCopiedEmail] = useState(false); // для FAQ email
-  const [hoveredEmail, setHoveredEmail] = useState(false); // для FAQ email
-  const [isWireframeMode, setIsWireframeMode] = useState(true);
-
-  // Загружаем wireframeMode из localStorage при монтировании
-  useEffect(() => {
+  const [isWireframeMode, setIsWireframeMode] = useState(() => {
     try {
       const saved = localStorage.getItem("wireframeMode");
-      if (saved !== null) {
-        setIsWireframeMode(saved === "true");
-      }
-    } catch (e) {
-      console.warn("Failed to load wireframeMode from localStorage", e);
+      return saved === null ? true : saved === "true";
+    } catch (error) {
+      console.warn("Failed to load wireframeMode from localStorage", error);
+      return true;
     }
-  }, []);
+  });
+
+  const faqItems: FaqItem[] = [
+    {
+      question: "What is FramerKit?",
+      answer:
+        "FramerKit is a library of ready-to-use Framer sections, components, and templates designed to help you build polished websites faster.",
+    },
+    {
+      question: "How does the workflow work?",
+      answer:
+        "Browse sections on the site or in the plugin, copy or insert what you need, then customize layout, content, and styling directly inside Framer.",
+    },
+    {
+      question: "What is Wireframe & Design mode?",
+      answer:
+        "Wireframe mode helps you work on structure and flow first. Design mode gives you the polished visual version when you're ready to refine the page.",
+    },
+    {
+      question: "Can I use FramerKit for client work?",
+      answer:
+        "Yes. Pro plans include commercial use, so you can use FramerKit components in unlimited client projects.",
+    },
+    {
+      question: "Is everything responsive?",
+      answer:
+        "Yes. The library is built to work across desktop, tablet, and mobile, so you start from a responsive base instead of fixing layouts later.",
+    },
+    {
+      question: "Are tutorials and updates included?",
+      answer: (
+        <>
+          Yes. New sections are added over time, and you can follow updates on{" "}
+          <span className="tooltip-wrapper">
+            <a
+              href="https://x.com/framer_kit"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="faq-link"
+            >
+              X
+            </a>
+            <div className="tooltip">
+              Follow on X
+              <div className="tooltip-arrow" />
+            </div>
+          </span>{" "}
+          and watch tutorials on{" "}
+          <span className="tooltip-wrapper" style={{ display: "inline-flex" }}>
+            <a
+              href="https://www.youtube.com/@framerkit_plugin"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="faq-link"
+            >
+              YouTube
+            </a>
+            <div className="tooltip">
+              Watch tutorials
+              <div className="tooltip-arrow" />
+            </div>
+          </span>
+          .
+        </>
+      ),
+    },
+  ];
 
   // Сохраняем wireframeMode при изменении
   useEffect(() => {
@@ -58,19 +121,53 @@ export default function LandingPage({ theme = "light" }: LandingPageProps) {
     }
   }, [isWireframeMode]);
 
-  // Сбрасываем URL на / при монтировании лейдинга
+  // Сбрасываем URL на / при монтировании лендинга,
+  // но сохраняем pricing hash, чтобы прямой переход к прайсу работал.
   useEffect(() => {
-    if (window.location.pathname !== "/") {
+    if (
+      window.location.pathname !== "/" ||
+      (window.location.hash && window.location.hash !== "#get-framerkit")
+    ) {
       window.history.replaceState(null, "", "/");
     }
   }, []);
 
+  useLayoutEffect(() => {
+    const state = location.state as { scrollTo?: string } | null;
+    const targetId = state?.scrollTo;
+
+    if (!targetId) return;
+
+    const target = document.getElementById(targetId);
+    if (target) {
+      target.scrollIntoView({ behavior: "auto", block: "start" });
+    }
+
+    navigate(location.pathname, { replace: true, state: null });
+  }, [location.pathname, location.state, navigate]);
+
+  useLayoutEffect(() => {
+    if (location.hash !== "#get-framerkit") return;
+    const target = document.getElementById("get-framerkit");
+    if (target) {
+      target.scrollIntoView({ behavior: "auto", block: "start" });
+    }
+  }, [location.hash]);
+
   return (
     <div className="landing-page">
+      <SEO
+        title="FramerKit — UI Components & Templates"
+        description="FramerKit library of ready-made Framer sections, components, and templates to build websites faster."
+        keywords="framerkit, framer ui kit, framer components, framer templates"
+        canonical="https://www.framerkit.site/"
+      />
       {/* HERO SECTION */}
       <section id="overview" className={styles.heroSection}>
         <div className={styles.lightTop}></div>
         <div className={styles.lightMid}></div>
+        <div className={styles.gridPattern}></div>
+        <HeroGridSnake theme={theme} />
 
         <div className={styles.container}>
           {(() => {
@@ -81,35 +178,26 @@ export default function LandingPage({ theme = "light" }: LandingPageProps) {
             const logoAndFirstLineDelay = 0;
             const secondLineDelay =
               logoAndFirstLineDelay + firstLine.length * 0.03 + 0.2;
+            const eyebrowDelay = logoAndFirstLineDelay;
             const subtitleDelay = secondLineDelay + secondLine.length * 0.03 + 0.2;
             const buttonsDelay = subtitleDelay + 0.6;
             const testimonialsDelay = buttonsDelay + 0.2;
 
             return (
               <>
-                {/* 1. Логотипы */}
+                {/* 1. Badge */}
                 <motion.div
-                  className={styles.logos}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
+                  className={styles.eyebrow}
+                  initial={{ opacity: 0, x: -20, filter: "blur(6px)" }}
+                  animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
                   transition={{
                     duration: 0.6,
                     ease: "easeOut",
-                    delay: logoAndFirstLineDelay,
+                    delay: eyebrowDelay,
                   }}
                 >
-                  <div
-                    className={styles["logo-item"]}
-                    style={{ transform: "rotate(-10deg)" }}
-                  >
-                    <img src="/Framer.png" alt="Framer" />
-                  </div>
-                  <div
-                    className={styles["logo-item"]}
-                    style={{ transform: "rotate(10deg)" }}
-                  >
-                    <img src="/framerkit.png" alt="FramerKit" />
-                  </div>
+                  <Sparkles size={14} strokeWidth={2.25} />
+                  <span>New components added daily</span>
                 </motion.div>
 
                 {/* 2-3. Заголовок — гибридная анимация */}
@@ -157,8 +245,7 @@ export default function LandingPage({ theme = "light" }: LandingPageProps) {
                     delay: subtitleDelay,
                   }}
                 >
-                 Everything you need to design, build, and launch beautiful websites faster and smarter
-
+                 Browse polished blocks, learn the workflow, drop sections into Framer, and build pages faster without repeating the same design work from scratch.
                 </motion.p>
 
                 {/* 5. Кнопки */}
@@ -175,28 +262,25 @@ export default function LandingPage({ theme = "light" }: LandingPageProps) {
            <button
               className="authButton"
               onClick={() => {
-                trackEvent("click_explore_components", { location: "landing_hero" });
+                trackGtagEvent("click_explore_components", { location: "landing_hero" });
                 
                 // 🔥 Правильный переход через React Router
                 navigate("/#overview");
               }}
             >
-              Getting Started
+              Quick Start
             </button>
-           
-                  <a
-                    href="https://www.framer.com/marketplace/plugins/framerkit"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() =>
-                      trackEvent("click_try_free_on_framer", {
-                        location: "hero",
-                        outbound: true,
-                      })
-                    }
-                  >
-                    <button className="logoutButton">Try Free on Framer</button>
-                  </a>
+            <button
+              className="logoutButton"
+              onClick={() => {
+                trackGtagEvent("click_see_pricing", { location: "landing_hero" });
+                document
+                  .getElementById("get-framerkit")
+                  ?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
+            >
+              See Pricing
+            </button>
                 </motion.div>
 
                 {/* 6. Аватарки и статистика */}
@@ -210,7 +294,7 @@ export default function LandingPage({ theme = "light" }: LandingPageProps) {
                     delay: testimonialsDelay,
                   }}
                 >
-                  <SimpleAvatarGroup size={40} overlap={6} />
+                  <SimpleAvatarGroup size={40} overlap={6} theme={theme} />
                   <p className={styles.statsText}>
                     1,400+ designers already use FramerKit
                   </p>
@@ -282,341 +366,6 @@ export default function LandingPage({ theme = "light" }: LandingPageProps) {
       </section>
 
      {/* TESTIMONIALS SECTION */}
-<section id="testimonials" className="testimonials-section">
-  <div className="faq-container">
-    <h2 className="fk-gs-title">What People Say</h2>
-    <p className="fk-gs-text">Feedback from designers and developers using FramerKit</p>
-
-    <div className="faq-grid">
-      
-      {/* Отзыв 1 */}
-      <div className="faq-item">
-        <p className="faq-answer">
-          "FramerKit saved me dozens of hours. The components are clean, responsive, and easy to customize. Best investment for my workflow!"
-        </p>
-        <div className="testimonial-author">
-          <div className="testimonial-left">
-            <img 
-              src="https://i.pravatar.cc/150?img=1" 
-              alt="Alex Morgan" 
-              className="testimonial-avatar"
-            />
-            <div className="testimonial-info">
-              <span className="testimonial-name">Alex Morgan</span>
-              <span className="testimonial-role">Freelance Designer</span>
-            </div>
-          </div>
-          <span className="tooltip-wrapper" style={{ display: 'inline-flex' }}>
-            <a 
-              href="https://x.com/framer_kit" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="faq-link testimonial-link"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-              </svg>
-            </a>
-            <div className="tooltip">
-              Follow on X
-              <div className="tooltip-arrow" />
-            </div>
-          </span>
-        </div>
-      </div>
-
-      {/* Отзыв 2 */}
-      <div className="faq-item">
-        <p className="faq-answer">
-          "The Wireframe & Design mode is a game-changer. I can prototype fast and then polish everything in minutes. Highly recommend!"
-        </p>
-        <div className="testimonial-author">
-          <div className="testimonial-left">
-            <img 
-              src="https://i.pravatar.cc/150?img=5" 
-              alt="Sarah Chen" 
-              className="testimonial-avatar"
-            />
-            <div className="testimonial-info">
-              <span className="testimonial-name">Sarah Chen</span>
-              <span className="testimonial-role">Product Designer</span>
-            </div>
-          </div>
-          <span className="tooltip-wrapper" style={{ display: 'inline-flex' }}>
-            <a 
-              href="https://x.com/framer_kit" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="faq-link testimonial-link"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-              </svg>
-            </a>
-            <div className="tooltip">
-              Follow on X
-              <div className="tooltip-arrow" />
-            </div>
-          </span>
-        </div>
-      </div>
-
-      {/* Отзыв 3 */}
-      <div className="faq-item">
-        <p className="faq-answer">
-          "Finally a kit that understands how designers work. Every component feels thoughtfully crafted. Worth every penny!"
-        </p>
-        <div className="testimonial-author">
-          <div className="testimonial-left">
-            <img 
-              src="https://i.pravatar.cc/150?img=11" 
-              alt="Mike Roberts" 
-              className="testimonial-avatar"
-            />
-            <div className="testimonial-info">
-              <span className="testimonial-name">Mike Roberts</span>
-              <span className="testimonial-role">Frontend Developer</span>
-            </div>
-          </div>
-          <span className="tooltip-wrapper" style={{ display: 'inline-flex' }}>
-            <a 
-              href="https://x.com/framer_kit" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="faq-link testimonial-link"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-              </svg>
-            </a>
-            <div className="tooltip">
-              Follow on X
-              <div className="tooltip-arrow" />
-            </div>
-          </span>
-        </div>
-      </div>
-
-      {/* Отзыв 4 — НОВЫЙ */}
-      <div className="faq-item">
-        <p className="faq-answer">
-          "The responsive blocks work flawlessly across all devices. I can build a complete landing page in under an hour. FramerKit is a must-have!"
-        </p>
-        <div className="testimonial-author">
-          <div className="testimonial-left">
-            <img 
-              src="https://i.pravatar.cc/150?img=3" 
-              alt="Jessica Lee" 
-              className="testimonial-avatar"
-            />
-            <div className="testimonial-info">
-              <span className="testimonial-name">Jessica Lee</span>
-              <span className="testimonial-role">UX Designer</span>
-            </div>
-          </div>
-          <span className="tooltip-wrapper" style={{ display: 'inline-flex' }}>
-            <a 
-              href="https://x.com/framer_kit" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="faq-link testimonial-link"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-              </svg>
-            </a>
-            <div className="tooltip">
-              Follow on X
-              <div className="tooltip-arrow" />
-            </div>
-          </span>
-        </div>
-      </div>
-
-      {/* Отзыв 5 — НОВЫЙ */}
-      <div className="faq-item">
-        <p className="faq-answer">
-          "Commercial license is a huge plus. I use FramerKit for all my client projects and they always love the results. Best ROI for my business!"
-        </p>
-        <div className="testimonial-author">
-          <div className="testimonial-left">
-            <img 
-              src="https://i.pravatar.cc/150?img=12" 
-              alt="Tom Anderson" 
-              className="testimonial-avatar"
-            />
-            <div className="testimonial-info">
-              <span className="testimonial-name">Tom Anderson</span>
-              <span className="testimonial-role">Agency Owner</span>
-            </div>
-          </div>
-          <span className="tooltip-wrapper" style={{ display: 'inline-flex' }}>
-            <a 
-              href="https://x.com/framer_kit" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="faq-link testimonial-link"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-              </svg>
-            </a>
-            <div className="tooltip">
-              Follow on X
-              <div className="tooltip-arrow" />
-            </div>
-          </span>
-        </div>
-      </div>
-
-      {/* Отзыв 6 — НОВЫЙ */}
-      <div className="faq-item">
-        <p className="faq-answer">
-          "The plugin makes it so easy to drop components directly into Framer. No more copy-pasting from external files. Game changer for my workflow!"
-        </p>
-        <div className="testimonial-author">
-          <div className="testimonial-left">
-            <img 
-              src="https://i.pravatar.cc/150?img=7" 
-              alt="Nina Patel" 
-              className="testimonial-avatar"
-            />
-            <div className="testimonial-info">
-              <span className="testimonial-name">Nina Patel</span>
-              <span className="testimonial-role">UI/UX Designer</span>
-            </div>
-          </div>
-          <span className="tooltip-wrapper" style={{ display: 'inline-flex' }}>
-            <a 
-              href="https://x.com/framer_kit" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="faq-link testimonial-link"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-              </svg>
-            </a>
-            <div className="tooltip">
-              Follow on X
-              <div className="tooltip-arrow" />
-            </div>
-          </span>
-        </div>
-      </div>
-
-      {/* Отзыв 7 — НОВЫЙ */}
-      <div className="faq-item">
-        <p className="faq-answer">
-          "I love how every component is built with best practices. Clean code, accessible markup, and beautiful design — all in one package."
-        </p>
-        <div className="testimonial-author">
-          <div className="testimonial-left">
-            <img 
-              src="https://i.pravatar.cc/150?img=15" 
-              alt="Chris Taylor" 
-              className="testimonial-avatar"
-            />
-            <div className="testimonial-info">
-              <span className="testimonial-name">Chris Taylor</span>
-              <span className="testimonial-role">Web Developer</span>
-            </div>
-          </div>
-          <span className="tooltip-wrapper" style={{ display: 'inline-flex' }}>
-            <a 
-              href="https://x.com/framer_kit" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="faq-link testimonial-link"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-              </svg>
-            </a>
-            <div className="tooltip">
-              Follow on X
-              <div className="tooltip-arrow" />
-            </div>
-          </span>
-        </div>
-      </div>
-
-      {/* Отзыв 8 — НОВЫЙ */}
-      <div className="faq-item">
-        <p className="faq-answer">
-          "The constant updates and new components show the team really cares. I've been using FramerKit for 6 months and it just keeps getting better!"
-        </p>
-        <div className="testimonial-author">
-          <div className="testimonial-left">
-            <img 
-              src="https://i.pravatar.cc/150?img=20" 
-              alt="Laura Kim" 
-              className="testimonial-avatar"
-            />
-            <div className="testimonial-info">
-              <span className="testimonial-name">Laura Kim</span>
-              <span className="testimonial-role">Startup Founder</span>
-            </div>
-          </div>
-          <span className="tooltip-wrapper" style={{ display: 'inline-flex' }}>
-            <a 
-              href="https://x.com/framer_kit" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="faq-link testimonial-link"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-              </svg>
-            </a>
-            <div className="tooltip">
-              Follow on X
-              <div className="tooltip-arrow" />
-            </div>
-          </span>
-        </div>
-      </div>
-
-      {/* Отзыв 9 — НОВЫЙ */}
-      <div className="faq-item">
-        <p className="faq-answer">
-          "As a teacher, I recommend FramerKit to all my students. It's the perfect balance of power and simplicity. They ship projects faster and with more confidence."
-        </p>
-        <div className="testimonial-author">
-          <div className="testimonial-left">
-            <img 
-              src="https://i.pravatar.cc/150?img=24" 
-              alt="Daniel Brown" 
-              className="testimonial-avatar"
-            />
-            <div className="testimonial-info">
-              <span className="testimonial-name">Daniel Brown</span>
-              <span className="testimonial-role">Design Instructor</span>
-            </div>
-          </div>
-          <span className="tooltip-wrapper" style={{ display: 'inline-flex' }}>
-            <a 
-              href="https://x.com/framer_kit" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="faq-link testimonial-link"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-              </svg>
-            </a>
-            <div className="tooltip">
-              Follow on X
-              <div className="tooltip-arrow" />
-            </div>
-          </span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
       <section id="explore-sections" className="explore-sections-section">
         <div className="fk-explore-wrapper">
           <div className="fk-container"></div>
@@ -701,25 +450,26 @@ export default function LandingPage({ theme = "light" }: LandingPageProps) {
   <div className="pricing-container">
     <h2 className="fk-gs-title">Get FramerKit</h2>
     <p className="fk-gs-text">
-      Choose your plan: subscribe monthly or get lifetime access with all future updates
+      Pick the plan that matches your workflow now. You can start monthly, save with yearly, or unlock everything forever.
     </p>
 
     <div className="pricing-grid">
-      {/* --- MONTHLY SUBSCRIPTION --- */}
       <div className="pricing-card">
-      <div className="badge-light">Flexible</div>
-  
+        <div className="badge-light">Monthly</div>
         <div className="price">
           <span className="price-amount">$15</span>
-          <span className="price-note">per month</span>
         </div>
+        <p className="plan-meta-inline">
+          <span className="plan-meta-chip">per month</span>
+        </p>
 
         <div className="features">
           <div className="feature-item"><CircleCheck className="feature-icon" /> Full FramerKit library</div>
           <div className="feature-item"><CircleCheck className="feature-icon" /> Framer plugin access</div>
-          <div className="feature-item"><CircleCheck className="feature-icon" /> 1000+ Premium sections</div>
-          <div className="feature-item"><CircleCheck className="feature-icon" /> Wireframe & Design modes</div>
-          <div className="feature-item"><CircleCheck className="feature-icon" /> Fully Responsive blocks</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> 1000+ premium sections</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Wireframe &amp; Design modes</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Fully responsive blocks</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Free lessons included</div>
           <div className="feature-item"><CircleCheck className="feature-icon" /> All updates while subscribed</div>
           <div className="feature-item"><CircleCheck className="feature-icon" /> Cancel anytime</div>
         </div>
@@ -730,9 +480,9 @@ export default function LandingPage({ theme = "light" }: LandingPageProps) {
           rel="noopener noreferrer"
           className="pricing-btn secondary"
           onClick={() =>
-            trackEvent("select_plan", {
+            trackGtagEvent("select_plan", {
               plan: "monthly",
-              price: 12,
+              price: 15,
               currency: "USD",
               interval: "month",
             })
@@ -742,24 +492,69 @@ export default function LandingPage({ theme = "light" }: LandingPageProps) {
         </a>
       </div>
 
-
-      {/* --- PLAN PLUGIN (Lifetime) - MOST POPULAR --- */}
-      <div className="pricing-card featured">
-        <div className="badge">Most Popular</div>
-        
+      <div className="pricing-card">
+        <div className="badge-light">Yearly</div>
         <div className="price">
-          <span className="price-amount">$89</span>
-          <span className="price-note">Lifetime</span>
+          <span className="price-amount">$72</span>
+          <span className="price-inline-note">$6/mo</span>
         </div>
+        <p className="plan-meta-inline">
+          <span className="plan-meta-chip">Paid yearly</span>
+          <span className="plan-meta-chip plan-meta-chip-accent">Save 60%</span>
+        </p>
 
         <div className="features">
           <div className="feature-item"><CircleCheck className="feature-icon" /> Full FramerKit library</div>
           <div className="feature-item"><CircleCheck className="feature-icon" /> Framer plugin access</div>
-          <div className="feature-item"><CircleCheck className="feature-icon" /> 1000+ Premium sections</div>
-          <div className="feature-item"><CircleCheck className="feature-icon" /> Wireframe & Design modes</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> 1000+ premium sections</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Wireframe &amp; Design modes</div>
           <div className="feature-item"><CircleCheck className="feature-icon" /> Fully responsive blocks</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Free lessons included</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> All updates while subscribed</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> 1 year access</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Cancel anytime</div>
+        </div>
+
+        <a
+          href="https://buy.polar.sh/polar_cl_0YFpBGmtf8un1uJgdyvJ3q5gsz3vQxQOjhwPv0HcV4h"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="pricing-btn secondary"
+          onClick={() =>
+            trackGtagEvent("select_plan", {
+              plan: "yearly",
+              price: 72,
+              currency: "USD",
+              interval: "year",
+            })
+          }
+        >
+          Get Yearly
+        </a>
+      </div>
+
+      <div className="pricing-card featured">
+        <div className="badge">Most Popular</div>
+        <div className="price">
+          <span className="price-amount">$89</span>
+          <span className="price-strike">$250</span>
+        </div>
+        <p className="plan-meta-inline">
+          <span className="plan-meta-chip">Lifetime</span>
+          <span className="plan-meta-chip plan-meta-chip-accent">Limited time offer</span>
+        </p>
+
+        <div className="features">
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Full FramerKit library</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Framer plugin access</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> 1000+ premium sections</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Wireframe &amp; Design modes</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Fully responsive blocks</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Free lessons included</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Lifetime access</div>
           <div className="feature-item"><CircleCheck className="feature-icon" /> Lifetime updates</div>
           <div className="feature-item"><CircleCheck className="feature-icon" /> Commercial use</div>
+          <div className="feature-item"><CircleCheck className="feature-icon" /> Priority support</div>
         </div>
 
         <a
@@ -768,9 +563,9 @@ export default function LandingPage({ theme = "light" }: LandingPageProps) {
           rel="noopener noreferrer"
           className="pricing-btn"
           onClick={() =>
-            trackEvent("select_plan", {
-              plan: "plugin",
-              price: 79,
+            trackGtagEvent("select_plan", {
+              plan: "lifetime",
+              price: 89,
               currency: "USD",
               featured: true,
             })
@@ -780,6 +575,18 @@ export default function LandingPage({ theme = "light" }: LandingPageProps) {
         </a>
       </div>
     </div>
+
+    <div className="pricing-polar-inline" aria-label="Payment details">
+      <span className="pricing-meta-brand">
+        <span>Secure checkout by</span>
+        <img
+          src={theme === "dark" ? "/polar-logotype-white.svg" : "/polar-logotype-black.svg"}
+          alt="Polar"
+          className="polar-logotype"
+        />
+      </span>
+    </div>
+
   </div>
 </section>
 
@@ -788,165 +595,15 @@ export default function LandingPage({ theme = "light" }: LandingPageProps) {
 <section id="faq-contact" className="faq-section">
   <div className="faq-container">
     <h2 className="fk-gs-title">Frequently Asked Questions</h2>
-    <p className="fk-gs-text">Everything you need to know about FramerKit</p>
+    <p className="fk-gs-text">The practical questions most people ask before they start using FramerKit.</p>
 
     <div className="faq-grid">
-      
-      {/* 1. Что такое Фреймер */}
-      <div className="faq-item">
-        <h3 className="faq-question">What is Framer?</h3>
-        <p className="faq-answer">
-          Framer is the world's most powerful tool for building professional websites with a "no-code" approach. It allows you to design and publish high-end sites instantly, and FramerKit is built to make this process 10x faster
-        </p>
-      </div>
-
-{/* 2. Ссылка для новых пользователей + Бонус */}
-<div className="faq-item">
-  <h3 className="faq-question">Any discount for new Framer users?</h3>
-  <p className="faq-answer">
-    Yes! If you are new to the <strong>Framer platform</strong>, you can sign up through my{' '}
-    
-    <span className="tooltip-wrapper">
-      <a 
-        href="https://framer.link/framerkit" 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        className="faq-link"
-      >
-          creator referral link
-        </a>
-        <div className="tooltip">
-          Get 3 months free
-          <div className="tooltip-arrow" />
+      {faqItems.map((item) => (
+        <div className="faq-item" key={item.question}>
+          <h3 className="faq-question">{item.question}</h3>
+          <p className="faq-answer">{item.answer}</p>
         </div>
-      </span>
-    
-    .{' '}
-    New users get <strong>3 months of Framer Pro for free</strong> on any annual plan. This is a great way to save on your Framer subscription while supporting my work on the plugin!
-  </p>
-</div>
-
-      {/* 3. Про Wireframe Mode */}
-      <div className="faq-item">
-        <h3 className="faq-question">What is Wireframe & Design mode?</h3>
-        <p className="faq-answer">
-          It’s our signature feature. Use Wireframe mode to build the structure and UX of your site, then switch to Design mode to apply polished, high-fidelity styles with a single toggle
-        </p>
-      </div>
-
-{/* 4. Обновления в X */}
-<div className="faq-item">
-  <h3 className="faq-question">How often are new sections added?</h3>
-  <p className="faq-answer">
-    The library is constantly growing. I announce all new layouts and fresh releases on our{' '}
-    
-    <span className="tooltip-wrapper">
-      <a 
-        href="https://x.com/framer_kit" 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        className="faq-link"
-      >
-        X (Twitter)
-      </a>
-      <div className="tooltip">
-        Follow on X
-        <div className="tooltip-arrow" />
-      </div>
-    </span>
-    
-    . Follow us to stay updated on the latest components!
-  </p>
-</div>
-
-      {/* 5. Про кастомизацию */}
-      <div className="faq-item">
-        <h3 className="faq-question">Can I customize the components?</h3>
-        <p className="faq-answer">
-          Absolutely. Every section is 100% editable. You can change colors, fonts, and layouts to match your brand identity without writing any code
-        </p>
-      </div>
-
-
-{/* 6. YouTube уроки */}
-<div className="faq-item">
-  <h3 className="faq-question">Are there any tutorials?</h3>
-  <p className="faq-answer">
-    Yes! I record deep-dive guides on how to build sites from scratch. You can watch all my tutorials on{' '}
-    
-    <span className="tooltip-wrapper" style={{ display: 'inline-flex' }}>
-      <a 
-        href="https://www.youtube.com/@framerkit_plugin" 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        className="faq-link"
-      >
-        YouTube
-      </a>
-      <div className="tooltip">
-        Watch tutorials
-        <div className="tooltip-arrow" />
-      </div>
-    </span>
-  </p>
-</div>
-
-      {/* 7. Коммерческая лицензия */}
-      <div className="faq-item">
-        <h3 className="faq-question">Can I use it for client projects?</h3>
-        <p className="faq-answer">
-          Yes. All Pro plans include a full commercial license. You can build and sell unlimited websites for your clients using FramerKit components
-        </p>
-      </div>
-
-      {/* 8. Адаптивность */}
-      <div className="faq-item">
-        <h3 className="faq-question">Is it mobile-friendly?</h3>
-        <p className="faq-answer">
-          Every component is hand-crafted to be fully responsive. Your site will look perfect on Desktop, Tablet, and Mobile devices right out of the box
-        </p>
-      </div>
-
-     {/* 9. Поддержка и почта */}
-<div className="faq-item">
-  <h3 className="faq-question">What if I need help?</h3>
-  <p className="faq-answer">
-    If you have any questions, feel free to reach out via email at{' '}
-    <span className="email-wrapper" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-      <a href="mailto:support@framerkit.site" className="faq-link">
-        support@framerkit.site
-      </a>
-      
-      {/* Кнопка копирования — точная копия паттерна из AccordionPage */}
-      <div
-        className={`iconButton ${copiedEmail ? 'copied' : ''}`}
-        onClick={async () => {
-          await navigator.clipboard.writeText('support@framerkit.site');
-          setCopiedEmail(true);
-          setTimeout(() => setCopiedEmail(false), 4000);
-        }}
-        onMouseEnter={() => !copiedEmail && setHoveredEmail(true)}
-        onMouseLeave={() => setHoveredEmail(false)}
-        style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
-      >
-        {copiedEmail ? (
-          <CircleCheck size={16} color="#22c55e" strokeWidth={2.5} />
-        ) : (
-          <Copy size={14} />
-        )}
-
-        {/* Tooltip — точная копия вашей структуры */}
-        {(copiedEmail || hoveredEmail) && (
-          <div className="tooltip">
-            {copiedEmail ? 'Copied' : 'Copy'}
-          </div>
-        )}
-      </div>
-    </span>
-    <br />
-    I'm always here to help you.
-  </p>
-</div>
+      ))}
 
     </div>
   </div>
@@ -970,10 +627,8 @@ export default function LandingPage({ theme = "light" }: LandingPageProps) {
               <h4>Documentation</h4>
               <a href="/#overview">Overview</a>
               <a href="/#getting-started">Getting Started</a>
-              <a href="/#what-is-framer">What is Framer?</a>
-              <a href="/#how-it-works">How it Works</a>
-              <a href="/#quick-start">Quick Start</a>
-              <a href="/#video">Video Tutorial</a>
+              <a href="/#layout-sections">Layout Sections</a>
+              <a href="/#ui-components">UI Components</a>
             </div>
 
             <div className="landing-footer-col">
@@ -981,13 +636,20 @@ export default function LandingPage({ theme = "light" }: LandingPageProps) {
               <a href="/#get-framerkit">Pricing</a>
               <a href="/#faq-contact">FAQ</a>
               <Link to="/templates">Templates</Link>
+              <a
+                href="https://www.framer.com/marketplace/plugins/framerkit"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Framer Plugin
+              </a>
             </div>
 
             <div className="landing-footer-col">
               <h4>Resources</h4>
-              <Link to="/learn">Learn</Link>
-              <Link to="/blog">Blog</Link>
-              <a href="/#overview">Changelog</a>
+              <Link to="/resources">Resources</Link>
+              <Link to="/layout">Layouts</Link>
+              <Link to="/components">Components</Link>
             </div>
 
             <div className="landing-footer-col">

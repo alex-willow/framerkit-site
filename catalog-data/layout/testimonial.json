@@ -1,0 +1,622 @@
+{
+  "testimonial": [
+
+  {
+    "key": "Testimonial-Section-01",
+    "title": "Testimonial Section 01",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Design%20/Testimonial-Section-01.gif",
+    "url": "https://framer.com/m/Testimonial-Section-01-hWoN.js",
+    "type": "free",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-01",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Wireframe/Testimonial%20Section%2001%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-01-Wireframe-ATWE.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-01-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-02",
+    "title": "Testimonial Section 02",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Design%20/Testimonial-Section-02.gif",
+    "url": "https://framer.com/m/Testimonial-Section-02-8XDw.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-02",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Wireframe/Testimonial%20Section%2002%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-02-Wireframe-f9J1.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-02-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-03",
+    "title": "Testimonial Section 03",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Design%20/Testimonial-Section-03.gif",
+    "url": "https://framer.com/m/Testimonial-Section-03-9bEZ.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-03",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Wireframe/Testimonial%20Section%2003%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-03-Wireframe-Agfe.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-03-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-04",
+    "title": "Testimonial Section 04",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Design%20/Testimonial-Section-04.gif",
+    "url": "https://framer.com/m/Testimonial-Section-04-a2Wh.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-04",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Wireframe/Testimonial%20Section%2004%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-04-Wireframe-RMK8.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-04-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-05",
+    "title": "Testimonial Section 05",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Design%20/Testimonial-Section-05.gif",
+    "url": "https://framer.com/m/Testimonial-Section-05-RSIG.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-05",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Wireframe/Testimonial%20Section%2005%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-05-Wireframe-AJQc.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-05-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-06",
+    "title": "Testimonial Section 06",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Design%20/Testimonial-Section-06.gif",
+    "url": "https://framer.com/m/Testimonial-Section-06-ibj0.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-06",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Wireframe/Testimonial%20Section%2006%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-06-Wireframe-iTuz.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-06-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-07",
+    "title": "Testimonial Section 07",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Design%20/Testimonial-Section-07.gif",
+    "url": "https://framer.com/m/Testimonial-Section-07-Q7Tf.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-07",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Wireframe/Testimonial%20Section%2007%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-07-Wireframe-xJKp.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-07-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-08",
+    "title": "Testimonial Section 08",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Design%20/Testimonial-Section-08.gif",
+    "url": "https://framer.com/m/Testimonial-Section-08-LEj5.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-08",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Wireframe/Testimonial%20Section%2008%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-08-Wireframe-0hzC.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-08-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-09",
+    "title": "Testimonial Section 09",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Design%20/Testimonial-Section-09.gif",
+    "url": "https://framer.com/m/Testimonial-Section-09-6xaF.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-09",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Wireframe/Testimonial%20Section%2009%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-09-Wireframe-KrHs.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-09-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-10",
+    "title": "Testimonial Section 10",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Design%20/Testimonial-Section-10.gif",
+    "url": "https://framer.com/m/Testimonial-Section-10-1DMW.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-10",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Wireframe/Testimonial%20Section%2010%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-10-Wireframe-r7qD.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-10-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-11",
+    "title": "Testimonial Section 11",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Design%20/Testimonial-Section-11.gif",
+    "url": "https://framer.com/m/Testimonial-Section-11-c6X3.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-11",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Wireframe/Testimonial%20Section%2011%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-11-Wireframe-lsK0.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-11-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-12",
+    "title": "Testimonial Section 12",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Design%20/Testimonial-Section-12.gif",
+    "url": "https://framer.com/m/Testimonial-Section-12-Z8rr.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-12",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Wireframe/Testimonial%20Section%2012%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-12-Wireframe-OAQT.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-12-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-13",
+    "title": "Testimonial Section 13",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Design%20/Testimonial-Section-13.gif",
+    "url": "https://framer.com/m/Testimonial-Section-13-khWO.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-13",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Wireframe/Testimonial%20Section%2013%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-13-Wireframe-wbV5.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-13-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-14",
+    "title": "Testimonial Section 14",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Design%20/Testimonial-Section-14.gif",
+    "url": "https://framer.com/m/Testimonial-Section-14-sTpB.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-14",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Wireframe/Testimonial%20Section%2014%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-14-Wireframe-dwZL.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-14-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-15",
+    "title": "Testimonial Section 15",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Design%20/Testimonial-Section-15.gif",
+    "url": "https://framer.com/m/Testimonial-Section-15-P8Ks.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-15",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Wireframe/Testimonial%20Section%2015%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-15-Wireframe-zixk.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-15-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-16",
+    "title": "Testimonial Section 16",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Design%20/Testimonial-Section-16.gif",
+    "url": "https://framer.com/m/Testimonial-Section-16-bwME.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-16",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Wireframe/Testimonial%20Section%2016%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-16-Wireframe-0wu7.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-16-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-17",
+    "title": "Testimonial Section 17",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Design%20/Testimonial-Section-17.gif",
+    "url": "https://framer.com/m/Testimonial-Section-17-9cDv.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-17",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Wireframe/Testimonial%20Section%2017%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-17-Wireframe-pvYG.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-17-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-18",
+    "title": "Testimonial Section 18",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Design%20/Testimonial-Section-18.gif",
+    "url": "https://framer.com/m/Testimonial-Section-18-bHVJ.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-18",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Wireframe/Testimonial%20Section%2018%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-18-Wireframe-doKa.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-18-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-19",
+    "title": "Testimonial Section 19",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Design%20/Testimonial-Section-19.gif",
+    "url": "https://framer.com/m/Testimonial-Section-19-FFxd.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-19",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Wireframe/Testimonial%20Section%2019%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-19-Wireframe-SQJ8.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-19-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-20",
+    "title": "Testimonial Section 20",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Design%20/Testimonial-Section-20.gif",
+    "url": "https://framer.com/m/Testimonial-Section-20-HDH4.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-20",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Wireframe/Testimonial%20Section%2020%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-20-Wireframe-vbUY.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-20-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-21",
+    "title": "Testimonial Section 21",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Design%20/Testimonial-Section-21.gif",
+    "url": "https://framer.com/m/Testimonial-Section-21-EI4c.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-21",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Wireframe/Testimonial%20Section%2021%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-21-Wireframe-Xbgr.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-21-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-22",
+    "title": "Testimonial Section 22",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Design%20/Testimonial-Section-22.gif",
+    "url": "https://framer.com/m/Testimonial-Section-22-1GCT.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-22",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Light/Wireframe/Testimonial%20Section%2022%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-22-Wireframe-iBna.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-22-wireframe"
+    }
+  },
+
+  {
+    "key": "Testimonial-Section-01-dark",
+    "title": "Testimonial Section 01",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Design%20/Testimonial-Section-01-Dark.gif",
+    "url": "https://framer.com/m/Testimonial-Section-01-Dark-KrcK.js",
+    "type": "free",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-01-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Wireframe/Testimonial%20Section%2001%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-01-Dark-Wireframe-iaHE.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-01-dark-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-02-dark",
+    "title": "Testimonial Section 02",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Design%20/Testimonial-Section-02-Dark.gif",
+    "url": "https://framer.com/m/Testimonial-Section-02-Dark-ea3V.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-02-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Wireframe/Testimonial%20Section%2002%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-02-Dark-Wireframe-fU1C.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-02-dark-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-03-dark",
+    "title": "Testimonial Section 03",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Design%20/Testimonial-Section-03-Dark.gif",
+    "url": "https://framer.com/m/Testimonial-Section-03-Dark-j8QT.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-03-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Wireframe/Testimonial%20Section%2003%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-03-Dark-Wireframe-MaLF.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-03-dark-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-04-dark",
+    "title": "Testimonial Section 04",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Design%20/Testimonial-Section-04-Dark.gif",
+    "url": "https://framer.com/m/Testimonial-Section-04-Dark-hWkx.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-04-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Wireframe/Testimonial%20Section%2004%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-04-Dark-Wireframe-rYZE.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-04-dark-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-05-dark",
+    "title": "Testimonial Section 05",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Design%20/Testimonial-Section-05-Dark.gif",
+    "url": "https://framer.com/m/Testimonial-Section-05-Dark-WlJR.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-05-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Wireframe/Testimonial%20Section%2005%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-05-Dark-Wireframe-7bpY.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-05-dark-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-06-dark",
+    "title": "Testimonial Section 06",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Design%20/Testimonial-Section-06-Dark.gif",
+    "url": "https://framer.com/m/Testimonial-Section-06-Dark-DLsD.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-06-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Wireframe/Testimonial%20Section%2006%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-06-Dark-Wireframe-qPmF.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-06-dark-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-07-dark",
+    "title": "Testimonial Section 07",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Design%20/Testimonial-Section-07-Dark.gif",
+    "url": "https://framer.com/m/Testimonial-Section-07-Dark-bPBn.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-07-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Wireframe/Testimonial%20Section%2007%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-07-Dark-Wireframe-FktE.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-07-dark-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-08-dark",
+    "title": "Testimonial Section 08",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Design%20/Testimonial-Section-08-Dark.gif",
+    "url": "https://framer.com/m/Testimonial-Section-08-Dark-sI7E.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-08-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Wireframe/Testimonial%20Section%2008%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-08-Dark-Wireframe-4oVh.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-08-dark-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-09-dark",
+    "title": "Testimonial Section 09",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Design%20/Testimonial-Section-09-Dark.gif",
+    "url": "https://framer.com/m/Testimonial-Section-09-Dark-W2nK.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-09-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Wireframe/Testimonial%20Section%2009%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-09-Dark-Wireframe-NqtX.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-09-dark-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-10-dark",
+    "title": "Testimonial Section 10",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Design%20/Testimonial-Section-10-Dark.gif",
+    "url": "https://framer.com/m/Testimonial-Section-10-Dark-AFuF.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-10-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Wireframe/Testimonial%20Section%2010%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-10-Dark-Wireframe-bHQy.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-10-dark-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-11-dark",
+    "title": "Testimonial Section 11",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Design%20/Testimonial-Section-11-Dark.gif",
+    "url": "https://framer.com/m/Testimonial-Section-11-Dark-nV1n.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-11-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Wireframe/Testimonial%20Section%2011%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-11-Dark-Wireframe-KJJo.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-11-dark-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-12-dark",
+    "title": "Testimonial Section 12",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Design%20/Testimonial-Section-12-Dark.gif",
+    "url": "https://framer.com/m/Testimonial-Section-12-Dark-X7eX.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-12-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Wireframe/Testimonial%20Section%2012%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-12-Dark-Wireframe-3Jbi.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-12-dark-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-13-dark",
+    "title": "Testimonial Section 13",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Design%20/Testimonial-Section-13-Dark.gif",
+    "url": "https://framer.com/m/Testimonial-Section-13-Dark-MGoy.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-13-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Wireframe/Testimonial%20Section%2013%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-13-Dark-Wireframe-nFTO.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-13-dark-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-14-dark",
+    "title": "Testimonial Section 14",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Design%20/Testimonial-Section-14-Dark.gif",
+    "url": "https://framer.com/m/Testimonial-Section-14-Dark-izX6.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-14-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Wireframe/Testimonial%20Section%2014%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-14-Dark-Wireframe-ixV5.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-14-dark-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-15-dark",
+    "title": "Testimonial Section 15",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Design%20/Testimonial-Section-15-Dark.gif",
+    "url": "https://framer.com/m/Testimonial-Section-15-Dark-fasc.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-15-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Wireframe/Testimonial%20Section%2015%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-15-Dark-Wireframe-zYru.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-15-dark-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-16-dark",
+    "title": "Testimonial Section 16",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Design%20/Testimonial-Section-16-Dark.gif",
+    "url": "https://framer.com/m/Testimonial-Section-16-Dark-Dv7D.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-16-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Wireframe/Testimonial%20Section%2016%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-16-Dark-Wireframe-0FLT.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-16-dark-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-17-dark",
+    "title": "Testimonial Section 17",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Design%20/Testimonial-Section-17-Dark.gif",
+    "url": "https://framer.com/m/Testimonial-Section-17-Dark-sEb4.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-17-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Wireframe/Testimonial%20Section%2017%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-17-Dark-Wireframe-FqV6.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-17-dark-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-18-dark",
+    "title": "Testimonial Section 18",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Design%20/Testimonial-Section-18-Dark.gif",
+    "url": "https://framer.com/m/Testimonial-Section-18-Dark-a2gh.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-18-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Wireframe/Testimonial%20Section%2018%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-18-Dark-Wireframe-K4b0.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-18-dark-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-19-dark",
+    "title": "Testimonial Section 19",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Design%20/Testimonial-Section-19-Dark.gif",
+    "url": "https://framer.com/m/Testimonial-Section-19-Dark-a4py.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-19-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Wireframe/Testimonial%20Section%2019%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-19-Dark-Wireframe-TsmN.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-19-dark-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-20-dark",
+    "title": "Testimonial Section 20",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Design%20/Testimonial-Section-20-Dark.gif",
+    "url": "https://framer.com/m/Testimonial-Section-20-Dark-Umi3.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-20-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Wireframe/Testimonial%20Section%2020%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-20-Dark-Wireframe-LffT.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-20-dark-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-21-dark",
+    "title": "Testimonial Section 21",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Design%20/Testimonial-Section-21-Dark.gif",
+    "url": "https://framer.com/m/Testimonial-Section-21-Dark-F1lV.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-21-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Wireframe/Testimonial%20Section%2021%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-21-Dark-Wireframe-p2Y6.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-21-dark-wireframe"
+    }
+  },
+  {
+    "key": "Testimonial-Section-22-dark",
+    "title": "Testimonial Section 22",
+    "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Design%20/Testimonial-Section-22-Dark.gif",
+    "url": "https://framer.com/m/Testimonial-Section-22-Dark-JS3J.js",
+    "type": "paid",
+    "dragType": "detachedComponentLayers",
+    "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-22-dark",
+    "wireframe": {
+      "image": "https://storage.googleapis.com/framerkit/Layout%20Sections/Testimonial%20Section/Dark/Wireframe/Testimonial%20Section%2022%20Dark%20Wireframe.png",
+      "url": "https://framer.com/m/Testimonial-Section-22-Dark-Wireframe-Vtiy.js",
+      "previewUrl": "https://framerkit.site/preview/testimonial-section/testimonial-section-22-dark-wireframe"
+    }
+  }
+  ]
+}
