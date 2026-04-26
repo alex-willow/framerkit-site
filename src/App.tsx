@@ -12,6 +12,14 @@ import ReactGA from "react-ga4";
 import { Analytics } from "@vercel/analytics/react";
 import { GA_ID, SUPABASE_ANON_KEY, SUPABASE_URL } from "./lib/env";
 
+// Lazy create Supabase client only when config is available
+const getSupabaseClient = () => {
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+    return null;
+  }
+  return createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+};
+
 import MainLayout from "./layouts/MainLayout";
 import LandingNavbar from './components/LandingNavbar';
 import Sidebar from './components/Sidebar';
@@ -36,11 +44,6 @@ import SupportPage from "./pages/SupportPage";
 // ================================
 // 🔑 GA4 ID
 // ================================
-// Supabase client
-const supabase = createClient(
-  SUPABASE_URL,
-  SUPABASE_ANON_KEY
-);
 
 // ================================
 // 🔥 Основной компонент
@@ -141,10 +144,13 @@ function AppContent() {
   const handleLogout = async () => {
     const email = localStorage.getItem("rememberedEmail");
     if (email) {
-      await supabase
-        .from("framer_kit")
-        .update({ site_status: "inactive" })
-        .eq("email", email);
+      const supabase = getSupabaseClient();
+      if (supabase) {
+        await supabase
+          .from("framer_kit")
+          .update({ site_status: "inactive" })
+          .eq("email", email);
+      }
     }
     localStorage.removeItem("rememberedEmail");
     localStorage.removeItem("rememberedKey");

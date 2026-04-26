@@ -10,10 +10,13 @@ import {
 } from "./lib/env";
 import { buildAdminHeaders } from "./lib/adminApi";
 
-const supabase = createClient(
-  SUPABASE_URL,
-  SUPABASE_ANON_KEY
-);
+// Lazy create Supabase client only when config is available
+const getSupabaseClient = () => {
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+    return null;
+  }
+  return createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+};
 
 type SignInModalProps = {
   isOpen: boolean;
@@ -119,6 +122,12 @@ export default function SignInModal({
         return;
       }
 
+      const supabase = getSupabaseClient();
+      if (!supabase) {
+        setErrorMessage("Authentication service is not configured.");
+        return;
+      }
+
       const { data: users, error } = await supabase
         .from("framer_kit")
         .select("*")
@@ -131,7 +140,7 @@ export default function SignInModal({
         setErrorMessage("Invalid Email or License Key");
       } else {
         // ✅ Автоматически активируем текущее устройство (перехват лицензии)
-        const { error: updateError } = await supabase
+        const { error: updateError } = await supabase!
           .from("framer_kit")
           .update({ site_status: "active" })
           .eq("email", cleanEmail)
