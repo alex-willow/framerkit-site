@@ -43,7 +43,6 @@ components: [
   { id: "pricingcard", label: "Pricing Card", jsonKey: "Pricingcard" },
   { id: "rating", label: "Rating", jsonKey: "rating" },
   { id: "testimonialcard", label: "Testimonial Card", jsonKey: "Testimonialcard" },
-  { id: "tabs", label: "Tabs", jsonKey: "tabs" },
 ],
 
 templates: [

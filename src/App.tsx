@@ -66,7 +66,14 @@ function AppContent() {
   const [activeSection, setActiveSection] = useState("overview");
   const [theme, setTheme] = useState<"light" | "dark">(() => {
     const savedTheme = localStorage.getItem("theme");
-    return savedTheme === "dark" ? "dark" : "light";
+    if (savedTheme === "dark" || savedTheme === "light") {
+      return savedTheme;
+    }
+    // Если нет сохраненной темы, определяем системную
+    if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      return "dark";
+    }
+    return "light";
   });
 
   const navigate = useNavigate();
@@ -112,6 +119,21 @@ function AppContent() {
     document.body.setAttribute("data-framer-theme", theme);
     window.dispatchEvent(new CustomEvent("framerkit-theme-change", { detail: theme }));
   }, [theme]);
+
+  // ================================
+  // 🌓 SYSTEM THEME LISTENER
+  // ================================
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleChange = (e: MediaQueryListEvent) => {
+      // Только если пользователь не выбрал тему вручную (нет сохраненной)
+      if (!localStorage.getItem("theme")) {
+        setTheme(e.matches ? "dark" : "light");
+      }
+    };
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
 
   useEffect(() => {
     const handleGlobalThemeChange = (event: Event) => {
