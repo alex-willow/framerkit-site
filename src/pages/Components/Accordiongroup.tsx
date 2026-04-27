@@ -165,8 +165,7 @@ export default function AccordionGroupPage({
 
       <SectionHeader
         title="Accordion Group"
-        count={filtered.length}
-        filter={filter}
+                filter={filter}
         onFilterChange={setFilter}
         loading={loading}
         hideTitle

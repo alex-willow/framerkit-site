@@ -162,7 +162,6 @@ export default function TestimonialCardPage({ isAuthenticated, setIsSignInOpen }
 
       <SectionHeader
         title="Testimonial Card"
-        count={filtered.length}
         filter={filter}
         onFilterChange={setFilter}
         loading={loading}

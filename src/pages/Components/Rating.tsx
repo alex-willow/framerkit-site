@@ -157,8 +157,7 @@ export default function RatingPage({ isAuthenticated, setIsSignInOpen }: RatingP
 
       <SectionHeader
         title="Rating"
-        count={filtered.length}
-        filter={filter}
+                filter={filter}
         onFilterChange={setFilter}
         loading={loading}
         hideTitle

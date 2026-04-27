@@ -86,7 +86,6 @@ export default function FramerKitDailyPage({
 
       <SectionHeader
         title="FramerKit Daily Templates"
-        count={items.length}
         loading={loading}
         hideThemeSwitcher={true}
         hideTitle={true}

@@ -157,8 +157,7 @@ export default function FormPage({ isAuthenticated, setIsSignInOpen }: FormPageP
 
       <SectionHeader
         title="Form"
-        count={filtered.length}
-        filter={filter}
+                filter={filter}
         onFilterChange={setFilter}
         loading={loading}
         hideTitle

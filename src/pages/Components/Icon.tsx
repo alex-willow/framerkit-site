@@ -157,8 +157,7 @@ export default function IconPage({ isAuthenticated, setIsSignInOpen }: IconPageP
 
       <SectionHeader
         title="Icon"
-        count={filtered.length}
-        filter={filter}
+                filter={filter}
         onFilterChange={setFilter}
         loading={loading}
         hideTitle

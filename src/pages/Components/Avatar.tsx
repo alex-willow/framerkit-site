@@ -157,8 +157,7 @@ export default function AvatarPage({ isAuthenticated, setIsSignInOpen }: AvatarP
 
       <SectionHeader
         title="Avatar"
-        count={filtered.length}
-        filter={filter}
+                filter={filter}
         onFilterChange={setFilter}
         loading={loading}
         hideTitle

@@ -189,8 +189,7 @@ export default function FeaturePage({ isAuthenticated, setIsSignInOpen }: Featur
 
       <SectionHeader
         title="Feature"
-        count={filtered.length}
-        filter={filter}
+                filter={filter}
         onFilterChange={setFilter}
         loading={loading}
         isWireframeMode={isWireframeMode}

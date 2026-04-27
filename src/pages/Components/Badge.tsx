@@ -157,8 +157,7 @@ export default function BadgePage({ isAuthenticated, setIsSignInOpen }: BadgePag
 
       <SectionHeader
         title="Badge"
-        count={filtered.length}
-        filter={filter}
+                filter={filter}
         onFilterChange={setFilter}
         loading={loading}
         hideTitle

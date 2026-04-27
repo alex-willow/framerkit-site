@@ -157,8 +157,7 @@ export default function CardPage({ isAuthenticated, setIsSignInOpen }: CardPageP
 
       <SectionHeader
         title="Card"
-        count={filtered.length}
-        filter={filter}
+                filter={filter}
         onFilterChange={setFilter}
         loading={loading}
         hideTitle

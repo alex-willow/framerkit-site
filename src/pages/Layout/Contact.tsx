@@ -192,7 +192,6 @@ export default function ContactPage({ isAuthenticated, setIsSignInOpen }: Contac
 
       <SectionHeader
         title="Contact"
-        count={filtered.length}
         filter={filter}
         onFilterChange={setFilter}
         loading={loading}

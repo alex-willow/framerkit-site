@@ -192,8 +192,7 @@ export default function FooterPage({ isAuthenticated, setIsSignInOpen }: FooterP
 
       <SectionHeader
         title="Footer"
-        count={filtered.length}
-        filter={filter}
+                filter={filter}
         onFilterChange={setFilter}
         loading={loading}
         isWireframeMode={isWireframeMode}

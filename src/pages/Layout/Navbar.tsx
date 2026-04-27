@@ -235,8 +235,7 @@ export default function NavbarPage({
 
       <SectionHeader
         title="Navbar"
-        count={filtered.length}
-        filter={filter}
+                filter={filter}
         onFilterChange={setFilter}
         loading={loading}
         isWireframeMode={isWireframeMode}

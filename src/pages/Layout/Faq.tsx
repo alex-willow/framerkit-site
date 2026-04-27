@@ -193,8 +193,7 @@ export default function FAQPage({ isAuthenticated, setIsSignInOpen }: FAQPagePro
 
       <SectionHeader
         title="FAQ"
-        count={filtered.length}
-        filter={filter}
+                filter={filter}
         onFilterChange={setFilter}
         loading={loading}
         isWireframeMode={isWireframeMode}

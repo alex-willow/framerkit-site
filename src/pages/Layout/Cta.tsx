@@ -191,7 +191,6 @@ export default function CtaPage({ isAuthenticated, setIsSignInOpen }: CtaPagePro
 
       <SectionHeader
         title="CTA"
-        count={filtered.length}
         filter={filter}
         onFilterChange={setFilter}
         loading={loading}

@@ -191,8 +191,7 @@ export default function PricingPage({ isAuthenticated, setIsSignInOpen }: Pricin
 
       <SectionHeader
         title="Pricing"
-        count={filtered.length}
-        filter={filter}
+                filter={filter}
         onFilterChange={setFilter}
         loading={loading}
         isWireframeMode={isWireframeMode}

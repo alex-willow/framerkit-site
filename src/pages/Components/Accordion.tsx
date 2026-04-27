@@ -160,8 +160,7 @@ export default function AccordionPage({ isAuthenticated, setIsSignInOpen }: Acco
 
       <SectionHeader
         title="Accordion"
-        count={filtered.length}
-        filter={filter}
+                filter={filter}
         onFilterChange={setFilter}
         loading={loading}
         hideTitle

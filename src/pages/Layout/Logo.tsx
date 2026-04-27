@@ -194,8 +194,7 @@ export default function LogoPage({ isAuthenticated, setIsSignInOpen }: LogoPageP
 
       <SectionHeader
         title="Logo"
-        count={filtered.length}
-        filter={filter}
+                filter={filter}
         onFilterChange={setFilter}
         loading={loading}
         isWireframeMode={isWireframeMode}

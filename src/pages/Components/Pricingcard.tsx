@@ -156,8 +156,7 @@ export default function PricingCardPage({ isAuthenticated, setIsSignInOpen }: Pr
 
       <SectionHeader
         title="Pricing Card"
-        count={filtered.length}
-        filter={filter}
+                filter={filter}
         onFilterChange={setFilter}
         loading={loading}
         hideTitle

@@ -3,15 +3,12 @@ import SectionHeader from "../components/SectionHeader";
 import SEO from "../components/SEO";
 import AdminCreateSectionCard from "../components/AdminCreateSectionCard";
 import RandomTemplateCards from "../components/RandomTemplateCards";
-import { useCatalogManifest } from "../hooks/useCatalogManifest";
-
 type TemplatesPageProps = {
   theme: "light" | "dark";
   isAdmin: boolean;
 };
 
 export default function TemplatesPage({ isAdmin }: TemplatesPageProps) {
-  const { manifest } = useCatalogManifest();
   const [filter, setFilter] = useState<"light" | "dark">(() => {
     const saved = localStorage.getItem("theme");
     return saved === "dark" ? "dark" : "light";

@@ -188,8 +188,7 @@ export default function GalleryPage({ isAuthenticated, setIsSignInOpen }: Galler
 
       <SectionHeader
         title="Gallery"
-        count={filtered.length}
-        filter={filter}
+                filter={filter}
         onFilterChange={setFilter}
         loading={loading}
         isWireframeMode={isWireframeMode}

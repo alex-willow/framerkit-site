@@ -189,8 +189,7 @@ export default function TestimonialPage({ isAuthenticated, setIsSignInOpen }: Te
 
       <SectionHeader
         title="Testimonial"
-        count={filtered.length}
-        filter={filter}
+                filter={filter}
         onFilterChange={setFilter}
         loading={loading}
         isWireframeMode={isWireframeMode}

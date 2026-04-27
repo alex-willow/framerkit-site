@@ -157,8 +157,7 @@ export default function InputPage({ isAuthenticated, setIsSignInOpen }: InputPag
 
       <SectionHeader
         title="Input"
-        count={filtered.length}
-        filter={filter}
+                filter={filter}
         onFilterChange={setFilter}
         loading={loading}
         hideTitle

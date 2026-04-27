@@ -160,8 +160,7 @@ export default function AvatarGroupPage({
 
       <SectionHeader
         title="Avatar Group"
-        count={filtered.length}
-        filter={filter}
+                filter={filter}
         onFilterChange={setFilter}
         loading={loading}
         hideTitle

@@ -157,8 +157,7 @@ export default function ButtonPage({ isAuthenticated, setIsSignInOpen }: ButtonP
 
       <SectionHeader
         title="Button"
-        count={filtered.length}
-        filter={filter}
+                filter={filter}
         onFilterChange={setFilter}
         loading={loading}
         hideTitle
