@@ -42,6 +42,9 @@ import ResourceArticlePage from "./pages/ResourceArticlePage";
 import UpdatesPage from "./pages/UpdatesPage";
 import SupportPage from "./pages/SupportPage";
 
+// Individual Lesson Pages
+import BuildFirstLandingFast from "./pages/Lessons/BuildFirstLandingFast";
+
 // ================================
 // 🔑 GA4 ID
 // ================================
@@ -387,6 +390,16 @@ function AppContent() {
         {/* === LEARN === */}
             <Route path="/learn/lessons" element={<ResourcesPage type="lessons" />} />
             <Route path="/learn/articles" element={<ResourcesPage type="articles" />} />
+
+            {/* Individual Lesson Pages (with React components support) */}
+            <Route
+              path="/learn/lessons/build-first-landing-fast"
+              element={
+                <BuildFirstLandingFast
+                  onSectionChange={setActiveSection}
+                />
+              }
+            />
 
             <Route path="/learn/lessons/:slug" element={<ResourceArticlePage />} />
             <Route path="/learn/articles/:slug" element={<ResourceArticlePage />} />

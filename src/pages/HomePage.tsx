@@ -16,6 +16,9 @@ import "./gettingstarted.css";
 import { trackGtagEvent } from "../utils/gtag";
 import SEO from "../components/SEO";
 import HoverVideo from "../components/HoverVideo";
+import ImageFrame from "../components/ImageFrame";
+
+
 
 
 type HeroCollectionItem = {
@@ -449,9 +452,9 @@ export default function HomePage({
         Paste the component into your Framer canvas and start customizing it right away.
       </p>
 
-      <HoverVideo
-        src="/videos/plugin-paste.mp4"
-        
+      <ImageFrame
+        src="/images/plugin-screenshot.jpg"
+        alt="Plugin screenshot"
       />
     </div>
 
