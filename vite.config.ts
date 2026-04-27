@@ -151,4 +151,7 @@ export default defineConfig({
     port: 4173,
     strictPort: false,
   },
+  build: {
+    chunkSizeWarningLimit: 1000, // Увеличиваем лимит до 1000 KB
+  },
 });

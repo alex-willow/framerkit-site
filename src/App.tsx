@@ -23,6 +23,7 @@ const getSupabaseClient = () => {
 import MainLayout from "./layouts/MainLayout";
 import LandingNavbar from './components/LandingNavbar';
 import Sidebar from './components/Sidebar';
+import NoticeBar from './components/NoticeBar';
 
 // Pages
 import LandingPage from './pages/LandingPage'; 
@@ -237,6 +238,8 @@ function AppContent() {
 
   return (
     <div data-framer-theme={theme}>
+      <NoticeBar />
+      
       {/* 🔥 УСЛОВНЫЙ РЕНДЕР: Лендинг ИЛИ Документация */}
       
       {isLandingPage ? (
