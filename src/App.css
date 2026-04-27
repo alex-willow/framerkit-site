@@ -1547,7 +1547,7 @@ body {
 /* Главный контейнер */
 .section-header-sticky {
   position: sticky;
-  top: 0;
+  top: -1px;
   z-index: 90; /* Чуть ниже навбара (100), но выше контента */
   
   /* 🔥 ФИКСИРОВАННАЯ ВЫСОТА */
@@ -8726,7 +8726,7 @@ kbd {
    ============================================ */
 .section-header-sticky {
   position: sticky;
-  top: 0;
+  top: -1px;
   z-index: 90;
   height: auto;
   min-height: 60px;
