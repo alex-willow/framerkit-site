@@ -58,7 +58,6 @@ export default function TemplatesPage({ isAdmin }: TemplatesPageProps) {
 
       <SectionHeader
         title="Templates"
-        count={manifest.templates.length}
         filter={filter}
         onFilterChange={setFilter}
         loading={false}

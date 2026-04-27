@@ -1287,7 +1287,6 @@ export default function CatalogSectionPage({
 
       <SectionHeader
         title={effectiveSectionLabel ?? config.singular}
-        count={filteredItems.length}
         filter={filter}
         onFilterChange={setFilter}
         loading={loading}

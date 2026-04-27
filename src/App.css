@@ -916,6 +916,7 @@ body {
   align-self: center;
 }
 
+
 .desktop-header-actions.desktop-header-actions-sticky {
   position: sticky;
   top: 0;
@@ -2122,6 +2123,7 @@ body.menu-open {
   background: var(--framer-color-bg);
   color: var(--framer-color-text);
   position: relative;      /* обязательно для корректного наблюдения */
+  padding: 40px 0;        /* уменьшенный отступ */
 }
 
 [data-framer-theme="dark"] .explore-sections-section {
@@ -6114,6 +6116,7 @@ body.menu-open {
 
 /* Use same authButton style for both light and dark themes */
 
+[data-framer-theme="dark"] .landing-page #overview .logoutButton,
 [data-framer-theme="dark"] .landing-page .heroSection .logoutButton {
   border-color: var(--button-secondary-border);
   color: var(--button-secondary-text);
@@ -6121,6 +6124,7 @@ body.menu-open {
   box-shadow: none;
 }
 
+[data-framer-theme="dark"] .landing-page #overview .logoutButton:hover,
 [data-framer-theme="dark"] .landing-page .heroSection .logoutButton:hover {
   background: var(--button-secondary-bg-hover);
   border-color: rgba(110, 63, 243, 0.35);
@@ -6198,7 +6202,7 @@ body.menu-open {
 .landing-page #ui-components,
 .landing-page #get-framerkit,
 .landing-page #faq-contact {
-  min-height: calc(100vh - 60px);
+  min-height: auto;
   padding-top: 80px;
   padding-bottom: 80px;
   box-sizing: border-box;
@@ -6232,8 +6236,8 @@ body.menu-open {
   .landing-page #get-framerkit,
   .landing-page #faq-contact {
     min-height: auto;
-    padding-top: 60px;
-    padding-bottom: 60px;
+    padding-top: 80px;
+    padding-bottom: 80px;
   }
 }
 
@@ -8411,6 +8415,10 @@ kbd {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  padding: 24px 24px 48px 24px; /* такой же как у HoverVideo */
+  border-radius: 24px;
+  border: 1px solid var(--framer-color-border);
+  background: transparent;
 }
 
 .video-wrapper {

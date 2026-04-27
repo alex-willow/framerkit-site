@@ -15,7 +15,6 @@ export default function ComponentPage({ isAdmin }: ComponentPageProps) {
     const saved = localStorage.getItem("theme");
     return saved === "dark" ? "dark" : "light";
   });
-  const componentCount = 13;
 
   useEffect(() => {
     const saved = localStorage.getItem("theme");
@@ -63,7 +62,6 @@ export default function ComponentPage({ isAdmin }: ComponentPageProps) {
 
       <SectionHeader
         title="UI Components"
-        count={componentCount}
         filter={filter}
         onFilterChange={setFilter}
         loading={false}

@@ -343,11 +343,11 @@
 :global([data-framer-theme="dark"]) .heroSection :global(.logoutButton) {
   border-color: rgba(255, 255, 255, 0.28) !important;
   color: #e5e7eb !important;
-  background: rgba(255, 255, 255, 0.04) !important;
+  background: #1f232c !important;
 }
 
 :global([data-framer-theme="dark"]) .heroSection :global(.logoutButton):hover {
-  background: rgba(110, 63, 243, 0.18) !important;
+  background: #2a2e3a !important;
   border-color: rgba(110, 63, 243, 0.35) !important;
 }
 

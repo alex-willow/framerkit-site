@@ -81,7 +81,7 @@ const ComponentRunner = () => {
   }, []);
 
   return (
-    <section id="components-runner" className="py-10 sm:py-12">
+    <section id="components-runner" className="py-4">
       {/* Верхний ряд */}
       <div className="runner-container">
         <div className="runner-mask">

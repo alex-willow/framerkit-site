@@ -22,7 +22,6 @@ export default function LayoutPage({ isAdmin }: LayoutPageProps) {
       return true;
     }
   });
-  const layoutCount = 11;
 
   useEffect(() => {
     try {
@@ -76,7 +75,6 @@ export default function LayoutPage({ isAdmin }: LayoutPageProps) {
 
       <SectionHeader
         title="Layout Sections"
-        count={layoutCount}
         filter={filter}
         onFilterChange={setFilter}
         loading={false}

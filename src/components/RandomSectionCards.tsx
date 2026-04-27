@@ -53,8 +53,8 @@ const getDisplayImage = (item: ComponentItem, wireframeMode: boolean) =>
 const formatSectionLabel = (sectionId: string, sectionLabelById: Record<string, string>) =>
   sectionLabelById[sectionId] || sectionId.charAt(0).toUpperCase() + sectionId.slice(1);
 
-const getSectionCountLabel = (sectionId: string, count: number, sectionLabelById: Record<string, string>) =>
-  `${formatSectionLabel(sectionId, sectionLabelById)} (${count})`;
+const getSectionCountLabel = (sectionId: string, _count: number, sectionLabelById: Record<string, string>) =>
+  formatSectionLabel(sectionId, sectionLabelById);
 
 const resolveItemsByKey = (
   payload: Record<string, ComponentItem[]>,

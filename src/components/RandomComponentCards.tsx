@@ -50,8 +50,8 @@ const isDarkVariant = (item: ComponentItem): boolean => {
 const formatComponentLabel = (section: string, componentLabelById: Record<string, string>) =>
   componentLabelById[section] || section.charAt(0).toUpperCase() + section.slice(1);
 
-const getComponentCountLabel = (section: string, count: number, componentLabelById: Record<string, string>) =>
-  `${formatComponentLabel(section, componentLabelById)} (${count})`;
+const getComponentCountLabel = (section: string, _count: number, componentLabelById: Record<string, string>) =>
+  formatComponentLabel(section, componentLabelById);
 
 export default function RandomComponentCards({
   theme = "light",

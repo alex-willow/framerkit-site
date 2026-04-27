@@ -1,11 +1,12 @@
 .hover-video-wrap {
   width: 100%;
+  margin: 0 -24px; /* Компенсируем padding родителя docs-section */
 }
 
 .hover-video {
   position: relative;
   overflow: hidden;
-  padding: 48px;
+  padding: 24px 24px 48px 24px; /* top right bottom left */
   border-radius: 24px;
   border: 1px solid var(--framer-color-border);
   background: transparent;
@@ -120,7 +121,7 @@
 }
 
 .hover-video:fullscreen .hover-video__controls {
-  padding: 0 48px 16px;
+  padding: 0 24px 16px;
 }
 
 .hover-video__controls {
@@ -129,7 +130,7 @@
   right: 0;
   bottom: 0;
   z-index: 2;
-  padding: 0 48px 12px;
+  padding: 0 24px 12px;
   opacity: 0;
   transform: translateY(6px);
   pointer-events: none;
@@ -287,7 +288,7 @@
 
 @media (max-width: 768px) {
   .hover-video {
-    padding: 32px;
+    padding: 16px 16px 32px 16px; /* уменьшенные отступы для мобильных */
     border-radius: 20px;
   }
 
@@ -299,7 +300,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    padding: 0 32px 8px;
+    padding: 0 16px 8px;
   }
 
   .hover-video__controls-row {

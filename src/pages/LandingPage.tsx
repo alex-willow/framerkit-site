@@ -350,25 +350,6 @@ export default function LandingPage({ theme = "light" }: LandingPageProps) {
               </div>
             </div>
           </div>
-
-          <div className="fk-gs-video-block">
-            <div className="fk-gs-video-wrapper">
-              <iframe
-                className="fk-gs-video-iframe"
-                src="https://www.youtube.com/embed/videoseries?list=PLMWSF_elzJIMIJsZaIK6Y_NztCiYd-Sx4&index=1&autoplay=1&mute=1&rel=0&modestbranding=1"
-                title="YouTube playlist"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-            </div>
-          </div>
-        </div>
-      </section>
-
-     {/* TESTIMONIALS SECTION */}
-      <section id="explore-sections" className="explore-sections-section">
-        <div className="fk-explore-wrapper">
-          <div className="fk-container"></div>
         </div>
       </section>
 

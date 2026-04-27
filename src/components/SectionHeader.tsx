@@ -13,7 +13,6 @@ import { useEffect, useRef, useState } from "react";
 
 type SectionHeaderProps = {
   title: string;
-  count: number;
   filter?: "light" | "dark";
   onFilterChange?: (filter: "light" | "dark") => void;
   loading: boolean;
@@ -260,7 +259,6 @@ function InlineSearch({
 
 export default function SectionHeader({
   title,
-  count,
   filter = "light",
   onFilterChange,
   loading,
@@ -295,7 +293,7 @@ export default function SectionHeader({
     };
   }, []);
 
-  const metaText = loading ? "Loading..." : `${count} ${templateLabel}`;
+  const metaText = loading ? "Loading..." : templateLabel;
 
   const wireframeControl =
     !hideWireframeToggle && onWireframeModeChange ? (
