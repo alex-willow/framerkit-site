@@ -2,40 +2,38 @@ import { useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import SEO from "../../components/SEO";
 import ImageFrame from "../../components/ImageFrame";
-import HoverVideo from "../../components/HoverVideo";
 
-// TOC sections for this lesson (right sidebar)
+// TOC sections for this lesson
 export const LESSON_SECTIONS = [
   { id: "intro", label: "Introduction" },
-  { id: "what-build", label: "What You Will Build" },
-  { id: "step-1", label: "Step 1: Hero Section" },
-  { id: "step-2", label: "Step 2: Feature Section" },
-  { id: "step-3", label: "Step 3: Social Proof" },
-  { id: "step-4", label: "Step 4: CTA" },
-  { id: "step-5", label: "Step 5: Apply Styles" },
+  { id: "why-wrong", label: "Why Layout Feels Wrong" },
+  { id: "logical-flow", label: "Build Logical Flow" },
+  { id: "visual-rhythm", label: "Keep Visual Rhythm" },
+  { id: "avoid-repetition", label: "Avoid Repetition" },
+  { id: "use-contrast", label: "Use Contrast" },
   { id: "result", label: "Result" },
 ];
 
 // Lesson metadata
 export const lessonMeta = {
-  slug: "build-first-landing-fast",
-  title: "Build Your First Landing Fast",
-  order: 1,
-  isLocked: false,
+  slug: "combine-sections-better-layouts",
+  title: "Combine Sections: Build Better Layouts",
+  order: 3,
+  isLocked: true,
   category: "Getting Started",
-  description: "Build a complete landing page in Framer using FramerKit sections in minutes.",
-  excerpt: "Learn how to quickly assemble a landing page using sections and basic structure.",
-  readTime: "8 min",
-  image: "https://via.placeholder.com/1280x720?text=Build+Landing+Fast",
+  description: "Learn how to combine sections правильно to create clean and balanced layouts.",
+  excerpt: "Understand how to structure sections so your pages look professional and consistent.",
+  readTime: "7 min",
+  image: "https://via.placeholder.com/1280x720?text=Combine+Sections",
   videoPlanned: true,
-  seoIntent: "framer landing page tutorial, build landing fast framer, framerkit sections",
+  seoIntent: "framer layout design, combine sections framer, website structure design",
 };
 
-type BuildFirstLandingFastProps = {
+type CombineSectionsBetterLayoutsProps = {
   onSectionChange: (sectionId: string) => void;
 };
 
-export default function BuildFirstLandingFast({ onSectionChange }: BuildFirstLandingFastProps) {
+export default function CombineSectionsBetterLayouts({ onSectionChange }: CombineSectionsBetterLayoutsProps) {
   const location = useLocation();
   const onSectionChangeRef = useRef(onSectionChange);
   const suppressSidebarUntilRef = useRef(0);
@@ -120,162 +118,144 @@ export default function BuildFirstLandingFast({ onSectionChange }: BuildFirstLan
 
         <div className="docs-content-block">
           <p className="docs-text">
-            In this lesson, you will build a complete landing page using FramerKit sections. 
-            The goal is not to design from scratch, but to assemble a clean and working structure quickly.
+            Building a page is not just about adding sections. The way you combine them defines how your layout looks and feels.
           </p>
         </div>
-
-        <ImageFrame
-          src="/images/lessons/final-landing-structure.jpg"
-          alt="Final landing page structure"
-          caption="The landing page you will build"
-        />
       </section>
 
-      {/* What You Will Build */}
-      <section id="what-build" className="docs-section">
+      <section id="why-wrong" className="docs-section">
         <div className="docs-header">
-          <h2 className="docs-section-title">What You Will Build</h2>
+          <h2 className="docs-section-title">Why Layout Feels Wrong</h2>
           <p className="docs-subtitle">
-            You will create a landing page with a clear structure using ready-made sections.
+            Even with good sections, layouts can look messy if they are combined incorrectly.
           </p>
         </div>
 
         <div className="docs-content-block">
           <ol className="resource-ordered-list">
-            <li>Hero section</li>
-            <li>Feature section</li>
-            <li>Social proof</li>
-            <li>CTA section</li>
-            <li>Footer</li>
+            <li>Sections feel disconnected</li>
+            <li>Spacing looks random</li>
+            <li>No visual flow</li>
+          </ol>
+
+          <p className="docs-text">
+            This usually happens when sections are added without thinking about how they work together.
+          </p>
+        </div>
+      </section>
+
+      <section id="logical-flow" className="docs-section">
+        <div className="docs-header">
+          <h2 className="docs-section-title">Build Logical Flow</h2>
+          <p className="docs-subtitle">
+            A strong layout follows a clear flow from top to bottom.
+          </p>
+        </div>
+
+        <div className="docs-content-block">
+          <ImageFrame
+            src="/images/lessons/section-flow.jpg"
+            alt="Section flow from hero to CTA"
+            caption="Section flow from hero to CTA"
+          />
+
+          <ol className="resource-ordered-list">
+            <li>Hero — explain what this is</li>
+            <li>Feature — explain why it matters</li>
+            <li>Social proof — build trust</li>
+            <li>CTA — guide the user</li>
+          </ol>
+
+          <p className="docs-text">
+            Each section has a clear role in guiding the user forward.
+          </p>
+        </div>
+      </section>
+
+      <section id="visual-rhythm" className="docs-section">
+        <div className="docs-header">
+          <h2 className="docs-section-title">Keep Visual Rhythm</h2>
+          <p className="docs-subtitle">
+            Rhythm is created by consistent spacing and predictable structure.
+          </p>
+        </div>
+
+        <div className="docs-content-block">
+          <ImageFrame
+            src="/images/lessons/consistent-spacing.jpg"
+            alt="Consistent spacing between sections"
+            caption="Consistent spacing between sections"
+          />
+
+          <ol className="resource-ordered-list">
+            <li>Use similar spacing between sections</li>
+            <li>Avoid sudden size changes</li>
+            <li>Keep alignment consistent</li>
           </ol>
         </div>
       </section>
 
-      {/* Step 1 */}
-      <section id="step-1" className="docs-section">
+      <section id="avoid-repetition" className="docs-section">
         <div className="docs-header">
-          <h2 className="docs-section-title">Step 1: Add Hero Section</h2>
+          <h2 className="docs-section-title">Avoid Repetition</h2>
           <p className="docs-subtitle">
-            Start by adding a Hero section. This is the first thing users see, so keep it simple and clear.
-          </p>
-        </div>
-
-        <div className="docs-content-block">
-          <ImageFrame
-            src="/images/lessons/hero-section-library.jpg"
-            alt="Hero section in library"
-            caption="Choose any Hero you like from the library"
-          />
-
-          <p className="docs-text">
-            Choose any Hero you like and copy it into your Framer project.
-          </p>
-        </div>
-      </section>
-
-      {/* Step 2 */}
-      <section id="step-2" className="docs-section">
-        <div className="docs-header">
-          <h2 className="docs-section-title">Step 2: Add Feature Section</h2>
-          <p className="docs-subtitle">
-            Next, explain your product or service using a Feature section.
-          </p>
-        </div>
-
-        <div className="docs-content-block">
-          <ImageFrame
-            src="/images/lessons/feature-sections.jpg"
-            alt="Feature sections"
-            caption="Pick a feature layout that matches your content"
-          />
-
-          <p className="docs-text">
-            Keep the content short and focused on value.
-          </p>
-        </div>
-      </section>
-
-      {/* Step 3 */}
-      <section id="step-3" className="docs-section">
-        <div className="docs-header">
-          <h2 className="docs-section-title">Step 3: Add Social Proof</h2>
-          <p className="docs-subtitle">
-            Add testimonials or logos to build trust.
-          </p>
-        </div>
-
-        <div className="docs-content-block">
-          <ImageFrame
-            src="/images/lessons/social-proof-sections.jpg"
-            alt="Social proof sections"
-            caption="Use testimonials or logos for credibility"
-          />
-        </div>
-      </section>
-
-      {/* Step 4 */}
-      <section id="step-4" className="docs-section">
-        <div className="docs-header">
-          <h2 className="docs-section-title">Step 4: Add CTA</h2>
-          <p className="docs-subtitle">
-            Add a clear call to action that tells users what to do next.
-          </p>
-        </div>
-
-        <div className="docs-content-block">
-          <ImageFrame
-            src="/images/lessons/cta-sections.jpg"
-            alt="CTA sections"
-            caption="Choose a CTA that matches your goal"
-          />
-        </div>
-      </section>
-
-      {/* Step 5 */}
-      <section id="step-5" className="docs-section">
-        <div className="docs-header">
-          <h2 className="docs-section-title">Step 5: Apply Styles</h2>
-          <p className="docs-subtitle">
-            Apply a Color Set and Text Styles to make your page consistent.
+            Using the same type of section too many times makes the page feel boring.
           </p>
         </div>
 
         <div className="docs-content-block">
           <ol className="resource-ordered-list">
-            <li>Apply Color Set</li>
-            <li>Apply Text Styles</li>
+            <li>Don&apos;t stack similar layouts</li>
+            <li>Mix different section types</li>
+            <li>Create variation in structure</li>
           </ol>
 
           <p className="docs-text">
-            This step makes your layout look clean instantly.
+            Variety keeps the page visually interesting.
           </p>
-
-          <HoverVideo
-            src="/videos/apply-styles-demo.mp4"
-            caption="Watch how to apply styles in seconds"
-          />
         </div>
       </section>
 
-      {/* Result */}
+      <section id="use-contrast" className="docs-section">
+        <div className="docs-header">
+          <h2 className="docs-section-title">Use Contrast Between Sections</h2>
+          <p className="docs-subtitle">
+            Contrast helps separate sections and improve readability.
+          </p>
+        </div>
+
+        <div className="docs-content-block">
+          <ImageFrame
+            src="/images/lessons/light-dark-contrast.jpg"
+            alt="Light and dark sections contrast"
+            caption="Light and dark sections contrast"
+          />
+
+          <ol className="resource-ordered-list">
+            <li>Alternate background colors</li>
+            <li>Use different layouts</li>
+            <li>Highlight important sections</li>
+          </ol>
+        </div>
+      </section>
+
       <section id="result" className="docs-section">
         <div className="docs-header">
           <h2 className="docs-section-title">Result</h2>
           <p className="docs-subtitle">
-            You now have a complete landing page built in minutes using FramerKit.
+            When sections are combined правильно, the page feels structured, balanced, and professional.
           </p>
         </div>
 
         <div className="docs-content-block">
           <ImageFrame
-            src="/images/lessons/final-result.jpg"
-            alt="Final clean landing page"
-            caption="Your finished landing page"
+            src="/images/lessons/clean-structured-layout.jpg"
+            alt="Clean structured layout"
+            caption="Clean structured layout"
           />
 
           <p className="docs-text">
-            This approach lets you focus on structure and content instead of spending time building layouts from scratch.
+            Good layout is not about adding more sections — it&apos;s about connecting them into a clear and consistent flow.
           </p>
         </div>
       </section>
@@ -287,13 +267,18 @@ export default function BuildFirstLandingFast({ onSectionChange }: BuildFirstLan
         </div>
 
         <div className="lesson-nav-buttons">
-          <div /> {/* No previous */}
+          <Link
+            to="/learn/lessons/framerkit-workflow-pages"
+            className="lesson-nav-button"
+          >
+            ← FramerKit Workflow
+          </Link>
 
           <Link
-            to="/learn/lessons/templates-vs-sections-framerkit"
+            to="/learn/lessons/responsive-layout-framer"
             className="lesson-nav-button next"
           >
-            Templates vs Sections →
+            Responsive Layout →
           </Link>
         </div>
       </div>

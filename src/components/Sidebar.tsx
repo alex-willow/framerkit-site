@@ -30,6 +30,7 @@ type SidebarProps = {
   isAuthenticated?: boolean;
   onLogout?: () => void;
   onSignInOpen?: () => void;
+  isAdmin?: boolean;
 };
 
 type PrefetchTarget = {
@@ -89,7 +90,8 @@ export default function Sidebar({
   onMenuClose,
   isAuthenticated,
   onLogout,
-  onSignInOpen
+  onSignInOpen,
+  isAdmin = false
 }: SidebarProps) {
   const { manifest } = useCatalogManifest();
   const navigate = useNavigate();
@@ -219,10 +221,64 @@ export default function Sidebar({
   };
 
   const toggleExclusiveOpenGroup = (
-    group: "lessons" | "articles" | "layout" | "components" | "templates",
-    isCurrentlyOpen: boolean
+    group: "lessons" | "articles" | "layout" | "components" | "templates"
   ) => {
-    setExclusiveOpenGroup(isCurrentlyOpen ? null : group);
+    if (group === "lessons") {
+      setLessonsOpen((prev) => {
+        const next = !prev;
+        if (next) {
+          setArticlesOpen(false);
+          setLayoutOpen(false);
+          setComponentsOpen(false);
+          setTemplatesOpen(false);
+        }
+        return next;
+      });
+    } else if (group === "articles") {
+      setArticlesOpen((prev) => {
+        const next = !prev;
+        if (next) {
+          setLessonsOpen(false);
+          setLayoutOpen(false);
+          setComponentsOpen(false);
+          setTemplatesOpen(false);
+        }
+        return next;
+      });
+    } else if (group === "layout") {
+      setLayoutOpen((prev) => {
+        const next = !prev;
+        if (next) {
+          setLessonsOpen(false);
+          setArticlesOpen(false);
+          setComponentsOpen(false);
+          setTemplatesOpen(false);
+        }
+        return next;
+      });
+    } else if (group === "components") {
+      setComponentsOpen((prev) => {
+        const next = !prev;
+        if (next) {
+          setLessonsOpen(false);
+          setArticlesOpen(false);
+          setLayoutOpen(false);
+          setTemplatesOpen(false);
+        }
+        return next;
+      });
+    } else if (group === "templates") {
+      setTemplatesOpen((prev) => {
+        const next = !prev;
+        if (next) {
+          setLessonsOpen(false);
+          setArticlesOpen(false);
+          setLayoutOpen(false);
+          setComponentsOpen(false);
+        }
+        return next;
+      });
+    }
   };
 
   useEffect(() => {
@@ -491,14 +547,20 @@ export default function Sidebar({
       openGroup: item.type === "lesson" ? "lessons" as const : "articles" as const,
     }));
 
-    return [
+    const items = [
       ...staticPages,
       ...layoutItems,
       ...componentItems,
       ...templateItems,
-      ...resourceItems,
     ];
-  }, [manifest.components, manifest.layout, manifest.templates]);
+    
+    // Only show lessons and articles in search for admins
+    if (isAdmin) {
+      items.push(...resourceItems);
+    }
+    
+    return items;
+  }, [manifest.components, manifest.layout, manifest.templates, isAdmin]);
 
   const globalSearchResults = useMemo(() => {
     const query = globalSearchQuery.trim().toLowerCase();
@@ -888,7 +950,21 @@ export default function Sidebar({
         <div className="sidebar-divider" />
 
         {/* === LEARN === */}
-        <div className="sidebar-group-label">Learn</div>
+        <div className="sidebar-group-label" style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+          Learn
+          {!isAdmin && (
+            <span className="sidebar-coming-soon-badge" style={{
+              fontSize: "10px",
+              padding: "2px 6px",
+              backgroundColor: "#5A32D3",
+              color: "#fff",
+              borderRadius: "4px",
+              fontWeight: 600,
+              textTransform: "uppercase",
+              letterSpacing: "0.5px"
+            }}>Soon</span>
+          )}
+        </div>
 
         <div className="sidebar-section">
   <div
@@ -898,26 +974,37 @@ export default function Sidebar({
   >
     <button
       type="button"
-      className={`sidebar-group-expand-btn ${lessonsOpen ? "open" : ""}`}
-      onClick={() => toggleExclusiveOpenGroup("lessons", lessonsOpen)}
+      className={`sidebar-group-expand-btn ${lessonsOpen ? "open" : ""} ${!isAdmin ? "disabled" : ""}`}
+      onClick={() => isAdmin && toggleExclusiveOpenGroup("lessons")}
       aria-label={lessonsOpen ? "Collapse Lessons" : "Expand Lessons"}
       aria-expanded={lessonsOpen}
       aria-controls="sidebar-lessons-group"
+      disabled={!isAdmin}
+      style={!isAdmin ? { opacity: 0.4, cursor: "not-allowed" } : undefined}
     >
       <ChevronDown size={14} />
     </button>
 
-    <Link
-      to="/learn/lessons"
-      className="sidebar-group-main-link"
-      onClick={() => {
-        setExclusiveOpenGroup("lessons");
-        onSectionChange("lessons");
-        if (isMobile) onMenuClose();
-      }}
-    >
-      <span className="sidebar-section-title">Lessons</span>
-    </Link>
+    {!isAdmin ? (
+      <div
+        className="sidebar-group-main-link"
+        style={{ cursor: "default", pointerEvents: "none" }}
+      >
+        <span className="sidebar-section-title" style={{ opacity: 0.5 }}>Lessons</span>
+      </div>
+    ) : (
+      <Link
+        to="/learn/lessons"
+        className="sidebar-group-main-link"
+        onClick={() => {
+          setExclusiveOpenGroup("lessons");
+          onSectionChange("lessons");
+          if (isMobile) onMenuClose();
+        }}
+      >
+        <span className="sidebar-section-title">Lessons</span>
+      </Link>
+    )}
   </div>
 
   <div
@@ -939,10 +1026,9 @@ export default function Sidebar({
       <Link
         key={group.id}
         to={`/learn/lessons#${group.id}`}
-        className={`sidebar-item ${
-          isLessonGroupActive(group.id) ? "active" : ""
-        }`}
+        className={`sidebar-item ${isLessonGroupActive(group.id) ? "active" : ""} ${!isAdmin ? "sidebar-item-disabled" : ""}`}
         onClick={(event) => handleLessonGroupClick(event, group.id)}
+        style={!isAdmin ? { opacity: 0.5, pointerEvents: "none" } : undefined}
       >
         {group.label}
       </Link>
@@ -958,26 +1044,37 @@ export default function Sidebar({
           >
             <button
               type="button"
-              className={`sidebar-group-expand-btn ${articlesOpen ? "open" : ""}`}
-              onClick={() => toggleExclusiveOpenGroup("articles", articlesOpen)}
+              className={`sidebar-group-expand-btn ${articlesOpen ? "open" : ""} ${!isAdmin ? "disabled" : ""}`}
+              onClick={() => isAdmin && toggleExclusiveOpenGroup("articles")}
               aria-label={articlesOpen ? "Collapse Articles" : "Expand Articles"}
               aria-expanded={articlesOpen}
               aria-controls="sidebar-articles-group"
+              disabled={!isAdmin}
+              style={!isAdmin ? { opacity: 0.4, cursor: "not-allowed" } : undefined}
             >
               <ChevronDown size={14} />
             </button>
 
-            <Link
-              to="/learn/articles"
-              className="sidebar-group-main-link"
-              onClick={() => {
-                setExclusiveOpenGroup("articles");
-                onSectionChange("articles");
-                if (isMobile) onMenuClose();
-              }}
-            >
-              <span className="sidebar-section-title">Articles</span>
-            </Link>
+            {!isAdmin ? (
+              <div
+                className="sidebar-group-main-link"
+                style={{ cursor: "default", pointerEvents: "none" }}
+              >
+                <span className="sidebar-section-title" style={{ opacity: 0.5 }}>Articles</span>
+              </div>
+            ) : (
+              <Link
+                to="/learn/articles"
+                className="sidebar-group-main-link"
+                onClick={() => {
+                  setExclusiveOpenGroup("articles");
+                  onSectionChange("articles");
+                  if (isMobile) onMenuClose();
+                }}
+              >
+                <span className="sidebar-section-title">Articles</span>
+              </Link>
+            )}
           </div>
 
           <div
@@ -999,10 +1096,9 @@ export default function Sidebar({
               <Link
                 key={group.id}
                 to={`/learn/articles#${group.id}`}
-                className={`sidebar-item ${
-                  isArticleGroupActive(group.id) ? "active" : ""
-                }`}
+                className={`sidebar-item ${isArticleGroupActive(group.id) ? "active" : ""} ${!isAdmin ? "sidebar-item-disabled" : ""}`}
                 onClick={(event) => handleArticleGroupClick(event, group.id)}
+                style={!isAdmin ? { opacity: 0.5, pointerEvents: "none" } : undefined}
               >
                 {group.label}
               </Link>
@@ -1021,7 +1117,7 @@ export default function Sidebar({
               <button
                 type="button"
                 className={`sidebar-group-expand-btn ${isLayoutOpen ? "open" : ""}`}
-                onClick={() => toggleExclusiveOpenGroup("layout", isLayoutOpen)}
+                onClick={() => toggleExclusiveOpenGroup("layout")}
                 aria-label={isLayoutOpen ? "Collapse Layout Sections" : "Expand Layout Sections"}
                 aria-expanded={isLayoutOpen}
                 aria-controls="sidebar-layout-group"
@@ -1067,7 +1163,7 @@ export default function Sidebar({
               <button
                 type="button"
                 className={`sidebar-group-expand-btn ${isComponentsOpen ? "open" : ""}`}
-                onClick={() => toggleExclusiveOpenGroup("components", isComponentsOpen)}
+                onClick={() => toggleExclusiveOpenGroup("components")}
                 aria-label={isComponentsOpen ? "Collapse Components" : "Expand Components"}
                 aria-expanded={isComponentsOpen}
                 aria-controls="sidebar-components-group"
@@ -1113,7 +1209,7 @@ export default function Sidebar({
               <button
                 type="button"
                 className={`sidebar-group-expand-btn ${isTemplatesOpen ? "open" : ""}`}
-                onClick={() => toggleExclusiveOpenGroup("templates", isTemplatesOpen)}
+                onClick={() => toggleExclusiveOpenGroup("templates")}
                 aria-label={isTemplatesOpen ? "Collapse Templates" : "Expand Templates"}
                 aria-expanded={isTemplatesOpen}
                 aria-controls="sidebar-templates-group"

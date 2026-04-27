@@ -22,8 +22,7 @@ const getSupabaseClient = () => {
 
 import MainLayout from "./layouts/MainLayout";
 import LandingNavbar from './components/LandingNavbar';
-import Sidebar from './components/Sidebar';
-import NoticeBar from './components/NoticeBar';
+import NoticeBar from "./components/NoticeBar";
 
 // Pages
 import LandingPage from './pages/LandingPage'; 
@@ -44,6 +43,35 @@ import SupportPage from "./pages/SupportPage";
 
 // Individual Lesson Pages
 import BuildFirstLandingFast from "./pages/Lessons/BuildFirstLandingFast";
+import FramerkitWorkflowPages from "./pages/Lessons/FramerkitWorkflowPages";
+import CombineSectionsBetterLayouts from "./pages/Lessons/CombineSectionsBetterLayouts";
+import ResponsiveLayoutFramer from "./pages/Lessons/ResponsiveLayoutFramer";
+import NavbarToCtaFlow from "./pages/Lessons/NavbarToCtaFlow";
+import ZeroToFirstClient from "./pages/Lessons/ZeroToFirstClient";
+import WhatToDoNext from "./pages/Lessons/WhatToDoNext";
+import BuildFasterWithTemplates from "./pages/Lessons/BuildFasterWithTemplates";
+import DeliverProjectsWithoutRevisions from "./pages/Lessons/DeliverProjectsWithoutRevisions";
+import HowToTalkToClients from "./pages/Lessons/HowToTalkToClients";
+import HowToPriceYourWork from "./pages/Lessons/HowToPriceYourWork";
+import HowToFindClients from "./pages/Lessons/HowToFindClients";
+import FramerkitForFreelance from "./pages/Lessons/FramerkitForFreelance";
+import SpeedTricksForFramer from "./pages/Lessons/SpeedTricksForFramer";
+import BuildOnePageWebsite from "./pages/Lessons/BuildOnePageWebsite";
+import BuildAppLandingPage from "./pages/Lessons/BuildAppLandingPage";
+import BuildAgencyWebsite from "./pages/Lessons/BuildAgencyWebsite";
+import BuildPortfolioWebsite from "./pages/Lessons/BuildPortfolioWebsite";
+import BuildSaaSLandingPage from "./pages/Lessons/BuildSaaSLandingPage";
+import CommonMistakesFramer from "./pages/Lessons/CommonMistakesFramer";
+import SpeedWorkflowBuildFast from "./pages/Lessons/SpeedWorkflowBuildFast";
+import WireframeDesignDarkModes from "./pages/Lessons/WireframeDesignDarkModes";
+import ImprovePageSmallChanges from "./pages/Lessons/ImprovePageSmallChanges";
+import ContentAndCopySections from "./pages/Lessons/ContentAndCopySections";
+
+// Individual Article Pages
+import TemplatesVsSections from "./pages/Articles/TemplatesVsSections";
+import ColorPalette from "./pages/Articles/ColorPalette";
+import TextStyles from "./pages/Articles/TextStyles";
+import ColorSets from "./pages/Articles/ColorSets";
 
 // ================================
 // 🔑 GA4 ID
@@ -308,18 +336,8 @@ function AppContent() {
     isMobile={isMobile}
     isMenuOpen={isMenuOpen}
     onMenuToggle={() => setIsMenuOpen(!isMenuOpen)}
+    isAdmin={isAdmin}
   >
-    {/* 🔥 Твой существующий Sidebar для документации */}
-    <Sidebar
-      activeSection={currentActiveSection}
-      onSectionChange={handleSetActiveSection}
-      isMobile={isMobile}
-      isMenuOpen={isMenuOpen}
-      onMenuClose={() => setIsMenuOpen(false)}
-      isAuthenticated={isAuthenticated}
-      onLogout={handleLogout}
-      onSignInOpen={() => setIsSignInOpen(true)}
-    />
           <Routes>
             {/* 🔥 HomePage обрабатывает все хэш-секции: /#overview, /#getting-started и т.д. */}
             <Route path="/" element={
@@ -396,6 +414,224 @@ function AppContent() {
               path="/learn/lessons/build-first-landing-fast"
               element={
                 <BuildFirstLandingFast
+                  onSectionChange={setActiveSection}
+                />
+              }
+            />
+            <Route
+              path="/learn/lessons/framerkit-workflow-pages"
+              element={
+                <FramerkitWorkflowPages
+                  onSectionChange={setActiveSection}
+                />
+              }
+            />
+            <Route
+              path="/learn/lessons/combine-sections-better-layouts"
+              element={
+                <CombineSectionsBetterLayouts
+                  onSectionChange={setActiveSection}
+                />
+              }
+            />
+            <Route
+              path="/learn/lessons/responsive-layout-framer"
+              element={
+                <ResponsiveLayoutFramer
+                  onSectionChange={setActiveSection}
+                />
+              }
+            />
+            <Route
+              path="/learn/lessons/navbar-to-cta-flow"
+              element={
+                <NavbarToCtaFlow
+                  onSectionChange={setActiveSection}
+                />
+              }
+            />
+            <Route
+              path="/learn/lessons/zero-to-first-client"
+              element={
+                <ZeroToFirstClient
+                  onSectionChange={setActiveSection}
+                />
+              }
+            />
+            <Route
+              path="/learn/lessons/what-to-do-next"
+              element={
+                <WhatToDoNext
+                  onSectionChange={setActiveSection}
+                />
+              }
+            />
+            <Route
+              path="/learn/lessons/build-faster-with-templates"
+              element={
+                <BuildFasterWithTemplates
+                  onSectionChange={setActiveSection}
+                />
+              }
+            />
+            <Route
+              path="/learn/lessons/deliver-projects-without-revisions"
+              element={
+                <DeliverProjectsWithoutRevisions
+                  onSectionChange={setActiveSection}
+                />
+              }
+            />
+            <Route
+              path="/learn/lessons/how-to-talk-to-clients"
+              element={
+                <HowToTalkToClients
+                  onSectionChange={setActiveSection}
+                />
+              }
+            />
+            <Route
+              path="/learn/lessons/how-to-price-your-work"
+              element={
+                <HowToPriceYourWork
+                  onSectionChange={setActiveSection}
+                />
+              }
+            />
+            <Route
+              path="/learn/lessons/how-to-find-clients"
+              element={
+                <HowToFindClients
+                  onSectionChange={setActiveSection}
+                />
+              }
+            />
+            <Route
+              path="/learn/lessons/framerkit-for-freelance"
+              element={
+                <FramerkitForFreelance
+                  onSectionChange={setActiveSection}
+                />
+              }
+            />
+            <Route
+              path="/learn/lessons/speed-tricks-for-framer"
+              element={
+                <SpeedTricksForFramer
+                  onSectionChange={setActiveSection}
+                />
+              }
+            />
+            <Route
+              path="/learn/lessons/build-one-page-website"
+              element={
+                <BuildOnePageWebsite
+                  onSectionChange={setActiveSection}
+                />
+              }
+            />
+            <Route
+              path="/learn/lessons/build-app-landing-page"
+              element={
+                <BuildAppLandingPage
+                  onSectionChange={setActiveSection}
+                />
+              }
+            />
+            <Route
+              path="/learn/lessons/build-agency-website"
+              element={
+                <BuildAgencyWebsite
+                  onSectionChange={setActiveSection}
+                />
+              }
+            />
+            <Route
+              path="/learn/lessons/build-portfolio-website"
+              element={
+                <BuildPortfolioWebsite
+                  onSectionChange={setActiveSection}
+                />
+              }
+            />
+            <Route
+              path="/learn/lessons/build-saas-landing-page"
+              element={
+                <BuildSaaSLandingPage
+                  onSectionChange={setActiveSection}
+                />
+              }
+            />
+            <Route
+              path="/learn/lessons/common-mistakes-framer"
+              element={
+                <CommonMistakesFramer
+                  onSectionChange={setActiveSection}
+                />
+              }
+            />
+            <Route
+              path="/learn/lessons/speed-workflow-build-fast"
+              element={
+                <SpeedWorkflowBuildFast
+                  onSectionChange={setActiveSection}
+                />
+              }
+            />
+            <Route
+              path="/learn/lessons/wireframe-design-dark-modes"
+              element={
+                <WireframeDesignDarkModes
+                  onSectionChange={setActiveSection}
+                />
+              }
+            />
+            <Route
+              path="/learn/lessons/improve-page-small-changes"
+              element={
+                <ImprovePageSmallChanges
+                  onSectionChange={setActiveSection}
+                />
+              }
+            />
+            <Route
+              path="/learn/lessons/content-and-copy-sections"
+              element={
+                <ContentAndCopySections
+                  onSectionChange={setActiveSection}
+                />
+              }
+            />
+
+            {/* Individual Article Pages (with React components support) */}
+            <Route
+              path="/learn/articles/templates-vs-sections-framerkit"
+              element={
+                <TemplatesVsSections
+                  onSectionChange={setActiveSection}
+                />
+              }
+            />
+            <Route
+              path="/learn/articles/color-palette-in-framerkit"
+              element={
+                <ColorPalette
+                  onSectionChange={setActiveSection}
+                />
+              }
+            />
+            <Route
+              path="/learn/articles/text-styles-in-framerkit"
+              element={
+                <TextStyles
+                  onSectionChange={setActiveSection}
+                />
+              }
+            />
+            <Route
+              path="/learn/articles/color-sets-in-framerkit"
+              element={
+                <ColorSets
                   onSectionChange={setActiveSection}
                 />
               }

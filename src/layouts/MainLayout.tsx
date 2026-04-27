@@ -1,9 +1,37 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Moon, Sun } from "lucide-react";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import DocsRightToc from "../components/DocsRightToc";
+import { LESSON_SECTIONS as BuildFirstLandingFastSections } from "../pages/Lessons/BuildFirstLandingFast";
+import { LESSON_SECTIONS as FramerkitWorkflowPagesSections } from "../pages/Lessons/FramerkitWorkflowPages";
+import { LESSON_SECTIONS as CombineSectionsBetterLayoutsSections } from "../pages/Lessons/CombineSectionsBetterLayouts";
+import { LESSON_SECTIONS as ResponsiveLayoutFramerSections } from "../pages/Lessons/ResponsiveLayoutFramer";
+import { LESSON_SECTIONS as NavbarToCtaFlowSections } from "../pages/Lessons/NavbarToCtaFlow";
+import { LESSON_SECTIONS as ZeroToFirstClientSections } from "../pages/Lessons/ZeroToFirstClient";
+import { LESSON_SECTIONS as WhatToDoNextSections } from "../pages/Lessons/WhatToDoNext";
+import { LESSON_SECTIONS as BuildFasterWithTemplatesSections } from "../pages/Lessons/BuildFasterWithTemplates";
+import { LESSON_SECTIONS as DeliverProjectsWithoutRevisionsSections } from "../pages/Lessons/DeliverProjectsWithoutRevisions";
+import { LESSON_SECTIONS as HowToTalkToClientsSections } from "../pages/Lessons/HowToTalkToClients";
+import { LESSON_SECTIONS as HowToPriceYourWorkSections } from "../pages/Lessons/HowToPriceYourWork";
+import { LESSON_SECTIONS as HowToFindClientsSections } from "../pages/Lessons/HowToFindClients";
+import { LESSON_SECTIONS as FramerkitForFreelanceSections } from "../pages/Lessons/FramerkitForFreelance";
+import { LESSON_SECTIONS as SpeedTricksForFramerSections } from "../pages/Lessons/SpeedTricksForFramer";
+import { LESSON_SECTIONS as BuildOnePageWebsiteSections } from "../pages/Lessons/BuildOnePageWebsite";
+import { LESSON_SECTIONS as BuildAppLandingPageSections } from "../pages/Lessons/BuildAppLandingPage";
+import { LESSON_SECTIONS as BuildAgencyWebsiteSections } from "../pages/Lessons/BuildAgencyWebsite";
+import { LESSON_SECTIONS as BuildPortfolioWebsiteSections } from "../pages/Lessons/BuildPortfolioWebsite";
+import { LESSON_SECTIONS as BuildSaaSLandingPageSections } from "../pages/Lessons/BuildSaaSLandingPage";
+import { LESSON_SECTIONS as CommonMistakesFramerSections } from "../pages/Lessons/CommonMistakesFramer";
+import { LESSON_SECTIONS as SpeedWorkflowBuildFastSections } from "../pages/Lessons/SpeedWorkflowBuildFast";
+import { LESSON_SECTIONS as WireframeDesignDarkModesSections } from "../pages/Lessons/WireframeDesignDarkModes";
+import { LESSON_SECTIONS as ImprovePageSmallChangesSections } from "../pages/Lessons/ImprovePageSmallChanges";
+import { LESSON_SECTIONS as ContentAndCopySectionsSections } from "../pages/Lessons/ContentAndCopySections";
+import { ARTICLE_SECTIONS as TemplatesVsSectionsSections } from "../pages/Articles/TemplatesVsSections";
+import { ARTICLE_SECTIONS as ColorPaletteSections } from "../pages/Articles/ColorPalette";
+import { ARTICLE_SECTIONS as TextStylesSections } from "../pages/Articles/TextStyles";
+import { ARTICLE_SECTIONS as ColorSetsSections } from "../pages/Articles/ColorSets";
 
 type WindowWithGtag = Window & {
   gtag?: (command: string, id: string, params?: Record<string, string>) => void;
@@ -22,6 +50,7 @@ type MainLayoutProps = {
   isMenuOpen: boolean;
   onMenuToggle: () => void;
   galleryScrollRef?: React.RefObject<HTMLDivElement>;
+  isAdmin?: boolean;
 };
 
 export default function MainLayout({
@@ -37,6 +66,7 @@ export default function MainLayout({
   isMenuOpen,
   onMenuToggle,
   galleryScrollRef,
+  isAdmin = false,
 }: MainLayoutProps) {
   const location = useLocation();
   const navigate = useNavigate();
@@ -66,14 +96,110 @@ export default function MainLayout({
     location.pathname.startsWith("/learn/articles/") ||
     location.pathname === "/support" ||
     location.pathname.startsWith("/support/");
-  const showDocsRightToc = !isMobile && location.pathname === "/";
-  const docsTocSections = [
-    { id: "overview", label: "Overview" },
-    { id: "how-it-works", label: "How it Works" },
-    { id: "quick-start", label: "Quick Start" },
-    { id: "using-the-plugin", label: "Using the Plugin" },
-    { id: "video-tutorial", label: "Video Tutorial" },
-  ];
+  // Determine if current page should show right TOC
+  const isPageWithToc = 
+    location.pathname === "/" ||
+    location.pathname === "/learn/lessons/build-first-landing-fast" ||
+    location.pathname === "/learn/lessons/framerkit-workflow-pages" ||
+    location.pathname === "/learn/lessons/combine-sections-better-layouts" ||
+    location.pathname === "/learn/lessons/responsive-layout-framer" ||
+    location.pathname === "/learn/lessons/navbar-to-cta-flow" ||
+    location.pathname === "/learn/lessons/zero-to-first-client" ||
+    location.pathname === "/learn/lessons/what-to-do-next" ||
+    location.pathname === "/learn/lessons/build-faster-with-templates" ||
+    location.pathname === "/learn/lessons/deliver-projects-without-revisions" ||
+    location.pathname === "/learn/lessons/how-to-talk-to-clients" ||
+    location.pathname === "/learn/lessons/how-to-price-your-work" ||
+    location.pathname === "/learn/lessons/how-to-find-clients" ||
+    location.pathname === "/learn/lessons/framerkit-for-freelance" ||
+    location.pathname === "/learn/lessons/speed-tricks-for-framer" ||
+    location.pathname === "/learn/lessons/build-one-page-website" ||
+    location.pathname === "/learn/lessons/build-app-landing-page" ||
+    location.pathname === "/learn/lessons/build-agency-website" ||
+    location.pathname === "/learn/lessons/build-portfolio-website" ||
+    location.pathname === "/learn/lessons/build-saas-landing-page" ||
+    location.pathname === "/learn/lessons/common-mistakes-framer" ||
+    location.pathname === "/learn/lessons/speed-workflow-build-fast" ||
+    location.pathname === "/learn/lessons/wireframe-design-dark-modes" ||
+    location.pathname === "/learn/lessons/improve-page-small-changes" ||
+    location.pathname === "/learn/lessons/content-and-copy-sections" ||
+    location.pathname === "/learn/articles/templates-vs-sections-framerkit" ||
+    location.pathname === "/learn/articles/color-palette-in-framerkit" ||
+    location.pathname === "/learn/articles/text-styles-in-framerkit" ||
+    location.pathname === "/learn/articles/color-sets-in-framerkit";
+  const showDocsRightToc = !isMobile && isPageWithToc;
+  
+  // Get TOC sections based on current page
+  const docsTocSections = useMemo(() => {
+    switch (location.pathname) {
+      case "/":
+        return [
+          { id: "overview", label: "Overview" },
+          { id: "how-it-works", label: "How it Works" },
+          { id: "quick-start", label: "Quick Start" },
+          { id: "using-the-plugin", label: "Using the Plugin" },
+          { id: "video-tutorial", label: "Video Tutorial" },
+        ];
+      case "/learn/lessons/build-first-landing-fast":
+        return BuildFirstLandingFastSections;
+      case "/learn/lessons/framerkit-workflow-pages":
+        return FramerkitWorkflowPagesSections;
+      case "/learn/lessons/combine-sections-better-layouts":
+        return CombineSectionsBetterLayoutsSections;
+      case "/learn/lessons/responsive-layout-framer":
+        return ResponsiveLayoutFramerSections;
+      case "/learn/lessons/navbar-to-cta-flow":
+        return NavbarToCtaFlowSections;
+      case "/learn/lessons/zero-to-first-client":
+        return ZeroToFirstClientSections;
+      case "/learn/lessons/what-to-do-next":
+        return WhatToDoNextSections;
+      case "/learn/lessons/build-faster-with-templates":
+        return BuildFasterWithTemplatesSections;
+      case "/learn/lessons/deliver-projects-without-revisions":
+        return DeliverProjectsWithoutRevisionsSections;
+      case "/learn/lessons/how-to-talk-to-clients":
+        return HowToTalkToClientsSections;
+      case "/learn/lessons/how-to-price-your-work":
+        return HowToPriceYourWorkSections;
+      case "/learn/lessons/how-to-find-clients":
+        return HowToFindClientsSections;
+      case "/learn/lessons/framerkit-for-freelance":
+        return FramerkitForFreelanceSections;
+      case "/learn/lessons/speed-tricks-for-framer":
+        return SpeedTricksForFramerSections;
+      case "/learn/lessons/build-one-page-website":
+        return BuildOnePageWebsiteSections;
+      case "/learn/lessons/build-app-landing-page":
+        return BuildAppLandingPageSections;
+      case "/learn/lessons/build-agency-website":
+        return BuildAgencyWebsiteSections;
+      case "/learn/lessons/build-portfolio-website":
+        return BuildPortfolioWebsiteSections;
+      case "/learn/lessons/build-saas-landing-page":
+        return BuildSaaSLandingPageSections;
+      case "/learn/lessons/common-mistakes-framer":
+        return CommonMistakesFramerSections;
+      case "/learn/lessons/speed-workflow-build-fast":
+        return SpeedWorkflowBuildFastSections;
+      case "/learn/lessons/wireframe-design-dark-modes":
+        return WireframeDesignDarkModesSections;
+      case "/learn/lessons/improve-page-small-changes":
+        return ImprovePageSmallChangesSections;
+      case "/learn/lessons/content-and-copy-sections":
+        return ContentAndCopySectionsSections;
+      case "/learn/articles/templates-vs-sections-framerkit":
+        return TemplatesVsSectionsSections;
+      case "/learn/articles/color-palette-in-framerkit":
+        return ColorPaletteSections;
+      case "/learn/articles/text-styles-in-framerkit":
+        return TextStylesSections;
+      case "/learn/articles/color-sets-in-framerkit":
+        return ColorSetsSections;
+      default:
+        return [];
+    }
+  }, [location.pathname]);
 
   const handlePricingClick = () => {
     navigate("/#get-framerkit");
@@ -146,6 +272,7 @@ export default function MainLayout({
           isAuthenticated={isAuthenticated}
           onLogout={onLogout}
           onSignInOpen={onSignInOpen}
+          isAdmin={isAdmin}
         />
 
         <main className="content" ref={contentRef}>

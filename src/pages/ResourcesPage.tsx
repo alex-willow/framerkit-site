@@ -286,8 +286,6 @@ export default function ResourcesPage({ type }: ResourcesPageProps) {
                   </div>
 
                   {items.map((item) => {
-                    const isLocked = type === "lessons" && item.isLocked;
-
                     const cardContent = (
                       <>
                         <div className="cardImage resource-card-image">
@@ -308,7 +306,7 @@ export default function ResourcesPage({ type }: ResourcesPageProps) {
 
                         <div className={`resource-image-placeholder resource-image-placeholder--${type}`}>
                           <div className="resource-image-label">
-                            {item.isLocked ? "Coming soon" : ""}
+                            {item.isLocked ? "" : ""}
                           </div>
                         </div>
                             </>
@@ -337,27 +335,13 @@ export default function ResourcesPage({ type }: ResourcesPageProps) {
                                   {item.readTime}
                                 </span>
 
-                            {!isLocked && (
                               <span className="iconButton">
                                 <ArrowUpRight size={16} />
                               </span>
-                            )}
                           </div>
                         </div>
                       </>
                     );
-
-                    if (isLocked) {
-                      return (
-                        <div
-                          key={item.slug}
-                          className="card card--locked"
-                          aria-disabled="true"
-                        >
-                          {cardContent}
-                        </div>
-                      );
-                    }
 
                     return (
                       <Link

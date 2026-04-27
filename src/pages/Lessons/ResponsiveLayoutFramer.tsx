@@ -2,40 +2,39 @@ import { useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import SEO from "../../components/SEO";
 import ImageFrame from "../../components/ImageFrame";
-import HoverVideo from "../../components/HoverVideo";
 
-// TOC sections for this lesson (right sidebar)
+// TOC sections for this lesson
 export const LESSON_SECTIONS = [
   { id: "intro", label: "Introduction" },
-  { id: "what-build", label: "What You Will Build" },
-  { id: "step-1", label: "Step 1: Hero Section" },
-  { id: "step-2", label: "Step 2: Feature Section" },
-  { id: "step-3", label: "Step 3: Social Proof" },
-  { id: "step-4", label: "Step 4: CTA" },
-  { id: "step-5", label: "Step 5: Apply Styles" },
+  { id: "why-matters", label: "Why Responsive Matters" },
+  { id: "breakpoints", label: "Breakpoints in Framer" },
+  { id: "step-1", label: "Step 1: Start with Desktop" },
+  { id: "step-2", label: "Step 2: Adjust for Tablet" },
+  { id: "step-3", label: "Step 3: Optimize for Mobile" },
+  { id: "keep-simple", label: "Keep It Simple" },
   { id: "result", label: "Result" },
 ];
 
 // Lesson metadata
 export const lessonMeta = {
-  slug: "build-first-landing-fast",
-  title: "Build Your First Landing Fast",
-  order: 1,
-  isLocked: false,
+  slug: "responsive-layout-framer",
+  title: "Responsive Layout in Framer: Make Your Design Work Everywhere",
+  order: 4,
+  isLocked: true,
   category: "Getting Started",
-  description: "Build a complete landing page in Framer using FramerKit sections in minutes.",
-  excerpt: "Learn how to quickly assemble a landing page using sections and basic structure.",
+  description: "Learn how to make your layouts responsive and look good on all screen sizes.",
+  excerpt: "Understand how to adapt your design for desktop, tablet, and mobile in Framer.",
   readTime: "8 min",
-  image: "https://via.placeholder.com/1280x720?text=Build+Landing+Fast",
+  image: "https://via.placeholder.com/1280x720?text=Responsive+Layout",
   videoPlanned: true,
-  seoIntent: "framer landing page tutorial, build landing fast framer, framerkit sections",
+  seoIntent: "framer responsive design, framer mobile layout, adaptive design framer",
 };
 
-type BuildFirstLandingFastProps = {
+type ResponsiveLayoutFramerProps = {
   onSectionChange: (sectionId: string) => void;
 };
 
-export default function BuildFirstLandingFast({ onSectionChange }: BuildFirstLandingFastProps) {
+export default function ResponsiveLayoutFramer({ onSectionChange }: ResponsiveLayoutFramerProps) {
   const location = useLocation();
   const onSectionChangeRef = useRef(onSectionChange);
   const suppressSidebarUntilRef = useRef(0);
@@ -120,162 +119,157 @@ export default function BuildFirstLandingFast({ onSectionChange }: BuildFirstLan
 
         <div className="docs-content-block">
           <p className="docs-text">
-            In this lesson, you will build a complete landing page using FramerKit sections. 
-            The goal is not to design from scratch, but to assemble a clean and working structure quickly.
+            A good layout is not only about how it looks on desktop. 
+            It must work across all screen sizes, from large monitors to mobile devices.
           </p>
         </div>
-
-        <ImageFrame
-          src="/images/lessons/final-landing-structure.jpg"
-          alt="Final landing page structure"
-          caption="The landing page you will build"
-        />
       </section>
 
-      {/* What You Will Build */}
-      <section id="what-build" className="docs-section">
+      <section id="why-matters" className="docs-section">
         <div className="docs-header">
-          <h2 className="docs-section-title">What You Will Build</h2>
+          <h2 className="docs-section-title">Why Responsive Design Matters</h2>
           <p className="docs-subtitle">
-            You will create a landing page with a clear structure using ready-made sections.
+            Most users will see your site on mobile. If your layout breaks, users leave.
           </p>
         </div>
 
         <div className="docs-content-block">
           <ol className="resource-ordered-list">
-            <li>Hero section</li>
-            <li>Feature section</li>
-            <li>Social proof</li>
-            <li>CTA section</li>
-            <li>Footer</li>
+            <li>Text becomes unreadable</li>
+            <li>Elements overlap</li>
+            <li>Buttons are hard to click</li>
+          </ol>
+
+          <p className="docs-text">
+            Responsive design ensures your layout works everywhere.
+          </p>
+        </div>
+      </section>
+
+      <section id="breakpoints" className="docs-section">
+        <div className="docs-header">
+          <h2 className="docs-section-title">Breakpoints in Framer</h2>
+          <p className="docs-subtitle">
+            Framer allows you to preview your design across different breakpoints.
+          </p>
+        </div>
+
+        <div className="docs-content-block">
+          <ImageFrame
+            src="/images/lessons/breakpoint-switcher.jpg"
+            alt="Desktop / Tablet / Mobile preview switch"
+            caption="Desktop / Tablet / Mobile preview switch"
+          />
+
+          <ol className="resource-ordered-list">
+            <li>Desktop — main layout</li>
+            <li>Tablet — medium screens</li>
+            <li>Mobile — small screens</li>
           </ol>
         </div>
       </section>
 
-      {/* Step 1 */}
       <section id="step-1" className="docs-section">
         <div className="docs-header">
-          <h2 className="docs-section-title">Step 1: Add Hero Section</h2>
+          <h2 className="docs-section-title">Step 1: Start with Desktop</h2>
           <p className="docs-subtitle">
-            Start by adding a Hero section. This is the first thing users see, so keep it simple and clear.
+            Always design your layout for desktop first.
           </p>
         </div>
 
         <div className="docs-content-block">
           <ImageFrame
-            src="/images/lessons/hero-section-library.jpg"
-            alt="Hero section in library"
-            caption="Choose any Hero you like from the library"
+            src="/images/lessons/desktop-layout.jpg"
+            alt="Desktop layout"
+            caption="Desktop layout"
           />
 
           <p className="docs-text">
-            Choose any Hero you like and copy it into your Framer project.
+            Focus on structure and spacing before thinking about smaller screens.
           </p>
         </div>
       </section>
 
-      {/* Step 2 */}
       <section id="step-2" className="docs-section">
         <div className="docs-header">
-          <h2 className="docs-section-title">Step 2: Add Feature Section</h2>
+          <h2 className="docs-section-title">Step 2: Adjust for Tablet</h2>
           <p className="docs-subtitle">
-            Next, explain your product or service using a Feature section.
-          </p>
-        </div>
-
-        <div className="docs-content-block">
-          <ImageFrame
-            src="/images/lessons/feature-sections.jpg"
-            alt="Feature sections"
-            caption="Pick a feature layout that matches your content"
-          />
-
-          <p className="docs-text">
-            Keep the content short and focused on value.
-          </p>
-        </div>
-      </section>
-
-      {/* Step 3 */}
-      <section id="step-3" className="docs-section">
-        <div className="docs-header">
-          <h2 className="docs-section-title">Step 3: Add Social Proof</h2>
-          <p className="docs-subtitle">
-            Add testimonials or logos to build trust.
-          </p>
-        </div>
-
-        <div className="docs-content-block">
-          <ImageFrame
-            src="/images/lessons/social-proof-sections.jpg"
-            alt="Social proof sections"
-            caption="Use testimonials or logos for credibility"
-          />
-        </div>
-      </section>
-
-      {/* Step 4 */}
-      <section id="step-4" className="docs-section">
-        <div className="docs-header">
-          <h2 className="docs-section-title">Step 4: Add CTA</h2>
-          <p className="docs-subtitle">
-            Add a clear call to action that tells users what to do next.
-          </p>
-        </div>
-
-        <div className="docs-content-block">
-          <ImageFrame
-            src="/images/lessons/cta-sections.jpg"
-            alt="CTA sections"
-            caption="Choose a CTA that matches your goal"
-          />
-        </div>
-      </section>
-
-      {/* Step 5 */}
-      <section id="step-5" className="docs-section">
-        <div className="docs-header">
-          <h2 className="docs-section-title">Step 5: Apply Styles</h2>
-          <p className="docs-subtitle">
-            Apply a Color Set and Text Styles to make your page consistent.
+            Tablet layouts usually require small adjustments.
           </p>
         </div>
 
         <div className="docs-content-block">
           <ol className="resource-ordered-list">
-            <li>Apply Color Set</li>
-            <li>Apply Text Styles</li>
+            <li>Reduce spacing</li>
+            <li>Stack columns</li>
+            <li>Simplify layouts</li>
           </ol>
 
-          <p className="docs-text">
-            This step makes your layout look clean instantly.
-          </p>
-
-          <HoverVideo
-            src="/videos/apply-styles-demo.mp4"
-            caption="Watch how to apply styles in seconds"
+          <ImageFrame
+            src="/images/lessons/tablet-layout.jpg"
+            alt="Tablet layout changes"
+            caption="Tablet layout changes"
           />
         </div>
       </section>
 
-      {/* Result */}
+      <section id="step-3" className="docs-section">
+        <div className="docs-header">
+          <h2 className="docs-section-title">Step 3: Optimize for Mobile</h2>
+          <p className="docs-subtitle">
+            Mobile layouts require more attention because of limited space.
+          </p>
+        </div>
+
+        <div className="docs-content-block">
+          <ol className="resource-ordered-list">
+            <li>Stack everything vertically</li>
+            <li>Increase text readability</li>
+            <li>Make buttons larger</li>
+          </ol>
+
+          <ImageFrame
+            src="/images/lessons/mobile-layout.jpg"
+            alt="Mobile layout"
+            caption="Mobile layout"
+          />
+        </div>
+      </section>
+
+      <section id="keep-simple" className="docs-section">
+        <div className="docs-header">
+          <h2 className="docs-section-title">Keep It Simple</h2>
+          <p className="docs-subtitle">
+            The simpler your layout, the easier it is to make it responsive.
+          </p>
+        </div>
+
+        <div className="docs-content-block">
+          <ol className="resource-ordered-list">
+            <li>Avoid complex nested layouts</li>
+            <li>Use consistent spacing</li>
+            <li>Stick to simple structures</li>
+          </ol>
+        </div>
+      </section>
+
       <section id="result" className="docs-section">
         <div className="docs-header">
           <h2 className="docs-section-title">Result</h2>
           <p className="docs-subtitle">
-            You now have a complete landing page built in minutes using FramerKit.
+            Your layout works smoothly across all devices and looks clean everywhere.
           </p>
         </div>
 
         <div className="docs-content-block">
           <ImageFrame
-            src="/images/lessons/final-result.jpg"
-            alt="Final clean landing page"
-            caption="Your finished landing page"
+            src="/images/lessons/responsive-all-devices.jpg"
+            alt="Same layout across all devices"
+            caption="Same layout across all devices"
           />
 
           <p className="docs-text">
-            This approach lets you focus on structure and content instead of spending time building layouts from scratch.
+            Responsive design is not about fixing layouts — it&apos;s about building them correctly from the start.
           </p>
         </div>
       </section>
@@ -287,13 +281,18 @@ export default function BuildFirstLandingFast({ onSectionChange }: BuildFirstLan
         </div>
 
         <div className="lesson-nav-buttons">
-          <div /> {/* No previous */}
+          <Link
+            to="/learn/lessons/combine-sections-better-layouts"
+            className="lesson-nav-button"
+          >
+            ← Combine Sections
+          </Link>
 
           <Link
-            to="/learn/lessons/templates-vs-sections-framerkit"
+            to="/learn/lessons/navbar-to-cta-flow"
             className="lesson-nav-button next"
           >
-            Templates vs Sections →
+            Navbar to CTA Flow →
           </Link>
         </div>
       </div>

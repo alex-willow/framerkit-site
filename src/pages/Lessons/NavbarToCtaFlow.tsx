@@ -2,40 +2,39 @@ import { useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import SEO from "../../components/SEO";
 import ImageFrame from "../../components/ImageFrame";
-import HoverVideo from "../../components/HoverVideo";
 
-// TOC sections for this lesson (right sidebar)
+// TOC sections for this lesson
 export const LESSON_SECTIONS = [
   { id: "intro", label: "Introduction" },
-  { id: "what-build", label: "What You Will Build" },
-  { id: "step-1", label: "Step 1: Hero Section" },
-  { id: "step-2", label: "Step 2: Feature Section" },
-  { id: "step-3", label: "Step 3: Social Proof" },
-  { id: "step-4", label: "Step 4: CTA" },
-  { id: "step-5", label: "Step 5: Apply Styles" },
+  { id: "why-flow", label: "Why Flow Matters" },
+  { id: "ideal-flow", label: "The Ideal Flow" },
+  { id: "navbar", label: "Navbar: Keep It Simple" },
+  { id: "hero", label: "Hero: First Impression" },
+  { id: "build-trust", label: "Build Trust" },
+  { id: "cta", label: "CTA: Make It Clear" },
   { id: "result", label: "Result" },
 ];
 
 // Lesson metadata
 export const lessonMeta = {
-  slug: "build-first-landing-fast",
-  title: "Build Your First Landing Fast",
-  order: 1,
-  isLocked: false,
+  slug: "navbar-to-cta-flow",
+  title: "Navbar to CTA: Guide Users Through Your Page",
+  order: 5,
+  isLocked: true,
   category: "Getting Started",
-  description: "Build a complete landing page in Framer using FramerKit sections in minutes.",
-  excerpt: "Learn how to quickly assemble a landing page using sections and basic structure.",
+  description: "Learn how to structure your page so users clearly understand what to do and where to click.",
+  excerpt: "Understand how to guide users from the first screen to the final action.",
   readTime: "8 min",
-  image: "https://via.placeholder.com/1280x720?text=Build+Landing+Fast",
+  image: "https://via.placeholder.com/1280x720?text=Navbar+to+CTA",
   videoPlanned: true,
-  seoIntent: "framer landing page tutorial, build landing fast framer, framerkit sections",
+  seoIntent: "landing page structure ux, navbar to cta flow, conversion design framer",
 };
 
-type BuildFirstLandingFastProps = {
+type NavbarToCtaFlowProps = {
   onSectionChange: (sectionId: string) => void;
 };
 
-export default function BuildFirstLandingFast({ onSectionChange }: BuildFirstLandingFastProps) {
+export default function NavbarToCtaFlow({ onSectionChange }: NavbarToCtaFlowProps) {
   const location = useLocation();
   const onSectionChangeRef = useRef(onSectionChange);
   const suppressSidebarUntilRef = useRef(0);
@@ -120,162 +119,168 @@ export default function BuildFirstLandingFast({ onSectionChange }: BuildFirstLan
 
         <div className="docs-content-block">
           <p className="docs-text">
-            In this lesson, you will build a complete landing page using FramerKit sections. 
-            The goal is not to design from scratch, but to assemble a clean and working structure quickly.
+            A good page is not just a collection of sections. 
+            It is a guided experience that leads users from the first impression to a clear action.
           </p>
         </div>
-
-        <ImageFrame
-          src="/images/lessons/final-landing-structure.jpg"
-          alt="Final landing page structure"
-          caption="The landing page you will build"
-        />
       </section>
 
-      {/* What You Will Build */}
-      <section id="what-build" className="docs-section">
+      <section id="why-flow" className="docs-section">
         <div className="docs-header">
-          <h2 className="docs-section-title">What You Will Build</h2>
+          <h2 className="docs-section-title">Why Flow Matters</h2>
           <p className="docs-subtitle">
-            You will create a landing page with a clear structure using ready-made sections.
+            Users don&apos;t read pages randomly. They scan and decide quickly whether to stay or leave.
           </p>
         </div>
 
         <div className="docs-content-block">
           <ol className="resource-ordered-list">
-            <li>Hero section</li>
-            <li>Feature section</li>
-            <li>Social proof</li>
-            <li>CTA section</li>
-            <li>Footer</li>
+            <li>Confusing layout → users leave</li>
+            <li>No clear action → no clicks</li>
+            <li>Weak structure → low conversion</li>
           </ol>
-        </div>
-      </section>
-
-      {/* Step 1 */}
-      <section id="step-1" className="docs-section">
-        <div className="docs-header">
-          <h2 className="docs-section-title">Step 1: Add Hero Section</h2>
-          <p className="docs-subtitle">
-            Start by adding a Hero section. This is the first thing users see, so keep it simple and clear.
-          </p>
-        </div>
-
-        <div className="docs-content-block">
-          <ImageFrame
-            src="/images/lessons/hero-section-library.jpg"
-            alt="Hero section in library"
-            caption="Choose any Hero you like from the library"
-          />
 
           <p className="docs-text">
-            Choose any Hero you like and copy it into your Framer project.
+            A clear flow solves this problem.
           </p>
         </div>
       </section>
 
-      {/* Step 2 */}
-      <section id="step-2" className="docs-section">
+      <section id="ideal-flow" className="docs-section">
         <div className="docs-header">
-          <h2 className="docs-section-title">Step 2: Add Feature Section</h2>
+          <h2 className="docs-section-title">The Ideal Flow</h2>
           <p className="docs-subtitle">
-            Next, explain your product or service using a Feature section.
+            Each section has a clear role in guiding the user forward.
           </p>
         </div>
 
         <div className="docs-content-block">
           <ImageFrame
-            src="/images/lessons/feature-sections.jpg"
-            alt="Feature sections"
-            caption="Pick a feature layout that matches your content"
+            src="/images/lessons/page-flow-navbar-cta.jpg"
+            alt="Page flow from navbar to CTA"
+            caption="Page flow from navbar to CTA"
           />
 
-          <p className="docs-text">
-            Keep the content short and focused on value.
-          </p>
-        </div>
-      </section>
-
-      {/* Step 3 */}
-      <section id="step-3" className="docs-section">
-        <div className="docs-header">
-          <h2 className="docs-section-title">Step 3: Add Social Proof</h2>
-          <p className="docs-subtitle">
-            Add testimonials or logos to build trust.
-          </p>
-        </div>
-
-        <div className="docs-content-block">
-          <ImageFrame
-            src="/images/lessons/social-proof-sections.jpg"
-            alt="Social proof sections"
-            caption="Use testimonials or logos for credibility"
-          />
-        </div>
-      </section>
-
-      {/* Step 4 */}
-      <section id="step-4" className="docs-section">
-        <div className="docs-header">
-          <h2 className="docs-section-title">Step 4: Add CTA</h2>
-          <p className="docs-subtitle">
-            Add a clear call to action that tells users what to do next.
-          </p>
-        </div>
-
-        <div className="docs-content-block">
-          <ImageFrame
-            src="/images/lessons/cta-sections.jpg"
-            alt="CTA sections"
-            caption="Choose a CTA that matches your goal"
-          />
-        </div>
-      </section>
-
-      {/* Step 5 */}
-      <section id="step-5" className="docs-section">
-        <div className="docs-header">
-          <h2 className="docs-section-title">Step 5: Apply Styles</h2>
-          <p className="docs-subtitle">
-            Apply a Color Set and Text Styles to make your page consistent.
-          </p>
-        </div>
-
-        <div className="docs-content-block">
           <ol className="resource-ordered-list">
-            <li>Apply Color Set</li>
-            <li>Apply Text Styles</li>
+            <li>Navbar — navigation and first action</li>
+            <li>Hero — explain what this is</li>
+            <li>Feature — explain why it matters</li>
+            <li>Social proof — build trust</li>
+            <li>CTA — guide user to action</li>
           </ol>
-
-          <p className="docs-text">
-            This step makes your layout look clean instantly.
-          </p>
-
-          <HoverVideo
-            src="/videos/apply-styles-demo.mp4"
-            caption="Watch how to apply styles in seconds"
-          />
         </div>
       </section>
 
-      {/* Result */}
+      <section id="navbar" className="docs-section">
+        <div className="docs-header">
+          <h2 className="docs-section-title">Navbar: Keep It Simple</h2>
+          <p className="docs-subtitle">
+            Your navbar should not overwhelm the user.
+          </p>
+        </div>
+
+        <div className="docs-content-block">
+          <ImageFrame
+            src="/images/lessons/simple-navbar.jpg"
+            alt="Simple navbar with one primary button"
+            caption="Simple navbar with one primary button"
+          />
+
+          <ol className="resource-ordered-list">
+            <li>Limit number of links</li>
+            <li>Use one primary CTA button</li>
+            <li>Keep it clean and readable</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="hero" className="docs-section">
+        <div className="docs-header">
+          <h2 className="docs-section-title">Hero: First Impression</h2>
+          <p className="docs-subtitle">
+            The hero section must instantly explain what your product or service is.
+          </p>
+        </div>
+
+        <div className="docs-content-block">
+          <ImageFrame
+            src="/images/lessons/strong-hero.jpg"
+            alt="Strong hero section"
+            caption="Strong hero section"
+          />
+
+          <ol className="resource-ordered-list">
+            <li>Clear headline</li>
+            <li>Short description</li>
+            <li>Primary CTA</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="build-trust" className="docs-section">
+        <div className="docs-header">
+          <h2 className="docs-section-title">Build Trust</h2>
+          <p className="docs-subtitle">
+            Users need to trust your product before taking action.
+          </p>
+        </div>
+
+        <div className="docs-content-block">
+          <ImageFrame
+            src="/images/lessons/testimonials-logos.jpg"
+            alt="Testimonials or logos"
+            caption="Testimonials or logos for trust"
+          />
+
+          <ol className="resource-ordered-list">
+            <li>Testimonials</li>
+            <li>Client logos</li>
+            <li>Numbers or metrics</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="cta" className="docs-section">
+        <div className="docs-header">
+          <h2 className="docs-section-title">CTA: Make It Clear</h2>
+          <p className="docs-subtitle">
+            The call to action should be obvious and easy to follow.
+          </p>
+        </div>
+
+        <div className="docs-content-block">
+          <ImageFrame
+            src="/images/lessons/strong-cta.jpg"
+            alt="Strong CTA section"
+            caption="Strong CTA section"
+          />
+
+          <ol className="resource-ordered-list">
+            <li>Clear action text</li>
+            <li>Visible button</li>
+            <li>No confusion</li>
+          </ol>
+        </div>
+      </section>
+
       <section id="result" className="docs-section">
         <div className="docs-header">
           <h2 className="docs-section-title">Result</h2>
           <p className="docs-subtitle">
-            You now have a complete landing page built in minutes using FramerKit.
+            Users understand your page, trust your product, and know exactly what to do next.
           </p>
         </div>
 
         <div className="docs-content-block">
           <ImageFrame
-            src="/images/lessons/final-result.jpg"
-            alt="Final clean landing page"
-            caption="Your finished landing page"
+            src="/images/lessons/clean-user-flow.jpg"
+            alt="Clean user flow from top to bottom"
+            caption="Clean user flow from top to bottom"
           />
 
           <p className="docs-text">
-            This approach lets you focus on structure and content instead of spending time building layouts from scratch.
+            Good design is not just visual — it guides users toward action. 
+            A clear flow turns visitors into users.
           </p>
         </div>
       </section>
@@ -287,14 +292,14 @@ export default function BuildFirstLandingFast({ onSectionChange }: BuildFirstLan
         </div>
 
         <div className="lesson-nav-buttons">
-          <div /> {/* No previous */}
-
           <Link
-            to="/learn/lessons/templates-vs-sections-framerkit"
-            className="lesson-nav-button next"
+            to="/learn/lessons/responsive-layout-framer"
+            className="lesson-nav-button"
           >
-            Templates vs Sections →
+            ← Responsive Layout
           </Link>
+
+          <div /> {/* No next lesson - end of Getting Started */}
         </div>
       </div>
     </div>

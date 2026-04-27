@@ -2,40 +2,38 @@ import { useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import SEO from "../../components/SEO";
 import ImageFrame from "../../components/ImageFrame";
-import HoverVideo from "../../components/HoverVideo";
 
-// TOC sections for this lesson (right sidebar)
+// TOC sections for this lesson
 export const LESSON_SECTIONS = [
   { id: "intro", label: "Introduction" },
-  { id: "what-build", label: "What You Will Build" },
-  { id: "step-1", label: "Step 1: Hero Section" },
-  { id: "step-2", label: "Step 2: Feature Section" },
-  { id: "step-3", label: "Step 3: Social Proof" },
-  { id: "step-4", label: "Step 4: CTA" },
-  { id: "step-5", label: "Step 5: Apply Styles" },
+  { id: "wrong-way", label: "The Wrong Way" },
+  { id: "right-workflow", label: "The Right Workflow" },
+  { id: "step-1", label: "Step 1: Build Structure" },
+  { id: "step-2", label: "Step 2: Add Content" },
+  { id: "step-3", label: "Step 3: Apply Styles" },
   { id: "result", label: "Result" },
 ];
 
 // Lesson metadata
 export const lessonMeta = {
-  slug: "build-first-landing-fast",
-  title: "Build Your First Landing Fast",
-  order: 1,
-  isLocked: false,
+  slug: "framerkit-workflow-pages",
+  title: "FramerKit Workflow: Build Pages the Right Way",
+  order: 2,
+  isLocked: true,
   category: "Getting Started",
-  description: "Build a complete landing page in Framer using FramerKit sections in minutes.",
-  excerpt: "Learn how to quickly assemble a landing page using sections and basic structure.",
-  readTime: "8 min",
-  image: "https://via.placeholder.com/1280x720?text=Build+Landing+Fast",
+  description: "Learn the correct workflow for building pages in Framer using FramerKit.",
+  excerpt: "Understand how to build pages faster using a structured workflow instead of random design.",
+  readTime: "7 min",
+  image: "https://via.placeholder.com/1280x720?text=FramerKit+Workflow",
   videoPlanned: true,
-  seoIntent: "framer landing page tutorial, build landing fast framer, framerkit sections",
+  seoIntent: "framer workflow tutorial, build pages framer, framerkit workflow",
 };
 
-type BuildFirstLandingFastProps = {
+type FramerkitWorkflowPagesProps = {
   onSectionChange: (sectionId: string) => void;
 };
 
-export default function BuildFirstLandingFast({ onSectionChange }: BuildFirstLandingFastProps) {
+export default function FramerkitWorkflowPages({ onSectionChange }: FramerkitWorkflowPagesProps) {
   const location = useLocation();
   const onSectionChangeRef = useRef(onSectionChange);
   const suppressSidebarUntilRef = useRef(0);
@@ -120,124 +118,103 @@ export default function BuildFirstLandingFast({ onSectionChange }: BuildFirstLan
 
         <div className="docs-content-block">
           <p className="docs-text">
-            In this lesson, you will build a complete landing page using FramerKit sections. 
-            The goal is not to design from scratch, but to assemble a clean and working structure quickly.
+            Building pages in FramerKit is not about randomly adding sections. 
+            A clear workflow helps you move faster, avoid mistakes, and keep your layouts consistent.
           </p>
         </div>
-
-        <ImageFrame
-          src="/images/lessons/final-landing-structure.jpg"
-          alt="Final landing page structure"
-          caption="The landing page you will build"
-        />
       </section>
 
-      {/* What You Will Build */}
-      <section id="what-build" className="docs-section">
+      <section id="wrong-way" className="docs-section">
         <div className="docs-header">
-          <h2 className="docs-section-title">What You Will Build</h2>
+          <h2 className="docs-section-title">The Wrong Way</h2>
           <p className="docs-subtitle">
-            You will create a landing page with a clear structure using ready-made sections.
+            Most beginners start by randomly adding sections without a clear structure.
           </p>
         </div>
 
         <div className="docs-content-block">
           <ol className="resource-ordered-list">
-            <li>Hero section</li>
-            <li>Feature section</li>
-            <li>Social proof</li>
-            <li>CTA section</li>
-            <li>Footer</li>
+            <li>Adding random blocks</li>
+            <li>Changing styles constantly</li>
+            <li>No clear flow</li>
+          </ol>
+
+          <p className="docs-text">
+            This leads to messy layouts and wasted time.
+          </p>
+        </div>
+      </section>
+
+      <section id="right-workflow" className="docs-section">
+        <div className="docs-header">
+          <h2 className="docs-section-title">The Right Workflow</h2>
+          <p className="docs-subtitle">
+            A better approach is to build your page step by step with a clear structure.
+          </p>
+        </div>
+
+        <div className="docs-content-block">
+          <ImageFrame
+            src="/images/lessons/page-structure-overview.jpg"
+            alt="Page structure overview"
+            caption="Clean page structure overview"
+          />
+
+          <ol className="resource-ordered-list">
+            <li>Start with structure</li>
+            <li>Add sections in order</li>
+            <li>Apply styles at the end</li>
           </ol>
         </div>
       </section>
 
-      {/* Step 1 */}
       <section id="step-1" className="docs-section">
         <div className="docs-header">
-          <h2 className="docs-section-title">Step 1: Add Hero Section</h2>
+          <h2 className="docs-section-title">Step 1: Build Structure First</h2>
           <p className="docs-subtitle">
-            Start by adding a Hero section. This is the first thing users see, so keep it simple and clear.
+            Start with layout only. Don&apos;t focus on design yet.
           </p>
         </div>
 
         <div className="docs-content-block">
           <ImageFrame
-            src="/images/lessons/hero-section-library.jpg"
-            alt="Hero section in library"
-            caption="Choose any Hero you like from the library"
+            src="/images/lessons/wireframe-sections.jpg"
+            alt="Wireframe sections"
+            caption="Wireframe sections for faster layout"
           />
 
           <p className="docs-text">
-            Choose any Hero you like and copy it into your Framer project.
+            Use wireframe sections if you want to move faster.
           </p>
         </div>
       </section>
 
-      {/* Step 2 */}
       <section id="step-2" className="docs-section">
         <div className="docs-header">
-          <h2 className="docs-section-title">Step 2: Add Feature Section</h2>
+          <h2 className="docs-section-title">Step 2: Add Content</h2>
           <p className="docs-subtitle">
-            Next, explain your product or service using a Feature section.
+            Fill sections with real content before styling.
           </p>
         </div>
 
         <div className="docs-content-block">
-          <ImageFrame
-            src="/images/lessons/feature-sections.jpg"
-            alt="Feature sections"
-            caption="Pick a feature layout that matches your content"
-          />
+          <ol className="resource-ordered-list">
+            <li>Headlines</li>
+            <li>Descriptions</li>
+            <li>CTA buttons</li>
+          </ol>
 
           <p className="docs-text">
-            Keep the content short and focused on value.
+            This helps you understand if your layout actually works.
           </p>
         </div>
       </section>
 
-      {/* Step 3 */}
       <section id="step-3" className="docs-section">
         <div className="docs-header">
-          <h2 className="docs-section-title">Step 3: Add Social Proof</h2>
+          <h2 className="docs-section-title">Step 3: Apply Styles</h2>
           <p className="docs-subtitle">
-            Add testimonials or logos to build trust.
-          </p>
-        </div>
-
-        <div className="docs-content-block">
-          <ImageFrame
-            src="/images/lessons/social-proof-sections.jpg"
-            alt="Social proof sections"
-            caption="Use testimonials or logos for credibility"
-          />
-        </div>
-      </section>
-
-      {/* Step 4 */}
-      <section id="step-4" className="docs-section">
-        <div className="docs-header">
-          <h2 className="docs-section-title">Step 4: Add CTA</h2>
-          <p className="docs-subtitle">
-            Add a clear call to action that tells users what to do next.
-          </p>
-        </div>
-
-        <div className="docs-content-block">
-          <ImageFrame
-            src="/images/lessons/cta-sections.jpg"
-            alt="CTA sections"
-            caption="Choose a CTA that matches your goal"
-          />
-        </div>
-      </section>
-
-      {/* Step 5 */}
-      <section id="step-5" className="docs-section">
-        <div className="docs-header">
-          <h2 className="docs-section-title">Step 5: Apply Styles</h2>
-          <p className="docs-subtitle">
-            Apply a Color Set and Text Styles to make your page consistent.
+            Only after structure and content are ready, apply styles.
           </p>
         </div>
 
@@ -248,34 +225,28 @@ export default function BuildFirstLandingFast({ onSectionChange }: BuildFirstLan
           </ol>
 
           <p className="docs-text">
-            This step makes your layout look clean instantly.
+            This keeps your design consistent and clean.
           </p>
-
-          <HoverVideo
-            src="/videos/apply-styles-demo.mp4"
-            caption="Watch how to apply styles in seconds"
-          />
         </div>
       </section>
 
-      {/* Result */}
       <section id="result" className="docs-section">
         <div className="docs-header">
           <h2 className="docs-section-title">Result</h2>
           <p className="docs-subtitle">
-            You now have a complete landing page built in minutes using FramerKit.
+            You get a clean, structured page built faster and with fewer mistakes.
           </p>
         </div>
 
         <div className="docs-content-block">
           <ImageFrame
-            src="/images/lessons/final-result.jpg"
-            alt="Final clean landing page"
-            caption="Your finished landing page"
+            src="/images/lessons/final-clean-page.jpg"
+            alt="Final clean page"
+            caption="Final clean page result"
           />
 
           <p className="docs-text">
-            This approach lets you focus on structure and content instead of spending time building layouts from scratch.
+            A clear workflow is the difference between struggling with design and building pages efficiently.
           </p>
         </div>
       </section>
@@ -287,13 +258,18 @@ export default function BuildFirstLandingFast({ onSectionChange }: BuildFirstLan
         </div>
 
         <div className="lesson-nav-buttons">
-          <div /> {/* No previous */}
+          <Link
+            to="/learn/lessons/build-first-landing-fast"
+            className="lesson-nav-button"
+          >
+            ← Build Your First Landing Fast
+          </Link>
 
           <Link
-            to="/learn/lessons/templates-vs-sections-framerkit"
+            to="/learn/lessons/combine-sections-better-layouts"
             className="lesson-nav-button next"
           >
-            Templates vs Sections →
+            Combine Sections →
           </Link>
         </div>
       </div>

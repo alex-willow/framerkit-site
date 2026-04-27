@@ -134,9 +134,23 @@ export default function ResourceArticlePage() {
         </div>
 
         <div className="docs-content-block">
-          <div className="docs-image-placeholder" style={{ marginTop: 0 }}>
-            <span>Image placeholder: add article cover (1280x720)</span>
-          </div>
+          {resource.image && resource.image !== "https://via.placeholder.com/1280x720?text=" ? (
+            <img
+              src={resource.image}
+              alt={resource.title}
+              style={{
+                width: "100%",
+                height: "auto",
+                borderRadius: "12px",
+                aspectRatio: "16 / 9",
+                objectFit: "cover",
+              }}
+            />
+          ) : (
+            <div className="docs-image-placeholder" style={{ marginTop: 0 }}>
+              <span>Image placeholder: add article cover (1280x720)</span>
+            </div>
+          )}
         </div>
 
         {resource.slug === "framerkit-workflow-basics" ? (
